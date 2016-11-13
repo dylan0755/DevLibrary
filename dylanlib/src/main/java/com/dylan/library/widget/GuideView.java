@@ -1,15 +1,14 @@
-package com.dylan.library.tab;
+package com.dylan.library.widget;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
 import android.graphics.drawable.shapes.OvalShape;
 import android.os.Build;
-import android.os.Handler;
-import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
@@ -17,8 +16,12 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.lang.ref.SoftReference;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +32,6 @@ public class GuideView extends FrameLayout {
     private ViewPager mViewPager;
     private List<View> viewList;
     private Context mContext;
-    private Handler mHandler;
-    private int updatePage = 10;
     private int currentIndex;
     private boolean Running;
     private ScaleUtil mScaleUtil;
@@ -48,7 +49,7 @@ public class GuideView extends FrameLayout {
     private List<View> indicatorList;
     private Drawable selectIndicatorDrawable;
     private Drawable normalIndicatorDrawable;
-    private Activity mActivity;
+    private List<SoftReference<Bitmap>> bitmaps;
 
     public GuideView(Context context) {
         this(context, null);
@@ -56,28 +57,16 @@ public class GuideView extends FrameLayout {
 
     public GuideView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        bitmaps=new ArrayList<SoftReference<Bitmap>>();
         mScaleUtil = new ScaleUtil(context);
         initUnit();
-        mContext = context;
+        mContext = context.getApplicationContext();
         viewList = new ArrayList<View>();
         mViewPager = new ViewPager(context);
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         mViewPager.setLayoutParams(lp);
         addView(mViewPager);
-        mHandler = new Handler() {
-            @Override
-            public void handleMessage(Message msg) {
-                if (Running) {
-                    if (mActivity != null && mActivity.isFinishing()) {
-                        Running = false;
-                    }
-                    if (msg.what == updatePage) {
-                        mViewPager.setCurrentItem(currentIndex);
-                    }
-                }
-                super.handleMessage(msg);
-            }
-        };
+
     }
 
     private void initUnit() {
@@ -105,9 +94,7 @@ public class GuideView extends FrameLayout {
         }
     }
 
-    public void attachActivity(Activity activity) {
-        mActivity = activity;
-    }
+
 
     public void createShapeDrawable() {
         ShapeDrawable selectdrawable = new ShapeDrawable(new OvalShape());
@@ -245,17 +232,41 @@ public class GuideView extends FrameLayout {
 
 
 
-    public void setGuideResource(List<View> list) {
-        if (list != null && list.size() > 0) {
-            viewList = list;
-            LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
-            for (View view:viewList){
-                view.setLayoutParams(lp);
-            }
-            setAdapter();
+    public void setGuideResource(int[] picIds,View lastPage) {
+        if (picIds==null||picIds.length==0)return;
+        LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT,
+                             LayoutParams.MATCH_PARENT);
+        for (int i = 0; i < picIds.length; i++) {
+            ImageView imageView = new ImageView(mContext);
+            Bitmap bitmap= BitmapReader.readBitMap565(mContext,picIds[i]);
+            imageView.setImageBitmap(bitmap);
+            SoftReference<Bitmap> softReference=new SoftReference<Bitmap>(bitmap);
+            bitmaps.add(softReference);
+            viewList.add(imageView);
         }
+        lastPage.setLayoutParams(lp);
+        viewList.add(lastPage);
+        setAdapter();
     }
 
+    public void recycle(){
+        if (bitmaps!=null&&bitmaps.size()>0){
+            for (int i=0, len=bitmaps.size();i<len;i++){
+                SoftReference<Bitmap> softReference=bitmaps.get(i);
+                if (softReference!=null){
+                    Bitmap bitmap=softReference.get();
+                    if (bitmap!=null){
+                        bitmap.recycle();
+                        bitmap=null;
+                    }
+                }
+            }
+        }
+        if (viewList!=null)viewList.clear();
+        if (indicatorList!=null)indicatorList.clear();
+        mScaleUtil=null;
+        removeAllViews();
+    }
 
     class GuideAdapter extends PagerAdapter {
 
@@ -272,7 +283,6 @@ public class GuideView extends FrameLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-
             View view = viewList.get(position);
             container.addView(view);
             return view;
@@ -319,14 +329,12 @@ public class GuideView extends FrameLayout {
     }
 
 
-    public class ScaleUtil {
-        private Context mContext;
+    public static class ScaleUtil {
         private final int BASE_WIDTH = 1080;
         private float BASE_RATIO = 1;
 
         public ScaleUtil(Context context) {
-            mContext = context;
-            BASE_RATIO = 1.0f * mContext.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
+            BASE_RATIO = 1.0f * context.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
         }
 
         public int toScaleSize(int px) {
@@ -335,13 +343,39 @@ public class GuideView extends FrameLayout {
     }
 
 
-    private OnItemClickListener mItemClickListener;
 
-    public interface OnItemClickListener {
-        void onClick(String url, int position);
+
+
+
+    public static class BitmapReader {
+
+        public static Bitmap readBitMap565(Context context, int resId) {
+            try {
+                BitmapFactory.Options opt = new BitmapFactory.Options();
+                opt.inPreferredConfig = Bitmap.Config.RGB_565;
+                InputStream is = context.getResources().openRawResource(resId);
+                Bitmap bitmap=BitmapFactory.decodeStream(is, null, opt);
+                is.close();
+                return bitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        public static Bitmap readBitMap888(Context context, int resId) {
+            try {
+                BitmapFactory.Options opt = new BitmapFactory.Options();
+                opt.inPreferredConfig = Bitmap.Config.RGB_565;
+                InputStream is = context.getResources().openRawResource(resId);
+                Bitmap bitmap=BitmapFactory.decodeStream(is, null, opt);
+                is.close();
+                return bitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
-        mItemClickListener = listener;
-    }
 }
