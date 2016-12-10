@@ -3,6 +3,8 @@ package com.dylan.library.widget;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.ShapeDrawable;
@@ -13,7 +15,6 @@ import android.os.Message;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +25,8 @@ import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,8 +43,8 @@ public class CarouselView extends FrameLayout {
     private ScaleUtil mScaleUtil;
     //indicatorLayout
     private LinearLayout indicatorLayout;
-    private int indicatorLayoutHeight ;
-    private int indicatorLayoutGravity=Gravity.BOTTOM|Gravity.RIGHT;  //默认右下角
+    private int indicatorLayoutHeight;
+    private int indicatorLayoutGravity = Gravity.BOTTOM | Gravity.RIGHT;  //默认右下角
     private int indicatorLayoutMarginRight;
     private int indicatorLayoutMarginLeft;
     private int indicatorLayoutMarginTop;
@@ -52,9 +55,9 @@ public class CarouselView extends FrameLayout {
     private List<View> indicatorList;
     private Drawable selectIndicatorDrawable;
     private Drawable normalIndicatorDrawable;
-    private Activity mActivity ;
+    private Activity mActivity;
     private int placeHolderId;
-    private PollingThread  mPollingThread;
+    private PollingThread mPollingThread;
 
 
     public CarouselView(Context context) {
@@ -63,9 +66,11 @@ public class CarouselView extends FrameLayout {
 
     public CarouselView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        mScaleUtil=new ScaleUtil(context);
+        mScaleUtil = new ScaleUtil(context);
         initUnit();
-        mContext = context;
+        if (mContext instanceof Activity) mContext = mActivity.getApplicationContext();
+        else mContext = context;
+
         imgList = new ArrayList<ImageView>();
         mViewPager = new ViewPager(context);
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -75,11 +80,15 @@ public class CarouselView extends FrameLayout {
             @Override
             public void handleMessage(Message msg) {
                 if (mPollingThread.isRunning()) {
-                    if (mActivity!=null&&mActivity.isFinishing()){
+
+                    if (mActivity != null && mActivity.isFinishing()) {
                         mPollingThread.finish();
                     }
                     if (msg.what == updatePage) {
-                        mViewPager.setCurrentItem(currentIndex);
+                        if (!mPollingThread.isStop()){
+                            currentIndex++;
+                            mViewPager.setCurrentItem(currentIndex);
+                        }
                     }
                 }
                 super.handleMessage(msg);
@@ -87,23 +96,21 @@ public class CarouselView extends FrameLayout {
         };
     }
 
-    private void initUnit(){
-        indicatorSpace=mScaleUtil.toScaleSize(20);
-        indicatorSize= mScaleUtil.toScaleSize(25);
-        indicatorLayoutHeight=mScaleUtil.toScaleSize (100);
-        indicatorLayoutMarginRight= mScaleUtil.toScaleSize(50);
-        indicatorLayoutMarginLeft =mScaleUtil.toScaleSize(50);
-        indicatorLayoutMarginTop=mScaleUtil.toScaleSize(10);
-        indicatorLayoutMarginBottom=mScaleUtil.toScaleSize(10);
+    private void initUnit() {
+        indicatorSpace = mScaleUtil.toScaleSize(20);
+        indicatorSize = mScaleUtil.toScaleSize(25);
+        indicatorLayoutHeight = mScaleUtil.toScaleSize(100);
+        indicatorLayoutMarginRight = mScaleUtil.toScaleSize(50);
+        indicatorLayoutMarginLeft = mScaleUtil.toScaleSize(50);
+        indicatorLayoutMarginTop = mScaleUtil.toScaleSize(10);
+        indicatorLayoutMarginBottom = mScaleUtil.toScaleSize(10);
     }
-
-
 
 
     private void setAdapter() {
         if (imgList != null && imgList.size() > 0) {
             mViewPager.setAdapter(new CarouselAdapter());
-            stop();
+            release();
             if (imgList.size() > 1) {
                 createShapeDrawable();
                 initIndicatorLayout(imgList.size());
@@ -118,9 +125,10 @@ public class CarouselView extends FrameLayout {
         }
     }
 
-    public void attachActivity(Activity activity){
-        mActivity=activity;
+    public void attachActivity(Activity activity) {
+        mActivity = activity;
     }
+
 
     public void createShapeDrawable() {
         ShapeDrawable selectdrawable = new ShapeDrawable(new OvalShape());
@@ -149,9 +157,9 @@ public class CarouselView extends FrameLayout {
     }
 
 
-    public void stop() {
-        if (mPollingThread!=null)mPollingThread.finish();
-        if (indicatorLayout!=null)indicatorLayout.removeAllViews();
+    private void release() {
+        if (mPollingThread != null) mPollingThread.finish();
+        if (indicatorLayout != null) indicatorLayout.removeAllViews();
     }
 
 
@@ -185,14 +193,14 @@ public class CarouselView extends FrameLayout {
 
     public void setIndicatorLayoutGravity(int gravity) {
         indicatorLayoutGravity = gravity;
-        if (indicatorLayout!=null){
+        if (indicatorLayout != null) {
             LayoutParams lp = (LayoutParams) indicatorLayout.getLayoutParams();
             lp.gravity = indicatorLayoutGravity;
         }
     }
 
     public void setIndicatorLayoutHeight(int height) {
-        indicatorLayoutHeight =  mScaleUtil.toScaleSize(height);
+        indicatorLayoutHeight = mScaleUtil.toScaleSize(height);
         if (indicatorLayout != null) {
             indicatorLayout.getLayoutParams().height = indicatorLayoutHeight;
         }
@@ -207,7 +215,7 @@ public class CarouselView extends FrameLayout {
     }
 
     public void setIndicatorLayoutMarginLeft(int space) {
-        indicatorLayoutMarginLeft =  mScaleUtil.toScaleSize(space);
+        indicatorLayoutMarginLeft = mScaleUtil.toScaleSize(space);
         if (indicatorLayout != null) {
             LayoutParams lp = (LayoutParams) indicatorLayout.getLayoutParams();
             lp.leftMargin = indicatorLayoutMarginLeft;
@@ -215,7 +223,7 @@ public class CarouselView extends FrameLayout {
     }
 
     public void setIndicatorLayoutMarginTop(int space) {
-        indicatorLayoutMarginTop =  mScaleUtil.toScaleSize(space);
+        indicatorLayoutMarginTop = mScaleUtil.toScaleSize(space);
         if (indicatorLayout != null) {
             LayoutParams lp = (LayoutParams) indicatorLayout.getLayoutParams();
             lp.topMargin = indicatorLayoutMarginTop;
@@ -257,9 +265,10 @@ public class CarouselView extends FrameLayout {
         addView(indicatorLayout);
     }
 
-    public void setPlaceHolder(int placeHolderId){
-        this.placeHolderId=placeHolderId;
+    public void setPlaceHolder(int placeHolderId) {
+        this.placeHolderId = placeHolderId;
     }
+
     /**
      * @param list      图片url集合
      * @param scaleType
@@ -268,44 +277,43 @@ public class CarouselView extends FrameLayout {
         if (list != null && list.size() > 0) {
             imgList.clear();
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            for (int i=0;i< list.size(); i++) {
-                final int index=i;
-                final String imgurl=list.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                final int index = i;
+                final String imgurl = list.get(i);
                 final ImageView imgv = new ImageView(mContext);
                 imgv.setLayoutParams(lp);
                 imgv.setScaleType(scaleType);
-                if (placeHolderId!=0){
+                if (placeHolderId != 0) {
                     Glide.with(mContext).load(imgurl).placeholder(placeHolderId).into(imgv);
-                }else{
+                } else {
                     Glide.with(mContext).load(imgurl).into(imgv);
                 }
                 imgv.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                          if (mItemClickListener!=null){
-                              mItemClickListener.onClick(imgurl,index);
-                          }
+                        if (mItemClickListener != null) {
+                            mItemClickListener.onClick(imgurl, index);
+                        }
                     }
                 });
                 imgList.add(imgv);
             }
-            Log.e("setCarouselFixXY:", " imageViewList.size() " + imgList.size());
             setAdapter();
         }
     }
 
     /**
-     * @param list      图片url集合
+     * @param list          图片url集合
      * @param placeHolderId 占位图
      * @param scaleType
      */
-    public void setCarouselResource(List<String> list, int placeHolderId,ImageView.ScaleType scaleType) {
+    public void setCarouselResource(List<String> list, int placeHolderId, ImageView.ScaleType scaleType) {
         if (list != null && list.size() > 0) {
             imgList.clear();
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
-            for (int i=0;i< list.size(); i++) {
-                final int index=i;
-                final String imgurl=list.get(i);
+            for (int i = 0; i < list.size(); i++) {
+                final int index = i;
+                final String imgurl = list.get(i);
                 final ImageView imgv = new ImageView(mContext);
                 imgv.setLayoutParams(lp);
                 imgv.setScaleType(scaleType);
@@ -313,14 +321,13 @@ public class CarouselView extends FrameLayout {
                 imgv.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (mItemClickListener!=null){
-                            mItemClickListener.onClick(imgurl,index);
+                        if (mItemClickListener != null) {
+                            mItemClickListener.onClick(imgurl, index);
                         }
                     }
                 });
                 imgList.add(imgv);
             }
-            Log.e("setCarouselFixXY:", " imageViewList.size() " + imgList.size());
             setAdapter();
         }
     }
@@ -336,56 +343,115 @@ public class CarouselView extends FrameLayout {
             for (int id : resIds) {
                 ImageView imgv = new ImageView(mContext);
                 imgv.setLayoutParams(lp);
-                imgv.setImageResource(id);
+                Bitmap bitmap =BitmapReader.readBitMap565(mContext, id);
+                imgv.setImageBitmap(bitmap);
                 imgv.setScaleType(scaleType);
                 imgList.add(imgv);
             }
-            Log.e("setCarouselFixXY:", " imageViewList.size() " + imgList.size());
             setAdapter();
         }
     }
+
+
+    public void recycle() {
+        try {
+            mActivity = null;
+            if (mPollingThread != null) {
+                mPollingThread.finish();
+                mPollingThread=null;
+            }
+            if (imgList!=null&&imgList.size()>0){
+                imgList.clear();
+                imgList=null;
+            }
+            if (indicatorList!=null)indicatorList.clear();
+            removeAllViews();
+        }catch (Exception e){
+
+        }
+    }
+
+
+    public void onStop(){
+        if (mPollingThread!=null){
+            mPollingThread.setStop(true);
+        }
+
+    }
+
+    public void onResume(){
+        if (mPollingThread!=null){
+            mPollingThread.setStop(false);
+        }
+
+    }
+
 
     /**
      * 开启轮询线程
      */
     private void startPolling() {
-        if (mPollingThread!=null){
+        if (mPollingThread != null) {
             mPollingThread.finish();
         }
-        mPollingThread=new PollingThread();
+        mPollingThread = new PollingThread();
         mPollingThread.Running = true;
         mPollingThread.start();
 
     }
 
 
-    class PollingThread extends Thread{
+    class PollingThread extends Thread {
         private boolean Running;
 
-        public void finish(){
-            Running=false;
+        private boolean isStop() {
+            return isStop;
         }
 
-        public boolean isRunning(){
-           return Running;
+        public void setStop(boolean stop) {
+            isStop = stop;
+            if (!isStop){
+                synchronized (PollingThread.this){
+                    notifyAll();
+                }
+            }
         }
+
+        private  boolean isStop;
+
+        public void finish() {
+            Running = false;
+        }
+
+        public boolean isRunning() {
+            return Running;
+        }
+
         @Override
         public void run() {
             while (Running) {
-                try {
-                    Thread.sleep(5000);
-                    currentIndex++;
-                    if (!Running)return;
-                    if (mHandler != null) {
-                        Message msg = Message.obtain();
-                        msg.what = updatePage;
-                        mHandler.sendMessage(msg);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                synchronized (PollingThread.this){
+                     if (isStop){
+                         try {
+                             wait();
+                         } catch (InterruptedException e) {
+                             e.printStackTrace();
+                         }
+                     }
                 }
 
-            }
+                        try {
+                        Thread.sleep(5000);
+                        if (!Running) return;
+                        if (mHandler != null) {
+                            Message msg = Message.obtain();
+                            msg.what = updatePage;
+                            mHandler.sendMessage(msg);
+                        }
+                        }catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
         }
     }
 
@@ -399,7 +465,6 @@ public class CarouselView extends FrameLayout {
 
         @Override
         public boolean isViewFromObject(View arg0, Object arg1) {
-
             return arg0 == arg1;
         }
 
@@ -409,7 +474,6 @@ public class CarouselView extends FrameLayout {
             if (position < 0) {
                 position = position + imgList.size();
             }
-
             ImageView view = imgList.get(position);
             ViewParent parent = view.getParent();
             if (parent != null) {
@@ -459,14 +523,12 @@ public class CarouselView extends FrameLayout {
     }
 
 
-    public class ScaleUtil {
-        private Context mContext;
+    public static class ScaleUtil {
         private final int BASE_WIDTH = 1080;
         private float BASE_RATIO = 1;
 
         public ScaleUtil(Context context) {
-            mContext = context;
-            BASE_RATIO = 1.0f * mContext.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
+            BASE_RATIO = 1.0f * context.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
         }
 
         public int toScaleSize(int px) {
@@ -475,13 +537,45 @@ public class CarouselView extends FrameLayout {
     }
 
 
+    private OnItemClickListener mItemClickListener;
 
-    private OnItemClickListener  mItemClickListener;
-  public interface OnItemClickListener{
+    public interface OnItemClickListener {
         void onClick(String url, int position);
-  }
+    }
 
-    public void setOnItemClickListener(OnItemClickListener listener){
-        mItemClickListener=listener;
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        mItemClickListener = listener;
+    }
+
+
+    public static class BitmapReader {
+
+        public static Bitmap readBitMap565(Context context, int resId) {
+            try {
+                BitmapFactory.Options opt = new BitmapFactory.Options();
+                opt.inPreferredConfig = Bitmap.Config.RGB_565;
+                InputStream is = context.getResources().openRawResource(resId);
+                Bitmap bitmap = BitmapFactory.decodeStream(is, null, opt);
+                is.close();
+                return bitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        public static Bitmap readBitMap888(Context context, int resId) {
+            try {
+                BitmapFactory.Options opt = new BitmapFactory.Options();
+                opt.inPreferredConfig = Bitmap.Config.RGB_565;
+                InputStream is = context.getResources().openRawResource(resId);
+                Bitmap bitmap = BitmapFactory.decodeStream(is, null, opt);
+                is.close();
+                return bitmap;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
     }
 }

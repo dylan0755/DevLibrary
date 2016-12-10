@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -34,81 +34,22 @@ dependencies {
     provided files('libs/glide.jar')
 }
 
-/*
-def siteUrl = 'https://coding.net/u/dylan_coding/p/MyLibraryDemo/git'
-def gitUrl = 'https://coding.net/u/dylan_coding/p/MyLibraryDemo/git'
-group = "com.dylan.library" // Maven Group ID for the artifact，一般填你唯一的包名
-install {
-    repositories.mavenInstaller {
-        // 生成POM.xml
-        pom {
-            project {
-                packaging 'aar'
-                // Add your description here
-                name 'fist time to upload to jcenter' //项目描述
-                url siteUrl
-                // Set your license
-                licenses {
-                    license {
-                        name 'The Apache Software License, Version 2.0'
-                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                    }
-                }
-                developers {
-                    developer {
-                        id 'dylan0759'    //填写的一些基本信息
-                        name 'dylan0759'
-                        email 'dylan0759@163.com'
-                    }
-                }
-                scm {
-                    connection gitUrl
-                    developerConnection gitUrl
-                    url siteUrl
-                }
-            }
-        }
-    }
-}
-task sourcesJar(type: Jar) {
-    from android.sourceSets.main.java.srcDirs
-    classifier = 'sources'
-}
-task javadoc(type: Javadoc) {
-    options.encoding ="UTF-8"
-    source = android.sourceSets.main.java.srcDirs
-    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
-}
-task javadocJar(type: Jar, dependsOn: javadoc) {
-    classifier = 'javadoc'
-    from javadoc.destinationDir
-}
-artifacts {
-    archives javadocJar
-    archives sourcesJar
-}
-Properties properties = new Properties()
-properties.load(project.rootProject.file('local.properties').newDataInputStream())
-bintray {
-    user = properties.getProperty("bintray.user")
-    key = properties.getProperty("bintray.apikey")
-    configurations = ['archives']
-    pkg {
-        repo = "maven"
-        name = "integr"    //发布到JCenter上的项目名字
-        websiteUrl = siteUrl
-        vcsUrl = gitUrl
-        licenses = ["Apache-2.0"]
-        publish = true
-    }
-}*/
+
 
 //添加
 publish {
-    userOrg = 'dylan0759'//bintray.com用户名
+    userOrg = 'zj'             //这里写的不是用户名而是 organization
     groupId = 'com.dylan'//jcenter上的路径
-    artifactId = 'libraray'//项目名称
-    publishVersion = '1.0.0'//版本号gra
-    desc = 'Oh hi, this is a nice description for a project, right?'//描述，不重要
+    artifactId = 'lib'//项目名称             //在maven下创建的包名,建议不要在后台创建，让这部分配置自动创建
+    publishVersion = '1.0.0'//版本号gra         //当涉及到更新的时候只要改动版本号即可
+    desc = 'a good tool'//描述，不重要
     website = 'https://github.com/dylan/libraray'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
+    //上传
+/*
+gradlew clean build bintrayUpload
+-PbintrayUser=dylan0759
+-PbintrayKey=d581f2bedee35122ede083913fa3b47902ac6739
+-PdryRun=false
+
+*/

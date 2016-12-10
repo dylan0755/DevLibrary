@@ -18,6 +18,8 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".ui.testactivity.CustomTittleUitlActivity"
+            android:screenOrientation="portrait"/>
 
 
         <meta-data

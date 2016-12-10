@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoRelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="96px"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary">
+    <ImageView
+        android:id="@+id/iv_top_left_back"
+        android:layout_width="100px"
+        android:layout_height="100px"
+        android:padding="30px"
+        android:src="@mipmap/nav_ic_back"
+        android:background="@drawable/selector_back_layout_purple"/>
+    <TextView
+        android:id="@+id/tv_base_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:textSize="36px"/>
+</com.zhy.autolayout.AutoRelativeLayout>
