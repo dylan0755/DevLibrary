@@ -1,4 +1,4 @@
-package com.dankal.mylibrary.ui;
+package com.dankal.mylibrary.ui.base;
 
 import android.content.Context;
 import android.os.Bundle;

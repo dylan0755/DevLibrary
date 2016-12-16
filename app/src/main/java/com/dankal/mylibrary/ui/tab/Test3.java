@@ -1,4 +1,4 @@
-package com.dankal.mylibrary;
+package com.dankal.mylibrary.ui.tab;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.test.VideoView;
 
 /**

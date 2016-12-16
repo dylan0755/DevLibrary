@@ -1,13 +1,14 @@
-package com.dankal.mylibrary;
+package com.dankal.mylibrary.ui.tab;
 
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dankal.mylibrary.R;
 import com.dylan.library.fragment.FragmentSwitcher;
 import com.dylan.library.tab.TabGroup;
 
-public class MainActivity extends AppCompatActivity {
+public class TabActivity extends AppCompatActivity {
     private TabGroup  tabGroup;
     private  FragmentSwitcher fragmentSwitcher;
     @Override

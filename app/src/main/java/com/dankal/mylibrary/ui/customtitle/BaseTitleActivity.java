@@ -1,4 +1,4 @@
-package com.dankal.mylibrary.ui.testactivity;
+package com.dankal.mylibrary.ui.customtitle;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
  * Created by Dylan on 2016/12/10.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseTitleActivity extends AppCompatActivity {
     private TextView tvTitle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {

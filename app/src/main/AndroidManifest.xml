@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".ui.DemoListActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -18,9 +18,13 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.testactivity.CustomTittleUitlActivity"
+        <activity android:name=".ui.customtitle.CustomTittleUitlActivity"
             android:screenOrientation="portrait"/>
-
+        <activity
+            android:name=".ui.tab.TabActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.date.DateTestActivity"
+            android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="design_width"

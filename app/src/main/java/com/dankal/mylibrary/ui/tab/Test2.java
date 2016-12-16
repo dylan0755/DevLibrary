@@ -1,4 +1,4 @@
-package com.dankal.mylibrary;
+package com.dankal.mylibrary.ui.tab;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -12,11 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.dankal.mylibrary.MyApplication;
+import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.bean.CarouselData;
 import com.dankal.mylibrary.bean.NavigateTag;
 import com.dankal.mylibrary.bean.Tag;
 import com.dankal.mylibrary.domain.RestApi;
-import com.dankal.mylibrary.ui.OriginalSubFragment;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
 import com.dylan.library.tab.TabIndicatorLayout;

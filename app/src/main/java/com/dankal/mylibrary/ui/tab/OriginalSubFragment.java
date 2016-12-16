@@ -1,4 +1,4 @@
-package com.dankal.mylibrary.ui;
+package com.dankal.mylibrary.ui.tab;
 
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
@@ -7,6 +7,7 @@ import android.view.View;
 import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.VideoDataAdapter;
 import com.dankal.mylibrary.bean.VideoData;
+import com.dankal.mylibrary.ui.base.BaseFragment;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
 import com.dylan.library.util.GridHorizontalSpace;

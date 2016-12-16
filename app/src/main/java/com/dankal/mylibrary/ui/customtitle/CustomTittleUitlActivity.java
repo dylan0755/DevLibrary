@@ -1,4 +1,4 @@
-package com.dankal.mylibrary.ui.testactivity;
+package com.dankal.mylibrary.ui.customtitle;
 
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,7 +15,7 @@ import butterknife.Bind;
  * Created by Dylan on 2016/12/10.
  */
 
-public class CustomTittleUitlActivity extends BaseActivity {
+public class CustomTittleUitlActivity extends BaseTitleActivity {
     @Bind(R.id.cv_avatar)
     ImageView cvAvatar;
     @Bind(R.id.tv_doctorname)

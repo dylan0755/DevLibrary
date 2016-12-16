@@ -1,4 +1,4 @@
-package com.dylan.library.time_date;
+package com.dylan.library.util;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
