@@ -21,10 +21,18 @@
         />
 
     <Button
-        android:id="@+id/btn_date"
+    android:id="@+id/btn_date"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="DateUtil"
+    android:layout_marginTop="20px"
+    />
+
+    <Button
+        android:id="@+id/btn_editnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="DateUtil"
+        android:text="editnumber"
         android:layout_marginTop="20px"
         />
 </com.zhy.autolayout.AutoLinearLayout>
