@@ -1,3 +1,6 @@
+版本1.0之后增加
+
 1.2016/12/10  增加CustomTitleUtil
 2.2016/12/16  增加DateUtil
 3.2016/12/20 增加EidtNumberHelper
+4.2016/12/22  增加LoginRegUtil
