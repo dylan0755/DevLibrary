@@ -4,3 +4,11 @@
 2.2016/12/16  增加DateUtil
 3.2016/12/20 增加EidtNumberHelper
 4.2016/12/22  增加LoginRegUtil
+
+
+
+5.2016/12/29
+
+将StringCheck重命名为StringUtils.
+  增加EmptyUtils.
+6.2016/12/31 增加BitmapUtils.

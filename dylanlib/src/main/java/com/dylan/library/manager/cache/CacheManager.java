@@ -3,7 +3,7 @@ package com.dylan.library.manager.cache;
 import android.content.Context;
 import android.text.format.Formatter;
 
-import com.dylan.library.util.StringCheck;
+import com.dylan.library.utils.StringUtils;
 
 import java.io.File;
 
@@ -212,7 +212,7 @@ public class CacheManager {
     }
 
     public static void deleteFolderFile(String filePath, boolean deleteThisPath) {
-        if (StringCheck.isValid(filePath)) {
+        if (StringUtils.isValid(filePath)) {
             try {
                 File file = new File(filePath);
                 if (file.isDirectory()) {// 如果下面还有文件

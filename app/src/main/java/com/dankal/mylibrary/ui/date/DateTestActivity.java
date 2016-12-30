@@ -7,7 +7,7 @@ import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.dankal.mylibrary.R;
-import com.dylan.library.util.DateUtil;
+import com.dylan.library.utils.DateUtil;
 
 /**
  * Created by Dylan on 2016/12/16.

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dankal.mylibrary.R;
-import com.dylan.library.util.CustomTitleUtil;
+import com.dylan.library.utils.CustomTitleUtil;
 
 import butterknife.ButterKnife;
 

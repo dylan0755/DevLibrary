@@ -8,8 +8,8 @@ import com.dankal.mylibrary.bean.QiNiuDomain;
 import com.dankal.mylibrary.domain.RestApi;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
-import com.dylan.library.util.StringCheck;
-import com.dylan.library.util.ToastUtil;
+import com.dylan.library.utils.StringUtils;
+import com.dylan.library.utils.ToastUtil;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -75,7 +75,7 @@ public class MyApplication extends Application {
         if (url!=null&&!url.isEmpty()){
             if (url.contains("http"))return url;
             else{
-                if (StringCheck.isValid(qiniuDomain)){
+                if (StringUtils.isValid(qiniuDomain)){
                     return qiniuDomain+url;
                 }else{
                     return "";

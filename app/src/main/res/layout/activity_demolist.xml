@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.zhy.autolayout.AutoLinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <Button
         android:id="@+id/btn_mainactivity"
         android:layout_width="wrap_content"
-        android:minWidth="200px"
         android:layout_height="100px"
-        android:text="mainActivity"/>
+        android:minWidth="200px"
+        android:text="mainActivity" />
 
 
     <Button
         android:id="@+id/btn_cutomTitleUtil"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CustomTitleUtil"
         android:layout_marginTop="20px"
-        />
+        android:text="CustomTitleUtil" />
 
     <Button
-    android:id="@+id/btn_date"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="DateUtil"
-    android:layout_marginTop="20px"
-    />
+        android:id="@+id/btn_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:text="DateUtil" />
 
     <Button
         android:id="@+id/btn_editnumber"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="editnumber"
         android:layout_marginTop="20px"
-        />
+        android:text="editnumber" />
+
+
 </com.zhy.autolayout.AutoLinearLayout>

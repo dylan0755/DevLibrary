@@ -12,7 +12,7 @@ import com.dankal.mylibrary.bean.VideoData;
 import com.dylan.library.adapter.footer.FooterItemAdapter;
 import com.dylan.library.adapter.footer.LoadStateListener;
 import com.dylan.library.adapter.footer.RecyclerItemViewHolder;
-import com.dylan.library.util.StringCheck;
+import com.dylan.library.utils.StringUtils;
 import com.dylan.library.widget.RefreshRecyclerView;
 
 import java.util.List;
@@ -43,7 +43,7 @@ public class VideoDataAdapter extends FooterItemAdapter<VideoData,VideoDataAdapt
         String imgurl=videoData.getImg_key();
         holder.tv_title.setText(videoData.getName());
         holder.tv_description.setText(videoData.getIntroduction());
-        if (StringCheck.isValid(imgurl)){
+        if (StringUtils.isValid(imgurl)){
             Glide.with(context).load(MyApplication.setURL(imgurl)).into(holder.thumbView);
         }
     }

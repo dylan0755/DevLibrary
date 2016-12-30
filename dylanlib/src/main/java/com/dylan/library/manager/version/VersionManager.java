@@ -20,7 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.dylan.library.bean.VersionBean;
-import com.dylan.library.util.ToastUtil;
+import com.dylan.library.utils.ToastUtil;
 
 import java.io.BufferedReader;
 import java.io.File;

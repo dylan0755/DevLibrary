@@ -10,7 +10,7 @@ import com.dankal.mylibrary.bean.VideoData;
 import com.dankal.mylibrary.ui.base.BaseFragment;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
-import com.dylan.library.util.GridHorizontalSpace;
+import com.dylan.library.widget.GridHorizontalSpace;
 import com.dylan.library.widget.RefreshRecyclerView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;

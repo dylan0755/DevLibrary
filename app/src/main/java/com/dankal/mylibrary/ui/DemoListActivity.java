@@ -50,6 +50,7 @@ public class DemoListActivity extends Activity implements View.OnClickListener{
                 intent=new Intent(this, EditNumberActivity.class);
                 startActivity(intent);
                 break;
+
         }
     }
 }
