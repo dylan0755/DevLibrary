@@ -1,4 +1,4 @@
-package com.dylan.library.util;
+package com.dylan.library.utils;
 
 import android.app.Activity;
 import android.view.View;
@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
  */
 
 public class CustomTitleUtil {
+
 
     public static void  init(Activity activity, int common_title_id){
         FrameLayout mFrameLayout= (FrameLayout) activity.findViewById(android.R.id.content);

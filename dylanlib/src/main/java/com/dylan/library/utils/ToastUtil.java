@@ -1,4 +1,4 @@
-package com.dylan.library.util;
+package com.dylan.library.utils;
 
 import android.content.Context;
 import android.widget.Toast;

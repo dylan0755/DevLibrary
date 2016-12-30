@@ -1,4 +1,4 @@
-package com.dylan.library.util;
+package com.dylan.library.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,7 +16,7 @@ public class LoginRegUtil {
               return false;
           }
 
-        if (!StringCheck.isValid(pass)) {
+        if (!StringUtils.isValid(pass)) {
             ToastUtil.toToast("请输入密码");
             return false;
         }

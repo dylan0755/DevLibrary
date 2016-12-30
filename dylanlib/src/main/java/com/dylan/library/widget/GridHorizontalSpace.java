@@ -1,4 +1,4 @@
-package com.dylan.library.util;
+package com.dylan.library.widget;
 
 import android.graphics.Rect;
 import android.support.v7.widget.GridLayoutManager;

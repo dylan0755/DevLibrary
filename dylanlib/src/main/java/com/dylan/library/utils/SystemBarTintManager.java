@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.dylan.library.util;
+package com.dylan.library.utils;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

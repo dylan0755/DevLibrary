@@ -1,4 +1,4 @@
-package com.dylan.library.util;
+package com.dylan.library.utils;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
@@ -15,6 +15,13 @@ import java.util.Date;
  */
 
 public class DateUtil {
+
+    private DateUtil(){
+
+    }
+
+
+
     private static Calendar calendar=Calendar.getInstance();
     private static DatePickerDialog mDatePicker;
 
