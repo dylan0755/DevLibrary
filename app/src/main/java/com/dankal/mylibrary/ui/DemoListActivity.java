@@ -9,6 +9,7 @@ import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.ui.customtitle.CustomTittleUitlActivity;
 import com.dankal.mylibrary.ui.date.DateTestActivity;
 import com.dankal.mylibrary.ui.edittext.EditNumberActivity;
+import com.dankal.mylibrary.ui.install.AutoInstallActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 
 /**
@@ -28,6 +29,7 @@ public class DemoListActivity extends Activity implements View.OnClickListener{
         findViewById(R.id.btn_cutomTitleUtil).setOnClickListener(this);
         findViewById(R.id.btn_date).setOnClickListener(this);
         findViewById(R.id.btn_editnumber).setOnClickListener(this);
+        findViewById(R.id.btn_autoinstall).setOnClickListener(this);
     }
 
     @Override
@@ -48,6 +50,10 @@ public class DemoListActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.btn_editnumber:
                 intent=new Intent(this, EditNumberActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btn_autoinstall:
+                intent=new Intent(this, AutoInstallActivity.class);
                 startActivity(intent);
                 break;
 

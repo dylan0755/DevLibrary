@@ -34,5 +34,12 @@
         android:layout_marginTop="20px"
         android:text="editnumber" />
 
+    <Button
+        android:id="@+id/btn_autoinstall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20px"
+        android:text="autoinstall" />
+
 
 </com.zhy.autolayout.AutoLinearLayout>
