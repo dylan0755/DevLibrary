@@ -11,6 +11,7 @@ import com.dankal.mylibrary.ui.date.DateTestActivity;
 import com.dankal.mylibrary.ui.edittext.EditNumberActivity;
 import com.dankal.mylibrary.ui.install.AutoInstallActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
+import com.dylan.library.utils.AppUtils;
 
 /**
  * Created by Dylan on 2016/12/16.

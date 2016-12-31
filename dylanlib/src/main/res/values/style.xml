@@ -9,5 +9,19 @@
         <item name="android:backgroundDimEnabled">false</item>
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+    <style name="edt_phone_style">
+        <item name="android:inputType">number</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">11</item>
+    </style>
 
+    <style name="edt_pass_style">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:digits">
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@_*#"
+        </item>
+    </style>
 </resources>
