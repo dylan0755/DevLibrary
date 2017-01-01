@@ -75,10 +75,10 @@ public class AppUtils {
     }
 
 
-     public static void unInstallApp(Context context, String packageName){
-         if (context==null)return;
-         context.startActivity(IntentUtils.getUninstallAppIntent(packageName));
-     }
+    public static void unInstallApp(Context context, String packageName) {
+        if (context == null) return;
+        context.startActivity(IntentUtils.getUninstallAppIntent(packageName));
+    }
 
 
     /**
@@ -86,7 +86,7 @@ public class AppUtils {
      *
      * @param context 上下文
      */
-    public static void launchApp(Context context,String packageName) {
+    public static void launchApp(Context context, String packageName) {
         if (context == null) return;
         if (StringUtils.isInValid(packageName)) return;
         context.startActivity(IntentUtils.getLaunchAppIntent(context, packageName));
@@ -100,7 +100,7 @@ public class AppUtils {
      * @param requestCode 请求值
      */
 
-    public static void launchApp(Activity activity, String packageName,int requestCode) {
+    public static void launchApp(Activity activity, String packageName, int requestCode) {
         if (activity == null) return;
         if (StringUtils.isInValid(packageName)) return;
         activity.startActivityForResult(IntentUtils.getLaunchAppIntent(activity, packageName), requestCode);
@@ -108,19 +108,17 @@ public class AppUtils {
     }
 
 
-
-    public static void shareText(Context context,String content){
-        if (context==null)return;
+    public static void shareText(Context context, String content) {
+        if (context == null) return;
         context.startActivity(IntentUtils.getShareTextIntent(content));
     }
 
 
-    public static void shareImage(Context context,String content,Uri uri){
-        if (context==null)return;
-        if (uri==null)return;
-        context.startActivity(IntentUtils.getShareImageIntent(content,uri));
+    public static void shareImage(Context context, String content, Uri uri) {
+        if (context == null) return;
+        if (uri == null) return;
+        context.startActivity(IntentUtils.getShareImageIntent(content, uri));
     }
-
 
 
     /**
@@ -184,6 +182,14 @@ public class AppUtils {
             e.printStackTrace();
             return null;
         }
+    }
+
+
+    public static String getAppName(Context context) {
+        if (context == null) return "";
+        CharSequence label = context.getPackageManager().getApplicationLabel(context.getApplicationInfo());
+        if (label != null) return label.toString();
+        else return "";
     }
 
 

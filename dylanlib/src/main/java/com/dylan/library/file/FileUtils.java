@@ -2,6 +2,7 @@ package com.dylan.library.file;
 
 import android.content.Context;
 
+import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.io.IOCloser;
 
 import java.io.File;
@@ -43,10 +44,29 @@ public class FileUtils {
     }
 
 
-    public void mkdirs(String dirPath){
+    public static void mkdirs(String dirPath){
          File file=new File(dirPath);
-        if (!file.exists())file.mkdirs();
+         if (!file.exists())file.mkdirs();
     }
+
+    public static void writeString2Sdcard(String text,String filePath){
+
+        if (text!=null&&!text.isEmpty()){
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(filePath);
+                fos.write(text.getBytes());
+                fos.flush();
+                fos.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+
+    }
+
+
 
 
 

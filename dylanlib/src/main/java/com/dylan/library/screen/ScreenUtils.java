@@ -1,6 +1,7 @@
 package com.dylan.library.screen;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Rect;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
@@ -13,6 +14,15 @@ import android.view.WindowManager;
  */
 public class ScreenUtils {
 
+     public static  int getScreenWidth(Context context){
+          if (context==null)return 0;
+          return context.getResources().getDisplayMetrics().widthPixels;
+     }
+
+    public static int getScreenHeight(Context context){
+        if (context==null)return 0;
+        return context.getResources().getDisplayMetrics().heightPixels;
+    }
     public static int getStatusBarHeight(Activity activity){
         Rect frame = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);

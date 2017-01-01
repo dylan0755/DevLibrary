@@ -8,6 +8,7 @@ import com.dankal.mylibrary.bean.QiNiuDomain;
 import com.dankal.mylibrary.domain.RestApi;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
+import com.dylan.library.exception.CrashHandler;
 import com.dylan.library.utils.StringUtils;
 import com.dylan.library.utils.ToastUtil;
 import com.google.gson.Gson;
@@ -32,7 +33,10 @@ public class MyApplication extends Application {
         mContext = this;
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         loadqiniuDomain();
-    
+        CrashHandler.getInstance().init(this);
+
+
+
     }
 
 

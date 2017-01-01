@@ -1,20 +1,23 @@
 版本1.0之后增加
 
 1.2016/12/10  增加CustomTitleUtil
-2.2016/12/16  增加DateUtil
-3.2016/12/20 增加EidtNumberHelper
+2.2016/12/16  增加DateUtil        日期选择器（4.x系统 样式）
+3.2016/12/20 增加EidtNumberHelper 对输入数字输入框 加减  输入计算。
 4.2016/12/22  增加LoginRegUtil
 
 
 
 5.2016/12/29
   将StringCheck重命名为StringUtils,  
-  增加EmptyUtils.
+  新增EmptyUtils.
 
 6.2016/12/31 
-   增加BitmapUtils.
-  增加自动安装  (AccessibilityService)
+  新增 BitmapUtils.
+  新增 自动安装/智能安装   (AccessibilityService)
 
 7.2017/01/01 
-  封装IOCloser
-  增加ScreenShoot
+  新增 IOCloser
+  新增 ScreenShoot
+  新增 MemoryUtils 读取sdcard  内存卡，RAM。
+  新增 CrashHandler  系统崩溃异常，写进日志文件，可上传至自己的服务器。
+  新增 TelephonyUtils 从TelePhoneyManager获取电话号码运行商，由号码来判断运营商。(正则)
