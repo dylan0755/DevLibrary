@@ -1,11 +1,11 @@
-package com.dylan.library.utils;
+package com.dylan.library.file;
 
 import android.content.Context;
-import android.util.Log;
 
-import java.io.Closeable;
+import com.dylan.library.io.IOCloser;
+
+import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -30,12 +30,7 @@ public class FileUtils {
             while((count= in.read(buffer))!=-1){
                 out.write(buffer, 0, count);
             }
-            in.close();
-
-            Log.e("copyAssets2SDcard: ","测试" );
-            out.close();
-           /* closeIO(in);
-            closeIO(out);*/
+            IOCloser.closeIOArray(in,out);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -43,15 +38,17 @@ public class FileUtils {
     }
 
 
-    public static void closeIO(Closeable closeable){
-         if (closeable!=null){
-             try {
-                 closeable.close();
-             } catch (IOException e) {
-                 e.printStackTrace();
-             }
-         }
+    public static String getSDCardDir(){
+          return SDCardUtils.getSDcardDir();
     }
+
+
+    public void mkdirs(String dirPath){
+         File file=new File(dirPath);
+        if (!file.exists())file.mkdirs();
+    }
+
+
 
 
 }

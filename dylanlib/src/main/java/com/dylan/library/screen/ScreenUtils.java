@@ -11,7 +11,7 @@ import android.view.WindowManager;
 /**
  * Created by Dylan on 2016/10/15.
  */
-public class ScreenTool {
+public class ScreenUtils {
 
     public static int getStatusBarHeight(Activity activity){
         Rect frame = new Rect();

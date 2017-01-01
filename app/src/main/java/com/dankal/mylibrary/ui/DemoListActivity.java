@@ -4,20 +4,33 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
 import com.dankal.mylibrary.R;
+import com.dankal.mylibrary.adapter.DemoListAdapter;
 import com.dankal.mylibrary.ui.customtitle.CustomTittleUitlActivity;
 import com.dankal.mylibrary.ui.date.DateTestActivity;
 import com.dankal.mylibrary.ui.edittext.EditNumberActivity;
 import com.dankal.mylibrary.ui.install.AutoInstallActivity;
+import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
-import com.dylan.library.utils.AppUtils;
+
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Created by Dylan on 2016/12/16.
  */
 
-public class DemoListActivity extends Activity implements View.OnClickListener{
+public class DemoListActivity extends Activity {
+    private GridView mGridView;
+    private DemoListAdapter mAdapter;
+    private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
+            "EditnnumberHelper", "autoInstall","ScreenShoot"};
+    private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
+            EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class};
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,38 +39,22 @@ public class DemoListActivity extends Activity implements View.OnClickListener{
     }
 
     private void initEvent() {
-        findViewById(R.id.btn_mainactivity).setOnClickListener(this);
-        findViewById(R.id.btn_cutomTitleUtil).setOnClickListener(this);
-        findViewById(R.id.btn_date).setOnClickListener(this);
-        findViewById(R.id.btn_editnumber).setOnClickListener(this);
-        findViewById(R.id.btn_autoinstall).setOnClickListener(this);
+        mGridView = (GridView) findViewById(R.id.gv_demolist);
+        mAdapter = new DemoListAdapter(this);
+        mGridView.setOnItemClickListener(new ItemClickListener());
+        mGridView.setAdapter(mAdapter);
+        List<String> list = Arrays.asList(demoNames);
+        mAdapter.bind(list);
     }
 
-    @Override
-    public void onClick(View v) {
-        Intent intent;
-        switch (v.getId()){
-            case R.id.btn_mainactivity:
-                intent=new Intent(this,TabActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.btn_cutomTitleUtil:
-                 intent=new Intent(this, CustomTittleUitlActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.btn_date:
-                intent=new Intent(this, DateTestActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.btn_editnumber:
-                intent=new Intent(this, EditNumberActivity.class);
-                startActivity(intent);
-                break;
-            case R.id.btn_autoinstall:
-                intent=new Intent(this, AutoInstallActivity.class);
-                startActivity(intent);
-                break;
 
+
+    class ItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            Intent intent = new Intent(DemoListActivity.this, classes[position]);
+            startActivity(intent);
         }
     }
 }

@@ -5,41 +5,11 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/btn_mainactivity"
-        android:layout_width="wrap_content"
-        android:layout_height="100px"
-        android:minWidth="200px"
-        android:text="mainActivity" />
-
-
-    <Button
-        android:id="@+id/btn_cutomTitleUtil"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20px"
-        android:text="CustomTitleUtil" />
-
-    <Button
-        android:id="@+id/btn_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20px"
-        android:text="DateUtil" />
-
-    <Button
-        android:id="@+id/btn_editnumber"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20px"
-        android:text="editnumber" />
-
-    <Button
-        android:id="@+id/btn_autoinstall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20px"
-        android:text="autoinstall" />
-
-
+    <GridView
+        android:id="@+id/gv_demolist"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="3"
+        android:horizontalSpacing="5dp"
+        android:verticalSpacing="5dp"/>
 </com.zhy.autolayout.AutoLinearLayout>

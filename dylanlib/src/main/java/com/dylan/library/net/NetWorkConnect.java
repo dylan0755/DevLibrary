@@ -1,4 +1,4 @@
-package com.dylan.library.network;
+package com.dylan.library.net;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

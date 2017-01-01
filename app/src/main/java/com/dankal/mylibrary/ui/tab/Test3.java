@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dankal.mylibrary.R;
-import com.dankal.mylibrary.test.VideoView;
+import com.dankal.mylibrary.widget.VideoView;
 
 /**
  * Created by Dylan on 2016/11/10.

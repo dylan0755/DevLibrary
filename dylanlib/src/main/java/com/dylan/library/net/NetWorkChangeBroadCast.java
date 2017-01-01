@@ -1,4 +1,4 @@
-package com.dylan.library.network;
+package com.dylan.library.net;
 
 import android.app.Service;
 import android.content.BroadcastReceiver;

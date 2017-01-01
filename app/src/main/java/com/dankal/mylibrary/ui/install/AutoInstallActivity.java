@@ -11,7 +11,7 @@ import com.dankal.mylibrary.R;
 import com.dylan.library.service.AutoInstallService;
 import com.dylan.library.service.ServiceHelper;
 import com.dylan.library.utils.AppUtils;
-import com.dylan.library.utils.FileUtils;
+import com.dylan.library.file.FileUtils;
 
 import java.io.File;
 

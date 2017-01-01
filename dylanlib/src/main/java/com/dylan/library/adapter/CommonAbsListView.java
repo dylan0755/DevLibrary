@@ -1,11 +1,15 @@
 package com.dylan.library.adapter;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.dylan.library.R;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -18,13 +22,13 @@ public class CommonAbsListView  {
         protected LayoutInflater mInflater;
         protected List<T> dataList;
 
-        public Adapter(Context context, List<T> dataList) {
+        public Adapter(Context context) {
             this.context = context;
             mInflater = LayoutInflater.from(context);
-            this.dataList = dataList;
+            dataList=new ArrayList<>();
         }
 
-        public void update(List<T> dataList){
+        public void bind(List<T> dataList){
             if (dataList!=null&&dataList.size()>0){
                 this.dataList = dataList;
                 notifyDataSetChanged();
@@ -63,7 +67,11 @@ public class CommonAbsListView  {
         public abstract void onBinderItem(VH holder,T t,int position);
 
 
+
     }
+
+
+
 
 
 

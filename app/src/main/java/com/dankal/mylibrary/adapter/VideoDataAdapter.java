@@ -1,4 +1,4 @@
-package com.dankal.mylibrary;
+package com.dankal.mylibrary.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.dankal.mylibrary.MyApplication;
+import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.bean.VideoData;
 import com.dylan.library.adapter.footer.FooterItemAdapter;
 import com.dylan.library.adapter.footer.LoadStateListener;

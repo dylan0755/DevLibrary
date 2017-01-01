@@ -1,4 +1,4 @@
-package com.dankal.mylibrary.test;
+package com.dankal.mylibrary.widget;
 
 import android.app.Activity;
 import android.content.Context;

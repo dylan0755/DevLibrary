@@ -1,12 +1,16 @@
 package com.dylan.library.utils;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Environment;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 
-import java.io.File;
+import com.dylan.library.io.IOCloser;
+
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by Dylan on 2016/12/30.
@@ -17,7 +21,7 @@ public class BitmapUtils {
 
     private static String dirPath ;
 
-    public static Bitmap getBitmap(String imgPath) {
+    public static Bitmap getScaleBitmap(String imgPath) {
         try {
             BitmapFactory.Options newOpts = new BitmapFactory.Options();
             newOpts.inJustDecodeBounds = true;
@@ -44,29 +48,61 @@ public class BitmapUtils {
         return null;
     }
 
-    public static String comPressBitmap(Context context,Bitmap bitmap, String fileName) {
-        if (bitmap == null) return "";
-        if (dirPath==null){
-            dirPath=Environment.getExternalStorageDirectory().toString() + "/Android/data/"+
-                    context.getPackageName()+"/upload/";
-        }
-        File fileDir=new File(dirPath);
-        if (!fileDir.exists())fileDir.mkdirs();
-        String path=dirPath+fileName;
 
-        try {
-            File file = new File(path);
-            file.createNewFile();
 
-            FileOutputStream fos = new FileOutputStream(file);
-            if (bitmap.compress(Bitmap.CompressFormat.JPEG, 90, fos)){
-                fos.close();
-                return path;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "";
+    public static void outPut(Bitmap bitmap, String savePath) {
+        outPut(Bitmap.CompressFormat.PNG,bitmap, 100, savePath,null);
     }
+
+    public static void outPut(Bitmap bitmap, String savePath,OutPutListenener listener) {
+        outPut(Bitmap.CompressFormat.PNG,bitmap, 100, savePath,listener);
+    }
+
+
+
+    public static void outPut(final Bitmap.CompressFormat format, final Bitmap bitmap, final int qulity, final String savePath, final OutPutListenener listener) {
+        if (bitmap == null){
+            Log.e("BitmapUtils.outPut()","bitmap==null");
+            return;
+        }
+
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 测试输出
+                FileOutputStream out = null;
+                try {
+                    out = new FileOutputStream(savePath);
+                } catch (FileNotFoundException e) {
+                    e.printStackTrace();
+                }
+                try {
+                    if (null != out) {
+                        bitmap.compress(format, qulity, out);
+                        out.flush();
+                        IOCloser.closeIO(out);
+                        Handler handler=new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (listener!=null) listener.onSuccess();
+                            }
+                        });
+
+                        Log.e("BitmapUtils: ","bitmap has compress success" );
+                    }
+                } catch (IOException e) {
+                    Log.e("BitmapUtils: ", "e:" + e.getMessage());
+                }
+            }
+        }).start();
+
+    }
+
+
+    public interface OutPutListenener{
+        void onSuccess();
+    }
+
+
 }

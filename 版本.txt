@@ -8,8 +8,13 @@
 
 
 5.2016/12/29
-
-将StringCheck重命名为StringUtils.
+  将StringCheck重命名为StringUtils,  
   增加EmptyUtils.
-6.2016/12/31 增加BitmapUtils.
-7.2016/12/31 增加自动安装  (AccessibilityService)
+
+6.2016/12/31 
+   增加BitmapUtils.
+  增加自动安装  (AccessibilityService)
+
+7.2017/01/01 
+  封装IOCloser
+  增加ScreenShoot

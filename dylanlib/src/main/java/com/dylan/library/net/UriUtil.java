@@ -1,4 +1,4 @@
-package com.dylan.library.fileuri;
+package com.dylan.library.net;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -10,7 +10,7 @@ import android.provider.MediaStore;
  * Created by Dylan on 2016/10/13.
  */
 public class UriUtil {
-    public static String getRealFilePath(final Context context, final Uri uri ) {
+    public static String getPathFromUri(final Context context, final Uri uri ) {
         if ( null == uri ) return null;
         final String scheme = uri.getScheme();
         String data = null;

@@ -1,4 +1,4 @@
-package com.dankal.mylibrary;
+package com.dankal.mylibrary.widget;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
