@@ -4,6 +4,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Service;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.media.AudioManager;
 import android.os.Build;
@@ -311,7 +312,16 @@ public class PlayerAdjustTool {
         private final int BASE_WIDTH = 1080;
         private float BASE_RATIO = 1;
         public ScaleUtil(Context context) {
-            BASE_RATIO = 1.0f * mContext.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
+            if (context==null)return;
+            //判断现在是横屏还是竖屏状态
+            int width=0;
+            boolean flag= mContext.getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT;
+            if (flag){
+                width=context.getResources().getDisplayMetrics().widthPixels;
+            }else{
+                width=context.getResources().getDisplayMetrics().heightPixels;
+            }
+            BASE_RATIO = 1.0f * width/ BASE_WIDTH;
         }
         public int toScaleSize(int px) {
             return (int) (BASE_RATIO * px);

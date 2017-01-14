@@ -30,6 +30,7 @@ public class LocalMediaLoader {
      *加载本地视频
      */
     public static List<VideoItem> getLocalVideo(Context context){
+        if (context==null)return new ArrayList<>();
         ContentResolver mResolver=context.getContentResolver();
             String[] projects={
                     MediaStore.Video.Media._ID,
@@ -66,6 +67,7 @@ public class LocalMediaLoader {
      * 加载本地歌曲
      */
     public static List<AudioItem> getLocalAudio(Context context){
+        if (context==null)return new ArrayList<>();
         ContentResolver mResolver=context.getContentResolver();
         String[] projects={
                 MediaStore.Audio.Media._ID,
@@ -110,6 +112,7 @@ public class LocalMediaLoader {
      * 加载本地歌曲
      */
     public static List<ImageItem> getLocalImage(Context context){
+        if (context==null)return new ArrayList<>();
         ContentResolver mResolver=context.getContentResolver();
         String[] projects={
                 MediaStore.Images.Media._ID,
@@ -338,6 +341,7 @@ public class LocalMediaLoader {
 
     //视频的缩略图
     public static Bitmap getVideoThumbnail(Context context, String filepath) {
+        if (context==null)return null;
         ContentResolver cr=context.getContentResolver();
         Bitmap bitmap = null;
         BitmapFactory.Options options = new BitmapFactory.Options();
@@ -369,6 +373,7 @@ public class LocalMediaLoader {
      * @return
      */
     public  static Bitmap getArtworkFromFile(Context context, long songid, long albumid){
+        if (context==null)return null;
         final Uri albumArtUri = Uri
                 .parse("content://media/external/audio/albumart");
         Bitmap bm = null;
@@ -415,10 +420,12 @@ public class LocalMediaLoader {
 
 
     public static void loadVideoThumb(Context context, String path,  ImageView imageview){
+        if (context==null)return;
         LruCacheUtil.getInstance(context).loadImage(path,imageview);
     }
 
     public static void recycle(Context context){
+        if (context==null)return;
         LruCacheUtil.getInstance(context).recycle();
     }
 

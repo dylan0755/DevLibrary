@@ -40,6 +40,10 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.screenshoot.ScreenShootActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.gridviewpager.GridViewPagerActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".ui.wraplayoutmanager.WrapLayoutActivity"
+            android:screenOrientation="portrait"/>
         <meta-data
             android:name="design_width"
             android:value="720" />

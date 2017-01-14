@@ -1,15 +1,11 @@
 package com.dylan.library.adapter;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
-import com.dylan.library.R;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -22,10 +18,8 @@ public class CommonAbsListView  {
         protected LayoutInflater mInflater;
         protected List<T> dataList;
 
-        public Adapter(Context context) {
-            this.context = context;
-            mInflater = LayoutInflater.from(context);
-            dataList=new ArrayList<>();
+        public Adapter() {
+
         }
 
         public void bind(List<T> dataList){
@@ -37,7 +31,7 @@ public class CommonAbsListView  {
 
         @Override
         public int getCount() {
-            return dataList.size();
+            return (dataList==null||dataList.size()==0)?0:dataList.size();
         }
 
         @Override
@@ -52,6 +46,11 @@ public class CommonAbsListView  {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
+            if (context==null){
+                context = parent.getContext();
+                mInflater = LayoutInflater.from(context);
+            }
+
             VH holder;
             if (convertView==null){
                 holder=oncreateViewHolder(mInflater,parent);

@@ -12,9 +12,11 @@ import com.dankal.mylibrary.adapter.DemoListAdapter;
 import com.dankal.mylibrary.ui.customtitle.CustomTittleUitlActivity;
 import com.dankal.mylibrary.ui.date.DateTestActivity;
 import com.dankal.mylibrary.ui.edittext.EditNumberActivity;
+import com.dankal.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dankal.mylibrary.ui.install.AutoInstallActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
+import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 
 import java.util.Arrays;
 import java.util.List;
@@ -27,9 +29,11 @@ public class DemoListActivity extends Activity {
     private GridView mGridView;
     private DemoListAdapter mAdapter;
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
-            "EditnnumberHelper", "autoInstall","ScreenShoot"};
+            "EditnnumberHelper", "autoInstall","ScreenShoot",
+            "GridViewPager","WrapLayoutManager"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
-            EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class};
+            EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
+            GridViewPagerActivity.class, WrapLayoutActivity.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,7 +44,7 @@ public class DemoListActivity extends Activity {
 
     private void initEvent() {
         mGridView = (GridView) findViewById(R.id.gv_demolist);
-        mAdapter = new DemoListAdapter(this);
+        mAdapter = new DemoListAdapter();
         mGridView.setOnItemClickListener(new ItemClickListener());
         mGridView.setAdapter(mAdapter);
         List<String> list = Arrays.asList(demoNames);

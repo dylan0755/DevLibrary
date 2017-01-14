@@ -1,5 +1,12 @@
 package com.dylan.library.utils;
 
+import android.util.Log;
+
+import com.dylan.library.exception.ELog;
+
+import java.net.URL;
+import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -7,9 +14,29 @@ import java.util.Date;
  * Created by Dylan on 2016/11/26.
  */
 
-public class TimeUtil {
+public class TimeUtils {
 
 
+    /**
+     * 获取网络时间
+     * @return
+     */
+    public static long getServerTimeMillSeconds(){
+        try {
+            URL url= new URL("http://www.baidu.com");
+            URLConnection uc=url.openConnection();
+            uc.connect();
+            long dateLong=uc.getDate();
+            return dateLong;
+        } catch (Exception e) {
+            if(e instanceof UnknownHostException){
+                Log.e("TimeUtils","网络断开" );
+            }else{
+                ELog.e(e);
+            }
+        }
+        return 0;
+    }
     /**
      *
      * 日期转时间戳和时间戳转字符串

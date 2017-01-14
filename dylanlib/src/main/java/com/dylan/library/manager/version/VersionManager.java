@@ -182,18 +182,30 @@ public abstract class VersionManager {
 
     //调用系统的下载管理器
     private void startDownLoad(final String remoteUrl) {
-        DownloadManager downloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
-        Uri uri = Uri.parse(remoteUrl);
-        DownloadManager.Request request = new DownloadManager.Request(uri);
-        request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
-        //显示下载界面
-        request.setVisibleInDownloadsUi(true);
-        //设置缓存目录
+        try{
+            DownloadManager downloadManager = (DownloadManager) mContext.getSystemService(Context.DOWNLOAD_SERVICE);
+            Uri uri = Uri.parse(remoteUrl);
+            DownloadManager.Request request = new DownloadManager.Request(uri);
+            request.setAllowedNetworkTypes(DownloadManager.Request.NETWORK_MOBILE | DownloadManager.Request.NETWORK_WIFI);
+            //显示下载界面
+            request.setVisibleInDownloadsUi(true);
+            //设置缓存目录
 //        if (Integer.valueOf(Build.VERSION.SDK)>22)
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            verifyStoragePermissions();
-            if (ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
-                request.setDestinationInExternalPublicDir("download",downloadFileName);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                verifyStoragePermissions();
+                if (ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                    request.setDestinationInExternalPublicDir("download",downloadFileName);
+                    //调用enqueue方法之后，只要数据连接可用并且Download Manager可用，下载就会开始。
+                    request.setMimeType("application/vnd.android.package-archive");
+                    // 设置为可被媒体扫描器找到
+                    request.allowScanningByMediaScanner();
+                    long id = downloadManager.enqueue(request);
+                    // 把当前下载的ID保存起来
+                    SharedPreferences sPreferences = mContext.getSharedPreferences("downloadmanager", -10);
+                    sPreferences.edit().putLong("downloadid", id).commit();
+                }
+            } else {
+                request.setDestinationInExternalPublicDir("download", downloadFileName);
                 //调用enqueue方法之后，只要数据连接可用并且Download Manager可用，下载就会开始。
                 request.setMimeType("application/vnd.android.package-archive");
                 // 设置为可被媒体扫描器找到
@@ -203,17 +215,10 @@ public abstract class VersionManager {
                 SharedPreferences sPreferences = mContext.getSharedPreferences("downloadmanager", -10);
                 sPreferences.edit().putLong("downloadid", id).commit();
             }
-        } else {
-            request.setDestinationInExternalPublicDir("download", downloadFileName);
-            //调用enqueue方法之后，只要数据连接可用并且Download Manager可用，下载就会开始。
-            request.setMimeType("application/vnd.android.package-archive");
-            // 设置为可被媒体扫描器找到
-            request.allowScanningByMediaScanner();
-            long id = downloadManager.enqueue(request);
-            // 把当前下载的ID保存起来
-            SharedPreferences sPreferences = mContext.getSharedPreferences("downloadmanager", -10);
-            sPreferences.edit().putLong("downloadid", id).commit();
+        }catch (Exception e){
+            e.printStackTrace();
         }
+
     }
 
     private String getJsonData(InputStream is) {

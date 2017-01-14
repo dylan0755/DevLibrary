@@ -11,12 +11,10 @@ import com.dylan.library.device.MemoryInfo;
 import com.dylan.library.device.MemoryUtils;
 import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.file.FileUtils;
+import com.dylan.library.screen.ScreenShoot;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.AppUtils;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
@@ -84,17 +82,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         }
         sb.append("\n").append("\n").append("\n");
 
-        //写入信息
-        Writer writer = new StringWriter();
-        PrintWriter printWriter = new PrintWriter(writer);
-        throwable.printStackTrace(printWriter);
-        Throwable cause = throwable.getCause();
-        while (cause != null) { ///////
-            cause.printStackTrace(printWriter);
-            cause = cause.getCause();
-        }
-        printWriter.close();
-        String result = writer.toString();
+
+        String result = ELog.getThrowableContent(throwable);
         sb.append(result);
 
         long timestamp = System.currentTimeMillis();
@@ -104,7 +93,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         if (Environment.getExternalStorageState().equals(
                 Environment.MEDIA_MOUNTED)) {
             String path = SDCardUtils.getSDcardCacheDir(mContext) + "/CrashLog/";
-            FileUtils.mkdirs(path);//创建文件夹
+            FileUtils.mkdirsIfNotExist(path);//创建文件夹
             String filepath = path + fileName;
             FileUtils.writeString2Sdcard(sb.toString(), filepath);
             return fileName;

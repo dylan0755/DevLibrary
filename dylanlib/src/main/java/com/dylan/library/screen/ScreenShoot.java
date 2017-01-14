@@ -6,10 +6,11 @@ import android.graphics.Canvas;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
-import com.dylan.library.utils.BitmapUtils;
+import com.dylan.library.graphics.BitmapUtils;
 
 
 /**
@@ -32,6 +33,19 @@ public class ScreenShoot {
         BitmapUtils.outPut(bitm, savePath, listener);
         return bitm;
     }
+
+
+    public static Bitmap captureDecorView(Window window, String savePath, BitmapUtils.OutPutListenener listener) {
+        View decordView =window.getDecorView();
+        decordView.setDrawingCacheEnabled(true);
+        decordView.buildDrawingCache();
+        Bitmap bitm = decordView.getDrawingCache();
+        BitmapUtils.outPut(bitm, savePath, listener);
+        return bitm;
+    }
+
+
+
 
     /**
      * 截取scrollview的屏幕

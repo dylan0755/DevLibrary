@@ -44,7 +44,7 @@ public class FileUtils {
     }
 
 
-    public static void mkdirs(String dirPath){
+    public static void mkdirsIfNotExist(String dirPath){
          File file=new File(dirPath);
          if (!file.exists())file.mkdirs();
     }

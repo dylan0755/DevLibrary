@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
+import com.dylan.library.graphics.BitmapUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +34,7 @@ import java.util.List;
 /**
  * @author Dylan
  */
-public class CarouselView extends FrameLayout {
+public class CarouselView extends FrameLayout  {
     private ViewPager mViewPager;
     private List<ImageView> imgList;
     private Context mContext;
@@ -70,7 +71,6 @@ public class CarouselView extends FrameLayout {
         initUnit();
         if (mContext instanceof Activity) mContext = mActivity.getApplicationContext();
         else mContext = context;
-
         imgList = new ArrayList<ImageView>();
         mViewPager = new ViewPager(context);
         LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
@@ -79,13 +79,12 @@ public class CarouselView extends FrameLayout {
         mHandler = new Handler() {
             @Override
             public void handleMessage(Message msg) {
-                if (mPollingThread.isRunning()) {
-
+                if (mPollingThread!=null&&mPollingThread.isRunning()) {
                     if (mActivity != null && mActivity.isFinishing()) {
                         mPollingThread.finish();
                     }
                     if (msg.what == updatePage) {
-                        if (!mPollingThread.isStop()){
+                        if (!mPollingThread.isStop()) {
                             currentIndex++;
                             mViewPager.setCurrentItem(currentIndex);
                         }
@@ -94,6 +93,7 @@ public class CarouselView extends FrameLayout {
                 super.handleMessage(msg);
             }
         };
+
     }
 
     private void initUnit() {
@@ -118,8 +118,10 @@ public class CarouselView extends FrameLayout {
                 mViewPager.setCurrentItem(currentIndex);
                 mViewPager.setOnPageChangeListener(new PageChageListener());
                 int selectIndex = currentIndex % indicatorList.size();
+                if (mItemSelectListener != null) mItemSelectListener.onSelect(selectIndex);
                 indicatorchage(selectIndex);
                 startPolling();
+
             }
 
         }
@@ -157,7 +159,7 @@ public class CarouselView extends FrameLayout {
     }
 
 
-    private void release() {
+    public void release() {
         if (mPollingThread != null) mPollingThread.finish();
         if (indicatorLayout != null) indicatorLayout.removeAllViews();
     }
@@ -273,7 +275,7 @@ public class CarouselView extends FrameLayout {
      * @param list      图片url集合
      * @param scaleType
      */
-    public void setCarouselResource(List<String> list, ImageView.ScaleType scaleType) {
+    public void setCarouselResource(final List<String> list, ImageView.ScaleType scaleType) {
         if (list != null && list.size() > 0) {
             imgList.clear();
             ViewGroup.LayoutParams lp = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
@@ -283,6 +285,7 @@ public class CarouselView extends FrameLayout {
                 final ImageView imgv = new ImageView(mContext);
                 imgv.setLayoutParams(lp);
                 imgv.setScaleType(scaleType);
+
                 if (placeHolderId != 0) {
                     Glide.with(mContext).load(imgurl).placeholder(placeHolderId).into(imgv);
                 } else {
@@ -291,9 +294,11 @@ public class CarouselView extends FrameLayout {
                 imgv.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         if (mItemClickListener != null) {
-                            mItemClickListener.onClick(imgurl, index);
+                            mItemClickListener.onClick(list.get(index), index);
                         }
+
                     }
                 });
                 imgList.add(imgv);
@@ -318,14 +323,6 @@ public class CarouselView extends FrameLayout {
                 imgv.setLayoutParams(lp);
                 imgv.setScaleType(scaleType);
                 Glide.with(mContext).load(imgurl).placeholder(placeHolderId).into(imgv);
-                imgv.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mItemClickListener != null) {
-                            mItemClickListener.onClick(imgurl, index);
-                        }
-                    }
-                });
                 imgList.add(imgv);
             }
             setAdapter();
@@ -343,7 +340,7 @@ public class CarouselView extends FrameLayout {
             for (int id : resIds) {
                 ImageView imgv = new ImageView(mContext);
                 imgv.setLayoutParams(lp);
-                Bitmap bitmap =BitmapReader.readBitMap565(mContext, id);
+                Bitmap bitmap = BitmapReader.readBitMap565(mContext, id);
                 imgv.setImageBitmap(bitmap);
                 imgv.setScaleType(scaleType);
                 imgList.add(imgv);
@@ -358,29 +355,30 @@ public class CarouselView extends FrameLayout {
             mActivity = null;
             if (mPollingThread != null) {
                 mPollingThread.finish();
-                mPollingThread=null;
+                mPollingThread = null;
             }
-            if (imgList!=null&&imgList.size()>0){
+            if (imgList != null && imgList.size() > 0) {
                 imgList.clear();
-                imgList=null;
+                imgList = null;
             }
-            if (indicatorList!=null)indicatorList.clear();
+            if (indicatorList != null) indicatorList.clear();
             removeAllViews();
-        }catch (Exception e){
+
+        } catch (Exception e) {
 
         }
     }
 
 
-    public void onStop(){
-        if (mPollingThread!=null){
+    public void onStop() {
+        if (mPollingThread != null) {
             mPollingThread.setStop(true);
         }
 
     }
 
-    public void onResume(){
-        if (mPollingThread!=null){
+    public void onResume() {
+        if (mPollingThread != null) {
             mPollingThread.setStop(false);
         }
 
@@ -410,14 +408,14 @@ public class CarouselView extends FrameLayout {
 
         public void setStop(boolean stop) {
             isStop = stop;
-            if (!isStop){
-                synchronized (PollingThread.this){
+            if (!isStop) {
+                synchronized (PollingThread.this) {
                     notifyAll();
                 }
             }
         }
 
-        private  boolean isStop;
+        private boolean isStop;
 
         public void finish() {
             Running = false;
@@ -430,28 +428,28 @@ public class CarouselView extends FrameLayout {
         @Override
         public void run() {
             while (Running) {
-                synchronized (PollingThread.this){
-                     if (isStop){
-                         try {
-                             wait();
-                         } catch (InterruptedException e) {
-                             e.printStackTrace();
-                         }
-                     }
-                }
-
+                synchronized (PollingThread.this) {
+                    if (isStop) {
                         try {
-                        Thread.sleep(5000);
-                        if (!Running) return;
-                        if (mHandler != null) {
-                            Message msg = Message.obtain();
-                            msg.what = updatePage;
-                            mHandler.sendMessage(msg);
-                        }
-                        }catch (Exception e) {
+                            wait();
+                        } catch (InterruptedException e) {
                             e.printStackTrace();
                         }
                     }
+                }
+
+                try {
+                    Thread.sleep(5000);
+                    if (!Running) return;
+                    if (mHandler != null) {
+                        Message msg = Message.obtain();
+                        msg.what = updatePage;
+                        mHandler.sendMessage(msg);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -470,6 +468,7 @@ public class CarouselView extends FrameLayout {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+
             position %= imgList.size();
             if (position < 0) {
                 position = position + imgList.size();
@@ -505,6 +504,7 @@ public class CarouselView extends FrameLayout {
             currentIndex = position;
             int selectIndex = currentIndex % indicatorList.size();
             indicatorchage(selectIndex);
+            if (mItemSelectListener != null) mItemSelectListener.onSelect(selectIndex);
         }
 
     }
@@ -548,6 +548,19 @@ public class CarouselView extends FrameLayout {
     }
 
 
+    private OnItemSelectListener mItemSelectListener;
+
+    public interface OnItemSelectListener {
+        void onSelect(int position);
+    }
+
+    public void setOnSelectListener(OnItemSelectListener listener) {
+        mItemSelectListener = listener;
+        if (imgList != null && imgList.size() > 0)
+            mItemSelectListener.onSelect(currentIndex % imgList.size());
+    }
+
+
     public static class BitmapReader {
 
         public static Bitmap readBitMap565(Context context, int resId) {
@@ -577,5 +590,8 @@ public class CarouselView extends FrameLayout {
             }
             return null;
         }
+
+
+
     }
 }

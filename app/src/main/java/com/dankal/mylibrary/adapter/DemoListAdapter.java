@@ -1,6 +1,5 @@
 package com.dankal.mylibrary.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +15,7 @@ import com.dylan.library.adapter.CommonAbsListView;
 public class DemoListAdapter extends CommonAbsListView.Adapter<String,DemoListAdapter.ViewHolder> {
 
 
-    public DemoListAdapter(Context context) {
-        super(context);
-    }
+
 
     @Override
     public ViewHolder oncreateViewHolder(LayoutInflater inflater, ViewGroup parent) {

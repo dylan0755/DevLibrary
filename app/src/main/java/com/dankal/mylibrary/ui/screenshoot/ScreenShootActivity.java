@@ -11,7 +11,7 @@ import com.dankal.mylibrary.R;
 import com.dylan.library.file.FileUtils;
 import com.dylan.library.screen.ScreenShoot;
 import com.dylan.library.test.TestAdapter;
-import com.dylan.library.utils.BitmapUtils;
+import com.dylan.library.graphics.BitmapUtils;
 import com.dylan.library.utils.ToastUtil;
 
 /**

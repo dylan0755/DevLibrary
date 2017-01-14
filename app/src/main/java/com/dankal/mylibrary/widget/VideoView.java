@@ -28,6 +28,7 @@ public class VideoView extends LinearLayout {
     public void attachActivity(Activity activity){
         mActivity=activity;
         playerAdjustTool.attachActivity(mActivity);
+
     }
 
     @Override
