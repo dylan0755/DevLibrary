@@ -14,6 +14,7 @@ import com.dankal.mylibrary.ui.date.DateTestActivity;
 import com.dankal.mylibrary.ui.edittext.EditNumberActivity;
 import com.dankal.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dankal.mylibrary.ui.install.AutoInstallActivity;
+import com.dankal.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
@@ -30,10 +31,10 @@ public class DemoListActivity extends Activity {
     private DemoListAdapter mAdapter;
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
             "EditnnumberHelper", "autoInstall","ScreenShoot",
-            "GridViewPager","WrapLayoutManager"};
+            "GridViewPager","WrapLayoutManager","LoadingDialog"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
-            GridViewPagerActivity.class, WrapLayoutActivity.class};
+            GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

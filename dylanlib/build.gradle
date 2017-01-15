@@ -31,6 +31,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
+    provided 'com.zhy:autolayout:1.4.3'
     provided files('libs/glide.jar')
 }
 

@@ -26,4 +26,11 @@
 8.2017/01/02
   TimeUtil重名为TimeUtils  增加获取网络时间。
   新增Elog 可以以Log.e()的形式输出  Exception和Throwable，因为e.printStack颜色不是红色。
+
+9.2017/01/14
+  新增GridViewPagerAdapter.
+  新增WrapLayoutManager.
+
+10.2017/01/15
+  新增DialogUtils.
   
