@@ -35,4 +35,6 @@
   新增DialogUtils.
 
 11.2017/01/16  为html增加头部样式，适配webView大小。
+
+12.2017/3/7 增加RomUtils  判断手机系统。
   
