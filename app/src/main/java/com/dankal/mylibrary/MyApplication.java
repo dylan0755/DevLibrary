@@ -35,8 +35,6 @@ public class MyApplication extends Application {
         loadqiniuDomain();
         CrashHandler.getInstance().init(this);
 
-
-
     }
 
 
