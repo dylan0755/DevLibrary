@@ -8,8 +8,8 @@ import android.widget.GridView;
 /**
  * Created by Dylan on 2016/9/30.
  */
-public class UnScrollGridView extends GridView{
-    public UnScrollGridView(Context context, @Nullable AttributeSet attrs) {
+public class AutoGridView extends GridView{
+    public AutoGridView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
     }
 
