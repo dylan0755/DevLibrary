@@ -8,6 +8,8 @@ import android.widget.TextView;
 import com.dankal.mylibrary.R;
 import com.dylan.library.adapter.CommonAbsListView;
 
+
+
 /**
  * Created by Dylan on 2017/1/1.
  */

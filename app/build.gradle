@@ -22,8 +22,12 @@ android {
     lintOptions {
         abortOnError false
     }
+}
 
-
+repositories{
+    flatDir{
+        dirs 'libs'
+    }
 }
 
 dependencies {
@@ -43,5 +47,6 @@ dependencies {
     compile files('libs/glide.jar')
     compile files('libs/butterknife-7.0.1.jar')
     compile project(':dylanlib')
-   // compile 'com.dylan:devlib:1.0.0'
+    //compile 'com.dylan:devlib:1.0.1'
+    //compile(name:'dylanlib-release', ext:'aar')
 }

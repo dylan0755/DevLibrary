@@ -1,4 +1,4 @@
-package com.dylan.library.widget;
+package com.dylan.library.utils;
 
 import android.app.Dialog;
 import android.content.Context;

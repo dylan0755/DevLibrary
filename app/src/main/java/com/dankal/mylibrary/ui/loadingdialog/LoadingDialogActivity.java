@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.dankal.mylibrary.R;
-import com.dylan.library.widget.DialogUtils;
+import com.dylan.library.utils.DialogUtils;
+
 
 /**
  * Created by Dylan on 2017/1/15.
@@ -27,7 +28,7 @@ public class LoadingDialogActivity extends Activity{
         btn_loading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog=DialogUtils.createLoadingDialog(v.getContext(),"加载中...");
+                dialog= DialogUtils.createLoadingDialog(v.getContext(),"加载中...");
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
