@@ -97,7 +97,10 @@
 -keepclassmembers class **.R$* {
     public static <fields>;
 }
-
+#保护注解
+-keepattributes Annotation
+#忽略警告
+-ignorewarning
 
   # 保持哪些类不被混淆
 -keep public class * extends android.app.Fragment
@@ -134,14 +137,19 @@
           protected *;
 
 }
+
+-keepclassmembers class * extends android.app.Activity {
+public void *(android.view.View);
+}
 #<-----保持自定义控件类不被混淆----->
 
 
 
 
+-keep class com.dylan.library.adapter.CommonAbsListView.Adapter {*;}
 
-
-
+-keep class android.support.** {*;}
+-keep class com.bumptech.glide.**{*;}
 #module中除了widget包进行混淆，其它包中的类不进行混淆
 -keep class com.dylan.library.adapter.**{
       *;

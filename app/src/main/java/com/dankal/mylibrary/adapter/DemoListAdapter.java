@@ -18,7 +18,6 @@ public class DemoListAdapter extends CommonAbsListView.Adapter<String,DemoListAd
 
 
 
-
     @Override
     public ViewHolder oncreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
        View contentView=mInflater.inflate(R.layout.gvitem_demolist,parent,false);
