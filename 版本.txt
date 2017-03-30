@@ -47,4 +47,6 @@
     (1).showSoftInputAuto自动弹出键盘并将输入框中的光标移至文本末尾。
 3.增加DLPopupWidnow  
     (1).解决安卓7.0 真机下的showAsDropDown(View anchor)的位置问题。
+4.增加BothItemAdapter
+    BaseAdapter双布局的封装类。
   
