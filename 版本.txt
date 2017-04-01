@@ -49,4 +49,13 @@
     (1).解决安卓7.0 真机下的showAsDropDown(View anchor)的位置问题。
 4.增加BothItemAdapter
     BaseAdapter双布局的封装类。
+5.StringUtils增加splitColor();  
+   对字符串中颜色分离，（SpanableString封装）
+6.增加  RunTaskUtils 
+    判断应用处于前台还是后台，在Application中的oncreate方法中调用 registerActivityLifeCallBack(getApplication())
+    在其它地方可以 调用下列方法来获取状态，注意在MainActivity中oncreate调用可能因时间太短获取到的状态是未注册。
+    final int flag=RunTaskUtils.getRunningState();
+    Log.e( "flag: ","getRunningState "+flag );
+    if (flag==RunTaskUtils.STATE_ON_FRONT) Log.e( "flag: ","在前台" );
+    else if (flag==RunTaskUtils.STATE_ON_BACKROUND) Log.e( "flag: ","在后台" );
   

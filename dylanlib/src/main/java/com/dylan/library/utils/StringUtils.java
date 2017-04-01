@@ -1,5 +1,9 @@
 package com.dylan.library.utils;
 
+import android.graphics.Color;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
 /**
@@ -118,6 +122,20 @@ public class StringUtils {
             }
         }
         return false;
+    }
+
+
+    public static CharSequence splitColor(String str,int limitStart,int limitEnd,String splitColor){
+        if (str==null)return str;
+        SpannableString span=null;
+        try{
+            span= new SpannableString(str);
+            ForegroundColorSpan fspan = new ForegroundColorSpan(Color.parseColor(splitColor));
+            span.setSpan(fspan, limitStart, limitEnd, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        }catch (Exception e){
+
+        }
+        return span;
     }
 
 }

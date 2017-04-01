@@ -41,7 +41,6 @@ public class DemoListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demolist);
         initEvent();
-
     }
 
     private void initEvent() {
