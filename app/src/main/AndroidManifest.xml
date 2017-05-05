@@ -48,6 +48,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.ExpandableListItemActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.BulletinBoardActivity"
+            android:screenOrientation="landscape"/>
         <meta-data
             android:name="design_width"
             android:value="720" />

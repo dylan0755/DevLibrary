@@ -58,4 +58,8 @@
     Log.e( "flag: ","getRunningState "+flag );
     if (flag==RunTaskUtils.STATE_ON_FRONT) Log.e( "flag: ","在前台" );
     else if (flag==RunTaskUtils.STATE_ON_BACKROUND) Log.e( "flag: ","在后台" );
+    
+ 7.增加BulletinBoard 公告栏，游戏里面跑马灯效果。
+ 8.修改TabGroup，附加badgeView。
+ 
   

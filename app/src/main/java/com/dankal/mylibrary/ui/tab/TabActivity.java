@@ -2,6 +2,7 @@ package com.dankal.mylibrary.ui.tab;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dankal.mylibrary.R;
@@ -50,10 +51,22 @@ public class TabActivity extends AppCompatActivity {
 
 
     private void initTabData() {
-        String[] tabsTitle = new String[]{"首页", "VR原创", "我的"};
-        int[] normalImgId = new int[]{R.mipmap.tab_ic_home_normal, R.mipmap.tab_ic_creative_normal, R.mipmap.tab_ic_personal_normal};
-        int[] selectImgId = new int[]{R.mipmap.tab_ic_home_pressed, R.mipmap.tab_ic_original_pressed, R.mipmap.tab_ic_personal_pressed};
-        tabGroup.addTabs(tabsTitle, normalImgId, selectImgId);
+        tabGroup.addItem("首页",R.mipmap.tab_ic_home_normal,R.mipmap.tab_ic_home_pressed,false);
+        tabGroup.addItem("VR原创",R.mipmap.tab_ic_creative_normal, R.mipmap.tab_ic_original_pressed,true);
+        tabGroup.addItem("我的",R.mipmap.tab_ic_personal_normal,R.mipmap.tab_ic_personal_pressed,false);
+        tabGroup.setBadgeViewText(1,128);//超过3位数默认显示99+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                tabGroup.hideBadgeView(1);
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                       tabGroup.showBadgeView(1);
+                    }
+                },2000);
+            }
+        },5000);
     }
 
 

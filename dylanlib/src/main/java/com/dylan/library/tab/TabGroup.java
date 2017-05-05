@@ -1,7 +1,10 @@
 package com.dylan.library.tab;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.support.annotation.NonNull;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Gravity;
@@ -12,6 +15,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.dylan.library.R;
+
 /**
  * Created by Dylan on 2016/9/7.
  */
@@ -20,9 +25,12 @@ public class TabGroup extends LinearLayout {
     private int normalColor;
     private int selectColor;
     private int currentIndex;
-    private int default_width =130;
+    private int tabItemCount;
+    private int bagedviewId = 100;
+    private int default_width = 130;
     private int deault_height = 106;
     private ScaleUtil mScaleUtil;
+
 
     public TabGroup(Context context) {
         this(context, null);
@@ -35,12 +43,11 @@ public class TabGroup extends LinearLayout {
     }
 
 
-    public void addTabs(String[] titles, int[] picNormalID, int[] picSelectID) {
+    public void addItem(@NonNull String tabtext, int picNormalId, int picSelectId, boolean isbageview) {
         LayoutParams lp_out = new LayoutParams(0, LayoutParams.MATCH_PARENT);
         lp_out.weight = 1;
-        for (int i = 0; i < titles.length; i++) {
-            createTabItem(titles[i], picNormalID[i], picSelectID[i], lp_out, i);
-        }
+        createTabItem(tabtext, picNormalId, picSelectId, lp_out, tabItemCount, isbageview);
+        tabItemCount++;
     }
 
     /**
@@ -48,22 +55,44 @@ public class TabGroup extends LinearLayout {
      * @param picNormalId
      * @param picSelectId
      * @param lp_out
-     * @param i
+     * @param tabId       添加id，相当于布局中  android:below="@id/xxx"  bageview要显示在tabitem的右边
+     * @param isBadgeView 该TabItem是否附加BageView
      */
-    private void createTabItem(String title, int picNormalId, int picSelectId, LayoutParams lp_out, int i) {
+    private void createTabItem(String title, int picNormalId, int picSelectId, LayoutParams lp_out, int tabId, boolean isBadgeView) {
         RelativeLayout relativeLayout = new RelativeLayout(mContext);
         relativeLayout.setLayoutParams(lp_out);
         RelativeLayout.LayoutParams lp_int = new RelativeLayout.LayoutParams(mScaleUtil.toScaleSize(default_width), mScaleUtil.toScaleSize(deault_height));
         lp_int.addRule(RelativeLayout.CENTER_IN_PARENT);
 
+
+        //icon和文本
         TabItem tabItem = new TabItem(mContext);
+        tabItem.setId(tabId + 1);
         tabItem.setLayoutParams(lp_int);
         tabItem.setOnClickListener(new TabClick());
-        tabItem.setTag(i);
+        tabItem.setTag(tabId);
         tabItem.setTab(title, picNormalId, picSelectId);
         if (normalColor != 0) tabItem.setTabNormalColor(normalColor);
         if (selectColor != 0) tabItem.setTabSelectColor(selectColor);
         relativeLayout.addView(tabItem);
+
+        if (isBadgeView) {
+            TextView textView = new TextView(getContext());
+            textView.setId(tabId + bagedviewId);
+            textView.setBackgroundDrawable(getResources().getDrawable(R.drawable.tabgroup_bageview));
+            textView.setTextColor(Color.WHITE);
+            textView.setTextSize(9);
+            textView.setGravity(Gravity.CENTER);
+            RelativeLayout.LayoutParams lp_bageview = new RelativeLayout.LayoutParams(mScaleUtil.toScaleSize(48), mScaleUtil.toScaleSize(48));
+            lp_bageview.addRule(RelativeLayout.RIGHT_OF, tabItem.getId());
+            lp_bageview.leftMargin = (int) getResources().getDimension(R.dimen.bageview_left_margin);
+            lp_bageview.topMargin = (int) getResources().getDimension(R.dimen.bageview_top_margin);
+            textView.setLayoutParams(lp_bageview);
+            textView.setSingleLine();
+            textView.setEllipsize(TextUtils.TruncateAt.END);
+            relativeLayout.addView(textView);
+        }
+
         addView(relativeLayout);
     }
 
@@ -71,6 +100,61 @@ public class TabGroup extends LinearLayout {
     private TabItem getTabItem(int index) {
         ViewGroup vg = (ViewGroup) getChildAt(index);
         return (TabItem) vg.getChildAt(0);
+    }
+
+    public void setBadgeViewText(int index, int textValue) throws NullPointerException {
+        TextView textView = findBadegeView(index);
+        if (textView == null) throw new NullPointerException("can not find the badgevew");
+        else {
+            textView.setVisibility(VISIBLE);
+            String textStr=Integer.toString(textValue);
+            if (textStr.length()>=3){
+                textStr="99+";
+                textView.setTextSize(8);
+            }else{
+                textView.setTextSize(9);
+            }
+            textView.setText(textStr);
+        }
+    }
+
+
+
+    public void setBadgeViewText(int index,int textValue,String max_value){
+        TextView textView = findBadegeView(index);
+        if (textView == null) throw new NullPointerException("can not find the badgevew");
+        else {
+            textView.setVisibility(VISIBLE);
+            String textStr=Integer.toString(textValue);
+            if (textStr.length()>=3){
+                textStr=max_value;
+                textView.setTextSize(8);
+            }else{
+                textView.setTextSize(9);
+            }
+            textView.setText(textStr);
+        }
+    }
+
+    public void hideBadgeView(int index) {
+        TextView textView = findBadegeView(index);
+        if (textView != null) {
+            textView.setVisibility(INVISIBLE);
+        }
+    }
+
+
+    public void showBadgeView(int index) {
+        TextView textView = findBadegeView(index);
+        if (textView != null) {
+            textView.setVisibility(VISIBLE);
+        }
+    }
+
+    private TextView findBadegeView(int index) {
+        ViewGroup vg = (ViewGroup) getChildAt(index);
+        TextView textView = (TextView) vg.findViewById(index + bagedviewId);
+        return textView;
     }
 
     public void setTabIconSize(int width, int height) {
@@ -116,10 +200,10 @@ public class TabGroup extends LinearLayout {
         for (int i = 0; i < getChildCount(); i++) {
             TabItem tabItem = getTabItem(i);
             int position = (int) tabItem.getTag();
-            if (position==index){
-                currentIndex=index;
+            if (position == index) {
+                currentIndex = index;
                 tabItem.setSelect(true);
-            }else{
+            } else {
                 tabItem.setSelect(false);
             }
         }
@@ -273,7 +357,12 @@ public class TabGroup extends LinearLayout {
 
         public ScaleUtil(Context context) {
             mContext = context;
-            BASE_RATIO = 1.0f * mContext.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
+
+            boolean isPortail = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+            if (isPortail)
+                BASE_RATIO = 1.0f * mContext.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
+            else
+                BASE_RATIO = 1.0f * mContext.getResources().getDisplayMetrics().heightPixels / BASE_WIDTH;
         }
 
         public int toScaleSize(int px) {

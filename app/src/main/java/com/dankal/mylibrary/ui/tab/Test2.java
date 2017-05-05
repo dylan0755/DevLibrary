@@ -21,6 +21,7 @@ import com.dankal.mylibrary.domain.RestApi;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
 import com.dylan.library.tab.TabIndicatorLayout;
+import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.widget.CarouselView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -90,14 +91,18 @@ public class Test2 extends Fragment {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
                 String jsonData=response.body();
-                try {
-                    jsonData = new JSONObject(jsonData).getString(suffix);
-                    Gson gson=new Gson();
-                    final List<CarouselData> list = gson.fromJson(jsonData, new TypeToken<List<CarouselData>>() { }.getType());
-                    setCarouselData(list);
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                if(!EmptyUtils.isEmpty(jsonData)){
+                    try {
+                        jsonData = new JSONObject(jsonData).getString(suffix);
+                        Gson gson=new Gson();
+                        final List<CarouselData> list = gson.fromJson(jsonData, new TypeToken<List<CarouselData>>() { }.getType());
+                        setCarouselData(list);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
                 }
+
+
 
             }
 

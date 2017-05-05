@@ -19,7 +19,7 @@
         android:background="#cfcfcf"/>
     <com.zhy.autolayout.AutoLinearLayout
         android:layout_width="match_parent"
-        android:layout_height="98px"
+        android:layout_height="96px"
         >
         <com.dylan.library.tab.TabGroup
             android:id="@+id/tg_main"

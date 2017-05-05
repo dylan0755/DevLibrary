@@ -1,4 +1,4 @@
-package com.example.flexboxlayout;
+package com.dylan.library.widget;
 
 import android.content.Context;
 import android.content.res.Configuration;
@@ -9,7 +9,6 @@ import android.os.Message;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -48,7 +47,7 @@ public class BulletinBoard extends FrameLayout {
     public BulletinBoard(@NonNull Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         mTextView=new TextView(context,attrs);
-        LayoutParams lp=new LayoutParams(LayoutParams.WRAP_CONTENT,LayoutParams.MATCH_PARENT);
+        LayoutParams lp=new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
         //layout_gravity
         lp.gravity= Gravity.CENTER_VERTICAL;
         mTextView.setLayoutParams(lp);
@@ -107,7 +106,6 @@ public class BulletinBoard extends FrameLayout {
                 scrollToParentRight();
                 caculateScrollTime();
                 startScroller();
-                Log.e("res: ", "onMeasure");
                 hasMeasure = true;
             }
         }
