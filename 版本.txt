@@ -61,5 +61,6 @@
     
  7.增加BulletinBoard 公告栏，游戏里面跑马灯效果。
  8.修改TabGroup，附加badgeView。
+ 9.增加RSAUtils
  
   
