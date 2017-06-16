@@ -6,7 +6,6 @@ import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dylan.library.R;
+
 
 /**
  * Created by Dylan on 2016/9/7.
@@ -46,7 +46,14 @@ public class TabGroup extends LinearLayout {
     public void addItem(@NonNull String tabtext, int picNormalId, int picSelectId, boolean isbageview) {
         LayoutParams lp_out = new LayoutParams(0, LayoutParams.MATCH_PARENT);
         lp_out.weight = 1;
-        createTabItem(tabtext, picNormalId, picSelectId, lp_out, tabItemCount, isbageview);
+        createTabItem(tabtext, picNormalId, picSelectId, lp_out, tabItemCount, isbageview,false);
+        tabItemCount++;
+    }
+
+    public void addItem(@NonNull String tabtext, int picNormalId, int picSelectId, boolean isbageview,boolean isNumBadgeView){
+        LayoutParams lp_out = new LayoutParams(0, LayoutParams.MATCH_PARENT);
+        lp_out.weight = 1;
+        createTabItem(tabtext, picNormalId, picSelectId, lp_out, tabItemCount, isbageview,isNumBadgeView);
         tabItemCount++;
     }
 
@@ -57,8 +64,9 @@ public class TabGroup extends LinearLayout {
      * @param lp_out
      * @param tabId       添加id，相当于布局中  android:below="@id/xxx"  bageview要显示在tabitem的右边
      * @param isBadgeView 该TabItem是否附加BageView
+     *     @param isNumBadgeView 该BadgeView能否显示数字
      */
-    private void createTabItem(String title, int picNormalId, int picSelectId, LayoutParams lp_out, int tabId, boolean isBadgeView) {
+    private void createTabItem(String title, int picNormalId, int picSelectId, LayoutParams lp_out, int tabId, boolean isBadgeView,boolean isNumBadgeView) {
         RelativeLayout relativeLayout = new RelativeLayout(mContext);
         relativeLayout.setLayoutParams(lp_out);
         RelativeLayout.LayoutParams lp_int = new RelativeLayout.LayoutParams(mScaleUtil.toScaleSize(default_width), mScaleUtil.toScaleSize(deault_height));
@@ -83,10 +91,20 @@ public class TabGroup extends LinearLayout {
             textView.setTextColor(Color.WHITE);
             textView.setTextSize(9);
             textView.setGravity(Gravity.CENTER);
-            RelativeLayout.LayoutParams lp_bageview = new RelativeLayout.LayoutParams(mScaleUtil.toScaleSize(48), mScaleUtil.toScaleSize(48));
-            lp_bageview.addRule(RelativeLayout.RIGHT_OF, tabItem.getId());
-            lp_bageview.leftMargin = (int) getResources().getDimension(R.dimen.bageview_left_margin);
-            lp_bageview.topMargin = (int) getResources().getDimension(R.dimen.bageview_top_margin);
+            RelativeLayout.LayoutParams lp_bageview=null;
+            if (isNumBadgeView){//显示数字的红点
+                lp_bageview= new RelativeLayout.LayoutParams(mScaleUtil.toScaleSize(48), mScaleUtil.toScaleSize(48));
+                lp_bageview.addRule(RelativeLayout.RIGHT_OF, tabItem.getId());
+                lp_bageview.leftMargin = (int) getResources().getDimension(R.dimen.bageview_left_margin);
+                lp_bageview.topMargin = (int) getResources().getDimension(R.dimen.numbageview_top_margin);
+            }else{//提示小红点
+                lp_bageview= new RelativeLayout.LayoutParams(mScaleUtil.toScaleSize(18), mScaleUtil.toScaleSize(18));
+                lp_bageview.addRule(RelativeLayout.RIGHT_OF, tabItem.getId());
+                lp_bageview.leftMargin = (int) getResources().getDimension(R.dimen.bageview_left_margin);
+                lp_bageview.topMargin = (int) getResources().getDimension(R.dimen.minbageview_top_margin);
+            }
+
+
             textView.setLayoutParams(lp_bageview);
             textView.setSingleLine();
             textView.setEllipsize(TextUtils.TruncateAt.END);
@@ -215,7 +233,6 @@ public class TabGroup extends LinearLayout {
             TabItem tabItem = (TabItem) v;
             int position = (int) tabItem.getTag();
             if (currentIndex == position) {
-                Log.e("onClick: ", "sss");
                 return;
             }
             //选中图标状态
