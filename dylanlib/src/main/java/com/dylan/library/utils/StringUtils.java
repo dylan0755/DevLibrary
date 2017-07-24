@@ -14,7 +14,7 @@ public class StringUtils {
     private StringUtils(){
 
     }
-    public static boolean isValid(String strObj) {
+    public static boolean isNotEmpty(String strObj) {
         if (strObj != null && !strObj.isEmpty()) {
             return true;
         } else if (strObj == null) {
@@ -28,7 +28,7 @@ public class StringUtils {
     /**
      * 这个方法会提示变量是null还是 empty
      */
-    public static boolean isValid(String strObj, String variableName) {
+    public static boolean isNotEmpty(String strObj, String variableName) {
         if (strObj != null && !strObj.isEmpty()) {
             return true;
         } else if (strObj == null) {
@@ -41,30 +41,30 @@ public class StringUtils {
     }
 
 
-    public static boolean isInValid(String strObj) {
-        return !isValid(strObj);
+    public static boolean isEmpty(String strObj) {
+        return !isNotEmpty(strObj);
     }
 
-    public static boolean isInValid(String strObj, String variableName) {
-        return !isValid(strObj, variableName);
+    public static boolean isEmpty(String strObj, String variableName) {
+        return !isNotEmpty(strObj, variableName);
     }
 
 
     public static String upperFirstLetter(String str) {
-        if (isInValid(str) || !Character.isLowerCase(str.charAt(0))) return str;
+        if (isEmpty(str) || !Character.isLowerCase(str.charAt(0))) return str;
         String endStr = str.substring(0, 1).toUpperCase() + str.substring(1);
         return endStr;
     }
 
     public static String lowerFirstLetter(String str) {
-        if (isInValid(str) || !Character.isUpperCase(str.charAt(0))) return str;
+        if (isEmpty(str) || !Character.isUpperCase(str.charAt(0))) return str;
         String endStr = str.substring(0, 1).toLowerCase() + str.substring(1);
         return endStr;
     }
 
 
     public static String reverse(String s) {
-        if(isInValid(s))return "";
+        if(isEmpty(s))return "";
         StringBuffer buff=new StringBuffer();
         buff.append(s);
         return buff.reverse().toString();
@@ -82,7 +82,7 @@ public class StringUtils {
         StringBuffer buffer=new StringBuffer();
         for (int i=0,size=args.length;i<size;i++){
             String str=args[i];
-            if (isValid(str)){
+            if (isNotEmpty(str)){
                 if (i!=size-1)buffer.append(str).append(separator);
                 else buffer.append(str);
             }

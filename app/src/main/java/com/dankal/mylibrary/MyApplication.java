@@ -12,7 +12,7 @@ import com.dankal.mylibrary.util.ResponseBodyParser;
 import com.dylan.library.exception.CrashHandler;
 import com.dylan.library.utils.RunTaskUtils;
 import com.dylan.library.utils.StringUtils;
-import com.dylan.library.utils.ToastUtil;
+import com.dylan.library.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -31,7 +31,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ToastUtil.mContext = this;
+        ToastUtils.initToast(this);
         mContext = this;
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         loadqiniuDomain();
@@ -89,7 +89,7 @@ public class MyApplication extends Application {
         if (url!=null&&!url.isEmpty()){
             if (url.contains("http"))return url;
             else{
-                if (StringUtils.isValid(qiniuDomain)){
+                if (StringUtils.isNotEmpty(qiniuDomain)){
                     return qiniuDomain+url;
                 }else{
                     return "";

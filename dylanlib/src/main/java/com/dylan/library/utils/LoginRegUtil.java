@@ -16,8 +16,8 @@ public class LoginRegUtil {
               return false;
           }
 
-        if (!StringUtils.isValid(pass)) {
-            ToastUtil.toToast("请输入密码");
+        if (!StringUtils.isNotEmpty(pass)) {
+            ToastUtils.show("请输入密码");
             return false;
         }
 
@@ -26,7 +26,7 @@ public class LoginRegUtil {
 
     private static boolean checkPhone(String phone) {
         if (phone == null || phone.isEmpty()) {
-            ToastUtil.toToast("请输入手机号");
+            ToastUtils.show("请输入手机号");
             return false;
         }
         String reg = "^1(3[0-9]|4[57]|5[0-35-9]|7[0135678]|8[0-9])\\d{8}$";
@@ -36,7 +36,7 @@ public class LoginRegUtil {
         if (flag) {//验证通过
             return true;
         } else {
-            ToastUtil.toToast("无效手机号");
+            ToastUtils.show("无效手机号");
             return false;
         }
     }

@@ -212,7 +212,7 @@ public class CacheManager {
     }
 
     public static void deleteFolderFile(String filePath, boolean deleteThisPath) {
-        if (StringUtils.isValid(filePath)) {
+        if (StringUtils.isNotEmpty(filePath)) {
             try {
                 File file = new File(filePath);
                 if (file.isDirectory()) {// 如果下面还有文件

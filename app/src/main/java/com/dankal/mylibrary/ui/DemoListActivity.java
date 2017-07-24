@@ -18,6 +18,7 @@ import com.dankal.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
+import com.dylan.library.utils.ToastUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -51,6 +52,11 @@ public class DemoListActivity extends Activity {
         mGridView.setAdapter(mAdapter);
         List<String> list = Arrays.asList(demoNames);
         mAdapter.bind(list);
+    }
+
+
+    public void toastClick(View view){
+        ToastUtils.show("dddd");
     }
 
 

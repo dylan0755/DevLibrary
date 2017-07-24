@@ -86,7 +86,7 @@ public class AppUtils {
      */
     public static void launchApp(Context context, String packageName) {
         if (context == null) return;
-        if (StringUtils.isInValid(packageName)) return;
+        if (StringUtils.isEmpty(packageName)) return;
         context.startActivity(IntentUtils.getLaunchAppIntent(context, packageName));
     }
 
@@ -100,7 +100,7 @@ public class AppUtils {
 
     public static void launchApp(Activity activity, String packageName, int requestCode) {
         if (activity == null) return;
-        if (StringUtils.isInValid(packageName)) return;
+        if (StringUtils.isEmpty(packageName)) return;
         activity.startActivityForResult(IntentUtils.getLaunchAppIntent(activity, packageName), requestCode);
 
     }
@@ -129,7 +129,7 @@ public class AppUtils {
     public static String getAppVersionName(Context context) {
         if (context == null) return "";
         String packageName = context.getPackageName();
-        if (StringUtils.isInValid(packageName)) return null;
+        if (StringUtils.isEmpty(packageName)) return null;
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
@@ -150,7 +150,7 @@ public class AppUtils {
     public static int getAppVersionCode(Context context) {
         if (context == null) return -1;
         String packageName = context.getPackageName();
-        if (StringUtils.isInValid(packageName)) return -1;
+        if (StringUtils.isEmpty(packageName)) return -1;
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
@@ -171,7 +171,7 @@ public class AppUtils {
      */
     public static Drawable getAppIcon(Context context, String packageName) {
         if (context == null) return null;
-        if (StringUtils.isInValid(packageName)) return null;
+        if (StringUtils.isEmpty(packageName)) return null;
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
@@ -227,7 +227,7 @@ public class AppUtils {
     public static boolean isSystemApp(Context context) {
         if (context == null) return false;
         String packageName = context.getPackageName();
-        if (StringUtils.isInValid(packageName)) return false;
+        if (StringUtils.isEmpty(packageName)) return false;
         try {
             PackageManager pm = context.getPackageManager();
             ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
