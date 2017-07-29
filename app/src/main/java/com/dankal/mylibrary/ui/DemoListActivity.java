@@ -18,7 +18,6 @@ import com.dankal.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
-import com.dylan.library.utils.ToastUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -32,11 +31,12 @@ public class DemoListActivity extends Activity {
     private DemoListAdapter mAdapter;
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
             "EditnnumberHelper", "autoInstall","ScreenShoot",
-            "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除","BulletinBoard"};
+            "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
+            "BulletinBoard","PhotoSelector"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
-            ExpandableListItemActivity.class, BulletinBoardActivity.class};
+            ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,6 @@ public class DemoListActivity extends Activity {
     }
 
 
-    public void toastClick(View view){
-        ToastUtils.show("dddd");
-    }
 
 
 
