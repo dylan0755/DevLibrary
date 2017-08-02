@@ -32,11 +32,11 @@ public class DemoListActivity extends Activity {
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
             "EditnnumberHelper", "autoInstall","ScreenShoot",
             "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
-            "BulletinBoard","PhotoSelector"};
+            "BulletinBoard","PhotoSelector","PermissionSetting"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
-            ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class};
+            ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,PermissionSettingActivity.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

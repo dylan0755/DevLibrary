@@ -61,7 +61,9 @@
     
  7.增加BulletinBoard 公告栏，游戏里面跑马灯效果。
  8.修改TabGroup，附加badgeView。
- 9.增加RSAUtils
+ 9.增加RSAUtils,Rsa加密
  10.优化ToastUtils,避免在使用的时候再实例化。
+ 11.AppUtils增加调往到权限设置页面，直接跳转的有魅族，小米，华为，其它的只是跳到应用信息页面，从应用信息页面在手动点击进入权限设置页面。
+ 
  
   
