@@ -6,6 +6,7 @@ import android.widget.DatePicker;
 
 import com.dylan.library.R;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
@@ -16,54 +17,52 @@ import java.util.Date;
 
 public class DateUtil {
 
-    private DateUtil(){
+    private DateUtil() {
 
     }
 
 
-
-    private static Calendar calendar=Calendar.getInstance();
+    private static Calendar calendar = Calendar.getInstance();
     private static DatePickerDialog mDatePicker;
 
 
     /**
      * 多少天之后的日期
      */
-    public static void getDateByDaysAfter(int dayafter){
+    public static void getDateByDaysAfter(int dayafter) {
         resetCalendar();
-        calendar.add(Calendar.DAY_OF_MONTH,dayafter);
+        calendar.add(Calendar.DAY_OF_MONTH, dayafter);
     }
 
     /**
      * 多少月之后的日期
      */
-    public static void getDateByMonthsAfter(int monthafter){
+    public static void getDateByMonthsAfter(int monthafter) {
         resetCalendar();
-        calendar.add(Calendar.MONTH,monthafter);
+        calendar.add(Calendar.MONTH, monthafter);
     }
 
-    public static void resetCalendar(){
+    public static void resetCalendar() {
         calendar.setTime(new Date());
     }
 
 
-
-    public static String getYear(){
-        String year=Integer.toString(calendar.get(Calendar.YEAR));
+    public static String getYear() {
+        String year = Integer.toString(calendar.get(Calendar.YEAR));
         return year;
     }
 
-    public static String getMonth(){
-        String month=Integer.toString(calendar.get(Calendar.MONTH)+1);
+    public static String getMonth() {
+        String month = Integer.toString(calendar.get(Calendar.MONTH) + 1);
         return month;
     }
 
-    public static String getDayOfMonth(){
-        String day=Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
+    public static String getDayOfMonth() {
+        String day = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
         return day;
     }
 
-    public static String getDayOfWeek(){
+    public static String getDayOfWeek() {
         String weakday = String.valueOf(calendar.get(Calendar.DAY_OF_WEEK));
         if ("1".equals(weakday)) {
             weakday = "天";
@@ -84,7 +83,6 @@ public class DateUtil {
     }
 
 
-
     public static void showDatePickerDialog(Context context, final DatePickerListener listener) {
         Calendar calendar = Calendar.getInstance();
         if (mDatePicker == null) {
@@ -92,7 +90,7 @@ public class DateUtil {
                 @Override
                 public void onDateSet(DatePicker arg0, int year, int month, int dayofmonth) {
                     String date = year + "-" + (month + 1) + "-" + dayofmonth;
-                    if (listener!=null)listener.onDateSet(arg0,year,(month + 1),dayofmonth);
+                    if (listener != null) listener.onDateSet(arg0, year, (month + 1), dayofmonth);
 
                 }
             },
@@ -102,8 +100,22 @@ public class DateUtil {
     }
 
 
-    public static interface DatePickerListener{
+    public static interface DatePickerListener {
         void onDateSet(DatePicker datePicker, int year, int month, int dayofmonth);
+    }
+
+
+    public static String getCurrentDate() {
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat("yyy-MM-dd  HH:mm:ss");
+        return format.format(date);
+    }
+
+
+    public static String getCurrentData(String pattern){
+        Date date = new Date(System.currentTimeMillis());
+        SimpleDateFormat format = new SimpleDateFormat(pattern);
+        return format.format(date);
     }
 
 }

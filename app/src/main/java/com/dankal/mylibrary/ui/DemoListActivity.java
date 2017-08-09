@@ -2,6 +2,7 @@ package com.dankal.mylibrary.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import com.dankal.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
+import com.dylan.library.screen.ScreenUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -31,16 +33,19 @@ public class DemoListActivity extends Activity {
     private DemoListAdapter mAdapter;
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
             "EditnnumberHelper", "autoInstall","ScreenShoot",
-            "GridViewPager","WrapLayoutManager","LoadingDialog"};
+            "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
+            "BulletinBoard","PhotoSelector","PermissionSetting"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
-            GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class};
+            GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
+            ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,PermissionSettingActivity.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demolist);
         initEvent();
+        ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
     }
 
     private void initEvent() {
@@ -51,6 +56,8 @@ public class DemoListActivity extends Activity {
         List<String> list = Arrays.asList(demoNames);
         mAdapter.bind(list);
     }
+
+
 
 
 

@@ -9,10 +9,10 @@ import android.view.View;
 
 import com.dankal.mylibrary.R;
 import com.dylan.library.file.FileUtils;
+import com.dylan.library.graphics.BitmapUtils;
 import com.dylan.library.screen.ScreenShoot;
 import com.dylan.library.test.TestAdapter;
-import com.dylan.library.graphics.BitmapUtils;
-import com.dylan.library.utils.ToastUtil;
+import com.dylan.library.utils.ToastUtils;
 
 /**
  * Created by Dylan on 2017/1/1.
@@ -43,7 +43,7 @@ public class ScreenShootActivity extends Activity {
         ScreenShoot.captureDecorView(this, picPath, new BitmapUtils.OutPutListenener() {
             @Override
             public void onSuccess() {
-                ToastUtil.toToast("保存成功！  "+picPath);
+                ToastUtils.show("保存成功！  "+picPath);
             }
         });
 

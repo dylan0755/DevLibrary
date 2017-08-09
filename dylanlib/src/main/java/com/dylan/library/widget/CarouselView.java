@@ -3,6 +3,7 @@ package com.dylan.library.widget;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -24,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import com.bumptech.glide.Glide;
-import com.dylan.library.graphics.BitmapUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -528,7 +528,16 @@ public class CarouselView extends FrameLayout  {
         private float BASE_RATIO = 1;
 
         public ScaleUtil(Context context) {
-            BASE_RATIO = 1.0f * context.getResources().getDisplayMetrics().widthPixels / BASE_WIDTH;
+            if (context==null)return;
+            //判断现在是横屏还是竖屏状态
+            int width=0;
+            boolean flag= context.getResources().getConfiguration().orientation== Configuration.ORIENTATION_PORTRAIT;
+            if (flag){
+                width=context.getResources().getDisplayMetrics().widthPixels;
+            }else{
+                width=context.getResources().getDisplayMetrics().heightPixels;
+            }
+            BASE_RATIO = 1.0f * width/ BASE_WIDTH;
         }
 
         public int toScaleSize(int px) {

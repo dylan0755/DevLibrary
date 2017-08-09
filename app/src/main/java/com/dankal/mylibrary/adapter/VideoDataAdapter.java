@@ -45,7 +45,7 @@ public class VideoDataAdapter extends FooterItemAdapter<VideoData,VideoDataAdapt
         String imgurl=videoData.getImg_key();
         holder.tv_title.setText(videoData.getName());
         holder.tv_description.setText(videoData.getIntroduction());
-        if (StringUtils.isValid(imgurl)){
+        if (StringUtils.isNotEmpty(imgurl)){
             Glide.with(context).load(MyApplication.setURL(imgurl)).into(holder.thumbView);
         }
     }

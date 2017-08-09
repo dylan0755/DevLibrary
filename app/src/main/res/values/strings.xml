@@ -2,4 +2,25 @@
     <string name="app_name">MyLibrary</string>
     <string name="accessibility_service_description">MyLibrary自动安装</string>
     <string name="acc_service_name">MyLibrary自动安装</string>
+
+
+
+    <string-array name="messageArray1">
+        <item>为了各位仙友有更好的游戏体验，3月30日06:00-08:00对1105，1106，1107，1108服务器进行整合</item>
+        <item>恭喜玩家轩宇在趣味钓鱼活动中钓到顶级水母</item>
+        <item>浪子出门没看黄历，上街被小偷天涯断剑偷取铜币2200000</item>
+        <item>恭喜玩家浪子在趣味钓鱼活动中钓到顶级水母</item>
+        <item>恭喜玩家宇文志明在趣味钓鱼活动中钓到深渊魔章</item>
+        <item>轩宇人品大爆发，获得深渊猪妖掉落的完美旋风头盔</item>
+    </string-array>
+
+
+    <string-array name="messageArray2">
+        <item>一声惊雷，轩宇的仙羽成功进阶至六阶，紫气东来</item>
+        <item>恭喜玩家一枪在翻翻转活动中获得神铸石x2</item>
+        <item>祥云滚滚，三界最强可乐加啤酒登录仙界</item>
+        <item>玩家披星口探月的宠物升级为紫色，战力直线飙升</item>
+        <item>玩家你的灵芝已经成熟，请前往农场收取，防止其他玩家偷取哦</item>
+        <item>神女在手，天下我有，欧阳莜莜获得高级神女礼包x2</item>
+    </string-array>
 </resources>

@@ -1,9 +1,9 @@
+版本1.0.0：
+
 1.2016/12/10  增加CustomTitleUtil
 2.2016/12/16  增加DateUtil        日期选择器（4.x系统 样式）
 3.2016/12/20 增加EidtNumberHelper 对输入数字输入框 加减  输入计算。
 4.2016/12/22  增加LoginRegUtil
-
-
 
 5.2016/12/29
   将StringCheck重命名为StringUtils,  
@@ -34,9 +34,36 @@
 
 11.2017/01/16  为html增加头部样式，适配webView大小。
 
-版本1.0之后增加
 
+版本1.0.1：
 1.2017/3/7 增加RomUtils  支持判断小米，魅族，华为。  
 2.StringUtils  增加判断是否包含中文的方法，支持。，等中文字符。
 增加ListView的侧滑删除
+
+版本1.0.2：
+1.增加ThreadUtils
+    (1) 判断是否在主线程的方法。
+2.增加EditTextUtils  
+    (1).showSoftInputAuto自动弹出键盘并将输入框中的光标移至文本末尾。
+3.增加DLPopupWidnow  
+    (1).解决安卓7.0 真机下的showAsDropDown(View anchor)的位置问题。
+4.增加BothItemAdapter
+    BaseAdapter双布局的封装类。
+5.StringUtils增加splitColor();  
+   对字符串中颜色分离，（SpanableString封装）
+6.增加  RunTaskUtils 
+    判断应用处于前台还是后台，在Application中的oncreate方法中调用 registerActivityLifeCallBack(getApplication())
+    在其它地方可以 调用下列方法来获取状态，注意在MainActivity中oncreate调用可能因时间太短获取到的状态是未注册。
+    final int flag=RunTaskUtils.getRunningState();
+    Log.e( "flag: ","getRunningState "+flag );
+    if (flag==RunTaskUtils.STATE_ON_FRONT) Log.e( "flag: ","在前台" );
+    else if (flag==RunTaskUtils.STATE_ON_BACKROUND) Log.e( "flag: ","在后台" );
+    
+ 7.增加BulletinBoard 公告栏，游戏里面跑马灯效果。
+ 8.修改TabGroup，附加badgeView。
+ 9.增加RSAUtils,Rsa加密
+ 10.优化ToastUtils,避免在使用的时候再实例化。
+ 11.AppUtils增加调往到权限设置页面，直接跳转的有魅族，小米，华为，其它的只是跳到应用信息页面，从应用信息页面在手动点击进入权限设置页面。
+ 
+ 
   

@@ -8,7 +8,7 @@ import android.widget.GridView;
 
 import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.ui.testdata.TestDatas;
-import com.dylan.library.utils.ToastUtil;
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.GridViewPager;
 
 import java.util.List;
@@ -46,7 +46,7 @@ public class GridViewPagerActivity extends Activity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ToastUtil.toToast("position "+position);
+            ToastUtils.show("position "+position);
         }
     }
 }

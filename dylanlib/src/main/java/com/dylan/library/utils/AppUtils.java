@@ -1,6 +1,7 @@
 package com.dylan.library.utils;
 
 import android.app.Activity;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -10,10 +11,8 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.Log;
 
-import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 
 /**
@@ -88,7 +87,7 @@ public class AppUtils {
      */
     public static void launchApp(Context context, String packageName) {
         if (context == null) return;
-        if (StringUtils.isInValid(packageName)) return;
+        if (StringUtils.isEmpty(packageName)) return;
         context.startActivity(IntentUtils.getLaunchAppIntent(context, packageName));
     }
 
@@ -102,7 +101,7 @@ public class AppUtils {
 
     public static void launchApp(Activity activity, String packageName, int requestCode) {
         if (activity == null) return;
-        if (StringUtils.isInValid(packageName)) return;
+        if (StringUtils.isEmpty(packageName)) return;
         activity.startActivityForResult(IntentUtils.getLaunchAppIntent(activity, packageName), requestCode);
 
     }
@@ -131,7 +130,7 @@ public class AppUtils {
     public static String getAppVersionName(Context context) {
         if (context == null) return "";
         String packageName = context.getPackageName();
-        if (StringUtils.isInValid(packageName)) return null;
+        if (StringUtils.isEmpty(packageName)) return null;
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
@@ -152,7 +151,7 @@ public class AppUtils {
     public static int getAppVersionCode(Context context) {
         if (context == null) return -1;
         String packageName = context.getPackageName();
-        if (StringUtils.isInValid(packageName)) return -1;
+        if (StringUtils.isEmpty(packageName)) return -1;
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
@@ -173,7 +172,7 @@ public class AppUtils {
      */
     public static Drawable getAppIcon(Context context, String packageName) {
         if (context == null) return null;
-        if (StringUtils.isInValid(packageName)) return null;
+        if (StringUtils.isEmpty(packageName)) return null;
         try {
             PackageManager pm = context.getPackageManager();
             PackageInfo pi = pm.getPackageInfo(packageName, 0);
@@ -229,7 +228,7 @@ public class AppUtils {
     public static boolean isSystemApp(Context context) {
         if (context == null) return false;
         String packageName = context.getPackageName();
-        if (StringUtils.isInValid(packageName)) return false;
+        if (StringUtils.isEmpty(packageName)) return false;
         try {
             PackageManager pm = context.getPackageManager();
             ApplicationInfo ai = pm.getApplicationInfo(packageName, 0);
@@ -240,14 +239,53 @@ public class AppUtils {
         }
     }
 
-
-    public static void closeIO(Closeable closeable) {
-        if (closeable != null) {
-            try {
-                closeable.close();
-            } catch (IOException e) {
-                e.printStackTrace();
+    /**
+     * 跳到权限设置页面
+     */
+    public static void gotoPermission(Context context){
+        if (context==null)return;
+        try{
+            if (RomUtils.isFlyme()){
+                Intent intent = new Intent("com.meizu.safe.security.SHOW_APPSEC");
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                intent.putExtra("packageName", context.getPackageName());
+                context.startActivity(intent);
+                return;
+            }else if (RomUtils.isMIUI()){
+                Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
+                ComponentName componentName = new ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
+                intent.setComponent(componentName);
+                intent.putExtra("extra_pkgname", context.getPackageName());
+                context.startActivity(intent);
+                return;
+            }else if (RomUtils.isEMUI()){
+                Intent intent = new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("packageName", context.getPackageName());
+                ComponentName comp = new ComponentName("com.huawei.systemmanager", "com.huawei.permissionmanager.ui.MainActivity");
+                intent.setComponent(comp);
+                context.startActivity(intent);
+                return;
             }
+        }catch (Exception e){
+            gotoApplicationSetting(context);
+            return;
         }
-    }
+        gotoApplicationSetting(context);
+     }
+
+    /**
+     * 跳到应用信息页面
+     * @param context
+     */
+     public static void gotoApplicationSetting(Context context){
+         Intent i = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
+         String pkg = "com.android.settings";
+         String cls = "com.android.settings.applications.InstalledAppDetails";
+         i.setComponent(new ComponentName(pkg, cls));
+         i.setData(Uri.parse("package:" + context.getPackageName()));
+         context.startActivity(i);
+     }
+
+
 }

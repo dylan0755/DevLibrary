@@ -3,14 +3,17 @@ package com.dankal.mylibrary;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.dankal.mylibrary.bean.QiNiuDomain;
 import com.dankal.mylibrary.domain.RestApi;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
 import com.dylan.library.exception.CrashHandler;
+import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.RunTaskUtils;
 import com.dylan.library.utils.StringUtils;
-import com.dylan.library.utils.ToastUtil;
+import com.dylan.library.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -29,11 +32,23 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ToastUtil.mContext = this;
+        ToastUtils.initToast(this);
         mContext = this;
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         loadqiniuDomain();
-       CrashHandler.getInstance().init(this);
+        CrashHandler.getInstance().init(this);
+       RunTaskUtils.registerActivityLifeCallBack(this, new RunTaskUtils.RunningListner() {
+           @Override
+           public void onForeground() {
+               Log.e( "onForeground: ","在前台" );
+           }
+
+           @Override
+           public void onBackground() {
+               Log.e( "onBackground: ","在后台" );
+           }
+       });
+
     }
 
 
@@ -76,7 +91,7 @@ public class MyApplication extends Application {
         if (url!=null&&!url.isEmpty()){
             if (url.contains("http"))return url;
             else{
-                if (StringUtils.isValid(qiniuDomain)){
+                if (EmptyUtils.isNotEmpty(qiniuDomain)){
                     return qiniuDomain+url;
                 }else{
                     return "";
