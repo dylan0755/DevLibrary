@@ -33,10 +33,7 @@ public class MyApplication extends Application {
         mContext = this;
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         loadqiniuDomain();
-        CrashHandler.getInstance().init(this);
-
-
-
+       CrashHandler.getInstance().init(this);
     }
 
 
