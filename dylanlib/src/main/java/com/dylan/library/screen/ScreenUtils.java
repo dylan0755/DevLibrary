@@ -3,11 +3,14 @@ package com.dylan.library.screen;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.dylan.library.utils.RomUtils;
 
 /**
  * Created by Dylan on 2016/10/15.
@@ -85,5 +88,28 @@ public class ScreenUtils {
         }
     }
 
-
+    /**
+     * 设置状态栏颜色和状态栏字体颜色
+     * @param window
+     * @param statusbarColor
+     */
+    public static void setStatusBarLightMode(Window window,int statusbarColor){
+        //更改状态栏和状态栏的字体颜色
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {//5.x系统s
+            if (RomUtils.isFlyme()) { //魅族，白色背景，灰色字体
+                if (StatusBarLightMode.FlymeSetStatusBarLightMode(window, true)) {
+                    if (statusbarColor!=0)  window.setStatusBarColor(statusbarColor);
+                }
+            } else if (RomUtils.isMIUI()) {//小米，白色背景，灰色字体
+                if (StatusBarLightMode.MIUISetStatusBarLightMode(window, true)) {
+                    if (statusbarColor!=0)  window.setStatusBarColor(statusbarColor);
+                }
+            } else {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    if (statusbarColor!=0)  window.setStatusBarColor(statusbarColor);
+                    window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+                }
+            }
+        }
+    }
 }

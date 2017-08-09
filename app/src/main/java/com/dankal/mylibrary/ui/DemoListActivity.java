@@ -2,6 +2,7 @@ package com.dankal.mylibrary.ui;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -18,6 +19,7 @@ import com.dankal.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
+import com.dylan.library.screen.ScreenUtils;
 
 import java.util.Arrays;
 import java.util.List;
@@ -43,6 +45,7 @@ public class DemoListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demolist);
         initEvent();
+        ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
     }
 
     private void initEvent() {
