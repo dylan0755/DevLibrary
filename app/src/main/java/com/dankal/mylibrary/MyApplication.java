@@ -10,6 +10,7 @@ import com.dankal.mylibrary.domain.RestApi;
 import com.dankal.mylibrary.util.IResponBodyImpl;
 import com.dankal.mylibrary.util.ResponseBodyParser;
 import com.dylan.library.exception.CrashHandler;
+import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.RunTaskUtils;
 import com.dylan.library.utils.StringUtils;
 import com.dylan.library.utils.ToastUtils;
@@ -47,6 +48,7 @@ public class MyApplication extends Application {
                Log.e( "onBackground: ","在后台" );
            }
        });
+
     }
 
 
@@ -89,7 +91,7 @@ public class MyApplication extends Application {
         if (url!=null&&!url.isEmpty()){
             if (url.contains("http"))return url;
             else{
-                if (StringUtils.isNotEmpty(qiniuDomain)){
+                if (EmptyUtils.isNotEmpty(qiniuDomain)){
                     return qiniuDomain+url;
                 }else{
                     return "";

@@ -35,8 +35,6 @@ dependencies {
     provided files('libs/glide.jar')
 }
 
-
-
 //添加
 publish {
     userOrg = 'dylan0759'             //如果账户是个人版本，则这里填的是用户名，如果是企业版这里写的是 organization
@@ -46,7 +44,7 @@ publish {
     desc = 'tool for Android development'//描述，不重要
     website = 'https://github.com/dylan/libraray'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
 }
-    //上传
+//上传
 /*
 gradlew clean build bintrayUpload
 -PbintrayUser=dylan0759
