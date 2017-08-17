@@ -1,4 +1,4 @@
-package com.dylan.library.utils;
+package com.dylan.library.screen;
 
 import android.annotation.TargetApi;
 import android.app.Activity;

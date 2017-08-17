@@ -65,7 +65,7 @@
  10.优化ToastUtils,避免在使用的时候再实例化。
  11.AppUtils增加调往到权限设置页面，直接跳转的有魅族，小米，华为，其它的只是跳到应用信息页面，从应用信息页面在手动点击进入权限设置页面。
  12. ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE); 魅族，小米，以及6.0以上的系统设置状态栏颜色为白色，并且字体颜色为黑色
- 
+ 13.增加UrlUtils  截取url中的参数名和参数值
  
  
   
