@@ -88,7 +88,7 @@ public class ScreenUtils {
         }
     }
 
-    /**
+    /**  要在style.xml文件中配置
      * 设置状态栏颜色和状态栏字体颜色
      * @param window
      * @param statusbarColor

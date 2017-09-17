@@ -9,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Log;
 
 import java.io.File;
@@ -104,6 +105,29 @@ public class AppUtils {
         if (StringUtils.isEmpty(packageName)) return;
         activity.startActivityForResult(IntentUtils.getLaunchAppIntent(activity, packageName), requestCode);
 
+    }
+
+    /**
+     * Activity从后台回到前台，后台不存在则创建
+     * @param context
+     * @param aClass
+     */
+    public static void bringActivityToFront(Context context, Class aClass) {
+        Intent intent = new Intent(context, aClass);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+    }
+
+    /**
+     * Activity从后台回到前台，后台不存在则创建
+     * @param context
+     * @param aClass
+     */
+    public static void bringActivityToFront(Context context,String bundleKey, Bundle bunldeValue,Class aClass){
+        Intent intent = new Intent(context, aClass);
+        intent.putExtra(bundleKey,bunldeValue);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
     }
 
 
@@ -242,23 +266,23 @@ public class AppUtils {
     /**
      * 跳到权限设置页面
      */
-    public static void gotoPermission(Context context){
-        if (context==null)return;
-        try{
-            if (RomUtils.isFlyme()){
+    public static void gotoPermission(Context context) {
+        if (context == null) return;
+        try {
+            if (RomUtils.isFlyme()) {
                 Intent intent = new Intent("com.meizu.safe.security.SHOW_APPSEC");
                 intent.addCategory(Intent.CATEGORY_DEFAULT);
                 intent.putExtra("packageName", context.getPackageName());
                 context.startActivity(intent);
                 return;
-            }else if (RomUtils.isMIUI()){
+            } else if (RomUtils.isMIUI()) {
                 Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
                 ComponentName componentName = new ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
                 intent.setComponent(componentName);
                 intent.putExtra("extra_pkgname", context.getPackageName());
                 context.startActivity(intent);
                 return;
-            }else if (RomUtils.isEMUI()){
+            } else if (RomUtils.isEMUI()) {
                 Intent intent = new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("packageName", context.getPackageName());
@@ -267,25 +291,26 @@ public class AppUtils {
                 context.startActivity(intent);
                 return;
             }
-        }catch (Exception e){
+        } catch (Exception e) {
             gotoApplicationSetting(context);
             return;
         }
         gotoApplicationSetting(context);
-     }
+    }
 
     /**
      * 跳到应用信息页面
+     *
      * @param context
      */
-     public static void gotoApplicationSetting(Context context){
-         Intent i = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
-         String pkg = "com.android.settings";
-         String cls = "com.android.settings.applications.InstalledAppDetails";
-         i.setComponent(new ComponentName(pkg, cls));
-         i.setData(Uri.parse("package:" + context.getPackageName()));
-         context.startActivity(i);
-     }
+    public static void gotoApplicationSetting(Context context) {
+        Intent i = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
+        String pkg = "com.android.settings";
+        String cls = "com.android.settings.applications.InstalledAppDetails";
+        i.setComponent(new ComponentName(pkg, cls));
+        i.setData(Uri.parse("package:" + context.getPackageName()));
+        context.startActivity(i);
+    }
 
 
 }

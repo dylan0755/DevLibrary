@@ -21,4 +21,5 @@
     <style name="statusBarStyle" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowLightStatusBar">false</item>
     </style>
+
 </resources>
