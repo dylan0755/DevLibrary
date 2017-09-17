@@ -67,8 +67,9 @@ public class FragmentSwitcher {
             while (iter.hasNext()) {
                 Map.Entry entry = (Map.Entry) iter.next();
                 int key = (int) entry.getKey();
-                if (getFragment(key)!=null){
-                    mFragmentManager.putFragment(outState, "fragment_" +key, getFragment(key));
+                Fragment fragment=getFragment(key);
+                if (fragment!=null&&fragment.isAdded()){
+                    mFragmentManager.putFragment(outState, "fragment_" +key, fragment);
                     fragment_key[index] = key;
                 }
                 index++;
