@@ -33,6 +33,7 @@ dependencies {
     compile 'com.android.support:support-v4:23.2.1'
     provided 'com.zhy:autolayout:1.4.3'
     provided files('libs/glide.jar')
+
 }
 
 //添加
