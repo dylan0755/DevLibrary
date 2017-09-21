@@ -67,6 +67,7 @@
  12. ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE); 魅族，小米，以及6.0以上的系统设置状态栏颜色为白色，并且字体颜色为黑色
  13.增加UrlUtils  截取url中的参数名和参数值
  14.修改DateUtil中  getDateByMonthsAfter  getDateByDaysAfter  返回Date
+ 15.增加BankCardCodeUtils  判断银行卡  卡号是否正确
  
  
   
