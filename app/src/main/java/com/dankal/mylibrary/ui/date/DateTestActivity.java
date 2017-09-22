@@ -2,8 +2,6 @@ package com.dankal.mylibrary.ui.date;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.DatePicker;
 import android.widget.TextView;
 
 import com.dankal.mylibrary.R;
@@ -22,17 +20,17 @@ public class DateTestActivity extends Activity {
         setContentView(R.layout.activity_datetest);
         textView= (TextView) findViewById(R.id.tv_date);
         tv_datepicker= (TextView) findViewById(R.id.tv_datepicker);
-        tv_datepicker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DateUtil.showDatePickerDialog(DateTestActivity.this, new DateUtil.DatePickerListener() {
-                    @Override
-                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofmonth) {
-                        tv_datepicker.setText("选择日期为："+year+"-"+month+"-"+dayofmonth);
-                    }
-                });
-            }
-        });
+//        tv_datepicker.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                DateUtil.showDatePickerDialog(DateTestActivity.this, new DateUtil.DatePickerListener() {
+//                    @Override
+//                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofmonth) {
+//                        tv_datepicker.setText("选择日期为："+year+"-"+month+"-"+dayofmonth);
+//                    }
+//                });
+//            }
+//        });
         getDate();
     }
 
