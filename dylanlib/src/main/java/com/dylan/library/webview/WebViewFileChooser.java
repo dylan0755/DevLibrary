@@ -1,4 +1,4 @@
-package com.dylan.library.graphics;
+package com.dylan.library.webview;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -30,7 +30,7 @@ import static android.app.Activity.RESULT_OK;
  * Created by Dylan on 2017/8/7.
  */
 
-public class WebViewImageSelector {
+public class WebViewFileChooser {
     private ValueCallback<Uri> mUploadFile;
     private ValueCallback<Uri[]>  filePathCallback;
     private final int REQUEST_UPLOAD_FILE_CODE=1001;
@@ -223,38 +223,5 @@ public class WebViewImageSelector {
 
 
 
-    public  abstract static class WebChromeClient extends android.webkit.WebChromeClient {
-
-        // android >5.0以上
-        @Override
-        public boolean onShowFileChooser(WebView webView,
-                                         ValueCallback<Uri[]> filePathCallback,
-                                         FileChooserParams fileChooserParams) {
-            attachSelector().setFilePathCallback(filePathCallback);
-            attachSelector().select(attachActivity());
-            return true;
-        }
-
-
-        public void openFileChooser(ValueCallback<Uri> uploadMsg) {
-            attachSelector().setUploadFile(uploadMsg);
-            attachSelector().select(attachActivity());
-        }
-
-        public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType) {
-            attachSelector().setUploadFile(uploadMsg);
-            attachSelector().select(attachActivity());
-        }
-
-        // android >4.11
-        public void openFileChooser(ValueCallback<Uri> uploadMsg, String acceptType, String capture) {
-            attachSelector().setUploadFile(uploadMsg);
-            attachSelector().select(attachActivity());
-        }
-
-        public abstract Activity attachActivity();
-        public abstract WebViewImageSelector attachSelector();
-
-    }
 
 }

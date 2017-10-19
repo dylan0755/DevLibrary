@@ -68,7 +68,6 @@
  13.增加UrlUtils  截取url中的参数名和参数值
  14.修改DateUtil中  getDateByMonthsAfter  getDateByDaysAfter  返回Date
  15.增加BankCardCodeUtils  判断银行卡  卡号是否正确
- 16.增加WebViewImageSelector    h5页面在WebView中获取手机本地图片
- 17.增加Logger类，log输出带有包名，方法和行数
- 
+ 16.增加Logger类，log输出带有包名，方法和行数
+ 17.增加DLWebChormeClinet  集成了视频全屏播放/相册（拍照）选择图片。
   

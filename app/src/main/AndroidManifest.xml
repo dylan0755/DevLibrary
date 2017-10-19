@@ -85,8 +85,9 @@
                   android:screenOrientation="portrait"/>
         <activity android:name=".ui.PermissionSettingActivity"
                   android:screenOrientation="portrait"/>
-        <activity android:name=".ui.WebViewImageSelectorActivity"
-                  android:screenOrientation="portrait"/>
+        <activity android:name=".ui.WebViewActivity"
+                  android:screenOrientation="portrait"
+            android:configChanges="orientation|keyboardHidden|screenSize"/>
         <meta-data
             android:name="design_width"
             android:value="720" />
