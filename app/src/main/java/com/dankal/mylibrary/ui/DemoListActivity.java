@@ -36,11 +36,12 @@ public class DemoListActivity extends Activity {
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
             "EditnnumberHelper", "autoInstall","ScreenShoot",
             "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
-            "BulletinBoard","PhotoSelector","PermissionSetting"};
+            "BulletinBoard","PhotoSelector","PermissionSetting","WebViewActvity"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
-            ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,PermissionSettingActivity.class};
+            ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,
+            PermissionSettingActivity.class,WebViewActivity.class};
 
     private DLAlertDialog mDialog;
     @Override

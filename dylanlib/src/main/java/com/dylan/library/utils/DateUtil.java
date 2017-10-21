@@ -1,10 +1,7 @@
 package com.dylan.library.utils;
 
 import android.app.DatePickerDialog;
-import android.content.Context;
 import android.widget.DatePicker;
-
-import com.dylan.library.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -29,17 +26,21 @@ public class DateUtil {
     /**
      * 多少天之后的日期
      */
-    public static void getDateByDaysAfter(int dayafter) {
+    public static Date getDateByDaysAfter(int dayafter) {
         resetCalendar();
         calendar.add(Calendar.DAY_OF_MONTH, dayafter);
+        Date date=calendar.getTime();
+        return date;
     }
 
     /**
      * 多少月之后的日期
      */
-    public static void getDateByMonthsAfter(int monthafter) {
+    public static Date getDateByMonthsAfter(int monthafter) {
         resetCalendar();
         calendar.add(Calendar.MONTH, monthafter);
+        Date date=calendar.getTime();
+        return date;
     }
 
     public static void resetCalendar() {
@@ -83,21 +84,21 @@ public class DateUtil {
     }
 
 
-    public static void showDatePickerDialog(Context context, final DatePickerListener listener) {
-        Calendar calendar = Calendar.getInstance();
-        if (mDatePicker == null) {
-            mDatePicker = new DatePickerDialog(context, R.style.datePickerTheme, new DatePickerDialog.OnDateSetListener() {
-                @Override
-                public void onDateSet(DatePicker arg0, int year, int month, int dayofmonth) {
-                    String date = year + "-" + (month + 1) + "-" + dayofmonth;
-                    if (listener != null) listener.onDateSet(arg0, year, (month + 1), dayofmonth);
-
-                }
-            },
-                    calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-        }
-        mDatePicker.show();
-    }
+//    public static void showDatePickerDialog(Context context, final DatePickerListener listener) {
+//        Calendar calendar = Calendar.getInstance();
+//        if (mDatePicker == null) {
+//            mDatePicker = new DatePickerDialog(context, R.style.datePickerTheme, new DatePickerDialog.OnDateSetListener() {
+//                @Override
+//                public void onDateSet(DatePicker arg0, int year, int month, int dayofmonth) {
+//                    String date = year + "-" + (month + 1) + "-" + dayofmonth;
+//                    if (listener != null) listener.onDateSet(arg0, year, (month + 1), dayofmonth);
+//
+//                }
+//            },
+//                    calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
+//        }
+//        mDatePicker.show();
+//    }
 
 
     public static interface DatePickerListener {

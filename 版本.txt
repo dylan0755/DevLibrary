@@ -66,7 +66,13 @@
  11.AppUtils增加调往到权限设置页面，直接跳转的有魅族，小米，华为，其它的只是跳到应用信息页面，从应用信息页面在手动点击进入权限设置页面。
  12. ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE); 魅族，小米，以及6.0以上的系统设置状态栏颜色为白色，并且字体颜色为黑色
  13.增加UrlUtils  截取url中的参数名和参数值
- 
+ 14.修改DateUtil中  getDateByMonthsAfter  getDateByDaysAfter  返回Date
+ 15.增加BankCardCodeUtils  判断银行卡  卡号是否正确
+ 16.增加Logger类，log输出带有包名，方法和行数
+ 17.增加DLWebChormeClinet  集成了视频全屏播放/相册（拍照）选择图片。
+ 18.增加TextViewUitls   支持滚动和  在ScrollView中TextView支持滚动
+ 19.增加DLTranPrentDialog 和DLAlertDialog,自定义Dialog 可以继承DLTranPrentDialog，布局的Match_parent不会失效。
+ 20.增加ResourceManager 代码中可以动态获取 colorPrimary colorPrimaryDark colorAccent 的颜色
  
  
   
