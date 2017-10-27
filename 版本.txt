@@ -73,6 +73,6 @@
  18.增加TextViewUitls   支持滚动和  在ScrollView中TextView支持滚动
  19.增加DLTranPrentDialog 和DLAlertDialog,自定义Dialog 可以继承DLTranPrentDialog，布局的Match_parent不会失效。
  20.增加ResourceManager 代码中可以动态获取 colorPrimary colorPrimaryDark colorAccent 的颜色
- 
+ 21.增加IOUtils  InputStream 转字符串。
  
   
