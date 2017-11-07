@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -21,6 +22,7 @@ import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.widget.DLAlertDialog;
 
 import java.util.Arrays;
 import java.util.List;
@@ -42,12 +44,14 @@ public class DemoListActivity extends Activity {
             ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,
             PermissionSettingActivity.class,WebViewActivity.class, HorizontalScrollBackActivity.class};
 
+    private DLAlertDialog mDialog;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
+        mDialog=new DLAlertDialog(this);
     }
 
     private void initEvent() {
@@ -71,4 +75,27 @@ public class DemoListActivity extends Activity {
             startActivity(intent);
         }
     }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode==KeyEvent.KEYCODE_BACK){
+            mDialog.show("提示", "要退出应用吗", new DLAlertDialog.CallBack() {
+                @Override
+                public void onCancel() {
+
+                }
+
+                @Override
+                public void onSure() {
+                     finish();
+                }
+            });
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+
 }

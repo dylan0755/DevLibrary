@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
 
     <GridView
         android:id="@+id/gv_demolist"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="3"
         android:horizontalSpacing="5dp"
-        android:verticalSpacing="5dp"/>
-</com.zhy.autolayout.AutoLinearLayout>
+        android:numColumns="3"
+        android:verticalSpacing="5dp" />
+
+
+</LinearLayout>
