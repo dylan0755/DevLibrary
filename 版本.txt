@@ -71,5 +71,6 @@
  16.增加Logger类，log输出带有包名，方法和行数
  17.增加DLWebChormeClinet  集成了视频全屏播放/相册（拍照）选择图片。
  18.增加TextViewUitls   支持滚动和  在ScrollView中TextView支持滚动
+ 19.增加HorizontalScrollBackLayout  支持右滑销毁Activity
  
   

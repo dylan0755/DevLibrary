@@ -88,6 +88,9 @@
         <activity android:name=".ui.WebViewActivity"
                   android:screenOrientation="portrait"
             android:configChanges="orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".HorizontalScrollBackActivity"
+                  android:screenOrientation="portrait"
+            android:theme="@style/transparentTheme"/>
         <meta-data
             android:name="design_width"
             android:value="720" />

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.dankal.mylibrary.HorizontalScrollBackActivity;
 import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.adapter.DemoListAdapter;
 import com.dankal.mylibrary.ui.customtitle.CustomTittleUitlActivity;
@@ -34,12 +35,12 @@ public class DemoListActivity extends Activity {
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
             "EditnnumberHelper", "autoInstall","ScreenShoot",
             "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
-            "BulletinBoard","PhotoSelector","PermissionSetting","WebViewActvity"};
+            "BulletinBoard","PhotoSelector","PermissionSetting","WebViewActvity","侧滑销毁Activity"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,
-            PermissionSettingActivity.class,WebViewActivity.class};
+            PermissionSettingActivity.class,WebViewActivity.class, HorizontalScrollBackActivity.class};
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

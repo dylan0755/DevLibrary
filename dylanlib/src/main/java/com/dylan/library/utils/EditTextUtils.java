@@ -3,6 +3,8 @@ package com.dylan.library.utils;
 import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -27,6 +29,23 @@ public class EditTextUtils {
                 inputManager.showSoftInput(editText, 0);
             }
         },100);
+
     }
 
+
+    public static abstract class AfterTextChangedListener implements TextWatcher{
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+        }
+
+        @Override
+        public abstract void afterTextChanged(Editable s);
+    }
 }
