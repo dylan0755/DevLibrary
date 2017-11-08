@@ -58,4 +58,10 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+
+
+    <style name="anim_slie_from_bottom">
+        <item name="android:windowEnterAnimation">@anim/anim_enter_frombottom</item>
+        <item name="android:windowExitAnimation">@anim/anim_exit_tobottom</item>
+    </style>
 </resources>

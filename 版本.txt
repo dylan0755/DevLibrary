@@ -75,6 +75,7 @@
  20.增加ResourceManager 代码中可以动态获取 colorPrimary colorPrimaryDark colorAccent 的颜色
  21.增加IOUtils  InputStream 转字符串。
  22.增加HorizontalScrollBackLayout  右滑销毁Activity
+ 23.封装SlideFromBottomDialog  从底部滑出，滑到底部退出动画
 
  
   

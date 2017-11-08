@@ -24,11 +24,12 @@ public abstract class DLTransParentDialog extends Dialog {
     private View mContentView;
     private   int  ORIENTATION_STATE;
 
+
     public DLTransParentDialog(@NonNull Context context) {
         super(context, R.style.transparentDialog);
         LayoutInflater inflater = LayoutInflater.from(context);
         mContentView = inflater.inflate(getLayoutId(), null, false);
-        controllWindowWidth();
+        setWindowAttribute();
         setContentView(mContentView);
         setCanceledOnTouchOutside(true);
         setOnCancelListener(new OnCancelListener() {
@@ -58,7 +59,7 @@ public abstract class DLTransParentDialog extends Dialog {
     /**
      * 横竖屏场景下控制Dialog的宽度
      */
-    private void controllWindowWidth(){
+    private void setWindowAttribute(){
         Context context=mContentView.getContext();
         if (context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             if (!isPotrait()){
@@ -68,7 +69,7 @@ public abstract class DLTransParentDialog extends Dialog {
                 wlp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 wlp.width = (int) (ScreenUtils.getScreenWidth(context) * 0.85f);
                 window.setAttributes(wlp);
-                ORIENTATION_STATE=Configuration.ORIENTATION_PORTRAIT;
+                ORIENTATION_STATE= Configuration.ORIENTATION_PORTRAIT;
             }
         } else {
             if (!isLandScape()){
@@ -78,26 +79,28 @@ public abstract class DLTransParentDialog extends Dialog {
                 wlp.height = ViewGroup.LayoutParams.WRAP_CONTENT;
                 wlp.width = (int) (ScreenUtils.getScreenWidth(context) * 0.60f);
                 window.setAttributes(wlp);
-                ORIENTATION_STATE=Configuration.ORIENTATION_LANDSCAPE;
+                ORIENTATION_STATE= Configuration.ORIENTATION_LANDSCAPE;
             }
         }
     }
 
 
     public boolean isPotrait(){
-        if (ORIENTATION_STATE==Configuration.ORIENTATION_PORTRAIT)return true;
+        if (ORIENTATION_STATE== Configuration.ORIENTATION_PORTRAIT)return true;
         else
             return false;
     }
 
     private boolean isLandScape(){
-        if (ORIENTATION_STATE==Configuration.ORIENTATION_LANDSCAPE)return true;
+        if (ORIENTATION_STATE== Configuration.ORIENTATION_LANDSCAPE)return true;
         else
             return false;
     }
     @Override
     public void show() {
-       controllWindowWidth();
         super.show();
     }
+
+
+
 }
