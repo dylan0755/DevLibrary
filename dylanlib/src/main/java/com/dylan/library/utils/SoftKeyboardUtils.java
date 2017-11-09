@@ -3,14 +3,17 @@ package com.dylan.library.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
 
 /**
  * Created by Dylan on 2016/10/9.
  */
-public class SoftKeyboardUtil {
+public class SoftKeyboardUtils {
     public static void observeSoftKeyboard(Activity activity, final OnSoftKeyboardChangeListener listener) {
         final View decorView = activity.getWindow().getDecorView();
         decorView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
@@ -42,5 +45,25 @@ public class SoftKeyboardUtil {
         Context context=view.getContext();
         InputMethodManager manager= (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         manager.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+    }
+
+
+
+    public static void showSoftInputAuto(final EditText editText){
+        if (editText==null)return;
+        new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                editText.requestFocus();
+                editText.setFocusable(true);
+                editText.setFocusableInTouchMode(true);
+                String textLength=editText.getText().toString();
+                editText.setSelection(textLength.length());
+                InputMethodManager inputManager =
+                        (InputMethodManager)editText.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(editText, 0);
+            }
+        },100);
+
     }
 }

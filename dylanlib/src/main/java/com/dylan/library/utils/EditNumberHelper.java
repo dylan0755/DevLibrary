@@ -29,7 +29,7 @@ public class EditNumberHelper {
         if (minNum != 0) this.minNum = minNum;
         if (maxNum != 0) this.maxNum = maxNum;
 
-        SoftKeyboardUtil.observeSoftKeyboard(activity, new SoftKeyboardUtil.OnSoftKeyboardChangeListener() {
+        SoftKeyboardUtils.observeSoftKeyboard(activity, new SoftKeyboardUtils.OnSoftKeyboardChangeListener() {
             @Override
             public void onSoftKeyBoardChange(int softKeybardHeight, boolean visible) {
                 if (!visible) {

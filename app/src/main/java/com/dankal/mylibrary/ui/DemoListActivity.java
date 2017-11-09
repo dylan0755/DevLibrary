@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.GridView;
 
 import com.dankal.mylibrary.HorizontalScrollBackActivity;
@@ -22,6 +23,7 @@ import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.SoftKeyboardUtils;
 import com.dylan.library.widget.DLAlertDialog;
 
 import java.util.Arrays;
@@ -52,6 +54,10 @@ public class DemoListActivity extends Activity {
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
         mDialog=new DLAlertDialog(this);
+
+
+
+
     }
 
     private void initEvent() {
