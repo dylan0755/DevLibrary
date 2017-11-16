@@ -78,6 +78,7 @@
  23.封装SlideFromBottomDialog  从底部滑出，滑到底部退出动画
  24.SoftKeyBoardUtils 增加 showSoftInputAuto(EditText edittext)
  25.增加NavBarUtils  判断是否有包含底部虚拟按键（如华为手机就有），隐藏和显示方法。
+ 26.增加录音，仿微信语音发送。
 
  
   
