@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.GridView;
 
 import com.dankal.mylibrary.HorizontalScrollBackActivity;
@@ -23,7 +22,6 @@ import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 import com.dylan.library.screen.ScreenUtils;
-import com.dylan.library.utils.SoftKeyboardUtils;
 import com.dylan.library.widget.DLAlertDialog;
 
 import java.util.Arrays;
@@ -39,12 +37,14 @@ public class DemoListActivity extends Activity {
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
             "EditnnumberHelper", "autoInstall","ScreenShoot",
             "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
-            "BulletinBoard","PhotoSelector","PermissionSetting","WebViewActvity","侧滑销毁Activity"};
+            "BulletinBoard","PhotoSelector","PermissionSetting","WebViewActvity",
+            "侧滑销毁Activity","语音发送"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,
-            PermissionSettingActivity.class,WebViewActivity.class, HorizontalScrollBackActivity.class};
+            PermissionSettingActivity.class,WebViewActivity.class, HorizontalScrollBackActivity.class,
+            VoiceRecordActivity.class};
 
     private DLAlertDialog mDialog;
     @Override

@@ -36,7 +36,7 @@
 
 
 
-    <!-- my loading dialog -->
+    <!-- my loading dialog_voicerecord -->
     <style name="DLDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowFrame">@null</item>
