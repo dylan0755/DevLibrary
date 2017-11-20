@@ -1,14 +1,13 @@
 package com.dankal.mylibrary.ui.loadingdialog;
 
 import android.app.Activity;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
 import com.dankal.mylibrary.R;
-import com.dylan.library.utils.DialogUtils;
+import com.dylan.library.widget.LoadingDialog;
 
 
 /**
@@ -17,7 +16,7 @@ import com.dylan.library.utils.DialogUtils;
 
 public class LoadingDialogActivity extends Activity{
     Button btn_loading;
-    private Dialog dialog;
+    private LoadingDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,11 +27,12 @@ public class LoadingDialogActivity extends Activity{
         btn_loading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog= DialogUtils.createLoadingDialog(v.getContext(),"加载中...");
+                dialog=new LoadingDialog(LoadingDialogActivity.this);
+                dialog.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        DialogUtils.closeDialog(dialog);
+                        dialog.dismiss();
                     }
                 },5000);
             }

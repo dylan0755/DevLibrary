@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.zhy.autolayout.AutoLinearLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/dialog_loading_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical">
 
-    <com.zhy.autolayout.AutoLinearLayout
-        android:layout_width="300px"
-        android:layout_height="200px"
-        android:background="@drawable/loading_bg"
+    <LinearLayout
+        android:id="@+id/dialog_loading_view"
+        android:layout_width="166dp"
+        android:layout_height="100dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:paddingBottom="20px"
-        android:paddingTop="20px"
-        android:paddingLeft="42px"
-        android:paddingRight="42px"
+        android:paddingBottom="15dp"
+        android:paddingTop="20dp"
+        android:background="@drawable/shape_loadingdialog"
         >
 
         <ProgressBar
             android:id="@+id/progressBar1"
-            android:layout_width="50px"
-            android:layout_height="50px"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:layout_gravity="center_horizontal"
             android:indeterminateBehavior="repeat"
-            android:indeterminateDrawable="@drawable/dialog_loading"
+            android:indeterminateDrawable="@drawable/progress_drawable_white"
             android:indeterminateOnly="true" />
 
         <TextView
             android:id="@+id/tipTextView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30px"
-            android:text="加载中..."
+            android:layout_marginTop="18dp"
+            android:text="查询工单信息...."
+            android:singleLine="true"
             android:textColor="#f0f0f0"
-            android:textSize="15sp" />
-    </com.zhy.autolayout.AutoLinearLayout>
+            android:textSize="14sp"
+            android:paddingLeft="24dp"
+            android:paddingRight="24dp"/>
+    </LinearLayout>
 
-</com.zhy.autolayout.AutoLinearLayout>
+</LinearLayout>

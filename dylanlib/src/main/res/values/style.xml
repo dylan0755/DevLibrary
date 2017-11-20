@@ -59,6 +59,11 @@
     </style>
 
 
+    <style name="progress_loading">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
 
     <style name="anim_slie_from_bottom">
         <item name="android:windowEnterAnimation">@anim/anim_enter_frombottom</item>
