@@ -1,11 +1,15 @@
 package com.dankal.mylibrary.ui;
 
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.KeyEvent;
 import android.webkit.CookieSyncManager;
+import android.webkit.WebResourceError;
+import android.webkit.WebResourceRequest;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 
 import com.dankal.mylibrary.R;
 import com.dylan.library.webview.DLWebChromeClient;
+import com.dylan.library.webview.WebViewErroPage;
 import com.dylan.library.webview.WebViewFileChooser;
 
 /**
@@ -25,11 +30,13 @@ public class WebViewActivity extends Activity {
     private WebView webView;
     private WebViewFileChooser mFileChooser;
     private DLWebChromeClient mWebViewClient;
+    private WebViewErroPage erroPage;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_webviewimageselector);
         webView= (WebView) findViewById(R.id.webview);
+        erroPage=new WebViewErroPage();
         mFileChooser =new WebViewFileChooser();
         webView.setHorizontalScrollBarEnabled(false);
         webView.setVerticalScrollBarEnabled(false);
@@ -61,13 +68,36 @@ public class WebViewActivity extends Activity {
             public WebView attachWebView() {
                 return webView;
             }
+
+            @Override
+            public void onReceivedTitle(WebView view, String title) {
+                super.onReceivedTitle(view, title);
+                erroPage.onReceivedTitle(view,title);
+            }
         };
         webView.setWebChromeClient(mWebViewClient);
         webView.setWebViewClient(new WebViewClient(){
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
-                webView.loadUrl(url);
-                return true;
+                return false;
+            }
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                erroPage.onPageFinished(view,url);
+            }
+
+            @TargetApi(Build.VERSION_CODES.M)
+            @Override
+            public void onReceivedError(WebView view, WebResourceRequest request, WebResourceError error) {
+                super.onReceivedError(view, request, error);
+                erroPage.onReceivedError(error.getErrorCode());
+            }
+
+            @Override
+            public void onReceivedError(WebView view, int errorCode, String description, String failingUrl) {
+                super.onReceivedError(view, errorCode, description, failingUrl);
+                erroPage.onReceivedError(errorCode);
             }
         });
         webView.loadUrl("http://s.ibanshou.cn/");
