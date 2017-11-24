@@ -2,16 +2,15 @@ package com.dylan.library.webview;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
 
 import com.dylan.library.R;
-
+import com.dylan.library.exception.ELog;
 
 /**
  * Created by Dylan on 2017/11/24.
- *
- * WebView 的直接父布局必须是FrameLayout
  */
 
 public class WebViewErroPage {
@@ -21,14 +20,42 @@ public class WebViewErroPage {
 
 
 
+
+
     public void onPageFinished(final android.webkit.WebView view, final String url) {
         ViewGroup webViewContainer= (ViewGroup) view.getParent();
         if (webViewContainer==null)return;
+        int childCount=webViewContainer.getChildCount();
         if (showErrorPage){
-            int childCount=webViewContainer.getChildCount();
-            if (childCount==1){
-                if (erroView==null)erroView= View.inflate(view.getContext(), R.layout.webview_error,null);
-                webViewContainer.addView(erroView,1);
+            addErrorView(view, url, webViewContainer, childCount);
+            showErrorPage =false;
+        }else{
+            if (childCount>1){
+                View lastChild=webViewContainer.getChildAt(childCount-1);
+                if (lastChild instanceof ErrorLayout){
+                    webViewContainer.removeView(lastChild);
+                    erroState =0;
+                }
+            }
+
+        }
+    }
+
+    private void addErrorView(final WebView view, final String url, ViewGroup webViewContainer, int childCount) {
+        try {
+            boolean hasErrorPage=false;
+            for (int i=0;i<childCount;i++){
+                View child=webViewContainer.getChildAt(i);
+                if (child instanceof ErrorLayout){
+                    hasErrorPage=true;
+                    break;
+                }
+            }
+            if (!hasErrorPage){
+                if (erroView==null){
+                    erroView= View.inflate(view.getContext(), R.layout.webview_error,null);
+                }
+                webViewContainer.addView(erroView,childCount);
                 erroView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -43,13 +70,10 @@ public class WebViewErroPage {
                     tv.setText("网络已断开");
                 }
             }
-            showErrorPage =false;
-        }else{
-            if (webViewContainer.getChildCount()>1){
-                webViewContainer.removeViewAt(1);
-                erroState =0;
-            }
+        }catch (Exception e){
+            ELog.e(e);
         }
+
     }
 
     public void onReceivedTitle(final android.webkit.WebView view, String title){
@@ -57,21 +81,11 @@ public class WebViewErroPage {
             title=title.toLowerCase();
             if (title.contains("网页无法打开")||title.contains("erro")){
                 showErrorPage =true;
+                ViewGroup webViewContainer= (ViewGroup) view.getParent();
+                if (webViewContainer==null)return;
+                int childCount=webViewContainer.getChildCount();
                 if (showErrorPage){
-                    ViewGroup webViewContainer= (ViewGroup) view.getParent();
-                    if (webViewContainer==null)return;
-                    int childCount=webViewContainer.getChildCount();
-                    if (childCount==1){
-                        if (erroView==null)erroView= View.inflate(view.getContext(),R.layout.webview_error,null);
-                        webViewContainer.addView(erroView,1);
-                        final String currentUrl=view.getUrl();
-                        erroView.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                view.loadUrl(currentUrl);
-                            }
-                        });
-                    }
+                    addErrorView(view,view.getUrl(),webViewContainer,childCount);
                     showErrorPage =false;
                 }
             }else{
@@ -92,8 +106,6 @@ public class WebViewErroPage {
             erroState =2;
         }
     }
-
-
 
 
 
