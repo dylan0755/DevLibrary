@@ -22,6 +22,9 @@ import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.SignatureUtils;
 import com.dylan.library.widget.DLAlertDialog;
 
 import java.util.Arrays;
@@ -54,7 +57,10 @@ public class DemoListActivity extends Activity {
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
         mDialog=new DLAlertDialog(this);
-
+        String signature=SignatureUtils.getMD5Signature(this,"com.wxhkj.weixiuhui");
+        if (EmptyUtils.isNotEmpty(signature)){
+            Logger.e("signature "+signature);
+        }
 
 
 
