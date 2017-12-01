@@ -25,8 +25,8 @@ import com.dylan.library.R;
 import java.io.File;
 
 public class VoiceRecorder {
-	public static final int REQUEST_AUDIO_RECORD_PERMISSION = 123456;
-	public static final int REQUEST_STORAGE_PERMISSION = 2345678;
+	public static final int REQUEST_AUDIO_RECORD_PERMISSION = 253;
+	public static final int REQUEST_STORAGE_PERMISSION = 264;
 	private static final int MSG_VOLUME_CHAMGED = 0x111;
 	private Dialog dialog;
 	private LinearLayout llTextTip;
