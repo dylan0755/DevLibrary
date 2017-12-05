@@ -1,5 +1,6 @@
 package com.dylan.library.net;
 
+import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,4 +58,26 @@ public class UrlUtils {
          }   
          return mapRequest;   
      }
+
+
+    public static String  parseFileNameFormUrl(String url)  {
+        try{
+            String fileName="";
+            URL mUrl=new URL(url);
+            String urlString=mUrl.toString();
+            String query=mUrl.getQuery();
+            int lastSpart=urlString.lastIndexOf("/");
+            if (query==null||query.isEmpty()){
+                fileName=urlString.substring(lastSpart+1,urlString.length());
+            }else{
+                int queryParamStart=urlString.indexOf("?");
+                fileName=urlString.substring(lastSpart+1,queryParamStart);
+            }
+            return fileName;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return url;
+    }
+
 }
