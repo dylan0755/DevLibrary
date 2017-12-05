@@ -82,6 +82,7 @@
  27.增加WebViewErroPage  当断网或无法访问时可以点击空白处刷新。WebView的父布局要是FrameLayout
  28.SignatureUtils  根据包名获取应用的MD5签名
  29.增加Base64Utils  安卓的Base64 Api 要选择NO_WRAP,不换行，不要选择DEFAULT,否则如果解码的方式不对，就会出现乱码
+ 30.增加FileUtils  复制文件，更改文件后缀
 
  
   
