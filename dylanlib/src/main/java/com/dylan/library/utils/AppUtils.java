@@ -15,6 +15,8 @@ import android.util.Log;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by Dylan on 2016/12/29.
@@ -109,6 +111,7 @@ public class AppUtils {
 
     /**
      * Activity从后台回到前台，后台不存在则创建
+     *
      * @param context
      * @param aClass
      */
@@ -120,12 +123,13 @@ public class AppUtils {
 
     /**
      * Activity从后台回到前台，后台不存在则创建
+     *
      * @param context
      * @param aClass
      */
-    public static void bringActivityToFront(Context context,String bundleKey, Bundle bunldeValue,Class aClass){
+    public static void bringActivityToFront(Context context, String bundleKey, Bundle bunldeValue, Class aClass) {
         Intent intent = new Intent(context, aClass);
-        intent.putExtra(bundleKey,bunldeValue);
+        intent.putExtra(bundleKey, bunldeValue);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
         context.startActivity(intent);
     }
@@ -312,5 +316,12 @@ public class AppUtils {
         context.startActivity(i);
     }
 
+
+    public List<PackageInfo> getALLInstallApp(Context context) {
+        if (context == null) return Collections.emptyList();
+        PackageManager packageManager = context.getPackageManager();
+        List<PackageInfo> list = packageManager.getInstalledPackages(0);
+        return list;
+    }
 
 }
