@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.dankal.mylibrary.R;
-import com.dylan.library.file.FileUtils;
+import com.dylan.library.io.FileUtils;
 import com.dylan.library.graphics.BitmapUtils;
 import com.dylan.library.screen.ScreenShoot;
 import com.dylan.library.test.TestAdapter;

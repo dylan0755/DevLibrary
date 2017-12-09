@@ -95,6 +95,7 @@
                   android:screenOrientation="portrait"
             android:theme="@style/transparentTheme"/>
         <activity android:name=".ui.VoiceRecordActivity"/>
+        <activity android:name=".ui.filedownloader.FileDownLoaderActivity"/>
         <meta-data
             android:name="design_width"
             android:value="720" />

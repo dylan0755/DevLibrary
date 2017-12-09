@@ -10,8 +10,7 @@ import com.dylan.library.device.DeviceUtils;
 import com.dylan.library.device.MemoryInfo;
 import com.dylan.library.device.MemoryUtils;
 import com.dylan.library.device.SDCardUtils;
-import com.dylan.library.file.FileUtils;
-import com.dylan.library.screen.ScreenShoot;
+import com.dylan.library.io.FileUtils;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.AppUtils;
 
