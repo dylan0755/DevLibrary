@@ -96,6 +96,7 @@
             android:theme="@style/transparentTheme"/>
         <activity android:name=".ui.VoiceRecordActivity"/>
         <activity android:name=".ui.filedownloader.FileDownLoaderActivity"/>
+        <activity android:name=".ui.tab.TabLayoutActivity"/>
         <meta-data
             android:name="design_width"
             android:value="720" />

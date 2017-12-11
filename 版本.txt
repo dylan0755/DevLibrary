@@ -85,6 +85,7 @@
  30.增加FileUtils  复制文件，更改文件后缀
  31.增加FileDownLoader  多线程下载，通知栏Notifcation 更新下载进度。（不能同时下载同名文件，因为各个线程的缓存文件是以下载文件名+threadId命名的）
  32.添加 clipboardUtils
+ 
 
  
   
