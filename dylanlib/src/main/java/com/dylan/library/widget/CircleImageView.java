@@ -1,4 +1,4 @@
-package com.wxh.livevideo.widget;
+package com.dylan.library.widget;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -21,7 +21,7 @@ import android.support.annotation.DrawableRes;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-import com.wxh.livevideo.R;
+import com.dylan.library.R;
 
 
 public class CircleImageView extends ImageView {
