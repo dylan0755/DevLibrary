@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
@@ -17,9 +18,9 @@ public class CommonAbsListView  {
         protected Context context;
         protected LayoutInflater mInflater;
         protected List<T> dataList;
-
+        protected SimpleDateFormat mDateFormatter;
         public Adapter() {
-
+            initDateFormatter();
         }
 
         public void bind(List<T> dataList){
@@ -27,6 +28,10 @@ public class CommonAbsListView  {
                 this.dataList = dataList;
                 notifyDataSetChanged();
             }
+        }
+
+        public void initDateFormatter(){
+            mDateFormatter=new SimpleDateFormat("yyyy-MM-dd");
         }
 
         @Override

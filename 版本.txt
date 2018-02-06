@@ -86,6 +86,8 @@
  31.增加FileDownLoader  多线程下载，通知栏Notifcation 更新下载进度。（不能同时下载同名文件，因为各个线程的缓存文件是以下载文件名+threadId命名的）
  32.添加 clipboardUtils
  33.增加circleImageView
+ 34.TimeUtils 增加判断今天，明天，后天
+ 35.commonAbsListView 中的adapter 增加 SimpleDateFormatter
  
 
  
