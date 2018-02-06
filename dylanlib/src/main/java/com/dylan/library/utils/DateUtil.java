@@ -1,6 +1,5 @@
 package com.dylan.library.utils;
 
-import android.app.DatePickerDialog;
 import android.widget.DatePicker;
 
 import java.text.SimpleDateFormat;
@@ -20,7 +19,6 @@ public class DateUtil {
 
 
     private static Calendar calendar = Calendar.getInstance();
-    private static DatePickerDialog mDatePicker;
 
 
     /**
@@ -84,21 +82,7 @@ public class DateUtil {
     }
 
 
-//    public static void showDatePickerDialog(Context context, final DatePickerListener listener) {
-//        Calendar calendar = Calendar.getInstance();
-//        if (mDatePicker == null) {
-//            mDatePicker = new DatePickerDialog(context, R.style.datePickerTheme, new DatePickerDialog.OnDateSetListener() {
-//                @Override
-//                public void onDateSet(DatePicker arg0, int year, int month, int dayofmonth) {
-//                    String date = year + "-" + (month + 1) + "-" + dayofmonth;
-//                    if (listener != null) listener.onDateSet(arg0, year, (month + 1), dayofmonth);
-//
-//                }
-//            },
-//                    calendar.get(Calendar.YEAR), calendar.get(Calendar.MONTH), calendar.get(Calendar.DAY_OF_MONTH));
-//        }
-//        mDatePicker.show();
-//    }
+
 
 
     public static interface DatePickerListener {

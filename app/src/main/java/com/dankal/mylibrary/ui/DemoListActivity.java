@@ -64,8 +64,6 @@ public class DemoListActivity extends Activity {
             Logger.e("signature "+signature);
         }
 
-
-
     }
 
     private void initEvent() {
