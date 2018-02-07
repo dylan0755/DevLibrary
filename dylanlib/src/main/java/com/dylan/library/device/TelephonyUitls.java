@@ -31,9 +31,7 @@ public class TelephonyUitls {
     }
 
     /**
-     * 需要加入权限<uses-permission
-     * android:name="android.permission.READ_PHONE_STATE"/> <BR>
-     * <p>
+     * 需要加入权限 READ_PHONE_STATE
      * IMSI号前面3位460是国家，紧接着后面2位00 02是中国移动，01是中国联通，03是中国电信。
      */
     public static String getProvidersName(TelephonyManager telephonyManager) {

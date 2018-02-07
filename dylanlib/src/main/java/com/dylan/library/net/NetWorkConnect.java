@@ -6,8 +6,7 @@ import android.net.NetworkInfo;
 
 
 /**
- * <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
- <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+ * 添加 ACCESS_NETWORK_STATE ACCESS_WIFI_STATE 两个权限
  */
 public class NetWorkConnect {
 

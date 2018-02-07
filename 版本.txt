@@ -1,46 +1,17 @@
-版本1.0.0：
-
-1.2016/12/10  增加CustomTitleUtil
-2.2016/12/16  增加DateUtil        日期选择器（4.x系统 样式）
-3.2016/12/20 增加EidtNumberHelper 对输入数字输入框 加减  输入计算。
-4.2016/12/22  增加LoginRegUtil
-
-5.2016/12/29
-  将StringCheck重命名为StringUtils,  
-  新增EmptyUtils.
-
-6.2016/12/31 
-  新增 BitmapUtils.
-  新增 自动安装/智能安装   (AccessibilityService)
-
-7.2017/01/01 
-  新增 IOCloser
-  新增 ScreenShoot
-  新增 MemoryUtils 读取sdcard  内存卡，RAM。
-  新增 CrashHandler  系统崩溃异常，写进日志文件，可上传至自己的服务器。
-  新增 TelephonyUtils 从TelePhoneyManager获取电话号码运行商，由号码来判断运营商。(正则)
+版本2.0.1
+增加 CheckBoxListAdapter  ，只要继承它不用考虑复用性导致 checkbox状态丢失
 
 
-8.2017/01/02
-  TimeUtil重名为TimeUtils  增加获取网络时间。
-  新增Elog 可以以Log.e()的形式输出  Exception和Throwable，因为e.printStack颜色不是红色。
-
-9.2017/01/14
-  新增GridViewPagerAdapter.
-  新增WrapLayoutManager.
-
-10.2017/01/15
-  新增DialogUtils.
-
-11.2017/01/16  为html增加头部样式，适配webView大小。
 
 
-版本1.0.1：
-1.2017/3/7 增加RomUtils  支持判断小米，魅族，华为。  
-2.StringUtils  增加判断是否包含中文的方法，支持。，等中文字符。
-增加ListView的侧滑删除
 
-版本1.0.2：
+
+
+
+
+
+
+版本2.0.0：
 1.增加ThreadUtils
     (1) 判断是否在主线程的方法。
 2.增加EditTextUtils  
@@ -88,6 +59,58 @@
  33.增加circleImageView
  34.TimeUtils 增加判断今天，明天，后天
  35.commonAbsListView 中的adapter 增加 SimpleDateFormatter
+ 
+ 
+ 
+ 
+版本1.0.1：
+1.2017/3/7 增加RomUtils  支持判断小米，魅族，华为。  
+2.StringUtils  增加判断是否包含中文的方法，支持。，等中文字符。
+增加ListView的侧滑删除
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 版本1.0.0：
+
+1.2016/12/10  增加CustomTitleUtil
+2.2016/12/16  增加DateUtil        日期选择器（4.x系统 样式）
+3.2016/12/20 增加EidtNumberHelper 对输入数字输入框 加减  输入计算。
+4.2016/12/22  增加LoginRegUtil
+
+5.2016/12/29
+  将StringCheck重命名为StringUtils,  
+  新增EmptyUtils.
+
+6.2016/12/31 
+  新增 BitmapUtils.
+  新增 自动安装/智能安装   (AccessibilityService)
+
+7.2017/01/01 
+  新增 IOCloser
+  新增 ScreenShoot
+  新增 MemoryUtils 读取sdcard  内存卡，RAM。
+  新增 CrashHandler  系统崩溃异常，写进日志文件，可上传至自己的服务器。
+  新增 TelephonyUtils 从TelePhoneyManager获取电话号码运行商，由号码来判断运营商。(正则)
+
+
+8.2017/01/02
+  TimeUtil重名为TimeUtils  增加获取网络时间。
+  新增Elog 可以以Log.e()的形式输出  Exception和Throwable，因为e.printStack颜色不是红色。
+
+9.2017/01/14
+  新增GridViewPagerAdapter.
+  新增WrapLayoutManager.
+
+10.2017/01/15
+  新增DialogUtils.
+
+11.2017/01/16  为html增加头部样式，适配webView大小。
+
+
  
 
  
