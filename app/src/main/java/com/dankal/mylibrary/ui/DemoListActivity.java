@@ -18,6 +18,7 @@ import com.dankal.mylibrary.ui.edittext.EditNumberActivity;
 import com.dankal.mylibrary.ui.filedownloader.FileDownLoaderActivity;
 import com.dankal.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dankal.mylibrary.ui.install.AutoInstallActivity;
+import com.dankal.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dankal.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
@@ -43,13 +44,15 @@ public class DemoListActivity extends Activity {
             "EditnnumberHelper", "autoInstall","ScreenShoot",
             "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
             "BulletinBoard","PhotoSelector","PermissionSetting","WebViewActvity",
-            "侧滑销毁Activity","语音发送","FileDownLoader","TabLayout","CheckBoxListAdapter"};
+            "侧滑销毁Activity","语音发送","FileDownLoader","TabLayout","CheckBoxListAdapter",
+    "LazyFragment"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,
             PermissionSettingActivity.class,WebViewActivity.class, HorizontalScrollBackActivity.class,
-            VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,CheckBoxListAdapterActivity.class};
+            VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
+            CheckBoxListAdapterActivity.class, LazyFragmentActivity.class};
 
     private DLAlertDialog mDialog;
     @Override

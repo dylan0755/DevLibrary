@@ -98,6 +98,7 @@
         <activity android:name=".ui.filedownloader.FileDownLoaderActivity"/>
         <activity android:name=".ui.tab.TabLayoutActivity"/>
         <activity android:name=".ui.CheckBoxListAdapterActivity"/>
+        <activity android:name=".ui.lazyload.LazyFragmentActivity"/>
         <meta-data
             android:name="design_width"
             android:value="720" />

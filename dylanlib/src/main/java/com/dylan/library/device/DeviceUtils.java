@@ -5,12 +5,9 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.provider.Settings;
+import android.telephony.TelephonyManager;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import static android.content.Context.TELEPHONY_SERVICE;
 
 /**
  * Created by Dylan on 2017/1/1.
@@ -57,8 +54,15 @@ public class DeviceUtils {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
 
-    // <uses-permission android:name="android.permission.INTERNET"/>
-    //<uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    //添加权限 READ_PHONE_STATE
+    public static String getIMEI(Context context){
+        TelephonyManager TelephonyMgr = (TelephonyManager) context.getSystemService(TELEPHONY_SERVICE);
+        String szImei = TelephonyMgr.getDeviceId();
+        return szImei;
+    }
+
+    // 添加权限 android.permission.INTERNET
+    //添加权限 android.permission.ACCESS_WIFI_STATE"
     public static String getLocalMac(Context context) {
         String macAddress = null;
         WifiManager wifiMgr = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
