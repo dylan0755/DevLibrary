@@ -52,6 +52,9 @@ public class HorizontalScrollBackLayout extends LinearLayout {
         FLING_FINISHING_MIN_VELOCITY = scale.toScaleSize(500);
     }
 
+    public void setStartAlpa(int alpa){
+        mAlpa=alpa;
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
