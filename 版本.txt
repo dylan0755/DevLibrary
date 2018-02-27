@@ -2,6 +2,7 @@
 增加 CheckBoxListAdapter  ，只要继承它不用考虑复用性导致 checkbox状态丢失
 DeviceUtls 增加获取IMEI getIMEI
 增加lazyFragment 懒加载
+AutoGridView 增加判断是否测量，CommonAbsListView.Adapter 中判断AutoGridView 类并判断是否测量
 
 
 

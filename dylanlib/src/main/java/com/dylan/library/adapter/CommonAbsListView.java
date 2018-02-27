@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.dylan.library.widget.AutoGridView;
+
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -64,7 +66,15 @@ public class CommonAbsListView  {
             }else{
                 holder= (VH) convertView.getTag();
             }
-            if (getItem(position)!=null) onBinderItem(holder, getItem(position),position);
+            if (getItem(position)!=null){
+                if (parent!=null&&parent instanceof AutoGridView){
+                    if (((AutoGridView) parent).hasMeasured()){
+                        onBinderItem(holder, getItem(position),position);
+                    }
+                }else{
+                    onBinderItem(holder, getItem(position),position);
+                }
+            }
             return convertView;
         }
         public abstract VH oncreateViewHolder(LayoutInflater inflater, ViewGroup parent);
