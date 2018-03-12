@@ -41,30 +41,31 @@ public class DemoListActivity extends Activity {
     private GridView mGridView;
     private DemoListAdapter mAdapter;
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
-            "EditnnumberHelper", "autoInstall","ScreenShoot",
-            "GridViewPager","WrapLayoutManager","LoadingDialog","listview侧滑删除",
-            "BulletinBoard","PhotoSelector","PermissionSetting","WebViewActvity",
-            "侧滑销毁Activity","语音发送","FileDownLoader","TabLayout","CheckBoxListAdapter",
-    "LazyFragment"};
+            "EditnnumberHelper", "autoInstall", "ScreenShoot",
+            "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
+            "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
+            "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
+            "LazyFragment"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
-            ExpandableListItemActivity.class, BulletinBoardActivity.class,PhotoPickerActivity.class,
-            PermissionSettingActivity.class,WebViewActivity.class, HorizontalScrollBackActivity.class,
+            ExpandableListItemActivity.class, BulletinBoardActivity.class, PhotoPickerActivity.class,
+            PermissionSettingActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class};
 
     private DLAlertDialog mDialog;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
-        mDialog=new DLAlertDialog(this);
-        String signature=SignatureUtils.getMD5Signature(this,"com.wxhkj.weixiuhui");
-        if (EmptyUtils.isNotEmpty(signature)){
-            Logger.e("signature "+signature);
+        mDialog = new DLAlertDialog(this);
+        String signature = SignatureUtils.getMD5Signature(this, "com.wxhkj.weixiuhui");
+        if (EmptyUtils.isNotEmpty(signature)) {
+            Logger.e("signature " + signature);
         }
 
     }
@@ -79,9 +80,6 @@ public class DemoListActivity extends Activity {
     }
 
 
-
-
-
     class ItemClickListener implements AdapterView.OnItemClickListener {
 
         @Override
@@ -94,7 +92,7 @@ public class DemoListActivity extends Activity {
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode==KeyEvent.KEYCODE_BACK){
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
             mDialog.show("提示", "要退出应用吗", new DLAlertDialog.CallBack() {
                 @Override
                 public void onCancel() {
@@ -103,14 +101,13 @@ public class DemoListActivity extends Activity {
 
                 @Override
                 public void onSure() {
-                     finish();
+                    finish();
                 }
             });
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
-
 
 
 }

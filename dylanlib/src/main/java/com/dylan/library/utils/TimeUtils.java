@@ -87,6 +87,7 @@ public class TimeUtils {
         return sdf.format(new Date(Long.valueOf(seconds + "000")));
     }
 
+    //是否为今天
     public static boolean isToday(long desTimeStamp){
         Date currentDate=new Date();
         Date desDate=new Date(desTimeStamp);
@@ -131,6 +132,58 @@ public class TimeUtils {
             }
         }
         return false;
+    }
+
+
+    public static String[] getCountTimeStartWidthDay(long millTimeStmap){
+        millTimeStmap-=System.currentTimeMillis();//减去当前时间
+        long secondTime = millTimeStmap / 1000;//转成秒单位的
+        int hour = (int) (secondTime / 3600);
+        int minute = (int) (secondTime % 3600);
+        if (minute != 0) {
+            minute = minute / 60;
+        }
+        int second = (int) (secondTime % 60);
+        String dayStr=null;
+        String houstr = null;
+        String minuteStr = null;
+        String secondStr = null;
+        if (hour < 10) {
+            houstr = "0" + hour;
+        } else {
+            if (hour>=24){
+                //天数
+                int  day=hour/24;
+                if (day>0&&day<10){
+                    dayStr="0"+Integer.toString(day);
+                }else{
+                    dayStr=Integer.toString(day);
+                }
+                //小时
+                hour=hour%24;
+                if (hour<10){
+                    houstr = "0" + hour;
+                }else{
+                    houstr = String.valueOf(hour);
+                }
+            }else{
+                houstr = String.valueOf(hour);
+                dayStr=Integer.toString(0);
+            }
+        }
+        if (minute < 10) {
+            minuteStr = "0" + minute;
+        } else {
+            minuteStr = String.valueOf(minute);
+        }
+
+        if (second < 10) {
+            secondStr = "0" + second;
+        } else {
+            secondStr = String.valueOf(second);
+        }
+        String[] timeArray=new String[]{dayStr,houstr,minuteStr,secondStr};
+        return timeArray;
     }
 
 }

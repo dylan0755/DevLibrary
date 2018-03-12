@@ -3,6 +3,7 @@
 DeviceUtls 增加获取IMEI getIMEI
 增加lazyFragment 懒加载
 AutoGridView 增加判断是否测量，CommonAbsListView.Adapter 中判断AutoGridView 类并判断是否测量
+TimeUtils增加 倒计时 getCountTimeStartWidthDay（） 返回Strng[] 包含天，时，分，秒 4个值
 
 
 
