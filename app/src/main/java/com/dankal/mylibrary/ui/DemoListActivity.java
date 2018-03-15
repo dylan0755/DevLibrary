@@ -1,9 +1,9 @@
 package com.dankal.mylibrary.ui;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,7 +37,7 @@ import java.util.List;
  * Created by Dylan on 2016/12/16.
  */
 
-public class DemoListActivity extends Activity {
+public class DemoListActivity extends AppCompatActivity {
     private GridView mGridView;
     private DemoListAdapter mAdapter;
     private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
@@ -67,6 +67,8 @@ public class DemoListActivity extends Activity {
         if (EmptyUtils.isNotEmpty(signature)) {
             Logger.e("signature " + signature);
         }
+
+
 
     }
 

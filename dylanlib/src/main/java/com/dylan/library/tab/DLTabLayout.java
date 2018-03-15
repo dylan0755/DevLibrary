@@ -36,6 +36,8 @@ public class DLTabLayout extends LinearLayout {
     private int mTabWidth;
     private int mTriangleWidth;
     private int mTriangleHeight;
+    private int widthMeasureSpec;
+    private int heightMeasureSpec;
     private ViewPager mViewPager;
     private List<TabItem> mTabItemList;
     private int mTabVisiableCount;
@@ -102,6 +104,16 @@ public class DLTabLayout extends LinearLayout {
         super.dispatchDraw(canvas);
     }
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        mMeasureWidth = MeasureSpec.getSize(widthMeasureSpec);
+        this.widthMeasureSpec=widthMeasureSpec;
+        this.heightMeasureSpec=heightMeasureSpec;
+        setTabWidth();
+    }
+
+
 
     @Override
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
@@ -114,8 +126,6 @@ public class DLTabLayout extends LinearLayout {
             initRetangle();
             mInitTranslationX = mTabWidth / 2 - mIndicatorWidht / 2;
         }
-
-
     }
 
     private void initRetangle() {
@@ -139,12 +149,7 @@ public class DLTabLayout extends LinearLayout {
         mPath.close();//闭合曲线形成三角形
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-        mMeasureWidth = MeasureSpec.getSize(widthMeasureSpec);
-        setTabWidth();
-    }
+
 
     /**
      * 设置tab的宽度
@@ -159,17 +164,19 @@ public class DLTabLayout extends LinearLayout {
                 mTabWidth = mMeasureWidth / MAX_VISIABLE_TAB_COUNT;
             }
         }
-
-        LayoutParams lp = new LayoutParams(mTabWidth, LayoutParams.MATCH_PARENT);
-        for (int i = 0; i < getChildCount(); i++) {
-            TabItem tabItem = (TabItem) getChildAt(i);
-            tabItem.setLayoutParams(lp);
+        //手动设置子View的宽度，  不要用  getChildAt(index).setLayoutParam的方式
+        // 因为有横竖屏切换的时候，setLayoutParam的无效
+        int childCount=getChildCount();
+        int newWidthMeasureSpec= MeasureSpec.makeMeasureSpec(mTabWidth, MeasureSpec.getMode(widthMeasureSpec));
+        for (int i=0;i<childCount;i++){
+            TabItem tabItem= (TabItem) getChildAt(i);
+            tabItem.measure(newWidthMeasureSpec,heightMeasureSpec);
             if (TAB_TEXT_SIZE != 0) tabItem.setTextSize(TAB_TEXT_SIZE);
-
             if (i == currentPosition) tabItem.setTextColor(COLOR_TEXT_SELECT);
             else
                 tabItem.setTextColor(COLOR_TEXT_NORMAL);
         }
+
     }
 
 
@@ -230,6 +237,7 @@ public class DLTabLayout extends LinearLayout {
     }
 
 
+
     public void create(){
         removeAllViews();
         if (mTabItemList.size() >= MAX_VISIABLE_TAB_COUNT) {
@@ -237,8 +245,10 @@ public class DLTabLayout extends LinearLayout {
         } else {
             mTabVisiableCount = mTabItemList.size();
         }
+        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(mTabWidth, LayoutParams.MATCH_PARENT);
         for (int i = 0; i < mTabItemList.size(); i++) {
             TabItem tabItem =mTabItemList.get(i);
+            tabItem.setLayoutParams(lp);
             tabItem.setTag(String.valueOf(i));
             tabItem.setOnClickListener(new TabClickListener());
             tabItem.setGravity(Gravity.CENTER);
@@ -395,7 +405,7 @@ public class DLTabLayout extends LinearLayout {
                     }
                 }
 
-                if (mViewPager != null || mViewPager.getAdapter() != null) {
+                if (mViewPager != null && mViewPager.getAdapter() != null) {
                     mViewPager.setCurrentItem(position);
                 }
             }

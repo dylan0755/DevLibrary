@@ -39,6 +39,7 @@ public class TabIndicatorLayout extends LinearLayout {
     private int mTabWidth;
     private int mTriangleWidth;
     private int mTriangleHeight;
+    private int widthMeasureSpec,  heightMeasureSpec;
     private ViewPager mViewPager;
     private List<String> mTitleList;
     private int mTabVisiableCount;
@@ -148,6 +149,8 @@ public class TabIndicatorLayout extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mMeasureWidth = MeasureSpec.getSize(widthMeasureSpec);
+        this.widthMeasureSpec=widthMeasureSpec;
+        this.heightMeasureSpec=heightMeasureSpec;
         setTabWidth();
     }
 
@@ -165,15 +168,17 @@ public class TabIndicatorLayout extends LinearLayout {
             }
         }
 
-        LayoutParams lp = new LayoutParams(mTabWidth, LayoutParams.MATCH_PARENT);
-        for (int i = 0; i < getChildCount(); i++) {
-            TextView tv = (TextView) getChildAt(i);
-            tv.setLayoutParams(lp);
-            if (TAB_TEXT_SIZE != 0) tv.setTextSize(TAB_TEXT_SIZE);
-
-            if (i == currentPosition) tv.setTextColor(COLOR_TEXT_SELECT);
+        //手动设置子View的宽度，  不要用  getChildAt(index).setLayoutParam的方式
+        // 因为有横竖屏切换的时候，setLayoutParam的无效
+        int childCount=getChildCount();
+        int newWidthMeasureSpec= MeasureSpec.makeMeasureSpec(mTabWidth, MeasureSpec.getMode(widthMeasureSpec));
+        for (int i=0;i<childCount;i++){
+            TabItem tabItem= (TabItem) getChildAt(i);
+            tabItem.measure(newWidthMeasureSpec,heightMeasureSpec);
+            if (TAB_TEXT_SIZE != 0) tabItem.setTextSize(TAB_TEXT_SIZE);
+            if (i == currentPosition) tabItem.setTextColor(COLOR_TEXT_SELECT);
             else
-                tv.setTextColor(COLOR_TEXT_NORMAL);
+                tabItem.setTextColor(COLOR_TEXT_NORMAL);
         }
     }
 
@@ -388,7 +393,7 @@ public class TabIndicatorLayout extends LinearLayout {
                     }
                 }
 
-                if (mViewPager != null || mViewPager.getAdapter() != null) {
+                if (mViewPager != null && mViewPager.getAdapter() != null) {
                     mViewPager.setCurrentItem(position);
                 }
             }

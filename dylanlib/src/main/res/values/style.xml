@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+
     <style name="datePickerTheme" parent="android:Theme.Holo.Light.NoActionBar">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
@@ -68,5 +70,9 @@
     <style name="anim_slie_from_bottom">
         <item name="android:windowEnterAnimation">@anim/anim_enter_frombottom</item>
         <item name="android:windowExitAnimation">@anim/anim_exit_tobottom</item>
+    </style>
+
+    <style name="AppCompatDialogStyle" parent="@style/Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/transparent</item>
     </style>
 </resources>
