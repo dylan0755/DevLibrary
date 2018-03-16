@@ -5,7 +5,7 @@
 4.AutoGridView 增加判断是否测量，CommonAbsListView.Adapter 中判断AutoGridView 类并判断是否测量，防止GridView 中的getView 调用多次问题
 5.TimeUtils增加 倒计时 getCountTimeStartWidthDay（） 返回Strng[] 包含天，时，分，秒 4个值
 6.修复DLTabLayout横竖屏切换  tab宽度没有改变问题
-
+7.修复TabLayout 标签显示不全问题
 
 
 

@@ -170,11 +170,12 @@ public class DLTabLayout extends LinearLayout {
         int newWidthMeasureSpec= MeasureSpec.makeMeasureSpec(mTabWidth, MeasureSpec.getMode(widthMeasureSpec));
         for (int i=0;i<childCount;i++){
             TabItem tabItem= (TabItem) getChildAt(i);
-            tabItem.measure(newWidthMeasureSpec,heightMeasureSpec);
             if (TAB_TEXT_SIZE != 0) tabItem.setTextSize(TAB_TEXT_SIZE);
             if (i == currentPosition) tabItem.setTextColor(COLOR_TEXT_SELECT);
             else
                 tabItem.setTextColor(COLOR_TEXT_NORMAL);
+            //先把大小，颜色 设置了再调用测量
+            tabItem.measure(newWidthMeasureSpec,heightMeasureSpec);
         }
 
     }
