@@ -144,4 +144,37 @@ public class StringUtils {
         return span;
     }
 
+    //全角转半角
+    public static String ToDBC(String input) {
+        if (input==null)return "";
+        char[] c = input.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == 12288) {
+                c[i] = (char) 32;
+                continue;
+            }
+            if (c[i] > 65280 && c[i] < 65375)
+                c[i] = (char) (c[i] - 65248);
+        }
+        return new String(c);
+    }
+
+
+    /**
+     * 半角转全角
+     * @param input String.
+     * @return 全角字符串.
+     */
+    public static String ToSBC(String input) {
+        char c[] = input.toCharArray();
+        for (int i = 0; i < c.length; i++) {
+            if (c[i] == ' ') {
+                c[i] = '\u3000';
+            } else if (c[i] < '\177') {
+                c[i] = (char) (c[i] + 65248);
+
+            }
+        }
+        return new String(c);
+    }
 }
