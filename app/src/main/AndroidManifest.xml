@@ -99,6 +99,7 @@
         <activity android:name=".ui.CheckBoxListAdapterActivity"/>
         <activity android:name=".ui.lazyload.LazyFragmentActivity"/>
         <activity android:name=".ui.CustomToastActivity"/>
+        <activity android:name=".ui.RedPointTextViewActivity"/>
         <meta-data
             android:name="design_width"
             android:value="720" />

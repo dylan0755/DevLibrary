@@ -6,6 +6,7 @@
 5.TimeUtils增加 倒计时 getCountTimeStartWidthDay（） 返回Strng[] 包含天，时，分，秒 4个值
 6.修复DLTabLayout横竖屏切换  tab宽度没有改变问题
 7.修复TabLayout 标签显示不全问题
+8.新增RedPointTextView,在文本末尾自动追加小红点，可控制隐藏。
 
 
 
