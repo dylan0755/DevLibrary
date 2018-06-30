@@ -33,6 +33,7 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.2.1'
     compile 'com.android.support:support-v4:23.2.1'
     provided 'com.zhy:autolayout:1.4.3'
+    compile files('libs/gson-2.8.0.jar')
     provided files('libs/glide.jar')
 
 }

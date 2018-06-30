@@ -23,12 +23,15 @@ import com.dankal.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dankal.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dankal.mylibrary.ui.tab.TabActivity;
 import com.dankal.mylibrary.ui.tab.TabLayoutActivity;
+import com.dankal.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dankal.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
+import com.dylan.library.json.FilterGson;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.SignatureUtils;
 import com.dylan.library.widget.DLAlertDialog;
+import com.google.gson.Gson;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,14 +48,15 @@ public class DemoListActivity extends AppCompatActivity {
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
-            "LazyFragment","RedPointTextView"};
+            "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, PhotoPickerActivity.class,
             PermissionSettingActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
-            CheckBoxListAdapterActivity.class, LazyFragmentActivity.class,RedPointTextViewActivity.class};
+            CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
+            UnScrollViewPagerActivity.class};
 
     private DLAlertDialog mDialog;
 
@@ -68,9 +72,10 @@ public class DemoListActivity extends AppCompatActivity {
             Logger.e("signature " + signature);
         }
 
-
-
     }
+
+
+
 
     private void initEvent() {
         mGridView = (GridView) findViewById(R.id.gv_demolist);

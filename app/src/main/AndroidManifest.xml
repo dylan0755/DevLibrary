@@ -100,6 +100,7 @@
         <activity android:name=".ui.lazyload.LazyFragmentActivity"/>
         <activity android:name=".ui.CustomToastActivity"/>
         <activity android:name=".ui.RedPointTextViewActivity"/>
+        <activity android:name=".ui.unscollviewpager.UnScrollViewPagerActivity"/>
         <meta-data
             android:name="design_width"
             android:value="720" />
