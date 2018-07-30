@@ -3,6 +3,7 @@
 1.Gson 添加  xxxAdapter， 过滤 int ,double, long 解析空字符串 "" 的问题。
 2. 更新RomUtils ，修复读取 build.prop 权限被拒绝问题。
 3.FileUtils 增加压缩到指定目录方法。
+4.FileUtils 增加 getFilefromUri() 和发送广播通知更新文件扫描
 
 
 
