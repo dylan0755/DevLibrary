@@ -17,9 +17,10 @@ import com.dylan.library.adapter.BaseRecyclerAdapter;
 public class WrapRecyclerAdapter extends BaseRecyclerAdapter<GridItemData,WrapRecyclerAdapter.ViewHolder> {
 
 
+
     @Override
-    public ViewHolder onCreateItemHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.rvitem_homeclassify,parent,false));
+    public int getLayoutId() {
+        return R.layout.rvitem_homeclassify;
     }
 
     @Override

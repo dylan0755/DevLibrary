@@ -6,23 +6,21 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dankal.mylibrary.R;
-import com.dylan.library.adapter.CommonAbsListView;
-
+import com.dylan.library.adapter.CommonBaseAdapter;
 
 
 /**
  * Created by Dylan on 2017/1/1.
  */
 
-public class DemoListAdapter extends CommonAbsListView.Adapter<String,DemoListAdapter.ViewHolder> {
+public class DemoListAdapter extends CommonBaseAdapter<String,DemoListAdapter.ViewHolder> {
+
 
 
 
     @Override
-    public ViewHolder oncreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
-       View contentView=mInflater.inflate(R.layout.gvitem_demolist,parent,false);
-        ViewHolder holder=new ViewHolder(contentView);
-        return holder;
+    public int getLayoutId() {
+        return R.layout.gvitem_demolist;
     }
 
     @Override
@@ -30,7 +28,7 @@ public class DemoListAdapter extends CommonAbsListView.Adapter<String,DemoListAd
          holder.tvItem.setText(s);
     }
 
-    class ViewHolder extends CommonAbsListView.ViewHolder{
+    class ViewHolder extends CommonBaseAdapter.ViewHolder{
         TextView tvItem;
         public ViewHolder(View convertView) {
             super(convertView);

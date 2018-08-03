@@ -15,9 +15,10 @@ import com.dylan.library.adapter.BaseRecyclerAdapter;
 public class NewDataAdapter extends BaseRecyclerAdapter<NewItem,NewDataAdapter.ViewHolder> {
 
 
+
     @Override
-    public ViewHolder onCreateItemHolder(LayoutInflater inflater, ViewGroup parent, int viewType) {
-        return new ViewHolder(inflater.inflate(R.layout.rvitem_newdata,parent,false));
+    public int getLayoutId() {
+        return R.layout.rvitem_newdata;
     }
 
     @Override

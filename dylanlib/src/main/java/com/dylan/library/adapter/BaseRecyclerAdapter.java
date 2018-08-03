@@ -1,13 +1,20 @@
 package com.dylan.library.adapter;
 
 import android.content.Context;
+import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.dylan.library.utils.Logger;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.util.List;
+
 
 
 /**
@@ -15,27 +22,45 @@ import java.util.List;
  */
 
 public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewHolder> extends RecyclerView.Adapter {
-    protected Context context;
+    protected Context mContext;
     private LayoutInflater mInflater;
    private List<T> mDataList;
-
+    private Constructor<VH> mSubConstrutor;
     public BaseRecyclerAdapter(){
-
+        Type type=this.getClass().getGenericSuperclass();
+        if ( type instanceof ParameterizedType) {
+            ParameterizedType genericSuperclass = (ParameterizedType)type;
+            Type[] types = genericSuperclass.getActualTypeArguments();
+            Class<VH> claszz = (Class<VH>) types[1];
+            //因为是内部类，反射要传入外部类对象
+            try {
+                mSubConstrutor = claszz.getDeclaredConstructor(getClass(), View.class);
+                mSubConstrutor.setAccessible(true);
+            } catch (NoSuchMethodException e) {
+                Logger.e(e);
+            }
+        }
     }
-
 
 
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
-        if (context==null){
-            context=parent.getContext();
-            mInflater= LayoutInflater.from(context);
+        if (mContext ==null){
+            mContext =parent.getContext();
+            mInflater= LayoutInflater.from(mContext);
         }
-
-        return onCreateItemHolder(mInflater,parent,viewType);
+        View convertView=mInflater.inflate( getLayoutId(),parent,false);
+        try {
+            VH holder= mSubConstrutor.newInstance(this,convertView);
+            return holder;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
-    public  abstract VH onCreateItemHolder(LayoutInflater inflater, ViewGroup parent, int viewType);
+    public  abstract @LayoutRes
+    int getLayoutId();
 
     public abstract void onBindViewHolder(VH holder,T t,int position);
 
@@ -77,6 +102,12 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
         }
     }
 
+    public List<T> getDataList(){
+        return mDataList;
+    }
+
+
+
 
     public boolean isEmpty(){
         return (mDataList==null||mDataList.size()==0)?true:false;
@@ -84,7 +115,7 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
 
     @Override
     public int getItemCount() {
-        return mDataList==null?0:(mDataList.size());
+        return (mSubConstrutor==null||mDataList==null)?0:(mDataList.size());
     }
 
 
@@ -92,6 +123,7 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ViewHolder(View itemView) {
             super(itemView);
+
         }
 
 

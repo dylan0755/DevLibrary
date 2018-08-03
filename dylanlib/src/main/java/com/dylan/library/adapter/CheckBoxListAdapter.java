@@ -9,14 +9,14 @@ import java.util.HashMap;
  * Created by Dylan on 2018/2/6.
  */
 
-public abstract  class CheckBoxListAdapter<T,VH extends CommonAbsListView.ViewHolder> extends CommonAbsListView.Adapter<T,VH> {
+public abstract  class CheckBoxListAdapter<T,VH extends CommonBaseAdapter.ViewHolder> extends CommonBaseAdapter<T,VH> {
     private HashMap<Integer, Boolean> checkMap;
     public CheckBoxListAdapter(){
         checkMap  = new HashMap<>();
     }
 
     @Override
-    public abstract VH oncreateViewHolder(LayoutInflater inflater, ViewGroup parent);
+    public abstract int getLayoutId();
 
     @Override
     public void onBinderItem(VH holder, T t, int position) {

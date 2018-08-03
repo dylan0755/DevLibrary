@@ -157,7 +157,23 @@ public class FileUtils {
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(desFilePath))));
     }
 
+    public static synchronized void addIgnore(String dirPath) {
+        File file = new File(dirPath);
+        if (!file.exists()) {
+            file.mkdirs();
+        }
 
+        File ignoreFile = new File(dirPath + "/.nomedia");
+        if (ignoreFile.exists() && ignoreFile.isFile()) {
+            return;
+        }
+
+        try {
+            ignoreFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
 }

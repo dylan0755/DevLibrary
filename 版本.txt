@@ -5,6 +5,9 @@
 3.FileUtils 增加压缩到指定目录方法。
 4.FileUtils 增加 getFilefromUri() 和发送广播通知更新文件扫描
 5.ToastUtils 增加 showLongToast() 设置随意
+6.更新CommonAbsListView.Adapter 重命名为CommonBaseAdapter,更新BaseRecycleViewAdapter
+oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
+
 
 
 

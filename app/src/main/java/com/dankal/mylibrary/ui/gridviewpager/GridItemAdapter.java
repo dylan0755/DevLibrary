@@ -8,20 +8,20 @@ import android.widget.TextView;
 
 import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.ui.testdata.GridItemData;
-import com.dylan.library.adapter.CommonAbsListView;
+import com.dylan.library.adapter.CommonBaseAdapter;
 
 
 /**
  * Created by Dylan on 2017/1/11.
  */
 
-public class GridItemAdapter extends CommonAbsListView.Adapter<GridItemData,GridItemAdapter.ViewHolder> {
+public class GridItemAdapter extends CommonBaseAdapter<GridItemData,GridItemAdapter.ViewHolder> {
+
 
 
     @Override
-    public ViewHolder oncreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
-        ViewHolder holder=new ViewHolder(inflater.inflate(R.layout.rvitem_homeclassify,parent,false));
-        return holder;
+    public int getLayoutId() {
+        return R.layout.rvitem_homeclassify;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class GridItemAdapter extends CommonAbsListView.Adapter<GridItemData,Grid
         holder.itemName.setText(homeClassifyBean.getName());
     }
 
-    class ViewHolder extends CommonAbsListView.ViewHolder{
+    class ViewHolder extends CommonBaseAdapter.ViewHolder{
          ImageView imgv;
          TextView itemName;
         public ViewHolder(View itemView) {

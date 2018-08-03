@@ -100,7 +100,7 @@ public class ScreenUtils {
                 if (StatusBarLightMode.FlymeSetStatusBarLightMode(window, true)) {
                     if (statusbarColor!=0)  window.setStatusBarColor(statusbarColor);
                 }
-            } else if (RomUtils.isMIUI()) {//小米，白色背景，灰色字体
+            } else if (RomUtils.isMiui()) {//小米，白色背景，灰色字体
                 if (StatusBarLightMode.MIUISetStatusBarLightMode(window, true)) {
                     if (statusbarColor!=0)  window.setStatusBarColor(statusbarColor);
                 }

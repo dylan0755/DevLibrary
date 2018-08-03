@@ -11,7 +11,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.dankal.mylibrary.R;
-import com.dylan.library.adapter.CommonAbsListView;
 
 import java.util.ArrayList;
 import java.util.List;

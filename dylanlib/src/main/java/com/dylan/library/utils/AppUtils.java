@@ -279,14 +279,14 @@ public class AppUtils {
                 intent.putExtra("packageName", context.getPackageName());
                 context.startActivity(intent);
                 return;
-            } else if (RomUtils.isMIUI()) {
+            } else if (RomUtils.isMiui()) {
                 Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
                 ComponentName componentName = new ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
                 intent.setComponent(componentName);
                 intent.putExtra("extra_pkgname", context.getPackageName());
                 context.startActivity(intent);
                 return;
-            } else if (RomUtils.isEMUI()) {
+            } else if (RomUtils.isEmui()) {
                 Intent intent = new Intent();
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 intent.putExtra("packageName", context.getPackageName());

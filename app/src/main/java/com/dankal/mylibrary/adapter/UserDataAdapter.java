@@ -10,7 +10,7 @@ import android.widget.TextView;
 import com.dankal.mylibrary.R;
 import com.dankal.mylibrary.bean.UserBean;
 import com.dylan.library.adapter.CheckBoxListAdapter;
-import com.dylan.library.adapter.CommonAbsListView;
+import com.dylan.library.adapter.CommonBaseAdapter;
 
 /**
  * Created by Dylan on 2018/2/6.
@@ -19,9 +19,11 @@ import com.dylan.library.adapter.CommonAbsListView;
 public class UserDataAdapter extends CheckBoxListAdapter<UserBean,UserDataAdapter.ViewHolder> {
 
 
+
+
     @Override
-    public ViewHolder oncreateViewHolder(LayoutInflater inflater, ViewGroup parent) {
-        return new ViewHolder(inflater.inflate(R.layout.lvitem_user,parent,false));
+    public int getLayoutId() {
+        return R.layout.lvitem_user;
     }
 
     @Override
@@ -50,7 +52,7 @@ public class UserDataAdapter extends CheckBoxListAdapter<UserBean,UserDataAdapte
     }
 
 
-    class ViewHolder extends CommonAbsListView.ViewHolder{
+    class ViewHolder extends CommonBaseAdapter.ViewHolder{
         private TextView tvUserName;
         private CheckBox mCheckBox;
         public ViewHolder(View convertView) {
