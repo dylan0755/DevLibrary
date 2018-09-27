@@ -48,7 +48,7 @@ public class DemoListActivity extends AppCompatActivity {
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
-            "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity"};
+            "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity","PullToRefreshScrollViewActivity"};
     private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -56,7 +56,7 @@ public class DemoListActivity extends AppCompatActivity {
             PermissionSettingActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
-            UnScrollViewPagerActivity.class};
+            UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class};
 
     private DLAlertDialog mDialog;
 

@@ -44,7 +44,6 @@ public class TabActivity extends AppCompatActivity {
             int currentIndex=fragmentSwitcher.restoreFragments(savedInstanceState);
             tabGroup.setSelect(currentIndex);
         }
-
     }
 
 

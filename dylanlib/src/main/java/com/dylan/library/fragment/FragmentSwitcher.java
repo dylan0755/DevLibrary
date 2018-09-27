@@ -96,7 +96,7 @@ public class FragmentSwitcher {
         } else {
             mTransaction.show(mReferenceMap.get(index));
         }
-        mTransaction.commit();
+        mTransaction.commitAllowingStateLoss();
         currentIndex = index;
     }
 
