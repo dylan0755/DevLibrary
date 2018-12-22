@@ -51,21 +51,10 @@ public class TabActivity extends AppCompatActivity {
 
     private void initTabData() {
         tabGroup.addItem("首页",R.mipmap.tab_ic_home_normal,R.mipmap.tab_ic_home_pressed,false);
-        tabGroup.addItem("VR原创",R.mipmap.tab_ic_creative_normal, R.mipmap.tab_ic_original_pressed,true);
+        tabGroup.addItem("VR原创",R.mipmap.tab_ic_creative_normal, R.mipmap.tab_ic_original_pressed,true,true);
         tabGroup.addItem("我的",R.mipmap.tab_ic_personal_normal,R.mipmap.tab_ic_personal_pressed,false);
-        tabGroup.setBadgeViewText(1,128);//超过3位数默认显示99+
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                tabGroup.hideBadgeView(1);
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                       tabGroup.showBadgeView(1);
-                    }
-                },2000);
-            }
-        },5000);
+        tabGroup.setBadgeViewText(1,12);//超过3位数默认显示99+
+
     }
 
 
