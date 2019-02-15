@@ -4,9 +4,14 @@ import android.content.Context;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
+import android.text.InputFilter;
+import android.text.Spanned;
 import android.text.TextWatcher;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Dylan on 2017/3/10.
@@ -48,4 +53,7 @@ public class EditTextUtils {
         @Override
         public abstract void afterTextChanged(Editable s);
     }
+
+
+
 }

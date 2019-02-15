@@ -3,8 +3,8 @@ apply plugin: 'com.novoda.bintray-release'//添加
 
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion '25.0.0'
+    compileSdkVersion 28
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         minSdkVersion 14
@@ -29,9 +29,9 @@ android {
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:appcompat-v7:23.2.1'
-    compile 'com.android.support:recyclerview-v7:23.2.1'
-    compile 'com.android.support:support-v4:23.2.1'
+    compile 'com.android.support:appcompat-v7:28.0.0'
+    compile 'com.android.support:recyclerview-v7:28.0.0'
+    compile 'com.android.support:support-v4:28.0.0'
     provided 'com.zhy:autolayout:1.4.3'
     compile files('libs/gson-2.8.0.jar')
     provided files('libs/glide.jar')
