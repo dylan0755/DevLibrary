@@ -8,7 +8,7 @@
 6.更新CommonAbsListView.Adapter 重命名为CommonBaseAdapter,更新BaseRecycleViewAdapter
 oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
 7.BitmpUtils 增加 convertViewToBitmap，将View 转Bitmap
-
+8.新增 VerticalTextSwitcherHelper  TextView 由下往上切换
 
 
 
