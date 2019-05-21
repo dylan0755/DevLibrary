@@ -50,6 +50,7 @@ public class DLTabLayout extends LinearLayout {
     public static int SHAPE_TRIANGLE = 1;//三角形指示器
     public static int SHAPE_RECTANGLE = 2;//长方形指示器
     private int mShape = SHAPE_RECTANGLE;
+    private int indicatorRightMargin;
 
     public DLTabLayout(Context context) {
         this(context, null);
@@ -92,6 +93,10 @@ public class DLTabLayout extends LinearLayout {
 
     }
 
+    public void setIndicatorRightMargin(int rightMargin){
+        indicatorRightMargin =rightMargin;
+    }
+
     /**
      * 绘制指示器
      */
@@ -124,7 +129,7 @@ public class DLTabLayout extends LinearLayout {
             mInitTranslationX = mTabWidth / 2 - mTriangleWidth / 2;
         } else {
             initRetangle();
-            mInitTranslationX = mTabWidth / 2 - mIndicatorWidht / 2;
+            mInitTranslationX = (mTabWidth / 2 - mIndicatorWidht / 2) - indicatorRightMargin;
         }
     }
 
