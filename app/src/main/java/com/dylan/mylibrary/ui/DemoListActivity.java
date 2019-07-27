@@ -1,0 +1,127 @@
+package com.dylan.mylibrary.ui;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.KeyEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+import com.dylan.mylibrary.HorizontalScrollBackActivity;
+import com.dylan.mylibrary.R;
+import com.dylan.mylibrary.adapter.DemoListAdapter;
+import com.dylan.mylibrary.ui.customtitle.CustomTittleUitlActivity;
+import com.dylan.mylibrary.ui.date.DateTestActivity;
+import com.dylan.mylibrary.ui.edittext.EditNumberActivity;
+import com.dylan.mylibrary.ui.filedownloader.FileDownLoaderActivity;
+import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
+import com.dylan.mylibrary.ui.install.AutoInstallActivity;
+import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
+import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
+import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
+import com.dylan.mylibrary.ui.tab.TabActivity;
+import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
+import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
+import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
+import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.SignatureUtils;
+import com.dylan.library.widget.DLAlertDialog;
+
+import java.util.Arrays;
+import java.util.List;
+
+/**
+ * Created by Dylan on 2016/12/16.
+ */
+
+public class DemoListActivity extends AppCompatActivity {
+    private GridView mGridView;
+    private DemoListAdapter mAdapter;
+    private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
+            "EditnnumberHelper", "autoInstall", "ScreenShoot",
+            "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
+            "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
+            "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
+            "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
+            "PullToRefreshScrollViewActivity","TextSwitchActivity","网络图片ViewPager显示"};
+    private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
+            EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
+            GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
+            ExpandableListItemActivity.class, BulletinBoardActivity.class, PhotoPickerActivity.class,
+            PermissionSettingActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
+            VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
+            CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
+            UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
+            OnLinePhotoPreviewActivity.class};
+
+    private DLAlertDialog mDialog;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_demolist);
+        initEvent();
+        ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
+        mDialog = new DLAlertDialog(this);
+        String signature = SignatureUtils.getMD5Signature(this, "com.wxhkj.weixiuhui");
+        if (EmptyUtils.isNotEmpty(signature)) {
+            Logger.e("signature " + signature);
+        }
+
+    }
+
+
+
+
+    private void initEvent() {
+        mGridView = (GridView) findViewById(R.id.gv_demolist);
+        mAdapter = new DemoListAdapter();
+        mGridView.setOnItemClickListener(new ItemClickListener());
+        mGridView.setAdapter(mAdapter);
+        List<String> list = Arrays.asList(demoNames);
+        mAdapter.bind(list);
+    }
+
+
+    class ItemClickListener implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            int[] location=new int[2];
+            view.getLocationInWindow(location);
+            location[1]-=ScreenUtils.getStatusBarHeight(DemoListActivity.this);
+           // location[1]=1300;
+           // Intent intent = new Intent(DemoListActivity.this, classes[position]);
+            Intent intent = new Intent(DemoListActivity.this, OnLinePhotoPreviewActivity.class);
+            intent.putExtra(OnLinePhotoPreviewActivity.EXTRA_LOCATION,location);
+            startActivity(intent);
+        }
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            mDialog.show("提示", "要退出应用吗", new DLAlertDialog.CallBack() {
+                @Override
+                public void onCancel() {
+
+                }
+
+                @Override
+                public void onSure() {
+                    finish();
+                }
+            });
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+
+}

@@ -4,7 +4,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.dankal.mylibrary.widget.VideoView
+    <com.dylan.mylibrary.widget.VideoView
         android:id="@+id/vv"
         android:layout_width="match_parent"
         android:layout_height="360px"

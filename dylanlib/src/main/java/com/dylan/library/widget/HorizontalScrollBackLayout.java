@@ -74,7 +74,6 @@ public class HorizontalScrollBackLayout extends LinearLayout {
 
                 Log.e("ACTION_MOVE ", "distanceX " + distanceX + " distanceY " + distanceY);
                 if (isOrigin) {//在原位
-
                     if (distanceY>=-FLING_MIN_DISTANCE_Y&&distanceY<=FLING_MIN_DISTANCE_Y
                             && distanceX > FLING_MIN_DISTANCE_X) {
                         totalDistance += distanceX;

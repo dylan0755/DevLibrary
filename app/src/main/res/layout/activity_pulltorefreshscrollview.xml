@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-   <com.dankal.mylibrary.widget.PullToRefreshScrollView
+   <com.dylan.mylibrary.widget.PullToRefreshScrollView
        android:id="@+id/pullRefreshScrollView"
        android:layout_width="match_parent"
        android:layout_height="wrap_content"
@@ -23,6 +23,6 @@
                android:background="#000000"/>
        </LinearLayout>
 
-   </com.dankal.mylibrary.widget.PullToRefreshScrollView>
+   </com.dylan.mylibrary.widget.PullToRefreshScrollView>
 
 </LinearLayout>

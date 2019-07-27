@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dankal.mylibrary"
-    >
+    package="com.dylan.mylibrary">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -41,15 +40,24 @@
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
     <application
-        android:name=".MyApplication"
+        android:name="com.dylan.mylibrary.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <meta-data
+            android:name="com.dylan.mylibrary.ui.onlinepic.glide.MyGlideAppModule"
+            android:value="AppGlideModule" />
+
         <activity
-            android:name=".ui.DemoListActivity"
+            android:name="com.dylan.mylibrary.ui.DemoListActivity"
             android:theme="@style/statusBarStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -60,49 +68,66 @@
         </activity>
 
         <activity
-            android:name=".ui.customtitle.CustomTittleUitlActivity"
+            android:name="com.dylan.mylibrary.ui.customtitle.CustomTittleUitlActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".ui.tab.TabActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.date.DateTestActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.edittext.EditNumberActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.install.AutoInstallActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.screenshoot.ScreenShootActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.gridviewpager.GridViewPagerActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.wraplayoutmanager.WrapLayoutActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.loadingdialog.LoadingDialogActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.ExpandableListItemActivity"
-            android:screenOrientation="portrait"/>
-        <activity android:name=".ui.BulletinBoardActivity"
-            android:screenOrientation="landscape"/>
-        <activity android:name=".ui.PhotoPickerActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.PermissionSettingActivity"
-                  android:screenOrientation="portrait"/>
-        <activity android:name=".ui.WebViewActivity"
-                  android:screenOrientation="portrait"
-            android:configChanges="orientation|keyboardHidden|screenSize"/>
-        <activity android:name=".HorizontalScrollBackActivity"
-                  android:screenOrientation="portrait"
-            android:theme="@style/transparentTheme"/>
-        <activity android:name=".ui.VoiceRecordActivity"/>
-        <activity android:name=".ui.filedownloader.FileDownLoaderActivity"/>
-        <activity android:name=".ui.tab.TabLayoutActivity"/>
-        <activity android:name=".ui.CheckBoxListAdapterActivity"/>
-        <activity android:name=".ui.lazyload.LazyFragmentActivity"/>
-        <activity android:name=".ui.CustomToastActivity"/>
-        <activity android:name=".ui.RedPointTextViewActivity"/>
-        <activity android:name=".ui.unscollviewpager.UnScrollViewPagerActivity"/>
-        <activity android:name=".ui.PullToRefreshScrollViewActivity"/>
-        <activity android:name=".ui.TextSwitchActivity"/>
+            android:name="com.dylan.mylibrary.ui.tab.TabActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.date.DateTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.edittext.EditNumberActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.install.AutoInstallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.ExpandableListItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.BulletinBoardActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.PhotoPickerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.PermissionSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.WebViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.HorizontalScrollBackActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparentTheme" />
+        <activity android:name="com.dylan.mylibrary.ui.VoiceRecordActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.filedownloader.FileDownLoaderActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.tab.TabLayoutActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.CheckBoxListAdapterActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.CustomToastActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.RedPointTextViewActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.PullToRefreshScrollViewActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.TextSwitchActivity" />
+        <activity android:name=".ui.OnLinePhotoPreviewActivity"
+            android:theme="@style/transparentTheme"
+            />
+
         <meta-data
             android:name="design_width"
             android:value="720" />

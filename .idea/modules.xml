@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://E:\androidstudio-workspace\MyLibrary\MyLibraryDemo\MyLibrary.iml" filepath="E:\androidstudio-workspace\MyLibrary\MyLibraryDemo\MyLibrary.iml" />
       <module fileurl="file://$PROJECT_DIR$/MyLibraryDemo.iml" filepath="$PROJECT_DIR$/MyLibraryDemo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/dylanlib/dylanlib.iml" filepath="$PROJECT_DIR$/dylanlib/dylanlib.iml" />
