@@ -4,11 +4,11 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
 
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.R;
@@ -21,6 +21,10 @@ import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dylan.mylibrary.ui.install.AutoInstallActivity;
 import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
+import com.dylan.mylibrary.ui.onlinepic.ClickViewPoint;
+import com.dylan.mylibrary.ui.onlinepic.OnLinePreviewActivity;
+import com.dylan.mylibrary.ui.onlinepic.glide.GlideApp;
+import com.dylan.mylibrary.ui.onlinepic.glide.GlideImageLoader;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dylan.mylibrary.ui.tab.TabActivity;
 import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
@@ -32,6 +36,7 @@ import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.SignatureUtils;
 import com.dylan.library.widget.DLAlertDialog;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,7 +62,7 @@ public class DemoListActivity extends AppCompatActivity {
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
-            OnLinePhotoPreviewActivity.class};
+            PicturePreViewActivity.class};
 
     private DLAlertDialog mDialog;
 
@@ -72,6 +77,7 @@ public class DemoListActivity extends AppCompatActivity {
         if (EmptyUtils.isNotEmpty(signature)) {
             Logger.e("signature " + signature);
         }
+
 
     }
 
@@ -92,13 +98,7 @@ public class DemoListActivity extends AppCompatActivity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            int[] location=new int[2];
-            view.getLocationInWindow(location);
-            location[1]-=ScreenUtils.getStatusBarHeight(DemoListActivity.this);
-           // location[1]=1300;
-           // Intent intent = new Intent(DemoListActivity.this, classes[position]);
-            Intent intent = new Intent(DemoListActivity.this, OnLinePhotoPreviewActivity.class);
-            intent.putExtra(OnLinePhotoPreviewActivity.EXTRA_LOCATION,location);
+            Intent intent = new Intent(DemoListActivity.this,classes[position]);
             startActivity(intent);
         }
     }

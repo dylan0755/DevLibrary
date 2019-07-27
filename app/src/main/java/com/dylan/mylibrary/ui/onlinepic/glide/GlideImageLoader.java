@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
+import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
@@ -55,7 +56,7 @@ public class GlideImageLoader {
             }
         });
 
-      final PhotoView photoView= imageLayout.getPhotoView();
+        final PhotoView photoView = imageLayout.getPhotoView();
         //开始展示
         GlideApp.with(imageLayout.getContext())
                 .asBitmap()
@@ -72,12 +73,19 @@ public class GlideImageLoader {
                     @Override
                     public boolean onResourceReady(Bitmap resource, Object model, Target<Bitmap> target, DataSource dataSource, boolean isFirstResource) {
                         //成功 移除监听
-                       // Log.e("onResourceReady", "url----" + model + "----" + dataSource);
+                        // Log.e("onResourceReady", "url----" + model + "----" + dataSource);
                         ProgressInterceptor.removeListener(picUrl);
                         circleProgressView.setVisibility(View.GONE);
                         return false;
                     }
                 }).into(photoView);
+    }
+
+    public static void load(final ImageView imageView, final String picUrl) {
+        GlideApp.with(imageView.getContext())
+                .asBitmap()
+                .load(picUrl)
+                .into(imageView);
     }
 
 }

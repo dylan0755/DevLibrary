@@ -23,6 +23,23 @@
         <item name="android:windowLightStatusBar">false</item>
     </style>
 
+    <style name="ActivityDialog" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="AnimationActivity" parent="@android:style/Animation.Translucent" >
+        <item name="android:activityOpenEnterAnimation">@anim/dialogfragment_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/dialogfragment_exit</item>
+        <item name="android:windowEnterAnimation">@anim/dialogfragment_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialogfragment_exit</item>
+        <!--<item name="android:activityOpenExitAnimation">@anim/dialogfragment_enter</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@anim/dialogfragment_enter</item>-->
+
+    </style>
+
 
     <style name="transparentTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -57,4 +74,22 @@
         <attr name="cpv_reachCapRound" format="boolean"/>
     </declare-styleable>
 
+
+
+    <style name="TranslucentNoTitle" parent="android:style/Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:colorBackgroundCacheHint">@null</item>
+    </style>
+
+    <style name="Dialog.FullScreen" parent="Theme.AppCompat.Dialog">
+
+    </style>
+
+    <style name="fullScreenDialogAnim">
+        <item name="android:windowEnterAnimation">@anim/dialogfragment_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialogfragment_exit</item>
+    </style>
 </resources>

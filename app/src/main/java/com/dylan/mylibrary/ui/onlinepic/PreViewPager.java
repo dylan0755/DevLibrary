@@ -3,21 +3,19 @@ package com.dylan.mylibrary.ui.onlinepic;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
-import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewConfiguration;
 
 import com.dylan.library.utils.Logger;
 import com.dylan.mylibrary.ui.onlinepic.glide.progress.ProgressImageLayout;
+
+import java.util.ArrayList;
 
 /**
  * Author: Dylan
@@ -25,7 +23,7 @@ import com.dylan.mylibrary.ui.onlinepic.glide.progress.ProgressImageLayout;
  * Desc:
  */
 
-public class PreViewPager extends ViewPager {
+public class PreViewPager extends ViewPager implements OnTouchCallBack{
     private float startX;
     private float startY;
     private float downX;
@@ -39,9 +37,7 @@ public class PreViewPager extends ViewPager {
     private boolean isDragging;
     private int mTouchSlop;//最小滑动距离
     private onFinishActivityListener mListener;
-    private int[] sourceViewLocation;  //点击Item 打开图片预览前item的屏幕坐标
-    private ProgressImageLayout mImageLayout;
-    private PhotoView mPhotoView;
+    private ArrayList<ClickViewPoint.Point> sourceViewLocations;  //点击Item 打开图片预览前item的屏幕坐标
 
 
     public PreViewPager(@NonNull Context context) {
@@ -62,8 +58,9 @@ public class PreViewPager extends ViewPager {
         getCurrentView();
     }
 
-    public void setSourceViewLocation(int[] location) {
-        sourceViewLocation = location;
+
+    public void setSourceViewLocation(ArrayList<ClickViewPoint.Point> list) {
+        sourceViewLocations = list;
     }
 
     @Override
@@ -80,14 +77,16 @@ public class PreViewPager extends ViewPager {
                 if (!isDragging && ev.getY() <= downY) {//往上方向拖动 左上，正上，右上
                     ev.setLocation(ev.getX(), downY);
                 } else {
+                    if (getPhotoView() == null) break;
                     if (!isDragging && ev.getY() >= downY + 5 * mTouchSlop) {//斜向下触发拖动事件
                         //图片预览处在缩放拖拉阶段不能触发下拉返回
-                        if (mPhotoView != null && mPhotoView.isOnDragMode()) {
-                            //Logger.e("当前在Drag模式");
+                        if (getPhotoView() != null && getPhotoView().isOnDragMode()) {
+                            Logger.e("当前在Drag模式");
                             break;
                         }
                         isDragging = true;
                     }
+
                     if (isDragging) {
                         float offsetX = ev.getX() - startX;
                         float offsetY = ev.getY() - startY;
@@ -96,41 +95,38 @@ public class PreViewPager extends ViewPager {
                         int alpha = 255;
                         if (deltaY >= 0) {//先往下拖最后往上托
                             alpha = 255 - (int) ((deltaY / mScreenHeight * 255) * 1.5);
+                            if (alpha < 0) alpha = 0;
                         }
-                        if (alpha < 0) alpha = 0;
-                        if (mImageLayout != null) {
-                            mPhotoView.setPivotX(0);
-                            mPhotoView.setPivotY(0);
-                            setContentViewAlpha(alpha);
-                            mPhotoView.setTranslationX(deltaX);
-                            mPhotoView.setTranslationY(deltaY);
-                            if (deltaY > 0) {
-                                float scale = 1 - deltaY / finishDeltaY * 0.2f;
-                                mPhotoView.setScaleX(scale);
-                                mPhotoView.setScaleY(scale);
-                            } else {
-                                mPhotoView.setScaleX(1.0f);
-                                mPhotoView.setScaleY(1.0f);
-                            }
+                        getPhotoView().setPivotX(0);
+                        getPhotoView().setPivotY(0);
+                        setContentViewAlpha(alpha);
+                        getPhotoView().setTranslationX(deltaX);
+                        getPhotoView().setTranslationY(deltaY);
+                        if (deltaY > 0) {
+                            float scale = 1 - deltaY / finishDeltaY * 0.2f;
+                            getPhotoView().setScaleX(scale);
+                            getPhotoView().setScaleY(scale);
+                        } else {
+                            getPhotoView().setScaleX(1.0f);
+                            getPhotoView().setScaleY(1.0f);
                         }
-                        startX = ev.getX();
-                        startY = ev.getY();
                     }
-
+                    startX = ev.getX();
+                    startY = ev.getY();
                 }
                 break;
             case MotionEvent.ACTION_UP:
                 isDragging = false;
                 if (deltaY > finishDeltaY) {//下拉某个距离则退出Activity
-                    startFinishActivityAnimation();
+                    startFinishActivityAnimation(ev);
                 } else {
-                    if (mPhotoView != null) {
-                        mPhotoView.setTranslationX(0);
-                        mPhotoView.setTranslationY(0);
-                        mPhotoView.setScaleX(1.0f);
-                        mPhotoView.setScaleY(1.0f);
+                    if (getPhotoView() != null) {
+                        getPhotoView().setTranslationX(0);
+                        getPhotoView().setTranslationY(0);
+                        getPhotoView().setScaleX(1.0f);
+                        getPhotoView().setScaleY(1.0f);
+                        setContentViewAlpha(255);
                     }
-                    setContentViewAlpha(255);
                 }
                 deltaX = 0;
                 deltaY = 0;
@@ -140,29 +136,31 @@ public class PreViewPager extends ViewPager {
     }
 
 
-    private void startFinishActivityAnimation() {
-        if (getCurrentView() != null) {
-            int sourceViewX = 0;
-            int sourceViewY = 0;
-            if (sourceViewLocation != null && sourceViewLocation.length > 0) {
-                sourceViewX = sourceViewLocation[0];
-                sourceViewY = sourceViewLocation[1];
-                Logger.e("sourceViewY " + sourceViewY);
+    private void startFinishActivityAnimation(MotionEvent event) {
+        if (getPhotoView() != null) {
+            if (mListener != null) mListener.hideIndicator();
+            float sourceViewX;
+            float sourceViewY;
+            if (sourceViewLocations != null && sourceViewLocations.size() > 0) {
+                sourceViewX = sourceViewLocations.get(getCurrentItem()).x;
+                sourceViewY = sourceViewLocations.get(getCurrentItem()).y;
+            } else {//没有传坐标进来的话就从屏幕底部消失
+                sourceViewX = event.getX();
+                sourceViewY = mScreenHeight + 100;
             }
             //最初的顶点的坐标
-            final float[] location = new float[2];
-            getOriginPoint(location);
+            final float[] location = getPhotoView().getOriginMatrixLocation();
             setContentViewAlpha(0);
             //当前图片的X,Y 的偏移量
-            final float hasTranslationX = mPhotoView.getTranslationX();
-            final float hasTranslationY = mPhotoView.getTranslationY();
+            final float hasTranslationX = getPhotoView().getTranslationX();
+            final float hasTranslationY = getPhotoView().getTranslationY();
             //当前移动后图片的左上角顶点坐标
-            float picX = 0;
-            float picY = 0;
+            float picX;
+            float picY;
             //获取图片的移动后的左上角坐标
-            if (mPhotoView.getScaleX() != 1 || mPhotoView.getScaleY() != 1) {
+            if (getPhotoView().getScaleX() != 1 || getPhotoView().getScaleY() != 1) {
                 float[] values = new float[9];
-                mPhotoView.getMatrix().getValues(values);
+                getPhotoView().getMatrix().getValues(values);
                 picX = values[2];
                 picY = values[5];
             } else {
@@ -170,7 +168,7 @@ public class PreViewPager extends ViewPager {
                 picX = (location[0] + hasTranslationX);
                 picY = (location[1] + hasTranslationY);
             }
-            final float preScale = mPhotoView.getScaleX();
+            final float preScale = getPhotoView().getScaleX();
             final PointF startPoint = new PointF(picX, picY);
             final PointF endPoint = new PointF(sourceViewX, sourceViewY);
             final float yy = (endPoint.y - startPoint.y);
@@ -184,33 +182,40 @@ public class PreViewPager extends ViewPager {
                     float pointY = startPoint.y + deltaY;
                     float pointX = MathUtils.getInnerPointX(startPoint, endPoint, new PointF(0, pointY)).x;
                     float deltaX = pointX - startPoint.x;
-                    if (mPhotoView.getScaleX() == 1 && mPhotoView.getScaleY() == 1) {
-                        mPhotoView.setTranslationX(hasTranslationX + deltaX);
-                        mPhotoView.setTranslationY(hasTranslationY + deltaY);
+                    if (getPhotoView().getScaleX() == 1 && getPhotoView().getScaleY() == 1) {
+                        getPhotoView().setTranslationX(hasTranslationX + deltaX);
+                        getPhotoView().setTranslationY(hasTranslationY + deltaY);
                     } else {
                         float ratio = deltaY / yy;
                         //整个View移动到目的位置，View里面的图片移动到顶点位置，两个操作同时进行
-                        mPhotoView.setTranslationX(hasTranslationX + deltaX);
-                        mPhotoView.setTranslationY(hasTranslationY + deltaY);
-                        mPhotoView.scrollTo(0, (int) (ratio * location[1]));
+                        getPhotoView().setTranslationX(hasTranslationX + deltaX);
+                        getPhotoView().setTranslationY(hasTranslationY + deltaY);
+                        getPhotoView().scrollTo(0, (int) (ratio * location[1]));
                         //移动过程中缩放
-                        float scale = preScale - ((preScale - 0.1f) * ratio);
-                        mPhotoView.setScaleX(scale);
-                        mPhotoView.setScaleY(scale);
+                        float scale = preScale - ((preScale - 0.2f) * ratio);
+                        getPhotoView().setScaleX(scale);
+                        getPhotoView().setScaleY(scale);
                     }
                 }
             });
 
             animator.addListener(new Animator.AnimatorListener() {
                 @Override
-                public void onAnimationStart(Animator animation) { }
+                public void onAnimationStart(Animator animation) {
+                }
+
                 @Override
-                public void onAnimationCancel(Animator animation) {}
+                public void onAnimationCancel(Animator animation) {
+                }
+
                 @Override
-                public void onAnimationRepeat(Animator animation) {}
+                public void onAnimationRepeat(Animator animation) {
+                }
+
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    if (mListener!=null)mListener.toFinishActivity();
+                    getPhotoView().setVisibility(GONE);
+                    if (mListener != null) mListener.toFinishActivity();
                 }
             });
             animator.start();
@@ -219,24 +224,13 @@ public class PreViewPager extends ViewPager {
 
     }
 
-    //图片获取最初的左上角坐标(注意不是Viw)
-    private void getOriginPoint(float[] location) {
-        Matrix matrix = mPhotoView.getImageMatrix();
-        if (matrix != null) {
-            float[] originLocation = new float[9];
-            matrix.getValues(originLocation);
-            location[0] = originLocation[2];
-            location[1] = originLocation[5];
-        }
-    }
 
-    /**
-     * 滑动翻页时重置
-     */
-    public void reset() {
-        setContentViewAlpha(255);
-        mImageLayout = null;
-        mPhotoView = null;
+    public PhotoView getPhotoView() {
+        if (getCurrentView() != null) {
+            getCurrentView().getPhotoView().addOnTouchCallBack(this);
+            return getCurrentView().getPhotoView();
+        }
+        return null;
     }
 
     private void setContentViewAlpha(int alpha) {
@@ -246,24 +240,26 @@ public class PreViewPager extends ViewPager {
     }
 
 
-    public View getCurrentView() {
-        if (mImageLayout == null) {
+    public ProgressImageLayout getCurrentView() {
+        if (mDataAdapter == null) {
             if (getAdapter() != null && getAdapter() instanceof DataAdapter) {
-                if (mDataAdapter == null) mDataAdapter = (DataAdapter) getAdapter();
-                mImageLayout = mDataAdapter.getCurrentItemView();
-                if (mImageLayout != null) {
-                    mPhotoView = mImageLayout.getPhotoView();
-                    //mPhotoView.setBackgroundColor(Color.BLACK);
-                    return mImageLayout;
-                }
+                mDataAdapter = (DataAdapter) getAdapter();
             }
-
+        } else {
+            return mDataAdapter.getCurrentItemView();
         }
-        return mImageLayout;
+        return null;
+    }
+
+    @Override
+    public void singleActionUp() {
+         if (mListener!=null)mListener.toFinishActivity();
     }
 
     public interface onFinishActivityListener {
         void toFinishActivity();
+
+        void hideIndicator();
     }
 
     public void setOnFinishActivityListener(onFinishActivityListener listener) {

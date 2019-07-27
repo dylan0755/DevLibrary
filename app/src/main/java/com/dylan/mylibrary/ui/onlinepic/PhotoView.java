@@ -6,17 +6,14 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
 
-import com.dylan.library.utils.Logger;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -35,7 +32,6 @@ public class PhotoView extends AppCompatImageView {
     private boolean hasMove;
     private boolean isDragged;
     private boolean hasMatrix;
-    private Handler mHandler;
     private OnTouchCallBack touchCallBack;
     private static final int ANIM_DURATION=200;
     private static final int DOUBLE_INTERVAL = 300;//两次点击的间隔时间为多长会响应双击事件
@@ -69,6 +65,7 @@ public class PhotoView extends AppCompatImageView {
     private final int DRAG = 1002;
     private final int NONE = 1003;
     private int mMode = NONE;
+    private GestureDetector mGestureDetector;
 
     public PhotoView(Context context) {
        this(context,null);
@@ -81,6 +78,9 @@ public class PhotoView extends AppCompatImageView {
 
     private void init(Context context) {
         setScaleType(ScaleType.MATRIX);
+        GestureCallBack callBack=new GestureCallBack();
+        mGestureDetector=new GestureDetector(getContext(),callBack);
+        mGestureDetector.setOnDoubleTapListener(callBack);
         ViewConfiguration configuration = ViewConfiguration.get(context);
         touchSlop = configuration.getScaledTouchSlop();
         mMatrix = new Matrix();
@@ -89,14 +89,7 @@ public class PhotoView extends AppCompatImageView {
         mMidPoint = new PointF();
         mStartPoint = new PointF();
         mEndPoint = new PointF();
-        mHandler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                if (actionUpType == ACTION_UP_TYPE_SINGLE) {//单指抬起
-                    if (touchCallBack != null) touchCallBack.singleActionUp();
-                }
-            }
-        };
+
     }
 
 
@@ -240,7 +233,6 @@ public class PhotoView extends AppCompatImageView {
                     lastDownTime = System.currentTimeMillis();
                     if (timevalue <= DOUBLE_INTERVAL) {//双击，放到最大
                         doubleClick = true;
-                        mHandler.removeMessages(ACTION_UP_MESSAGE);
                         //双击以触摸点为中心放到最大，或恢复原来的宽高
                         float scalew = currentWidth / parentWidth;
                         float scaleh = currentHeight / parentHeight;
@@ -267,13 +259,12 @@ public class PhotoView extends AppCompatImageView {
                 }
 
                 mMode = NONE;
-                if (!isDragged)
-                    mHandler.sendEmptyMessageDelayed(ACTION_UP_MESSAGE, MESSAGE_DELAY);
                 resetFlag();
                 getParent().requestDisallowInterceptTouchEvent(false);
                 break;
         }
         setImageMatrix(mMatrix);
+        mGestureDetector.onTouchEvent(event);
         return true;
     }
 
@@ -491,8 +482,6 @@ public class PhotoView extends AppCompatImageView {
             if (!isScaling) doubleClickRestore(scale, mMidPoint,50);
         }
         mMode = NONE;
-        if (!isDragged)
-            mHandler.sendEmptyMessageDelayed(ACTION_UP_MESSAGE, MESSAGE_DELAY);
         resetFlag();
         getParent().requestDisallowInterceptTouchEvent(false);
         setImageMatrix(mMatrix);
@@ -504,4 +493,15 @@ public class PhotoView extends AppCompatImageView {
     }
 
 
+    class GestureCallBack extends GestureDetector.SimpleOnGestureListener{
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            if (currentWidth<=parentWidth&&currentHeight<=parentHeight){
+                if (touchCallBack!=null)touchCallBack.singleActionUp();
+            }
+
+            return true;
+        }
+
+    }
 }

@@ -4,37 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/ivUser"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@mipmap/ic_launcher" />
-
-        <TextView
-            android:id="@+id/tvUserName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试用户测试用户测试用户测试用户测试用户测试用户"
-            android:layout_toRightOf="@id/ivUser"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="8dp"/>
-        <TextView
-            android:id="@+id/tvContent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="测试的发表内容"
-            android:layout_toRightOf="@id/ivUser"
-            android:layout_marginLeft="4dp"
-            android:layout_below="@id/tvUserName"/>
-    </RelativeLayout>
-
-    <GridView
-        android:id="@+id/gridView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:numColumns="3"
-        android:layout_marginLeft="48dp"/>
+    <ImageView
+        android:id="@+id/ivPic"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:scaleType="centerCrop"/>
 </LinearLayout>

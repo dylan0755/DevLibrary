@@ -6,7 +6,6 @@
   >
 
 
-
     <GridView
         android:id="@+id/gv_demolist"
         android:layout_width="match_parent"

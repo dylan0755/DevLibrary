@@ -5,6 +5,10 @@ import android.widget.TextView;
 
 import com.dylan.mylibrary.R;
 import com.dylan.library.adapter.CommonBaseAdapter;
+import com.dylan.mylibrary.ui.onlinepic.ClickViewPoint;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -13,6 +17,9 @@ import com.dylan.library.adapter.CommonBaseAdapter;
 
 public class DemoListAdapter extends CommonBaseAdapter<String,DemoListAdapter.ViewHolder> {
 
+
+    public DemoListAdapter(){
+    }
 
 
 
@@ -24,13 +31,17 @@ public class DemoListAdapter extends CommonBaseAdapter<String,DemoListAdapter.Vi
     @Override
     public void onBinderItem(ViewHolder holder, String s, int position) {
          holder.tvItem.setText(s);
+
+
+
     }
 
     class ViewHolder extends CommonBaseAdapter.ViewHolder{
         TextView tvItem;
         public ViewHolder(View convertView) {
             super(convertView);
-            tvItem= (TextView) convertView.findViewById(R.id.tv_listItem);
+            tvItem=  convertView.findViewById(R.id.tv_listItem);
+
         }
     }
 }

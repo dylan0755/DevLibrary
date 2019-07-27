@@ -124,9 +124,11 @@
         <activity android:name="com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity" />
         <activity android:name="com.dylan.mylibrary.ui.PullToRefreshScrollViewActivity" />
         <activity android:name="com.dylan.mylibrary.ui.TextSwitchActivity" />
-        <activity android:name=".ui.OnLinePhotoPreviewActivity"
-            android:theme="@style/transparentTheme"
+        <activity android:name=".ui.onlinepic.OnLinePreviewActivity"
+            android:theme="@style/ActivityDialog"
             />
+        <activity android:name=".ui.PicturePreViewActivity"
+            android:theme="@style/statusBarStyle"/>
 
         <meta-data
             android:name="design_width"
