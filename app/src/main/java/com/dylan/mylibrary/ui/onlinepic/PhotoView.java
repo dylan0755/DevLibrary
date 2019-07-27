@@ -14,6 +14,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 
 
+import com.dylan.library.utils.Logger;
 
 import static java.lang.System.currentTimeMillis;
 
@@ -494,12 +495,23 @@ public class PhotoView extends AppCompatImageView {
 
 
     class GestureCallBack extends GestureDetector.SimpleOnGestureListener{
+       private long gestureLastDownTime;
+       private int gestureDoubleInterval=300;
+
+
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
-            if (currentWidth<=parentWidth&&currentHeight<=parentHeight){
-                if (touchCallBack!=null)touchCallBack.singleActionUp();
+            //防止同时调两次
+            if (gestureLastDownTime == 0) {
+                gestureLastDownTime = currentTimeMillis();
+                if (touchCallBack != null) touchCallBack.singleActionUp();
+            } else {
+                long timevalue = System.currentTimeMillis() - gestureLastDownTime;
+                gestureLastDownTime = System.currentTimeMillis();
+                if (timevalue > gestureDoubleInterval) {
+                    if (touchCallBack != null) touchCallBack.singleActionUp();
+                }
             }
-
             return true;
         }
 
