@@ -1,8 +1,6 @@
 package com.dylan.mylibrary.ui.onlinepic;
 
 import android.app.Activity;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
@@ -10,20 +8,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 
-import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.mylibrary.R;
-import com.dylan.mylibrary.ui.onlinepic.ClickViewPoint;
-import com.dylan.mylibrary.ui.onlinepic.DataAdapter;
-import com.dylan.mylibrary.ui.onlinepic.PreViewPager;
-import com.dylan.mylibrary.ui.onlinepic.SelectorAdapter;
+import com.dylan.mylibrary.ui.onlinepic.glide.progress.ProgressImageLayout;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Author: Dylan
@@ -107,11 +101,11 @@ public class OnLinePreviewActivity extends AppCompatActivity implements PreViewP
     @Override
     public void finish() {
         super.finish();
-        overridePendingTransition(0, R.anim.dialogfragment_exit);
+        overridePendingTransition(0, R.anim.preview_activity_exit);
     }
 
     public static void overridePendingTransition(Activity activity){
-        activity.overridePendingTransition(R.anim.dialogfragment_enter, 0);
+        activity.overridePendingTransition(R.anim.anim_enable_false, 0);
 
     }
 

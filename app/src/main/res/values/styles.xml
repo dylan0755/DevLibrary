@@ -31,12 +31,12 @@
     </style>
 
     <style name="AnimationActivity" parent="@android:style/Animation.Translucent" >
-        <item name="android:activityOpenEnterAnimation">@anim/dialogfragment_enter</item>
-        <item name="android:activityCloseExitAnimation">@anim/dialogfragment_exit</item>
-        <item name="android:windowEnterAnimation">@anim/dialogfragment_enter</item>
-        <item name="android:windowExitAnimation">@anim/dialogfragment_exit</item>
-        <!--<item name="android:activityOpenExitAnimation">@anim/dialogfragment_enter</item>-->
-        <!--<item name="android:activityCloseEnterAnimation">@anim/dialogfragment_enter</item>-->
+        <item name="android:activityOpenEnterAnimation">@anim/anim_picture_enter</item>
+        <item name="android:activityCloseExitAnimation">@anim/preview_activity_exit</item>
+        <item name="android:windowEnterAnimation">@anim/anim_picture_enter</item>
+        <item name="android:windowExitAnimation">@anim/preview_activity_exit</item>
+        <!--<item name="android:activityOpenExitAnimation">@apreview_activity_enternter</item>-->
+        <!--<item name="android:activityCloseEnterAnimation">@apreview_activity_enternter</item>-->
 
     </style>
 
@@ -89,7 +89,7 @@
     </style>
 
     <style name="fullScreenDialogAnim">
-        <item name="android:windowEnterAnimation">@anim/dialogfragment_enter</item>
-        <item name="android:windowExitAnimation">@anim/dialogfragment_exit</item>
+        <item name="android:windowEnterAnimation">@anim/anim_picture_enter</item>
+        <item name="android:windowExitAnimation">@anim/preview_activity_exit</item>
     </style>
 </resources>

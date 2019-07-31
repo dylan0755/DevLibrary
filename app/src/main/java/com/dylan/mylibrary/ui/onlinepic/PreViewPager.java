@@ -3,7 +3,11 @@ package com.dylan.mylibrary.ui.onlinepic;
 import android.animation.Animator;
 import android.animation.ValueAnimator;
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.view.PagerAdapter;
@@ -23,7 +27,7 @@ import java.util.ArrayList;
  * Desc:
  */
 
-public class PreViewPager extends ViewPager implements OnTouchCallBack{
+public class PreViewPager extends ViewPager implements OnTouchCallBack {
     private float startX;
     private float startY;
     private float downX;
@@ -81,7 +85,7 @@ public class PreViewPager extends ViewPager implements OnTouchCallBack{
                     if (!isDragging && ev.getY() >= downY + 5 * mTouchSlop) {//斜向下触发拖动事件
                         //图片预览处在缩放拖拉阶段不能触发下拉返回
                         if (getPhotoView() != null && getPhotoView().isOnDragMode()) {
-                            Logger.e("当前在Drag模式");
+                            // Logger.e("当前在Drag模式");
                             break;
                         }
                         isDragging = true;
@@ -97,8 +101,8 @@ public class PreViewPager extends ViewPager implements OnTouchCallBack{
                             alpha = 255 - (int) ((deltaY / mScreenHeight * 255) * 1.5);
                             if (alpha < 0) alpha = 0;
                         }
-                        getPhotoView().setPivotX(0);
-                        getPhotoView().setPivotY(0);
+                        getPhotoView().setPivotX(ev.getX());
+                        getPhotoView().setPivotY(ev.getY());
                         setContentViewAlpha(alpha);
                         getPhotoView().setTranslationX(deltaX);
                         getPhotoView().setTranslationY(deltaY);
@@ -138,64 +142,84 @@ public class PreViewPager extends ViewPager implements OnTouchCallBack{
 
     private void startFinishActivityAnimation(MotionEvent event) {
         if (getPhotoView() != null) {
+            setContentViewAlpha(0);
             if (mListener != null) mListener.hideIndicator();
+            //当前移动后图片的左上角顶点坐标
+            float[] lastMoveLocation = getCurrentPicLeftTopPoint();
+
+            //点击View传过来的位置
             float sourceViewX;
             float sourceViewY;
-            if (sourceViewLocations != null && sourceViewLocations.size() > 0) {
+
+            //如果拖动图片超过了屏幕底部，又或者没有传坐标进来 则直接从底部消失了
+            if ((sourceViewLocations == null || sourceViewLocations.isEmpty())||lastMoveLocation[1]>=mScreenHeight*0.8f){
+                sourceViewX = (event != null ? event.getX() : mScreenWidth);
+                sourceViewY = mScreenHeight ;
+            }else{
                 sourceViewX = sourceViewLocations.get(getCurrentItem()).x;
                 sourceViewY = sourceViewLocations.get(getCurrentItem()).y;
-            } else {//没有传坐标进来的话就从屏幕底部消失
-                sourceViewX = event.getX();
-                sourceViewY = mScreenHeight + 100;
             }
-            //最初的顶点的坐标
-            final float[] location = getPhotoView().getOriginMatrixLocation();
-            setContentViewAlpha(0);
-            //当前图片的X,Y 的偏移量
-            final float hasTranslationX = getPhotoView().getTranslationX();
-            final float hasTranslationY = getPhotoView().getTranslationY();
-            //当前移动后图片的左上角顶点坐标
-            float picX;
-            float picY;
-            //获取图片的移动后的左上角坐标
-            if (getPhotoView().getScaleX() != 1 || getPhotoView().getScaleY() != 1) {
-                float[] values = new float[9];
-                getPhotoView().getMatrix().getValues(values);
-                picX = values[2];
-                picY = values[5];
-            } else {
-                //没有缩放情况下，原点坐标+TranslationX,TranslationY 偏移的量
-                picX = (location[0] + hasTranslationX);
-                picY = (location[1] + hasTranslationY);
-            }
+
+
+
+
+
+
+            /**
+             * 更改缩放中心点Pivot，原本PivotY 是大于0的，现在改成0，
+             * 那么整个PhotoView的位置会上移，但translationY是没有变的
+             * 所以要把PhotoView 的位置移动到原来的位置上
+             */
+            getPhotoView().setPivotX(0);
+            getPhotoView().setPivotY(0);
+            float[] changePivotPoint = getCurrentPicLeftTopPoint();
+            //位置改变的差值
+            float changeWidth = lastMoveLocation[0] - changePivotPoint[0];
+            float changeHight = lastMoveLocation[1] - changePivotPoint[1];
+            final float hasTranslationX = getPhotoView().getTranslationX() + changeWidth;
+            final float hasTranslationY = getPhotoView().getTranslationY() + changeHight;
+            //移动到运来的位置
+            getPhotoView().setTranslationX(hasTranslationX);
+            getPhotoView().setTranslationY(hasTranslationY);
+
+
+            //设置图片滚回到点击控件位置然后消失的 路径
             final float preScale = getPhotoView().getScaleX();
-            final PointF startPoint = new PointF(picX, picY);
+            final PointF startPoint;
+            final float[] originLocation = getPhotoView().getOriginMatrixLocation();
+            //拖动
+            if (getPhotoView().getTranslationY()!=0||getPhotoView().getTranslationX()!=0) {
+                startPoint = new PointF(lastMoveLocation[0], lastMoveLocation[1]);
+            } else {//未Tanslation，只是单击退出
+                startPoint = new PointF(0, 0);
+            }
             final PointF endPoint = new PointF(sourceViewX, sourceViewY);
-            final float yy = (endPoint.y - startPoint.y);
-            ValueAnimator animator = ValueAnimator.ofFloat(0, yy);
+            final float deltaY = (endPoint.y - startPoint.y);
+            ValueAnimator animator = ValueAnimator.ofFloat(0, deltaY);
             animator.setDuration(200);
             animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
                 @Override
                 public void onAnimationUpdate(ValueAnimator animation) {
-                    float deltaY = (float) animation.getAnimatedValue();
+                    float moveY = (float) animation.getAnimatedValue();
                     //由偏移量计算出Y轴坐标,由Y轴坐标得到X轴坐标
-                    float pointY = startPoint.y + deltaY;
+                    float pointY = startPoint.y + moveY;
                     float pointX = MathUtils.getInnerPointX(startPoint, endPoint, new PointF(0, pointY)).x;
-                    float deltaX = pointX - startPoint.x;
-                    if (getPhotoView().getScaleX() == 1 && getPhotoView().getScaleY() == 1) {
-                        getPhotoView().setTranslationX(hasTranslationX + deltaX);
-                        getPhotoView().setTranslationY(hasTranslationY + deltaY);
+                    float moveX = pointX - startPoint.x;
+                    float ratio = moveY / deltaY;
+                    //整个View移动到目的位置，View里面的图片移动到顶点位置，两个操作同时进行
+                    if (hasTranslationY != 0 || hasTranslationX != 0) {
+                        getPhotoView().setTranslationX(hasTranslationX + moveX);
+                        getPhotoView().setTranslationY(hasTranslationY + moveY);
+                        getPhotoView().scrollTo(0, (int) (ratio * originLocation[1]));
                     } else {
-                        float ratio = deltaY / yy;
-                        //整个View移动到目的位置，View里面的图片移动到顶点位置，两个操作同时进行
-                        getPhotoView().setTranslationX(hasTranslationX + deltaX);
-                        getPhotoView().setTranslationY(hasTranslationY + deltaY);
-                        getPhotoView().scrollTo(0, (int) (ratio * location[1]));
-                        //移动过程中缩放
-                        float scale = preScale - ((preScale - 0.2f) * ratio);
-                        getPhotoView().setScaleX(scale);
-                        getPhotoView().setScaleY(scale);
+                        getPhotoView().setTranslationX(moveX);
+                        getPhotoView().setTranslationY(moveY);
+                        getPhotoView().scrollTo(0, (int) (ratio * originLocation[1]));
                     }
+                    //缩放
+                    float scale = preScale - ((preScale - 0.2f) * ratio);
+                    getPhotoView().setScaleX(scale);
+                    getPhotoView().setScaleY(scale);
                 }
             });
 
@@ -214,7 +238,7 @@ public class PreViewPager extends ViewPager implements OnTouchCallBack{
 
                 @Override
                 public void onAnimationEnd(Animator animation) {
-                    getPhotoView().setVisibility(GONE);
+                    getPhotoView().setVisibility(INVISIBLE);
                     if (mListener != null) mListener.toFinishActivity();
                 }
             });
@@ -225,17 +249,33 @@ public class PreViewPager extends ViewPager implements OnTouchCallBack{
     }
 
 
+    public float[] getCurrentPicLeftTopPoint() {
+        float[] point = new float[2];
+        if (getPhotoView().getScaleX() != 1 || getPhotoView().getScaleY() != 1) {
+            float[] values = new float[9];
+            getPhotoView().getMatrix().getValues(values);
+            point[0] = values[2];
+            point[1] = values[5];
+        } else {
+            //没有缩放情况下，原点坐标+TranslationX,TranslationY 偏移的量
+            point[0] = (getPhotoView().getOriginMatrixLocation()[0] + getPhotoView().getTranslationX());
+            point[1] = (getPhotoView().getOriginMatrixLocation()[1] + getPhotoView().getTranslationY());
+        }
+        return point;
+    }
+
     public PhotoView getPhotoView() {
         if (getCurrentView() != null) {
             getCurrentView().getPhotoView().addOnTouchCallBack(this);
+           // getCurrentView().getPhotoView().setBackgroundColor(Color.BLACK);
             return getCurrentView().getPhotoView();
         }
         return null;
     }
 
     private void setContentViewAlpha(int alpha) {
-        if (getCurrentView() != null && getCurrentView().getBackground() != null) {
-            getCurrentView().getBackground().setAlpha(alpha);
+        if (getBackground() != null) {
+            getBackground().setAlpha(alpha);
         }
     }
 
@@ -244,6 +284,7 @@ public class PreViewPager extends ViewPager implements OnTouchCallBack{
         if (mDataAdapter == null) {
             if (getAdapter() != null && getAdapter() instanceof DataAdapter) {
                 mDataAdapter = (DataAdapter) getAdapter();
+                return mDataAdapter.getCurrentItemView();
             }
         } else {
             return mDataAdapter.getCurrentItemView();
@@ -253,7 +294,8 @@ public class PreViewPager extends ViewPager implements OnTouchCallBack{
 
     @Override
     public void singleActionUp() {
-         if (mListener!=null)mListener.toFinishActivity();
+//        if (mListener != null) mListener.toFinishActivity();
+        startFinishActivityAnimation(null);
     }
 
     public interface onFinishActivityListener {

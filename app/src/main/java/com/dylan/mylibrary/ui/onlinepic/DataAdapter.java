@@ -9,6 +9,8 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 
@@ -86,7 +88,7 @@ public class DataAdapter extends PagerAdapter {
         if (cacheImageList.size() == 0) {
             imageLayout = (ProgressImageLayout) LayoutInflater.from(container.getContext()).inflate(R.layout.layout_progress_image, null);
             imageLayout.setLayoutParams(getLayoutParam());
-            imageLayout.setBackgroundColor(Color.parseColor("#000000"));
+            if (container.getBackground()!=null)container.getBackground().setAlpha(255);
         } else {
             imageLayout = cacheImageList.remove(0);
             imageLayout.getPhotoView().setImageBitmap(null);

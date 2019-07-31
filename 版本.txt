@@ -1,5 +1,6 @@
 
 版本2.2.0
+1.增加MathUtils 工具类，  已知两个坐标点和第三个坐标的 X或Y 中的一个坐标，求X或Y;
 
 
 
@@ -11,8 +12,8 @@
 
 
 
+版本 2.1.0  --->  Mar, 2019 更新到JCenter
 
-版本 2.1.0
 1.Gson 添加  xxxAdapter， 过滤 int ,double, long 解析空字符串 "" 的问题。
 2. 更新RomUtils ，修复读取 build.prop 权限被拒绝问题。
 3.FileUtils 增加压缩到指定目录方法。

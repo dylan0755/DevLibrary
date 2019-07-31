@@ -36,7 +36,6 @@ public class GlideImageLoader {
     public static void load(final ProgressImageLayout imageLayout, final String picUrl) {
         final CircleProgressView circleProgressView = imageLayout.getProgressView();
         circleProgressView.setBackgroundColor(Color.TRANSPARENT);
-        circleProgressView.setVisibility(View.VISIBLE);
         //开始监听某个url
         ProgressInterceptor.addListener(picUrl, new ProgressListener() {
             @Override
@@ -50,6 +49,14 @@ public class GlideImageLoader {
                             circleProgressView.setVisibility(View.GONE);
                         }
                     });
+                }else{
+                    circleProgressView.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            circleProgressView.setVisibility(View.VISIBLE);
+                        }
+                    });
+
                 }
 
 
