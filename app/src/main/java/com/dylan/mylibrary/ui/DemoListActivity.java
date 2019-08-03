@@ -42,14 +42,14 @@ import java.util.List;
 public class DemoListActivity extends AppCompatActivity {
     private GridView mGridView;
     private DemoListAdapter mAdapter;
-    private String[] demoNames = {"RecyclerViewSnapHelper", "CustomTitleUtil", "VerticalPager",
+    private String[] demoNames = {"RecyclerViewSnapHelper", "PhotoView", "VerticalPager",
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "PullToRefreshScrollViewActivity","TextSwitchActivity"};
-    private Class[] classes = {RecyclerSnapHelperActivity.class, CustomTittleUitlActivity.class, VerticalViewPagerActivity.class,
+    private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, VerticalViewPagerActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, PhotoPickerActivity.class,
