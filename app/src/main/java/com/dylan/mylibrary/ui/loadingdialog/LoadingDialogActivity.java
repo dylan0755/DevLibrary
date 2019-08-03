@@ -28,6 +28,8 @@ public class LoadingDialogActivity extends Activity{
             @Override
             public void onClick(View v) {
                 dialog=new LoadingDialog(LoadingDialogActivity.this);
+               //dialog.getBackgroundView().setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_loadingdialog));
+               // dialog.setLoadingTipText("25132");
                 dialog.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
