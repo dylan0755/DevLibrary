@@ -5,7 +5,6 @@ import android.widget.TextView;
 
 import com.dylan.mylibrary.R;
 import com.dylan.library.adapter.CommonBaseAdapter;
-import com.dylan.mylibrary.ui.onlinepic.ClickViewPoint;
 
 import java.util.ArrayList;
 import java.util.List;

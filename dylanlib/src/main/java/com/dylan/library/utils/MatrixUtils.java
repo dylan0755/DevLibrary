@@ -72,7 +72,76 @@ public class MatrixUtils {
     }
 
 
+    //缩小至最大范围
+    public static Matrix zoomOutToMaxRange(Matrix matrix, Bitmap bm, float rangeWidth, float rangeHeight) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        //缩放
+        if (width > rangeWidth && height > rangeHeight) {//宽高都超过规定宽高
+            float scale;
+            float wScale = width * 1.0f / rangeWidth;
+            float hScale = height * 1.0f / rangeHeight;
+            scale = Math.max(wScale, hScale);
+            scale = 1.0f / scale;
+            matrix.postScale(scale, scale);
+        } else if (width > rangeWidth && height == rangeHeight) {//宽大于规定宽，高等于规定高，缩至规定宽
+            float wScale = width * 1.0f / rangeWidth;
+            float scale = 1.0f / wScale;
+            matrix.postScale(scale, scale);
+        } else if (width > rangeWidth && height < rangeHeight) {//宽大于规定宽，高小于规定高
+            float scale;
+            float wScale = width * 1.0f / rangeWidth;
+            scale = 1.0f / wScale;
+            matrix.postScale(scale, scale);
+        } else if (width <= rangeWidth && height > rangeHeight) {//图片高大于规定高度，而宽度没有，则图片缩至规定高度
+            float hScale = height * 1.0f / rangeHeight;
+            float scale = 1.0f / hScale;
+            matrix.postScale(scale, scale);
+        } else if (width < rangeWidth && height < rangeHeight) {//宽高都小于规定宽高
+            float scale;
+            if (width == height || width > height) {
+                scale = width * 1.0f / rangeWidth;
+            } else {
+                float wScale = width * 1.0f / rangeWidth;
+                float hScale = height * 1.0f / rangeHeight;
+                scale = Math.min(wScale, hScale);
+            }
+            scale = 1.0f / scale;
+            matrix.postScale(scale, scale);
+        }
+        return matrix;
+    }
 
+
+    //在范围内居中
+    public static Matrix centerInRange(Matrix mMatrix, Bitmap bitmap, float rangeWidth, float rangeHeight) {
+        Matrix m = new Matrix();
+        m.set(mMatrix);
+        RectF rect = new RectF(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        m.mapRect(rect);
+        float height = rect.height();
+        float width = rect.width();
+        float deltaX = 0, deltaY = 0;
+        // 图片小于控件大小，则居中显示。大于控件，上方留空则往上移，下方留空则往下移
+        if (height < rangeHeight) {
+            deltaY = (rangeHeight - height) / 2 - rect.top;
+        } else if (rect.top > 0) {
+            deltaY = -rect.top;
+        } else if (rect.bottom < rangeHeight) {
+            deltaY = rangeHeight - rect.bottom;
+        }
+
+
+        if (width < rangeWidth) {
+            deltaX = (rangeWidth - width) / 2 - rect.left;
+        } else if (rect.left > 0) {
+            deltaX = -rect.left;
+        } else if (rect.right < rangeWidth) {
+            deltaX = rangeWidth - rect.right;
+        }
+        mMatrix.postTranslate(deltaX, deltaY);
+        return mMatrix;
+    }
 
 
 }

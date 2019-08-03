@@ -4,10 +4,8 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.dylan.library.adapter.CommonBaseAdapter;
-import com.dylan.library.utils.Logger;
 import com.dylan.mylibrary.R;
-import com.dylan.mylibrary.ui.onlinepic.glide.GlideApp;
-import com.dylan.mylibrary.ui.onlinepic.glide.GlideImageLoader;
+
 
 /**
  * Author: Dylan
@@ -25,7 +23,7 @@ public class PictureDataGridAdapter extends CommonBaseAdapter<String,PictureData
 
     @Override
     public void onBinderItem(ViewHolder holder, String s, int position) {
-       GlideImageLoader.load(holder.ivPic,s);
+
     }
 
     class ViewHolder extends CommonBaseAdapter.ViewHolder{

@@ -8,24 +8,19 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.adapter.DemoListAdapter;
 import com.dylan.mylibrary.ui.customtitle.CustomTittleUitlActivity;
-import com.dylan.mylibrary.ui.date.DateTestActivity;
 import com.dylan.mylibrary.ui.edittext.EditNumberActivity;
 import com.dylan.mylibrary.ui.filedownloader.FileDownLoaderActivity;
 import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dylan.mylibrary.ui.install.AutoInstallActivity;
 import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
-import com.dylan.mylibrary.ui.onlinepic.ClickViewPoint;
-import com.dylan.mylibrary.ui.onlinepic.OnLinePreviewActivity;
-import com.dylan.mylibrary.ui.onlinepic.glide.GlideApp;
-import com.dylan.mylibrary.ui.onlinepic.glide.GlideImageLoader;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
+import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.tab.TabActivity;
 import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
@@ -47,14 +42,14 @@ import java.util.List;
 public class DemoListActivity extends AppCompatActivity {
     private GridView mGridView;
     private DemoListAdapter mAdapter;
-    private String[] demoNames = {"tabActivity", "CustomTitleUtil", "DateUtils",
+    private String[] demoNames = {"RecyclerViewSnapHelper", "CustomTitleUtil", "VerticalPager",
             "EditnnumberHelper", "autoInstall", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
-            "PullToRefreshScrollViewActivity","TextSwitchActivity","网络图片ViewPager显示"};
-    private Class[] classes = {TabActivity.class, CustomTittleUitlActivity.class, DateTestActivity.class,
+            "PullToRefreshScrollViewActivity","TextSwitchActivity"};
+    private Class[] classes = {RecyclerSnapHelperActivity.class, CustomTittleUitlActivity.class, VerticalViewPagerActivity.class,
             EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, PhotoPickerActivity.class,
@@ -62,7 +57,7 @@ public class DemoListActivity extends AppCompatActivity {
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
-            PicturePreViewActivity.class};
+            };
 
     private DLAlertDialog mDialog;
 
