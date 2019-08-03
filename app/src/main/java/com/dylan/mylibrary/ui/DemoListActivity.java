@@ -43,14 +43,14 @@ public class DemoListActivity extends AppCompatActivity {
     private GridView mGridView;
     private DemoListAdapter mAdapter;
     private String[] demoNames = {"RecyclerViewSnapHelper", "CustomTitleUtil", "VerticalPager",
-            "EditnnumberHelper", "autoInstall", "ScreenShoot",
+            "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "PullToRefreshScrollViewActivity","TextSwitchActivity"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, CustomTittleUitlActivity.class, VerticalViewPagerActivity.class,
-            EditNumberActivity.class, AutoInstallActivity.class, ScreenShootActivity.class,
+            EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, PhotoPickerActivity.class,
             PermissionSettingActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,

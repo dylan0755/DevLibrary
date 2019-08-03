@@ -126,6 +126,7 @@
         <activity android:name="com.dylan.mylibrary.ui.TextSwitchActivity" />
         <activity android:name=".ui.VerticalViewPagerActivity"/>
         <activity android:name=".ui.snaphelper.RecyclerSnapHelperActivity"/>
+        <activity android:name=".ui.CircleAnimationActivity"/>
 
         <meta-data
             android:name="design_width"
