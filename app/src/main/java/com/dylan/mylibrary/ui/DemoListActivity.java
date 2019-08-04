@@ -48,7 +48,7 @@ public class DemoListActivity extends AppCompatActivity {
             "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
-            "PullToRefreshScrollViewActivity","TextSwitchActivity"};
+            "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, VerticalViewPagerActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -57,7 +57,7 @@ public class DemoListActivity extends AppCompatActivity {
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
-            };
+            ModifyFontActivity.class};
 
     private DLAlertDialog mDialog;
 

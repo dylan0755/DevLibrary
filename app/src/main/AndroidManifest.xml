@@ -128,6 +128,8 @@
         <activity android:name=".ui.snaphelper.RecyclerSnapHelperActivity"/>
         <activity android:name=".ui.CircleAnimationActivity"/>
          <activity android:name=".ui.PhotoViewActivity"/>
+        <activity android:name=".ui.ModifyFontActivity"
+            android:theme="@style/statusBarStyle"/>
         <meta-data
             android:name="design_width"
             android:value="720" />
