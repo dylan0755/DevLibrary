@@ -27,6 +27,7 @@ public class TabActivity extends AppCompatActivity {
             @Override
             public void select(int position) {
                 fragmentSwitcher.select(position);
+
             }
         });
 

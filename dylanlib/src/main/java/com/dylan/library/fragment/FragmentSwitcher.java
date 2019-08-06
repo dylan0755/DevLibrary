@@ -20,7 +20,7 @@ public class FragmentSwitcher {
     public static String CURRENT_INDEX = "currentIndex";
     public static String FRAGMENT_KEY_ARRAY = "keyarray";
     private int mContainerId;
-    public int currentIndex = -1;
+    private int currentIndex = -1;
     private FragmentManager mFragmentManager;
     private FragmentTransaction mTransaction;
     private List<Class<Fragment>> list = new ArrayList<>();
@@ -80,7 +80,7 @@ public class FragmentSwitcher {
     }
 
 
-    public void inits(Class... classes) {
+    private void inits(Class... classes) {
         for (Class c : classes) {
             list.add(c);
         }
@@ -110,7 +110,7 @@ public class FragmentSwitcher {
     }
 
 
-    public Fragment newInstance(int position) {
+    private Fragment newInstance(int position) {
         try {
             Fragment fragment = list.get(position).newInstance();
             mReferenceMap.put(position, fragment);

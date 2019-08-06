@@ -12,7 +12,7 @@ import com.dylan.library.io.FileUtils;
 import com.dylan.library.graphics.BitmapUtils;
 import com.dylan.library.screen.ScreenShoot;
 import com.dylan.library.test.TestAdapter;
-import com.dylan.library.utils.ToastUtils;
+import com.dylan.library.utils.ToastUtil;
 
 /**
  * Created by Dylan on 2017/1/1.
@@ -43,7 +43,7 @@ public class ScreenShootActivity extends Activity {
         ScreenShoot.captureDecorView(this, picPath, new BitmapUtils.OutPutListenener() {
             @Override
             public void onSuccess() {
-                ToastUtils.show("保存成功！  "+picPath);
+                ToastUtil.show("保存成功！  "+picPath);
             }
         });
 
