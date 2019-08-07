@@ -6,6 +6,7 @@
 4.增加PhotoView 和ViewTouchUtils 类
 5.去掉Gson 包依赖
 6.更新ToastUtil ,增加显示中间位置toast，还有任意时长的toast
+7.增加CompatUtils，和ToastUtils 一样在Application 中initContext()
 
 
 
