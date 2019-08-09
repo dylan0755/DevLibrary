@@ -20,6 +20,7 @@ import com.dylan.mylibrary.ui.install.AutoInstallActivity;
 import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
+import com.dylan.mylibrary.ui.slidingrefresh.SlidingRefreshActivity;
 import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.tab.TabActivity;
 import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
@@ -45,7 +46,7 @@ public class DemoListActivity extends AppCompatActivity {
     private String[] demoNames = {"RecyclerViewSnapHelper", "PhotoView", "VerticalPager",
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
-            "BulletinBoard", "PhotoSelector", "PermissionSetting", "WebViewActvity",
+            "BulletinBoard", "PhotoSelector", "SlidingRefresh", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体"};
@@ -53,7 +54,7 @@ public class DemoListActivity extends AppCompatActivity {
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, PhotoPickerActivity.class,
-            PermissionSettingActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
+            SlidingRefreshActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,

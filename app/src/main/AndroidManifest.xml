@@ -127,6 +127,11 @@
          <activity android:name=".ui.PhotoViewActivity"/>
         <activity android:name=".ui.ModifyFontActivity"
             android:theme="@style/statusBarStyle"/>
+        <activity android:name=".ui.slidingrefresh.SlidingRefreshActivity"/>
+
+
+
+
         <meta-data
             android:name="design_width"
             android:value="720" />
