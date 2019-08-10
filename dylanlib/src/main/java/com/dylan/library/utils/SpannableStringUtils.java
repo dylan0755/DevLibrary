@@ -1,14 +1,9 @@
 package com.dylan.library.utils;
 
-import android.content.Context;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.LeadingMarginSpan;
-import android.util.Log;
-import android.view.View;
-import android.widget.TextView;
 
-import java.security.PublicKey;
 
 /**
  * Author: Dylan
