@@ -19,6 +19,7 @@ import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dylan.mylibrary.ui.install.AutoInstallActivity;
 import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
+import com.dylan.mylibrary.ui.marginspan.FirstLineMarginLeftActivity;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dylan.mylibrary.ui.slidingrefresh.SlidingRefreshActivity;
 import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
@@ -49,7 +50,7 @@ public class DemoListActivity extends AppCompatActivity {
             "BulletinBoard", "PhotoSelector", "SlidingRefresh", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
-            "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体"};
+            "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体","FirstLineMargin"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, VerticalViewPagerActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -58,7 +59,7 @@ public class DemoListActivity extends AppCompatActivity {
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
-            ModifyFontActivity.class};
+            ModifyFontActivity.class, FirstLineMarginLeftActivity.class};
 
     private DLAlertDialog mDialog;
 

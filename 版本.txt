@@ -8,6 +8,8 @@
 6.更新ToastUtil ,增加显示中间位置toast，还有任意时长的toast
 7.增加CompatUtils，和ToastUtils 一样在Application 中initContext()
 8.增加SlidingLayout 和 PullRefreshLayout
+9.增加SpannableStringUtils，SpannableStringUtils.firstLineMarginLeft(leftTagViewWidth,content)
+第一行会有个左边距(如段落文章起行空两个字)
 
 
 
