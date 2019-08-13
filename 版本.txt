@@ -1,5 +1,19 @@
+版本2.3.0
+1.增加 BitmapDownloader ，下载bitmap并缓存到内部磁盘
 
-版本2.2.0
+
+
+
+
+
+
+
+
+
+
+
+
+版本2.2.0  ---> 2019.08.12 更新至JCenter
 1.增加MathUtils 工具类，  已知两个坐标点和第三个坐标的 X或Y 中的一个坐标，求X或Y;
 2.增加MatixUtils 工具类， 可由Matrix 对象 获取到当前操作图片的四个顶点坐标
 3.MatixUtils更新，增加 zoomOutToMaxRange和 centerInRange 两个方法，缩至指定范围并居中
@@ -18,7 +32,7 @@
 
 
 
-版本 2.1.0  --->  Mar, 2019 更新到JCenter
+版本 2.1.0  --->  2019.03.20 更新至JCenter
 
 1.Gson 添加  xxxAdapter， 过滤 int ,double, long 解析空字符串 "" 的问题。
 2. 更新RomUtils ，修复读取 build.prop 权限被拒绝问题。
@@ -41,7 +55,7 @@ oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
 
 
 
-版本2.0.1
+版本2.0.1  2018.05.07更新至JCenter
 1.新增CheckBoxListAdapter  ，只要继承它不用考虑复用性导致 checkbox状态丢失
 2.DeviceUtls 增加获取IMEI getIMEI
 3.新增lazyFragment 懒加载

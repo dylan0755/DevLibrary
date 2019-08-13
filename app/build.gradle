@@ -51,8 +51,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     compile 'com.github.bumptech.glide:okhttp3-integration:4.7.1'
     compile files('libs/butterknife-7.0.1.jar')
-    compile project(':dylanlib')
-    // compile 'com.dylan:devlib:2.1.0'
+    //compile project(':dylanlib')
+    compile 'com.dylan:devlib:2.2.0'
     compile files('libs/ImmersionBar.jar')
     compile files('libs/gson-2.8.0.jar')
  
