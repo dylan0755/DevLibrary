@@ -20,7 +20,7 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.dylan.library.bean.VersionBean;
-import com.dylan.library.utils.ToastUtil;
+import com.dylan.library.utils.ToastUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -89,7 +89,7 @@ public abstract class VersionManager {
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             if (download_url==null||download_url.isEmpty()){
-                                ToastUtil.show("下载地址为空");
+                                ToastUtils.show("下载地址为空");
                                 mAlertDialog.dismiss();
                                 return;
                             }
@@ -108,7 +108,7 @@ public abstract class VersionManager {
                     .setPositiveButton("确定", new DialogInterface.OnClickListener() {
                         public void onClick(DialogInterface dialog, int whichButton) {
                             if (download_url==null||download_url.isEmpty()){
-                                ToastUtil.show("下载地址为空");
+                                ToastUtils.show("下载地址为空");
                                 mAlertDialog.dismiss();
                                 return;
                             }

@@ -10,7 +10,7 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ScrollView;
 
-import com.dylan.library.graphics.BitmapUtils;
+import com.dylan.library.graphics.BitmapHelper;
 
 
 /**
@@ -24,23 +24,23 @@ public class ScreenShoot {
         return captureDecorView(activity, savePath, null);
     }
 
-    public static Bitmap captureDecorView(Activity activity, String savePath, BitmapUtils.OutPutListenener listener) {
+    public static Bitmap captureDecorView(Activity activity, String savePath, BitmapHelper.OutPutListenener listener) {
         if (activity == null) return null;
         View decordView = activity.getWindow().getDecorView();
         decordView.setDrawingCacheEnabled(true);
         decordView.buildDrawingCache();
         Bitmap bitm = decordView.getDrawingCache();
-        BitmapUtils.outPut(bitm, savePath, listener);
+        BitmapHelper.saveBitmapASync(bitm, savePath, listener);
         return bitm;
     }
 
 
-    public static Bitmap captureDecorView(Window window, String savePath, BitmapUtils.OutPutListenener listener) {
+    public static Bitmap captureDecorView(Window window, String savePath, BitmapHelper.OutPutListenener listener) {
         View decordView =window.getDecorView();
         decordView.setDrawingCacheEnabled(true);
         decordView.buildDrawingCache();
         Bitmap bitm = decordView.getDrawingCache();
-        BitmapUtils.outPut(bitm, savePath, listener);
+        BitmapHelper.saveBitmapASync(bitm, savePath, listener);
         return bitm;
     }
 
@@ -54,7 +54,7 @@ public class ScreenShoot {
         return captureScrollView(scrollView, savePath, null);
     }
 
-    public static Bitmap captureScrollView(ScrollView scrollView, String savePath, BitmapUtils.OutPutListenener listener) {
+    public static Bitmap captureScrollView(ScrollView scrollView, String savePath, BitmapHelper.OutPutListenener listener) {
         if (scrollView == null) return null;
         int h = 0;
         Bitmap bitmap;
@@ -71,7 +71,7 @@ public class ScreenShoot {
                 Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         scrollView.draw(canvas);
-        BitmapUtils.outPut(bitmap, savePath, listener);
+        BitmapHelper.saveBitmapASync(bitmap, savePath, listener);
         return bitmap;
     }
 
@@ -83,7 +83,7 @@ public class ScreenShoot {
         return captureRecyclerView(recyclerview, savePath, null);
     }
 
-    public static Bitmap captureRecyclerView(RecyclerView recyclerview, String savePath, BitmapUtils.OutPutListenener listener) {
+    public static Bitmap captureRecyclerView(RecyclerView recyclerview, String savePath, BitmapHelper.OutPutListenener listener) {
         if (recyclerview == null) return null;
         int h = 0;
         Bitmap bitmap;
@@ -102,7 +102,7 @@ public class ScreenShoot {
                 Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         recyclerview.draw(canvas);
-        BitmapUtils.outPut(bitmap, savePath, listener);
+        BitmapHelper.saveBitmapASync(bitmap, savePath, listener);
         return bitmap;
 
     }
@@ -112,14 +112,14 @@ public class ScreenShoot {
         return captureImageView(imageView, savePath, null);
     }
 
-    public static Bitmap captureImageView(ImageView imageView, String savePath, BitmapUtils.OutPutListenener listener) {
+    public static Bitmap captureImageView(ImageView imageView, String savePath, BitmapHelper.OutPutListenener listener) {
         if (imageView == null) return null;
         // 创建对应大小的bitmap
         Bitmap bitmap = Bitmap.createBitmap(imageView.getWidth(), imageView.getHeight(),
                 Bitmap.Config.ARGB_8888);
         final Canvas canvas = new Canvas(bitmap);
         imageView.draw(canvas);
-        BitmapUtils.outPut(bitmap, savePath, listener);
+        BitmapHelper.saveBitmapASync(bitmap, savePath, listener);
         return bitmap;
     }
 

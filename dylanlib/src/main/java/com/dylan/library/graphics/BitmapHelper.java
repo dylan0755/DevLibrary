@@ -1,78 +1,137 @@
 package com.dylan.library.graphics;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Handler;
-import android.os.Looper;
+import android.net.Uri;
 import android.util.Log;
 import android.view.View;
 
+import com.dylan.library.exception.ELog;
+import com.dylan.library.io.FileUtils;
 import com.dylan.library.io.IOCloser;
+import com.dylan.library.utils.EmptyUtils;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.Channels;
+import java.nio.channels.ReadableByteChannel;
 
 /**
  * Created by Dylan on 2016/12/30.
  */
 
-public class BitmapUtils {
+public class BitmapHelper {
 
 
-    private static String dirPath ;
-
-    public static Bitmap getScaleBitmap(String imgPath) {
+    public static Bitmap getInSampleSizeBitmap(String picPath, int reqsW, int reqsH) {
         try {
-            BitmapFactory.Options newOpts = new BitmapFactory.Options();
-            newOpts.inJustDecodeBounds = true;
-            newOpts.inPreferredConfig = Bitmap.Config.RGB_565;
-            Bitmap bitmap = BitmapFactory.decodeFile(imgPath, newOpts);
-            newOpts.inJustDecodeBounds = false;
-            int w = newOpts.outWidth;
-            int h = newOpts.outHeight;
-            float hh = 720;
-            float ww = 480;
-            int be = 1;//be=1表示不缩放
-            if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
-                be = (int) (newOpts.outWidth / ww);
-            } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
-                be = (int) (newOpts.outHeight / hh);
+            FileInputStream inputStream = new FileInputStream(picPath);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ReadableByteChannel channel = Channels.newChannel(inputStream);
+            ByteBuffer buffer = ByteBuffer.allocate(1024);
+            while (channel.read(buffer) != -1) {
+                buffer.flip();
+                while (buffer.hasRemaining())
+                    baos.write(buffer.get());
+                buffer.clear();
             }
-            if (be <= 0) be = 1;
-            newOpts.inSampleSize = be;//设置缩放比例
-            bitmap = BitmapFactory.decodeFile(imgPath, newOpts);
-            return bitmap;
+            byte[] bts = baos.toByteArray();
+            inputStream.close();
+            channel.close();
+            baos.close();
+            //图片尺寸压缩
+            final BitmapFactory.Options options = new BitmapFactory.Options();
+            options.inJustDecodeBounds = true;
+            BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+            options.inSampleSize = caculateInSampleSize(options, reqsW, reqsH);
+            options.inJustDecodeBounds = false;
+            return BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
         } catch (Exception e) {
             e.printStackTrace();
+            ELog.e(e);
+            return null;
         }
-        return null;
+    }
+
+    //获得采样率
+    public final static int caculateInSampleSize(BitmapFactory.Options options, int rqsW, int rqsH) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if (rqsW == 0 || rqsH == 0)
+            return 1;
+        if (height > rqsH || width > rqsW) {
+            final int heightRatio = Math.round((float) height / (float) rqsH);
+            final int widthRatio = Math.round((float) width / (float) rqsW);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
     }
 
 
-
-    public static void outPut(Bitmap bitmap, String savePath) {
-        outPut(Bitmap.CompressFormat.PNG,bitmap, 100, savePath,null);
-    }
-
-    public static void outPut(Bitmap bitmap, String savePath,OutPutListenener listener) {
-        outPut(Bitmap.CompressFormat.PNG,bitmap, 100, savePath,listener);
-    }
-
-
-
-    public static void outPut(final Bitmap.CompressFormat format, final Bitmap bitmap, final int qulity, final String savePath, final OutPutListenener listener) {
-        if (bitmap == null){
-            Log.e("BitmapUtils.outPut()","bitmap==null");
-            return;
+    //同步保存并通知系统扫描
+    public static void saveBitmapSyncAndNotifyScan(Context context,Bitmap bitmap, String savePath) throws IOException{
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+        File outPutFile = new File(savePath);
+        if (!outPutFile.getParentFile().exists()) {
+            outPutFile.getParentFile().mkdirs();
         }
 
+        FileOutputStream fos = new FileOutputStream(savePath);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        fos.flush();
+        fos.close();
+        if (context!=null) context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(savePath))));
+    }
+
+
+    //同步保存
+    public static void saveBitmapSync(Bitmap bitmap, String savePath) throws IOException{
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+
+        File outPutFile = new File(savePath);
+        if (!outPutFile.getParentFile().exists()) {
+            outPutFile.getParentFile().mkdirs();
+        }
+
+        FileOutputStream fos = new FileOutputStream(savePath);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+        fos.flush();
+        fos.close();
+    }
+
+
+
+    //异步保存
+    public static void saveBitmapASync(Bitmap bitmap, String savePath) {
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+        saveBitmapASync(Bitmap.CompressFormat.PNG, bitmap, 100, savePath, null);
+    }
+    //异步保存
+    public static void saveBitmapASync(Bitmap bitmap, String savePath, OutPutListenener listener) {
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+        saveBitmapASync(Bitmap.CompressFormat.PNG, bitmap, 100, savePath, listener);
+    }
+
+
+    private static void saveBitmapASync(final Bitmap.CompressFormat format, final Bitmap bitmap, final int qulity, final String savePath, final OutPutListenener listener) {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                //创建目录
+                File file = new File(savePath);
+                if (!file.getParentFile().exists()) {
+                    file.getParentFile().mkdirs();
+                }
                 // 测试输出
                 FileOutputStream out = null;
                 try {
@@ -85,18 +144,11 @@ public class BitmapUtils {
                         bitmap.compress(format, qulity, out);
                         out.flush();
                         IOCloser.closeIO(out);
-                        Handler handler=new Handler(Looper.getMainLooper());
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (listener!=null) listener.onSuccess();
-                            }
-                        });
-
-                        Log.e("BitmapUtils: ","bitmap has compress success" );
+                        if (listener != null) listener.onSuccess();
+                        Log.i("BitmapHelper: ", "bitmap has compress success");
                     }
                 } catch (IOException e) {
-                    Log.e("BitmapUtils: ", "e:" + e.getMessage());
+                    ELog.e(e);
                 }
             }
         }).start();
@@ -104,37 +156,41 @@ public class BitmapUtils {
     }
 
 
-
-
-
-    public static class BlurImages{
-        /** 水平方向模糊度 */
+    public static class BlurImages {
+        /**
+         * 水平方向模糊度
+         */
         private static float hRadius = 5;
-        /** 竖直方向模糊度 */
+        /**
+         * 竖直方向模糊度
+         */
         private static float vRadius = 5;
-        /** 模糊迭代度 */
-        private static int iterations =3;
+        /**
+         * 模糊迭代度
+         */
+        private static int iterations = 3;
 
 
-        public  static void setRadius(float hradius,float vradius, int iteration){
-             hRadius=hradius;
-            vRadius=vradius;
-            iterations=iteration;
+        public static void setRadius(float hradius, float vradius, int iteration) {
+            hRadius = hradius;
+            vRadius = vradius;
+            iterations = iteration;
         }
+
         /**
          * 图片高斯模糊处理
          * ARGB_8888 每个像素占用4个字节
          * ARGB_4444 每个像素占用2个字节
-         *  ARGB_565 每个像素占用2个字节
-         *  ALPHA_8  每个像素占用1个字节
+         * ARGB_565 每个像素占用2个字节
+         * ALPHA_8  每个像素占用1个字节
          */
         public static Drawable blurImages(Bitmap bmp, Context context) {
             int width = bmp.getWidth();
             int height = bmp.getHeight();
             int[] inPixels = new int[width * height];
             int[] outPixels = new int[width * height];
-            if (bmp==null||bmp.isRecycled()){
-                Log.e("blurImages: ","bmp==null||bmp.isRecycled()" );
+            if (bmp == null || bmp.isRecycled()) {
+                Log.e("blurImages: ", "bmp==null||bmp.isRecycled()");
                 return null;
             }
             Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
@@ -149,6 +205,7 @@ public class BitmapUtils {
             Drawable drawable = new BitmapDrawable(context.getResources(), bitmap);
             return drawable;
         }
+
         /**
          * 图片高斯模糊算法
          */
@@ -194,7 +251,7 @@ public class BitmapUtils {
          * 图片高斯模糊算法
          * 
          */
-        private  static void blurFractional(int[] in, int[] out, int width, int height, float radius) {
+        private static void blurFractional(int[] in, int[] out, int width, int height, float radius) {
             radius -= (int) radius;
             float f = 1.0f / (1 + 2 * radius);
             int inIndex = 0;
@@ -234,11 +291,11 @@ public class BitmapUtils {
                 inIndex += width;
             }
         }
+
         public static int clamp(int x, int a, int b) {
             return (x < a) ? a : (x > b) ? b : x;
         }
     }
-
 
 
     public static Bitmap convertViewToBitmap(final View v) {
@@ -265,10 +322,10 @@ public class BitmapUtils {
     }
 
 
-
-
-    public interface OutPutListenener{
+    public interface OutPutListenener {
         void onSuccess();
+
+        void onFailure();
     }
 
 

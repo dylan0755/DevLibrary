@@ -4,10 +4,13 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.dylan.library.device.SDCardUtils;
+import com.dylan.library.graphics.BitmapHelper;
+import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
 import java.io.File;
@@ -23,6 +26,7 @@ import java.util.zip.ZipFile;
  */
 
 public class FileUtils {
+
     /**
      *
      * @param context
@@ -173,6 +177,31 @@ public class FileUtils {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    //同步保存
+    public static void saveBitmapSyncAndNotifyScan(Context context,Bitmap bitmap, String savePath) throws IOException {
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
+        BitmapHelper.saveBitmapSyncAndNotifyScan(context,bitmap,savePath);
+    }
+
+    //同步保存
+    public static void saveBitmapSync(Bitmap bitmap, String savePath) throws IOException {
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
+        BitmapHelper.saveBitmapSync(bitmap,savePath);
+    }
+
+
+
+    //异步保存
+    public static void saveBitmapASync(Bitmap bitmap, String savePath) {
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
+        BitmapHelper.saveBitmapASync(bitmap,savePath);
+    }
+    //异步保存
+    public static void saveBitmapASync(Bitmap bitmap, String savePath, BitmapHelper.OutPutListenener outPutListenener) {
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
+        BitmapHelper.saveBitmapASync(bitmap,savePath,outPutListenener);
     }
 
 

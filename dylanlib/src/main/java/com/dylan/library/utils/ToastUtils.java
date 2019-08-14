@@ -11,7 +11,7 @@ import java.util.TimerTask;
  * Created by Dylan on 2016/4/16.
  */
 
-public class ToastUtil {
+public class ToastUtils {
     public static Toast shortToast = null;
     public static Toast longToast = null;
     private static Context context;
@@ -24,18 +24,21 @@ public class ToastUtil {
 
 
     public static void show(String msg) {
+        if (context==null)return;
         if (shortToast == null) shortToast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
         shortToast.setText(msg);
         shortToast.show();
     }
 
     public static void showLong(String msg) {
+        if (context==null)return;
         if (longToast == null) longToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
         longToast.setText(msg);
         longToast.show();
     }
 
     public static void showCenter(String string) {
+        if (context==null)return;
         Toast toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
         toast.setText(string);
         toast.setGravity(Gravity.CENTER, 0, 0);
@@ -49,6 +52,7 @@ public class ToastUtil {
 
 
     public static void showLongToast(final Toast lenthLongToast, final int duration) {
+        if (context==null)return;
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override

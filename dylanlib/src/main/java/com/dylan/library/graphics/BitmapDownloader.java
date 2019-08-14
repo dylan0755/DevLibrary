@@ -1,4 +1,4 @@
-package com.dylan.library.utils;
+package com.dylan.library.graphics;
 
 import android.app.Application;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.graphics.BitmapFactory;
 
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.net.UrlUtils;
+import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
 
 import java.io.File;
 import java.io.FileOutputStream;
