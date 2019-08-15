@@ -31,24 +31,22 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ToastUtils.initToast(MyApplication.this);
-
         mContext = this;
+        ToastUtils.initToast(this);
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         loadqiniuDomain();
-        CrashHandler.getInstance().init(this);
-       RunTaskUtils.registerActivityLifeCallBack(this, new RunTaskUtils.RunningListner() {
-           @Override
-           public void onForeground() {
-               Log.e( "onForeground: ","在前台" );
-           }
+        CrashHandler.getInstance().init(MyApplication.this);
+        RunTaskUtils.registerActivityLifeCallBack(MyApplication.this, new RunTaskUtils.RunningListner() {
+            @Override
+            public void onForeground() {
+                Log.e( "onForeground: ","在前台" );
+            }
 
-           @Override
-           public void onBackground() {
-               Log.e( "onBackground: ","在后台" );
-           }
-       });
-
+            @Override
+            public void onBackground() {
+                Log.e( "onBackground: ","在后台" );
+            }
+        });
     }
 
 

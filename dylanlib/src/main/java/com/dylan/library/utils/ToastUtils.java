@@ -3,6 +3,7 @@ package com.dylan.library.utils;
 import android.app.Application;
 import android.content.Context;
 import android.os.Looper;
+import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -19,15 +20,12 @@ public class ToastUtils {
     private static Application applicationContext;
 
     public static void initToast(Application application) {
-        applicationContext = application;
         if (ThreadUtils.isMainThread()) {
+            applicationContext = application;
             shortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
             longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
         } else {
-            Looper.prepare();
-            shortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
-            longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
-            Looper.loop();
+            Log.e("ToastUtils ","Can't create handler inside thread that has not called Looper.prepare()");
         }
     }
 
@@ -44,21 +42,14 @@ public class ToastUtils {
         longToast.show();
     }
 
-    public static void showCenter(String string) {
+    public static void showCenterOnMainThread(String string) {
         if (applicationContext == null) return;
-        Toast toast = null;
-        if (ThreadUtils.isMainThread()) {
+        if (ThreadUtils.isMainThread()){
+            Toast toast = null;
             toast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
             toast.setText(string);
             toast.setGravity(Gravity.CENTER, 0, 0);
             toast.show();
-        } else {
-            Looper.prepare();
-            toast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
-            toast.setText(string);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-            Looper.loop();
         }
 
     }
@@ -67,10 +58,6 @@ public class ToastUtils {
     public static void show(Context context, String text) {
         if (ThreadUtils.isMainThread()) {
             Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
-        }else{
-            Looper.prepare();
-            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
-            Looper.loop();
         }
 
     }
