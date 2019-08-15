@@ -31,7 +31,8 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ToastUtils.initToast(this);
+        ToastUtils.initToast(MyApplication.this);
+
         mContext = this;
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         loadqiniuDomain();

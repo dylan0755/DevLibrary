@@ -9,8 +9,10 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.Toast;
 
 import com.dylan.library.io.FileUtils;
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.adapter.DemoListAdapter;
@@ -76,6 +78,7 @@ public class DemoListActivity extends AppCompatActivity {
         if (EmptyUtils.isNotEmpty(signature)) {
             Logger.e("signature " + signature);
         }
+
 
     }
 

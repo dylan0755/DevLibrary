@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
 
 /**
@@ -31,7 +32,8 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
         viewHolder.tvText.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(viewHolder.tvText.getContext(), "position "+i, Toast.LENGTH_SHORT).show();
+                //Toast.makeText(viewHolder.tvText.getContext(), "position "+i, Toast.LENGTH_SHORT).show();
+                ToastUtils.show("position "+i);
             }
         });
 

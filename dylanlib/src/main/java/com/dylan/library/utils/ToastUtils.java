@@ -1,6 +1,8 @@
 package com.dylan.library.utils;
 
+import android.app.Application;
 import android.content.Context;
+import android.os.Looper;
 import android.view.Gravity;
 import android.widget.Toast;
 
@@ -14,45 +16,68 @@ import java.util.TimerTask;
 public class ToastUtils {
     public static Toast shortToast = null;
     public static Toast longToast = null;
-    private static Context context;
+    private static Application applicationContext;
 
-    public static void initToast(Context ctext) {
-        context = ctext;
-        shortToast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
-        longToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
+    public static void initToast(Application application) {
+        applicationContext = application;
+        if (ThreadUtils.isMainThread()) {
+            shortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+            longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
+        } else {
+            Looper.prepare();
+            shortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+            longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
+            Looper.loop();
+        }
     }
 
 
     public static void show(String msg) {
-        if (context==null)return;
-        if (shortToast == null) shortToast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+        if (applicationContext == null) return;
         shortToast.setText(msg);
         shortToast.show();
     }
 
     public static void showLong(String msg) {
-        if (context==null)return;
-        if (longToast == null) longToast = Toast.makeText(context, "", Toast.LENGTH_LONG);
+        if (applicationContext == null) return;
         longToast.setText(msg);
         longToast.show();
     }
 
     public static void showCenter(String string) {
-        if (context==null)return;
-        Toast toast = Toast.makeText(context, "", Toast.LENGTH_SHORT);
-        toast.setText(string);
-        toast.setGravity(Gravity.CENTER, 0, 0);
-        toast.show();
+        if (applicationContext == null) return;
+        Toast toast = null;
+        if (ThreadUtils.isMainThread()) {
+            toast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+            toast.setText(string);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+        } else {
+            Looper.prepare();
+            toast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+            toast.setText(string);
+            toast.setGravity(Gravity.CENTER, 0, 0);
+            toast.show();
+            Looper.loop();
+        }
+
     }
 
 
-    public static void show(Context context, int info) {
-        Toast.makeText(context, info, Toast.LENGTH_SHORT).show();
+    public static void show(Context context, String text) {
+        if (ThreadUtils.isMainThread()) {
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+        }else{
+            Looper.prepare();
+            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+            Looper.loop();
+        }
+
     }
 
 
     public static void showLongToast(final Toast lenthLongToast, final int duration) {
-        if (context==null)return;
+        if (applicationContext == null) return;
         final Timer timer = new Timer();
         timer.schedule(new TimerTask() {
             @Override
