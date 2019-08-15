@@ -17,6 +17,7 @@ import java.util.TimerTask;
 public class ToastUtils {
     public static Toast shortToast = null;
     public static Toast longToast = null;
+    public static Toast centerShortToast = null;
     private static Application applicationContext;
 
     public static void initToast(Application application) {
@@ -24,8 +25,10 @@ public class ToastUtils {
             applicationContext = application;
             shortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
             longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
+            centerShortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+            centerShortToast.setGravity(Gravity.CENTER, 0, 0);
         } else {
-            Log.e("ToastUtils ","Can't create handler inside thread that has not called Looper.prepare()");
+            Log.e("ToastUtils ", "Can't create handler inside thread that has not called Looper.prepare()");
         }
     }
 
@@ -42,16 +45,10 @@ public class ToastUtils {
         longToast.show();
     }
 
-    public static void showCenterOnMainThread(String string) {
+    public static void showCenter(String string) {
         if (applicationContext == null) return;
-        if (ThreadUtils.isMainThread()){
-            Toast toast = null;
-            toast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
-            toast.setText(string);
-            toast.setGravity(Gravity.CENTER, 0, 0);
-            toast.show();
-        }
-
+        centerShortToast.setText(string);
+        centerShortToast.show();
     }
 
 
@@ -61,6 +58,7 @@ public class ToastUtils {
         }
 
     }
+
 
 
     public static void showLongToast(final Toast lenthLongToast, final int duration) {
@@ -80,4 +78,5 @@ public class ToastUtils {
             }
         }, duration);
     }
+
 }
