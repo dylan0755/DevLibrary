@@ -12,7 +12,7 @@ import com.dylan.mylibrary.util.ResponseBodyParser;
 import com.dylan.library.exception.CrashHandler;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.RunTaskUtils;
-import com.dylan.library.utils.ToastUtil;
+import com.dylan.library.utils.ToastUtils;
 import com.google.gson.Gson;
 
 import org.json.JSONException;
@@ -31,7 +31,7 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ToastUtil.initToast(this);
+        ToastUtils.initToast(this);
         mContext = this;
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         loadqiniuDomain();

@@ -15,9 +15,9 @@ import android.os.Message;
 import android.support.v4.app.NotificationCompat;
 import android.widget.RemoteViews;
 
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
 import com.dylan.library.io.FileDownLoader;
-import com.dylan.library.utils.ToastUtil;
 
 /**
  * Created by Dylan on 2017/12/6.
@@ -98,7 +98,7 @@ public class NotificationDownLoader implements FileDownLoader.DownLoadListener {
             mNotificationManager.notify(NOTIFY_ID, mNotification);
             mNotificationHandler.removeMessages(UPDATE_NOTIFICATION_WHAT);
         }else{
-            ToastUtil.show(error);
+            ToastUtils.show(error);
         }
     }
 

@@ -3,7 +3,7 @@
 2.BitmapHelper中增加压缩图片尺寸方法getInSampleSizeBitmap(String picPath, int reqsW, int reqsH)，
 增加同步，异步方式保存Bitmap到本地 的方法
 3.ToastUtils 对Context 进行空判，防止Context 为空时调用显示空指针异常
-
+4.FileUtils 增加delectDirFile，删除整个文件夹
 
 
 

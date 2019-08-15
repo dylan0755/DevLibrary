@@ -7,12 +7,12 @@ import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 
+import com.dylan.library.graphics.BitmapHelper;
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
 import com.dylan.library.io.FileUtils;
-import com.dylan.library.graphics.BitmapUtils;
 import com.dylan.library.screen.ScreenShoot;
 import com.dylan.library.test.TestAdapter;
-import com.dylan.library.utils.ToastUtil;
 
 /**
  * Created by Dylan on 2017/1/1.
@@ -40,10 +40,15 @@ public class ScreenShootActivity extends Activity {
 
         final String picPath= FileUtils.getSDCardDir()+"/"+"decordView.jpg";
        // ScreenShoot.captureDecorView(this,picPath);
-        ScreenShoot.captureDecorView(this, picPath, new BitmapUtils.OutPutListenener() {
+        ScreenShoot.captureDecorView(this, picPath, new BitmapHelper.OutPutListenener() {
             @Override
             public void onSuccess() {
-                ToastUtil.show("保存成功！  "+picPath);
+                ToastUtils.show("保存成功！  "+picPath);
+            }
+
+            @Override
+            public void onFailure() {
+
             }
         });
 

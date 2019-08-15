@@ -4,11 +4,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.dylan.library.io.FileUtils;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.adapter.DemoListAdapter;
@@ -74,7 +76,6 @@ public class DemoListActivity extends AppCompatActivity {
         if (EmptyUtils.isNotEmpty(signature)) {
             Logger.e("signature " + signature);
         }
-
 
     }
 

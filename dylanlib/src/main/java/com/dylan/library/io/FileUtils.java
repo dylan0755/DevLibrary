@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.provider.MediaStore;
 
 import com.dylan.library.device.SDCardUtils;
+import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
@@ -178,6 +179,33 @@ public class FileUtils {
             e.printStackTrace();
         }
     }
+
+    public  static boolean delectDirFile(String dirPath){
+        try {
+            File file=new File(dirPath);
+            if (file.exists()){
+                File[] files=file.listFiles();
+                for (File f:files){
+                    if (f.isFile()){
+                        f.delete();
+                    }else if (f.isDirectory()){
+                        delectDirFile(f.getAbsolutePath());
+                    }
+
+                }
+            }
+            //删除空的文件夹
+            return file.delete();
+        }catch (Exception e){
+            ELog.e(e);
+        }
+        return false;
+    }
+
+
+
+
+
 
     //同步保存
     public static void saveBitmapSyncAndNotifyScan(Context context,Bitmap bitmap, String savePath) throws IOException {
