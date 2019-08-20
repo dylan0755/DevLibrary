@@ -48,7 +48,7 @@ public class BezierView extends View {
         endX = w;
         endY = 0;
         //控制点
-        eventX = w;
+        eventX = w/2;
         eventY = h/4;
     }
 
