@@ -129,7 +129,7 @@
             android:theme="@style/statusBarStyle"/>
         <activity android:name=".ui.slidingrefresh.SlidingRefreshActivity"/>
         <activity android:name=".ui.marginspan.FirstLineMarginLeftActivity"/>
-
+        <activity android:name=".ui.BezierCurveActivity"/>
 
 
         <meta-data

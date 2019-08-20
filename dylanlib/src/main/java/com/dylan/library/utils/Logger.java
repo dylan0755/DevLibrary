@@ -71,4 +71,8 @@ public class Logger {
     public static void setDebugMode(boolean bl) {
         isDebug = bl;
     }
+
+    public static boolean isDebugMode(){
+        return isDebug;
+    }
 }

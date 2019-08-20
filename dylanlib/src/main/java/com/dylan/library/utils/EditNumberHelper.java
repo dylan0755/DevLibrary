@@ -163,7 +163,7 @@ public class EditNumberHelper {
     }
 
 
-    public class ToastUtil {
+    private class ToastUtil {
         private Toast toast;
 
         public void toToast(Context context, String str) {
