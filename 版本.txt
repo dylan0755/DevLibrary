@@ -5,7 +5,7 @@
 3.ToastUtils 对Context 进行空判，防止Context 为空时调用显示空指针异常
 4.FileUtils 增加delectDirFile，删除整个文件夹
 5.CompatUtils 增加 setTint(Drawable drawble,int color) 兼容着色
-
+6.增加CommonFragmentPagerAdapter adapter.addFragment() 和 adapter.addTitle();
 
 
 
