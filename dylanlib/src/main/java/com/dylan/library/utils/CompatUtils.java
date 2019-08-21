@@ -16,7 +16,7 @@ import com.dylan.library.R;
  * Desc:
  */
 public class CompatUtils {
-    public static Context mContext;
+    private static Context mContext;
 
     public static void initContext(Context context) {
         mContext = context;
