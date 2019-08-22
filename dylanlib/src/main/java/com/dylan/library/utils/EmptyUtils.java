@@ -53,4 +53,9 @@ public class EmptyUtils {
     public static boolean isNotEmpty(Object object){
         return !isEmpty(object);
     }
+
+
+    public static boolean isNotBlank(String str){
+        return str != null && str.length() > 0 && str.trim().length() > 0;
+    }
 }
