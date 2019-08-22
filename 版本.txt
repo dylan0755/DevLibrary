@@ -7,7 +7,7 @@
 5.CompatUtils 增加 setTint(Drawable drawble,int color) 兼容着色
 6.增加CommonFragmentPagerAdapter adapter.addFragment() 和 adapter.addTitle();
 7.EmptyUtils 新增isNotBlank()判断空格
-
+8.HtmlUtils 新增 fromHtml() 处理Html.fromHtml()过时问题。
 
 
 

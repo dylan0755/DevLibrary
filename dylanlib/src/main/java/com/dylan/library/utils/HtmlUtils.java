@@ -1,5 +1,9 @@
 package com.dylan.library.utils;
 
+import android.os.Build;
+import android.text.Html;
+import android.text.Spanned;
+
 /**
  * Created by Dylan on 2017/1/16.
  */
@@ -21,6 +25,14 @@ public class HtmlUtils {
          }
          return htmlContent;
      }
+
+    public static Spanned fromHtml(String inputStr) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            return Html.fromHtml(inputStr, Html.FROM_HTML_MODE_LEGACY);
+        } else {
+            return Html.fromHtml(inputStr);
+        }
+    }
 
 
 }
