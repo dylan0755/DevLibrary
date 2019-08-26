@@ -127,4 +127,24 @@ public class FragmentSwitcher {
         Fragment fragment = mReferenceMap.get(index);
         return fragment;
     }
+
+    public List<Fragment> getFragments(){
+        Iterator iterator=mReferenceMap.entrySet().iterator();
+        List<Fragment> fragmentList=null;
+        while (iterator.hasNext()){
+            if (fragmentList==null)fragmentList=new ArrayList<>();
+            Map.Entry<Integer,Fragment> entry= (Map.Entry<Integer, Fragment>) iterator.next();
+            fragmentList.add(entry.getValue());
+        }
+        return fragmentList;
+    }
+
+
+    public void replace(int index){
+        Fragment fragment=getFragment(index);
+        if (fragment!=null){
+            Fragment newFragment=newInstance(index);
+            mFragmentManager.beginTransaction().replace(mContainerId,newFragment).commit();
+        }
+    }
 }

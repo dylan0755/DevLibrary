@@ -8,7 +8,8 @@
 6.增加CommonFragmentPagerAdapter adapter.addFragment() 和 adapter.addTitle();
 7.EmptyUtils 新增isNotBlank()判断空格
 8.HtmlUtils 新增 fromHtml() 处理Html.fromHtml()过时问题。
-
+9.增加EventBus 数据传递类：EventBundle   内部封装Action, Bundle存储 ，附加属性；
+使用 putAction(),putInt(),putString(),putBoolean(),putLong(),putSerializable等方法。
 
 
 
