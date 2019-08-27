@@ -12,10 +12,12 @@ import android.provider.MediaStore;
 import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
+import com.dylan.library.net.UrlUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -170,6 +172,14 @@ public class FileUtils {
     }
 
     public static void notifyScanFile(Context context, String desFilePath) {
+        try {
+            int lastSpart = desFilePath.lastIndexOf("/");
+            String fileName = desFilePath.substring(lastSpart + 1);
+            MediaStore.Images.Media.insertImage(context.getContentResolver(),
+                    desFilePath, fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(desFilePath))));
     }
 
