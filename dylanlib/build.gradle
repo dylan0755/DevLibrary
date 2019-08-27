@@ -48,9 +48,18 @@ publish {
 }
 //上传
 /*
-gradlew clean build bintrayUpload
--PbintrayUser=dylan0759
--PbintrayKey=aeba2dbf3a2e737464ec7e3197fd78be3f950a1a
--PdryRun=false
+
+第一步：打开右边的Gradle窗口找到publishing
+(1) 点击generatePomFileForMavenPublication
+(2) 点击publicMavenPublicationToMavenLocal
+
+第二步：执行以下上传命令
+gradlew bintrayUpload -PbintrayUser=dylan0759 -PbintrayKey=aeba2dbf3a2e737464ec7e3197fd78be3f950a1a -PdryRun=false
+
+备注：以下命令是错误的
+gradlew clean build bintrayUpload -PbintrayUser=dylan0759 -PbintrayKey=aeba2dbf3a2e737464ec7e3197fd78be3f950a1a -PdryRun=false
+因为clean build 操作 会把生成的pom.xml 文件删除，上传到Bintray 上看不到POM.xml
+那么久无法放入JCenter
+
 
 */
