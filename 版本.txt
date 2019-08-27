@@ -1,8 +1,6 @@
 版本2.4.0
 1.CompatUtils增加 setTextAppearance(TextView textView,int resId);
-
-
-
+2.BitmapHelper 增加 Bitmap 与Base64字符串的相互转换
 
 
 

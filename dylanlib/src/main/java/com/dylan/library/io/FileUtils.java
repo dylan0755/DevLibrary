@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Environment;
 import android.provider.MediaStore;
 
 import com.dylan.library.device.SDCardUtils;
@@ -29,23 +30,22 @@ import java.util.zip.ZipFile;
 public class FileUtils {
 
     /**
-     *
      * @param context
      * @param assetsFileName
      * @param outputFilePath 必须是一个文件的路径，而不是文件夹的路径
      */
     public static void copyAssets2SDcard(Context context, String assetsFileName, String outputFilePath) {
-        if (context==null)return;
+        if (context == null) return;
         FileOutputStream out = null;
         try {
             out = new FileOutputStream(outputFilePath);
             byte[] buffer = new byte[1024];
             InputStream in = context.getAssets().open(assetsFileName);
             int count;
-            while((count= in.read(buffer))!=-1){
+            while ((count = in.read(buffer)) != -1) {
                 out.write(buffer, 0, count);
             }
-            IOCloser.closeIOArray(in,out);
+            IOCloser.closeIOArray(in, out);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -53,42 +53,54 @@ public class FileUtils {
     }
 
 
-    public static String getSDCardDir(){
-          return SDCardUtils.getSDcardDir();
+    public static String getSDCardDir() {
+        return SDCardUtils.getSDcardDir();
     }
 
 
-    public static void mkdirsIfNotExist(String dirPath){
-         File file=new File(dirPath);
-         if (!file.exists())file.mkdirs();
+    public static void mkdirsIfNotExist(String dirPath) {
+        File file = new File(dirPath);
+        if (!file.exists()) file.mkdirs();
     }
 
-    public static void writeString2Sdcard(String text,String outputFilePath){
+    public static void writeTextToSDRootPath(String text, String fileName) throws Exception {
+        if (EmptyUtils.isEmpty(text)) throw new Exception("text is empty!!!");
+        String sdPath = Environment.getExternalStorageDirectory().toString();
+        String outPutPath = sdPath + "/" + fileName;
+        FileOutputStream fos = new FileOutputStream(outPutPath);
+        fos.write(text.getBytes());
+        fos.flush();
+        fos.close();
+    }
 
-        if (text!=null&&!text.isEmpty()){
-            FileOutputStream fos = null;
-            try {
-                fos = new FileOutputStream(outputFilePath);
-                fos.write(text.getBytes());
-                fos.flush();
-                fos.close();
-            } catch (Exception e) {
-                e.printStackTrace();
+
+    public static boolean writeTextToSdcard(String text, String outputFilePath) throws Exception {
+        if (EmptyUtils.isEmpty(text)) throw new Exception("text is empty!!!");
+
+        File outPutFile = new File(outputFilePath);
+        if (!outPutFile.getParentFile().exists()) {
+            boolean isCreated = outPutFile.getParentFile().mkdirs();
+            if (!isCreated) {
+                return false;
             }
-
         }
+        FileOutputStream fos = new FileOutputStream(outputFilePath);
+        fos.write(text.getBytes());
+        fos.flush();
+        fos.close();
+        return true;
 
     }
 
 
-    public static void unzip(String srcZipPath,String dirName) throws IOException {
-        ZipFile zipFile=new ZipFile(srcZipPath);
-        for (Enumeration<? extends ZipEntry> entries = zipFile.entries(); entries.hasMoreElements();) {
+    public static void unzip(String srcZipPath, String dirName) throws IOException {
+        ZipFile zipFile = new ZipFile(srcZipPath);
+        for (Enumeration<? extends ZipEntry> entries = zipFile.entries(); entries.hasMoreElements(); ) {
             ZipEntry entry = entries.nextElement();
             String zipEntryName = entry.getName();
             InputStream in = zipFile.getInputStream(entry);
             // String outPath = (desDir + name +"/"+ zipEntryName).replaceAll("\\*", "/");
-            String outPath = (dirName+"/"+ zipEntryName).replaceAll("\\*", "/");
+            String outPath = (dirName + "/" + zipEntryName).replaceAll("\\*", "/");
             // 判断路径是否存在,不存在则创建文件路径
             File file = new File(outPath.substring(0, outPath.lastIndexOf('/')));
             if (!file.exists()) {
@@ -112,8 +124,7 @@ public class FileUtils {
     }
 
 
-
-    public static File getFileByUri(Uri uri,Context context){
+    public static File getFileByUri(Uri uri, Context context) {
         String path = null;
         if ("file".equals(uri.getScheme())) {
             path = uri.getEncodedPath();
@@ -122,7 +133,7 @@ public class FileUtils {
                 ContentResolver cr = context.getContentResolver();
                 StringBuffer buff = new StringBuffer();
                 buff.append("(").append(MediaStore.Images.ImageColumns.DATA).append("=").append("'" + path + "'").append(")");
-                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[] { MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA }, buff.toString(), null, null);
+                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA}, buff.toString(), null, null);
                 int index = 0;
                 int dataIdx = 0;
                 for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
@@ -143,7 +154,7 @@ public class FileUtils {
             }
         } else if ("content".equals(uri.getScheme())) {
             // 4.2.2以后
-            String[] proj = { MediaStore.Images.Media.DATA };
+            String[] proj = {MediaStore.Images.Media.DATA};
             Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
             if (cursor.moveToFirst()) {
                 int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
@@ -158,7 +169,7 @@ public class FileUtils {
         return null;
     }
 
-    public static void notifyScanFile(Context context, String desFilePath){
+    public static void notifyScanFile(Context context, String desFilePath) {
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(desFilePath))));
     }
 
@@ -180,15 +191,15 @@ public class FileUtils {
         }
     }
 
-    public  static boolean delectDirFile(String dirPath){
+    public static boolean delectDirFile(String dirPath) {
         try {
-            File file=new File(dirPath);
-            if (file.exists()){
-                File[] files=file.listFiles();
-                for (File f:files){
-                    if (f.isFile()){
+            File file = new File(dirPath);
+            if (file.exists()) {
+                File[] files = file.listFiles();
+                for (File f : files) {
+                    if (f.isFile()) {
                         f.delete();
-                    }else if (f.isDirectory()){
+                    } else if (f.isDirectory()) {
                         delectDirFile(f.getAbsolutePath());
                     }
 
@@ -196,40 +207,36 @@ public class FileUtils {
             }
             //删除空的文件夹
             return file.delete();
-        }catch (Exception e){
+        } catch (Exception e) {
             ELog.e(e);
         }
         return false;
     }
 
 
-
-
-
-
     //同步保存
-    public static void saveBitmapSyncAndNotifyScan(Context context,Bitmap bitmap, String savePath) throws IOException {
-        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
-        BitmapHelper.saveBitmapSyncAndNotifyScan(context,bitmap,savePath);
+    public static void saveBitmapSyncAndNotifyScan(Context context, Bitmap bitmap, String savePath) throws IOException {
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+        BitmapHelper.saveBitmapSyncAndNotifyScan(context, bitmap, savePath);
     }
 
     //同步保存
     public static void saveBitmapSync(Bitmap bitmap, String savePath) throws IOException {
-        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
-        BitmapHelper.saveBitmapSync(bitmap,savePath);
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+        BitmapHelper.saveBitmapSync(bitmap, savePath);
     }
-
 
 
     //异步保存
     public static void saveBitmapASync(Bitmap bitmap, String savePath) {
-        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
-        BitmapHelper.saveBitmapASync(bitmap,savePath);
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+        BitmapHelper.saveBitmapASync(bitmap, savePath);
     }
+
     //异步保存
     public static void saveBitmapASync(Bitmap bitmap, String savePath, BitmapHelper.OutPutListenener outPutListenener) {
-        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath))  return;
-        BitmapHelper.saveBitmapASync(bitmap,savePath,outPutListenener);
+        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
+        BitmapHelper.saveBitmapASync(bitmap, savePath, outPutListenener);
     }
 
 

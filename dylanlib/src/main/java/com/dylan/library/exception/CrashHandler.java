@@ -94,7 +94,11 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             String path = SDCardUtils.getSDcardCacheDir(mContext) + "/CrashLog/";
             FileUtils.mkdirsIfNotExist(path);//创建文件夹
             String filepath = path + fileName;
-            FileUtils.writeString2Sdcard(sb.toString(), filepath);
+            try {
+                FileUtils.writeTextToSdcard(sb.toString(), filepath);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
             return fileName;
         }
 
