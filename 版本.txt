@@ -1,4 +1,16 @@
-版本2.3.0
+版本2.4.0
+1.CompatUtils增加 setTextAppearance(TextView textView,int resId);
+
+
+
+
+
+
+
+
+
+
+版本2.3.0 ---> 2019.08.27 更新至JCenter
 1.增加 BitmapDownloader ，下载bitmap并缓存到内部磁盘
 2.BitmapHelper中增加压缩图片尺寸方法getInSampleSizeBitmap(String picPath, int reqsW, int reqsH)，
 增加同步，异步方式保存Bitmap到本地 的方法
