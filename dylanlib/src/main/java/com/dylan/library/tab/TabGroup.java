@@ -367,7 +367,7 @@ public class TabGroup extends LinearLayout {
     /**
      * 适配
      */
-    public class ScaleUtil {
+    private class ScaleUtil {
         private Context mContext;
         private final int BASE_WIDTH = 1080;
         private float BASE_RATIO = 1;

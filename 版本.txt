@@ -2,7 +2,7 @@
 1.CompatUtils增加 setTextAppearance(TextView textView,int resId);
 2.BitmapHelper 增加 Bitmap 与Base64字符串的相互转换
 3.FileUtis notifyScanFile 通知媒体文件刷新增加兼容解决方式
-
+4.隐藏部分类中的ScaleUtils
 
 
 

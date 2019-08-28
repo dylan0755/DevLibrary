@@ -523,7 +523,7 @@ public class CarouselView extends FrameLayout  {
     }
 
 
-    public static class ScaleUtil {
+    private static class ScaleUtil {
         private final int BASE_WIDTH = 1080;
         private float BASE_RATIO = 1;
 

@@ -308,7 +308,7 @@ public class PlayerAdjustTool {
     }
 
 
-    public class ScaleUtil {
+    private class ScaleUtil {
         private final int BASE_WIDTH = 1080;
         private float BASE_RATIO = 1;
         public ScaleUtil(Context context) {
