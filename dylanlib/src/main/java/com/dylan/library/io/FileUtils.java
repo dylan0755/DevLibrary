@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -16,6 +17,7 @@ import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.net.UrlUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.RomUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -173,17 +175,23 @@ public class FileUtils {
     }
 
     public static void notifyScanFile(Context context, String desFilePath) {
-        //手动往媒体库插入记录
-        String suffix=desFilePath.substring(desFilePath.lastIndexOf(".")+1);
-        if (EmptyUtils.isNotEmpty(suffix)){
-            suffix=suffix.toLowerCase();
-            if ("png".equals(suffix)||"jpg".equals(suffix)||"jpeg".equals(suffix)){
-                ContentValues values = new ContentValues();
-                values.put(MediaStore.Images.Media.DATA, desFilePath);
-                values.put(MediaStore.Images.Media.MIME_TYPE, "image/"+(suffix.equals("jpg")?"jpeg":suffix));
-                context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        try {
+             //手动往媒体库插入记录
+            String suffix = desFilePath.substring(desFilePath.lastIndexOf(".") + 1);
+            if (EmptyUtils.isNotEmpty(suffix)) {
+                suffix = suffix.toLowerCase();
+                if ("png".equals(suffix) || "jpg".equals(suffix) || "jpeg".equals(suffix)) {
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.Images.Media.DATA, desFilePath);
+                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/" + (suffix.equals("jpg") ? "jpeg" : suffix));
+                    context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                }
             }
+        } catch (Exception e) {
+            ELog.e(e);
         }
+        //通知更新
+        MediaScannerConnection.scanFile(context, new String[]{desFilePath}, null, null);
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(desFilePath))));
     }
 
