@@ -175,20 +175,34 @@ public class FileUtils {
     }
 
     public static void notifyScanFile(Context context, String desFilePath) {
-        try {
-             //手动往媒体库插入记录
-            String suffix = desFilePath.substring(desFilePath.lastIndexOf(".") + 1);
-            if (EmptyUtils.isNotEmpty(suffix)) {
-                suffix = suffix.toLowerCase();
-                if ("png".equals(suffix) || "jpg".equals(suffix) || "jpeg".equals(suffix)) {
-                    ContentValues values = new ContentValues();
-                    values.put(MediaStore.Images.Media.DATA, desFilePath);
-                    values.put(MediaStore.Images.Media.MIME_TYPE, "image/" + (suffix.equals("jpg") ? "jpeg" : suffix));
-                    context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+        notifyScanFile(context,desFilePath,false);
+    }
+
+    /**
+     * 一般图片放在sd卡根目录，或者根目录的文件夹内只要通知刷新即可，
+     * 如果要放在深层次的文件目录中调用刷新大部分情况下是不会有效果的，
+     * 比如在私有目录，Android/data/包名/
+     * @param context
+     * @param desFilePath
+     * @param insertRecord
+     */
+    public static void notifyScanFile(Context context, String desFilePath,boolean insertRecord) {
+        if (insertRecord){
+            try {
+                //手动往媒体库插入记录
+                String suffix = desFilePath.substring(desFilePath.lastIndexOf(".") + 1);
+                if (EmptyUtils.isNotEmpty(suffix)) {
+                    suffix = suffix.toLowerCase();
+                    if ("png".equals(suffix) || "jpg".equals(suffix) || "jpeg".equals(suffix)) {
+                        ContentValues values = new ContentValues();
+                        values.put(MediaStore.Images.Media.DATA, desFilePath);
+                        values.put(MediaStore.Images.Media.MIME_TYPE, "image/" + (suffix.equals("jpg") ? "jpeg" : suffix));
+                        context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+                    }
                 }
+            } catch (Exception e) {
+                ELog.e(e);
             }
-        } catch (Exception e) {
-            ELog.e(e);
         }
         //通知更新
         MediaScannerConnection.scanFile(context, new String[]{desFilePath}, null, null);
