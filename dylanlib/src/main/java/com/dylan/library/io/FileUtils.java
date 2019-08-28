@@ -1,6 +1,7 @@
 package com.dylan.library.io;
 
 import android.content.ContentResolver;
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -172,13 +173,16 @@ public class FileUtils {
     }
 
     public static void notifyScanFile(Context context, String desFilePath) {
-        try {
-            int lastSpart = desFilePath.lastIndexOf("/");
-            String fileName = desFilePath.substring(lastSpart + 1);
-            MediaStore.Images.Media.insertImage(context.getContentResolver(),
-                    desFilePath, fileName, null);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        //手动往媒体库插入记录
+        String suffix=desFilePath.substring(desFilePath.lastIndexOf(".")+1);
+        if (EmptyUtils.isNotEmpty(suffix)){
+            suffix=suffix.toLowerCase();
+            if ("png".equals(suffix)||"jpg".equals(suffix)||"jpeg".equals(suffix)){
+                ContentValues values = new ContentValues();
+                values.put(MediaStore.Images.Media.DATA, desFilePath);
+                values.put(MediaStore.Images.Media.MIME_TYPE, "image/"+(suffix.equals("jpg")?"jpeg":suffix));
+                context.getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values);
+            }
         }
         context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(desFilePath))));
     }
