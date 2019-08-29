@@ -19,7 +19,7 @@ public abstract  class CheckBoxListAdapter<T,VH extends CommonBaseAdapter.ViewHo
     public abstract int getLayoutId();
 
     @Override
-    public void onBinderItem(VH holder, T t, int position) {
+    public void onBindViewHolder(VH holder, T t, int position) {
         onBindItem(holder,t,position);
         if (hasCheck(position)){
             onCheckState(holder,t,position);
