@@ -78,7 +78,9 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
         return t;
     }
 
-
+    public Context getContext() {
+        return mContext;
+    }
 
     public void bind(List<T> list) {
         if (list!=null&&list.size()>0){

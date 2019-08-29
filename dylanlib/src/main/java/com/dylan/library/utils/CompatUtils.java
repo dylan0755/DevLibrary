@@ -54,4 +54,9 @@ public class CompatUtils {
         }
     }
 
+    public static float getDimension(int resId){
+        if (mContext==null)return 0.0f;
+        return mContext.getResources().getDimension(resId);
+    }
+
 }

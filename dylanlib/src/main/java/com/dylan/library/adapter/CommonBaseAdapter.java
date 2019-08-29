@@ -110,7 +110,7 @@ public abstract class CommonBaseAdapter<T, VH extends CommonBaseAdapter.ViewHold
             holder = (VH) convertView.getTag();
         }
         if (getItem(position) != null) {
-            onBinderItem(holder, getItem(position), position);
+            onBindViewHolder(holder, getItem(position), position);
         }
         return convertView;
     }
@@ -118,7 +118,7 @@ public abstract class CommonBaseAdapter<T, VH extends CommonBaseAdapter.ViewHold
     public abstract @LayoutRes
     int getLayoutId();
 
-    public abstract void onBinderItem(VH holder, T t, int position);
+    public abstract void onBindViewHolder(VH holder, T t, int position);
 
 
     public static class ViewHolder {
