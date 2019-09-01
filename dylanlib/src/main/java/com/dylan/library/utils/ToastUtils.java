@@ -2,10 +2,11 @@ package com.dylan.library.utils;
 
 import android.app.Application;
 import android.content.Context;
-import android.os.Looper;
 import android.util.Log;
 import android.view.Gravity;
 import android.widget.Toast;
+
+import com.dylan.library.utils.thread.ThreadUtils;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -1,4 +1,4 @@
-package com.dylan.library.utils;
+package com.dylan.library.utils.thread;
 
 import android.os.Looper;
 
@@ -9,10 +9,7 @@ public class ThreadUtils {
 		return flag;
 	}
 
-	public static void startNewThread(Runnable runnable){
-		if (runnable==null)return;
-		new Thread(runnable).start();
-	}
+
 
 
 }

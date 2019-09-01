@@ -1,6 +1,7 @@
 package com.dylan.library.utils;
 
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorRes;
@@ -57,6 +58,11 @@ public class CompatUtils {
     public static float getDimension(int resId){
         if (mContext==null)return 0.0f;
         return mContext.getResources().getDimension(resId);
+    }
+
+
+    public static ColorDrawable getCompatBitmapDrawable(){
+        return new ColorDrawable(android.graphics.Color.TRANSPARENT);
     }
 
 }
