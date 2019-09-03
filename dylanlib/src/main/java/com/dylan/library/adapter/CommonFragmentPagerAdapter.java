@@ -1,9 +1,11 @@
 package com.dylan.library.adapter;
 
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.widget.TableLayout;
 
 
 import com.dylan.library.utils.EmptyUtils;
@@ -22,16 +24,29 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public CommonFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
+        fragmentList = new ArrayList<>();
+        titleList = new ArrayList<>();
+    }
+
+    public void addFragment(Fragment fragment,String title){
+        addFragment(fragment);
+        addTitle(title);
     }
 
     public void addFragment(Fragment fragment) {
-        if (fragmentList == null) fragmentList = new ArrayList<>();
         fragmentList.add(fragment);
     }
 
+    public void addFragments(List<Fragment> fragments){
+        fragmentList=fragments;
+    }
+
     public void addTitle(String title) {
-        if (titleList == null) titleList = new ArrayList<>();
         titleList.add(title);
+    }
+
+    public void addTitles(List<String> titleList){
+      this.titleList=titleList;
     }
 
     @Override
@@ -51,6 +66,24 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
 
+    public List<Fragment> getFragmentList(){
+        return fragmentList;
+    }
+
+    public List<String> getTitleList(){
+        return titleList;
+    }
+
+
+    public void addTabWithName(TabLayout tabLayout){
+      if (tabLayout!=null){
+          if (EmptyUtils.isNotEmpty(titleList)){
+              for (String title:titleList){
+                  tabLayout.addTab(tabLayout.newTab().setText(title));
+              }
+          }
+      }
+    }
 
 
 }

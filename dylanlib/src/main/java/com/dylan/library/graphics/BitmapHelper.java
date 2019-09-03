@@ -10,6 +10,7 @@ import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
@@ -322,6 +323,13 @@ public class BitmapHelper {
         return bitmap;
     }
 
+    public static Bitmap getBitampFromImageView(ImageView imageView){
+        if (imageView==null)return null;
+        imageView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
+        imageView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
 
     public interface OutPutListenener {
         void onSuccess();

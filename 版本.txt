@@ -4,8 +4,8 @@
 3.FileUtis notifyScanFile 通知媒体文件刷新增加兼容解决方式
 4.隐藏部分类中的ScaleUtils
 5.增加ThreadPools 核心线程数量8
-
-
+6.增加SingleClickListener  单击控制
+7.BitmapHelper getBitampFromImageView
 
 
 版本2.3.0 ---> 2019.08.27 更新至JCenter
