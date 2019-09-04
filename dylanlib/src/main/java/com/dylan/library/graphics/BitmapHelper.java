@@ -323,7 +323,7 @@ public class BitmapHelper {
         return bitmap;
     }
 
-    public static Bitmap getBitampFromImageView(ImageView imageView){
+    public static Bitmap getBitmapFromImageView(ImageView imageView){
         if (imageView==null)return null;
         imageView.setDrawingCacheEnabled(true);
         Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());

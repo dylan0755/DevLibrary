@@ -154,4 +154,34 @@ public class ViewTouchUtils {
         return dy;
     }
 
+
+    public static MotionEvent.PointerCoords[] getPointerCoords(MotionEvent e) {
+        int n = e.getPointerCount();
+        MotionEvent.PointerCoords[] r = new MotionEvent.PointerCoords[n];
+        for (int i = 0; i < n; i++) {
+            r[i] = new MotionEvent.PointerCoords();
+            e.getPointerCoords(i, r[i]);
+        }
+        return r;
+    }
+
+    public static MotionEvent.PointerProperties[] getPointerProperties(MotionEvent e){
+        int n=e.getPointerCount();
+        MotionEvent.PointerProperties[] r=new MotionEvent.PointerProperties[n];
+        for (int i = 0; i < n; i++) {
+            r[i] = new MotionEvent.PointerProperties();
+            e.getPointerProperties(i, r[i]);
+        }
+        return r;
+    }
+
+    public static int[] getPointerIds(MotionEvent e) {
+        int n = e.getPointerCount();
+        int[] r = new int[n];
+        for (int i = 0; i < n; i++) {
+            r[i] = e.getPointerId(i);
+        }
+        return r;
+    }
+
 }
