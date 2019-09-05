@@ -1,23 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
-    <Button
-        android:layout_width="wrap_content"
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="上传头像"
-        android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"
-        android:onClick="selectPic"/>
-    
-    
-    <ImageView
-        android:id="@+id/iv_photoshow"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="50dp"/>
+        >
+
+        <ImageView
+            android:id="@+id/ivIdCardFront"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="110dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/icon_idcard_front"
+            android:scaleType="centerCrop"/>
+
+        <View
+            android:layout_width="18dp"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:id="@+id/ivIdCardBack"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="110dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"
+            android:src="@mipmap/icon_idcard_back"
+            android:scaleType="centerCrop"/>
+    </LinearLayout>
+
+
 </LinearLayout>

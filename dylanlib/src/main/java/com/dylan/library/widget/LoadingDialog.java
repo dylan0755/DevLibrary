@@ -2,7 +2,6 @@ package com.dylan.library.widget;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -36,7 +35,7 @@ public class LoadingDialog extends Dialog {
 
     private void initContentView(Context context) {
         LayoutInflater inflater = LayoutInflater.from(context);
-        View contentView = inflater.inflate(R.layout.dialog_loading, null, false);
+        View contentView = inflater.inflate(R.layout.dl_dialog_loading, null, false);
         backgroundView=contentView.findViewById(R.id.dialog_loading_view);
 //        if (backgroundView!=null){
 //            Drawable drawable=backgroundView.getBackground();

@@ -2,11 +2,24 @@
 1.CompatUtils增加 setTextAppearance(TextView textView,int resId);
 2.BitmapHelper 增加 Bitmap 与Base64字符串的相互转换
 3.FileUtis notifyScanFile 通知媒体文件刷新增加兼容解决方式
-4.隐藏部分类中的ScaleUtils
+4.隐藏部分类中的ScaleUtils,删除DLAlertDialog,DLTransparentDialog
 5.增加ThreadPools 核心线程数量8
 6.增加SingleClickListener  单击控制
 7.BitmapHelper  增加 getBitmapFromImageView 从ImageView中获取Bitmap
 8.SpannableStringUtils 增加 tintText  convertBlodStyle  setAbsoluteSizeSpan 函数，对应文本的着色，加粗，大小
+9.增加 PhotoSelectBottomSheetDialog  底部滑出图片选择对话框，相册选择，拍照
+10.PhotoSelector 集成 从相册选择和拍照 方式选择图片
+     使用：photoSelector.showDialog("这里是tag,一个页面有几个ImageView要选择图片，则靠Tag来标识是哪个ImageView");
+     回调：onPickerResult(File pickFile, String tag)
+     在Activity中：
+       @Override
+       protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        photoSelector.onActivityResult(requestCode, resultCode, data);
+       }
+
+
+
 
 
 

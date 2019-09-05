@@ -28,12 +28,11 @@ public class DemoListAdapter extends CommonBaseAdapter<String,DemoListAdapter.Vi
     }
 
     @Override
-    public void onBinderItem(ViewHolder holder, String s, int position) {
-         holder.tvItem.setText(s);
-
-
-
+    public void onBindViewHolder(ViewHolder holder, String s, int position) {
+        holder.tvItem.setText(s);
     }
+
+
 
     class ViewHolder extends CommonBaseAdapter.ViewHolder{
         TextView tvItem;

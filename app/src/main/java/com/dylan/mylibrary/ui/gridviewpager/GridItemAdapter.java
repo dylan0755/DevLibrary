@@ -23,10 +23,11 @@ public class GridItemAdapter extends CommonBaseAdapter<GridItemData,GridItemAdap
     }
 
     @Override
-    public void onBinderItem(ViewHolder holder, GridItemData homeClassifyBean, int position) {
-
-        holder.itemName.setText(homeClassifyBean.getName());
+    public void onBindViewHolder(ViewHolder holder, GridItemData gridItemData, int position) {
+        holder.itemName.setText(gridItemData.getName());
     }
+
+
 
     class ViewHolder extends CommonBaseAdapter.ViewHolder{
          ImageView imgv;

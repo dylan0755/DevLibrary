@@ -53,7 +53,7 @@ public class WebViewErroPage {
             }
             if (!hasErrorPage){
                 if (erroView==null){
-                    erroView= View.inflate(view.getContext(), R.layout.webview_error,null);
+                    erroView= View.inflate(view.getContext(), R.layout.dl_webview_error,null);
                 }
                 webViewContainer.addView(erroView,childCount);
                 erroView.setOnClickListener(new View.OnClickListener() {

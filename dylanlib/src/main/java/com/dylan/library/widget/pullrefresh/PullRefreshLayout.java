@@ -46,7 +46,7 @@ public class PullRefreshLayout extends BaseRefreshLayout {
 
     @Override
     public View getHeaderView() {
-        final View headView = LayoutInflater.from(getContext()).inflate(R.layout.view_refresh_header, null);
+        final View headView = LayoutInflater.from(getContext()).inflate(R.layout.dl_view_refresh_header, null);
         llIcon = headView.findViewById(R.id.llIcon);
         tvTip = headView.findViewById(R.id.tv_tip);
         refreshCircleView = headView.findViewById(R.id.indicatorView);

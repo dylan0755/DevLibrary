@@ -7,7 +7,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.dylan.mylibrary.R;
-import com.dylan.library.utils.EditNumberHelper;
+import com.dylan.library.utils.helper.EditNumberHelper;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;

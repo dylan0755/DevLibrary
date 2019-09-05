@@ -22,9 +22,11 @@ public class PictureDataGridAdapter extends CommonBaseAdapter<String,PictureData
     }
 
     @Override
-    public void onBinderItem(ViewHolder holder, String s, int position) {
+    public void onBindViewHolder(ViewHolder holder, String s, int position) {
 
     }
+
+
 
     class ViewHolder extends CommonBaseAdapter.ViewHolder{
         ImageView ivPic;

@@ -7,7 +7,6 @@ import android.view.View;
 
 import com.dylan.mylibrary.R;
 import com.dylan.library.widget.BulletinBoard;
-import com.dylan.library.widget.DLAlertDialog;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +18,6 @@ import java.util.List;
 
 public class BulletinBoardActivity extends Activity {
     private BulletinBoard bulletinBoard;
-    private DLAlertDialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,22 +68,8 @@ public class BulletinBoardActivity extends Activity {
                 }
             }
         },16000);
-        dialog=new DLAlertDialog(this);
-        dialog.addCallBack(new DLAlertDialog.CallBack() {
-            @Override
-            public void onCancel() {
 
-            }
-
-            @Override
-            public void onSure() {
-                BulletinBoardActivity.super.onBackPressed();
-            }
-        });
     }
 
-    @Override
-    public void onBackPressed() {
-        dialog.show("提示", "退出");
-    }
+
 }

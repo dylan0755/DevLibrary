@@ -36,7 +36,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mContext==null)mContext=parent.getContext();
-        View convertView= LayoutInflater.from(mContext).inflate(R.layout.rvitem_test,parent,false);
+        View convertView= LayoutInflater.from(mContext).inflate(R.layout.dl_rvitem_test,parent,false);
         ViewHolder holder=new ViewHolder(convertView);
         return holder;
     }

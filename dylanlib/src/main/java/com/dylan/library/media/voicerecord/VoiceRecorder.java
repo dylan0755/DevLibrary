@@ -48,7 +48,7 @@ public class VoiceRecorder {
 		dialog = new Dialog(context, R.style.DLDialogStyle);
 		dialog.setCanceledOnTouchOutside(false);
 		LayoutInflater inflater = LayoutInflater.from(context);
-		View view = inflater.inflate(R.layout.dialog_voicerecord, null);
+		View view = inflater.inflate(R.layout.dl_dialog_voicerecord, null);
 		dialog.setContentView(view);
 		llTextTip = (LinearLayout) dialog.findViewById(R.id.ll_text_tip);
 		if (!showTextHint) llTextTip.setVisibility(View.GONE);

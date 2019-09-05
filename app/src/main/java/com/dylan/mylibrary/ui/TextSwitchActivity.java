@@ -6,7 +6,7 @@ import android.support.annotation.Nullable;
 import android.widget.TextSwitcher;
 
 import com.dylan.mylibrary.R;
-import com.dylan.library.utils.VerticalTextSwitcherHelper;
+import com.dylan.library.utils.helper.VerticalTextSwitcherHelper;
 
 import java.util.ArrayList;
 import java.util.List;

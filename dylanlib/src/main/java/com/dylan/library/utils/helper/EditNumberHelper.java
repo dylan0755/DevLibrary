@@ -1,4 +1,4 @@
-package com.dylan.library.utils;
+package com.dylan.library.utils.helper;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import com.dylan.library.utils.SoftKeyboardUtils;
 
 /**
  * Created by Dylan on 2016/12/20.
