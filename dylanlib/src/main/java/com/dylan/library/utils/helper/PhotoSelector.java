@@ -117,7 +117,7 @@ public class PhotoSelector {
                 if (!crop && operateOriginal) {//操作原图 ,直接返回原图路径，只能是在不裁剪的前提下
                     if (pickerCallBack != null) {
                         File file=FileUtils.getFileByUri(selectUri, pickerCallBack.getActivityContext());
-                        if (file!=null) pickerCallBack.onPickerResult(file,mTag);
+                        if (file!=null) pickerCallBack.onPickerResult(file,mTag==null?"":mTag);
 
                     }
                 } else {
@@ -136,7 +136,7 @@ public class PhotoSelector {
                     toCrop(uri, mWidth, mHeight);
                 }
             } else {
-                pickerCallBack.onPickerResult(new File(tempFilePath),mTag);
+                pickerCallBack.onPickerResult(new File(tempFilePath),mTag==null?"":mTag);
             }
         } else if (PICTURE_CUT == requestCode && data != null && resultCode == -1) {//裁剪成功后返回
             pickerCallBack.onPickerResult(new File(tempFilePath),mTag);

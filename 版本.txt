@@ -17,7 +17,7 @@
         super.onActivityResult(requestCode, resultCode, data);
         photoSelector.onActivityResult(requestCode, resultCode, data);
        }
-
+11.MathUtils 增加 rvZeroAndDot  去掉多余零
 
 
 

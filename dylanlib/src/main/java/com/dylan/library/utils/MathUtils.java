@@ -33,4 +33,25 @@ public class MathUtils {
         return innerPoint;
     }
 
+    public static String rvZeroAndDot(String s) {
+        if (s==null||s.isEmpty()) {
+            return "";
+        }
+        if (s.indexOf(".") > 0) {
+            s = s.replaceAll("0+?$", "");//去掉多余的0
+            s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
+        }
+        return s;
+    }
+
+    public static String rvZeroAndDot(double d){
+        String s = Double.toString(d);
+        if (s.indexOf(".") > 0) {
+            s = s.replaceAll("0+?$", "");//去掉多余的0
+            s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
+        }
+        return s;
+    }
+
+
 }
