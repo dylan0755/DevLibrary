@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -79,5 +80,9 @@ public class LocalPhotoSelectActivity extends AppCompatActivity {
         photoSelector.onActivityResult(requestCode, resultCode, data);
     }
 
-
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        photoSelector.onRequestPermissionsResult(requestCode,permissions,grantResults);
+    }
 }

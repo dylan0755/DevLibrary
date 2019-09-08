@@ -11,15 +11,11 @@
 10.PhotoSelector 集成 从相册选择和拍照 方式选择图片
      使用：photoSelector.showDialog("这里是tag,一个页面有几个ImageView要选择图片，则靠Tag来标识是哪个ImageView");
      回调：onPickerResult(File pickFile, String tag)
-     在Activity中：
-       @Override
-       protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        photoSelector.onActivityResult(requestCode, resultCode, data);
-       }
+     回调:photoSelector.onActivityResult(requestCode, resultCode, data);
+     回调:photoSelector.onRequestPermissionsResult(requestCode,permissions,grantResults);
 11.MathUtils 增加 rvZeroAndDot  去掉多余零
-
-
+12.增加PermissionUtils,判断和申请 Camera ,存储权限
+13.AndroidManifestUtils 可动态获取AndroidManifest.xml 中 7.0 配置的FileProvider信息
 
 
 

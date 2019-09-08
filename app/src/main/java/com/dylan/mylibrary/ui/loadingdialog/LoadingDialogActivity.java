@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.dylan.mylibrary.R;
-import com.dylan.library.widget.LoadingDialog;
+import com.dylan.library.dialog.LoadingDialog;
 
 
 /**

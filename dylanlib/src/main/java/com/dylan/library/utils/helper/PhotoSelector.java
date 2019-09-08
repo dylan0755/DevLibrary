@@ -1,16 +1,27 @@
 package com.dylan.library.utils.helper;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v4.content.FileProvider;
+import android.util.Log;
 import android.widget.Toast;
 import com.dylan.library.dialog.PhotoSelectBottomSheetDialog;
 import com.dylan.library.io.FileUtils;
+import com.dylan.library.utils.AndroidManifestUtils;
 import com.dylan.library.utils.ContextUtils;
+import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.PermissionUtils;
+import com.dylan.library.utils.ToastUtils;
 
 import java.io.File;
 
@@ -53,11 +64,23 @@ public class PhotoSelector {
         bottomSheetDialog.show(new PhotoSelectBottomSheetDialog.SelectListener() {
             @Override
             public void selectCamera() {
+                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                    if (PermissionUtils.hasNotCameraAndExternalWritePermission(ContextUtils.getActivity(pickerCallBack.getActivityContext()))){
+                        PermissionUtils.requestCameraAndExternalWrite(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+                        return;
+                    }
+                }
                 selectByCamera();
             }
 
             @Override
             public void selectPhotoAlbum() {
+                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+                    if (PermissionUtils.hasNotExternalStoragePermission(ContextUtils.getActivity(pickerCallBack.getActivityContext()))){
+                        PermissionUtils.requestExternalStorage(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+                        return;
+                    }
+                }
                 toPick();
             }
         });
@@ -74,7 +97,17 @@ public class PhotoSelector {
         intent.setAction("android.media.action.IMAGE_CAPTURE");
         //设置相片存储路径
         File file = new File(tempFilePath);
-        Uri uri = Uri.fromFile(file);
+        Uri uri;
+        if (Build.VERSION.SDK_INT>=23){
+            String authority= AndroidManifestUtils.getFileProviderAuthority(pickerCallBack.getActivityContext());
+            Log.e("authority",authority);
+            uri= FileProvider.getUriForFile(pickerCallBack.getActivityContext(),authority,file);
+            //临时共享权限
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION
+                    | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        }else{
+            uri = Uri.fromFile(file);
+        }
         intent.putExtra(MediaStore.EXTRA_OUTPUT, uri);
         ContextUtils.getActivity(pickerCallBack.getActivityContext()).startActivityForResult(intent, TAKE_PHOTO);
 
@@ -143,6 +176,33 @@ public class PhotoSelector {
         }
     }
 
+
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+      if (requestCode==PermissionUtils.REQUEST_PER_CAMERA_WRITE){
+        if (EmptyUtils.isNotEmpty(grantResults)){
+            if (grantResults[0]== PackageManager.PERMISSION_GRANTED&&
+                grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                selectByCamera();
+            }else{
+                ToastUtils.show("相机权限未允许");
+            }
+        }else{
+            ToastUtils.show("相机权限未允许");
+        }
+      }else if (requestCode==PermissionUtils.REQUEST_PER_EXTERNAL_STORAGE){
+          if (EmptyUtils.isNotEmpty(grantResults)){
+              if (grantResults[0]== PackageManager.PERMISSION_GRANTED&&
+                      grantResults[1]==PackageManager.PERMISSION_GRANTED){
+                  toPick();
+              }else{
+                  ToastUtils.show("存储权限未允许");
+              }
+          }else{
+              ToastUtils.show("存储权限未允许");
+          }
+
+      }
+    }
     public void deleteTempFile() {
         File file = new File(tempFilePath);
         if (file.exists()) {
