@@ -68,7 +68,7 @@ public class LocalPhotoSelectActivity extends AppCompatActivity {
         ivIdCardBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                photoSelector.showDialog("idCardBack");
+                photoSelector.showDialog(true,360,240,"idCardBack");
             }
         });
     }
