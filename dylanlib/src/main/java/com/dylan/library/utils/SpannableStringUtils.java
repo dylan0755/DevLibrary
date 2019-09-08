@@ -31,14 +31,7 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    public static SpannableString tintText(String fullText, String innerText, int colorValue) {
-        SpannableString spannableString = new SpannableString(fullText);
-        ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
-        int start = fullText.indexOf(innerText);
-        int end = start + innerText.length();
-        spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        return spannableString;
-    }
+
 
 
     public static SpannableString convertBlodStyle(String text, int start, int end) {
@@ -59,6 +52,24 @@ public class SpannableStringUtils {
 
     public static SpannableString setAbsoluteSizeSpan(SpannableString spannableString, int dip, int start, int end) {
         spannableString.setSpan(new AbsoluteSizeSpan(dip, true), start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
+    }
+
+
+    public static SpannableString tintResize(String fullText, int dip, int start, int end, int colorValue){
+        SpannableString spannableString = new SpannableString(fullText);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
+        spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString=setAbsoluteSizeSpan(spannableString,dip,start,end);
+        return spannableString;
+    }
+
+    public static SpannableString tintResizeBold(String fullText, int dip,int start,int end,int colorValue){
+        SpannableString spannableString = new SpannableString(fullText);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
+        spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString=setAbsoluteSizeSpan(spannableString,dip,start,end);
+        spannableString=convertBlodStyle(spannableString,start,end);
         return spannableString;
     }
 
