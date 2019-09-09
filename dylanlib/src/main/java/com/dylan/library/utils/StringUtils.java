@@ -6,6 +6,9 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Created by Dylan on 2016/6/2.
  */
@@ -176,5 +179,16 @@ public class StringUtils {
             }
         }
         return new String(c);
+    }
+
+
+    /**
+     * 判断是否为数字
+     */
+    public static boolean isNumber(String str){
+        String pattern = "^[\\+\\-]?[\\d]+(\\.[\\d]+)?$";
+        Pattern r = Pattern.compile(pattern);
+        Matcher m = r.matcher(str);
+        return m.matches();
     }
 }

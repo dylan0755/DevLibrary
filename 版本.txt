@@ -18,7 +18,7 @@
 11.MathUtils 增加 rvZeroAndDot  去掉多余零
 12.增加PermissionUtils,判断和申请 Camera ,存储权限
 13.AndroidManifestUtils 可动态获取AndroidManifest.xml 中 7.0 配置的FileProvider信息
-
+14.StringUtils 增加 isNumber 判断字符串是否为数字 (正负小数点)
 
 
 
