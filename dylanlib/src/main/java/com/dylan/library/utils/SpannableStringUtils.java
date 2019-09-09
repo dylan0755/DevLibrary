@@ -6,6 +6,7 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.LeadingMarginSpan;
 import android.text.style.StyleSpan;
+import android.text.style.UnderlineSpan;
 
 
 /**
@@ -64,6 +65,7 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
+    //着色-大小-加粗
     public static SpannableString tintResizeBold(String fullText, int dip,int start,int end,int colorValue){
         SpannableString spannableString = new SpannableString(fullText);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
@@ -73,5 +75,14 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
+
+
+    public static SpannableString getUnderLineSpannableString(String text){
+        if (text==null)text="";
+        SpannableString spannableString=new SpannableString(text.trim());
+        UnderlineSpan span=new UnderlineSpan();
+        spannableString.setSpan(span,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
+    }
 
 }

@@ -6,7 +6,9 @@
 5.增加ThreadPools 核心线程数量8
 6.增加SingleClickListener  单击控制
 7.BitmapHelper  增加 getBitmapFromImageView 从ImageView中获取Bitmap
-8.SpannableStringUtils 增加 tintText  convertBlodStyle  setAbsoluteSizeSpan 函数，对应文本的着色，加粗，大小
+8.SpannableStringUtils
+   增加 tintText  convertBlodStyle  setAbsoluteSizeSpan  getUnderLineSpannableString
+   函数，对应文本的着色，加粗，大小 ,下划线
 9.增加 PhotoSelectBottomSheetDialog  底部滑出图片选择对话框，相册选择，拍照
 10.PhotoSelector 集成 从相册选择和拍照 方式选择图片
      使用：photoSelector.showDialog("这里是tag,一个页面有几个ImageView要选择图片，则靠Tag来标识是哪个ImageView");
