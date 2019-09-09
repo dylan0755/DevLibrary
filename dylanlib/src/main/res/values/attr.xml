@@ -17,4 +17,10 @@
     <declare-styleable name="RedPointTextView">
         <attr name="redPointSize" format="dimension"/>
     </declare-styleable>
+
+    <declare-styleable name="DashLineView">
+        <attr name="dashLineColor" format="color"/>
+        <attr name="android:paddingLeft"/>
+        <attr name="android:paddingRight"/>
+    </declare-styleable>
 </resources>

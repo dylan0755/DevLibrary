@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
@@ -45,7 +44,7 @@ public class DemoListActivity extends AppCompatActivity {
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体","FirstLineMargin",
-            "贝塞尔曲线"};
+            "贝塞尔曲线","DashLineView"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, VerticalViewPagerActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -54,7 +53,7 @@ public class DemoListActivity extends AppCompatActivity {
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
-            ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class};
+            ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class, DashLineViewActivity.class};
 
 
     @Override
