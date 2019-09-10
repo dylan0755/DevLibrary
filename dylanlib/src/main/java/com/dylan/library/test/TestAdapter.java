@@ -21,7 +21,7 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
     private Context mContext;
     public TestAdapter(){
         dataList=new ArrayList<String>();
-        bind(getDataList());
+
     }
 
 
@@ -32,6 +32,8 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
         }
 
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -62,11 +64,6 @@ public class TestAdapter extends RecyclerView.Adapter<TestAdapter.ViewHolder> {
 
 
     public List<String> getDataList(){
-        List<String> list=new ArrayList<>();
-        for (int i='A';i<'Z';i++){
-            list.add(""+(char)i);
-        }
-
-        return list;
+        return dataList==null?new ArrayList<String>():dataList;
     }
 }

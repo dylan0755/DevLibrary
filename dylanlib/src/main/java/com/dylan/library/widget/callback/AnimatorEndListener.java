@@ -7,16 +7,12 @@ import android.animation.Animator;
  * Date: 2019/8/8
  * Desc:
  */
-public class AnimatorEndListener implements Animator.AnimatorListener {
+public abstract class AnimatorEndListener implements Animator.AnimatorListener {
     @Override
     public void onAnimationStart(Animator animation) {
 
     }
 
-    @Override
-    public void onAnimationEnd(Animator animation) {
-
-    }
 
     @Override
     public void onAnimationCancel(Animator animation) {
@@ -27,4 +23,7 @@ public class AnimatorEndListener implements Animator.AnimatorListener {
     public void onAnimationRepeat(Animator animation) {
 
     }
+
+    @Override
+    public abstract void onAnimationEnd(Animator animation);
 }

@@ -222,7 +222,7 @@ public abstract class BaseRefreshLayout extends FrameLayout {
 
 
 
-   //用来判断是否可以上拉
+   //用来判断是否可以下拉，往上滚动
     public boolean canChildScrollUp() {
         if (mChildView == null) {
             return false;
@@ -238,7 +238,6 @@ public abstract class BaseRefreshLayout extends FrameLayout {
                 return mChildView.canScrollVertically(-1)||mChildView.getScrollY() > 0;
             }
         } else {
-
             //return ViewCompat.canScrollVertically(mChildView, -1);
             return mChildView.canScrollVertically(-1);
         }

@@ -53,7 +53,8 @@ public class DemoListActivity extends AppCompatActivity {
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
-            ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class, DashLineViewActivity.class};
+            ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,
+            DashLineViewActivity.class};
 
 
     @Override
