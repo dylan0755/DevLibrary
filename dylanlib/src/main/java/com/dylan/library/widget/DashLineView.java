@@ -11,6 +11,7 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.dylan.library.R;
+import com.dylan.library.utils.Logger;
 
 /**
  * Author: Dylan
@@ -22,6 +23,8 @@ public class DashLineView extends View {
     private int dividerLineColor=defaultColor;
     private float dividerPaddingLeft;
     private float dividerPaddingRight;
+    private float dashWith;
+    private float dashGap;
     private Paint mPaint;
     private Path mPath;
 
@@ -40,12 +43,14 @@ public class DashLineView extends View {
         dividerLineColor=typedArray.getColor(R.styleable.DashLineView_dashLineColor, defaultColor);
         dividerPaddingLeft=typedArray.getDimension(R.styleable.DashLineView_android_paddingLeft, 0);
         dividerPaddingRight=typedArray.getDimension(R.styleable.DashLineView_android_paddingRight,0);
+        dashWith=typedArray.getDimension(R.styleable.DashLineView_dashWith,24);
+        dashGap=typedArray.getDimension(R.styleable.DashLineView_dashGap,10);
         typedArray.recycle();
-
+        Logger.e("dashWith "+dashWith+" dashGap "+dashGap);
         mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(dividerLineColor);
-        mPaint.setPathEffect(new DashPathEffect(new float[]{24,10},0));
+        mPaint.setPathEffect(new DashPathEffect(new float[]{dashWith,dashGap},0));
         mPath=new Path();
     }
 

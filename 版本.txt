@@ -1,4 +1,4 @@
-版本2.4.0
+V2.4.0
 1.CompatUtils增加 setTextAppearance(TextView textView,int resId);
 2.BitmapHelper 增加 Bitmap 与Base64字符串的相互转换
 3.FileUtis notifyScanFile 通知媒体文件刷新增加兼容解决方式
@@ -19,7 +19,8 @@
 12.增加PermissionUtils,判断和申请 Camera ,存储权限
 13.AndroidManifestUtils 可动态获取AndroidManifest.xml 中 7.0 配置的FileProvider信息
 14.StringUtils 增加 isNumber 判断字符串是否为数字 (正负小数点)
-15.增加DashLineView  虚线View
+15.增加DashLineView  虚线View: app:dashLineColor="#333333" 虚线颜色    app:dashWith="12dp"：虚线宽度  app:dashGap="3dp" 间隙宽度
+16. EditTextUtils 增加 setGravityCenter，解决努比亚手机 EditText内容不能居中问题
 
 
 
@@ -28,8 +29,7 @@
 
 
 
-
-版本2.3.0 ---> 2019.08.27 更新至JCenter
+V2.3.0 ---> 2019.08.27 更新至JCenter
 1.增加 BitmapDownloader ，下载bitmap并缓存到内部磁盘
 2.BitmapHelper中增加压缩图片尺寸方法getInSampleSizeBitmap(String picPath, int reqsW, int reqsH)，
 增加同步，异步方式保存Bitmap到本地 的方法
@@ -47,7 +47,7 @@
 
 
 
-版本2.2.0  ---> 2019.08.12 更新至JCenter
+V2.2.0  ---> 2019.08.12 更新至JCenter
 1.增加MathUtils 工具类，  已知两个坐标点和第三个坐标的 X或Y 中的一个坐标，求X或Y;
 2.增加MatixUtils 工具类， 可由Matrix 对象 获取到当前操作图片的四个顶点坐标
 3.MatixUtils更新，增加 zoomOutToMaxRange和 centerInRange 两个方法，缩至指定范围并居中
@@ -66,7 +66,7 @@
 
 
 
-版本 2.1.0  --->  2019.03.20 更新至JCenter
+V2.1.0  --->  2019.03.20 更新至JCenter
 
 1.Gson 添加  xxxAdapter， 过滤 int ,double, long 解析空字符串 "" 的问题。
 2. 更新RomUtils ，修复读取 build.prop 权限被拒绝问题。
@@ -89,7 +89,7 @@ oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
 
 
 
-版本2.0.1  2018.05.07更新至JCenter
+V2.0.1  2018.05.07更新至JCenter
 1.新增CheckBoxListAdapter  ，只要继承它不用考虑复用性导致 checkbox状态丢失
 2.DeviceUtls 增加获取IMEI getIMEI
 3.新增lazyFragment 懒加载
@@ -108,7 +108,7 @@ oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
 
 
 
-版本2.0.0：
+V2.0.0：
 1.增加ThreadUtils
     (1) 判断是否在主线程的方法。
 2.增加EditTextUtils  
@@ -160,7 +160,7 @@ oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
  
  
  
-版本1.0.1：
+V1.0.1：
 1.2017/3/7 增加RomUtils  支持判断小米，魅族，华为。  
 2.StringUtils  增加判断是否包含中文的方法，支持。，等中文字符。
 增加ListView的侧滑删除
@@ -171,7 +171,7 @@ oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
  
  
  
- 版本1.0.0：
+V1.0.0：
 
 1.2016/12/10  增加CustomTitleUtil
 2.2016/12/16  增加DateUtil        日期选择器（4.x系统 样式）

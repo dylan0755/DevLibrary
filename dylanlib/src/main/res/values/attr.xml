@@ -22,5 +22,7 @@
         <attr name="dashLineColor" format="color"/>
         <attr name="android:paddingLeft"/>
         <attr name="android:paddingRight"/>
+        <attr name="dashWith" format="dimension"/>
+        <attr name="dashGap" format="dimension"/>
     </declare-styleable>
 </resources>
