@@ -1,4 +1,4 @@
-package com.dylan.library.media.voicerecord;
+package com.dylan.mylibrary.ui.voicerecord;
 
 import android.Manifest;
 import android.app.Activity;
@@ -20,7 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.dylan.library.R;
+
+import com.dylan.mylibrary.R;
 
 import java.io.File;
 

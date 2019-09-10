@@ -1,4 +1,4 @@
-package com.dylan.library.media.voicerecord;
+package com.dylan.mylibrary.ui.voicerecord;
 
 import android.content.Context;
 import android.util.AttributeSet;
@@ -7,8 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import com.dylan.library.R;
-
-import static android.R.attr.action;
 
 
 public class VoiceRecordButton extends Button {

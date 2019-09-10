@@ -15,8 +15,8 @@ import android.widget.ListView;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.voicerecord.MediaManager;
 import com.dylan.mylibrary.ui.voicerecord.VoiceListAdapter;
-import com.dylan.library.media.voicerecord.VoiceRecordButton;
-import com.dylan.library.media.voicerecord.VoiceRecorder;
+import com.dylan.mylibrary.ui.voicerecord.VoiceRecordButton;
+import com.dylan.mylibrary.ui.voicerecord.VoiceRecorder;
 
 import java.io.File;
 import java.util.ArrayList;
