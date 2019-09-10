@@ -54,4 +54,16 @@
         app:dashWith="12dp"
         app:dashGap="3dp"
         />
+
+    <com.dylan.library.widget.DashLineView
+        android:id="@+id/dashLine"
+        android:layout_width="match_parent"
+        android:layout_height="1.5dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="30dp"
+        app:dashLineColor="#333333"
+        app:dashWith="12dp"
+        app:dashGap="3dp"
+        />
 </LinearLayout>

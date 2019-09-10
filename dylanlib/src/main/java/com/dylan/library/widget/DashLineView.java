@@ -20,9 +20,9 @@ import com.dylan.library.utils.Logger;
  */
 public class DashLineView extends View {
     private static final int defaultColor=Color.parseColor("#d8d8d8");
-    private int dividerLineColor=defaultColor;
-    private float dividerPaddingLeft;
-    private float dividerPaddingRight;
+    private int dashLineColor =defaultColor;
+    private float dashPaddingLeft;
+    private float dashPaddingRight;
     private float dashWith;
     private float dashGap;
     private Paint mPaint;
@@ -40,16 +40,16 @@ public class DashLineView extends View {
 
     private void initAttr(Context context,AttributeSet attrs){
         TypedArray typedArray=context.obtainStyledAttributes(attrs,R.styleable.DashLineView);
-        dividerLineColor=typedArray.getColor(R.styleable.DashLineView_dashLineColor, defaultColor);
-        dividerPaddingLeft=typedArray.getDimension(R.styleable.DashLineView_android_paddingLeft, 0);
-        dividerPaddingRight=typedArray.getDimension(R.styleable.DashLineView_android_paddingRight,0);
+        dashLineColor =typedArray.getColor(R.styleable.DashLineView_dashLineColor, defaultColor);
+        dashPaddingLeft =typedArray.getDimension(R.styleable.DashLineView_android_paddingLeft, 0);
+        dashPaddingRight =typedArray.getDimension(R.styleable.DashLineView_android_paddingRight,0);
         dashWith=typedArray.getDimension(R.styleable.DashLineView_dashWith,24);
         dashGap=typedArray.getDimension(R.styleable.DashLineView_dashGap,10);
         typedArray.recycle();
         Logger.e("dashWith "+dashWith+" dashGap "+dashGap);
         mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
-        mPaint.setColor(dividerLineColor);
+        mPaint.setColor(dashLineColor);
         mPaint.setPathEffect(new DashPathEffect(new float[]{dashWith,dashGap},0));
         mPath=new Path();
     }
@@ -60,8 +60,59 @@ public class DashLineView extends View {
         int lineHeight=getHeight();
         int centerY=lineHeight/2;
         mPaint.setStrokeWidth(lineHeight);
-        mPath.moveTo(dividerPaddingLeft,centerY);
-        mPath.lineTo(lineWidth-dividerPaddingRight,centerY);
+        mPath.moveTo(dashPaddingLeft,centerY);
+        mPath.lineTo(lineWidth- dashPaddingRight,centerY);
         canvas.drawPath(mPath, mPaint);
+    }
+
+
+    public int getDashLineColor() {
+        return dashLineColor;
+    }
+
+    public void setDashLineColor(int dashLineColor) {
+        this.dashLineColor = dashLineColor;
+        mPaint.setColor(dashLineColor);
+        invalidate();
+    }
+
+    public float getDashPaddingLeft() {
+        return dashPaddingLeft;
+    }
+
+    public void setDashPaddingLeft(float dashPaddingLeft) {
+        this.dashPaddingLeft = dashPaddingLeft;
+        invalidate();
+    }
+
+    public float getDashPaddingRight() {
+        return dashPaddingRight;
+    }
+
+    public void setDashPaddingRight(float dashPaddingRight) {
+        this.dashPaddingRight = dashPaddingRight;
+        invalidate();
+    }
+
+    public float getDashWith() {
+        return dashWith;
+    }
+
+    public void setDashWith(float dashWith) {
+        this.dashWith = dashWith;
+        DashPathEffect effect= new DashPathEffect(new float[]{dashWith,dashGap},0);
+        mPaint.setPathEffect(effect);
+        invalidate();
+    }
+
+    public float getDashGap() {
+        return dashGap;
+    }
+
+    public void setDashGap(float dashGap) {
+        this.dashGap = dashGap;
+        DashPathEffect effect= new DashPathEffect(new float[]{dashWith,dashGap},0);
+        mPaint.setPathEffect(effect);
+        invalidate();
     }
 }
