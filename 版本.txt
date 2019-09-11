@@ -1,4 +1,5 @@
-V2.4.0
+V3.0.0 --->2019.09.11
+
 1.CompatUtils增加 setTextAppearance(TextView textView,int resId);
 2.BitmapHelper 增加 Bitmap 与Base64字符串的相互转换
 3.FileUtis notifyScanFile 通知媒体文件刷新增加兼容解决方式
