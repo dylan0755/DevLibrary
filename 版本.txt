@@ -1,3 +1,17 @@
+
+V3.1.0
+BitmapHelper 增加 transformRoundCornerWithBorder 圆角白边框，transformCircleWithBorder 圆形白边框
+
+
+
+
+
+
+
+
+
+
+
 V3.0.0 --->2019.09.11
 
 1.CompatUtils增加 setTextAppearance(TextView textView,int resId);

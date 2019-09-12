@@ -4,6 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.BitmapShader;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Matrix;
+import android.graphics.Paint;
+import android.graphics.RectF;
+import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -81,7 +88,7 @@ public class BitmapHelper {
 
 
     //同步保存并通知系统扫描
-    public static void saveBitmapSyncAndNotifyScan(Context context,Bitmap bitmap, String savePath) throws IOException{
+    public static void saveBitmapSyncAndNotifyScan(Context context, Bitmap bitmap, String savePath) throws IOException {
         if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
         File outPutFile = new File(savePath);
         if (!outPutFile.getParentFile().exists()) {
@@ -92,12 +99,12 @@ public class BitmapHelper {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         fos.flush();
         fos.close();
-        FileUtils.notifyScanFile(context,savePath);
+        FileUtils.notifyScanFile(context, savePath);
     }
 
 
     //同步保存
-    public static void saveBitmapSync(Bitmap bitmap, String savePath) throws IOException{
+    public static void saveBitmapSync(Bitmap bitmap, String savePath) throws IOException {
         if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
 
         File outPutFile = new File(savePath);
@@ -110,7 +117,6 @@ public class BitmapHelper {
         fos.flush();
         fos.close();
     }
-
 
 
     //异步保存
@@ -118,6 +124,7 @@ public class BitmapHelper {
         if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
         saveBitmapASync(Bitmap.CompressFormat.PNG, bitmap, 100, savePath, null);
     }
+
     //异步保存
     public static void saveBitmapASync(Bitmap bitmap, String savePath, OutPutListenener listener) {
         if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
@@ -157,6 +164,177 @@ public class BitmapHelper {
 
     }
 
+
+    public static Bitmap convertViewToBitmap(final View v) {
+        v.clearFocus();
+        v.setPressed(false);
+        boolean willNotCache = v.willNotCacheDrawing();
+        v.setWillNotCacheDrawing(false);
+        int color = v.getDrawingCacheBackgroundColor();
+        v.setDrawingCacheBackgroundColor(0);
+        if (color != 0) {
+            v.destroyDrawingCache();
+        }
+        v.buildDrawingCache();
+        Bitmap cacheBitmap = v.getDrawingCache();
+        if (cacheBitmap == null) {
+            return null;
+        }
+        Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
+        v.destroyDrawingCache();
+        v.setWillNotCacheDrawing(willNotCache);
+        v.setDrawingCacheBackgroundColor(color);
+
+        return bitmap;
+    }
+
+    public static Bitmap getBitmapFromImageView(ImageView imageView) {
+        if (imageView == null) return null;
+        imageView.setDrawingCacheEnabled(true);
+        Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
+        imageView.setDrawingCacheEnabled(false);
+        return bitmap;
+    }
+
+    //Bitamp 圆角+白边框
+    public static Bitmap transformRoundCornerWithBorder(Bitmap bitmap, int cornerRadius, int border) {
+        if (bitmap == null) return null;
+        return transformRoundCornerWithBorder(bitmap, bitmap.getWidth(), bitmap.getHeight(), cornerRadius, border);
+    }
+
+
+    public static Bitmap transformRoundCornerWithBorder(Bitmap bitmap, int outWidth, int outHeight, int cornerRadius, int border) {
+        if (bitmap == null) {
+            return null;
+        }
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float widthScale = outWidth * 1f / width;
+        float heightScale = outHeight * 1f / height;
+
+        Matrix matrix = new Matrix();
+        matrix.setScale(widthScale, heightScale);
+        //创建输出的bitmap
+        Bitmap desBitmap = Bitmap.createBitmap(width + 2 * border, height + 2 * border, Bitmap.Config.ARGB_8888);
+        //创建canvas并传入desBitmap，这样绘制的内容都会在desBitmap上
+        Canvas canvas = new Canvas(desBitmap);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        //创建着色器
+        BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        //给着色器配置matrix
+        bitmapShader.setLocalMatrix(matrix);
+        paint.setShader(bitmapShader);
+        //创建矩形区域并且预留出border
+        RectF rect = new RectF(border, border, border + width, border + height);
+        //把传入的bitmap绘制到圆角矩形区域内
+        canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint);
+
+        if (border > 0) {
+            //绘制boarder
+            Paint boarderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            boarderPaint.setColor(Color.WHITE);
+            boarderPaint.setStyle(Paint.Style.STROKE);
+            boarderPaint.setStrokeWidth(border);
+            canvas.drawRoundRect(rect, cornerRadius, cornerRadius, boarderPaint);
+        }
+        return desBitmap;
+
+    }
+
+
+    //Bitamp 圆形+白边框
+    public static Bitmap transformCircleWithBorder(Bitmap bitmap, int border) {
+        if (bitmap == null) return null;
+        return transformCircleWithBorder(bitmap, bitmap.getWidth(), bitmap.getHeight(), border);
+    }
+
+    public static Bitmap transformCircleWithBorder(Bitmap bitmap, int outWidth, int outHeight, int border) {
+
+        if (bitmap == null) {
+            return null;
+        }
+        int radius;
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float widthScale = outWidth * 1f / width;
+        float heightScale = outHeight * 1f / height;
+
+        Matrix matrix = new Matrix();
+        matrix.setScale(widthScale, heightScale);
+        Bitmap desBitmap = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888);
+        if (outHeight > outWidth) {
+            radius = outWidth / 2;
+        } else {
+            radius = outHeight / 2;
+        }
+        //创建canvas
+        Canvas canvas = new Canvas(desBitmap);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        bitmapShader.setLocalMatrix(matrix);
+        paint.setShader(bitmapShader);
+        canvas.drawCircle(outWidth / 2, outHeight / 2, radius - border, paint);
+        if (border > 0) {
+            //绘制boarder
+            Paint boarderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            boarderPaint.setColor(Color.WHITE);
+            boarderPaint.setStyle(Paint.Style.STROKE);
+            boarderPaint.setStrokeWidth(border);
+            canvas.drawCircle(outWidth / 2, outHeight / 2, radius - border, boarderPaint);
+        }
+        return desBitmap;
+
+
+    }
+
+
+    /**
+     * bitmap转为base64
+     */
+    public static String bitmapToBase64(Bitmap bitmap) {
+        String result = null;
+        ByteArrayOutputStream baos = null;
+        try {
+            if (bitmap != null) {
+                baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                baos.flush();
+                baos.close();
+                byte[] bitmapBytes = baos.toByteArray();
+                result = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (baos != null) {
+                    baos.flush();
+                    baos.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    /**
+     * base64转为bitmap
+     */
+    public static Bitmap base64ToBitmap(String base64Data) {
+        if (base64Data == null || base64Data.isEmpty()) return null;
+        base64Data = base64Data.replace("data:image/jpeg;base64", "");
+        base64Data = base64Data.replace("data:image/png;base64", "");
+        byte[] bytes = Base64.decode(base64Data, Base64.NO_WRAP);
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+
+    public interface OutPutListenener {
+        void onSuccess();
+
+        void onFailure();
+    }
 
     public static class BlurImages {
         /**
@@ -297,93 +475,6 @@ public class BitmapHelper {
         public static int clamp(int x, int a, int b) {
             return (x < a) ? a : (x > b) ? b : x;
         }
-    }
-
-
-    public static Bitmap convertViewToBitmap(final View v) {
-        v.clearFocus();
-        v.setPressed(false);
-        boolean willNotCache = v.willNotCacheDrawing();
-        v.setWillNotCacheDrawing(false);
-        int color = v.getDrawingCacheBackgroundColor();
-        v.setDrawingCacheBackgroundColor(0);
-        if (color != 0) {
-            v.destroyDrawingCache();
-        }
-        v.buildDrawingCache();
-        Bitmap cacheBitmap = v.getDrawingCache();
-        if (cacheBitmap == null) {
-            return null;
-        }
-        Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
-        v.destroyDrawingCache();
-        v.setWillNotCacheDrawing(willNotCache);
-        v.setDrawingCacheBackgroundColor(color);
-
-        return bitmap;
-    }
-
-    public static Bitmap getBitmapFromImageView(ImageView imageView){
-        if (imageView==null)return null;
-        imageView.setDrawingCacheEnabled(true);
-        Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
-        imageView.setDrawingCacheEnabled(false);
-        return bitmap;
-    }
-
-    public interface OutPutListenener {
-        void onSuccess();
-
-        void onFailure();
-    }
-
-
-
-    /**
-     * bitmap转为base64
-     *
-     * @param bitmap
-     * @return
-     */
-    public static String bitmapToBase64(Bitmap bitmap) {
-        String result = null;
-        ByteArrayOutputStream baos = null;
-        try {
-            if (bitmap != null) {
-                baos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
-                baos.flush();
-                baos.close();
-                byte[] bitmapBytes = baos.toByteArray();
-                result = Base64.encodeToString(bitmapBytes, Base64.NO_WRAP);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (baos != null) {
-                    baos.flush();
-                    baos.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        return result;
-    }
-
-    /**
-     * base64转为bitmap
-     *
-     * @param base64Data
-     * @return
-     */
-    public static Bitmap base64ToBitmap(String base64Data) {
-        if (base64Data==null||base64Data.isEmpty())return null;
-        base64Data=base64Data.replace("data:image/jpeg;base64","");
-        base64Data=base64Data.replace("data:image/png;base64","");
-        byte[] bytes = Base64.decode(base64Data, Base64.NO_WRAP);
-        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 
 }
