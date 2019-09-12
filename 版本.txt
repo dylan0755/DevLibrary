@@ -1,6 +1,7 @@
 
 V3.1.0
-BitmapHelper Ôö¼Ó transformRoundCornerWithBorder Ô²½Ç°×±ß¿ò£¬transformCircleWithBorder Ô²ÐÎ°×±ß¿ò
+
+1.BitmapHelper Ôö¼Ó transformRoundCornerWithBorder Ô²½Ç°×±ß¿ò£¬transformCircleWithBorder Ô²ÐÎ°×±ß¿ò
 
 
 
