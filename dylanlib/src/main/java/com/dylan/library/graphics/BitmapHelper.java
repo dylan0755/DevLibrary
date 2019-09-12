@@ -288,6 +288,52 @@ public class BitmapHelper {
     }
 
 
+    //两个Bitmap叠加
+    public static Bitmap layOnCenter(Bitmap bitmapBottom, Bitmap bitmapTop, float toScale) {
+        if (bitmapBottom == null) {
+            return null;
+        }
+
+        if (bitmapTop == null) {
+            return bitmapBottom;
+        }
+        //获取图片的宽高
+        int srcWidth = bitmapBottom.getWidth();
+        int srcHeight = bitmapBottom.getHeight();
+        int logoWidth = bitmapTop.getWidth();
+        int logoHeight = bitmapTop.getHeight();
+
+        if (srcWidth == 0 || srcHeight == 0) {
+            return null;
+        }
+
+        if (logoWidth == 0 || logoHeight == 0) {
+            return bitmapBottom;
+        }
+
+        //logo大小为二维码整体大小的 几分之几
+        float scaleFactor = srcWidth * toScale / logoWidth;
+        Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
+        try {
+            Canvas canvas = new Canvas(bitmap);
+            canvas.drawBitmap(bitmapBottom, 0, 0, null);
+            canvas.scale(scaleFactor, scaleFactor, srcWidth / 2, srcHeight / 2);
+            canvas.drawBitmap(bitmapTop, (srcWidth - logoWidth) / 2, (srcHeight - logoHeight) / 2, null);
+
+            canvas.save();
+            canvas.restore();
+        } catch (Exception e) {
+            bitmap = null;
+            e.getStackTrace();
+        }
+
+        return bitmap;
+    }
+
+
+
+
+
     /**
      * bitmap转为base64
      */
