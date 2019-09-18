@@ -2,6 +2,8 @@ package com.dylan.library.utils;
 
 import android.graphics.PointF;
 
+import java.math.BigDecimal;
+
 /**
  * Author: Dylan
  * Date: 2019/7/26
@@ -51,6 +53,81 @@ public class MathUtils {
             s = s.replaceAll("[.]$", "");//如最后一位是.则去掉
         }
         return s;
+    }
+
+    //加
+    public static double add(double v1,double v2){
+        BigDecimal b1=new BigDecimal(Double.toString(v1));
+        BigDecimal b2=new BigDecimal(Double.toString(v2));
+        return b1.add(b2).doubleValue();
+    }
+
+    public static double add(String v1,String v2){
+        if (v1==null||v1.isEmpty())v1="0";
+        if (v2==null||v2.isEmpty())v2="0";
+        BigDecimal b1=new BigDecimal(v1);
+        BigDecimal b2=new BigDecimal(v2);
+        return b1.add(b2).doubleValue();
+    }
+
+    //减
+    public static double subtract(double v1,double v2){
+        BigDecimal b1=new BigDecimal(Double.toString(v1));
+        BigDecimal b2=new BigDecimal(Double.toString(v2));
+        return b1.subtract(b2).doubleValue();
+    }
+
+    public static double subtract(String v1,String v2){
+        if (v1==null||v1.isEmpty())v1="0";
+        if (v2==null||v2.isEmpty())v2="0";
+        BigDecimal b1=new BigDecimal(v1);
+        BigDecimal b2=new BigDecimal(v2);
+        return b1.subtract(b2).doubleValue();
+    }
+
+    //乘
+    public static double multiply(double v1,double v2){
+        BigDecimal b1=new BigDecimal(Double.toString(v1));
+        BigDecimal b2=new BigDecimal(Double.toString(v2));
+        return b1.multiply(b2).doubleValue();
+    }
+
+    public static double multiply(String v1,String v2){
+        if (v1==null||v1.isEmpty())v1="0";
+        if (v2==null||v2.isEmpty())v2="0";
+        BigDecimal b1=new BigDecimal(v1);
+        BigDecimal b2=new BigDecimal(v2);
+        return b1.multiply(b2).doubleValue();
+    }
+
+
+
+
+    /**
+     *
+     * @param v1
+     * @param v2
+     * @param scale 保留几位小数
+     * @return
+     */
+    public static double divide(double v1,double v2,int scale){
+        if (scale<0){
+            scale=2;
+        }
+        BigDecimal b1=new BigDecimal(Double.toString(v1));
+        BigDecimal b2=new BigDecimal(Double.toString(v2));
+        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+    public static double divide(String v1,String v2,int scale){
+        if (v1==null||v1.isEmpty())v1="0";
+        if (v2==null||v2.isEmpty())v2="0";
+        if (scale<0){
+            scale=2;
+        }
+        BigDecimal b1=new BigDecimal(v1);
+        BigDecimal b2=new BigDecimal(v2);
+        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
 

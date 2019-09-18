@@ -11,6 +11,7 @@ import android.widget.GridView;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.MathUtils;
 import com.dylan.library.utils.SignatureUtils;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.R;
@@ -80,6 +81,7 @@ public class DemoListActivity extends AppCompatActivity {
         mGridView.setAdapter(mAdapter);
         List<String> list = Arrays.asList(demoNames);
         mAdapter.bind(list);
+
     }
 
 
