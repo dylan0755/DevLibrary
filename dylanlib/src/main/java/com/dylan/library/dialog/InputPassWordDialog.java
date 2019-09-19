@@ -24,11 +24,11 @@ import com.dylan.library.widget.NumberKeyboardView;
 public class InputPassWordDialog extends Dialog {
 
 
-    public InputPassWordDialog(@NonNull Context context) {
+    private InputPassWordDialog(@NonNull Context context) {
         super(context);
     }
 
-    public InputPassWordDialog(@NonNull Context context, int themeResId) {
+    private InputPassWordDialog(@NonNull Context context, int themeResId) {
         super(context, themeResId);
     }
 
@@ -40,6 +40,7 @@ public class InputPassWordDialog extends Dialog {
 
         private String str = "";
 
+        private String titleText;
         private String tipText;
 
         public Builder(Context mContext) {
@@ -57,15 +58,23 @@ public class InputPassWordDialog extends Dialog {
             return this;
         }
 
+        public Builder setTitle(String titleText) {
+            this.titleText = titleText;
+            return this;
+        }
+
         public InputPassWordDialog create() {
             LayoutInflater inflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             final InputPassWordDialog dialog = new InputPassWordDialog(mContext, R.style.DLInputPasswordDialog);
             View layout = inflater.inflate(R.layout.dl_dialog_input_password, null);
+            TextView tvTitle = layout.findViewById(R.id.tvTitle);
+            //标题
+            if (EmptyUtils.isNotEmpty(titleText))tvTitle.setText(titleText);
             final InputPassWordView inputView = layout.findViewById(R.id.dlInputView);
+            //提示
             TextView tvTip = layout.findViewById(R.id.tvTips);
-            if (EmptyUtils.isNotEmpty(tipText)){
-                tvTip.setText(tipText);
-            }
+            if (EmptyUtils.isNotEmpty(tipText))tvTip.setText(tipText);
+
             NumberKeyboardView keyboardView = layout.findViewById(R.id.dlInputKeyBoard);
             keyboardView.setOnNumberClickListener(new NumberKeyboardView.OnNumberClickListener() {
                 @Override
