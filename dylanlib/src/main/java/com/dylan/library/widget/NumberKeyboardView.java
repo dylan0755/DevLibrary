@@ -87,7 +87,7 @@ public class NumberKeyboardView extends View {
                     if ("".equals(number)) {
                         mPaint.setColor(Color.WHITE);
                     } else {
-                        mPaint.setColor(Color.GRAY);
+                        mPaint.setColor(Color.LTGRAY);
                     }
                     canvas.drawRoundRect(new RectF(x1, y1, x2, y2), roundX, roundY, mPaint);
                     mPaint.setColor(Color.BLACK);
@@ -97,14 +97,14 @@ public class NumberKeyboardView extends View {
                 }
             } else if (type == 1) {  //抬起刷新
                 if ("delete".equals(number)) {
-                    mPaint.setColor(Color.GRAY);
+                    mPaint.setColor(Color.LTGRAY);
                     canvas.drawRoundRect(new RectF(x1, y1, x2, y2), roundX, roundY, mPaint);
                     canvas.drawBitmap(mBpDelete, xs[2], ys[3] - mHeightOfBp, mPaint);
                 } else {
                     if ("".equals(number)) {
                         mPaint.setColor(Color.WHITE);
                     } else {
-                        mPaint.setColor(Color.GRAY);
+                        mPaint.setColor(Color.LTGRAY);
                     }
                     canvas.drawRoundRect(new RectF(x1, y1, x2, y2), roundX, roundY, mPaint);
                     mPaint.setColor(Color.BLACK);
