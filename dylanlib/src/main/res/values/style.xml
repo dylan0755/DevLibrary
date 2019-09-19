@@ -19,7 +19,6 @@
     </style>
 
 
-
     <style name="edt_phone_style">
         <item name="android:inputType">number</item>
         <item name="android:maxLines">1</item>
@@ -37,7 +36,6 @@
     </style>
 
 
-
     <!-- my loading dl_dialog_voicerecord -->
     <style name="DLDialogStyle">
         <item name="android:windowBackground">@android:color/transparent</item>
@@ -51,7 +49,7 @@
     </style>
 
 
-    <style name="transparentDialog"  parent="@android:style/Theme">
+    <style name="transparentDialog" parent="@android:style/Theme">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">false</item>
         <item name="android:windowNoTitle">true</item>
@@ -60,6 +58,12 @@
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
 
+    <style name="DLInputPasswordDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
 
     <style name="progress_loading">
         <item name="android:windowNoTitle">true</item>
