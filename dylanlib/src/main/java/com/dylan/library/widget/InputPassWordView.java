@@ -135,7 +135,7 @@ public class InputPassWordView extends AppCompatEditText {
         radius = typedArray.getDimensionPixelOffset(R.styleable.DLPayPsdInputView_radius, radius);
         divideLineWidth = typedArray.getDimensionPixelSize(R.styleable.DLPayPsdInputView_divideLineWidth, divideLineWidth);
         divideLineColor = typedArray.getColor(R.styleable.DLPayPsdInputView_divideLineColor, divideLineColor);
-        psdType = typedArray.getInt(R.styleable.DLPayPsdInputView_psdType, psdType);
+        psdType = typedArray.getInt(R.styleable.DLPayPsdInputView_pwType, psdType);
         rectAngle = typedArray.getDimensionPixelOffset(R.styleable.DLPayPsdInputView_rectAngle, rectAngle);
         focusedColor = typedArray.getColor(R.styleable.DLPayPsdInputView_focusedColor, focusedColor);
         typedArray.recycle();
