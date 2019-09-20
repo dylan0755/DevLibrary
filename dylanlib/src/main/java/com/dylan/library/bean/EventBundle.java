@@ -58,6 +58,22 @@ public class EventBundle {
         return bundle.getInt(key, defaultValue);
     }
 
+    public EventBundle putDouble(String key, double value) {
+        if (bundle == null) bundle = new Bundle();
+        bundle.putDouble(key, value);
+        return this;
+    }
+
+    public double getDouble(String key) {
+        if (bundle == null) return 0;
+        return bundle.getDouble(key);
+    }
+
+    public double getDouble(String key, double defaultValue) {
+        if (bundle == null) return defaultValue;
+        return bundle.getDouble(key, defaultValue);
+    }
+
 
     public EventBundle putString(String key, String value) {
         if (bundle == null) bundle = new Bundle();
