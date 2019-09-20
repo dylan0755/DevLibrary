@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F4F6FC">
+
+<com.dl.recyclerview.IRecyclerView
+    android:id="@+id/recyclerView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:refreshEnabled="true"
+    app:loadMoreEnabled="true"
+    app:refreshHeaderLayout="@layout/header_pull_refresh"
+    app:loadMoreFooterLayout="@layout/footer_load_more"
+    />
+</LinearLayout>

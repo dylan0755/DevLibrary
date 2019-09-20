@@ -52,6 +52,7 @@ dependencies {
     compile 'com.github.bumptech.glide:okhttp3-integration:4.7.1'
     //compile 'com.dylan:devlib:3.0.0'
     compile project(':dylanlib')
+    compile project(':IRecyclerView')
     compile files('libs/butterknife-7.0.1.jar')
     compile files('libs/ImmersionBar.jar')
     compile files('libs/gson-2.8.0.jar')

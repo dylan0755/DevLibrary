@@ -8,12 +8,14 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import com.dl.recyclerview.IRecyclerView;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.MathUtils;
 import com.dylan.library.utils.SignatureUtils;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
+import com.dylan.mylibrary.IRecyclerViewActivity;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.adapter.DemoListAdapter;
 import com.dylan.mylibrary.ui.edittext.EditNumberActivity;
@@ -38,7 +40,7 @@ import java.util.List;
 public class DemoListActivity extends AppCompatActivity {
     private GridView mGridView;
     private DemoListAdapter mAdapter;
-    private String[] demoNames = {"RecyclerViewSnapHelper", "PhotoView", "VerticalPager",
+    private String[] demoNames = {"RecyclerViewSnapHelper", "PhotoView", "IRecyclerView",
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "SlidingRefresh", "WebViewActvity",
@@ -46,7 +48,7 @@ public class DemoListActivity extends AppCompatActivity {
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体","FirstLineMargin",
             "贝塞尔曲线","DashLineView","InputPasswordDialog"};
-    private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, VerticalViewPagerActivity.class,
+    private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, LocalPhotoSelectActivity.class,
@@ -55,7 +57,7 @@ public class DemoListActivity extends AppCompatActivity {
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,
-            DashLineViewActivity.class,InputPasswordActivity.class};
+            DashLineViewActivity.class,InputPasswordActivity.class,};
 
 
     @Override

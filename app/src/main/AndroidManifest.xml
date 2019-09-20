@@ -129,6 +129,7 @@
         <activity android:name=".ui.BezierCurveActivity"/>
         <activity android:name=".ui.DashLineViewActivity"/>
         <activity android:name=".ui.InputPasswordActivity"/>
+        <activity android:name=".IRecyclerViewActivity"/>
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
         所以name,authorities,resource 里面的都不一样-->
         <provider
