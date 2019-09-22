@@ -6,7 +6,8 @@ V3.1.0
 2.MathUtils 封装BigDecimal,  增加 加减乘除 对应方法  处理double 运算问题
 3.增加6位数字密码对话框 InputPassWordDialog
 4.EventBundle 补回  putDouble getDouble
-
+5.SpannableStringUtils tintText 增加SpannableString 传参，
+增加getUnderLineTintSpannableString 函数 着色并下划线处理
 
 
 

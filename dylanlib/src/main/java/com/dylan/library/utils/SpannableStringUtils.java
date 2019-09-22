@@ -33,6 +33,13 @@ public class SpannableStringUtils {
     }
 
 
+    public static SpannableString tintText(SpannableString spannableString, int start,int end,int colorValue) {
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
+        spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
+    }
+
+
 
 
     public static SpannableString convertBlodStyle(String text, int start, int end) {
@@ -84,5 +91,13 @@ public class SpannableStringUtils {
         spannableString.setSpan(span,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return spannableString;
     }
+
+
+    public static SpannableString getUnderLineTintSpannableString(String text,int start,int end,int colorValue){
+        SpannableString spannableString=getUnderLineSpannableString(text);
+        spannableString=tintText(spannableString,start,end,colorValue);
+        return spannableString;
+    }
+
 
 }
