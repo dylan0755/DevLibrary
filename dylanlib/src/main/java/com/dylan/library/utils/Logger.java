@@ -21,21 +21,33 @@ public class Logger {
             if (msg != null && msg instanceof List) {
                 Log.e(LOGTAG, stackInfo + ":\n" + ((List) msg).size());
                 return;
-            }else if (msg!=null&& msg instanceof Throwable){
+            } else if (msg != null && msg instanceof Throwable) {
                 Log.e(LOGTAG, stackInfo);
-                Throwable throwable= (Throwable) msg;
+                Throwable throwable = (Throwable) msg;
                 ELog.e(throwable);
                 return;
 
             }
-            Log.e(LOGTAG, stackInfo + ":\n"+msg);
+            e(LOGTAG, stackInfo + ":\n" + msg);
         }
 
     }
 
     public static void e(String tag, String msg) {
         if (isDebug) {
-            Log.e(tag, "" + msg);
+            if (msg == null || msg.length() == 0) return;
+            int segmentSize = 3900;
+            long length = msg.length();
+            if (length <= segmentSize) {// 长度小于等于限制直接打印
+                Log.e(tag, msg);
+            } else {
+                while (msg.length() > segmentSize) {// 循环分段打印日志
+                    String logContent = msg.substring(0, segmentSize);
+                    msg = msg.replace(logContent, "");
+                    Log.e(tag, logContent);
+                }
+                Log.e(tag, msg);// 打印剩余日志
+            }
         }
 
     }
@@ -43,7 +55,20 @@ public class Logger {
     public static void i(String msg) {
         if (isDebug) {
             String stackInfo = getStackInfo();
-            Log.i(LOGTAG, stackInfo + ":\n" + msg);
+            msg = stackInfo + ":\n" + msg;
+
+            int segmentSize = 3900;
+            long length = msg.length();
+            if (length <= segmentSize) {// 长度小于等于限制直接打印
+                Log.i(LOGTAG, msg);
+            } else {
+                while (msg.length() > segmentSize) {// 循环分段打印日志
+                    String logContent = msg.substring(0, segmentSize);
+                    msg = msg.replace(logContent, "");
+                    Log.i(LOGTAG, logContent);
+                }
+                Log.i(LOGTAG, msg);// 打印剩余日志
+            }
         }
 
     }
@@ -72,7 +97,7 @@ public class Logger {
         isDebug = bl;
     }
 
-    public static boolean isDebugMode(){
+    public static boolean isDebugMode() {
         return isDebug;
     }
 }
