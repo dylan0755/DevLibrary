@@ -14,6 +14,7 @@ import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.MathUtils;
 import com.dylan.library.utils.SignatureUtils;
+import com.dylan.library.widget.CountDownCircleView;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
 import com.dylan.mylibrary.R;
@@ -47,7 +48,7 @@ public class DemoListActivity extends AppCompatActivity {
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体","FirstLineMargin",
-            "贝塞尔曲线","DashLineView","InputPasswordDialog"};
+            "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -57,7 +58,7 @@ public class DemoListActivity extends AppCompatActivity {
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,
-            DashLineViewActivity.class,InputPasswordActivity.class,};
+            DashLineViewActivity.class,InputPasswordActivity.class, CountDownCircleViewActivity.class};
 
 
     @Override

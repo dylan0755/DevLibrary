@@ -50,12 +50,17 @@
             android:name="com.dylan.mylibrary.ui.onlinepic.glide.MyGlideAppModule"
             android:value="AppGlideModule" />
 
+        <activity android:name=".ui.CountDownCircleViewActivity"
+            android:theme="@style/statusBarStyle"/>
+
+
         <activity
             android:name="com.dylan.mylibrary.ui.DemoListActivity"
             android:theme="@style/statusBarStyle">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
@@ -118,18 +123,19 @@
         <activity android:name="com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity" />
         <activity android:name="com.dylan.mylibrary.ui.PullToRefreshScrollViewActivity" />
         <activity android:name="com.dylan.mylibrary.ui.TextSwitchActivity" />
-        <activity android:name=".ui.VerticalViewPagerActivity"/>
-        <activity android:name=".ui.snaphelper.RecyclerSnapHelperActivity"/>
-        <activity android:name=".ui.CircleAnimationActivity"/>
-         <activity android:name=".ui.PhotoViewActivity"/>
-        <activity android:name=".ui.ModifyFontActivity"
-            android:theme="@style/statusBarStyle"/>
-        <activity android:name=".ui.slidingrefresh.SlidingRefreshActivity"/>
-        <activity android:name=".ui.marginspan.FirstLineMarginLeftActivity"/>
-        <activity android:name=".ui.BezierCurveActivity"/>
-        <activity android:name=".ui.DashLineViewActivity"/>
-        <activity android:name=".ui.InputPasswordActivity"/>
-        <activity android:name=".IRecyclerViewActivity"/>
+        <activity android:name=".ui.VerticalViewPagerActivity" />
+        <activity android:name=".ui.snaphelper.RecyclerSnapHelperActivity" />
+        <activity android:name=".ui.CircleAnimationActivity" />
+        <activity android:name=".ui.PhotoViewActivity" />
+        <activity
+            android:name=".ui.ModifyFontActivity"
+            android:theme="@style/statusBarStyle" />
+        <activity android:name=".ui.slidingrefresh.SlidingRefreshActivity" />
+        <activity android:name=".ui.marginspan.FirstLineMarginLeftActivity" />
+        <activity android:name=".ui.BezierCurveActivity" />
+        <activity android:name=".ui.DashLineViewActivity" />
+        <activity android:name=".ui.InputPasswordActivity" />
+        <activity android:name=".IRecyclerViewActivity" />
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
         所以name,authorities,resource 里面的都不一样-->
         <provider
@@ -141,7 +147,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/dl_file_paths" />
         </provider>
-
 
 
         <meta-data
