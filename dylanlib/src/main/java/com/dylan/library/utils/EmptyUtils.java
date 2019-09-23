@@ -43,15 +43,14 @@ public class EmptyUtils {
 
         else if (object instanceof SparseIntArray && ((SparseIntArray) object).size() == 0)
             return true;
+        //TextView ,EditText
+        else if (object instanceof TextView && ((TextView) object).getText().toString().isEmpty())
+            return true;
 
         else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             if (object instanceof SparseLongArray && ((SparseLongArray) object).size() == 0)
                 return true;
         }
-        //TextView ,EditText
-        else if (object instanceof TextView && ((TextView) object).getText().toString().isEmpty())
-            return true;
-
 
 
         return false;
