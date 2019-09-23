@@ -9,6 +9,7 @@ V3.1.0
 5.SpannableStringUtils tintText 增加SpannableString 传参，
 增加getUnderLineTintSpannableString 函数 着色并下划线处理
 6.Logger 输出字符串若长度超过4k，分段打印
+7.EmptyUtils isEmpty  增加判断TextView 和 EditText
 
 
 

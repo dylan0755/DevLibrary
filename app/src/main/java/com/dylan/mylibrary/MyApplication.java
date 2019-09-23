@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.dylan.library.utils.Logger;
 import com.dylan.mylibrary.bean.QiNiuDomain;
 import com.dylan.mylibrary.domain.RestApi;
 import com.dylan.mylibrary.util.IResponBodyImpl;
@@ -33,8 +34,8 @@ public class MyApplication extends Application {
         super.onCreate();
         mContext = this;
         ToastUtils.initToast(this);
+        Logger.setDebugMode(true);
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
-        loadqiniuDomain();
         CrashHandler.getInstance().init(MyApplication.this);
         RunTaskUtils.registerActivityLifeCallBack(MyApplication.this, new RunTaskUtils.RunningListner() {
             @Override
