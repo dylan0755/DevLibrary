@@ -8,19 +8,17 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.dl.recyclerview.IRecyclerView;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.MathUtils;
 import com.dylan.library.utils.SignatureUtils;
-import com.dylan.library.widget.CountDownCircleView;
+import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
 import com.dylan.mylibrary.R;
-import com.dylan.mylibrary.adapter.DemoListAdapter;
 import com.dylan.mylibrary.ui.edittext.EditNumberActivity;
 import com.dylan.mylibrary.ui.filedownloader.FileDownLoaderActivity;
+import com.dylan.mylibrary.ui.gridviewpager.GridItemAdapter;
 import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
@@ -31,7 +29,8 @@ import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
-import java.util.Arrays;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,8 +38,7 @@ import java.util.List;
  */
 
 public class DemoListActivity extends AppCompatActivity {
-    private GridView mGridView;
-    private DemoListAdapter mAdapter;
+    private GridViewPager mGridPager;
     private String[] demoNames = {"RecyclerViewSnapHelper", "PhotoView", "IRecyclerView",
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
@@ -80,24 +78,38 @@ public class DemoListActivity extends AppCompatActivity {
 
 
     private void initEvent() {
-        mGridView = (GridView) findViewById(R.id.gv_demolist);
-        mAdapter = new DemoListAdapter();
-        mGridView.setOnItemClickListener(new ItemClickListener());
-        mGridView.setAdapter(mAdapter);
-        List<String> list = Arrays.asList(demoNames);
-        mAdapter.bind(list);
-
-    }
+        mGridPager =  findViewById(R.id.gridPager);
 
 
-    class ItemClickListener implements AdapterView.OnItemClickListener {
-
-        @Override
-        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Intent intent = new Intent(DemoListActivity.this,classes[position]);
-            startActivity(intent);
+        List<GridDemoItem> list=new ArrayList<>();
+        for (int i=0;i<demoNames.length;i++){
+            String name=demoNames[i];
+            Class clazz=classes[i];
+            GridDemoItem item=new GridDemoItem(name,clazz);
+            list.add(item);
         }
+
+        mGridPager.setAttachAdapterListener(new GridViewPager.AttachAdapterListener() {
+            @Override
+            public void attachAdapter(GridView gridView, List datasPerPage) {
+                GridDemoItemAdapter adapter = new GridDemoItemAdapter();
+                adapter.bind(datasPerPage);
+                gridView.setAdapter(adapter);
+                adapter.setOnItemClick(new GridDemoItemAdapter.OnItemClick() {
+                    @Override
+                    public void onItemClick(GridDemoItem item) {
+                        Intent intent = new Intent(DemoListActivity.this,item.getClzz());
+                        startActivity(intent);
+                    }
+                });
+            }
+        });
+        mGridPager.setDataList(list,3,30);
+
     }
+
+
+
 
 
 

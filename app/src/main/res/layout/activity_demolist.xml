@@ -3,11 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#ffffff"
   >
 
 
-    <GridView
-        android:id="@+id/gv_demolist"
+    <com.dylan.library.widget.GridViewPager
+        android:id="@+id/gridPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:horizontalSpacing="5dp"
