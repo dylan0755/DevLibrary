@@ -11,7 +11,7 @@ V3.1.0
 6.Logger 输出字符串若长度超过4k，分段打印
 7.EmptyUtils isEmpty  增加判断TextView 和 EditText
 8.增加 CountDownCircleView ，用于启动页倒计时
-
+9.增加 WebProgressView，显示WebView 加载的进度
 
 
 
