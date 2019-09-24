@@ -1,4 +1,18 @@
 
+V3.2.0
+
+
+1.增加 setClickTintResizeSpanStr getClickTintResizeSpanStr 着色并可点击效果的字符串，
+  增加 ClickableSpanTextView 和 ClickableLinkMovementMethod 应对ListView 中的TextView 设置ClickableSpanString 时，item点击没有效果等
+
+
+
+
+
+
+
+
+
 V3.1.0 --->2019.09.24
 
 1.BitmapHelper 增加 transformRoundCornerWithBorder 圆角白边框，

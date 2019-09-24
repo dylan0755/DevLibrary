@@ -1,12 +1,23 @@
 package com.dylan.library.utils;
 
+import android.support.annotation.NonNull;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.LeadingMarginSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
+import android.view.View;
+import android.widget.TextView;
+
+import com.dylan.library.widget.ClickableLinkMovementMethod;
+import com.dylan.library.widget.ClickableSpanTextView;
 
 
 /**
@@ -100,4 +111,90 @@ public class SpannableStringUtils {
     }
 
 
+    public static SpannableString getClickTintResizeSpanStr(String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            public void onClick(View v) {
+                Selection.removeSelection((Spannable) ((TextView)v).getText());
+                if (clickListener != null) {
+                    clickListener.onClick(v);
+                }
+
+            }
+
+            @Override
+            public void updateDrawState( TextPaint ds) {
+                ds.setColor(colorValue);
+                ds.setUnderlineText(false);//去掉下划线,否则 ForegroundColorSpan 失效
+
+            }
+        };
+
+        text = text.concat(" ");
+        SpannableString spannableString = new SpannableString(text);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
+        //大小
+        spannableString.setSpan(new AbsoluteSizeSpan(dp, true), start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        //颜色
+        spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        //点击
+        spannableString.setSpan(clickableSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
+    }
+
+
+    public static SpannableString getClickTintResizeSpanStr(String text, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener) {
+        ClickableSpan clickableSpan = new ClickableSpan() {
+            public void onClick(View v) {
+                Selection.removeSelection((Spannable) ((TextView)v).getText());
+                if (clickListener != null) {
+                    clickListener.onClick(v);
+                }
+
+            }
+
+            @Override
+            public void updateDrawState( TextPaint ds) {
+                ds.setColor(colorValue2);
+                ds.setUnderlineText(false);//去掉下划线,否则 ForegroundColorSpan 失效
+
+            }
+        };
+
+        text = text.concat(" ");
+        SpannableString spannableString = new SpannableString(text);
+        ForegroundColorSpan colorSpan1 = new ForegroundColorSpan(colorValue1);
+        ForegroundColorSpan colorSpan2 = new ForegroundColorSpan(colorValue2);
+        //大小
+        spannableString.setSpan(new AbsoluteSizeSpan(dp, true), start1, end1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(new AbsoluteSizeSpan(dp, true), start2, end2, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        //颜色
+        spannableString.setSpan(colorSpan1, start1, end1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        spannableString.setSpan(colorSpan2, start2, end2, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        //点击
+        spannableString.setSpan(clickableSpan, start2, end2, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
+    }
+
+
+    public static SpannableString setClickTintResizeSpanStr(TextView textView,String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener){
+        SpannableString spannableString=getClickTintResizeSpanStr(text,dp,start,end,colorValue,clickListener);
+        textView.setText(spannableString);
+        if (textView instanceof ClickableSpanTextView){
+            ((ClickableSpanTextView)textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        }else{
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        return spannableString;
+    }
+
+    public static SpannableString setClickTintResizeSpanStr(TextView textView,String text, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener){
+        SpannableString spannableString=getClickTintResizeSpanStr(text,dp,start1,end1,start2,end2,colorValue1,colorValue2,clickListener);
+        textView.setText(spannableString);
+        if (textView instanceof ClickableSpanTextView){
+            ((ClickableSpanTextView)textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        }else{
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        return spannableString;
+    }
 }
