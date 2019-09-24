@@ -12,7 +12,7 @@ V3.1.0
 7.EmptyUtils isEmpty  增加判断TextView 和 EditText
 8.增加 CountDownCircleView ，用于启动页倒计时
 9.增加 WebProgressView，显示WebView 加载的进度
-
+10.EditTextUtils 增加showCursor 和 hideCursor 方法
 
 
 

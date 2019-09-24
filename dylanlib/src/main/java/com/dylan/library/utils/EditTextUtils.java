@@ -51,6 +51,15 @@ public class EditTextUtils {
     }
 
 
+    public static void hideCursor(EditText editText) {
+        if (editText!=null)editText.setCursorVisible(false);
+    }
+
+    public static void showCursor(EditText editText){
+        if (editText!=null)editText.setCursorVisible(true);
+    }
+
+
     public static abstract class AfterTextChangedListener implements TextWatcher {
 
         @Override
