@@ -35,8 +35,11 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-
-    public static SpannableString tintText(String fullText, int start,int end,int colorValue) {
+    public static SpannableString tintText(String fullText, String tintKeyWord, int colorValue) {
+        if (fullText == null) fullText = "";
+        if (tintKeyWord == null) tintKeyWord = "";
+        int start = fullText.indexOf(tintKeyWord);
+        int end = start + tintKeyWord.length();
         SpannableString spannableString = new SpannableString(fullText);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
         spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
@@ -44,13 +47,19 @@ public class SpannableStringUtils {
     }
 
 
-    public static SpannableString tintText(SpannableString spannableString, int start,int end,int colorValue) {
+    public static SpannableString tintText(String fullText, int start, int end, int colorValue) {
+        SpannableString spannableString = new SpannableString(fullText);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
         spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return spannableString;
     }
 
 
+    public static SpannableString tintText(SpannableString spannableString, int start, int end, int colorValue) {
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
+        spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return spannableString;
+    }
 
 
     public static SpannableString convertBlodStyle(String text, int start, int end) {
@@ -58,6 +67,7 @@ public class SpannableStringUtils {
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return spannableString;
     }
+
     public static SpannableString convertBlodStyle(SpannableString spannableString, int start, int end) {
         spannableString.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return spannableString;
@@ -75,38 +85,48 @@ public class SpannableStringUtils {
     }
 
 
-    public static SpannableString tintResize(String fullText, int dip, int start, int end, int colorValue){
+    public static SpannableString tintResize(String fullText, int dip, int start, int end, int colorValue) {
         SpannableString spannableString = new SpannableString(fullText);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
         spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        spannableString=setAbsoluteSizeSpan(spannableString,dip,start,end);
+        spannableString = setAbsoluteSizeSpan(spannableString, dip, start, end);
         return spannableString;
+    }
+
+    public static SpannableString tintResize(String fullText, String tintKeyWord, int dp, int tintColor) {
+        if (fullText == null) fullText = "";
+        if (tintKeyWord == null) tintKeyWord = "";
+        int start = fullText.indexOf(tintKeyWord);
+        int end = start + tintKeyWord.length();
+        SpannableString spannableString = new SpannableString(fullText);
+        ForegroundColorSpan colorSpan = new ForegroundColorSpan(tintColor);
+        spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        return setAbsoluteSizeSpan(spannableString, dp, start, end);
     }
 
     //着色-大小-加粗
-    public static SpannableString tintResizeBold(String fullText, int dip,int start,int end,int colorValue){
+    public static SpannableString tintResizeBold(String fullText, int dip, int start, int end, int colorValue) {
         SpannableString spannableString = new SpannableString(fullText);
         ForegroundColorSpan colorSpan = new ForegroundColorSpan(colorValue);
         spannableString.setSpan(colorSpan, start, end, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        spannableString=setAbsoluteSizeSpan(spannableString,dip,start,end);
-        spannableString=convertBlodStyle(spannableString,start,end);
+        spannableString = setAbsoluteSizeSpan(spannableString, dip, start, end);
+        spannableString = convertBlodStyle(spannableString, start, end);
         return spannableString;
     }
 
 
-
-    public static SpannableString getUnderLineSpannableString(String text){
-        if (text==null)text="";
-        SpannableString spannableString=new SpannableString(text.trim());
-        UnderlineSpan span=new UnderlineSpan();
-        spannableString.setSpan(span,0,spannableString.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+    public static SpannableString getUnderLineSpannableString(String text) {
+        if (text == null) text = "";
+        SpannableString spannableString = new SpannableString(text.trim());
+        UnderlineSpan span = new UnderlineSpan();
+        spannableString.setSpan(span, 0, spannableString.length(), Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return spannableString;
     }
 
 
-    public static SpannableString getUnderLineTintSpannableString(String text,int start,int end,int colorValue){
-        SpannableString spannableString=getUnderLineSpannableString(text);
-        spannableString=tintText(spannableString,start,end,colorValue);
+    public static SpannableString getUnderLineTintSpannableString(String text, int start, int end, int colorValue) {
+        SpannableString spannableString = getUnderLineSpannableString(text);
+        spannableString = tintText(spannableString, start, end, colorValue);
         return spannableString;
     }
 
@@ -114,7 +134,7 @@ public class SpannableStringUtils {
     public static SpannableString getClickTintResizeSpanStr(String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
         ClickableSpan clickableSpan = new ClickableSpan() {
             public void onClick(View v) {
-                Selection.removeSelection((Spannable) ((TextView)v).getText());
+                Selection.removeSelection((Spannable) ((TextView) v).getText());
                 if (clickListener != null) {
                     clickListener.onClick(v);
                 }
@@ -122,7 +142,7 @@ public class SpannableStringUtils {
             }
 
             @Override
-            public void updateDrawState( TextPaint ds) {
+            public void updateDrawState(TextPaint ds) {
                 ds.setColor(colorValue);
                 ds.setUnderlineText(false);//去掉下划线,否则 ForegroundColorSpan 失效
 
@@ -145,7 +165,7 @@ public class SpannableStringUtils {
     public static SpannableString getClickTintResizeSpanStr(String text, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener) {
         ClickableSpan clickableSpan = new ClickableSpan() {
             public void onClick(View v) {
-                Selection.removeSelection((Spannable) ((TextView)v).getText());
+                Selection.removeSelection((Spannable) ((TextView) v).getText());
                 if (clickListener != null) {
                     clickListener.onClick(v);
                 }
@@ -153,7 +173,7 @@ public class SpannableStringUtils {
             }
 
             @Override
-            public void updateDrawState( TextPaint ds) {
+            public void updateDrawState(TextPaint ds) {
                 ds.setColor(colorValue2);
                 ds.setUnderlineText(false);//去掉下划线,否则 ForegroundColorSpan 失效
 
@@ -176,23 +196,23 @@ public class SpannableStringUtils {
     }
 
 
-    public static SpannableString setClickTintResizeSpanStr(TextView textView,String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener){
-        SpannableString spannableString=getClickTintResizeSpanStr(text,dp,start,end,colorValue,clickListener);
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
+        SpannableString spannableString = getClickTintResizeSpanStr(text, dp, start, end, colorValue, clickListener);
         textView.setText(spannableString);
-        if (textView instanceof ClickableSpanTextView){
-            ((ClickableSpanTextView)textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
-        }else{
+        if (textView instanceof ClickableSpanTextView) {
+            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        } else {
             textView.setMovementMethod(LinkMovementMethod.getInstance());
         }
         return spannableString;
     }
 
-    public static SpannableString setClickTintResizeSpanStr(TextView textView,String text, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener){
-        SpannableString spannableString=getClickTintResizeSpanStr(text,dp,start1,end1,start2,end2,colorValue1,colorValue2,clickListener);
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String text, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener) {
+        SpannableString spannableString = getClickTintResizeSpanStr(text, dp, start1, end1, start2, end2, colorValue1, colorValue2, clickListener);
         textView.setText(spannableString);
-        if (textView instanceof ClickableSpanTextView){
-            ((ClickableSpanTextView)textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
-        }else{
+        if (textView instanceof ClickableSpanTextView) {
+            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        } else {
             textView.setMovementMethod(LinkMovementMethod.getInstance());
         }
         return spannableString;

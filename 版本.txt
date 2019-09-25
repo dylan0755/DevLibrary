@@ -4,7 +4,7 @@ V3.2.0
 
 1.增加 setClickTintResizeSpanStr getClickTintResizeSpanStr 着色并可点击效果的字符串，
   增加 ClickableSpanTextView 和 ClickableLinkMovementMethod 应对ListView 中的TextView 设置ClickableSpanString 时，item点击没有效果等
-
+2.tintText 和 tintResize 两个函数重载， 不传入 start,end, 只传全文本，和keyword
 
 
 
