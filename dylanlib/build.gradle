@@ -17,8 +17,18 @@ android {
 
     buildTypes {
         release {
-            minifyEnabled false   //设置为true  混淆代码
+            minifyEnabled true//设置为true  混淆代码
+            shrinkResources true
+            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+//            minifyEnabled true
+//            shrinkResources true
+//            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
         }
     }
 

@@ -220,4 +220,9 @@ public class PullRefreshLayout extends BaseRefreshLayout {
         supportMaxBack=bl;
         setSupportMaxBack(supportMaxBack);
     }
+
+
+    public boolean isRefreshing(){
+        return isRefreshing;
+    }
 }

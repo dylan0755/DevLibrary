@@ -157,15 +157,21 @@ public void *(android.view.View);
 -keep class com.dylan.library.bean.** {
       *;
  }
+
+ -keep class com.dylan.library.callback.** {
+       *;
+  }
+
 -keep class com.dylan.library.device.** {
       *;
 }
 
--keep class com.dylan.library.exception.** {
+-keep class com.dylan.library.dialog.** {
       *;
 }
 
--keep class com.dylan.library.file.** {
+
+-keep class com.dylan.library.exception.** {
       *;
 }
 
@@ -180,7 +186,6 @@ public void *(android.view.View);
 -keep class com.dylan.library.io.** {
       *;
 }
-
 
 -keep class com.dylan.library.manager.** {
       *;
@@ -217,7 +222,9 @@ public void *(android.view.View);
 -keep class com.dylan.library.utils.** {
       *;
 }
-
+-keep class com.dylan.library.webview.** {
+      *;
+}
 -keep class com.dylan.library.widget.** {
      #module中除了widget包进行混淆，其它包中的类不进行混淆,并且public 和protected 成员不被混淆
       public <init>(android.content.Context);
