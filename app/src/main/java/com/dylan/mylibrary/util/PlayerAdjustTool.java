@@ -1,4 +1,4 @@
-package com.dylan.library.media;
+package com.dylan.mylibrary.util;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
@@ -18,7 +18,8 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import com.dylan.library.R;
+
+import com.dylan.mylibrary.R;
 
 
 /**

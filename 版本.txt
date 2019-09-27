@@ -8,6 +8,7 @@ V3.2.0
   增加 ClickableSpanTextView 和 ClickableLinkMovementMethod 应对ListView 中的TextView 设置ClickableSpanString 时，item点击没有效果等
 2.tintText 和 tintResize 两个函数重载， 不传入 start,end, 只传全文本，和keyword
 3.PullRefreshLayout 增加 isRefreshing()函数 判断是否正在刷新
+4.LoadingDialog 更新旋转样式
 
 
 

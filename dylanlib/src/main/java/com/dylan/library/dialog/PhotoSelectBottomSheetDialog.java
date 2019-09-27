@@ -22,7 +22,7 @@ public class PhotoSelectBottomSheetDialog extends Dialog implements View.OnClick
     private SelectListener mLister;
 
     public PhotoSelectBottomSheetDialog(@NonNull Context context) {
-        super(context, R.style.BottomSheetDialogStyle);
+        super(context, R.style.DLBottomSheetDialogStyle);
         init(context);
     }
 

@@ -8,8 +8,14 @@
         android:id="@+id/btn_loading"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="加载"
+        android:text="加载1"
         android:layout_marginTop="50dp"/>
 
 
+    <Button
+        android:id="@+id/btn_loading2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="加载2"
+        android:layout_marginTop="50dp"/>
 </LinearLayout>

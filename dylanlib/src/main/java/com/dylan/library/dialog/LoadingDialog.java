@@ -2,13 +2,9 @@ package com.dylan.library.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -21,34 +17,21 @@ import com.dylan.library.R;
 
 public class LoadingDialog extends Dialog {
     private TextView tipTextView;
-    private View backgroundView;
+    private View backgroudView;
     private ProgressBar loadingBar;
 
     public LoadingDialog(@NonNull Context context) {
-        super(context, R.style.progress_loading);
-        initContentView(context);
-
-    }
-
-
-
-
-    private void initContentView(Context context) {
-        LayoutInflater inflater = LayoutInflater.from(context);
-        View contentView = inflater.inflate(R.layout.dl_dialog_loading, null, false);
-        backgroundView=contentView.findViewById(R.id.dialog_loading_view);
-//        if (backgroundView!=null){
-//            Drawable drawable=backgroundView.getBackground();
-//            if (drawable!=null)drawable.setAlpha(230);
-//        }
-        tipTextView = (TextView) contentView.findViewById(R.id.tipTextView);
-        loadingBar=contentView.findViewById(R.id.loadingBar);
+        super(context, R.style.DLCustomDialog);
         setCancelable(true);
         setCanceledOnTouchOutside(false);
-        setContentView(contentView, new LinearLayout.LayoutParams(-1, -1));
-        setDialogWindowParam(this, Gravity.CENTER, com.dylan.library.R.style.anim_popWindowStyle);
 
+        setContentView(R.layout.dl_dialog_loading);
+        loadingBar=findViewById(R.id.loadingBar);
+        tipTextView=findViewById(R.id.tipTextView);
+        backgroudView=findViewById(R.id.rootView);
     }
+
+
 
     public void setLoadingTipText(String tipText) {
         tipTextView.setText(tipText);
@@ -61,7 +44,7 @@ public class LoadingDialog extends Dialog {
     }
 
     public View getBackgroundView(){
-        return backgroundView;
+        return backgroudView;
     }
 
     public TextView getLoadingTextView(){
@@ -71,17 +54,4 @@ public class LoadingDialog extends Dialog {
     public ProgressBar getLoadingBar(){
         return loadingBar;
     }
-
-    private static void setDialogWindowParam(Dialog dialog, int gravity, int windowAnimStyleId) {
-        if (dialog == null) return;
-        Window window = dialog.getWindow();
-        WindowManager.LayoutParams lp = window.getAttributes();
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        window.setGravity(gravity);
-        window.setAttributes(lp);
-        window.setWindowAnimations(windowAnimStyleId);
-    }
-
-
 }

@@ -1,45 +1,36 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical">
+<?xml version="1" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/shape_loding_pop"
+    android:gravity="center_horizontal"
+    android:paddingTop="14dp"
+    android:paddingLeft="14dp"
+    android:paddingRight="14dp">
 
-    <LinearLayout
-        android:id="@+id/dialog_loading_view"
+    <ProgressBar
+        android:id="@+id/loadingBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:minWidth="100dp"
-        android:minHeight="100dp"
-        android:gravity="center"
-        android:orientation="vertical"
-        android:paddingBottom="15dp"
-        android:paddingTop="20dp"
-        android:background="@drawable/shape_loadingdialog"
-        >
+        android:layout_gravity="center"
+        android:indeterminateDrawable="@drawable/load_progress_anim"
+        android:indeterminateDuration="1200"
+        android:layout_marginBottom="14dp"
+        />
 
-        <ProgressBar
-            android:id="@+id/loadingBar"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:layout_gravity="center_horizontal"
-            android:indeterminateBehavior="repeat"
-            android:indeterminateDrawable="@drawable/progress_drawable_white"
-            android:indeterminateOnly="true" />
-
-        <TextView
-            android:id="@+id/tipTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:text="加载中...."
-            android:singleLine="true"
-            android:textColor="#f0f0f0"
-            android:textSize="14sp"
-            android:paddingLeft="24dp"
-            android:paddingRight="24dp"
-            android:visibility="gone"/>
-    </LinearLayout>
-
+    <TextView
+        android:id="@+id/tipTextView"
+        android:layout_width="94dp"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:textColor="#f0f0f0"
+        android:textSize="13sp"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:visibility="gone"/>
 </LinearLayout>
+
+

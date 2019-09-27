@@ -6,7 +6,7 @@ import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.widget.LinearLayout;
 
-import com.dylan.library.media.PlayerAdjustTool;
+import com.dylan.mylibrary.util.PlayerAdjustTool;
 
 /**
  * Created by Dylan on 2016/11/12.

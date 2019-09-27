@@ -45,7 +45,7 @@ public class DemoListActivity extends AppCompatActivity {
             "BulletinBoard", "PhotoSelector", "SlidingRefresh", "WebViewActvity",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
-            "PullToRefreshScrollViewActivity","TextSwitchActivity","全局更换字体","FirstLineMargin",
+            "TextSwitchActivity","全局更换字体","FirstLineMargin",
             "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView","ProgressWebActivity"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
@@ -54,7 +54,7 @@ public class DemoListActivity extends AppCompatActivity {
             SlidingRefreshActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
-            UnScrollViewPagerActivity.class,PullToRefreshScrollViewActivity.class,TextSwitchActivity.class,
+            UnScrollViewPagerActivity.class,TextSwitchActivity.class,
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,
             DashLineViewActivity.class,InputPasswordActivity.class, CountDownCircleViewActivity.class,
             ProgressWebViewActivity.class};
