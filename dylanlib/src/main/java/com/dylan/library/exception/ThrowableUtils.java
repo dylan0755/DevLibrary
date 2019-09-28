@@ -32,4 +32,18 @@ public class ThrowableUtils {
 
     }
 
+
+
+    public static void show(Object errorMsg) {
+        if (errorMsg==null)return;
+        if (errorMsg instanceof String){
+            ToastUtils.show((String) errorMsg);
+        }else if (errorMsg instanceof Throwable){
+            Throwable throwable= (Throwable) errorMsg;
+            show(throwable);
+        }else{
+            ToastUtils.show("invalid input,only support String or Throwable");
+        }
+    }
+
 }

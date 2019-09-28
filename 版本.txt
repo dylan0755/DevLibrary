@@ -10,6 +10,8 @@ V3.2.0
 3.PullRefreshLayout 增加 isRefreshing()函数 判断是否正在刷新
 4.LoadingDialog 更新旋转样式
 5.RedPointTextView  增加修改红点颜色
+6.ThrowableUtils 重载show 方法，接收Object ,会判断是String 还是Throwable，
+用于网络请求接口错误和业务failure情况
 
 
 

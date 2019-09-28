@@ -59,7 +59,7 @@ publish {
 }
 //上传
 /*
-第一步：打开右边的Gradle窗口 build目录
+第一步：先关闭混淆，然后打开右边的Gradle窗口 build目录
 (1)先点击clean
 (2)然后点击build
 
