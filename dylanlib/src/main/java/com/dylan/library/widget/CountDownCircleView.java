@@ -1,7 +1,5 @@
 package com.dylan.library.widget;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.graphics.Canvas;
@@ -75,7 +73,7 @@ public class CountDownCircleView extends View {
         textSize=scaleUtils.toScaleSize(textSize);
         textPaint.setTextSize(textSize);
         textPaint.setColor(Color.WHITE);
-        setBackgroundResource(R.drawable.bg_countdown_skip);
+        setBackgroundResource(R.drawable.dl_bg_countdown_skip);
         getBackground().setAlpha(125);
         txtRec=new Rect();
        this.setWillNotDraw(false);

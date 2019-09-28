@@ -7,7 +7,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_dialog_white_radiu6"
+        android:background="@drawable/dl_bg_dialog_white_radiu6"
         android:orientation="vertical">
 
 

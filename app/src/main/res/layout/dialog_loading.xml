@@ -16,7 +16,7 @@
         android:orientation="vertical"
         android:paddingBottom="15dp"
         android:paddingTop="20dp"
-        android:background="@drawable/shape_loding_pop"
+        android:background="@drawable/dl_shape_loding_pop"
         >
 
         <ProgressBar
