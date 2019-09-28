@@ -9,7 +9,7 @@ V3.2.0
 2.tintText 和 tintResize 两个函数重载， 不传入 start,end, 只传全文本，和keyword
 3.PullRefreshLayout 增加 isRefreshing()函数 判断是否正在刷新
 4.LoadingDialog 更新旋转样式
-
+5.RedPointTextView  增加修改红点颜色
 
 
 

@@ -16,6 +16,7 @@
 
     <declare-styleable name="RedPointTextView">
         <attr name="redPointSize" format="dimension"/>
+        <attr name="pointColor" format="color"/>
     </declare-styleable>
 
     <declare-styleable name="DashLineView">

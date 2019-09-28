@@ -3,14 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:background="#ffffff"
+
     >
 
     <TextView
         android:id="@+id/tv_listItem"
         android:layout_width="match_parent"
         android:layout_height="48dp"
-        android:gravity="center" />
+        android:gravity="center"
+        android:background="?android:attr/selectableItemBackground"/>
 
     <View
         android:layout_width="match_parent"
