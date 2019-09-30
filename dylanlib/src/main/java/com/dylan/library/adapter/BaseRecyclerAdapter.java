@@ -89,6 +89,14 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
         }
     }
 
+    public void addAllAndNotifyDataChanged(List<T> list) {
+        if (mDataList == null) {
+            mDataList = list;
+        } else {
+            mDataList.addAll(list);
+        }
+        notifyDataSetChanged();
+    }
 
     public void clear(){
         if (mDataList!=null){

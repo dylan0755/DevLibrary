@@ -12,7 +12,8 @@ V3.2.0
 5.RedPointTextView  增加修改红点颜色
 6.ThrowableUtils 重载show 方法，接收Object ,会判断是String 还是Throwable，
 用于网络请求接口错误和业务failure情况
-
+7.BaseRecyclerAdapter 增加 addAllAndNotifyDataChanged
+8.增加IRecyclerView
 
 
 

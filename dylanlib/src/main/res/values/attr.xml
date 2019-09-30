@@ -43,4 +43,15 @@
             <enum name="bottomLine" value="1" />
         </attr>
     </declare-styleable>
+
+
+    <declare-styleable name="DLIRecyclerView">
+        <attr name="refreshHeaderLayout" format="reference" />
+        <attr name="loadMoreFooterLayout" format="reference" />
+        <attr name="refreshEnabled" format="boolean" />
+        <attr name="loadMoreEnabled" format="boolean" />
+        <attr name="refreshFinalMoveOffset" format="dimension" />
+    </declare-styleable>
+
+
 </resources>

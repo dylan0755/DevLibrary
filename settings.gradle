@@ -1,1 +1,1 @@
-include ':app', ':dylanlib', ':IRecyclerView'
+include ':app', ':dylanlib'

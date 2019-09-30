@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:gravity="center"
-        android:background="?android:attr/selectableItemBackground"/>
+        android:background="#ffffff"/>
 
     <View
         android:layout_width="match_parent"

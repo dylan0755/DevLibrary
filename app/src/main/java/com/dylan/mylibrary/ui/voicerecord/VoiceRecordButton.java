@@ -1,15 +1,14 @@
 package com.dylan.mylibrary.ui.voicerecord;
 
 import android.content.Context;
+import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.Button;
-
-import com.dylan.library.R;
 
 
-public class VoiceRecordButton extends Button {
+
+public class VoiceRecordButton extends AppCompatButton {
     private static final int STATE_NORMAL = 1;
     private static final int STATE_RECORDING = 2;
     private static final int STATE_WANT_CANCEL = 3;
@@ -28,9 +27,9 @@ public class VoiceRecordButton extends Button {
 
     public VoiceRecordButton(Context context, AttributeSet attrs) {
         super(context, attrs);
-        text_state_normal =context.getString(R.string.btn_recorder_normal);
-        text_state_recording=context.getString(R.string.btn_recorder_recording);
-        text_state_wantcancel=context.getString(R.string.btn_recorder_want_cancel);
+        text_state_normal ="按住说话";
+        text_state_recording="松开结束";
+        text_state_wantcancel="松开手指 取消发送";
         setOnLongClickListener(new OnLongClickListener() {
 
             @Override

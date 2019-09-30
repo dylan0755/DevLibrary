@@ -6,13 +6,14 @@
     android:orientation="vertical"
     android:background="#F4F6FC">
 
-<com.dl.recyclerview.IRecyclerView
+<com.dylan.library.widget.irecycler.IRecyclerView
     android:id="@+id/recyclerView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:refreshEnabled="true"
     app:loadMoreEnabled="true"
-    app:refreshHeaderLayout="@layout/header_pull_refresh"
-    app:loadMoreFooterLayout="@layout/footer_load_more"
+    app:refreshHeaderLayout="@layout/dl_header_pull_refresh"
+    app:loadMoreFooterLayout="@layout/dl_footer_load_more"
+    android:background="#ffffff"
     />
 </LinearLayout>

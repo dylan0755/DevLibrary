@@ -31,7 +31,7 @@
             android:gravity="center"
             android:minHeight="0dp"
             android:padding="5dp"
-            android:text="@string/btn_recorder_normal"
+            android:text="按住说话"
             android:textColor="#727272" >
         </com.dylan.mylibrary.ui.voicerecord.VoiceRecordButton>
 
