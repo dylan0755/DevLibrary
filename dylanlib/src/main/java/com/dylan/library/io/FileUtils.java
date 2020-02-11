@@ -34,6 +34,26 @@ import java.util.zip.ZipFile;
 
 public class FileUtils {
 
+
+    public static boolean isExists(String path){
+        return new File(path).exists();
+    }
+
+
+    //递归获取文件夹大小
+    public static long getTotalSizeOfFilesInDir(File dirFile) {
+        if (dirFile.isFile())
+            return dirFile.length();
+        final File[] children = dirFile.listFiles();
+        long total = 0;
+        if (children != null)
+            for (final File child : children)
+                total += getTotalSizeOfFilesInDir(child);
+        return total;
+    }
+
+
+
     /**
      * @param context
      * @param assetsFileName
@@ -63,10 +83,7 @@ public class FileUtils {
     }
 
 
-    public static void mkdirsIfNotExist(String dirPath) {
-        File file = new File(dirPath);
-        if (!file.exists()) file.mkdirs();
-    }
+
 
     public static void writeTextToSDRootPath(String text, String fileName) throws Exception {
         if (EmptyUtils.isEmpty(text)) throw new Exception("text is empty!!!");
@@ -175,19 +192,20 @@ public class FileUtils {
     }
 
     public static void notifyScanFile(Context context, String desFilePath) {
-        notifyScanFile(context,desFilePath,false);
+        notifyScanFile(context, desFilePath, false);
     }
 
     /**
      * 一般图片放在sd卡根目录，或者根目录的文件夹内只要通知刷新即可，
      * 如果要放在深层次的文件目录中调用刷新大部分情况下是不会有效果的，
      * 比如在私有目录，Android/data/包名/
+     *
      * @param context
      * @param desFilePath
      * @param insertRecord
      */
-    public static void notifyScanFile(Context context, String desFilePath,boolean insertRecord) {
-        if (insertRecord){
+    public static void notifyScanFile(Context context, String desFilePath, boolean insertRecord) {
+        if (insertRecord) {
             try {
                 //手动往媒体库插入记录
                 String suffix = desFilePath.substring(desFilePath.lastIndexOf(".") + 1);
@@ -245,6 +263,32 @@ public class FileUtils {
             return file.delete();
         } catch (Exception e) {
             ELog.e(e);
+        }
+        return false;
+    }
+
+
+    public static boolean createDirIfNotExists(String dirPath) {
+        File file = new File(dirPath);
+        if (!file.exists()) {
+            return file.mkdirs();
+        }
+        return false;
+    }
+
+    public static boolean createFileIfNotExists(String filePath) {
+        File file = new File(filePath);
+        //先判断父目录
+        File parentFile=file.getParentFile();
+        if (!parentFile.exists()) {
+             parentFile.mkdirs();
+        }
+
+        //创建目标文件
+        try {
+            return file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return false;
     }

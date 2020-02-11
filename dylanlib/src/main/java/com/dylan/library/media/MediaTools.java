@@ -1,9 +1,14 @@
 package com.dylan.library.media;
 
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
+import android.media.ThumbnailUtils;
+import android.provider.MediaStore;
+
 /**
  * Created by Dylan on 2016/9/22.
  */
-public class MediaTime {
+public class MediaTools {
     public static int HOURSE_TIME = 1;
     public static int MINUTE_TIME = 2;
 
@@ -83,4 +88,51 @@ public class MediaTime {
 
         return endtime;
     }
+
+    public static Bitmap createThumbnailAtTime(String filePath, int timeInSeconds){
+        MediaMetadataRetriever mMMR = new MediaMetadataRetriever();
+        mMMR.setDataSource(filePath);
+        return mMMR.getFrameAtTime(timeInSeconds*1000000, MediaMetadataRetriever.OPTION_CLOSEST);
+    }
+
+
+
+
+
+    public static Bitmap getVideoThumbnailMiniKind(String videoPath) {
+        Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Video.Thumbnails.MINI_KIND);
+        return bitmap;
+    }
+
+    public static Bitmap getVideoThumbnailMicroKind(String videoPath){
+        Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Video.Thumbnails.MICRO_KIND);
+        return bitmap;
+    }
+
+    public static Bitmap getVideoThumbnailFullScreenKind(String videoPath){
+        Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(videoPath, MediaStore.Video.Thumbnails.FULL_SCREEN_KIND);
+        return bitmap;
+    }
+
+    /**
+     * 不支持m3u8 格式
+     * @param videoPath
+     * @return
+     */
+    public static int[] getVideoSpec(String videoPath){
+        MediaMetadataRetriever retr = new MediaMetadataRetriever();
+        retr.setDataSource(videoPath);
+        String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
+        String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
+        String rotation = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION); // 视频旋转方
+        int[] infos=new int[3];
+        infos[0]=Integer.parseInt(width);
+        infos[1]=Integer.parseInt(height);
+        infos[2]=Integer.parseInt(rotation);
+        return infos;
+    }
+
+
+
+
 }
