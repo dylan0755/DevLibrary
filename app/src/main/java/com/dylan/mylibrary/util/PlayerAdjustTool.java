@@ -70,6 +70,10 @@ public class PlayerAdjustTool {
     }
 
 
+    public void setAnchorView(View anchorView){
+        this.anchorView = anchorView;
+    }
+
     public void attachActivity(Activity activity) {
         mActivity = activity;
     }
