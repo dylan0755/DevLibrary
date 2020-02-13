@@ -1,7 +1,6 @@
 package com.dylan.library.graphics;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -13,7 +12,6 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.net.Uri;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -99,7 +97,7 @@ public class BitmapHelper {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         fos.flush();
         fos.close();
-        FileUtils.notifyScanFile(context, savePath);
+        FileUtils.notifyScanImageFile(context, savePath);
     }
 
 

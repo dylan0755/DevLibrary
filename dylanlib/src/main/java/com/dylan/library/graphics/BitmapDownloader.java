@@ -99,7 +99,7 @@ public class BitmapDownloader {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         fos.flush();
         fos.close();
-        FileUtils.notifyScanFile(applicationContext, outPath);
+        FileUtils.notifyScanImageFile(applicationContext, outPath);
     }
 
     public void toSave(Bitmap bitmap, String outPath) throws IOException {
@@ -112,7 +112,7 @@ public class BitmapDownloader {
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         fos.flush();
         fos.close();
-        FileUtils.notifyScanFile(applicationContext, outPath);
+        FileUtils.notifyScanImageFile(applicationContext, outPath);
     }
 
     public interface BitmapDownLoadListener {

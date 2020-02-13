@@ -6,8 +6,10 @@ V3.3.0
 2.添加GridDividerItemDecoration
 3.MediaTime 改名MediaTools,增加获取视频截图，视频规格函数
 4.FileUtils 增加判断并创建文件，文件夹、文件是否存在、
-计算文件夹总大小(getTotalSizeOfFilesInDir)
-从指定目录，媒体文件库中根据后缀名查找文件(getSpecFilesFromDir、getSpecFileFromMediaFileStore)
+(1).计算文件夹总大小(getTotalSizeOfFilesInDir)
+(2).从指定目录，媒体文件库中根据后缀名查找文件(getSpecFilesFromDir、getSpecFileFromMediaFileStore)
+(3).增加 deleteMediaStoreVideoFile 、 deleteMediaStoreImageFile 、deleteMediaStoreAudioFile 、deleteMediaFileStoreFile  从数据库中删除记录
+(4).增加delete方法
 5.增加CollectionsUtils 类，增加mergeList，合并两个集合且去重处理。
 
 

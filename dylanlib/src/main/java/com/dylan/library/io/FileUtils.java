@@ -14,13 +14,10 @@ import android.provider.MediaStore;
 import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
-import com.dylan.library.net.UrlUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.RomUtils;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,11 +34,65 @@ import java.util.zip.ZipFile;
 public class FileUtils {
 
 
-    public static boolean isExists(String path){
+    public static boolean isExists(String path) {
         return new File(path).exists();
     }
 
-    public static String getFileNameFromPath(String filePath){
+    public static boolean delete(String path){
+        File file=new File(path);
+        if (file.exists()){
+            if (file.isFile()){
+                return file.delete();
+            }else if (file.isDirectory()){
+                return delectDirFile(path);
+            }
+        }
+        return false;
+    }
+    //通知更新单个文件
+    public static void notifyScanFile(Context context,String filePath){
+        Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        scanIntent.setData(Uri.fromFile(new File(filePath)));
+        context.sendBroadcast(scanIntent);
+    }
+
+
+
+
+
+
+    //从媒体库中删除视频数据
+    public static boolean deleteMediaStoreVideoFile(Context context, String deleteFilePath) {
+        if (context == null) return false;
+        ContentResolver resolver = context.getContentResolver();
+        int delRows = resolver.delete(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, MediaStore.Video.Media.DATA + "=?", new String[]{deleteFilePath});
+        return delRows == 1;
+    }
+    //从媒体库中删除图片数据
+    public static boolean deleteMediaStoreImageFile(Context context, String deleteFilePath) {
+        if (context == null) return false;
+        ContentResolver resolver = context.getContentResolver();
+        int delRows = resolver.delete(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, MediaStore.Images.Media.DATA + "=?", new String[]{deleteFilePath});
+        return delRows == 1;
+    }
+
+    //从媒体库中删除音频数据
+    public static boolean deleteMediaStoreAudioFile(Context context, String deleteFilePath) {
+        if (context == null) return false;
+        ContentResolver resolver = context.getContentResolver();
+        int delRows = resolver.delete(MediaStore.Audio.Media.EXTERNAL_CONTENT_URI, MediaStore.Audio.Media.DATA + "=?", new String[]{deleteFilePath});
+        return delRows == 1;
+    }
+
+    //从媒体库中删除文件
+    public static boolean deleteMediaFileStoreFile(Context context, String deleteFilePath) {
+        if (context == null) return false;
+        ContentResolver resolver = context.getContentResolver();
+        int delRows = resolver.delete(MediaStore.Files.getContentUri("external"),MediaStore.Files.FileColumns.DATA+ "=?", new String[]{deleteFilePath});
+        return delRows == 1;
+    }
+
+    public static String getFileNameFromPath(String filePath) {
         return filePath.substring(filePath.lastIndexOf("/") + 1);
     }
 
@@ -59,31 +110,38 @@ public class FileUtils {
 
 
     //从指定目录查找指定文件
-    public static List<File> getSpecFilesFromDir(String dirPath, String suffix){
-        List<File> fileList=new ArrayList<>();
-        File file=new File(dirPath);
-        if (!file.exists())return fileList;
-        File[] files= file.listFiles();
-        if (files==null||files.length==0)return fileList;
-        for (File f:files){
-            String path=f.getPath();
-            if (f.isDirectory()){
-                if (!path.contains("/.")){//过滤忽略文件夹
-                    List<File> list= getSpecFilesFromDir(path,suffix);
-                    if (EmptyUtils.isNotEmpty(list))fileList.addAll(list);
+    public static List<File> getSpecFilesFromDir(String dirPath, String suffix) {
+        return getSpecFilesFromDir(dirPath,new String[]{suffix});
+    }
+
+    //从指定目录查找指定文件
+    public static List<File> getSpecFilesFromDir(String dirPath, String[] suffixs) {
+        List<File> fileList = new ArrayList<>();
+        if (EmptyUtils.isEmpty(suffixs))return fileList;
+        File file = new File(dirPath);
+        if (!file.exists()) return fileList;
+        File[] files = file.listFiles();
+        if (files == null || files.length == 0) return fileList;
+        for (File f : files) {
+            String path = f.getPath();
+            if (f.isDirectory()) {
+                if (!path.contains("/.")) {//过滤忽略文件夹
+                    List<File> list = getSpecFilesFromDir(path, suffixs);
+                    if (EmptyUtils.isNotEmpty(list)) fileList.addAll(list);
                 }
-            }else{
-                if (path.endsWith(suffix)){
-                    fileList.add(new File(path));
+            } else {
+                for (String suffix:suffixs){
+                    if (path.endsWith(suffix)) {
+                        fileList.add(new File(path));
+                    }
                 }
+
             }
         }
         return fileList;
     }
-
-
     //从多媒体文件库中查找
-    public static List<File> getSpecFileFromMediaFileStore(Context context, String[] suffix,String[] filters) {
+    public static List<File> getSpecFileFromMediaFileStore(Context context, String[] suffix, String[] filters) {
         List<File> fileList = new ArrayList<>();
         //从外存中获取
         Uri fileUri = MediaStore.Files.getContentUri("external");
@@ -112,16 +170,16 @@ public class FileUtils {
             do {
                 //输出文件的完整路径
                 String path = cursor.getString(cursor.getColumnIndex(MediaStore.Files.FileColumns.DATA));
-                if (!path.contains("/.") ) {
-                    boolean isFilter=false;
+                if (!path.contains("/.")) {
+                    boolean isFilter = false;
                     //是否包含过滤条件
-                    if (filters!=null&&filters.length>0){
-                        for (String filter:filters){
-                            if (EmptyUtils.isEmpty(filter))continue;
-                            if (path.contains(filter))isFilter=true;
+                    if (filters != null && filters.length > 0) {
+                        for (String filter : filters) {
+                            if (EmptyUtils.isEmpty(filter)) continue;
+                            if (path.contains(filter)) isFilter = true;
                         }
                     }
-                    if (!isFilter)fileList.add(new File(path));
+                    if (!isFilter) fileList.add(new File(path));
                 }
             } while (cursor.moveToPrevious());
         }
@@ -129,11 +187,6 @@ public class FileUtils {
         return fileList;
 
     }
-
-
-
-
-
 
 
     /**
@@ -163,8 +216,6 @@ public class FileUtils {
     public static String getSDCardDir() {
         return SDCardUtils.getSDcardDir();
     }
-
-
 
 
     public static void writeTextToSDRootPath(String text, String fileName) throws Exception {
@@ -273,8 +324,8 @@ public class FileUtils {
         return null;
     }
 
-    public static void notifyScanFile(Context context, String desFilePath) {
-        notifyScanFile(context, desFilePath, false);
+    public static void notifyScanImageFile(Context context, String desFilePath) {
+        notifyScanImageFile(context, desFilePath, false);
     }
 
     /**
@@ -286,7 +337,7 @@ public class FileUtils {
      * @param desFilePath
      * @param insertRecord
      */
-    public static void notifyScanFile(Context context, String desFilePath, boolean insertRecord) {
+    public static void notifyScanImageFile(Context context, String desFilePath, boolean insertRecord) {
         if (insertRecord) {
             try {
                 //手动往媒体库插入记录
@@ -361,9 +412,9 @@ public class FileUtils {
     public static boolean createFileIfNotExists(String filePath) {
         File file = new File(filePath);
         //先判断父目录
-        File parentFile=file.getParentFile();
+        File parentFile = file.getParentFile();
         if (!parentFile.exists()) {
-             parentFile.mkdirs();
+            parentFile.mkdirs();
         }
 
         //创建目标文件
