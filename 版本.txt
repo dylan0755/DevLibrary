@@ -14,7 +14,7 @@ V3.3.0
 6.ClipBoardUtils 增加 getPasteString  获取最新复制的内容
 7.增加 SystemSettings 类，获取系统设置，如 亮度，自动旋转等等
 8.增加PlayerGesture和PlayerGestureView 两类，使用PlayerGestureView 可以控制亮度，声音，进度
-9.anim 文件夹下增加 左上右下四个方向 的滑出和滑入  8个动画文件。
+9.anim 文件夹下增加 左上右下四个方向 的滑出和滑入  8个动画文件,style.xml 创建4个style,提供调用
 
 
 

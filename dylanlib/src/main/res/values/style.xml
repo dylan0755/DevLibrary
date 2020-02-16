@@ -84,7 +84,23 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="dl_anim_slie_from_bottom">
+
+
+    <style name="dl_anim_left_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_left_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_left_exit_slide_back</item>
+    </style>
+    <style name="dl_anim_top_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_top_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_top_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_right_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_right_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_right_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_bottom_sliding">
         <item name="android:windowEnterAnimation">@anim/anim_bottom_enter_slide_out</item>
         <item name="android:windowExitAnimation">@anim/anim_bottom_exit_slide_back</item>
     </style>
