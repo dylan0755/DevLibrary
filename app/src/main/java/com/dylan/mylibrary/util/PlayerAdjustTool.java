@@ -252,7 +252,7 @@ public class PlayerAdjustTool {
             mScaleUtil = new ScaleUtil(context);
             initSize();
             setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT));
-            setBackgroundDrawable(getResources().getDrawable(R.drawable.shape_tv_soundlight));
+            setBackgroundDrawable(getResources().getDrawable(R.drawable.dl_shape_soundlight));
             initView(context);
         }
 

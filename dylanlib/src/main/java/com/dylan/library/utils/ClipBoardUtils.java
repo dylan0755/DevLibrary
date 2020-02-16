@@ -1,5 +1,6 @@
 package com.dylan.library.utils;
 
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -28,6 +29,19 @@ public class ClipBoardUtils {
         ClipData myClip = ClipData.newPlainText("text", text);
         myClipboard.setPrimaryClip(myClip);
         Toast.makeText(context,""+tip,Toast.LENGTH_SHORT).show();
+    }
+
+
+    public static String getPasteString(final Context context){
+        String pasteString="";
+        ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clipData = clipboard.getPrimaryClip();
+        if (clipData != null && clipData.getItemCount() > 0) {
+            CharSequence text = clipData.getItemAt(0).getText();
+            pasteString=text.toString();
+            return pasteString;
+        }
+        return pasteString;
     }
 
 }

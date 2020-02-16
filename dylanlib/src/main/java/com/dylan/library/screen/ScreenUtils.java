@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.dylan.library.device.SystemSettings;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.utils.RomUtils;
 
@@ -119,14 +120,7 @@ public class ScreenUtils {
 
 
     public static boolean isScreenAutoRotate(Context context) {
-        int gravity = 0;
-        try {
-            gravity = Settings.System.getInt(context.getContentResolver(),
-                    Settings.System.ACCELEROMETER_ROTATION);
-        } catch (Settings.SettingNotFoundException e) {
-            ELog.e(e);
-        }
-        return gravity==1;
+        return SystemSettings.isScreenAutoRotate(context);
     }
 
 

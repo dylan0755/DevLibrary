@@ -14,8 +14,8 @@ public class SDCacheDir {
 
     public SDCacheDir(Context context){
         sdpath=Environment.getExternalStorageDirectory().toString();
-        cachepath=sdpath+"/"+"Android/data/"+context.getPackageName()+"/cache/";
-        filesDir =sdpath+"/"+"Android/data/"+context.getPackageName()+"/files/";
+        cachepath=sdpath+"/"+"Android/data/"+context.getPackageName()+"/cache";
+        filesDir =sdpath+"/"+"Android/data/"+context.getPackageName()+"/files";
     }
 
 
