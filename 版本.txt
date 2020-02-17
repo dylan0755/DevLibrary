@@ -15,7 +15,16 @@ V3.3.0
 7.增加 SystemSettings 类，获取系统设置，如 亮度，自动旋转等等
 8.增加PlayerGesture和PlayerGestureView 两类，使用PlayerGestureView 可以控制亮度，声音，进度
 9.anim 文件夹下增加 左上右下四个方向 的滑出和滑入  8个动画文件,style.xml 创建4个style,提供调用
-
+  增加AnimationUtils 来获取、启动这8个动画，getLeftSlideOutAnimation(Context context),startLeftSlideOutAnimation(Context context);
+10.增加 RoundImageView   app:roundRadius="10dp" 控制圆角大小
+   使用：
+    <com.dylan.library.widget.RoundImageView
+           android:id="@+id/ivItem"
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:scaleType="centerCrop"
+           app:roundRadius="10dp"
+           />
 
 
 

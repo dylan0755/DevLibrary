@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
@@ -284,6 +285,42 @@ public class BitmapHelper {
 
 
     }
+
+
+    public static Bitmap getBitmapWithBorder(Bitmap bitmap, int outWidth, int outHeight, int border){
+        if (bitmap == null) {
+            return null;
+        }
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float widthScale = outWidth * 1f / width;
+        float heightScale = outHeight * 1f / height;
+
+        Matrix matrix = new Matrix();
+        matrix.setScale(widthScale, heightScale);
+        //创建底图
+        Bitmap desBitmap = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888);
+        //创建canvas
+        Canvas canvas = new Canvas(desBitmap);
+        //将原图绘制入底图
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        bitmapShader.setLocalMatrix(matrix);
+        paint.setShader(bitmapShader);
+        canvas.drawBitmap(bitmap,null, paint);
+        if (border > 0) {
+            //绘制boarder
+            Paint boarderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            boarderPaint.setColor(Color.WHITE);
+            boarderPaint.setStyle(Paint.Style.STROKE);
+            boarderPaint.setStrokeWidth(border);
+
+            Rect borderRect=new Rect(0,0,outWidth,outHeight);
+            canvas.drawRect(borderRect, boarderPaint);
+        }
+        return desBitmap;
+    }
+
 
 
     //两个Bitmap叠加

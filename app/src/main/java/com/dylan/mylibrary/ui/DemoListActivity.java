@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.AnimationUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.SignatureUtils;
@@ -47,7 +48,8 @@ public class DemoListActivity extends AppCompatActivity {
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "TextSwitchActivity","全局更换字体","FirstLineMargin",
-            "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView","ProgressWebActivity"};
+            "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView",
+            "ProgressWebActivity","VideoPlayerGesture","ScrollLayoutActivity"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -58,7 +60,7 @@ public class DemoListActivity extends AppCompatActivity {
             UnScrollViewPagerActivity.class,TextSwitchActivity.class,
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,
             DashLineViewActivity.class,InputPasswordActivity.class, CountDownCircleViewActivity.class,
-            ProgressWebViewActivity.class};
+            ProgressWebViewActivity.class,VideoPlayerGestureActivity.class,RebondLayoutActivity.class};
 
 
     @Override
@@ -71,6 +73,7 @@ public class DemoListActivity extends AppCompatActivity {
         if (EmptyUtils.isNotEmpty(signature)) {
             Logger.e("signature " + signature);
         }
+
 
 
     }
