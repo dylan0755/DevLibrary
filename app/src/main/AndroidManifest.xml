@@ -143,8 +143,12 @@
 
         <activity android:name=".ui.VideoPlayerGestureActivity"
             android:theme="@style/FullScreen"/>
-        <activity android:name=".ui.RebondLayoutActivity"/>
-
+        <activity android:name=".ui.rebound.ReboundActivity"/>
+        <activity android:name=".ui.rebound.ReboundScrollViewActivity"/>
+        <activity android:name=".ui.rebound.ReboundLayoutActivity"/>
+        <activity android:name=".ui.rebound.ReboundRecyclerViewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ui.rebound.ReboundListViewActivity"/>
 
 
 

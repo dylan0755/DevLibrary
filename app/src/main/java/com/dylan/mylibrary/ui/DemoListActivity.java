@@ -3,14 +3,10 @@ package com.dylan.mylibrary.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
-import com.dylan.library.utils.AnimationUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.SignatureUtils;
@@ -20,11 +16,11 @@ import com.dylan.mylibrary.IRecyclerViewActivity;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.edittext.EditNumberActivity;
 import com.dylan.mylibrary.ui.filedownloader.FileDownLoaderActivity;
-import com.dylan.mylibrary.ui.gridviewpager.GridItemAdapter;
 import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dylan.mylibrary.ui.marginspan.FirstLineMarginLeftActivity;
+import com.dylan.mylibrary.ui.rebound.ReboundActivity;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dylan.mylibrary.ui.slidingrefresh.SlidingRefreshActivity;
 import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
@@ -49,7 +45,7 @@ public class DemoListActivity extends AppCompatActivity {
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "TextSwitchActivity","全局更换字体","FirstLineMargin",
             "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView",
-            "ProgressWebActivity","VideoPlayerGesture","ScrollLayoutActivity"};
+            "ProgressWebActivity","VideoPlayerGesture","拖拽回弹组件"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, PhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -60,7 +56,7 @@ public class DemoListActivity extends AppCompatActivity {
             UnScrollViewPagerActivity.class,TextSwitchActivity.class,
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,
             DashLineViewActivity.class,InputPasswordActivity.class, CountDownCircleViewActivity.class,
-            ProgressWebViewActivity.class,VideoPlayerGestureActivity.class,RebondLayoutActivity.class};
+            ProgressWebViewActivity.class,VideoPlayerGestureActivity.class, ReboundActivity.class};
 
 
     @Override

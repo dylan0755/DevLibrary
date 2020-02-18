@@ -26,7 +26,8 @@ V3.3.0
            app:roundRadius="10dp"
            />
 
-
+11.增加 ReboundHelper 核心类，  支持拖拽回弹效果!
+新增 ReboundLayout,ReboudRecyclerView,ReboundScrollView,ReboundListView,ReboundGridView 5个回弹组件。
 
 
 

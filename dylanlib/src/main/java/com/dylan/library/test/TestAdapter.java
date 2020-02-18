@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.dylan.library.R;
 import com.dylan.library.adapter.BaseRecyclerAdapter;
+import com.dylan.library.utils.ToastUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +34,14 @@ public class TestAdapter extends BaseRecyclerAdapter<String,TestAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, String s, int position) {
+    public void onBindViewHolder(ViewHolder holder,final String s, int position) {
         holder.tvItem.setText(s);
+        holder.tvItem.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
