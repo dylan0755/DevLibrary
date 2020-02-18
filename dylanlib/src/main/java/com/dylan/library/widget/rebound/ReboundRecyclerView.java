@@ -64,7 +64,8 @@ public class ReboundRecyclerView extends RecyclerView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if (!reboundHelper.onTouchEvent(event)) {
+        boolean bl=reboundHelper.onTouchEvent(event);
+        if (!bl) {
             return super.onTouchEvent(event);
         } else {
             return true;

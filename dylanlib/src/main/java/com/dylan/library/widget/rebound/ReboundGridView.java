@@ -12,6 +12,8 @@ import android.widget.GridView;
  */
 public class ReboundGridView extends GridView {
     private ReboundHelper reboundHelper;
+
+
     public ReboundGridView(Context context) {
         this(context,null);
     }
@@ -25,13 +27,13 @@ public class ReboundGridView extends GridView {
     public void setDampingRatio(float ratio) {
         reboundHelper.setDampingRatio(ratio);
     }
-    
+
     @Override
-    public boolean onTouchEvent(MotionEvent ev) {
-        boolean bl=reboundHelper.onTouchEvent(ev);
-        if (!bl){
-            return super.onTouchEvent(ev);
-        }else{
+    public boolean onTouchEvent(MotionEvent event) {
+        boolean bl = reboundHelper.onTouchEvent(event);
+        if (!bl) {
+            return super.onTouchEvent(event);
+        } else {
             return true;
         }
     }

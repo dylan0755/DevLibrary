@@ -2,17 +2,16 @@ package com.dylan.library.widget.rebound;
 
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.AdapterView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 
-import com.dylan.library.utils.RecyclerViewHelper;
+import com.dylan.library.utils.Logger;
+
 
 /**
  * Author: Dylan
@@ -29,6 +28,7 @@ public class ReboundHelper {
     private boolean isScrollBottomOver;
     private boolean needChangeParentBack;
     private boolean isDragging;
+    private boolean haveDragged;
     private float downX, downY;
     private float dampingRatio = 0.5f;//阻尼系数
     private Scroller mScroller;
@@ -37,15 +37,15 @@ public class ReboundHelper {
     private View scrollTarget;
 
 
-    public ReboundHelper(View scrollTarget){
-        this.scrollTarget=scrollTarget;
+    public ReboundHelper(View scrollTarget) {
+        this.scrollTarget = scrollTarget;
         scrollTarget.setOverScrollMode(View.OVER_SCROLL_NEVER);
         mScroller = new Scroller(scrollTarget.getContext());
         gestureDetector = new GestureDetector(scrollTarget.getContext(), new GestureListener());
     }
 
-    public void setOrient(int orient){
-        currentOrient=orient;
+    public void setOrient(int orient) {
+        currentOrient = orient;
     }
 
     //设置阻尼系数
@@ -55,15 +55,15 @@ public class ReboundHelper {
         }
     }
 
-    public void setChangeParentBackground(boolean bl){
-        needChangeParentBack=bl;
+    public void setChangeParentBackground(boolean bl) {
+        needChangeParentBack = bl;
     }
 
 
     public View getParentView() {
         if (mParent == null) {
             mParent = (ViewGroup) scrollTarget.getParent();
-            if (needChangeParentBack){
+            if (needChangeParentBack) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
                     if (mParent != null && mParent.getBackground() == null) {
                         Drawable backGround = scrollTarget.getBackground();
@@ -78,14 +78,23 @@ public class ReboundHelper {
 
     }
 
+    public boolean isDragging() {
+        return isDragging;
+    }
+
+    public boolean haveDragged() {
+        return haveDragged;
+    }
 
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             downY = event.getRawY();
+            haveDragged = false;
         } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
             float deltX = downX - event.getRawX();
             float deltY = downY - event.getRawY();
             if (isDragging) {
+                haveDragged = true;
                 if (currentOrient == VERTICAL) {
                     deltY = deltY * dampingRatio;
                     beginScroll(0, (int) deltY);
@@ -105,10 +114,20 @@ public class ReboundHelper {
         downX = event.getRawX();
         downY = event.getRawY();
         gestureDetector.onTouchEvent(event);
+
+
         if (isDragging) {
             return true;
         }
-        return false;
+
+
+        if (scrollTarget instanceof AbsListView) {
+            scrollTarget.setPressed(false);
+            return haveDragged;
+        } else {
+            return false;
+        }
+
 
     }
 
@@ -122,10 +141,6 @@ public class ReboundHelper {
         mScroller.startScroll(mScroller.getFinalX(), mScroller.getFinalY(), dx, dy);
         scrollTarget.invalidate();
     }
-
-
-
-
 
 
     //滚动的逻辑   mScroller startScroll(xxxx)之后，下方的方法响应
@@ -194,19 +209,6 @@ public class ReboundHelper {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     private class GestureListener extends GestureDetector.SimpleOnGestureListener {
 
 
@@ -248,29 +250,28 @@ public class ReboundHelper {
     }
 
 
-
     public static boolean isOnBottom(View scrollTarget) {
-        if (scrollTarget instanceof ScrollView){
-            ScrollView scrollView= (ScrollView) scrollTarget;
-            return scrollView.getChildAt(0).getMeasuredHeight()==scrollView.getScrollY()+scrollView.getHeight() ;
+        if (scrollTarget instanceof ScrollView) {
+            ScrollView scrollView = (ScrollView) scrollTarget;
+            return scrollView.getChildAt(0).getMeasuredHeight() == scrollView.getScrollY() + scrollView.getHeight();
         }
         return !scrollTarget.canScrollVertically(1);
     }
 
 
-    private static  boolean isOnTop(View scrollTarget){
-        if (scrollTarget instanceof ScrollView){
-            return ((ScrollView) scrollTarget).getScrollY()<=0;
+    private static boolean isOnTop(View scrollTarget) {
+        if (scrollTarget instanceof ScrollView) {
+            return ((ScrollView) scrollTarget).getScrollY() <= 0;
         }
         return !scrollTarget.canScrollVertically(-1);
     }
 
 
-    private static boolean isOnRight(View scrollTarget){
+    private static boolean isOnRight(View scrollTarget) {
         return !scrollTarget.canScrollHorizontally(1);
     }
 
-    private static boolean isOnLeft(View scrollTarget){
+    private static boolean isOnLeft(View scrollTarget) {
         return !scrollTarget.canScrollHorizontally(-1);
     }
 

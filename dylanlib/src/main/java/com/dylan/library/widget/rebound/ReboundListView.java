@@ -2,12 +2,9 @@ package com.dylan.library.widget.rebound;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.view.GestureDetector;
 import android.view.MotionEvent;
-import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Scroller;
+
 
 
 /**
@@ -16,15 +13,19 @@ import android.widget.Scroller;
  * Desc: 拖拽回弹ListView
  */
 public class ReboundListView extends ListView {
-     private ReboundHelper reboundHelper;
+    private ReboundHelper reboundHelper;
+
 
     public ReboundListView(Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public ReboundListView(Context context, AttributeSet attrs) {
         super(context, attrs);
-        reboundHelper=new ReboundHelper(this);
+        setClickable(true);
+        reboundHelper = new ReboundHelper(this);
+
+
     }
 
     //设置阻尼系数
@@ -33,17 +34,20 @@ public class ReboundListView extends ListView {
     }
 
 
+    @Override
+    public boolean onInterceptTouchEvent(MotionEvent ev) {
+        return reboundHelper.isDragging();
+    }
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        boolean bl=reboundHelper.onTouchEvent(event);
-        if (!bl){
+        boolean bl = reboundHelper.onTouchEvent(event);
+        if (!bl) {
             return super.onTouchEvent(event);
-        }else{
+        } else {
             return true;
         }
     }
-
 
 
     @Override
@@ -52,7 +56,6 @@ public class ReboundListView extends ListView {
         super.computeScroll();
 
     }
-
 
 
 }
