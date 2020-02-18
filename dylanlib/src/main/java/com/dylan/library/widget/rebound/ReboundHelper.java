@@ -50,7 +50,7 @@ public class ReboundHelper {
 
     //设置阻尼系数
     public void setDampingRatio(float ratio) {
-        if (ratio > 0 && ratio < 1) {
+        if (ratio > 0 && ratio <=1) {
             dampingRatio = ratio;
         }
     }
@@ -151,8 +151,8 @@ public class ReboundHelper {
             if (isDragging) {
                 if (currentOrient == VERTICAL) {
                     if (isScrollTopOver) {
-                        //向下拉  currY 为负，如果下拉再往上拉  就得判断是否有内容可以向下滚动，
-                        // 有则事件交由RecyclerView 去滚动显示
+                        //开始向下拉currY 为负，如果下拉再往上拉  就得判断是否有内容可以向下滚动，
+                        // 有则事件交由RecyclerView、ScrollView 去滚动显示
                         if (currY > 0) {
                             if (scrollTarget.canScrollVertically(1)) {
                                 currY = 0;

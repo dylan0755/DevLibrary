@@ -38,7 +38,7 @@ public class ReboundRecyclerView extends RecyclerView {
                     if (layoutManager == null) {
                         Log.e(ReboundRecyclerView.this.getClass().getSimpleName(), "layoutManager is null");
                     } else {
-                        //   GridLayoutManager 是 LinearLayoutManager 的子类,条件也成立
+                        //   GridLayoutManager 是 LinearLayoutManager 的子类
                         int orientation=ReboundHelper.VERTICAL;
                         if (layoutManager instanceof LinearLayoutManager) {
                             orientation= ((LinearLayoutManager) layoutManager).getOrientation();

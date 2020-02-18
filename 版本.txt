@@ -5,11 +5,11 @@ V3.3.0
 1.ScreenUtils 增加横竖屏方向判断方法，切换横竖屏方法
 2.添加GridDividerItemDecoration
 3.MediaTime 改名MediaTools,增加获取视频截图，视频规格函数
-4.FileUtils 增加判断并创建文件，文件夹、文件是否存在、
+4.FileUtils 更新
 (1).计算文件夹总大小(getTotalSizeOfFilesInDir)
 (2).从指定目录，媒体文件库中根据后缀名查找文件(getSpecFilesFromDir、getSpecFileFromMediaFileStore)
 (3).增加 deleteMediaStoreVideoFile 、 deleteMediaStoreImageFile 、deleteMediaStoreAudioFile 、deleteMediaFileStoreFile  从数据库中删除记录
-(4).增加delete方法
+
 5.增加CollectionsUtils 类，增加mergeList，合并两个集合且去重处理。
 6.ClipBoardUtils 增加 getPasteString  获取最新复制的内容
 7.增加 SystemSettings 类，获取系统设置，如 亮度，自动旋转等等
@@ -17,16 +17,7 @@ V3.3.0
 9.anim 文件夹下增加 左上右下四个方向 的滑出和滑入  8个动画文件,style.xml 创建4个style,提供调用
   增加AnimationUtils 来获取、启动这8个动画，getLeftSlideOutAnimation(Context context),startLeftSlideOutAnimation(Context context);
 10.增加 RoundImageView   app:roundRadius="10dp" 控制圆角大小
-   使用：
-    <com.dylan.library.widget.RoundImageView
-           android:id="@+id/ivItem"
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:scaleType="centerCrop"
-           app:roundRadius="10dp"
-           />
-
-11.增加 ReboundHelper 核心类，  支持拖拽回弹效果!
+11.增加 ReboundHelper 核心类，拖拽回弹效果!
 新增 ReboundLayout,ReboudRecyclerView,ReboundScrollView,ReboundListView,ReboundGridView 5个回弹组件。
 
 
