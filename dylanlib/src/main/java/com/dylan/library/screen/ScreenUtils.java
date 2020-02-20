@@ -17,6 +17,8 @@ import com.dylan.library.device.SystemSettings;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.utils.RomUtils;
 
+import java.lang.reflect.Field;
+
 /**
  * Created by Dylan on 2016/10/15.
  */
@@ -36,6 +38,27 @@ public class ScreenUtils {
         Rect frame = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int statusBarHeight = frame.top;
+        if (statusBarHeight==0){
+            statusBarHeight=getStatusBarHeight2(activity);
+        }
+        return statusBarHeight;
+    }
+
+    private static int getStatusBarHeight2(Context context) {
+        Class<?> clazz;
+        Object object;
+        Field field;
+        int x;
+        int statusBarHeight = 0;
+        try {
+            clazz = Class.forName("com.android.internal.R$dimen");
+            object = clazz.newInstance();
+            field = clazz.getField("status_bar_height");
+            x = Integer.parseInt(field.get(object).toString());
+            statusBarHeight = context.getResources().getDimensionPixelSize(x);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return statusBarHeight;
     }
 
@@ -143,6 +166,19 @@ public class ScreenUtils {
     public static void switchOrientationPortrail(Activity activity) {
         activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
     }
+
+
+    /**
+     * 判断是否是平板
+     * 这个方法是从 Google I/O App for Android 的源码里找来的，非常准确。
+     * @param context
+     * @return
+     */
+    public static boolean isTablet(Context context) {
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+    }
+
 
 
 }

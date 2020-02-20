@@ -99,7 +99,8 @@ public class ActivityManager {
     }
 
 
-    public Activity findAcitivity(Class<?> cls){
+
+    public Activity getActivity(Class<?> cls){
         for (Activity activity : activityStack) {
             if (activity.getClass().equals(cls)) {
                 return activity;
