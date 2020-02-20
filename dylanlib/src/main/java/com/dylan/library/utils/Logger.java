@@ -1,9 +1,12 @@
 package com.dylan.library.utils;
 
+import android.os.Build;
 import android.util.Log;
 
 import com.dylan.library.exception.ELog;
 
+import java.lang.reflect.Method;
+import java.security.Policy;
 import java.util.List;
 
 /**
@@ -30,7 +33,6 @@ public class Logger {
             }
             e(LOGTAG, stackInfo + ":\n" + msg);
         }
-
     }
 
     public static void e(String tag, String msg) {
@@ -50,6 +52,17 @@ public class Logger {
             }
         }
 
+    }
+
+
+    public static void e(Object... objects) {
+        if (EmptyUtils.isNotEmpty(objects)) {
+            String printStr = "";
+            for (Object o : objects) {
+                printStr = printStr.concat(o.toString() + "  ");
+            }
+            e(printStr);
+        }
     }
 
     public static void i(String msg) {

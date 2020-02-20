@@ -122,12 +122,7 @@ public class AppUtils {
     }
 
     public static boolean isAppRoot() {
-        ShellUtils.CommandResult result = ShellUtils.execCmd("echo root", true);
-        if (result.result == 0) return true;
-        if (result.errorMsg != null) {
-            Log.e("isAppRoot", result.errorMsg);
-        }
-        return false;
+        return RootUtil.hasRooted();
     }
 
     /**
@@ -262,31 +257,18 @@ public class AppUtils {
 
     }
 
-    /**
-     * Activity从后台回到前台，后台不存在则创建
-     *
-     * @param context
-     * @param aClass
-     */
-    public static void bringActivityToFront(Context context, Class aClass) {
-        Intent intent = new Intent(context, aClass);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        context.startActivity(intent);
-    }
+     public static void backHome(Activity activity){
+         Intent home=new Intent(Intent.ACTION_MAIN);
+         home.addCategory(Intent.CATEGORY_HOME);
+         activity.startActivity(home);
+     }
 
-    /**
-     * Activity从后台回到前台，后台不存在则创建
-     *
-     * @param context
-     * @param aClass
-     */
-    public static void bringActivityToFront(Context context, String bundleKey, Bundle bunldeValue, Class aClass) {
-        Intent intent = new Intent(context, aClass);
-        intent.putExtra(bundleKey, bunldeValue);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        context.startActivity(intent);
-    }
-
+     public static void backHome(Context context){
+         Intent home=new Intent(Intent.ACTION_MAIN);
+         home.addCategory(Intent.CATEGORY_HOME);
+         home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+         context.startActivity(home);
+     }
 
     public static void shareText(Context context, String content) {
         if (context == null) return;

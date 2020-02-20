@@ -26,6 +26,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dylan.library.R;
+import com.dylan.library.utils.Logger;
 
 
 /**
@@ -123,8 +124,8 @@ public class PlayerGesture {
     private void onActionDown(MotionEvent event) {
         if (anchorView == null || mSoundLightSpeedView == null) return;
         maxTouchHeight = (int) (anchorView.getMeasuredHeight() * 0.7f);
-        downPoint.x = event.getX();
-        downPoint.y = event.getY();
+        downPoint.x = event.getRawX();
+        downPoint.y = event.getRawY();
         //判断触摸位置
         if (event.getX() > mMeasureWidth / 2) {  //点击在右边
             if (soundonLeft) {
@@ -168,8 +169,9 @@ public class PlayerGesture {
 
     @TargetApi(Build.VERSION_CODES.KITKAT)
     private void onActionMove(MotionEvent event) {
-        float deX = downPoint.x - event.getX();
-        float deY = downPoint.y - event.getY();
+        float deX = downPoint.x - event.getRawX();
+        float deY = downPoint.y - event.getRawY();
+
         //在没有横向滑动的情况下，触发纵向滑动或者已经处于纵向滑动则调节 亮度和音频
         if (Math.abs(deY) > Math.abs(deX) && !isChangeHorization) {
             if (!isShowing()) {//没有显示的情况下
@@ -195,8 +197,8 @@ public class PlayerGesture {
         }
         distanceX += deX;
         distanceY += deY;
-        downPoint.x = event.getX();
-        downPoint.y = event.getY();
+        downPoint.x = event.getRawX();
+        downPoint.y = event.getRawY();
 
     }
 

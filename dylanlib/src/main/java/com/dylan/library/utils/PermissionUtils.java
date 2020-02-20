@@ -2,9 +2,16 @@ package com.dylan.library.utils;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+
+import java.lang.reflect.Method;
 
 /**
  * Created by Dylan on 2017/11/4.
@@ -14,6 +21,7 @@ public class PermissionUtils {
 
     public static final int REQUEST_PER_CAMERA_WRITE =101;
     public static final int REQUEST_PER_EXTERNAL_STORAGE =102;
+    public static final int REQUEST_PER_DRAW_OVER_LAY=103;
 
 
     public static boolean hasNotCameraAndExternalWritePermission(Activity activity) {
@@ -48,6 +56,32 @@ public class PermissionUtils {
     }
 
 
+    public static boolean hasDrawOverlaysPermission(Context context){
+        Boolean result = false;
+        if (Build.VERSION.SDK_INT >= 23) {
+            try {
+                Class clazz = Settings.class;
+                Method canDrawOverlays = clazz.getDeclaredMethod("canDrawOverlays", Context.class);
+                result = (Boolean) canDrawOverlays.invoke(null, context);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
+
+    public static boolean hasNotDrawOverlaysPermission(Context context){
+        return !hasDrawOverlaysPermission(context);
+    }
+
+
+    //申请权限
+    public static void startDrawOverlaysActivityForResult(Activity activity) {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        intent.setData(Uri.parse("package:" + activity.getPackageName()));
+        activity.startActivityForResult(intent, REQUEST_PER_DRAW_OVER_LAY);
+    }
+
     public static void requestCameraAndExternalWrite(Activity activity){
         ActivityCompat.requestPermissions(activity,
                 new String[]{Manifest.permission.CAMERA,
@@ -60,4 +94,7 @@ public class PermissionUtils {
                 new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PER_EXTERNAL_STORAGE);
     }
+
+
+
 }

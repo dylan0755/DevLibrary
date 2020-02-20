@@ -4,13 +4,13 @@
 V3.3.0
 1.ScreenUtils 增加横竖屏方向判断方法，切换横竖屏方法
 2.添加GridDividerItemDecoration
-3.MediaTime 改名MediaTools,增加获取视频截图，视频规格函数
+3.MediaTime 更名为MediaTools,新增获取视频截图，视频规格函数
 4.FileUtils 更新
 (1).计算文件夹总大小(getTotalSizeOfFilesInDir)
 (2).从指定目录，媒体文件库中根据后缀名查找文件(getSpecFilesFromDir、getSpecFileFromMediaFileStore)
 (3).增加 deleteMediaStoreVideoFile 、 deleteMediaStoreImageFile 、deleteMediaStoreAudioFile 、deleteMediaFileStoreFile  从数据库中删除记录
 
-5.增加CollectionsUtils 类，增加mergeList，合并两个集合且去重处理。
+5.增加CollectionsUtils 类，增加mergeList，合并两个集合且去重处理,结构类需继承 MergeCell .
 6.ClipBoardUtils 增加 getPasteString  获取最新复制的内容
 7.增加 SystemSettings 类，获取系统设置，如 亮度，自动旋转等等
 8.增加PlayerGesture和PlayerGestureView 两类，使用PlayerGestureView 可以控制亮度，声音，进度
@@ -19,9 +19,9 @@ V3.3.0
 10.增加 RoundImageView   app:roundRadius="10dp" 控制圆角大小
 11.增加 ReboundHelper 核心类，拖拽回弹效果!
 新增 ReboundLayout,ReboudRecyclerView,ReboundScrollView,ReboundListView,ReboundGridView 5个回弹组件。
-
-
-
+12.AppUtils 增加 backHome，返回桌面。
+13.增加 ActivityManager
+14.PermissionUtils 增加判断是否有显示在应用上层权限 hasDrawOverlaysPermission   startDrawOverlaysActivityForResult
 
 
 
