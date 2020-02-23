@@ -1,6 +1,7 @@
 package com.dylan.library.graphics;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
@@ -13,11 +14,13 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.io.IOCloser;
@@ -41,28 +44,20 @@ public class BitmapHelper {
 
 
     public static Bitmap getInSampleSizeBitmap(String picPath, int reqsW, int reqsH) {
+        Bitmap bitmap = null;
         try {
-            FileInputStream inputStream = new FileInputStream(picPath);
-            ByteArrayOutputStream baos = new ByteArrayOutputStream();
-            ReadableByteChannel channel = Channels.newChannel(inputStream);
-            ByteBuffer buffer = ByteBuffer.allocate(1024);
-            while (channel.read(buffer) != -1) {
-                buffer.flip();
-                while (buffer.hasRemaining())
-                    baos.write(buffer.get());
-                buffer.clear();
+            BitmapFactory.Options option = new BitmapFactory.Options();
+            option.inPreferredConfig = Bitmap.Config.RGB_565;
+            option.inJustDecodeBounds = true;//不添加到内存，只测量宽高
+            BitmapFactory.decodeFile(picPath, option);
+            option.inSampleSize = getInSampleSize(option, reqsW, reqsH);
+            try {
+                option.inJustDecodeBounds = false;
+                bitmap = BitmapFactory.decodeStream(new FileInputStream(picPath), null, option);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
             }
-            byte[] bts = baos.toByteArray();
-            inputStream.close();
-            channel.close();
-            baos.close();
-            //图片尺寸压缩
-            final BitmapFactory.Options options = new BitmapFactory.Options();
-            options.inJustDecodeBounds = true;
-            BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
-            options.inSampleSize = caculateInSampleSize(options, reqsW, reqsH);
-            options.inJustDecodeBounds = false;
-            return BitmapFactory.decodeByteArray(bts, 0, bts.length, options);
+            return bitmap;
         } catch (Exception e) {
             e.printStackTrace();
             ELog.e(e);
@@ -71,7 +66,7 @@ public class BitmapHelper {
     }
 
     //获得采样率
-    public final static int caculateInSampleSize(BitmapFactory.Options options, int rqsW, int rqsH) {
+    public final static int getInSampleSize(BitmapFactory.Options options, int rqsW, int rqsH) {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
@@ -195,99 +190,208 @@ public class BitmapHelper {
         return bitmap;
     }
 
-    //Bitamp 圆角+白边框
-    public static Bitmap transformRoundCornerWithBorder(Bitmap bitmap, int cornerRadius, int border) {
-        if (bitmap == null) return null;
-        return transformRoundCornerWithBorder(bitmap, bitmap.getWidth(), bitmap.getHeight(), cornerRadius, border);
+
+    public static Bitmap centerCrop(Bitmap srcBitmap, int outWidth, int outHeight) {
+        if (srcBitmap == null) return null;
+        if (srcBitmap.getWidth() == outWidth && srcBitmap.getHeight() == outHeight) {
+            return srcBitmap;
+        }
+        final float scale;
+        final float dx;
+        final float dy;
+        Matrix m = new Matrix();
+        if (srcBitmap.getWidth() * outHeight > outWidth * srcBitmap.getHeight()) {
+            scale = (float) outHeight / (float) srcBitmap.getHeight();
+            dx = (outWidth - srcBitmap.getWidth() * scale) * 0.5f;
+            dy = 0;
+        } else {
+            scale = (float) outWidth / (float) srcBitmap.getWidth();
+            dx = 0;
+            dy = (outHeight - srcBitmap.getHeight() * scale) * 0.5f;
+        }
+
+        m.setScale(scale, scale);
+        m.postTranslate((int) (dx + 0.5f), (int) (dy + 0.5f));
+
+        // We don't add or remove alpha, so keep the alpha setting of the Bitmap we were given.
+        if (Build.VERSION.SDK_INT >= 12 && srcBitmap != null) {
+            srcBitmap.setHasAlpha(srcBitmap.hasAlpha());
+        }
+        Bitmap targetBitmap = Bitmap.createBitmap(outWidth, outHeight, srcBitmap.getConfig());
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setAntiAlias(true);
+        Canvas canvas = new Canvas(targetBitmap);
+        canvas.drawBitmap(srcBitmap, m, paint);
+        return targetBitmap;
     }
 
 
-    public static Bitmap transformRoundCornerWithBorder(Bitmap bitmap, int outWidth, int outHeight, int cornerRadius, int border) {
-        if (bitmap == null) {
-            return null;
-        }
+    public static Bitmap centerCropRoundCorner(Bitmap srcBitmap, int cornerRadius, int outWidth, int outHeight) {
+        Bitmap bitmap = centerCrop(srcBitmap, outWidth, outHeight);
+        bitmap = transformRoundCorner(bitmap, cornerRadius, outWidth, outHeight);
+        return bitmap;
+    }
+
+    public static Bitmap centerCropRoundCornerWithBorder(Bitmap srcBitmap, int cornerRadius, int borderWidth, int borderColor, int outWidth, int outHeight) {
+        Bitmap bitmap = centerCropRoundCorner(srcBitmap, cornerRadius, outWidth, outHeight);
+        bitmap = transformRoundCornerWithBorder(bitmap, cornerRadius, borderWidth, borderColor, outWidth, outHeight);
+        return bitmap;
+    }
+
+
+    public static Bitmap transformRoundCorner(Bitmap bitmap, int cornerRadius, int outWidth, int outHeight) {
+        if (bitmap == null) return null;
+        float radiusDp = Resources.getSystem().getDisplayMetrics().density * cornerRadius;
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         float widthScale = outWidth * 1f / width;
         float heightScale = outHeight * 1f / height;
-
         Matrix matrix = new Matrix();
         matrix.setScale(widthScale, heightScale);
         //创建输出的bitmap
-        Bitmap desBitmap = Bitmap.createBitmap(width + 2 * border, height + 2 * border, Bitmap.Config.ARGB_8888);
+        Bitmap desBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
         //创建canvas并传入desBitmap，这样绘制的内容都会在desBitmap上
         Canvas canvas = new Canvas(desBitmap);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         //创建着色器
         BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
-        //给着色器配置matrix
         bitmapShader.setLocalMatrix(matrix);
         paint.setShader(bitmapShader);
         //创建矩形区域并且预留出border
-        RectF rect = new RectF(border, border, border + width, border + height);
-        //把传入的bitmap绘制到圆角矩形区域内
-        canvas.drawRoundRect(rect, cornerRadius, cornerRadius, paint);
-
-        if (border > 0) {
-            //绘制boarder
-            Paint boarderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            boarderPaint.setColor(Color.WHITE);
-            boarderPaint.setStyle(Paint.Style.STROKE);
-            boarderPaint.setStrokeWidth(border);
-            canvas.drawRoundRect(rect, cornerRadius, cornerRadius, boarderPaint);
-        }
+        RectF rect = new RectF(0, 0, width, height);
+        canvas.drawRoundRect(rect, radiusDp, radiusDp, paint);
         return desBitmap;
-
     }
 
 
-    //Bitamp 圆形+白边框
-    public static Bitmap transformCircleWithBorder(Bitmap bitmap, int border) {
-        if (bitmap == null) return null;
-        return transformCircleWithBorder(bitmap, bitmap.getWidth(), bitmap.getHeight(), border);
-    }
-
-    public static Bitmap transformCircleWithBorder(Bitmap bitmap, int outWidth, int outHeight, int border) {
-
+    public static Bitmap transformRoundCornerWithBorder(Bitmap bitmap, int cornerRadius, int borderWidth, int borderColor, int outWidth, int outHeight) {
         if (bitmap == null) {
             return null;
         }
+        float radiusPx = Resources.getSystem().getDisplayMetrics().density * cornerRadius;
+        borderColor = (int) (Resources.getSystem().getDisplayMetrics().density * borderColor);
+
+
+        bitmap = transformRoundCorner(bitmap, cornerRadius, outWidth, outHeight);
+
+        Bitmap targetBitmap = Bitmap.createBitmap(bitmap.getWidth() + 2 * borderWidth, bitmap.getHeight() + 2 * borderWidth, bitmap.getConfig());
+        Canvas canvas = new Canvas(targetBitmap);
+        canvas.drawBitmap(bitmap, borderWidth, borderWidth, null);
+        if (borderWidth > 0) {
+            //创建矩形区域并且预留出border
+            RectF rect = new RectF(borderWidth, borderWidth, targetBitmap.getWidth() - borderWidth, targetBitmap.getHeight() - borderWidth);
+            //绘制boarder
+            Paint boarderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            boarderPaint.setColor(borderColor);
+            boarderPaint.setStyle(Paint.Style.STROKE);
+            boarderPaint.setStrokeWidth(borderWidth);
+            canvas.drawRoundRect(rect, radiusPx, radiusPx, boarderPaint);
+        }
+        return targetBitmap;
+    }
+
+
+
+
+
+    public static Bitmap transformCircle(Bitmap bitmap, int outWidth, int outHeight) {
+        if (bitmap == null) {
+            return null;
+        }
+
         int radius;
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
         float widthScale = outWidth * 1f / width;
         float heightScale = outHeight * 1f / height;
 
-        Matrix matrix = new Matrix();
-        matrix.setScale(widthScale, heightScale);
+
         Bitmap desBitmap = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888);
         if (outHeight > outWidth) {
             radius = outWidth / 2;
         } else {
             radius = outHeight / 2;
         }
-        //创建canvas
+
         Canvas canvas = new Canvas(desBitmap);
+
+
+        int cx = outWidth / 2;
+        int cy = outHeight / 2;
+
+
+       //绘制圆形的Bitmap
+        Matrix matrix = new Matrix();
+        matrix.setScale(widthScale, heightScale);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         bitmapShader.setLocalMatrix(matrix);
         paint.setShader(bitmapShader);
-        canvas.drawCircle(outWidth / 2, outHeight / 2, radius - border, paint);
-        if (border > 0) {
-            //绘制boarder
-            Paint boarderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
-            boarderPaint.setColor(Color.WHITE);
-            boarderPaint.setStyle(Paint.Style.STROKE);
-            boarderPaint.setStrokeWidth(border);
-            canvas.drawCircle(outWidth / 2, outHeight / 2, radius - border, boarderPaint);
+        canvas.drawCircle(cx, cy, radius, paint);
+
+        return desBitmap;
+    }
+
+
+    public static Bitmap transformCircleWithBorder(Bitmap bitmap, int borderWidth, int borderColor, int outWidth, int outHeight) {
+        if (bitmap == null) {
+            return null;
         }
+
+        //转成像素
+        borderWidth = (int) (borderWidth * Resources.getSystem().getDisplayMetrics().density);
+
+        int radius;
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        float widthScale = outWidth * 1f / width;
+        float heightScale = outHeight * 1f / height;
+
+
+        Bitmap desBitmap = Bitmap.createBitmap(outWidth, outHeight, Bitmap.Config.ARGB_8888);
+        if (outHeight > outWidth) {
+            radius = (outWidth - borderWidth * 2) / 2;
+        } else {
+            radius = (outHeight - borderWidth * 2) / 2;
+        }
+
+        Canvas canvas = new Canvas(desBitmap);
+
+
+        int cx = outWidth / 2;
+        int cy = outHeight / 2;
+
+
+//        //绘制圆形的Bitmap,要在边框以内
+        Matrix matrix = new Matrix();
+        matrix.setScale(widthScale, heightScale);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
+        bitmapShader.setLocalMatrix(matrix);
+        paint.setShader(bitmapShader);
+        canvas.drawCircle(cx, cy, radius, paint);
+
+
+        //绘制边框
+        if (borderWidth > 0) {
+            Paint borderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            borderPaint.setDither(true);
+            borderPaint.setColor(borderColor);
+            borderPaint.setStyle(Paint.Style.STROKE);
+            borderPaint.setStrokeWidth(borderWidth);
+            borderPaint.setStrokeJoin(Paint.Join.ROUND);
+            borderPaint.setStrokeCap(Paint.Cap.ROUND);
+            canvas.drawCircle(cx, cy, radius, borderPaint);
+        }
+
+
         return desBitmap;
 
 
     }
 
 
-    public static Bitmap getBitmapWithBorder(Bitmap bitmap, int outWidth, int outHeight, int border){
+    public static Bitmap getBitmapWithBorder(Bitmap bitmap, int outWidth, int outHeight, int border) {
         if (bitmap == null) {
             return null;
         }
@@ -307,20 +411,18 @@ public class BitmapHelper {
         BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         bitmapShader.setLocalMatrix(matrix);
         paint.setShader(bitmapShader);
-        canvas.drawBitmap(bitmap,null, paint);
+        canvas.drawBitmap(bitmap, null, paint);
         if (border > 0) {
             //绘制boarder
             Paint boarderPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
             boarderPaint.setColor(Color.WHITE);
             boarderPaint.setStyle(Paint.Style.STROKE);
             boarderPaint.setStrokeWidth(border);
-
-            Rect borderRect=new Rect(0,0,outWidth,outHeight);
+            Rect borderRect = new Rect(0, 0, outWidth, outHeight);
             canvas.drawRect(borderRect, boarderPaint);
         }
         return desBitmap;
     }
-
 
 
     //两个Bitmap叠加
@@ -364,9 +466,6 @@ public class BitmapHelper {
 
         return bitmap;
     }
-
-
-
 
 
     /**

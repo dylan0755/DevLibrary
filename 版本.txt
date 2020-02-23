@@ -2,8 +2,13 @@
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
 V3.4.0
-
-
+1.BitmapHelper 修复 getInSampleSizeBitmap  造成内存溢出bug.
+2.增加ImageViewUtils,增加主线程内设置图片，动态获取宽高。
+3.SDCacheDir 标注过期，使用ExternalStorageDir 新类，增加getPackageNameDir 获取报名目录
+4.BitmapHelper 更新：
+(1). 增加 centerCrop  配合 ImageView xml 中的scaleType centerCrop
+(2). 增加 centerCropRoundCorner   centerCrop 模式下再进行圆角
+(3). 优化 原有 transformRoundCorner  transformRoundCornerWithBorder，outPutWidth 和 outPutHeight 必须显示指定
 
 
 

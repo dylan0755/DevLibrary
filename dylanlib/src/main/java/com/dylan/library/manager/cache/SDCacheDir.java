@@ -6,11 +6,18 @@ import android.os.Environment;
 /**
  * Created by Dylan on 2016/10/12.
  */
+
+@Deprecated
 public class SDCacheDir {
     private static SDCacheDir mInstance;
+    @Deprecated
     private String sdpath;
+    @Deprecated
     public String cachepath;
+    @Deprecated
     public String filesDir;
+    @Deprecated
+
 
     public SDCacheDir(Context context){
         sdpath=Environment.getExternalStorageDirectory().toString();
