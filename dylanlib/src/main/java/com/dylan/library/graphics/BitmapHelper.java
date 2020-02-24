@@ -25,6 +25,7 @@ import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.io.IOCloser;
 import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -41,7 +42,19 @@ import java.nio.channels.ReadableByteChannel;
  */
 
 public class BitmapHelper {
+    private static final String TAG=BitmapHelper.class.getSimpleName();
 
+    public static void logWidthHeight(Bitmap bitmap){
+        logWidthHeight(TAG,bitmap);
+    }
+
+    public static void logWidthHeight(String tag,Bitmap bitmap){
+        if (bitmap==null){
+            Log.e(tag, "bitmap is null" );
+            return;
+        }
+        Log.e(tag, "width="+bitmap.getWidth()+" height="+bitmap.getHeight() );
+    }
 
     public static Bitmap getInSampleSizeBitmap(String picPath, int reqsW, int reqsH) {
         Bitmap bitmap = null;

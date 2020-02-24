@@ -96,6 +96,18 @@ public class FileUtils {
         return filePath.substring(filePath.lastIndexOf("/") + 1);
     }
 
+    public static String getFileNameWithoutSuffix(String filePath){
+        int startIndex=filePath.lastIndexOf("/") + 1;
+        int endIndex=filePath.lastIndexOf(".");
+        endIndex=endIndex>0?endIndex:filePath.length();
+        return filePath.substring(startIndex,endIndex);
+    }
+
+    public static String getFileSuffixFromPath(String filePath){
+        int pointIndex=filePath.lastIndexOf(".");
+        return pointIndex>0?filePath.substring( pointIndex+ 1):filePath;
+    }
+
     //递归获取文件夹大小
     public static long getTotalSizeOfFilesInDir(File dirFile) {
         if (dirFile.isFile())

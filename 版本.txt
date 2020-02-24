@@ -6,9 +6,23 @@ V3.4.0
 2.增加ImageViewUtils,增加主线程内设置图片，动态获取宽高。
 3.SDCacheDir 标注过期，使用ExternalStorageDir 新类，增加getPackageNameDir 获取报名目录
 4.BitmapHelper 更新：
-(1). 增加 centerCrop  配合 ImageView xml 中的scaleType centerCrop
-(2). 增加 centerCropRoundCorner   centerCrop 模式下再进行圆角
-(3). 优化 原有 transformRoundCorner  transformRoundCornerWithBorder，outPutWidth 和 outPutHeight 必须显示指定
+ (1). 增加 centerCrop  配合 ImageView xml 中的scaleType centerCrop
+ (2). 增加 centerCropRoundCorner   centerCrop 模式下再进行圆角
+ (3). 优化 原有 transformRoundCorner  transformRoundCornerWithBorder，outPutWidth 和 outPutHeight 必须显示指定
+ (4). 增加 logWidthHeight,打印宽高
+5.增加ArrayUtils  getStringByArray(Object o),printArray(Object o)  转字符串，输出
+6.Logger
+ (1).增加 数组判断并输出数组
+ (2).判断如果是List,输出长度和 数组形式输出
+ (3).增加Bitmap 判断，输出宽高
+7.StringUtils
+ (1).增加 trim方法，支持全角空格去除，原生字符串的trim() 只能去除首尾半角空格
+ (2).字符串和Unicode码互转
+
+8.FileUtils
+ (1).getFileSuffixFromPath  获取文件名后缀
+ (2).getFileNameWithoutSuffix  获取不带后缀的文件名
+
 
 
 

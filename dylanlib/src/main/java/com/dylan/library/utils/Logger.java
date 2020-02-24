@@ -1,10 +1,12 @@
 package com.dylan.library.utils;
 
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.util.Log;
 
 import com.dylan.library.exception.ELog;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.security.Policy;
 import java.util.List;
@@ -21,15 +23,23 @@ public class Logger {
         if (isDebug) {
             String stackInfo = getStackInfo();
 
-            if (msg != null && msg instanceof List) {
-                Log.e(LOGTAG, stackInfo + ":\n" + ((List) msg).size());
+            if (msg instanceof List) {
+                int len=((List) msg).size();
+                String arrayString=ArrayUtils.getStringByArray(((List)msg).toArray());
+                e(LOGTAG, stackInfo + ":\n" +"List-> size="+len+"  "+arrayString );
                 return;
-            } else if (msg != null && msg instanceof Throwable) {
-                Log.e(LOGTAG, stackInfo);
+            } else if (msg instanceof Throwable) {
+                e(LOGTAG, stackInfo);
                 Throwable throwable = (Throwable) msg;
                 ELog.e(throwable);
                 return;
-
+            } else if (msg != null && msg.getClass().isArray()) {
+                String str=ArrayUtils.getStringByArray(msg);
+                e(LOGTAG, stackInfo + ":\n" +"array-> "+ str);
+                return;
+            }else if (msg instanceof Bitmap){
+               e(LOGTAG,stackInfo + ":\n" +"bitmap-> with="+((Bitmap)msg).getWidth()+" height="+((Bitmap)msg).getHeight());
+               return;
             }
             e(LOGTAG, stackInfo + ":\n" + msg);
         }

@@ -16,7 +16,7 @@ import java.lang.reflect.Field;
  */
 public class ImageViewUtils {
 
-    public static void setImageBitmap(final ImageView iv, final Bitmap bitmap){
+    public static void setBitmapInMainThread(final ImageView iv, final Bitmap bitmap){
         iv.post(new Runnable() {
             @Override
             public void run() {
@@ -25,7 +25,7 @@ public class ImageViewUtils {
         });
     }
 
-    public static void setImageDrawable(final ImageView iv , int resId){
+    public static void setDrawableInMainThread(final ImageView iv , int resId){
        final Drawable drawable= ContextCompat.getDrawable(iv.getContext(),resId);
         iv.post(new Runnable() {
             @Override
@@ -35,7 +35,7 @@ public class ImageViewUtils {
         });
     }
 
-    public static void setImageDrawable(final ImageView iv ,final Drawable drawable){
+    public static void setDrawableInMainThread(final ImageView iv , final Drawable drawable){
         iv.post(new Runnable() {
             @Override
             public void run() {
