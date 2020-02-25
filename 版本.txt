@@ -1,7 +1,22 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V3.4.0
+V3.5.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+V3.4.0 ---->2020.02.25
+
 1.BitmapHelper 修复 getInSampleSizeBitmap  造成内存溢出bug.
 2.增加ImageViewUtils,增加主线程内设置图片，动态获取宽高。
 3.SDCacheDir 标注过期，使用ExternalStorageDir 新类，增加getPackageNameDir 获取报名目录

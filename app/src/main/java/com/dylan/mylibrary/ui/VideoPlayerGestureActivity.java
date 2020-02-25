@@ -43,7 +43,7 @@ public class VideoPlayerGestureActivity extends AppCompatActivity {
 
             @Override
             public void seekTo(long position) {
-                ToastUtils.show("从 "+ MediaTools.getMediaDurtionTime(position,MediaTools.MINUTE_TIME)+"播放");
+                ToastUtils.show("从 "+ MediaTools.getDurationMinuteFormat(position)+"播放");
             }
         });
     }
