@@ -4,7 +4,9 @@
 V3.5.0
 
 1.增加MediaStoreUtils  ，MediaStoreFile,  查找输出MediaStoreFile.
-2.FileUtils  移除 MediaStore 相关文件操作，交给MediaStoreUtils 管理。
+2.FileUtils
+ (1).移除 MediaStore 相关文件操作，交给MediaStoreUtils 管理。
+ (2).getAllTSFilePath  getTSFileDirPath  两个方法，  delete方法判断如果是删除m3u8，则会删除ts文件
 
 
 

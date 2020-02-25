@@ -17,10 +17,13 @@ import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -42,7 +45,22 @@ public class FileUtils {
         File file=new File(path);
         if (file.exists()){
             if (file.isFile()){
-                return file.delete();
+                //如果是m3u8 则删除ts 文件
+                 if (path.endsWith(".m3u8")||path.endsWith(".M3U8")){
+                     String dirPath=getTSFileDirPath(path);
+                     if (isExists(dirPath)){
+                         delectDirFile(dirPath);
+                     }
+                     //ts 有可能和当前的m3u8 同一个文件夹，所以删除了文件夹还要判断
+                     // m3u8 是否存在，存在则继续删除
+                     if (file.exists()){
+                         return file.delete();
+                     }else{
+                         return true;
+                     }
+                 }else{
+                     return file.delete();
+                 }
             }else if (file.isDirectory()){
                 return delectDirFile(path);
             }
@@ -122,6 +140,59 @@ public class FileUtils {
         return fileList;
     }
 
+
+   //m3u8 里头的Ts 文件
+    public static List<String> getAllTSFilePath(String m3u8FilePath){
+        List<String> tsFileList=new ArrayList<>();
+        String filePath = null;
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(m3u8FilePath);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+            String line;
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("file://")&&line.endsWith(".ts")) {
+                    tsFileList.add(line);
+                }
+            }
+            reader.close();
+            IOCloser.closeIO(fileInputStream);
+            return tsFileList;
+        } catch (Exception e) {
+            e.printStackTrace();
+            IOCloser.closeIO(fileInputStream);
+        }
+        return tsFileList;
+    }
+
+    //获取m3u8 里头的ts 所在的文件夹
+    public static String getTSFileDirPath(String m3u8FilePath) {
+        String filePath = "";
+        FileInputStream fileInputStream = null;
+        try {
+            fileInputStream = new FileInputStream(m3u8FilePath);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
+            String line;
+            //找到就退出
+            while ((line = reader.readLine()) != null) {
+                if (line.startsWith("file://")&&line.endsWith("ts")) {
+                    //获取目录路径
+                    filePath = new File(line).getParentFile().getPath();
+                    filePath=filePath.substring("file://".length()-1);
+                    //  Logger.e(filePath);
+                    break;
+                }
+
+            }
+            reader.close();
+            IOCloser.closeIO(fileInputStream);
+            return filePath;
+        } catch (Exception e) {
+            e.printStackTrace();
+            IOCloser.closeIO(fileInputStream);
+        }
+        return "";
+    }
 
     /**
      * @param context
@@ -312,7 +383,7 @@ public class FileUtils {
         }
     }
 
-    public static boolean delectDirFile(String dirPath) {
+    private static boolean delectDirFile(String dirPath) {
         try {
             File file = new File(dirPath);
             if (file.exists()) {

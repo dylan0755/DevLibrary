@@ -49,7 +49,7 @@ public class MediaStoreUtils {
 
     public static int updateVideoInVideoStore(Context context, String oldPath, String newPath){
         ContentResolver resolver = context.getContentResolver();
-        Uri uri = getMediaVideoStoreUri();
+        Uri uri = getVideoStoreUri();
         ContentValues contentValues=new ContentValues();
         contentValues.put(MediaStore.Video.Media.DATA,newPath);
         contentValues.put(MediaStore.Video.Media.DISPLAY_NAME,getFileNameFromPath(newPath));
@@ -63,7 +63,7 @@ public class MediaStoreUtils {
 
     public static int updateVideoInFileStore(Context context, String oldPath, String newPath){
         ContentResolver resolver = context.getContentResolver();
-        Uri uri =getMediaFileStoreUri();
+        Uri uri = getFileStoreUri();
         ContentValues contentValues=new ContentValues();
         contentValues.put(MediaStore.Files.FileColumns.DATA,newPath);
         int result=resolver.update(uri,contentValues, MediaStore.Files.FileColumns.DATA+"=?", new String[]{oldPath});
@@ -74,9 +74,9 @@ public class MediaStoreUtils {
     }
 
 
-    public static List<MediaStoreFile> getVideoList(Context context){
+    public static List<MediaStoreFile> getVideosFromVideoStore(Context context){
        List<MediaStoreFile> mediaStoreFiles = new ArrayList<>();
-        Cursor cursor = context.getContentResolver().query(getMediaVideoStoreUri(), LocalVideoColumns,
+        Cursor cursor = context.getContentResolver().query(getVideoStoreUri(), LocalVideoColumns,
                 null, null, MediaStore.Video.VideoColumns.DATE_ADDED + " DESC");
         if (cursor != null) {
             while (cursor.moveToNext()) {
@@ -99,10 +99,10 @@ public class MediaStoreUtils {
 
 
     //从多媒体文件库中查找
-    public static List<MediaStoreFile> getSpecFileFromMediaFileStore(Context context, String[] suffix, String[] filters) {
+    public static List<MediaStoreFile> getFilesFromFileStore(Context context, String[] suffix, String[] filters) {
         List<MediaStoreFile> mediaStoreFiles = new ArrayList<>();
         //从外存中获取
-        Uri fileUri =getMediaFileStoreUri();
+        Uri fileUri = getFileStoreUri();
         //筛选列，这里只筛选了：文件路径和不含后缀的文件名
         String[] projection = new String[]{
                 MediaStore.Files.FileColumns._ID,
@@ -170,49 +170,49 @@ public class MediaStoreUtils {
 
 
     //从媒体库中删除视频数据
-    public static boolean deleteMediaStoreVideoFile(Context context, String deleteFilePath) {
+    public static boolean deleteVideoStoreFile(Context context, String deleteFilePath) {
         if (context == null) return false;
         ContentResolver resolver = context.getContentResolver();
-        int delRows = resolver.delete(getMediaVideoStoreUri(), MediaStore.Video.Media.DATA + "=?", new String[]{deleteFilePath});
+        int delRows = resolver.delete(getVideoStoreUri(), MediaStore.Video.Media.DATA + "=?", new String[]{deleteFilePath});
         return delRows == 1;
     }
     //从媒体库中删除图片数据
-    public static boolean deleteMediaStoreImageFile(Context context, String deleteFilePath) {
+    public static boolean deleteImageStoreFile(Context context, String deleteFilePath) {
         if (context == null) return false;
         ContentResolver resolver = context.getContentResolver();
-        int delRows = resolver.delete(getMediaImageStoreUri(), MediaStore.Images.Media.DATA + "=?", new String[]{deleteFilePath});
+        int delRows = resolver.delete(getImageStoreUri(), MediaStore.Images.Media.DATA + "=?", new String[]{deleteFilePath});
         return delRows == 1;
     }
 
     //从媒体库中删除音频数据
-    public static boolean deleteMediaStoreAudioFile(Context context, String deleteFilePath) {
+    public static boolean deleteAudioStoreFile(Context context, String deleteFilePath) {
         if (context == null) return false;
         ContentResolver resolver = context.getContentResolver();
-        int delRows = resolver.delete(getMediaAudioStoreUri(), MediaStore.Audio.Media.DATA + "=?", new String[]{deleteFilePath});
+        int delRows = resolver.delete(getAudioStoreUri(), MediaStore.Audio.Media.DATA + "=?", new String[]{deleteFilePath});
         return delRows == 1;
     }
 
     //从媒体库中删除文件
-    public static boolean deleteMediaFileStoreFile(Context context, String deleteFilePath) {
+    public static boolean deleteFileStoreFile(Context context, String deleteFilePath) {
         if (context == null) return false;
         ContentResolver resolver = context.getContentResolver();
-        int delRows = resolver.delete(getMediaFileStoreUri(),MediaStore.Files.FileColumns.DATA+ "=?", new String[]{deleteFilePath});
+        int delRows = resolver.delete(getFileStoreUri(),MediaStore.Files.FileColumns.DATA+ "=?", new String[]{deleteFilePath});
         return delRows == 1;
     }
 
 
-    public static Uri getMediaImageStoreUri(){
+    public static Uri getImageStoreUri(){
         return MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
     }
-    public static Uri getMediaVideoStoreUri(){
+    public static Uri getVideoStoreUri(){
         return MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
     }
 
-    public static Uri getMediaAudioStoreUri(){
+    public static Uri getAudioStoreUri(){
         return MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
     }
 
-    public static Uri getMediaFileStoreUri(){
+    public static Uri getFileStoreUri(){
         return MediaStore.Files.getContentUri("external");
     }
 
