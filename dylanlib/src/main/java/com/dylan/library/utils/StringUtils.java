@@ -149,7 +149,7 @@ public class StringUtils {
     }
 
     //全角转半角
-    public static String ToDBC(String input) {
+    public static String toDBC(String input) {
         if (input == null) return "";
         char[] c = input.toCharArray();
         for (int i = 0; i < c.length; i++) {
@@ -170,7 +170,7 @@ public class StringUtils {
      * @param input String.
      * @return 全角字符串.
      */
-    public static String ToSBC(String input) {
+    public static String toSBC(String input) {
         char c[] = input.toCharArray();
         for (int i = 0; i < c.length; i++) {
             if (c[i] == ' ') {
@@ -316,7 +316,7 @@ public class StringUtils {
      * @return String
      */
 
-    public static String GBKToUnicode(String str) {
+    public static String gbKToUnicode(String str) {
         StringBuffer result = new StringBuffer();
         for (int i = 0; i < str.length(); i++) {
             char chr1 = (char) str.charAt(i);
@@ -340,7 +340,7 @@ public class StringUtils {
      * @return String
      */
 
-    public static String UnicodeToGBK(String dataStr) {
+    public static String unicodeToGBK(String dataStr) {
         int index = 0;
         StringBuffer buffer = new StringBuffer();
 

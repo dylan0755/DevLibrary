@@ -9,15 +9,25 @@ import android.provider.MediaStore;
  * Created by Dylan on 2016/9/22.
  */
 public class MediaTools {
-    public static int HOURSE_TIME = 1;
+    public static int HOUR_TIME = 1;
     public static int MINUTE_TIME = 2;
+
+
+    public static String getDurationMinuteFormat(long time){
+        return getMediaDurtionTime(time,MINUTE_TIME);
+    }
+
+    public static String getDurationHourFormat(long time){
+        return getMediaDurtionTime(time, HOUR_TIME);
+    }
+
 
     /**
      * @param time       long时间戳
      * @param timeformat 最高位是时还是分钟
      * @return
      */
-    public static String getMediaDurtionTime(long time, int timeformat) {//
+    private static String getMediaDurtionTime(long time, int timeformat) {//
         long secondTime = time / 1000;
         int hour = (int) (secondTime / 3600);
         int minute = (int) (secondTime % 3600);
@@ -55,7 +65,7 @@ public class MediaTools {
     }
 
 
-    public static String getMediaDurtionTime(long time) {//
+    private static String getMediaDurtionTime(long time) {//
         long secondTime = time / 1000;
         int hour = (int) (secondTime / 3600);
         int minute = (int) (secondTime % 3600);

@@ -391,7 +391,7 @@ public class PlayerGesture {
                 }
             }
 
-            tvSpeed.setText(MediaTools.getMediaDurtionTime(recordProgress, MediaTools.MINUTE_TIME));
+            tvSpeed.setText(MediaTools.getDurationMinuteFormat(recordProgress));
             pbSpeed.setProgress((int) (recordProgress * 100.0f / totalDuration));
         }
 

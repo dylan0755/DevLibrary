@@ -11,18 +11,29 @@ import android.net.Uri;
 public class IntentUtils {
 
     public static Intent getShareTextIntent(String content) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        intent.putExtra(Intent.EXTRA_TEXT, content);
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.setType("text/plain");
+        shareIntent.putExtra(Intent.EXTRA_TEXT, content);
+        Intent intent=Intent.createChooser(shareIntent,"");
         return intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 
 
     public static Intent getShareImageIntent(String content, Uri uri) {
-        Intent intent = new Intent(Intent.ACTION_SEND);
-        intent.putExtra(Intent.EXTRA_TEXT, content);
-        intent.putExtra(Intent.EXTRA_STREAM, uri);
-        intent.setType("image/*");
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_TEXT, content);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        shareIntent.setType("image/*");
+        Intent intent=Intent.createChooser(shareIntent,"");
+        return intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    }
+
+
+    public static Intent getShareVideoIntent(Uri uri){
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
+        shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        shareIntent.setType("video/*");
+        Intent intent=Intent.createChooser(shareIntent,"");
         return intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
     }
 

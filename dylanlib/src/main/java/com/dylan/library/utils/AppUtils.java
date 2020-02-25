@@ -282,4 +282,11 @@ public class AppUtils {
         context.startActivity(IntentUtils.getShareImageIntent(content, uri));
     }
 
+
+    public static void shareVideo(Context context,Uri uri){
+        if (context == null) return;
+        if (uri == null) return;
+        context.startActivity(IntentUtils.getShareVideoIntent(uri));
+    }
+
 }

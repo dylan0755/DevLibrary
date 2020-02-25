@@ -23,6 +23,17 @@ V3.4.0
  (1).getFileSuffixFromPath  获取文件名后缀
  (2).getFileNameWithoutSuffix  获取不带后缀的文件名
 
+9. SpannableStringUtils 多个函数更名，方便调用
+ (1).setAbsoluteSizeSpan 更名为 getAbsoluteSizeSpannableString
+ (2).convertBlodStyle 更名为 getBlodStyleSpannableString
+ (3).setTint 更名为 getTintSpannableString
+ (4). tintResize  更名为 getTintResizeSpannableString
+ (5). tintResizeBold 更名为 getTintResizeBoldSpannableString
+ (6).setClickTintResizeSpanStr  接收颜色  字符串改成  int
+
+10. MediaTools 增加 getDurationMinuteFormat   getDurationHourFormat
+11.新增 CompatLineTextView 类， 处理字符串中有小数点和英文出现异常换行的情况，支持 maxLine 限制
+12.AppUtils 新增 shareVideo
 
 
 
