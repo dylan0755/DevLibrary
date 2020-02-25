@@ -3,6 +3,8 @@
 
 V3.5.0
 
+1.增加MediaStoreUtils  ，MediaStoreFile,  查找输出MediaStoreFile.
+2.FileUtils  移除 MediaStore 相关文件操作，交给MediaStoreUtils 管理。
 
 
 
