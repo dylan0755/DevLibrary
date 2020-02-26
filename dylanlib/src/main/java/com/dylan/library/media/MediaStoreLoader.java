@@ -19,7 +19,7 @@ import java.util.List;
  * Date: 2020/2/24
  * Desc:
  */
-public class MediaStoreUtils {
+public class MediaStoreLoader {
     public static final int SOURCE_TYPE_EXTERNAL=0; //sd 文件
     public static final int SOURCE_TYPE_MEDIASTORE_VIDEO=100;  // 视频库
     public static final int SOURCE_TYPE_MEIDASTORE_FILE=200; //文件库
@@ -81,7 +81,7 @@ public class MediaStoreUtils {
         if (cursor != null) {
             while (cursor.moveToNext()) {
                 MediaStoreFile storeFile = new MediaStoreFile();
-                storeFile.setSourceType(MediaStoreUtils.SOURCE_TYPE_MEDIASTORE_VIDEO);
+                storeFile.setSourceType(MediaStoreLoader.SOURCE_TYPE_MEDIASTORE_VIDEO);
                 storeFile.set_ID(cursor.getInt(cursor.getColumnIndex(MediaStore.Video.Media._ID)));
                 storeFile.setPath(cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA)));
                 storeFile.setLength(cursor.getLong(cursor.getColumnIndex(MediaStore.Video.Media.SIZE)));
@@ -96,6 +96,52 @@ public class MediaStoreUtils {
 
         return mediaStoreFiles;
     }
+
+    public static List<PictureDirectory> getPictureDirectoryFromImageStore(Context context){
+        List<PictureDirectory> directories=new ArrayList<>();
+        Uri uri =getImageStoreUri();
+        ContentResolver resolver =context.getContentResolver();
+        String selection = "0=0) group by (" + MediaStore.Images.Media.BUCKET_DISPLAY_NAME;
+        String[] projects = {MediaStore.Images.Media.BUCKET_DISPLAY_NAME,
+                MediaStore.Images.Media.DATA,
+                "count(*) as image_count"};
+        Cursor cursor = resolver.query(uri, projects, selection, null, MediaStore.Images.Media._ID + " desc");
+        if (cursor==null) return directories;
+        while (cursor.moveToNext()) {
+            String path=cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
+            String bucketDisplayName = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.BUCKET_DISPLAY_NAME));
+            int bucketChildCount = cursor.getInt(cursor.getColumnIndex("image_count"));
+            PictureDirectory directory = new PictureDirectory();
+            directory.setDirName(bucketDisplayName);
+            directory.setDirPath(new File(path).getParentFile().getPath());
+            directory.setChildCount(bucketChildCount);
+            directory.setFirstChildPath(path);
+            directories.add(directory);
+        }
+        cursor.close();
+        return directories;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     //从多媒体文件库中查找
@@ -148,7 +194,7 @@ public class MediaStoreUtils {
                         File file=new File(path);
                         String fileName = FileUtils.getFileNameFromPath(path);
                         MediaStoreFile mediaStoreFile =new MediaStoreFile();
-                        mediaStoreFile.setSourceType(MediaStoreUtils.SOURCE_TYPE_MEIDASTORE_FILE);
+                        mediaStoreFile.setSourceType(MediaStoreLoader.SOURCE_TYPE_MEIDASTORE_FILE);
                         mediaStoreFile.set_ID(id);
                         mediaStoreFile.setPath(path);
                         mediaStoreFile.setDisplayName(displayName);

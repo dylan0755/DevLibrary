@@ -3,14 +3,16 @@
 
 V3.5.0
 
-1.增加MediaStoreUtils  ，MediaStoreFile,  查找输出MediaStoreFile.
+1.增加MediaStoreLoader  ，MediaStoreFile,  查找输出MediaStoreFile.
 2.FileUtils
- (1).移除 MediaStore 相关文件操作，交给MediaStoreUtils 管理。
+ (1).移除 MediaStore 相关文件操作，交给MediaStoreLoader 管理。
  (2).getAllTSFilePath  getTSFileDirPath  两个方法，  delete方法判断如果是删除m3u8，则会删除ts文件
+ (3).sortASC(List<File> fileList)升序排序  sortDESC(List<File> fileList) 降序排序
+
 3. 拖拽回弹组件增加 ReboundViewPager
-
-
-
+4.MediaStoreLoader 增加 getPictureDirectoryFromImageStore 返回 List<PictureDirectory> 图片文件夹集合
+5.widget 目录新增PhotoView 模块，PhotoView 新增支持惯性滚动
+6.BitmapHelper 新增 readBitmapDegree 读取图片角度  rotateToDegrees 旋转图片
 
 
 

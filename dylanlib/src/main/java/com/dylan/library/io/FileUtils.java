@@ -16,6 +16,7 @@ import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
+import com.dylan.library.widget.irecycler.RefreshTrigger;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,6 +26,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -193,6 +196,50 @@ public class FileUtils {
         }
         return "";
     }
+
+
+    //升序
+    @SuppressWarnings("all")
+    public static List<File> sortASC(List<File> fileList){
+        if (fileList == null || fileList.isEmpty()) return fileList;
+        Collections.sort(fileList, new Comparator<File>() {
+            @Override
+            public int compare(File o1, File o2) {
+                try {
+                    //  jdk 7 的排序，不能使用下面的，否则会报错
+                    return o1.lastModified() == o2.lastModified() ? 0 :
+                            (o1.lastModified() > o2.lastModified() ? 1 : -1);
+                } catch (Exception e) {
+                    return 0;
+                }
+            }
+        });
+        return fileList;
+    }
+
+    //降序
+    @SuppressWarnings("all")
+    public static List<File> sortDESC(List<File> fileList) {
+        if (fileList == null || fileList.isEmpty()) return fileList;
+
+        Collections.sort(fileList, new Comparator<File>() {
+            @Override
+            public int compare(File o1, File o2) {
+                try {
+                    //  jdk 7 的排序，不能使用下面的，否则会报错
+                    return o1.lastModified() == o2.lastModified() ? 0 :
+                            (o1.lastModified() > o2.lastModified() ? -1 : 1);
+                } catch (Exception e) {
+                    return 0;
+                }
+            }
+        });
+        return fileList;
+    }
+
+
+
+
 
     /**
      * @param context

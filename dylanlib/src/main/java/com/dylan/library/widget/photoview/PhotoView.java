@@ -1,4 +1,4 @@
-package com.dylan.library.widget;
+package com.dylan.library.widget.photoview;
 
 import android.animation.Animator;
 import android.animation.ValueAnimator;
@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
+import android.widget.ImageView;
+
 
 import com.dylan.library.utils.MatrixUtils;
 import com.dylan.library.utils.ViewTouchUtils;
@@ -38,8 +40,6 @@ public class PhotoView extends AppCompatImageView {
     public static final int RESTORE_DUTRATION = 50;
     private static final int ANIM_DURATION = 200;
     private static final int DOUBLE_INTERVAL = 300;//两次点击的间隔时间为多长会响应双击事件
-    private static final int MESSAGE_DELAY = DOUBLE_INTERVAL + 50; //自定义的ACTION_UP的响应，非onTouchEvent中的ACTION_UP
-    private static final int ACTION_UP_MESSAGE = 10010;
     private static final int ACTION_UP_TYPE_SINGLE = 0;
     private static final int ACTION_UP_TYPE_DOUBLE = 1;
     private static final int ACTION_UP_TYPE_MOVE = 2;
@@ -71,6 +71,9 @@ public class PhotoView extends AppCompatImageView {
     private int mMode = NONE;
     private GestureDetector mGestureDetector;
 
+    private FlingRunnable mFlingRunnable;
+
+
     public PhotoView(Context context) {
         this(context, null);
     }
@@ -93,6 +96,10 @@ public class PhotoView extends AppCompatImageView {
         mMidPoint = new PointF();
         mStartPoint = new PointF();
         mEndPoint = new PointF();
+        //速度
+        mFlingRunnable = new FlingRunnable(context);
+        mFlingRunnable.setOnFlingCallBack(new FilingCallBackImpl());
+
     }
 
 
@@ -140,7 +147,6 @@ public class PhotoView extends AppCompatImageView {
         mMatrix.set(mSavedMatrix);
         if (bm == null) {
             super.setImageBitmap(bm);
-            return;
         } else {
             boolean hasDo = false;
             if (matrixListener != null) {
@@ -176,9 +182,10 @@ public class PhotoView extends AppCompatImageView {
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 mMode = NONE;
-                mStartPoint.set(event.getX(), event.getY());
+                mStartPoint.set(event.getRawX(), event.getRawY());
                 mSavedMatrix.set(mMatrix);
                 hasMove = false;
+                mFlingRunnable.initVelocityTracker();
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 getParent().requestDisallowInterceptTouchEvent(true);
@@ -195,10 +202,11 @@ public class PhotoView extends AppCompatImageView {
             case MotionEvent.ACTION_MOVE:
                 if (mBitmap == null) return true;
                 if (event.getPointerCount() > 2) return true;
+                 mFlingRunnable.addMovement(event);
                 if (mMode == ZOOM) {
                     onZoom(event);
                 } else {
-                    mEndPoint.set(event.getX(), event.getY());
+                    mEndPoint.set(event.getRawX(), event.getRawY());
                     float distance = ViewTouchUtils.spacing(mEndPoint, mStartPoint);
                     if (distance < touchSlop / 8) {//滑动距离过小，相当于点击事件
                         break;
@@ -207,6 +215,7 @@ public class PhotoView extends AppCompatImageView {
                     if (currentWidth > parentWidth || currentHeight > parentHeight) {
                         getParent().requestDisallowInterceptTouchEvent(true);
                         mMode = DRAG;
+                        isDragged = true;
                         onDrag(event);
                     }
 
@@ -222,6 +231,7 @@ public class PhotoView extends AppCompatImageView {
                 break;
             case MotionEvent.ACTION_CANCEL:
                 getParent().requestDisallowInterceptTouchEvent(false);
+                mFlingRunnable.recycleVelocityTracker();
                 break;
             case MotionEvent.ACTION_UP:
                 if (doublePoint) {
@@ -250,7 +260,7 @@ public class PhotoView extends AppCompatImageView {
                         float scaleh = currentHeight / parentHeight;
                         float scale = Math.max(scalew, scaleh);
                         mMatrix.set(mSavedMatrix);
-                        mMidPoint.set(event.getX(), event.getY());
+                        mMidPoint.set(event.getRawX(), event.getRawY());
                         if (scale <= 1) {
                             scale = maxWidth / currentWidth;
                             if (!isScaling) doubleClickToMax(scale, mMidPoint);
@@ -272,6 +282,10 @@ public class PhotoView extends AppCompatImageView {
                 }
 
 
+                if (isDragged) {
+                 mFlingRunnable.computeCurrentVelocity();
+                }
+
                 if (currentWidth <= parentWidth && currentHeight <= parentHeight) {
                     mMode = NONE;
                     getParent().requestDisallowInterceptTouchEvent(false);
@@ -279,12 +293,16 @@ public class PhotoView extends AppCompatImageView {
                     getParent().requestDisallowInterceptTouchEvent(true);
                 }
                 resetFlag();
+
                 break;
         }
         setImageMatrix(mMatrix);
         mGestureDetector.onTouchEvent(event);
         return true;
     }
+
+
+
 
     //放大的时候拦截事件
     private void interceptEventIfIsZoomIn() {
@@ -333,16 +351,15 @@ public class PhotoView extends AppCompatImageView {
 
     //放大状态下的拖动
     public void onDrag(MotionEvent event) {
-        mEndPoint.set(event.getX(), event.getY());
+        mEndPoint.set(event.getRawX(), event.getRawY());
         float moveX = (mEndPoint.x - mStartPoint.x);
         float moveY = (mEndPoint.y - mStartPoint.y);
-        isDragged = true;
         mMatrix.set(mSavedMatrix);
         moveX = checkDxBound(moveX);
         moveY = checkDyBound(moveY);
         mMatrix.postTranslate(moveX, moveY);
         mSavedMatrix.set(mMatrix);
-        mStartPoint.set(event.getX(), event.getY());
+        mStartPoint.set(event.getRawX(), event.getRawY());
     }
 
 
@@ -538,15 +555,33 @@ public class PhotoView extends AppCompatImageView {
     }
 
 
-    public void addOnTouchCallBack(OnTouchCallBack callBack) {
-        touchCallBack = callBack;
-    }
+    /**
+     * 松手后的惯性滑动
+     */
+    class FilingCallBackImpl implements FlingRunnable.OnFlingCallBack {
+        @Override
+        public ImageView getImageView() {
+            return PhotoView.this;
+        }
 
+        @Override
+        public void onFiling(int currentX, int currentY, float deltaX, float deltaY) {
+            mEndPoint.set(currentX, currentY);
+            mMatrix.set(mSavedMatrix);
+            deltaX = checkDxBound(deltaX);
+            deltaY = checkDyBound(deltaY);
+            mMatrix.postTranslate(deltaX, deltaY);
+            mSavedMatrix.set(mMatrix);
+            mStartPoint.set(currentX, currentY);
+            setImageMatrix(mMatrix);
+        }
+
+
+    }
 
     class GestureCallBack extends GestureDetector.SimpleOnGestureListener {
         private long gestureLastDownTime;
         private int gestureDoubleInterval = 300;
-
 
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
@@ -578,7 +613,9 @@ public class PhotoView extends AppCompatImageView {
         matrixListener = listener;
     }
 
-
+    public void addOnTouchCallBack(OnTouchCallBack callBack) {
+        touchCallBack = callBack;
+    }
 
 
 }

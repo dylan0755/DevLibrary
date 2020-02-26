@@ -14,6 +14,7 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.media.ExifInterface;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
@@ -42,19 +43,46 @@ import java.nio.channels.ReadableByteChannel;
  */
 
 public class BitmapHelper {
-    private static final String TAG=BitmapHelper.class.getSimpleName();
+    private static final String TAG = BitmapHelper.class.getSimpleName();
 
-    public static void logWidthHeight(Bitmap bitmap){
-        logWidthHeight(TAG,bitmap);
-    }
 
-    public static void logWidthHeight(String tag,Bitmap bitmap){
-        if (bitmap==null){
-            Log.e(tag, "bitmap is null" );
-            return;
+    public static int readBitmapDegree(String path) {
+        int degree = 0;
+        try {
+            ExifInterface exifInterface = new ExifInterface(path);
+            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,
+                    ExifInterface.ORIENTATION_NORMAL);
+            switch (orientation) {
+                case ExifInterface.ORIENTATION_ROTATE_90:
+                    degree = 90;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_180:
+                    degree = 180;
+                    break;
+                case ExifInterface.ORIENTATION_ROTATE_270:
+                    degree = 270;
+                    break;
+            }
+
+        } catch (IOException e) {
+
+            e.printStackTrace();
+
         }
-        Log.e(tag, "width="+bitmap.getWidth()+" height="+bitmap.getHeight() );
+        return degree;
     }
+
+
+    public static Bitmap rotateToDegrees(Bitmap tmpBitmap, float degrees) {
+        Matrix matrix = new Matrix();
+        matrix.reset();
+        matrix.setRotate(degrees);
+        tmpBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(), tmpBitmap.getHeight(), matrix,true);
+        return tmpBitmap;
+    }
+
+
+
 
     public static Bitmap getInSampleSizeBitmap(String picPath, int reqsW, int reqsH) {
         Bitmap bitmap = null;
@@ -79,7 +107,8 @@ public class BitmapHelper {
     }
 
     //获得采样率
-    public final static int getInSampleSize(BitmapFactory.Options options, int rqsW, int rqsH) {
+    public final static int getInSampleSize(BitmapFactory.Options options, int rqsW,
+                                            int rqsH) {
         final int height = options.outHeight;
         final int width = options.outWidth;
         int inSampleSize = 1;
@@ -95,7 +124,8 @@ public class BitmapHelper {
 
 
     //同步保存并通知系统扫描
-    public static void saveBitmapSyncAndNotifyScan(Context context, Bitmap bitmap, String savePath) throws IOException {
+    public static void saveBitmapSyncAndNotifyScan(Context context, Bitmap bitmap, String
+            savePath) throws IOException {
         if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
         File outPutFile = new File(savePath);
         if (!outPutFile.getParentFile().exists()) {
@@ -133,13 +163,16 @@ public class BitmapHelper {
     }
 
     //异步保存
-    public static void saveBitmapASync(Bitmap bitmap, String savePath, OutPutListenener listener) {
+    public static void saveBitmapASync(Bitmap bitmap, String savePath, OutPutListenener
+            listener) {
         if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
         saveBitmapASync(Bitmap.CompressFormat.PNG, bitmap, 100, savePath, listener);
     }
 
 
-    private static void saveBitmapASync(final Bitmap.CompressFormat format, final Bitmap bitmap, final int qulity, final String savePath, final OutPutListenener listener) {
+    private static void saveBitmapASync(final Bitmap.CompressFormat format,
+                                        final Bitmap bitmap, final int qulity, final String savePath,
+                                        final OutPutListenener listener) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -239,20 +272,23 @@ public class BitmapHelper {
     }
 
 
-    public static Bitmap centerCropRoundCorner(Bitmap srcBitmap, int cornerRadius, int outWidth, int outHeight) {
+    public static Bitmap centerCropRoundCorner(Bitmap srcBitmap, int cornerRadius,
+                                               int outWidth, int outHeight) {
         Bitmap bitmap = centerCrop(srcBitmap, outWidth, outHeight);
         bitmap = transformRoundCorner(bitmap, cornerRadius, outWidth, outHeight);
         return bitmap;
     }
 
-    public static Bitmap centerCropRoundCornerWithBorder(Bitmap srcBitmap, int cornerRadius, int borderWidth, int borderColor, int outWidth, int outHeight) {
+    public static Bitmap centerCropRoundCornerWithBorder(Bitmap srcBitmap, int cornerRadius,
+                                                         int borderWidth, int borderColor, int outWidth, int outHeight) {
         Bitmap bitmap = centerCropRoundCorner(srcBitmap, cornerRadius, outWidth, outHeight);
         bitmap = transformRoundCornerWithBorder(bitmap, cornerRadius, borderWidth, borderColor, outWidth, outHeight);
         return bitmap;
     }
 
 
-    public static Bitmap transformRoundCorner(Bitmap bitmap, int cornerRadius, int outWidth, int outHeight) {
+    public static Bitmap transformRoundCorner(Bitmap bitmap, int cornerRadius, int outWidth,
+                                              int outHeight) {
         if (bitmap == null) return null;
         float radiusDp = Resources.getSystem().getDisplayMetrics().density * cornerRadius;
         int width = bitmap.getWidth();
@@ -277,7 +313,8 @@ public class BitmapHelper {
     }
 
 
-    public static Bitmap transformRoundCornerWithBorder(Bitmap bitmap, int cornerRadius, int borderWidth, int borderColor, int outWidth, int outHeight) {
+    public static Bitmap transformRoundCornerWithBorder(Bitmap bitmap, int cornerRadius,
+                                                        int borderWidth, int borderColor, int outWidth, int outHeight) {
         if (bitmap == null) {
             return null;
         }
@@ -302,9 +339,6 @@ public class BitmapHelper {
         }
         return targetBitmap;
     }
-
-
-
 
 
     public static Bitmap transformCircle(Bitmap bitmap, int outWidth, int outHeight) {
@@ -333,7 +367,7 @@ public class BitmapHelper {
         int cy = outHeight / 2;
 
 
-       //绘制圆形的Bitmap
+        //绘制圆形的Bitmap
         Matrix matrix = new Matrix();
         matrix.setScale(widthScale, heightScale);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
@@ -346,7 +380,8 @@ public class BitmapHelper {
     }
 
 
-    public static Bitmap transformCircleWithBorder(Bitmap bitmap, int borderWidth, int borderColor, int outWidth, int outHeight) {
+    public static Bitmap transformCircleWithBorder(Bitmap bitmap, int borderWidth,
+                                                   int borderColor, int outWidth, int outHeight) {
         if (bitmap == null) {
             return null;
         }
@@ -404,7 +439,8 @@ public class BitmapHelper {
     }
 
 
-    public static Bitmap getBitmapWithBorder(Bitmap bitmap, int outWidth, int outHeight, int border) {
+    public static Bitmap getBitmapWithBorder(Bitmap bitmap, int outWidth, int outHeight,
+                                             int border) {
         if (bitmap == null) {
             return null;
         }
@@ -670,4 +706,16 @@ public class BitmapHelper {
         }
     }
 
+
+    public static void logWidthHeight(Bitmap bitmap) {
+        logWidthHeight(TAG, bitmap);
+    }
+
+    public static void logWidthHeight(String tag, Bitmap bitmap) {
+        if (bitmap == null) {
+            Log.e(tag, "bitmap is null");
+            return;
+        }
+        Log.e(tag, "width=" + bitmap.getWidth() + " height=" + bitmap.getHeight());
+    }
 }
