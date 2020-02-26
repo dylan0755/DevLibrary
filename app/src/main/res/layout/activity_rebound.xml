@@ -36,4 +36,12 @@
         android:layout_gravity="center_horizontal"
         android:text="ReboundListView"
         android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnVPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="ReboundViewPager"
+        android:layout_marginTop="16dp"/>
 </LinearLayout>

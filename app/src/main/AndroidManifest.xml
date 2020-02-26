@@ -149,6 +149,7 @@
         <activity android:name=".ui.rebound.ReboundRecyclerViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ui.rebound.ReboundListViewActivity"/>
+        <activity android:name=".ui.rebound.ReboundViewPagerActivity"/>
         <activity android:name=".ui.BitmapHelperActivity"/>
 
 

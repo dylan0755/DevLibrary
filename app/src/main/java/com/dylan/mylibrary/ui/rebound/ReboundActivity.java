@@ -22,6 +22,7 @@ public class ReboundActivity extends AppCompatActivity implements View.OnClickLi
         findViewById(R.id.btnRv).setOnClickListener(this);
         findViewById(R.id.btnSv).setOnClickListener(this);
         findViewById(R.id.btnLv).setOnClickListener(this);
+        findViewById(R.id.btnVPager).setOnClickListener(this);
     }
 
     @Override
@@ -42,6 +43,10 @@ public class ReboundActivity extends AppCompatActivity implements View.OnClickLi
                 break;
             case R.id.btnLv:
                 intent=new Intent(this, ReboundListViewActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.btnVPager:
+                intent=new Intent(this, ReboundViewPagerActivity.class);
                 startActivity(intent);
                 break;
         }
