@@ -24,6 +24,12 @@ public class ReboundViewPager extends ViewPager {
         reboundHelper.setOrient(ReboundHelper.HORIZONTAL);
     }
 
+    //设置阻尼系数
+    public void setDampingRatio(float ratio) {
+        reboundHelper.setDampingRatio(ratio);
+    }
+
+
 
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
