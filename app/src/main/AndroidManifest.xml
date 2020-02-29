@@ -151,7 +151,7 @@
         <activity android:name=".ui.rebound.ReboundListViewActivity"/>
         <activity android:name=".ui.rebound.ReboundViewPagerActivity"/>
         <activity android:name=".ui.BitmapHelperActivity"/>
-
+        <activity android:name=".ui.PhotoPickerDemoActivity"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，

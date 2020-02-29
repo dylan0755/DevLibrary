@@ -21,6 +21,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
+import com.bumptech.glide.load.data.ExifOrientationStream;
 import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
@@ -46,30 +47,18 @@ public class BitmapHelper {
     private static final String TAG = BitmapHelper.class.getSimpleName();
 
 
+    public  static BitmapSize decodeBitmapSize(String path){
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inJustDecodeBounds=true;
+        BitmapFactory.decodeFile(path,options);
+        BitmapSize size=new BitmapSize();
+        size.width=options.outWidth;
+        size.height=options.outHeight;
+        return size;
+    }
+
     public static int readBitmapDegree(String path) {
-        int degree = 0;
-        try {
-            ExifInterface exifInterface = new ExifInterface(path);
-            int orientation = exifInterface.getAttributeInt(ExifInterface.TAG_ORIENTATION,
-                    ExifInterface.ORIENTATION_NORMAL);
-            switch (orientation) {
-                case ExifInterface.ORIENTATION_ROTATE_90:
-                    degree = 90;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_180:
-                    degree = 180;
-                    break;
-                case ExifInterface.ORIENTATION_ROTATE_270:
-                    degree = 270;
-                    break;
-            }
-
-        } catch (IOException e) {
-
-            e.printStackTrace();
-
-        }
-        return degree;
+        return ExifHelper.readPictureDegree(path);
     }
 
 
@@ -717,5 +706,19 @@ public class BitmapHelper {
             return;
         }
         Log.e(tag, "width=" + bitmap.getWidth() + " height=" + bitmap.getHeight());
+    }
+
+
+    public static class BitmapSize{
+        public int width;
+        public int height;
+
+        @Override
+        public String toString() {
+            return "BitmapSize{" +
+                    "width=" + width +
+                    ", height=" + height +
+                    '}';
+        }
     }
 }

@@ -5,6 +5,8 @@ import android.graphics.Matrix;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.Drawable;
+import android.widget.ImageView;
 
 /**
  * Author: Dylan
@@ -22,13 +24,13 @@ public class MatrixUtils {
         float[] location = new float[9];
         matrix.getValues(location);
         //左上角
-        points[0]=new PointF(location[2],location[5]) ;
+        points[0] = new PointF(location[2], location[5]);
         //右上角
-        points[1] =new PointF(location[2] + rectF.width() * location[0],points[0].y) ;
+        points[1] = new PointF(location[2] + rectF.width() * location[0], points[0].y);
         //左下角
-        points[2] =new PointF(points[0].x,location[5] + rectF.height() * location[4]) ;
+        points[2] = new PointF(points[0].x, location[5] + rectF.height() * location[4]);
         //右下角
-        points[3] =new PointF(points[1].x,points[2].y);
+        points[3] = new PointF(points[1].x, points[2].y);
         return points;
     }
 
@@ -41,13 +43,13 @@ public class MatrixUtils {
         float[] location = new float[9];
         matrix.getValues(location);
         //左上角
-        points[0]=new PointF(location[2],location[5]) ;
+        points[0] = new PointF(location[2], location[5]);
         //右上角
-        points[1] =new PointF(location[2] + rectF.width() * location[0],points[0].y) ;
+        points[1] = new PointF(location[2] + rectF.width() * location[0], points[0].y);
         //左下角
-        points[2] =new PointF(points[0].x,location[5] + rectF.height() * location[4]) ;
+        points[2] = new PointF(points[0].x, location[5] + rectF.height() * location[4]);
         //右下角
-        points[3] =new PointF(points[1].x,points[2].y);
+        points[3] = new PointF(points[1].x, points[2].y);
         return points;
     }
 
@@ -55,61 +57,92 @@ public class MatrixUtils {
     public static PointF getScaleSize(Matrix matrix) {
         float[] location = new float[9];
         matrix.getValues(location);
-        PointF pointF=new PointF();
-        pointF.x=location[0];
-        pointF.y=location[4];
+        PointF pointF = new PointF();
+        pointF.x = location[0];
+        pointF.y = location[4];
         return pointF;
     }
 
     //左上角坐标
-    public static PointF getLefTop(Matrix matrix){
+    public static PointF getLefTop(Matrix matrix) {
         float[] location = new float[9];
         matrix.getValues(location);
-        PointF pointF=new PointF();
-        pointF.x=location[2];
-        pointF.y=location[5];
+        PointF pointF = new PointF();
+        pointF.x = location[2];
+        pointF.y = location[5];
         return pointF;
     }
 
 
-    //缩小至最大范围
-    public static Matrix zoomOutToMaxRange(Matrix matrix, Bitmap bm, float rangeWidth, float rangeHeight) {
+    /**
+     * 获取ImageView 当前图片的位置信息
+     */
+    public static Rect getMatrixRect(Matrix matrix, Bitmap bitmap) {
+        int dw = bitmap.getWidth();
+        int dh = bitmap.getHeight();
+        float[] location = new float[9];
+        matrix.getValues(location);
+        float sx = location[0];
+        float sy = location[4];
+
+        int cw = (int) (dw * sx);
+        int ch = (int) (dh * sy);
+
+        float leftX = location[2];
+        float leftY = location[5];
+
+        return new Rect((int) leftX, (int) leftY, (int) (cw + leftX), (int) (ch + leftY));
+    }
+
+    /**
+     * 获取ImageView 当前图片的位置信息
+     */
+    public static RectF getMatrixRectF(ImageView imageView) {
+        RectF rectF = new RectF();
+        Drawable d = imageView.getDrawable();
+        if (d != null) {
+            rectF.set(0, 0, d.getIntrinsicWidth(), d.getIntrinsicHeight());
+            imageView.getImageMatrix().mapRect(rectF);
+        }
+        return rectF;
+    }
+
+    //缩小至最初的展示大小  即根据图片 宽高其中一边铺满屏幕
+    public static Matrix zoomToOriginalShowRange(Matrix matrix, Bitmap bm, float rangeWidth, float rangeHeight) {
         int width = bm.getWidth();
         int height = bm.getHeight();
+        float scale=getZoomScaleToOriginalShowRange(width,height,rangeWidth,rangeHeight);
+        matrix.postScale(scale,scale);
+        return matrix;
+    }
+
+
+    public static float getZoomScaleToOriginalShowRange(float currentWidth, float currentHeight, float rangeWidth, float rangeHeight) {
+        float scale = 1;
         //缩放
-        if (width > rangeWidth && height > rangeHeight) {//宽高都超过规定宽高
-            float scale;
-            float wScale = width * 1.0f / rangeWidth;
-            float hScale = height * 1.0f / rangeHeight;
+        if (currentWidth > rangeWidth && currentHeight > rangeHeight) {//宽高都超过规定宽高
+            float wScale = currentWidth * 1.0f / rangeWidth;
+            float hScale = currentHeight * 1.0f / rangeHeight;
             scale = Math.max(wScale, hScale);
             scale = 1.0f / scale;
-            matrix.postScale(scale, scale);
-        } else if (width > rangeWidth && height == rangeHeight) {//宽大于规定宽，高等于规定高，缩至规定宽
-            float wScale = width * 1.0f / rangeWidth;
-            float scale = 1.0f / wScale;
-            matrix.postScale(scale, scale);
-        } else if (width > rangeWidth && height < rangeHeight) {//宽大于规定宽，高小于规定高
-            float scale;
-            float wScale = width * 1.0f / rangeWidth;
+        } else if (currentWidth >= rangeWidth && currentHeight <= rangeHeight) {//宽大于规定宽，高等于规定高，缩至规定宽
+            float wScale = currentWidth * 1.0f / rangeWidth;
             scale = 1.0f / wScale;
-            matrix.postScale(scale, scale);
-        } else if (width <= rangeWidth && height > rangeHeight) {//图片高大于规定高度，而宽度没有，则图片缩至规定高度
-            float hScale = height * 1.0f / rangeHeight;
-            float scale = 1.0f / hScale;
-            matrix.postScale(scale, scale);
-        } else if (width < rangeWidth && height < rangeHeight) {//宽高都小于规定宽高
-            float scale;
-            if (width == height || width > height) {
-                scale = width * 1.0f / rangeWidth;
+        } else if (currentWidth <= rangeWidth && currentHeight > rangeHeight) {//图片高大于规定高度，而宽度没有，则图片缩至规定高度
+            float hScale = currentHeight * 1.0f / rangeHeight;
+            scale = 1.0f / hScale;
+        } else if (currentWidth < rangeWidth && currentHeight < rangeHeight) {//宽高都小于规定宽高
+            if (currentWidth >= currentHeight) {
+                scale = currentWidth * 1.0f / rangeWidth;
             } else {
-                float wScale = width * 1.0f / rangeWidth;
-                float hScale = height * 1.0f / rangeHeight;
-                scale = Math.min(wScale, hScale);
+                float wScale = currentWidth * 1.0f / rangeWidth;
+                float hScale = currentHeight * 1.0f / rangeHeight;
+                scale = Math.max(wScale, hScale);
             }
             scale = 1.0f / scale;
-            matrix.postScale(scale, scale);
+
         }
-        return matrix;
+        return scale;
     }
 
 

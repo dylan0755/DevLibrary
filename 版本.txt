@@ -13,6 +13,26 @@ V3.5.0
 4.MediaStoreLoader 增加 getPictureDirectoryFromImageStore 返回 List<PictureDirectory> 图片文件夹集合
 5.widget 目录新增PhotoView 模块，PhotoView 新增支持惯性滚动
 6.BitmapHelper 新增 readBitmapDegree 读取图片角度  rotateToDegrees 旋转图片
+7.增加ExifHelper ，  getExifInfo(String path) 返回 Exif 详情
+8.新增ImageLoader
+9.MatrixUtils 更新
+10.新增 GridListViewUtils getChildAt(AbsListView view, int position)
+    ListView或GridView 直接getChildAt 返回的是当前可见数量的第几个，
+    所以争取的获取方法是 position-view.getFirstVisiblePosition()
+
+11.新增 PrimaryPagerAdapter ， 通过 PrimaryItem primaryItem= adapter.getPrimaryItem();
+    primaryItem.object, 或者 adapter.getPrimaryItemObject()
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,0 +1,58 @@
+package com.dylan.library.adapter;
+
+import android.support.annotation.NonNull;
+import android.support.v4.view.PagerAdapter;
+import android.view.View;
+import android.view.ViewGroup;
+
+/**
+ * Author: Dylan
+ * Date: 2020/2/28
+ * Desc:
+ */
+public abstract class PrimaryPagerAdapter extends PagerAdapter {
+    protected PrimaryItem primaryItem;
+    @Override
+    public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        super.setPrimaryItem(container, position, object);
+        if (primaryItem == null) {
+            primaryItem = new PrimaryItem();
+            primaryItem.position = position;
+            primaryItem.object = object;
+        } else {
+            if (primaryItem.position != position) {
+                PrimaryItemChanged(primaryItem);
+                primaryItem.position = position;
+                primaryItem.object = object;
+            }
+        }
+    }
+
+    public abstract void PrimaryItemChanged(PrimaryItem oldItem);
+
+
+    public PrimaryItem getPrimaryItem() {
+        return primaryItem;
+    }
+
+    public Object getPrimaryItemObject(){
+        if (primaryItem!=null)return primaryItem.object;
+        return null;
+    }
+
+    @Override
+    public int getCount() {
+        return 0;
+    }
+
+    @Override
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object o) {
+        return false;
+    }
+
+
+    public  class PrimaryItem{
+        public int position;
+        public Object object;
+    }
+}

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 
-import com.dylan.library.utils.DensityUtil;
 import com.dylan.library.utils.SpannableStringUtils;
 import com.dylan.mylibrary.R;
 

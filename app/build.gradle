@@ -56,4 +56,8 @@ dependencies {
     compile files('libs/ImmersionBar.jar')
     compile files('libs/gson-2.8.0.jar')
     compile files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_20190429_175122.jar')
+    compile (name:'photopicker-release',ext:'aar')
+
+
+
 }

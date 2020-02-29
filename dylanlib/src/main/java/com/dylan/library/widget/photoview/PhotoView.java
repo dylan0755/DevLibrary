@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.RectF;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.GestureDetector;
@@ -30,8 +31,8 @@ import static java.lang.System.currentTimeMillis;
  * 所以第一次的高度未必就是正确的，所以不能取第一次测量的值
  */
 public class PhotoView extends AppCompatImageView {
+    private static final String TAG="PhotoView";
     private long lastDownTime;
-    private boolean doublePoint;
     private boolean doubleClick;
     private boolean hasMove;
     private boolean isDragged;
@@ -39,7 +40,7 @@ public class PhotoView extends AppCompatImageView {
     private OnTouchCallBack touchCallBack;
     public static final int RESTORE_DUTRATION = 50;
     private static final int ANIM_DURATION = 200;
-    private static final int DOUBLE_INTERVAL = 300;//两次点击的间隔时间为多长会响应双击事件
+    private static final int DOUBLE_INTERVAL = 250;//两次点击的间隔时间为多长会响应双击事件
     private static final int ACTION_UP_TYPE_SINGLE = 0;
     private static final int ACTION_UP_TYPE_DOUBLE = 1;
     private static final int ACTION_UP_TYPE_MOVE = 2;
@@ -52,10 +53,10 @@ public class PhotoView extends AppCompatImageView {
     private PointF mMidPoint;
     private PointF mStartPoint;
     private PointF mEndPoint;
-    private float parentWidth;
-    private float parentHeight;
-    private float minWidth;
-    private float minHeight;
+    private float viewWidth;
+    private float viewHeight;
+    private float showRangeWidth;
+    private float showRangeHeight;
     private float maxWidth;
     private float maxHeight;
     private float currentWidth;
@@ -107,14 +108,12 @@ public class PhotoView extends AppCompatImageView {
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
         if (!hasMeasure && getMeasuredWidth() != 0) {
-            parentWidth = getMeasuredWidth();
-            parentHeight = getMeasuredHeight();
-            currentWidth = parentWidth;
-            currentHeight = parentHeight;
-            minWidth = parentWidth * 0.8f;
-            minHeight = parentHeight * 0.8f;
-            maxWidth = parentWidth * 4.0f;
-            maxHeight = parentHeight * 4.0f;
+            viewWidth = getMeasuredWidth();
+            viewHeight = getMeasuredHeight();
+            currentWidth = viewWidth;
+            currentHeight = viewHeight;
+            maxWidth = viewWidth * 4.0f;
+            maxHeight = viewHeight * 4.0f;
             hasMeasure = true;
             //还没有进行Matrix，则开始Matrix缩放
             if (mBitmap != null && !isHasImageMatrix()) {
@@ -134,7 +133,7 @@ public class PhotoView extends AppCompatImageView {
         super.setImageBitmap(bm);
         mBitmap = bm;
         //宽高已经不为0，则直接进行矩阵缩放，如果为0则会在OnLayout 得到宽高之后再缩放
-        if (parentWidth != 0) {
+        if (viewWidth != 0) {
             hasImageMatrix = false;
             setMatrixBitmap(mBitmap);
         }
@@ -154,8 +153,8 @@ public class PhotoView extends AppCompatImageView {
             }
             if (!hasDo) {
                 //调整图片到中间铺满状态
-                MatrixUtils.zoomOutToMaxRange(mMatrix, bm, parentWidth, parentHeight);
-                MatrixUtils.centerInRange(mMatrix, bm, parentWidth, parentHeight);
+                MatrixUtils.zoomToOriginalShowRange(mMatrix, bm, viewWidth, viewHeight);
+                MatrixUtils.centerInRange(mMatrix, bm, viewWidth, viewHeight);
             }
             //记录矩阵后图片左上角的坐标
             originalMatrixPoints = MatrixUtils.getLocation(mMatrix, mBitmap);
@@ -165,6 +164,11 @@ public class PhotoView extends AppCompatImageView {
             setImageMatrix(mMatrix);
             super.setImageBitmap(bm);
 
+
+
+            RectF rectF=MatrixUtils.getMatrixRectF(this);
+            showRangeWidth =rectF.width();
+            showRangeHeight =rectF.height();
 
         }
 
@@ -179,6 +183,7 @@ public class PhotoView extends AppCompatImageView {
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         interceptEventIfIsZoomIn();
+
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
             case MotionEvent.ACTION_DOWN:
                 mMode = NONE;
@@ -186,12 +191,15 @@ public class PhotoView extends AppCompatImageView {
                 mSavedMatrix.set(mMatrix);
                 hasMove = false;
                 mFlingRunnable.initVelocityTracker();
+
+                RectF rectF = MatrixUtils.getMatrixRectF(this);
+                currentWidth = rectF.width();
+                currentHeight = rectF.height();
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
                 getParent().requestDisallowInterceptTouchEvent(true);
                 //如果动画还在继续，则一步到位，结束动画，防止快速操作
                 if (mAnimator != null && mAnimator.isRunning()) mAnimator.end();
-                doublePoint = true;
                 mOldDist = ViewTouchUtils.spacing(event);
                 if (mOldDist > 10.0f) {
                     mMode = ZOOM;
@@ -202,7 +210,7 @@ public class PhotoView extends AppCompatImageView {
             case MotionEvent.ACTION_MOVE:
                 if (mBitmap == null) return true;
                 if (event.getPointerCount() > 2) return true;
-                 mFlingRunnable.addMovement(event);
+                mFlingRunnable.addMovement(event);
                 if (mMode == ZOOM) {
                     onZoom(event);
                 } else {
@@ -212,7 +220,7 @@ public class PhotoView extends AppCompatImageView {
                         break;
                     }
                     hasMove = true;
-                    if (currentWidth > parentWidth || currentHeight > parentHeight) {
+                    if (currentWidth > viewWidth || currentHeight > viewHeight) {
                         getParent().requestDisallowInterceptTouchEvent(true);
                         mMode = DRAG;
                         isDragged = true;
@@ -222,31 +230,26 @@ public class PhotoView extends AppCompatImageView {
                 }
                 break;
             case MotionEvent.ACTION_POINTER_UP:  //图片的回弹
-                if (currentWidth < parentWidth || currentHeight < parentHeight) {
-                    float scaleW = currentWidth / parentWidth;
-                    float scaleH = currentHeight / parentHeight;
+                //双指抬起的时候若缩小至最小宽高，则恢复到最初大小
+                if (currentWidth < showRangeWidth || currentHeight <= showRangeHeight) {
+                    float scaleW = currentWidth / showRangeWidth;
+                    float scaleH = currentHeight / showRangeHeight;
                     float scale = 1 / Math.min(scaleW, scaleH);
-                    scaleAnimator(scale, new PointF(parentWidth / 2, parentHeight / 2), parentWidth, parentHeight);
+                    scaleAnimator(scale, new PointF(viewWidth / 2, viewHeight / 2), showRangeWidth, showRangeHeight);
+                }
+                //双指抬起的时候若超过最大宽高则缩至最大宽高
+                if (currentWidth > maxWidth || currentHeight > maxHeight) {
+                    float scalew = currentWidth / maxWidth;
+                    float scaleh = currentHeight / maxHeight;
+                    float scale = Math.max(scalew, scaleh);
+                    scale = 1 / scale;
+                    scaleAnimator(scale, mMidPoint, maxWidth, maxHeight);
                 }
                 break;
             case MotionEvent.ACTION_CANCEL:
-                getParent().requestDisallowInterceptTouchEvent(false);
                 mFlingRunnable.recycleVelocityTracker();
                 break;
             case MotionEvent.ACTION_UP:
-                if (doublePoint) {
-                    resetFlag();
-                    if (currentWidth > maxWidth || currentHeight > maxHeight) {//双指抬起的时候若超过最大宽高则缩至最大宽高
-                        float scalew = currentWidth / maxWidth;
-                        float scaleh = currentHeight / maxHeight;
-                        float scale = Math.max(scalew, scaleh);
-                        scale = 1 / scale;
-                        scaleAnimator(scale, mMidPoint, maxWidth, maxHeight);
-                    }
-                    if (lastDownTime == 0) lastDownTime = currentTimeMillis();
-                    return true;
-                }
-
 
                 if (lastDownTime == 0) {
                     lastDownTime = currentTimeMillis();
@@ -254,20 +257,7 @@ public class PhotoView extends AppCompatImageView {
                     long timevalue = System.currentTimeMillis() - lastDownTime;
                     lastDownTime = System.currentTimeMillis();
                     if (timevalue <= DOUBLE_INTERVAL) {//双击，放到最大
-                        doubleClick = true;
-                        //双击以触摸点为中心放到最大，或恢复原来的宽高
-                        float scalew = currentWidth / parentWidth;
-                        float scaleh = currentHeight / parentHeight;
-                        float scale = Math.max(scalew, scaleh);
-                        mMatrix.set(mSavedMatrix);
-                        mMidPoint.set(event.getRawX(), event.getRawY());
-                        if (scale <= 1) {
-                            scale = maxWidth / currentWidth;
-                            if (!isScaling) doubleClickToMax(scale, mMidPoint);
-                        } else if (scale > 1) {
-                            scale = 1 / scale;
-                            if (!isScaling) doubleClickRestore(scale, mMidPoint, ANIM_DURATION);
-                        }
+                        doubleClick(event);
                     } else {//单击
                         doubleClick = false;
                     }
@@ -283,17 +273,12 @@ public class PhotoView extends AppCompatImageView {
 
 
                 if (isDragged) {
-                 mFlingRunnable.computeCurrentVelocity();
+                    mFlingRunnable.computeCurrentVelocity();
                 }
-
-                if (currentWidth <= parentWidth && currentHeight <= parentHeight) {
+                if (currentWidth <= viewWidth && currentHeight <= viewHeight) {
                     mMode = NONE;
-                    getParent().requestDisallowInterceptTouchEvent(false);
-                } else {
-                    getParent().requestDisallowInterceptTouchEvent(true);
                 }
                 resetFlag();
-
                 break;
         }
         setImageMatrix(mMatrix);
@@ -302,18 +287,47 @@ public class PhotoView extends AppCompatImageView {
     }
 
 
+    /**
+     * 双击铺满屏
+     */
+    private void doubleClick(MotionEvent event) {
+        //一开始就初始化满屏的情况不能放大，可以双击缩小
+        if ((showRangeWidth>= viewWidth)
+                &&(showRangeHeight>= viewHeight)) {
+            if (currentWidth>showRangeWidth&&currentHeight>showRangeHeight){
+                if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
+            }
+            return;
+        }
+        doubleClick = true;
+        float scale = 0;
+        mMatrix.set(mSavedMatrix);
+        mMidPoint.set(event.getRawX(), event.getRawY());
+        if (currentWidth < viewWidth || currentHeight < viewHeight) {
+            //满屏
+            float hscale = viewHeight / currentHeight;
+            float wscale = viewWidth / currentWidth;
+            scale = Math.max(hscale, wscale);
+            if (!isScaling) doubleClickToFull(scale, mMidPoint);//放大
+        } else {
+            if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
+        }
+    }
 
 
     //放大的时候拦截事件
     private void interceptEventIfIsZoomIn() {
-        if (currentWidth > parentWidth || currentHeight > parentHeight) {
-            getParent().requestDisallowInterceptTouchEvent(true);
+        if (currentWidth >= viewWidth && currentHeight >= viewHeight) {
+            if (currentWidth != showRangeWidth) {
+                //可能图片初始展示的位置 宽高就已经超过了控件宽高，所以要判断下初始位置
+                getParent().requestDisallowInterceptTouchEvent(true);
+            }
+
         }
     }
 
     private void resetFlag() {
         doubleClick = false;
-        doublePoint = false;
         isDragged = false;
         hasMove = false;
     }
@@ -334,7 +348,7 @@ public class PhotoView extends AppCompatImageView {
             float scaleRatio = newDist / mOldDist;//放大的倍数
             mMatrix.set(mSavedMatrix);
             if (scaleRatio < 1) {
-                if (currentWidth * scaleRatio <= minWidth || currentHeight * scaleRatio <= minHeight) {
+                if (currentWidth * scaleRatio < showRangeWidth * 0.85 || currentHeight * scaleRatio < showRangeHeight * 0.85) {
                     return;
                 }
             }
@@ -342,7 +356,7 @@ public class PhotoView extends AppCompatImageView {
             currentHeight *= scaleRatio;
             //缩小的时候边缩边居中
             mMatrix.postScale(scaleRatio, scaleRatio, mMidPoint.x, mMidPoint.y);
-            MatrixUtils.centerInRange(mMatrix, mBitmap, parentWidth, parentHeight);
+            MatrixUtils.centerInRange(mMatrix, mBitmap, viewWidth, viewHeight);
             mSavedMatrix.set(mMatrix);
         }
         mOldDist = newDist;
@@ -350,12 +364,12 @@ public class PhotoView extends AppCompatImageView {
 
 
     //放大状态下的拖动
-    public void onDrag(MotionEvent event) {
+    private void onDrag(MotionEvent event) {
         mEndPoint.set(event.getRawX(), event.getRawY());
         float moveX = (mEndPoint.x - mStartPoint.x);
         float moveY = (mEndPoint.y - mStartPoint.y);
         mMatrix.set(mSavedMatrix);
-        moveX = checkDxBound(moveX);
+        moveX = checkDxBound(moveX, true);
         moveY = checkDyBound(moveY);
         mMatrix.postTranslate(moveX, moveY);
         mSavedMatrix.set(mMatrix);
@@ -369,21 +383,22 @@ public class PhotoView extends AppCompatImageView {
      * @param dx
      * @return
      */
-    private float checkDxBound(float dx) {
+    private float checkDxBound(float dx, boolean isDragging) {
         float[] values = new float[9];
         mMatrix.getValues(values);
         float width = getWidth();
         float bmWidth = mBitmap.getWidth();
-        if (bmWidth * values[Matrix.MSCALE_X] < width)
+        if (Math.round(bmWidth * values[Matrix.MSCALE_X]) < width) {
             return 0;
+        }
+
         if (values[Matrix.MTRANS_X] + dx > 0) {//滑到最左边
-            if (values[Matrix.MTRANS_X] + dx > touchSlop / 4)
-                getParent().requestDisallowInterceptTouchEvent(false);
+            if (isDragging) getParent().requestDisallowInterceptTouchEvent(false);
             dx = -values[Matrix.MTRANS_X];
         } else if (values[Matrix.MTRANS_X] + dx < -(bmWidth * values[Matrix.MSCALE_X] - width)) {//滑到最右边
-            if (values[Matrix.MTRANS_X] + dx < -(bmWidth * values[Matrix.MSCALE_X] - width) + touchSlop / 4)
-                getParent().requestDisallowInterceptTouchEvent(false);
+            if (isDragging) getParent().requestDisallowInterceptTouchEvent(false);
             dx = -(bmWidth * values[Matrix.MSCALE_X] - width) - values[Matrix.MTRANS_X];
+
         }
         return dx;
     }
@@ -393,7 +408,7 @@ public class PhotoView extends AppCompatImageView {
         mMatrix.getValues(values);
         float height = getHeight();
         float bmHeight = mBitmap.getHeight();
-        if (bmHeight * values[Matrix.MSCALE_Y] < height)
+        if (Math.round(bmHeight * values[Matrix.MSCALE_Y]) < height)
             return 0;
         if (values[Matrix.MTRANS_Y] + dy > 0)
             dy = -values[Matrix.MTRANS_Y];
@@ -409,7 +424,7 @@ public class PhotoView extends AppCompatImageView {
      * @param scale
      * @param midPint
      */
-    public void scaleAnimator(final float scale, final PointF midPint, final float finalWidth, final float finalHeight) {
+    private void scaleAnimator(final float scale, final PointF midPint, final float finalWidth, final float finalHeight) {
         mAnimator = ValueAnimator.ofFloat(1, scale);
         ScaleAnimatorListener listener = new ScaleAnimatorListener() {
             @Override
@@ -426,7 +441,7 @@ public class PhotoView extends AppCompatImageView {
                 if (mBitmap == null) return mMatrix;
                 Matrix matrix = new Matrix(mMatrix);
                 matrix.postScale(scaleValue, scaleValue, midPint.x, midPint.y);
-                MatrixUtils.centerInRange(matrix, mBitmap, parentWidth, parentHeight);
+                MatrixUtils.centerInRange(matrix, mBitmap, viewWidth, viewHeight);
                 setImageMatrix(matrix);
                 return matrix;
             }
@@ -442,24 +457,25 @@ public class PhotoView extends AppCompatImageView {
     /**
      * 双击最大化
      */
-    public void doubleClickToMax(final float scale, final PointF midPint) {
+    private void doubleClickToFull(final float scale, final PointF midPint) {
         ValueAnimator mAnimator = ValueAnimator.ofFloat(1, scale);
         ScaleAnimatorListener mImpl = new ScaleAnimatorListener() {
             @Override
             public void onAnimationEnd(Animator animation, Matrix matrix) {
-                currentWidth = maxWidth;
-                currentHeight = maxHeight;
-                mMatrix.set(matrix);
-                mSavedMatrix.set(mMatrix);
                 isScaling = false;
+                currentWidth = MatrixUtils.getMatrixRectF(PhotoView.this).width();
+                currentHeight = viewHeight;
+                mMatrix = matrix;
+                mSavedMatrix.set(mMatrix);
             }
 
             @Override
             public Matrix onAnimationUpdate(float scaleValue) {
                 if (mBitmap == null) return mMatrix;
+                //每次都是从放大前的矩阵为基准进行放大操作
                 Matrix matrix = new Matrix(mMatrix);
                 matrix.postScale(scaleValue, scaleValue, midPint.x, mMidPoint.y);
-                MatrixUtils.centerInRange(matrix, mBitmap, parentWidth, parentHeight);
+                MatrixUtils.centerInRange(matrix, mBitmap, viewWidth, viewHeight);
                 setImageMatrix(matrix);
                 return matrix;
             }
@@ -475,13 +491,15 @@ public class PhotoView extends AppCompatImageView {
     /**
      * 双击恢复最初大小
      */
-    public void doubleClickRestore(final float scale, final PointF midPint, int duration) {
+    private void doubleClickRestore(final PointF midPint, int duration) {
+        final float scale = MatrixUtils.getZoomScaleToOriginalShowRange(currentWidth, currentHeight, viewWidth, viewHeight);
+
         ValueAnimator mAnimator = ValueAnimator.ofFloat(1, scale);
         ScaleAnimatorListener mImpl = new ScaleAnimatorListener() {
             @Override
             public void onAnimationEnd(Animator animation, Matrix matrix) {
-                currentWidth = parentWidth;
-                currentHeight = parentHeight;
+                currentWidth = showRangeWidth;
+                currentHeight = showRangeHeight;
                 mMatrix.set(matrix);
                 mSavedMatrix.set(mMatrix);
                 isScaling = false;
@@ -492,7 +510,7 @@ public class PhotoView extends AppCompatImageView {
                 if (mBitmap == null) return mMatrix;
                 Matrix matrix = new Matrix(mMatrix);
                 matrix.postScale(scaleValue, scaleValue, midPint.x, mMidPoint.y);
-                MatrixUtils.centerInRange(matrix, mBitmap, parentWidth, parentHeight);
+                MatrixUtils.centerInRange(matrix, mBitmap, viewWidth, viewHeight);
                 setImageMatrix(matrix);
                 return matrix;
             }
@@ -523,32 +541,17 @@ public class PhotoView extends AppCompatImageView {
         return originalMatrixPoints;
     }
 
-    public float getParentWidth() {
-        return parentWidth;
-    }
-
-    public float getParentHeight() {
-        return parentHeight;
-    }
 
     /**
      * 恢复最初状态，在ViewPager中滑动另一个页面则需要恢复这个状态
      */
     public boolean restore() {
         boolean needRestore = false;
-        float scalew = currentWidth / parentWidth;
-        float scaleh = currentHeight / parentHeight;
-        float scale = Math.max(scalew, scaleh);
-        if (scale > 1) {
+        if (currentWidth > viewWidth || currentHeight > viewHeight) {
             needRestore = true;
-            mMatrix.set(mSavedMatrix);
-            mMidPoint.set(getRight() / 2, getBottom() / 2);
-            scale = 1 / scale;
-            if (!isScaling) doubleClickRestore(scale, mMidPoint, RESTORE_DUTRATION);
             mMode = NONE;
             resetFlag();
-            getParent().requestDisallowInterceptTouchEvent(false);
-            setImageMatrix(mMatrix);
+            if (!isScaling) doubleClickRestore(mMidPoint, 0);
         }
         return needRestore;
 
@@ -566,9 +569,10 @@ public class PhotoView extends AppCompatImageView {
 
         @Override
         public void onFiling(int currentX, int currentY, float deltaX, float deltaY) {
+            getParent().requestDisallowInterceptTouchEvent(true);
             mEndPoint.set(currentX, currentY);
             mMatrix.set(mSavedMatrix);
-            deltaX = checkDxBound(deltaX);
+            deltaX = checkDxBound(deltaX, false);
             deltaY = checkDyBound(deltaY);
             mMatrix.postTranslate(deltaX, deltaY);
             mSavedMatrix.set(mMatrix);
