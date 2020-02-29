@@ -113,6 +113,7 @@ public class MatrixUtils {
         int height = bm.getHeight();
         float scale=getZoomScaleToOriginalShowRange(width,height,rangeWidth,rangeHeight);
         matrix.postScale(scale,scale);
+        centerInRange(matrix, bm, rangeWidth, rangeHeight);
         return matrix;
     }
 
@@ -144,6 +145,14 @@ public class MatrixUtils {
         }
         return scale;
     }
+
+
+    public static Rect getMatrixRectForOriginalShowRange(Bitmap bm, float rangeWidth, float rangeHeight){
+         Matrix matrix=new Matrix();
+         zoomToOriginalShowRange(matrix,bm,rangeWidth,rangeHeight);
+         return getMatrixRect(matrix,bm);
+    }
+
 
 
     //在范围内居中

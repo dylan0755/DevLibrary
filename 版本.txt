@@ -22,6 +22,8 @@ V3.5.0
 
 11.新增 PrimaryPagerAdapter ， 通过 PrimaryItem primaryItem= adapter.getPrimaryItem();
     primaryItem.object, 或者 adapter.getPrimaryItemObject()
+12.新增ScaleUpPhotoView  从点击处扩大到指定位置，场景：相册图片预览
+
 
 
 

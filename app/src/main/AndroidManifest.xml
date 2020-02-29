@@ -128,7 +128,8 @@
         <activity android:name=".ui.VerticalViewPagerActivity" />
         <activity android:name=".ui.snaphelper.RecyclerSnapHelperActivity" />
         <activity android:name=".ui.CircleAnimationActivity" />
-        <activity android:name=".ui.PhotoViewActivity" />
+        <activity android:name=".ui.ScaleUpPhotoViewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity
             android:name=".ui.ModifyFontActivity"
             android:theme="@style/statusBarStyle" />

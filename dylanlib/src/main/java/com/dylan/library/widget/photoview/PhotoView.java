@@ -31,7 +31,7 @@ import static java.lang.System.currentTimeMillis;
  * 所以第一次的高度未必就是正确的，所以不能取第一次测量的值
  */
 public class PhotoView extends AppCompatImageView {
-    private static final String TAG="PhotoView";
+    private static final String TAG = "PhotoView";
     private long lastDownTime;
     private boolean doubleClick;
     private boolean hasMove;
@@ -141,12 +141,12 @@ public class PhotoView extends AppCompatImageView {
 
     //Matrix缩放
     protected void setMatrixBitmap(final Bitmap bm) {
-        mMatrix.reset();
-        mSavedMatrix.reset();
-        mMatrix.set(mSavedMatrix);
         if (bm == null) {
             super.setImageBitmap(bm);
         } else {
+            mMatrix.reset();
+            mSavedMatrix.reset();
+            mMatrix.set(mSavedMatrix);
             boolean hasDo = false;
             if (matrixListener != null) {
                 hasDo = matrixListener.preMatrix(this, mMatrix);
@@ -154,7 +154,6 @@ public class PhotoView extends AppCompatImageView {
             if (!hasDo) {
                 //调整图片到中间铺满状态
                 MatrixUtils.zoomToOriginalShowRange(mMatrix, bm, viewWidth, viewHeight);
-                MatrixUtils.centerInRange(mMatrix, bm, viewWidth, viewHeight);
             }
             //记录矩阵后图片左上角的坐标
             originalMatrixPoints = MatrixUtils.getLocation(mMatrix, mBitmap);
@@ -164,11 +163,9 @@ public class PhotoView extends AppCompatImageView {
             setImageMatrix(mMatrix);
             super.setImageBitmap(bm);
 
-
-
-            RectF rectF=MatrixUtils.getMatrixRectF(this);
-            showRangeWidth =rectF.width();
-            showRangeHeight =rectF.height();
+            RectF rectF = MatrixUtils.getMatrixRectF(this);
+            showRangeWidth = rectF.width();
+            showRangeHeight = rectF.height();
 
         }
 
@@ -292,9 +289,9 @@ public class PhotoView extends AppCompatImageView {
      */
     private void doubleClick(MotionEvent event) {
         //一开始就初始化满屏的情况不能放大，可以双击缩小
-        if ((showRangeWidth>= viewWidth)
-                &&(showRangeHeight>= viewHeight)) {
-            if (currentWidth>showRangeWidth&&currentHeight>showRangeHeight){
+        if ((showRangeWidth >= viewWidth)
+                && (showRangeHeight >= viewHeight)) {
+            if (currentWidth > showRangeWidth && currentHeight > showRangeHeight) {
                 if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
             }
             return;

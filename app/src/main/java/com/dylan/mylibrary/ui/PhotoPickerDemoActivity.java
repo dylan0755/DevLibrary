@@ -27,9 +27,9 @@ public class PhotoPickerDemoActivity extends AppCompatActivity {
     //本地相册
     public void openPicker(View view) {
         Intent intent = new Intent(view.getContext(), PhotoPickerActivity.class);
-        intent.putExtra(com.dylan.photopicker.app.PhotoPickerActivity.EXTRA_MAX_SELECT,6);
-         intent.putExtra(PhotoPickerActivity.EXTRA_LIMIT_SELECT_TIP,"不可以再选了");
-        intent.putExtra(PhotoPickerActivity.EXTRA_CAN_PREVIEW_ON_SINGLE_CHOICE,true);
+        intent.putExtra(com.dylan.photopicker.app.PhotoPickerActivity.EXTRA_MAX_SELECT,9);
+         intent.putExtra(PhotoPickerActivity.EXTRA_LIMIT_SELECT_TIP,"最多能选9张图片");
+        intent.putExtra(PhotoPickerActivity.EXTRA_CAN_PREVIEW_ON_SINGLE_CHOICE,false);
         startActivityForResult(intent, 1001);
     }
 

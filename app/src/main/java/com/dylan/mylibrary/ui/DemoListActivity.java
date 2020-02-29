@@ -27,7 +27,6 @@ import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
-import com.dylan.photopicker.app.PhotoPickerActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +37,7 @@ import java.util.List;
 
 public class DemoListActivity extends AppCompatActivity {
     private GridViewPager mGridPager;
-    private String[] demoNames = {"PhotoPickerLibrary","RecyclerViewSnapHelper", "PhotoView", "IRecyclerView",
+    private String[] demoNames = {"PhotoPickerLibrary","RecyclerViewSnapHelper", "ScaleUpPhotoView", "IRecyclerView",
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "SlidingRefresh", "WebViewActvity",
@@ -47,7 +46,7 @@ public class DemoListActivity extends AppCompatActivity {
             "TextSwitchActivity","全局更换字体","FirstLineMargin",
             "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView",
             "ProgressWebActivity","VideoPlayerGesture","拖拽回弹组件","BitmapHelper"};
-    private Class[] classes = {PhotoPickerDemoActivity.class,RecyclerSnapHelperActivity.class, PhotoViewActivity.class, IRecyclerViewActivity.class,
+    private Class[] classes = {PhotoPickerDemoActivity.class,RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, LocalPhotoSelectActivity.class,
