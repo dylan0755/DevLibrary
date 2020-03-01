@@ -1,7 +1,14 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V3.5.0
+
+
+
+
+
+
+
+V3.5.0 ---->2020.03.01
 
 1.增加MediaStoreLoader  ，MediaStoreFile,  查找输出MediaStoreFile.
 2.FileUtils
@@ -11,7 +18,13 @@ V3.5.0
 
 3. 拖拽回弹组件增加 ReboundViewPager
 4.MediaStoreLoader 增加 getPictureDirectoryFromImageStore 返回 List<PictureDirectory> 图片文件夹集合
-5.widget 目录新增PhotoView 模块，PhotoView 新增支持惯性滚动
+5.widget 目录新增PhotoView 模块,原widget 下的PhotoView 迁移到该目录
+    (1)PhotoView 新增支持惯性滚动
+    (2).setMatrixBitmap 重命名为 onMatrixWhileSettingBitmap  表示当 setBitmap 的时候会回调
+    (3).移除 OnFirstImageMatrixListener 类  ,原先 OnFirstImageMatrixListener 中的 preMatrix()
+        是回调 当设置setBitmap时 设置Matrix 操作的， 避免在 preMatrix 写逻辑 从而保持PhotoView 的完整性，
+        要实现逻辑  则重写 (1) 中的 onMatrixWhileSettingBitmap
+
 6.BitmapHelper 新增 readBitmapDegree 读取图片角度  rotateToDegrees 旋转图片
 7.增加ExifHelper ，  getExifInfo(String path) 返回 Exif 详情
 8.新增ImageLoader
@@ -22,26 +35,7 @@ V3.5.0
 
 11.新增 PrimaryPagerAdapter ， 通过 PrimaryItem primaryItem= adapter.getPrimaryItem();
     primaryItem.object, 或者 adapter.getPrimaryItemObject()
-12.新增ScaleUpPhotoView  从点击处扩大到指定位置，场景：相册图片预览
-13.PhotoView ：
-  (1).setMatrixBitmap 重命名为 onMatrixWhileSettingBitmap  表示当 setBitmap 的时候会回调
-  (2).移除 OnFirstImageMatrixListener 类  ,原先 OnFirstImageMatrixListener 中的 preMatrix()
-      是回调 当设置setBitmap时 设置Matrix 操作的， 避免在 preMatrix 写逻辑 从而保持PhotoView 的完整性，
-      要实现逻辑  则重写 (1) 中的 onMatrixWhileSettingBitmap
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+12.新增ScaleUpPhotoView  从点击处扩大到指定位置，场景：图片放大浏览
 
 
 
