@@ -23,12 +23,15 @@ import com.dylan.library.widget.photoview.callback.OnScaleTransAnimListener;
  */
 public class ScaleUpPhotoView extends PhotoView {
     private String TAG = ScaleUpPhotoView.class.getSimpleName();
-    private static final long ANIMATION_ENTER_DURATION = 100;
-    private static final long ANIMATION_EXIT_DURATION = 200;
+    public static final long ANIMATION_ENTER_DURATION = 100;
+    public static final long ANIMATION_EXIT_DURATION = 200;
     private ViewLocation vLocation;
     private boolean canScaleAnim = true;
     private boolean haveAnim;
     private OnScaleTransAnimListener mAnimtorListener;
+    private OnPrepareMatrixListener onPrepareMatrixListener;
+
+
 
     public ScaleUpPhotoView(Context context) {
         this(context, null);
@@ -44,40 +47,46 @@ public class ScaleUpPhotoView extends PhotoView {
     }
 
 
-    public boolean  checkViewLocationVaid(ViewLocation vLocation){
+    public static boolean  checkViewLocationVaid(ViewLocation vLocation){
       if (vLocation==null) return false;
       if (vLocation.getWidth()==0||vLocation.getHeight()==0){
-          Log.e(TAG, "Location.getWidth()==0||Location.getHeight()==0 ");
+          Log.e(ScaleUpPhotoView.class.getSimpleName(), "Location.getWidth()==0||Location.getHeight()==0 ");
           return false;
       }
       return true;
     }
     @Override
-    protected void setMatrixBitmap(Bitmap bm) {
+    protected void onMatrixWhileSettingBitmap(Bitmap bm) {
+        //是否自己调用动画
+        if (onPrepareMatrixListener!=null&&bm!=null){
+            boolean isCustom=onPrepareMatrixListener.prepareMatrix(this,bm);
+            if (isCustom){
+                return;
+            }
+        }
         if (checkViewLocationVaid(vLocation)&&bm!=null) {
             if (canScaleAnim && !haveAnim) {
                 haveAnim = true;
-                startEnterAnimation(bm, vLocation.getX(), vLocation.getY(),
-                        vLocation.getWidth(), vLocation.getHeight());
+                startEnterAnimation(bm,vLocation);
             }else{
-                super.setMatrixBitmap(bm);
+                super.onMatrixWhileSettingBitmap(bm);
             }
         }else{
-            super.setMatrixBitmap(bm);
+            super.onMatrixWhileSettingBitmap(bm);
         }
     }
 
 
 
 
-    protected void startEnterAnimation(final Bitmap bitmap, final float fromX, final float fromY, final float fromWidth, final float fromHeight) {
+    protected void startEnterAnimation(final Bitmap bitmap, ViewLocation viewLocation) {
         //起始位置
         int width = bitmap.getWidth();
         int height = bitmap.getHeight();
-        final float wScale = fromWidth / width;
-        final float hScale = fromHeight / height;
+        final float wScale = viewLocation.getWidth() / width;
+        final float hScale = viewLocation.getHeight() / height;
         mMatrix.postScale(wScale, hScale);
-        mMatrix.postTranslate(fromX, fromY);
+        mMatrix.postTranslate(viewLocation.getX(), viewLocation.getY());
 
 
         //测量中央目的位置
@@ -89,8 +98,8 @@ public class ScaleUpPhotoView extends PhotoView {
         final float toHeight = rect.height();
 
         //中心点坐标
-        final float fromCenterX = fromX + fromWidth / 2;
-        final float fromCenterY = fromY + fromHeight / 2;
+        final float fromCenterX = viewLocation.getX() + viewLocation.getWidth() / 2;
+        final float fromCenterY = viewLocation.getY() + viewLocation.getHeight() / 2;
         final float toCenterX = toX + toWidth / 2;
         final float toCenterY = toY + toHeight / 2;
 
@@ -99,15 +108,15 @@ public class ScaleUpPhotoView extends PhotoView {
         float tranY = toCenterY - fromCenterY;
 
         //缩放倍数
-        float scaleX = toWidth / fromWidth;
-        float scaleY = toHeight / fromHeight;
+        float scaleX = toWidth / viewLocation.getWidth();
+        float scaleY = toHeight / viewLocation.getHeight();
 
 
         TranslateScaleValue startValue = new TranslateScaleValue();
-        startValue.setX(fromX);
-        startValue.setY(fromY);
-        startValue.setWidth(fromWidth);
-        startValue.setHeight(fromHeight);
+        startValue.setX(viewLocation.getX());
+        startValue.setY(viewLocation.getY());
+        startValue.setWidth(viewLocation.getWidth());
+        startValue.setHeight(viewLocation.getHeight());
         startValue.setScaleX(1);
         startValue.setScaleY(1);
         startValue.setTranX(0);
@@ -172,7 +181,8 @@ public class ScaleUpPhotoView extends PhotoView {
             @Override
             public void onAnimationEnd(Animator animation) {
                 setScaling(false);
-                ScaleUpPhotoView.super.setMatrixBitmap(bitmap);
+                mMatrix=new Matrix(getImageMatrix());
+                mSavedMatrix.set(mMatrix);
                 if (mAnimtorListener != null)
                     mAnimtorListener.onEnterAnimEnd();
             }
@@ -268,6 +278,8 @@ public class ScaleUpPhotoView extends PhotoView {
             @Override
             public void onAnimationEnd(Animator animation) {
                 setScaling(false);
+                mMatrix=new Matrix(getImageMatrix());
+                mSavedMatrix.set(mMatrix);
                 if (mAnimtorListener != null)
                     mAnimtorListener.onExitAnimEnd();
                 if (listener!=null)listener.onAnimationEnd(animation);
@@ -286,5 +298,15 @@ public class ScaleUpPhotoView extends PhotoView {
 
     public void setOnScaleTransAnimListener(OnScaleTransAnimListener listener) {
         mAnimtorListener = listener;
+    }
+
+
+
+    public interface OnPrepareMatrixListener {
+        boolean prepareMatrix(ScaleUpPhotoView photoView, Bitmap bitmap);
+    }
+
+    public void setOnPrepareMatrixListener(OnPrepareMatrixListener listener){
+        onPrepareMatrixListener =listener;
     }
 }

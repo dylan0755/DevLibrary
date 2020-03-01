@@ -1,11 +1,13 @@
 package com.dylan.library.widget.photoview;
 
+import java.io.Serializable;
+
 /**
  * Author: Dylan
  * Date: 2020/2/28
  * Desc:
  */
-public class ViewLocation {
+public class ViewLocation implements Serializable {
     private  float x;
     private float y;
     private float width;

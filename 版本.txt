@@ -23,6 +23,11 @@ V3.5.0
 11.新增 PrimaryPagerAdapter ， 通过 PrimaryItem primaryItem= adapter.getPrimaryItem();
     primaryItem.object, 或者 adapter.getPrimaryItemObject()
 12.新增ScaleUpPhotoView  从点击处扩大到指定位置，场景：相册图片预览
+13.PhotoView ：
+  (1).setMatrixBitmap 重命名为 onMatrixWhileSettingBitmap  表示当 setBitmap 的时候会回调
+  (2).移除 OnFirstImageMatrixListener 类  ,原先 OnFirstImageMatrixListener 中的 preMatrix()
+      是回调 当设置setBitmap时 设置Matrix 操作的， 避免在 preMatrix 写逻辑 从而保持PhotoView 的完整性，
+      要实现逻辑  则重写 (1) 中的 onMatrixWhileSettingBitmap
 
 
 

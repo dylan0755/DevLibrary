@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.graphics.RectF;
 import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
@@ -13,7 +14,6 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
-
 
 import com.dylan.library.utils.MatrixUtils;
 import com.dylan.library.utils.ViewTouchUtils;
@@ -46,7 +46,6 @@ public class PhotoView extends AppCompatImageView {
     private static final int ACTION_UP_TYPE_MOVE = 2;
     private int actionUpType;
     private PointF originalPointF;
-    private PointF[] originalMatrixPoints;
     private float mOldDist;
     protected Matrix mMatrix;
     protected Matrix mSavedMatrix;
@@ -117,7 +116,7 @@ public class PhotoView extends AppCompatImageView {
             hasMeasure = true;
             //还没有进行Matrix，则开始Matrix缩放
             if (mBitmap != null && !isHasImageMatrix()) {
-                setMatrixBitmap(mBitmap);
+                prepareShowRange();
             }
         }
     }
@@ -135,38 +134,38 @@ public class PhotoView extends AppCompatImageView {
         //宽高已经不为0，则直接进行矩阵缩放，如果为0则会在OnLayout 得到宽高之后再缩放
         if (viewWidth != 0) {
             hasImageMatrix = false;
-            setMatrixBitmap(mBitmap);
+            prepareShowRange();
         }
     }
 
+    //提前获取范围,子类 可能重写 onMatrixWhileSettingBitmap
+    private void prepareShowRange() {
+        if (mBitmap==null)return;
+        Rect rectF = MatrixUtils.getMatrixRectForOriginalShowRange(mBitmap, viewWidth, viewHeight);
+        showRangeWidth = rectF.width();
+        showRangeHeight = rectF.height();
+        //记录矩阵后图片左上角的坐标
+        originalPointF = new PointF();
+        originalPointF.x=rectF.left;
+        originalPointF.y=rectF.top;
+
+        onMatrixWhileSettingBitmap(mBitmap);
+    }
+
     //Matrix缩放
-    protected void setMatrixBitmap(final Bitmap bm) {
+    protected void onMatrixWhileSettingBitmap(final Bitmap bm) {
         if (bm == null) {
             super.setImageBitmap(bm);
         } else {
             mMatrix.reset();
             mSavedMatrix.reset();
             mMatrix.set(mSavedMatrix);
-            boolean hasDo = false;
-            if (matrixListener != null) {
-                hasDo = matrixListener.preMatrix(this, mMatrix);
-            }
-            if (!hasDo) {
-                //调整图片到中间铺满状态
-                MatrixUtils.zoomToOriginalShowRange(mMatrix, bm, viewWidth, viewHeight);
-            }
-            //记录矩阵后图片左上角的坐标
-            originalMatrixPoints = MatrixUtils.getLocation(mMatrix, mBitmap);
-            originalPointF = originalMatrixPoints[0];
+            //调整图片到中间铺满状态
+            MatrixUtils.zoomToOriginalShowRange(mMatrix, bm, viewWidth, viewHeight);
             mSavedMatrix.set(mMatrix);
             hasImageMatrix = true;
             setImageMatrix(mMatrix);
             super.setImageBitmap(bm);
-
-            RectF rectF = MatrixUtils.getMatrixRectF(this);
-            showRangeWidth = rectF.width();
-            showRangeHeight = rectF.height();
-
         }
 
     }
@@ -534,9 +533,6 @@ public class PhotoView extends AppCompatImageView {
         return originalPointF;
     }
 
-    public PointF[] getOriginalMatrixPoints() {
-        return originalMatrixPoints;
-    }
 
 
     /**
@@ -602,17 +598,6 @@ public class PhotoView extends AppCompatImageView {
 
     }
 
-
-    private OnFirstImageMatrixListener matrixListener;
-
-    public interface OnFirstImageMatrixListener {
-        boolean preMatrix(PhotoView photoView, Matrix matrix);
-
-    }
-
-    public void setOnFirstImageMatrixListener(OnFirstImageMatrixListener listener) {
-        matrixListener = listener;
-    }
 
     public void addOnTouchCallBack(OnTouchCallBack callBack) {
         touchCallBack = callBack;
