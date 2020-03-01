@@ -114,6 +114,18 @@ public class ScreenUtils {
         }
     }
 
+
+    public static void showInFullScreen(Window window){
+        WindowManager.LayoutParams attrs = window.getAttributes();
+        attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
+        window.setAttributes(attrs);
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+        window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+
+    }
+
+
+
     /**
      * 要在style.xml文件中配置
      * 设置状态栏颜色和状态栏字体颜色

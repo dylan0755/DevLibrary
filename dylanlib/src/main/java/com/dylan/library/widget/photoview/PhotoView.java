@@ -148,8 +148,8 @@ public class PhotoView extends AppCompatImageView {
         originalPointF = new PointF();
         originalPointF.x=rectF.left;
         originalPointF.y=rectF.top;
-
         onMatrixWhileSettingBitmap(mBitmap);
+        hasImageMatrix = true;
     }
 
     //Matrix缩放

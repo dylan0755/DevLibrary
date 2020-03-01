@@ -57,12 +57,8 @@ public class ScaleUpPhotoView extends PhotoView {
     }
     @Override
     protected void onMatrixWhileSettingBitmap(Bitmap bm) {
-        //是否自己调用动画
         if (onPrepareMatrixListener!=null&&bm!=null){
-            boolean isCustom=onPrepareMatrixListener.prepareMatrix(this,bm);
-            if (isCustom){
-                return;
-            }
+            onPrepareMatrixListener.prepareMatrix(this,bm);
         }
         if (checkViewLocationVaid(vLocation)&&bm!=null) {
             if (canScaleAnim && !haveAnim) {
@@ -303,7 +299,7 @@ public class ScaleUpPhotoView extends PhotoView {
 
 
     public interface OnPrepareMatrixListener {
-        boolean prepareMatrix(ScaleUpPhotoView photoView, Bitmap bitmap);
+        void prepareMatrix(ScaleUpPhotoView photoView, Bitmap bitmap);
     }
 
     public void setOnPrepareMatrixListener(OnPrepareMatrixListener listener){
