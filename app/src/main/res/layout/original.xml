@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="50dp">
 
-        <com.dylan.library.tab.TabIndicatorLayout
+        <com.dylan.library.widget.tab.HorizontalScrollTabLayout
             android:id="@+id/tl_common_top"
             android:layout_width="match_parent"
             android:layout_height="50dp"

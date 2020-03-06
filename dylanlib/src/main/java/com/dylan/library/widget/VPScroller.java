@@ -14,22 +14,34 @@ import java.lang.reflect.Field;
  */
 
 public class VPScroller {
-
-
-    public VPScroller(View viewPager){
+    Field mScroller;
+    private int duration=400;
+    public VPScroller(int duration){
         try {
-            Field mScroller = ViewPager.class.getDeclaredField("mScroller");
+            this.duration=duration;
+            mScroller = ViewPager.class.getDeclaredField("mScroller");
             mScroller.setAccessible(true);
-            ChangeSpeedScroller scroller = new ChangeSpeedScroller(viewPager.getContext(), new AccelerateInterpolator());
-            scroller.setDuration(800);
-            mScroller.set(viewPager, scroller);
         } catch (NoSuchFieldException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
 
     }
+
+
+    public void attachViewPager(ViewPager viewPager){
+        ChangeSpeedScroller scroller = new ChangeSpeedScroller(viewPager.getContext(), new AccelerateInterpolator());
+        scroller.setDuration(duration);
+        try {
+            mScroller.set(viewPager, scroller);
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
+
     public class ChangeSpeedScroller extends Scroller {
         private int mDuration=250;
 

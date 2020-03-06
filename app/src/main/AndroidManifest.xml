@@ -72,9 +72,6 @@
             android:name="com.dylan.mylibrary.ui.customtitle.CustomTittleUitlActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.dylan.mylibrary.ui.tab.TabActivity"
-            android:screenOrientation="portrait" />
-        <activity
             android:name="com.dylan.mylibrary.ui.date.DateTestActivity"
             android:screenOrientation="portrait" />
         <activity

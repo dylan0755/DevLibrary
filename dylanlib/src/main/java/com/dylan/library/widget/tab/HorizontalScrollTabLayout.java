@@ -1,4 +1,4 @@
-package com.dylan.library.tab;
+package com.dylan.library.widget.tab;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.VelocityTracker;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.LinearLayout;
@@ -21,7 +22,7 @@ import java.util.List;
 /**
  * Created by Dylan on 2016/8/31.
  */
-public class DLTabLayout extends LinearLayout {
+public class HorizontalScrollTabLayout extends LinearLayout {
     private int TAB_TEXT_SIZE;
     private int COLOR_TEXT_NORMAL;
     private int COLOR_TEXT_SELECT = Color.BLACK;
@@ -33,6 +34,7 @@ public class DLTabLayout extends LinearLayout {
     private int MAX_VISIABLE_TAB_COUNT = 5;//默认一行可见的tab数量
     private float mInitTranslationX;
     private float mTranslationX;
+    private int mMaxScrollRange;
     private int mTabWidth;
     private int mTriangleWidth;
     private int mTriangleHeight;
@@ -45,27 +47,33 @@ public class DLTabLayout extends LinearLayout {
     private float downX;
     private int mTouchSlop;
     private boolean isDragged;
-    private boolean isClick;//区分是点击tab还是滑动viewpager，因为点击的时候和滑动ViewPager的时候本身布局要随着移动
+    private boolean syncColor=true;
     private OverScroller mScroller;
     public static int SHAPE_TRIANGLE = 1;//三角形指示器
     public static int SHAPE_RECTANGLE = 2;//长方形指示器
     private int mShape = SHAPE_RECTANGLE;
     private int indicatorRightMargin;
+    private TabClickListener tabClickListener;
+    private int mMinimumVelocity;
+    private VelocityTracker mVelocityTracker;
 
-    public DLTabLayout(Context context) {
+
+    public HorizontalScrollTabLayout(Context context) {
         this(context, null);
 
     }
 
-    public DLTabLayout(Context context, AttributeSet attrs) {
+    public HorizontalScrollTabLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(HORIZONTAL);
         setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
         mScroller = new OverScroller(context);
         ViewConfiguration config = ViewConfiguration.get(context);
         mTouchSlop = config.getScaledTouchSlop();
+        mMinimumVelocity = ViewConfiguration.get(context).getScaledMinimumFlingVelocity();
         mTabItemList = new ArrayList<TabItem>();
         initPaint();
+        tabClickListener = new TabClickListener();
     }
 
     public void setMaxVisiableCount(int count) {
@@ -93,8 +101,8 @@ public class DLTabLayout extends LinearLayout {
 
     }
 
-    public void setIndicatorRightMargin(int rightMargin){
-        indicatorRightMargin =rightMargin;
+    public void setIndicatorRightMargin(int rightMargin) {
+        indicatorRightMargin = rightMargin;
     }
 
     /**
@@ -113,11 +121,10 @@ public class DLTabLayout extends LinearLayout {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mMeasureWidth = MeasureSpec.getSize(widthMeasureSpec);
-        this.widthMeasureSpec=widthMeasureSpec;
-        this.heightMeasureSpec=heightMeasureSpec;
+        this.widthMeasureSpec = widthMeasureSpec;
+        this.heightMeasureSpec = heightMeasureSpec;
         setTabWidth();
     }
-
 
 
     @Override
@@ -155,7 +162,6 @@ public class DLTabLayout extends LinearLayout {
     }
 
 
-
     /**
      * 设置tab的宽度
      */
@@ -169,18 +175,20 @@ public class DLTabLayout extends LinearLayout {
                 mTabWidth = mMeasureWidth / MAX_VISIABLE_TAB_COUNT;
             }
         }
+
         //手动设置子View的宽度，  不要用  getChildAt(index).setLayoutParam的方式
         // 因为有横竖屏切换的时候，setLayoutParam的无效
-        int childCount=getChildCount();
-        int newWidthMeasureSpec= MeasureSpec.makeMeasureSpec(mTabWidth, MeasureSpec.getMode(widthMeasureSpec));
-        for (int i=0;i<childCount;i++){
-            TabItem tabItem= (TabItem) getChildAt(i);
+        int childCount = getChildCount();
+        mMaxScrollRange = (mTabItemList.size() - (MAX_VISIABLE_TAB_COUNT - 1)) * mTabWidth;//向左滑最大的距离，最右边的tab全部显示出来;
+        int newWidthMeasureSpec = MeasureSpec.makeMeasureSpec(mTabWidth, MeasureSpec.getMode(widthMeasureSpec));
+        for (int i = 0; i < childCount; i++) {
+            TabItem tabItem = (TabItem) getChildAt(i);
             if (TAB_TEXT_SIZE != 0) tabItem.setTextSize(TAB_TEXT_SIZE);
             if (i == currentPosition) tabItem.setTextColor(COLOR_TEXT_SELECT);
             else
                 tabItem.setTextColor(COLOR_TEXT_NORMAL);
             //先把大小，颜色 设置了再调用测量
-            tabItem.measure(newWidthMeasureSpec,heightMeasureSpec);
+            tabItem.measure(newWidthMeasureSpec, heightMeasureSpec);
         }
 
     }
@@ -192,29 +200,46 @@ public class DLTabLayout extends LinearLayout {
             return super.dispatchTouchEvent(event);
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                mScroller.abortAnimation();
                 isDragged = false;
-                downX = event.getX();
+                downX = event.getRawX();
+                mVelocityTracker = VelocityTracker.obtain();
                 break;
             case MotionEvent.ACTION_MOVE:
-                float dex = event.getX() - downX;
-                downX = event.getX();
-                if (Math.abs(dex) > mTouchSlop) {
+                mVelocityTracker.addMovement(event);
+                float dex = event.getRawX() - downX;
+                downX = event.getRawX();
+                if (!isDragged && Math.abs(dex) > mTouchSlop) {
                     isDragged = true;
+                }
+
+                if (isDragged) {
                     if (dex > 0) {//向右滑动
                         if (getScrollX() <= 0) {
                             setScrollX(0);
                             return true;
                         }
                     } else {
-                        int scrollRange = (mTabItemList.size() - (MAX_VISIABLE_TAB_COUNT - 1)) * mTabWidth;//向左滑最大的距离，最右边的tab全部显示出来
-                        if (getScrollX() >= scrollRange) {
-                            setScrollX(scrollRange);
+                        if (getScrollX() >= mMaxScrollRange) {
+                            setScrollX(mMaxScrollRange);
                             return true;
                         }
                     }
                     scrollBy(-(int) dex, 0);
                     return true;
                 }
+                break;
+            case MotionEvent.ACTION_UP:
+                mVelocityTracker.computeCurrentVelocity(1000);
+                float vX = mVelocityTracker.getXVelocity();
+                if (Math.abs(vX) > mMinimumVelocity) {
+                    isDragged = true;
+                    fling((int) vX, 0);
+                }
+                mVelocityTracker.recycle();
+                break;
+            case MotionEvent.ACTION_CANCEL:
+                mVelocityTracker.recycle();
                 break;
         }
         if (isDragged) {//发生了滑动，则消费掉此事件，避免Tab的点击事件的产生
@@ -223,46 +248,62 @@ public class DLTabLayout extends LinearLayout {
             return super.dispatchTouchEvent(event);
     }
 
+    private void fling(int velocityX, int velocityY) {
+        int minScrollRangeX = 0;
+        int maxScrollRangeX =mMaxScrollRange;
+        int minScrollRangeY = 0;
+        int maScrollRangeY = 0;
+        int startX=getScrollX();
+        int startY=getScrollY();
+        mScroller.fling(startX, startY, -velocityX, velocityY, minScrollRangeX, maxScrollRangeX, minScrollRangeY, maScrollRangeY);
+
+    }
+
+
     public void setUpWidthViewPager(ViewPager viewpager) {
         this.mViewPager = viewpager;
-        mViewPager.setOnPageChangeListener(new PageSelectedListener());
+        mViewPager.addOnPageChangeListener(new PageSelectedListener());
 
     }
 
+    public void syncTextIconColor(boolean bl){
+        syncColor=bl;
+    }
 
-    public TabItem newTab(){
-        TabItem tabItem=new TabItem(getContext());
+
+    public TabItem newTab() {
+        TabItem tabItem = new TabItem(getContext());
         return tabItem;
     }
+
     /**
      * 添加标签
      */
-    public DLTabLayout addTab(TabItem tabItem){
+    public HorizontalScrollTabLayout addTab(TabItem tabItem) {
         mTabItemList.add(tabItem);
-         return this;
+        return this;
     }
 
 
-
-    public void create(){
+    public void create() {
         removeAllViews();
         if (mTabItemList.size() >= MAX_VISIABLE_TAB_COUNT) {
             mTabVisiableCount = MAX_VISIABLE_TAB_COUNT;
         } else {
             mTabVisiableCount = mTabItemList.size();
         }
-        LinearLayout.LayoutParams lp=new LinearLayout.LayoutParams(mTabWidth, LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(mTabWidth, LayoutParams.MATCH_PARENT);
         for (int i = 0; i < mTabItemList.size(); i++) {
-            TabItem tabItem =mTabItemList.get(i);
+            TabItem tabItem = mTabItemList.get(i);
             tabItem.setLayoutParams(lp);
             tabItem.setTag(String.valueOf(i));
-            tabItem.setOnClickListener(new TabClickListener());
+            tabItem.setOnClickListener(tabClickListener);
             tabItem.setGravity(Gravity.CENTER);
             if (COLOR_TEXT_NORMAL == 0) {
                 COLOR_TEXT_NORMAL = tabItem.getCurrentTextColor();
             }
-            if (tabItem.getRightIconView()!=null){
-                tabItem.getRightIconView().setColorFilter(COLOR_TEXT_NORMAL);
+            if (syncColor){
+                tabItem.setIconColorFilter(COLOR_TEXT_NORMAL);
             }
             if (i == 0) {
                 tabItem.setTextColor(COLOR_TEXT_SELECT);
@@ -274,18 +315,13 @@ public class DLTabLayout extends LinearLayout {
         }
     }
 
-    public TabItem getTabItemAt(int index){
-        int childCount=getChildCount();
-        if (childCount>0&&index<=childCount-1){
+    public TabItem getTabItemAt(int index) {
+        int childCount = getChildCount();
+        if (childCount > 0 && index <= childCount - 1) {
             return (TabItem) getChildAt(index);
         }
         return null;
     }
-
-
-
-
-
 
 
     private void setSelectIndex(int position) {
@@ -295,21 +331,25 @@ public class DLTabLayout extends LinearLayout {
             //将选中的取消选中
             TabItem item = (TabItem) getChildAt(currentPosition);
             item.setTextColor(COLOR_TEXT_NORMAL);//恢复为初始原色
-            if (item.getRightIconView()!=null){
-                item.getRightIconView().setColorFilter(COLOR_TEXT_NORMAL);
+            if (syncColor){
+                item.setIconColorFilter(COLOR_TEXT_NORMAL);
             }
+
+
+
             if (mTabSelectListener != null) {
-                mTabSelectListener.unSelect(currentPosition,item);
+                mTabSelectListener.unSelect(currentPosition, item);
             }
             //记录新的
             TabItem tabItem = (TabItem) getChildAt(position);
             tabItem.setTextColor(COLOR_TEXT_SELECT);
-            if (tabItem.getRightIconView()!=null){
-                tabItem.getRightIconView().setColorFilter(COLOR_TEXT_SELECT);
+            if (syncColor){
+                tabItem.setIconColorFilter(COLOR_TEXT_SELECT);
             }
+
             currentPosition = position;
             if (mTabSelectListener != null) {
-                mTabSelectListener.onSelect(currentPosition,tabItem);
+                mTabSelectListener.onSelect(currentPosition, tabItem);
             }
         }
     }
@@ -389,30 +429,21 @@ public class DLTabLayout extends LinearLayout {
     class TabClickListener implements OnClickListener {
         @Override
         public void onClick(View v) {
-
             String strPostion = (String) v.getTag();
             if (strPostion != null && !strPostion.isEmpty()) {
-                int position = Integer.parseInt(strPostion);
-                if (position==currentPosition){
+                int clickPosition = Integer.parseInt(strPostion);
+                if (clickPosition == currentPosition) {
                     if (mTabSelectListener != null) {
-                        mTabSelectListener.reSelected(position, (TabItem) v);
+                        mTabSelectListener.reSelected(clickPosition, (TabItem) v);
                     }
-                }else{
-                    isClick = true;
-                }
-                setSelectIndex(position);
-                setIndicatorOffset(position, 0);
-                //点击Tab的时候TabLayout也跟着滚动
-                if (mTabVisiableCount > 0 && position >= (mTabVisiableCount - 2) && getChildCount() > mTabVisiableCount) {
-                    if (position != mTabItemList.size() - 1) {//不是最后一个则滚动
-                        int px = (position - (mTabVisiableCount - 2)) * mTabWidth;
-                        mScroller.startScroll(px, 0, mTabWidth, 0, 500);//点击Tab的时候若需要滑动，则滑动的距离是一个Tab的宽度
-                        invalidate();
-                    }
+                    return;
                 }
 
                 if (mViewPager != null && mViewPager.getAdapter() != null) {
-                    mViewPager.setCurrentItem(position);
+                    mViewPager.setCurrentItem(clickPosition);
+                }else{
+                    setSelectIndex(clickPosition);
+                    setIndicatorOffset(clickPosition, 0);
                 }
             }
 
@@ -424,7 +455,6 @@ public class DLTabLayout extends LinearLayout {
     class PageSelectedListener implements ViewPager.OnPageChangeListener {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            if (!isClick) {
                 setIndicatorOffset(position, positionOffset);
                 //当滑动ViewPager的时候，布局需要跟着滑动
                 if (mTabVisiableCount > 0 && position >= (mTabVisiableCount - 2) && getChildCount() > mTabVisiableCount) {
@@ -432,33 +462,22 @@ public class DLTabLayout extends LinearLayout {
                     // Log.e( "onPageScrolled: ","px "+px );
                     scrollTo(px, 0);
                 }
-            }
 
-            if (mPageChangeListener != null) {
-                mPageChangeListener.onPageScrolled(position, positionOffset, positionOffsetPixels);
-            }
         }
 
 
         @Override
         public void onPageSelected(int position) {
             setSelectIndex(position);
-            if (mPageChangeListener != null) {
-                mPageChangeListener.onPageSelected(position);
-            }
+
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
-            if (state == 0) {  //state 的变化  1,2,0       0的时候完全停止滚动
-                isClick = false;
-            }
             if (currentPosition <= (mTabVisiableCount - 2)) {
                 scrollTo(0, 0);
             }
-            if (mPageChangeListener != null) {
-                mPageChangeListener.onPageScrollStateChanged(state);
-            }
+
         }
     }
 
@@ -486,18 +505,5 @@ public class DLTabLayout extends LinearLayout {
         mTabSelectListener = listener;
     }
 
-    //ViewPage滑动监听，提供对外
-    private OnPageChangeListener mPageChangeListener;
 
-    public interface OnPageChangeListener {
-        void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
-
-        void onPageSelected(int position);
-
-        void onPageScrollStateChanged(int state);
-    }
-
-    public void setPageChangeListener(OnPageChangeListener listener) {
-        mPageChangeListener = listener;
-    }
 }

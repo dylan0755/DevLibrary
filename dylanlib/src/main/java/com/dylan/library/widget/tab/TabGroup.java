@@ -1,4 +1,4 @@
-package com.dylan.library.tab;
+package com.dylan.library.widget.tab;
 
 import android.content.Context;
 import android.content.res.Configuration;

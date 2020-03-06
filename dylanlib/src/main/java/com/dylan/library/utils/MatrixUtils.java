@@ -73,6 +73,21 @@ public class MatrixUtils {
         return pointF;
     }
 
+    public static Rect getMatrixRect(Matrix matrix, int width, int height) {
+        float[] location = new float[9];
+        matrix.getValues(location);
+        float sx = location[0];
+        float sy = location[4];
+
+        int cw = (int) (width * sx);
+        int ch = (int) (height * sy);
+
+        float leftX = location[2];
+        float leftY = location[5];
+
+        return new Rect((int) leftX, (int) leftY, (int) (cw + leftX), (int) (ch + leftY));
+    }
+
 
     /**
      * 获取ImageView 当前图片的位置信息

@@ -3,7 +3,7 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
-   <com.dylan.library.tab.DLTabLayout
+   <com.dylan.library.widget.tab.HorizontalScrollTabLayout
        android:id="@+id/tablayout"
        android:layout_width="match_parent"
        android:layout_height="45dp"/>

@@ -41,7 +41,7 @@ public class DemoListActivity extends AppCompatActivity {
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "SlidingRefresh", "WebViewActvity",
-            "侧滑销毁Activity", "语音发送", "FileDownLoader", "TabLayout", "CheckBoxListAdapter",
+            "侧滑销毁Activity", "语音发送", "FileDownLoader", "HorizontalScrollTabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "TextSwitchActivity","全局更换字体","FirstLineMargin",
             "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView",

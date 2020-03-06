@@ -13,8 +13,8 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 
 import com.dylan.mylibrary.R;
-import com.dylan.library.tab.DLTabLayout;
-import com.dylan.library.tab.TabItem;
+import com.dylan.library.widget.tab.HorizontalScrollTabLayout;
+import com.dylan.library.widget.tab.TabItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +24,7 @@ import java.util.List;
  */
 
 public class TabLayoutActivity extends FragmentActivity {
-    DLTabLayout mTabLayout;
+    HorizontalScrollTabLayout mTabLayout;
     ViewPager mViewPager;
     public static final String TAB_INDEX="tabIndex";
 
@@ -32,8 +32,8 @@ public class TabLayoutActivity extends FragmentActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tablayout);
-        mTabLayout= (DLTabLayout) findViewById(R.id.tablayout);
-        mViewPager= (ViewPager) findViewById(R.id.vpager);
+        mTabLayout= findViewById(R.id.tablayout);
+        mViewPager=  findViewById(R.id.vpager);
         initTabLayout();
     }
 
@@ -44,20 +44,22 @@ public class TabLayoutActivity extends FragmentActivity {
         int normalColor = Color.parseColor("#666666");
         mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setTabTextSize(16);
+        mTabLayout.setIndicatorShap(HorizontalScrollTabLayout.SHAPE_TRIANGLE);
         mTabLayout.setTabColor(normalColor);
         mTabLayout.setTabSelectColor(selectColor);
-        mTabLayout.setIndicatorColor(getResources().getColor(android.R.color.holo_orange_dark));
+        mTabLayout.setIndicatorColor(Color.BLACK);
         mTabLayout.setMaxVisiableCount(5);
         mTabLayout.setUpWidthViewPager(mViewPager);
+       // mTabLayout.syncTextIconColor(false);
         mTabLayout.addTab(mTabLayout.newTab().setTabTitle("待签收"))
                 .addTab(mTabLayout.newTab().setTabTitle("处理中"))
                 .addTab(mTabLayout.newTab().setTabTitle("全部")
                         .setTabIconRight(R.mipmap.ic_arrow_down))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试1"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试2"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试3"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试4"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试5"))
                 .create();
         List<Fragment> fragmentList = new ArrayList<Fragment>();
         for (int i = 0; i < 8; i++) {
@@ -67,7 +69,6 @@ public class TabLayoutActivity extends FragmentActivity {
             fragment.setArguments(bundle);
             fragmentList.add(fragment);
         }
-        mTabLayout.setUpWidthViewPager(mViewPager);
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(adapter);
         mTabLayout.setTabSelectListener(new TabSelectListenerImpl());
@@ -99,7 +100,7 @@ public class TabLayoutActivity extends FragmentActivity {
     }
 
 
-    class TabSelectListenerImpl implements DLTabLayout.TabSelectListener{
+    class TabSelectListenerImpl implements HorizontalScrollTabLayout.TabSelectListener{
 
         @Override
         public void onSelect(int position, TabItem tabItem) {

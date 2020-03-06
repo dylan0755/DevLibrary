@@ -9,7 +9,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dylan.mylibrary.R;
-import com.dylan.library.tab.DLTabLayout;
+import com.dylan.library.widget.tab.HorizontalScrollTabLayout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,14 +20,14 @@ import java.util.List;
 
 public class LazyFragmentActivity extends AppCompatActivity {
     private ViewPager mViewPager;
-    private DLTabLayout mTabLayout;
+    private HorizontalScrollTabLayout mTabLayout;
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lazyfragment);
         mViewPager= (ViewPager) findViewById(R.id.vpager);
         mViewPager.setOffscreenPageLimit(4);
-        mTabLayout= (DLTabLayout) findViewById(R.id.tablayout);
+        mTabLayout= (HorizontalScrollTabLayout) findViewById(R.id.tablayout);
         for (int i=0;i<8;i++){
             mTabLayout.addTab(mTabLayout.newTab().setTabTitle("page"+(i+1)));
         }

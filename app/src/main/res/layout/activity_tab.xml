@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="96px"
         >
-        <com.dylan.library.tab.TabGroup
+        <com.dylan.library.widget.tab.TabGroup
             android:id="@+id/tg_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>

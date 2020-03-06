@@ -212,7 +212,7 @@ public void *(android.view.View);
 -keep class com.dylan.library.service.** {
       *;
 }
--keep class com.dylan.library.tab.** {
+-keep class com.dylan.library.widget.tab.** {
       *;
 }
 

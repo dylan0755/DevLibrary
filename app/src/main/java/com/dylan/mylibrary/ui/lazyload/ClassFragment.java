@@ -9,8 +9,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dylan.mylibrary.R;
 import com.dylan.library.fragment.LazyFragment;
+import com.dylan.library.fragment.LazyFragmentBase;
+import com.dylan.mylibrary.R;
 import com.dylan.library.utils.HandlerUtils;
 
 import java.util.ArrayList;
@@ -26,22 +27,27 @@ public class ClassFragment extends LazyFragment implements SwipeRefreshLayout.On
     private NewDataAdapter mDataAdapter;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View contentView = inflater.inflate(R.layout.fragment_lazyload, container, false);
-        initView(contentView);
-        return contentView;
+    public int getLayoutId() {
+        return R.layout.fragment_lazyload;
     }
 
-    private void initView(View contentView) {
-        mRefreshLayout = (SwipeRefreshLayout) contentView.findViewById(R.id.swiperefresh);
+    @Override
+    public void onFragmentCreate() {
+        initView();
+    }
+
+    private void initView() {
+        mRefreshLayout = findViewById(R.id.swiperefresh);
         mRefreshLayout.setOnRefreshListener(this);
-        mRecyclerView = (RecyclerView) contentView.findViewById(R.id.recycleView_class);
+        mRecyclerView =  findViewById(R.id.recycleView_class);
         mRefreshLayout.setColorSchemeResources(android.R.color.holo_red_light, android.R.color.holo_orange_light,
                 android.R.color.holo_green_light);
         mDataAdapter = new NewDataAdapter();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mDataAdapter);
     }
+
+   
 
     @Override
     public void firstVisibleLoad() {
