@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.SignatureUtils;
@@ -40,7 +41,7 @@ public class DemoListActivity extends AppCompatActivity {
     private String[] demoNames = {"RecyclerViewSnapHelper", "ScaleUpPhotoView", "IRecyclerView",
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
-            "BulletinBoard", "PhotoSelector", "SlidingRefresh", "WebViewActvity",
+            "BulletinBoard", "PhotoSelector", "SlidingRefresh",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "HorizontalScrollTabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "TextSwitchActivity","全局更换字体","FirstLineMargin",
@@ -50,7 +51,7 @@ public class DemoListActivity extends AppCompatActivity {
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, LocalPhotoSelectActivity.class,
-            SlidingRefreshActivity.class, WebViewActivity.class, HorizontalScrollBackActivity.class,
+            SlidingRefreshActivity.class,  HorizontalScrollBackActivity.class,
             VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,TextSwitchActivity.class,
@@ -63,6 +64,7 @@ public class DemoListActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        DensityUtils.setCustomDensity(this,getApplication());
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
