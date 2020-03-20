@@ -19,6 +19,7 @@ import com.dylan.library.utils.Logger;
 import com.dylan.library.widget.irecycler.RefreshTrigger;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -297,6 +298,25 @@ public class FileUtils {
         fos.close();
         return true;
 
+    }
+
+
+    public static String getStringFromInputStream(InputStream is) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        try {
+            int i = -1;
+            while (true) {
+                if (!((i = is.read()) != -1)) break;
+                baos.write(i);
+            }
+            String result=baos.toString();
+            baos.close();
+            is.close();
+            return result;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

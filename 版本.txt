@@ -8,8 +8,8 @@ V3.6.0
 3. 原包名下的tag 目录 移动到widget中， DLTabLayout 更名为 HorizontalScrollTabLayout并优化滚动体验
 4.DensityUtils 新增 setCustomDensity(Activity activity, final Application application) 适配屏幕
    在Activity onCreate 中使用，
-
-
+5.EdiTextUtils 增加 软键盘右下角按键文本更改和点击监听    addSearchAction  addSendAction addDoneAction
+6.FileUtils 新增 getStringFromInputStream inputStream 转字符串
 
 
 
