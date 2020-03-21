@@ -11,8 +11,8 @@ V3.6.0
 5.EdiTextUtils 增加 软键盘右下角按键文本更改和点击监听    addSearchAction  addSendAction addDoneAction
 6.FileUtils 新增 getStringFromInputStream inputStream 转字符串
 7.HorizontalScrollTabLayout Tab 增加加粗，增加 setIndicatorLeftMargin
-
-
+8.新增 Symbol 类，符号类， 如人民币符号
+9.修复侧滑删除类 点击删除无效果bug
 
 
 

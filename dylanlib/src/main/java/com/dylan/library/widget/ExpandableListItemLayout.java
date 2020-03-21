@@ -2,6 +2,7 @@ package com.dylan.library.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -11,6 +12,10 @@ import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
+import android.widget.OverScroller;
+
+import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.ToastUtils;
 
 
 /**
@@ -23,7 +28,6 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
     private ListItemWrapperLayout mWrapper;
     private ViewGroup mContentView;
     private ViewGroup menuView;
-    private int mScreenWidth;
     private int mMenuViewWidth;
     private  ActiveMode activeMode= ActiveMode.activeWhileOtherOpen;
     private boolean measured = false;
@@ -32,7 +36,13 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
     private OnClickListener mClickListener;
     private int ColorValue;
     private int expandSlap;//滑动多长距离则自动弹出隐藏的菜单项
+    private int touchSlop;
+    private float moveSlap;
+    private float downX;
     private ExpandedRecorder mRecorder;
+    private Drawable defalutBackgroundDraw;
+    private View parentView;
+    private OverScroller scroller;
 
     public ExpandableListItemLayout(Context context) {
         this(context, null);
@@ -41,27 +51,30 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
     public ExpandableListItemLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mContext = context;
-        DisplayMetrics outmetricx = context.getResources().getDisplayMetrics();
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        wm.getDefaultDisplay().getMetrics(outmetricx);
-        mScreenWidth = outmetricx.widthPixels;
         setHorizontalScrollBarEnabled(false);
         setOnTouchListener(this);
-        expandSlap = ViewConfiguration.get(mContext).getScaledTouchSlop();
-        mRecorder = ExpandedRecorder.getExpandRecorderInstance();
-        expandSlap *= 2;
+        touchSlop = ViewConfiguration.get(mContext).getScaledTouchSlop();
+        mRecorder =  ExpandedRecorder.getExpandRecorderInstance();
+        expandSlap =touchSlop* 2;
+        scroller=new OverScroller(context);
+
     }
 
+    @Override
+    protected void onFinishInflate() {
+        super.onFinishInflate();
+        defalutBackgroundDraw=getBackground();
+    }
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        if (!measured) {
-            mWrapper = (ListItemWrapperLayout) getChildAt(0);
-            mContentView = (ViewGroup) mWrapper.getChildAt(0);
-            menuView = (ViewGroup) mWrapper.getChildAt(1);
-            mContentView.getLayoutParams().width = mScreenWidth;
-        }
+        int parentWidth=MeasureSpec.getSize(widthMeasureSpec);
+        mWrapper = (ListItemWrapperLayout) getChildAt(0);
+        mContentView = (ViewGroup) mWrapper.getChildAt(0);
+        menuView = (ViewGroup) mWrapper.getChildAt(1);
+        mContentView.getLayoutParams().width = parentWidth;
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
     }
 
 
@@ -75,6 +88,8 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
         }
     }
 
+
+
     /**
      * 1.当点击屏幕的时候，要先判断是否有其他item没有关闭，
      * 如果有，则在ACTION_DOWN的时候先将其他的item关闭
@@ -84,6 +99,7 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
      */
 
     public boolean onTouchEvent(MotionEvent event, View v) {
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 mMenuViewWidth = menuView.getMeasuredWidth();
@@ -94,17 +110,20 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
                     if (activeMode== ActiveMode.noActiveWhileOtherOpen)hasColseOnDown =true;
 
                 }
-
+                downX=event.getRawX();
+                moveSlap=0;
                 break;
+                case MotionEvent.ACTION_MOVE:
+                    moveSlap=event.getRawX()-downX;
+                    break;
             case MotionEvent.ACTION_CANCEL:
                 setDefaultColor();
                 break;
             case MotionEvent.ACTION_UP:
                 setDefaultColor();
                 int scrollX = getScrollX();
-
                 if (scrollX > 0) { //布局已经发生移动
-                    if (scrollX >= expandSlap) {//达到阀值
+                    if (scrollX >= touchSlop) {//达到阀值
                         if (!expanded) {
                             open();
                         } else {
@@ -115,7 +134,6 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
                     }
                     return true;
                 } else {//布局没有发生移动则判断布局是否展开状态，没有展开则响应点击事件，否则布局收缩
-
                     /**
                      * expanded==true，
                      * 说明ACTION_DOWN的执行只是为了让已打开的展开的Item关闭
@@ -132,29 +150,35 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
                         }
                     }
 
-
                     if (mClickListener != null) {
                         mClickListener.onClick(v);
                     }
-
 
                 }
                 break;
         }
 
-        return super.onTouchEvent(event);
+        return onTouchEvent(event);
     }
 
+
+    private void prepareScroll(int fx, int fy) {
+        int dx = fx - getScrollX();
+        int dy = fy - getScrollY();
+        scroller.startScroll(getScrollX(), getScrollY(), dx, dy);
+    }
+
+
+
+
     private void setDefaultColor() {
-        setBackgroundColor(0);
+        if (ColorValue==0)return;
+        setBackgroundDrawable(defalutBackgroundDraw);
     }
 
     private void setPressColor() {
-        if (ColorValue == 0) {
-            setDefaultColor();
-        } else {
-            setBackgroundColor(ColorValue);
-        }
+        if (ColorValue==0)return;
+        setBackgroundColor(ColorValue);
     }
 
 
@@ -166,7 +190,7 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
 
 
     public void close() {
-        this.smoothScrollTo(0, 0);
+        prepareScroll(0,0);
         expanded = false;
         mRecorder.UnExpanding(this);
 
@@ -174,8 +198,7 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
 
     //打开一个之前先要判断上一个是否已关闭。
     public void open() {
-        //传正值往负方向走
-        this.smoothScrollTo(mMenuViewWidth, 0);
+        prepareScroll(mMenuViewWidth,0);
         expanded = true;
         mRecorder.Expanding(this);
     }
@@ -230,4 +253,25 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
         noActiveWhileOtherOpen //当点击的某个Item的时候假如有其他Item正在展开，则关掉其它Item，但是本Item的点击事件不响应，如QQ的消息列表
     }
 
+    private boolean inRangeOfView(View view, MotionEvent ev){
+        int[] location = new int[2];
+        view.getLocationOnScreen(location);
+        int x = location[0];
+        int y = location[1];
+        if(ev.getX() < x || ev.getX() > (x + view.getWidth()) || ev.getY() < y || ev.getY() > (y + view.getHeight())){
+            return false;
+        }
+        return true;
+    }
+
+
+    @Override
+    public void computeScroll() {
+        if (scroller.computeScrollOffset()){
+            int currX = scroller.getCurrX();
+            int currY = scroller.getCurrY();
+            scrollTo(currX,currY);
+            postInvalidate();
+        }
+    }
 }

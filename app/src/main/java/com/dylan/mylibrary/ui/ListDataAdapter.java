@@ -2,6 +2,7 @@ package com.dylan.mylibrary.ui;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -9,6 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.dylan.library.utils.Logger;
 import com.dylan.mylibrary.R;
 import com.dylan.library.widget.ExpandableListItemLayout;
 
@@ -61,13 +63,14 @@ public class ListDataAdapter extends BaseAdapter{
            holder.expandableLayout.close();
 
            holder.ItemName.setText(getItem(position).toString());
-           holder.deleteButton.setTag(position);
+
+
 
         holder.deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int index=(Integer)holder.deleteButton.getTag();
-                list.remove(index);
+
+                list.remove(position);
                 notifyDataSetChanged();
                 holder.expandableLayout.delete();
 
