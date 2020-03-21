@@ -53,6 +53,7 @@ public class HorizontalScrollTabLayout extends LinearLayout {
     public static int SHAPE_RECTANGLE = 2;//长方形指示器
     private int mShape = SHAPE_RECTANGLE;
     private int indicatorRightMargin;
+    private int indicatorLeftMargin;
     private TabClickListener tabClickListener;
     private int mMinimumVelocity;
     private VelocityTracker mVelocityTracker;
@@ -102,7 +103,11 @@ public class HorizontalScrollTabLayout extends LinearLayout {
     }
 
     public void setIndicatorRightMargin(int rightMargin) {
-        indicatorRightMargin = rightMargin;
+        indicatorRightMargin= (int) (getResources().getDisplayMetrics().density*rightMargin+0.5f);
+    }
+
+    public void setIndicatorLeftMargin(int leftMargin){
+        indicatorLeftMargin= (int) (getResources().getDisplayMetrics().density*leftMargin+0.5f);
     }
 
     /**
@@ -143,7 +148,7 @@ public class HorizontalScrollTabLayout extends LinearLayout {
     private void initRetangle() {
         mPath = new Path();
         mPaint.setStyle(Paint.Style.STROKE);
-        mPath.moveTo(0, 0);
+        mPath.moveTo(indicatorLeftMargin, 0);
         mIndicatorWidht = mTabWidth / 2;
         mPath.lineTo(mIndicatorWidht, 0);
     }

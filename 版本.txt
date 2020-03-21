@@ -10,7 +10,7 @@ V3.6.0
    在Activity onCreate 中使用，
 5.EdiTextUtils 增加 软键盘右下角按键文本更改和点击监听    addSearchAction  addSendAction addDoneAction
 6.FileUtils 新增 getStringFromInputStream inputStream 转字符串
-
+7.HorizontalScrollTabLayout Tab 增加加粗，增加 setIndicatorLeftMargin
 
 
 

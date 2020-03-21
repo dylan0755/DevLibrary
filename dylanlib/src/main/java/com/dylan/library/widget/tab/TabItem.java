@@ -1,6 +1,7 @@
 package com.dylan.library.widget.tab;
 
 import android.content.Context;
+import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;
@@ -75,6 +76,11 @@ public class TabItem extends LinearLayout {
         return this;
     }
 
+    public TabItem blodStyle(){
+        tabTitle.getPaint().setFakeBoldText(true);
+        return this;
+    }
+
     public void setIconColorFilter(int color){
         setRightIconColorFilter(color);
     }
@@ -89,5 +95,7 @@ public class TabItem extends LinearLayout {
     private static void setTint(Drawable drawable, int color) {
         drawable.setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
     }
+
+
 
 }
