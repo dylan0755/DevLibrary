@@ -56,6 +56,8 @@ public class IRecyclerHelper {
         emptyTip = charSequence;
     }
 
+
+
     public void setFirstPageNo(int pageNo) {
         firstPageNo = pageNo;
     }
@@ -112,6 +114,21 @@ public class IRecyclerHelper {
 
         }
     }
+
+    public void setNoMoreText(String text){
+        if (footerView!=null)footerView.getNoMoreTextView().setText(text);
+    }
+
+
+    public void setLoadingText(String text){
+        if (footerView!=null)footerView.getLoadingTextView().setText(text);
+    }
+
+
+    public void setErrorTextColor(String text){
+        if (footerView!=null)footerView.getErrorTextView().setText(text);
+    }
+
 
 
     public void setNoMoreTextColor(int colorValue) {
