@@ -13,9 +13,10 @@ V3.6.0
 7.HorizontalScrollTabLayout Tab 增加加粗，增加 setIndicatorLeftMargin
 8.新增 Symbol 类，符号类， 如人民币符号
 9.修复侧滑删除类 点击删除无效果bug
-
-
-
+10. CollectionsUtils 新增 createEntityList(MyPublishDemand.class,8)，返回指定的bean 集合，方便测试
+11.修复PhotoView 从最大缩小 有自动弹到最大bug
+12.新增 IRecyclerViewGridDivider   rvMain.addItemDecoration(new IRecycleViewGridDivider(36,
+                                               true,true));
 
 
 

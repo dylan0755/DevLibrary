@@ -4,18 +4,13 @@ import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 import android.widget.HorizontalScrollView;
 import android.widget.OverScroller;
-
-import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.ToastUtils;
 
 
 /**
@@ -39,9 +34,8 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
     private int touchSlop;
     private float moveSlap;
     private float downX;
-    private ExpandedRecorder mRecorder;
+    private static ExpandableListItemLayout mRecorder;
     private Drawable defalutBackgroundDraw;
-    private View parentView;
     private OverScroller scroller;
 
     public ExpandableListItemLayout(Context context) {
@@ -54,7 +48,6 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
         setHorizontalScrollBarEnabled(false);
         setOnTouchListener(this);
         touchSlop = ViewConfiguration.get(mContext).getScaledTouchSlop();
-        mRecorder =  ExpandedRecorder.getExpandRecorderInstance();
         expandSlap =touchSlop* 2;
         scroller=new OverScroller(context);
 
@@ -84,6 +77,7 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
         //第一次启动时执行该方法。
         if (changed) {
             close();
+            mMenuViewWidth=menuView.getMeasuredWidth();
             measured = true;
         }
     }
@@ -102,6 +96,8 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
 
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
+                scroller.abortAnimation();
+                scroller.forceFinished(true);
                 mMenuViewWidth = menuView.getMeasuredWidth();
                 //按下颜色变化
                 setPressColor();
@@ -192,7 +188,8 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
     public void close() {
         prepareScroll(0,0);
         expanded = false;
-        mRecorder.UnExpanding(this);
+        mRecorder=null;
+
 
     }
 
@@ -200,20 +197,22 @@ public class ExpandableListItemLayout extends HorizontalScrollView implements Vi
     public void open() {
         prepareScroll(mMenuViewWidth,0);
         expanded = true;
-        mRecorder.Expanding(this);
+        if (mRecorder!=null){
+            mRecorder.close();
+        }
+        mRecorder=this;
     }
 
     /**
      * 删除记录
      */
     public void delete() {
-        mRecorder.deleteExpandingObject();
+        if (mRecorder==this)mRecorder=null;
     }
 
     public boolean closeIfHasExpanding() {
-        ExpandableListItemLayout sl = mRecorder.getExpandingObj();
-        if (sl != null && sl != this) {
-            sl.close();
+        if (mRecorder != null &&mRecorder!=this) {
+            mRecorder.close();
             return true;
         }
         return false;

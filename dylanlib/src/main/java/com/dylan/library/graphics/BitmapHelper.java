@@ -255,6 +255,7 @@ public class BitmapHelper {
         Bitmap targetBitmap = Bitmap.createBitmap(outWidth, outHeight, srcBitmap.getConfig());
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
         paint.setAntiAlias(true);
+        paint.setDither(true);
         Canvas canvas = new Canvas(targetBitmap);
         canvas.drawBitmap(srcBitmap, m, paint);
         return targetBitmap;
@@ -291,6 +292,8 @@ public class BitmapHelper {
         //创建canvas并传入desBitmap，这样绘制的内容都会在desBitmap上
         Canvas canvas = new Canvas(desBitmap);
         Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setAntiAlias(true);
+        paint.setDither(true);
         //创建着色器
         BitmapShader bitmapShader = new BitmapShader(bitmap, Shader.TileMode.CLAMP, Shader.TileMode.CLAMP);
         bitmapShader.setLocalMatrix(matrix);
@@ -505,7 +508,45 @@ public class BitmapHelper {
         return bitmap;
     }
 
+    public static Bitmap layOnCenter(Bitmap bitmapBottom, Bitmap bitmapTop) {
+        if (bitmapBottom == null) {
+            return null;
+        }
 
+        if (bitmapTop == null) {
+            return bitmapBottom;
+        }
+        //获取图片的宽高
+        int srcWidth = bitmapBottom.getWidth();
+        int srcHeight = bitmapBottom.getHeight();
+        int logoWidth = bitmapTop.getWidth();
+        int logoHeight = bitmapTop.getHeight();
+
+        if (srcWidth == 0 || srcHeight == 0) {
+            return null;
+        }
+
+        if (logoWidth == 0 || logoHeight == 0) {
+            return bitmapBottom;
+        }
+
+        //logo大小为二维码整体大小的 几分之几
+
+        Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
+        try {
+            Canvas canvas = new Canvas(bitmap);
+            canvas.drawBitmap(bitmapBottom, 0, 0, null);
+            canvas.drawBitmap(bitmapTop, (srcWidth - logoWidth) / 2, (srcHeight - logoHeight) / 2, null);
+
+            canvas.save();
+            canvas.restore();
+        } catch (Exception e) {
+            bitmap = null;
+            e.getStackTrace();
+        }
+
+        return bitmap;
+    }
     /**
      * bitmap转为base64
      */

@@ -241,7 +241,7 @@ public class PhotoView extends AppCompatImageView {
                     autoReboundWhilePointerUp(0, new PointF(viewWidth / 2, viewHeight / 2));
                 }
                 //双指抬起的时候若超过最大宽高则缩至最大宽高
-                if (currentWidth > maxWidth || currentHeight > maxHeight) {
+                if (currentWidth > maxWidth && currentHeight > maxHeight) {
                     autoReboundWhilePointerUp(1, mMidPoint);
                 }
                 break;
