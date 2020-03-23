@@ -64,7 +64,7 @@ public class DemoListActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DensityUtils.setCustomDensity(this,getApplication());
+        DensityUtils.setCustomDensityInWidth(360,this,getApplication());
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);

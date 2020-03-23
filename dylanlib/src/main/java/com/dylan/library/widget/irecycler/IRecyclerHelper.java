@@ -1,11 +1,11 @@
 package com.dylan.library.widget.irecycler;
 
 import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.os.Build;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -55,7 +55,6 @@ public class IRecyclerHelper {
         if (charSequence == null) return;
         emptyTip = charSequence;
     }
-
 
 
     public void setFirstPageNo(int pageNo) {
@@ -115,20 +114,19 @@ public class IRecyclerHelper {
         }
     }
 
-    public void setNoMoreText(String text){
-        if (footerView!=null)footerView.getNoMoreTextView().setText(text);
+    public void setNoMoreText(String text) {
+        if (footerView != null) footerView.getNoMoreTextView().setText(text);
     }
 
 
-    public void setLoadingText(String text){
-        if (footerView!=null)footerView.getLoadingTextView().setText(text);
+    public void setLoadingText(String text) {
+        if (footerView != null) footerView.getLoadingTextView().setText(text);
     }
 
 
-    public void setErrorTextColor(String text){
-        if (footerView!=null)footerView.getErrorTextView().setText(text);
+    public void setErrorTextColor(String text) {
+        if (footerView != null) footerView.getErrorTextView().setText(text);
     }
-
 
 
     public void setNoMoreTextColor(int colorValue) {
@@ -214,14 +212,35 @@ public class IRecyclerHelper {
         if (recyclerView == null || loadMoreFooterView == null ||
                 adapter == null) return false;
         if (loadMoreFooterView.canLoadMore() && adapter.getItemCount() > 0) {
-            if (((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition() > 2) {
+            if (recyclerView.getLayoutManager() instanceof LinearLayoutManager && ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition() > 2) {
                 loadMoreFooterView.setStatus(LoadMoreFooterView.Status.LOADING);
                 return true;
+            } else if (recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
+                int[] lastPositions = new int[((StaggeredGridLayoutManager) recyclerView.getLayoutManager()).getSpanCount()];
+                ((StaggeredGridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPositions(lastPositions);
+                int lastPosition = findMax(lastPositions);
+                boolean isBottom = lastPosition == recyclerView.getLayoutManager().getItemCount() - 1;
+
+                if (isBottom) {
+                    loadMoreFooterView.setStatus(LoadMoreFooterView.Status.LOADING);
+                }
+                return isBottom;
             } else {
                 loadMoreFooterView.setVisibility(View.GONE);
             }
         }
         return false;
+    }
+
+    //找到数组中的最大值
+    private static int findMax(int[] lastPositions) {
+        int max = lastPositions[0];
+        for (int value : lastPositions) {
+            if (value > max) {
+                max = value;
+            }
+        }
+        return max;
     }
 
     public static void setRefreshStatus(LoadMoreFooterView loadMoreFooterView) {

@@ -1,7 +1,27 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V3.6.0
+
+V3.7.0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+V3.6.0 ---->2020.03.24
 
 1.修复PhotoView 不能正常预览长截图bug
 2.原LazyFragment 更名为 LazyFragmentBase,重新新建LazyFragment
@@ -17,7 +37,9 @@ V3.6.0
 11.修复PhotoView 从最大缩小 有自动弹到最大bug
 12.新增 IRecyclerViewGridDivider   rvMain.addItemDecoration(new IRecycleViewGridDivider(36,
                                                true,true));
-
+13.IRecyclerHelper isCanLoadMore  中增加StaggeredGridLayoutManager 判断
+14.新增 IndicatorSwitcher  圆点指示器 切换器
+15.新增 NormalTabSwitcher  普通的几个按钮之间的切换
 
 
 

@@ -20,7 +20,7 @@ import android.view.View;
  //添加分割线
  RecyclerViewDivider itemDecoration=new RecyclerViewDivider(this,LinearLayoutManager.VERTICAL);
  itemDecoration.setDrawable(getResources().getDrawable(R.drawable.divider_lineed),
- DisplayUtil.dip2px(this,15),DisplayUtil.dip2px(this,15));
+ DisplayUtil.dp2px(this,15),DisplayUtil.dp2px(this,15));
  mRecyclerView.addItemDecoration(itemDecoration);
  */
 
