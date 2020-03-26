@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.dylan.library.utils.DateUtils;
 import com.dylan.mylibrary.R;
-import com.dylan.library.utils.DateUtil;
 
 /**
  * Created by Dylan on 2016/12/16.
@@ -23,7 +23,7 @@ public class DateTestActivity extends Activity {
 //        tv_datepicker.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
-//                DateUtil.showDatePickerDialog(DateTestActivity.this, new DateUtil.DatePickerListener() {
+//                DateUtils.showDatePickerDialog(DateTestActivity.this, new DateUtils.DatePickerListener() {
 //                    @Override
 //                    public void onDateSet(DatePicker datePicker, int year, int month, int dayofmonth) {
 //                        tv_datepicker.setText("选择日期为："+year+"-"+month+"-"+dayofmonth);
@@ -36,17 +36,17 @@ public class DateTestActivity extends Activity {
 
     private void getDate(){
         StringBuffer buffer=new StringBuffer();
-          String currentdate= DateUtil.getYear()+"年"+DateUtil.getMonth()+
-                  "月"+DateUtil.getDayOfMonth()+"日"+" 星期"+DateUtil.getDayOfWeek();
+          String currentdate= DateUtils.getYear()+"年"+ DateUtils.getMonth()+
+                  "月"+ DateUtils.getDayOfMonth()+"日"+" 星期"+ DateUtils.getDayOfWeek();
 
-          DateUtil.getDateByDaysAfter(10);
-         String _10daysafter=DateUtil.getYear()+"年"+DateUtil.getMonth()+
-                "月"+DateUtil.getDayOfMonth()+"日"+" 星期"+DateUtil.getDayOfWeek();
+          DateUtils.getDateByDaysAfter(10);
+         String _10daysafter= DateUtils.getYear()+"年"+ DateUtils.getMonth()+
+                "月"+ DateUtils.getDayOfMonth()+"日"+" 星期"+ DateUtils.getDayOfWeek();
 
-        DateUtil.getDateByMonthsAfter(2);
+        DateUtils.getDateByMonthsAfter(2);
 
-        String _2monthafter=DateUtil.getYear()+"年"+DateUtil.getMonth()+
-                "月"+DateUtil.getDayOfMonth()+"日"+" 星期"+DateUtil.getDayOfWeek();
+        String _2monthafter= DateUtils.getYear()+"年"+ DateUtils.getMonth()+
+                "月"+ DateUtils.getDayOfMonth()+"日"+" 星期"+ DateUtils.getDayOfWeek();
         buffer.append("当前日期："+"\n"+currentdate).append("\n").append("10天后的日期：").append("\n")
                 .append(_10daysafter)
                 .append("\n")

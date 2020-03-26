@@ -6,9 +6,14 @@ import android.graphics.Rect;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.ScrollView;
+
+import com.dylan.library.screen.ScreenUtils;
 
 /**
  * Created by Dylan on 2016/10/9.
@@ -65,5 +70,45 @@ public class SoftKeyboardUtils {
             }
         },100);
 
+    }
+
+
+
+    public static void adustScrollView(final ScrollView scrollView, final int originalBottomMargin){
+        if (scrollView==null)return;
+        if ( ! (scrollView.getChildAt(0)instanceof LinearLayout))return;
+        final Activity activity= ContextUtils.getActivity(scrollView.getContext());
+        if (activity==null)return;
+
+
+
+
+        LinearLayout wrapperLayout= (LinearLayout) scrollView.getChildAt(0);
+        final View emptyView=new View(scrollView.getContext());
+        LinearLayout.LayoutParams layoutParams=new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,0);
+        emptyView.setLayoutParams(layoutParams);
+        wrapperLayout.addView(emptyView);
+
+        final int statusBarHeight= ScreenUtils.getStatusBarHeight(activity);
+        observeSoftKeyboard(activity, new SoftKeyboardUtils.OnSoftKeyboardChangeListener() {
+            @Override
+            public void onSoftKeyBoardChange(int keyboardHeight, boolean visible) {
+                if (visible){
+                    if (ViewUtils.isOnBottom(scrollView)){
+                        View focusView=activity.getCurrentFocus();
+                        emptyView.getLayoutParams().height= keyboardHeight-statusBarHeight-originalBottomMargin;
+                        emptyView.setVisibility(View.VISIBLE);
+                        scrollView.fullScroll(ScrollView.FOCUS_DOWN);
+                        if (focusView!=null)focusView.requestFocus();
+                    }else{
+                        emptyView.setVisibility(View.GONE);
+                    }
+
+                }else{
+                    emptyView.setVisibility(View.GONE);
+                }
+
+            }
+        });
     }
 }

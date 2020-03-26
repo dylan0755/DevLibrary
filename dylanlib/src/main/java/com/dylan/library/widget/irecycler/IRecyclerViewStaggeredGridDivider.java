@@ -2,8 +2,8 @@ package com.dylan.library.widget.irecycler;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
 import android.view.View;
 
@@ -12,24 +12,22 @@ import android.view.View;
  * Date: 2020/3/23
  * Desc:
  */
-public class IRecyclerViewGridDivider extends RecyclerView.ItemDecoration {
+public class IRecyclerViewStaggeredGridDivider extends RecyclerView.ItemDecoration {
     protected int mHorizontalSpace;
     protected int mVerticalSpace;
-
-    private boolean mIncludeEdge ;
-    private boolean hasHeaderView;
-
+    private boolean mIncludeEdge = true;
+    private boolean hasHeaderView=false;
     private int mSpanCount=-1;
 
-    public IRecyclerViewGridDivider(Context context, int horizontalSpace, int verticalSpace, boolean hasHeaderView, boolean includeEdge) {
+
+
+    public IRecyclerViewStaggeredGridDivider(Context context, int horizontalSpace, int verticalSpace, boolean hasHeaderView, boolean includeEdge) {
         mHorizontalSpace = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 horizontalSpace, context.getResources().getDisplayMetrics());
 
         mVerticalSpace = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 verticalSpace, context.getResources().getDisplayMetrics());
 
-        this.mIncludeEdge = includeEdge;
-        this.hasHeaderView=hasHeaderView;
         this.mIncludeEdge = includeEdge;
         this.hasHeaderView=hasHeaderView;
     }
@@ -48,19 +46,27 @@ public class IRecyclerViewGridDivider extends RecyclerView.ItemDecoration {
             }
         }
 
-        GridLayoutManager.LayoutParams params = (GridLayoutManager.LayoutParams) view.getLayoutParams();
 
 
 
+        StaggeredGridLayoutManager.LayoutParams params = (StaggeredGridLayoutManager.LayoutParams) view.getLayoutParams();
+
+
+
+        //列数
         if (mSpanCount==-1){
-            GridLayoutManager gridLayoutManager = (GridLayoutManager) parent.getLayoutManager();
+            StaggeredGridLayoutManager gridLayoutManager = (StaggeredGridLayoutManager) parent.getLayoutManager();
             mSpanCount = gridLayoutManager.getSpanCount();
         }
 
 
 
-        //列数
-        int position =params.getSpanIndex();
+
+        // 获取item在span中的下标
+        //int spanIndex = params.getSpanIndex();
+        //int position = parent.getChildLayoutPosition(view);
+        //使用 原position 会导致item间隔的错乱  将position替换为span的下标判断item的位置，RecyclerView 滚动监听中还要  recyclerView.invalidateItemDecorations();
+        int position=params.getSpanIndex();
         int column = (position) % mSpanCount;
         if (mIncludeEdge) {
             outRect.left = mHorizontalSpace - column * mHorizontalSpace / mSpanCount;
@@ -68,7 +74,7 @@ public class IRecyclerViewGridDivider extends RecyclerView.ItemDecoration {
 //            if (position < mSpanCount) {
 //                outRect.top = mVerticalSpace;
 //            }
-           outRect.bottom = mVerticalSpace;
+            outRect.bottom = mVerticalSpace;
         } else {
             outRect.left = column * mHorizontalSpace / mSpanCount;
             outRect.right = mHorizontalSpace - (column + 1) * mHorizontalSpace / mSpanCount;

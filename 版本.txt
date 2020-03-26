@@ -4,13 +4,17 @@
 
 V3.7.0
 
+1.SoftKeyboardUtils 新增 adustScrollView(final ScrollView scrollView, final int originalBottomMargin) 解决键盘弹起遮挡输入框 问题
+2.新增 ViewUtils isOnBottom  isOnTop  isOnRight isOnLeft
+3.DateUtils
+  1.isToday(Date paramDate)
+  2.isTomorrow(Date paramDate)
+  3.getAllDaysAfter(int days,boolean inCludeToday) //获取多少天后的
+  4.isTodayAfterMilliSecond  判断多少毫秒之后是否为今天
 
-
-
-
-
-
-
+4.notifyItemRangeChanged(list) 局部更新，应用场景 瀑布流，内部封装position 与范围
+5.新增 IRecyclerViewStaggeredGridDivider 瀑布流分割条
+6.IRecyclerHelper 新增 invalidateSpanAssignments 处理瀑布流顶部空白问题
 
 
 

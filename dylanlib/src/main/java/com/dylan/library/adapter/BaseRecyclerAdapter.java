@@ -13,6 +13,7 @@ import com.dylan.library.utils.Logger;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -97,6 +98,26 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
         }
         notifyDataSetChanged();
     }
+
+
+
+
+    public void notifyItemRangeChanged(List<T> list) {
+        if (list!=null){
+            if (mDataList == null) {
+                mDataList=new ArrayList<>();
+                mDataList.addAll(list);
+                notifyItemRangeChanged(0, list.size());
+            } else {
+                int start = getDataList().size();
+                getDataList().addAll(list);
+                super.notifyItemRangeChanged(start, list.size());
+            }
+        }
+
+    }
+
+
 
     public void clear(){
         if (mDataList!=null){

@@ -10,7 +10,7 @@ import android.widget.AbsListView;
 import android.widget.ScrollView;
 import android.widget.Scroller;
 
-import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.ViewUtils;
 
 
 /**
@@ -251,28 +251,21 @@ public class ReboundHelper {
 
 
     public static boolean isOnBottom(View scrollTarget) {
-        if (scrollTarget instanceof ScrollView) {
-            ScrollView scrollView = (ScrollView) scrollTarget;
-            return scrollView.getChildAt(0).getMeasuredHeight() == scrollView.getScrollY() + scrollView.getHeight();
-        }
-        return !scrollTarget.canScrollVertically(1);
+       return ViewUtils.isOnBottom(scrollTarget);
     }
 
 
     private static boolean isOnTop(View scrollTarget) {
-        if (scrollTarget instanceof ScrollView) {
-            return ((ScrollView) scrollTarget).getScrollY() <= 0;
-        }
-        return !scrollTarget.canScrollVertically(-1);
+       return ViewUtils.isOnTop(scrollTarget);
     }
 
 
     private static boolean isOnRight(View scrollTarget) {
-        return !scrollTarget.canScrollHorizontally(1);
+        return ViewUtils.isOnRight(scrollTarget);
     }
 
     private static boolean isOnLeft(View scrollTarget) {
-        return !scrollTarget.canScrollHorizontally(-1);
+        return ViewUtils.isOnLeft(scrollTarget);
     }
 
 }

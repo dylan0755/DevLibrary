@@ -3,6 +3,7 @@ package com.dylan.library.widget.irecycler;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -267,5 +268,26 @@ public class IRecyclerHelper {
         loadMoreFooterView.setStatus(LoadMoreFooterView.Status.ERROR);
     }
 
+
+    public static void invalidateSpanAssignments(IRecyclerView recyclerView, final int state) {
+        if ((recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager)) return;
+        final StaggeredGridLayoutManager manager = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
+        if (manager==null)return;
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (state != 0) {
+                    manager.invalidateSpanAssignments();
+                    recyclerView.invalidateItemDecorations();//刷新 item 之间的间隔
+                } else {  //停止的时候
+                    if (newState == RecyclerView.SCROLL_STATE_IDLE) {
+                        manager.invalidateSpanAssignments();
+                        recyclerView.invalidateItemDecorations();//刷新 item 之间的间隔
+                    }
+                }
+            }
+        });
+    }
 
 }
