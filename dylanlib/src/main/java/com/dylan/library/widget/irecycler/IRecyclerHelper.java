@@ -17,8 +17,10 @@ import com.dylan.library.exception.OnNextBussinesException;
 import com.dylan.library.exception.ThrowableUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.widget.CircleIndicatorView;
+import com.dylan.library.widget.irecycler.IRecyclerView;
 import com.dylan.library.widget.irecycler.footer.LoadMoreFooterView;
 import com.dylan.library.widget.irecycler.header.RefreshHeaderView;
+import com.dylan.library.widget.irecycler.paging.IRecyclerPage;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ import java.util.List;
  */
 
 public class IRecyclerHelper {
+
     private int firstPageNo = 1;
     private int pageNo = firstPageNo;
     private IRecyclerView recyclerView;
@@ -64,38 +67,131 @@ public class IRecyclerHelper {
 
     public void setRefreshStatus() {
         pageNo = 1;
-        IRecyclerHelper.setRefreshStatus(footerView);
+        setRefreshStatus(footerView);
 
     }
 
     public boolean isCanLoadMore() {
-        if (IRecyclerHelper.isCanLoadMore(recyclerView, footerView, mAdapter)) {
+        if (isCanLoadMore(recyclerView, footerView, mAdapter)) {
             pageNo++;
             return true;
         }
         return false;
     }
 
+    public   void afterGetData(boolean isError, Throwable throwable, IRecyclerPage page){
+        List  list=page==null?null:page.getList();
+        boolean isLastPage=(page!=null&&page.isLastPage());
+        afterGetData(isError,throwable,list,isLastPage);
+    }
+
+    public void afterGetData(boolean isError, Throwable throwable, List<?> list,boolean isLastPage) {
+        if (isError) {
+            if (throwable == null) return;
+            if (throwable instanceof OnNextBussinesException) {
+                ThrowableUtils.show(((OnNextBussinesException) throwable).target);
+            } else {
+                if (pageNo > firstPageNo) {
+                    pageNo--;
+                    setError(footerView);
+                } else {
+                    setRefreshStatus(footerView);
+                }
+                ThrowableUtils.show(throwable);
+            }
+        } else {
+            if (EmptyUtils.isNotEmpty(list)) {
+                if (tvEmptyView != null) tvEmptyView.setText("");
+                if (pageNo == 1) {
+                    mAdapter.bind(list);
+                    refreshComplete(recyclerView);
+                } else {
+                    mAdapter.addAllAndNotifyDataChanged(list);
+                    if (footerView != null) {
+                        if (isLastPage){
+                            setNoMore(footerView);
+                        }else{
+                            loadMoreComplete(footerView);
+                        }
+
+                    }
+                }
+            } else {
+                if (pageNo == 1) {
+                    refreshComplete(recyclerView);
+                    mAdapter.clear();
+                    if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
+                } else {
+                    setNoMore(footerView);
+                }
+            }
+
+        }
+
+    }
+
+
+    public void afterGetData(boolean isError, Throwable errorMsg, List<?> list) {
+        if (isError) {
+            if (errorMsg == null) return;
+            if (errorMsg instanceof OnNextBussinesException) {
+                ThrowableUtils.show(((OnNextBussinesException) errorMsg).target);
+            } else {
+                if (pageNo > firstPageNo) {
+                    pageNo--;
+                    setError(footerView);
+                } else {
+                    setRefreshStatus(footerView);
+                }
+                ThrowableUtils.show(errorMsg);
+            }
+        } else {
+            if (EmptyUtils.isNotEmpty(list)) {
+                if (tvEmptyView != null) tvEmptyView.setText("");
+                if (pageNo == 1) {
+                    mAdapter.bind(list);
+                    refreshComplete(recyclerView);
+                } else {
+                    mAdapter.addAllAndNotifyDataChanged(list);
+                    if (footerView != null) {
+                        loadMoreComplete(footerView);
+                    }
+                }
+            } else {
+                if (pageNo == 1) {
+                    refreshComplete(recyclerView);
+                    mAdapter.clear();
+                    if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
+                } else {
+                    setNoMore(footerView);
+                }
+            }
+
+        }
+    }
+
+
+    @Deprecated
     public void afterGetData(boolean isSucceed, Object errorMsg, List<?> list) {
         if (isSucceed) {
             if (EmptyUtils.isNotEmpty(list)) {
                 if (tvEmptyView != null) tvEmptyView.setText("");
                 if (pageNo == 1) {
                     mAdapter.bind(list);
-                    IRecyclerHelper.refreshComplete(recyclerView);
+                    refreshComplete(recyclerView);
                 } else {
                     mAdapter.addAllAndNotifyDataChanged(list);
                     if (footerView != null) {
-                        IRecyclerHelper.loadMoreComplete(footerView);
+                        loadMoreComplete(footerView);
                     }
                 }
             } else {
                 if (pageNo == 1) {
-                    IRecyclerHelper.refreshComplete(recyclerView);
+                    refreshComplete(recyclerView);
                     mAdapter.clear();
                     if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
                 } else {
-                    IRecyclerHelper.setNoMore(footerView);
+                    setNoMore(footerView);
                 }
             }
         } else {
@@ -105,9 +201,9 @@ public class IRecyclerHelper {
             } else {
                 if (pageNo > firstPageNo) {
                     pageNo--;
-                    IRecyclerHelper.setError(footerView);
+                    setError(footerView);
                 } else {
-                    IRecyclerHelper.setRefreshStatus(footerView);
+                    setRefreshStatus(footerView);
                 }
                 ThrowableUtils.show(errorMsg);
             }
@@ -272,7 +368,7 @@ public class IRecyclerHelper {
     public static void invalidateSpanAssignments(IRecyclerView recyclerView, final int state) {
         if ((recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager)) return;
         final StaggeredGridLayoutManager manager = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
-        if (manager==null)return;
+        if (manager == null) return;
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {

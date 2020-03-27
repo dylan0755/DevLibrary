@@ -7,15 +7,12 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.GridView;
 import android.widget.ImageView;
 
-import com.dylan.library.graphics.BitmapHelper;
+import com.dylan.library.dialog.PhotoViewShowDialog;
 import com.dylan.library.screen.ScreenUtils;
-import com.dylan.library.widget.photoview.PhotoView;
 import com.dylan.library.widget.photoview.ViewLocation;
 import com.dylan.mylibrary.R;
-import com.dylan.mylibrary.widget.dialog.PhotoViewShowDialog;
 import com.gyf.barlibrary.ImmersionBar;
 
 /**
@@ -43,15 +40,8 @@ public class ScaleUpPhotoViewActivity extends AppCompatActivity {
         ivTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int[] p=new int[2];
-                v.getLocationInWindow(p);
-                ViewLocation viewLocation=new ViewLocation();
-                viewLocation.setX(p[0]);
-                viewLocation.setY(p[1]- ScreenUtils.getStatusBarHeight(ScaleUpPhotoViewActivity.this));
-                viewLocation.setWidth(v.getMeasuredWidth());
-                viewLocation.setHeight(v.getMeasuredHeight());
                 PhotoViewShowDialog dialog=new PhotoViewShowDialog(v.getContext());
-                dialog.show(bitmap,viewLocation);
+                dialog.show((ImageView) v);
             }
         });
 
@@ -60,15 +50,8 @@ public class ScaleUpPhotoViewActivity extends AppCompatActivity {
         ivCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int[] p=new int[2];
-                v.getLocationInWindow(p);
-                ViewLocation viewLocation=new ViewLocation();
-                viewLocation.setX(p[0]);
-                viewLocation.setY(p[1]- ScreenUtils.getStatusBarHeight(ScaleUpPhotoViewActivity.this));
-                viewLocation.setWidth(v.getMeasuredWidth());
-                viewLocation.setHeight(v.getMeasuredHeight());
                 PhotoViewShowDialog dialog=new PhotoViewShowDialog(v.getContext());
-                dialog.show(bitmap,viewLocation);
+                dialog.show((ImageView) v);
             }
         });
 
@@ -77,15 +60,8 @@ public class ScaleUpPhotoViewActivity extends AppCompatActivity {
         ivBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int[] p=new int[2];
-                v.getLocationInWindow(p);
-                ViewLocation viewLocation=new ViewLocation();
-                viewLocation.setX(p[0]);
-                viewLocation.setY(p[1]- ScreenUtils.getStatusBarHeight(ScaleUpPhotoViewActivity.this));
-                viewLocation.setWidth(v.getMeasuredWidth());
-                viewLocation.setHeight(v.getMeasuredHeight());
                 PhotoViewShowDialog dialog=new PhotoViewShowDialog(v.getContext());
-                dialog.show(bitmap,viewLocation);
+                dialog.show((ImageView) v);
             }
         });
 

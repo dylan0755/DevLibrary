@@ -1,6 +1,5 @@
 package com.dylan.mylibrary;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.Nullable;
@@ -8,8 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.dylan.library.test.TestAdapter;
-import com.dylan.library.widget.irecycler.IRecyclerView;
 import com.dylan.library.widget.irecycler.IRecyclerHelper;
+import com.dylan.library.widget.irecycler.IRecyclerView;
 import com.dylan.library.widget.irecycler.OnLoadMoreListener;
 import com.dylan.library.widget.irecycler.OnRefreshListener;
 

@@ -365,4 +365,28 @@ public class StringUtils {
 
         return buffer.toString();
     }
+
+
+    /**
+     * 替换为星号
+     */
+    public static String replaceWithStarSymbol(String text, int start,int end){
+        if (EmptyUtils.isEmpty(text))return text;
+        int len =text.length();
+        if (start>len-1)return text;
+        if (end>len-1) return text;
+
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < len; i++) {
+            char c= text.charAt(i);
+            if (i>=start&i<=end){
+                stringBuilder.append("*");
+            }else{
+                stringBuilder.append(c);
+            }
+        }
+
+        return stringBuilder.toString();
+    }
 }

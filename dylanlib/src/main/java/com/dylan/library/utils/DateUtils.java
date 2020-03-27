@@ -2,6 +2,8 @@ package com.dylan.library.utils;
 
 import android.widget.DatePicker;
 
+import com.dylan.library.exception.ELog;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,6 +36,32 @@ public class DateUtils {
         return date;
     }
 
+
+    public static long parseYMDHM(String dateStr){
+        String formatText = "yyyy-MM-dd HH:mm";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formatText);
+        try {
+            long selectTime= dateFormat.parse(dateStr).getTime();
+            return selectTime;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
+
+    public static long parseYMDHMS(String dateStr){
+        String formatText = "yyyy-MM-dd HH:mm:ss";
+        SimpleDateFormat dateFormat = new SimpleDateFormat(formatText);
+        try {
+            long selectTime= dateFormat.parse(dateStr).getTime();
+            return selectTime;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return 0;
+    }
+
     /**
      * 多少月之后的日期
      */
@@ -50,18 +78,21 @@ public class DateUtils {
 
 
     public static String getYear() {
-        String year = Integer.toString(calendar.get(Calendar.YEAR));
-        return year;
+        Date date=new Date();
+        return String.format("%tY",date);
     }
 
     public static String getMonth() {
-        String month = Integer.toString(calendar.get(Calendar.MONTH) + 1);
-        return month;
+        Date date=new Date();
+        return  String.format("%tm", date);// 获取当前月份
     }
 
+
+
     public static String getDayOfMonth() {
-        String day = Integer.toString(calendar.get(Calendar.DAY_OF_MONTH));
-        return day;
+        Date date=new Date();
+        return String.format("%td", date);
+
     }
 
     public static String getDayOfWeek() {
