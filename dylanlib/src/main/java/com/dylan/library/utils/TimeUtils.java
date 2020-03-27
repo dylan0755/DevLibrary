@@ -15,6 +15,7 @@ import java.util.Date;
  * Created by Dylan on 2016/11/26.
  */
 
+@Deprecated
 public class TimeUtils {
 
 

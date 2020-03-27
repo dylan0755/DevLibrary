@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!--公共属性抽出来-->
+    <attr name="radius" format="dimension" />
+    <attr name="dashGap" format="dimension" />
+
     <declare-styleable name="dl_base_color">
         <attr name="colorPrimary1" format="color"/>
         <attr name="colorPrimaryDark1" format="color"/>
@@ -31,7 +36,7 @@
         <attr name="android:paddingLeft"/>
         <attr name="android:paddingRight"/>
         <attr name="dashWith" format="dimension"/>
-        <attr name="dashGap" format="dimension"/>
+        <attr name="dashGap"/>
     </declare-styleable>
 
 
@@ -40,7 +45,7 @@
         <attr name="maxCount" format="integer" />
         <attr name="circleColor" format="color" />
         <attr name="bottomLineColor" format="color" />
-        <attr name="radius" format="dimension" />
+        <attr name="radius" />
         <attr name="divideLineWidth" format="dimension" />
         <attr name="divideLineColor" format="color" />
         <attr name="rectAngle" format="dimension" />
@@ -61,4 +66,30 @@
     </declare-styleable>
 
 
+    <!--自定义矩形边框的TextView-->
+    <declare-styleable name="DLShapeTextView">
+        <!--是否使用Selector选择器-->
+        <attr name="openSelector" format="boolean" />
+        <!--填充色-->
+        <attr name="solidColor" format="color" />
+        <!--边框色-->
+        <attr name="strokeColor" format="color" />
+        <!--按下填充色-->
+        <attr name="solidTouchColor" format="color" />
+        <!--按下边框色-->
+        <attr name="strokeTouchColor" format="color" />
+        <!--边框宽度-->
+        <attr name="strokeWidth" format="dimension" />
+        <!--圆角弧度-->
+        <attr name="radius" />
+        <!--四个角的圆角弧度-->
+        <attr name="topLeftRadius" format="dimension" />
+        <attr name="topRightRadius" format="dimension" />
+        <attr name="bottomLeftRadius" format="dimension" />
+        <attr name="bottomRightRadius" format="dimension" />
+        <!--虚线边框宽度-->
+        <attr name="dashWidth" format="dimension" />
+        <!--虚线边框间隙-->
+        <attr name="dashGap" />
+    </declare-styleable>
 </resources>

@@ -59,7 +59,6 @@ public class ActivityManager {
      */
     public Activity currentActivity() {
         Activity activity = activityStack.lastElement();
-        Logger.e(activity.getClass().getSimpleName());
         return activity;
     }
 

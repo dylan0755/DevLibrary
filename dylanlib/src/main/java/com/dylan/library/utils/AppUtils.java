@@ -9,10 +9,16 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.content.FileProvider;
+import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
 
@@ -21,6 +27,31 @@ import java.util.List;
  */
 
 public class AppUtils {
+
+
+    public static String getProcessName(int pid) {
+        BufferedReader reader = null;
+        try {
+            reader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));
+            String processName = reader.readLine();
+            if (!TextUtils.isEmpty(processName)) {
+                processName = processName.trim();
+            }
+            return processName;
+        } catch (Throwable throwable) {
+            throwable.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException exception) {
+                exception.printStackTrace();
+            }
+        }
+        return null;
+    }
+
 
 
     public static PackageInfo getPackageInfo(Context context) throws PackageManager.NameNotFoundException {
@@ -202,26 +233,27 @@ public class AppUtils {
         return list;
     }
 
-    /**
-     * @param context
-     * @param apkPath
-     */
-    public static void installApp(Context context, String apkPath) {
-        try {
-            if (context == null) {
-                new NullPointerException("param context is a  empty reference");
-                return;
+
+    public static boolean toInstallApk(Activity activity,String desFilePath) throws Exception {
+        File desFile=new File(desFilePath);
+        Intent installApkIntent = new Intent();
+        installApkIntent.setAction(Intent.ACTION_VIEW);
+        installApkIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        installApkIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            String fileProvider= AndroidManifestUtils.getFileProviderAuthority(activity);
+            if (fileProvider==null||fileProvider.isEmpty()){
+                throw new Exception("please set fileProvider in AndroidManifest");
             }
-            Intent intent = new Intent(Intent.ACTION_VIEW);
-            File file = new File(apkPath);
-            if (!file.exists()) return;
-            intent.setDataAndType(Uri.fromFile(file), "application/vnd.android.package-archive");
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
-        } catch (Exception e) {
-            Log.e("installApp: ", "" + e.getMessage());
-            e.printStackTrace();
+            installApkIntent.setDataAndType(FileProvider.getUriForFile(activity, fileProvider, desFile), "application/vnd.android.package-archive");
+            installApkIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        } else {
+            installApkIntent.setDataAndType(Uri.fromFile(desFile), "application/vnd.android.package-archive");
         }
+        if (activity.getPackageManager().queryIntentActivities(installApkIntent, 0).size() > 0) {
+            activity.startActivity(installApkIntent);
+        }
+        return true;
     }
 
 

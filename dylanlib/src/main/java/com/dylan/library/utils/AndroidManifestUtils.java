@@ -6,7 +6,6 @@ import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
 import android.util.Log;
 
-import com.dylan.library.BuildConfig;
 
 import java.util.List;
 

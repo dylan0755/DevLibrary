@@ -173,12 +173,95 @@ public class DateUtils {
     }
 
 
+    //是否为今天
+    public static boolean isToday(long desTimeStamp){
+        Date currentDate=new Date();
+        Date desDate=new Date(desTimeStamp);
+        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+        String todayTime=format.format(currentDate);
+        String desTime=format.format(desDate);
+        if (todayTime.equals(desTime)){
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    //是否为明天
+    public static boolean isTomorrow(long timeStamp){
+        Calendar todayCalendar = Calendar.getInstance();
+        Date currentDay = new Date(System.currentTimeMillis());
+        todayCalendar.setTime(currentDay);
+        Calendar tomarrowCalendar = Calendar.getInstance();
+        Date date =new Date(timeStamp);
+        tomarrowCalendar.setTime(date);
+        if (todayCalendar.get(Calendar.YEAR) == (tomarrowCalendar.get(Calendar.YEAR))) {
+            int diffDay = tomarrowCalendar.get(Calendar.DAY_OF_YEAR) - todayCalendar.get(Calendar.DAY_OF_YEAR);
+            if (diffDay ==1) {
+                return true;
+            }
+        }
+        return false;
+    }
+    //是否为后天
+    public static boolean isDayAfterTomorrow(long timeStamp){
+        Calendar todayCalendar = Calendar.getInstance();
+        Date currentDay = new Date(System.currentTimeMillis());
+        todayCalendar.setTime(currentDay);
+        Calendar desCalendar = Calendar.getInstance();
+        Date date =new Date(timeStamp);
+        desCalendar.setTime(date);
+        if (todayCalendar.get(Calendar.YEAR) == (desCalendar.get(Calendar.YEAR))) {
+            int diffDay = desCalendar.get(Calendar.DAY_OF_YEAR) - todayCalendar.get(Calendar.DAY_OF_YEAR);
+            if (diffDay ==2) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+
     //多少毫秒之后是否还是今天
     public static boolean isTodayAfterMilliSecond(long millisecond) {
         //6 小时后有没有过晚上十二点
         long afterSixHourTime = System.currentTimeMillis() + millisecond;
         return isToday(new Date(afterSixHourTime));
     }
+
+
+
+
+    public static String getYM() {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
+        Date date = new Date(System.currentTimeMillis());
+        return simpleDateFormat.format(date);
+    }
+
+
+
+    public static String getWantDateStr(String yyyMMddHHmmss, String wantFormat) {
+        if (!"".equals(yyyMMddHHmmss) && yyyMMddHHmmss != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat(wantFormat);
+            try {
+                SimpleDateFormat sdfStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = sdfStr.parse(yyyMMddHHmmss);
+                return sdf.format(date);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return "";
+    }
+
+
+
+
+
+
+
+
+
 
 
     public static List<DateTime> getAllDaysAfter(int days, boolean inCludeToday) {
