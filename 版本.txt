@@ -20,8 +20,9 @@ V3.7.0
 9.AppUtils
   1.新增 getProcessName
   2.修改 toInstallApk 动态判断 7.0 FileProvider
-
-
+10.新增 PermissionRequestBuilder add 添加 权限 并且标志该权限是否强制需要，回调中
+   isRejectForcePermissions(String[] permissions, @NonNull int[] grantResults)
+   返回 所拒绝的必须权限  不为空则退出应用
 
 
 
