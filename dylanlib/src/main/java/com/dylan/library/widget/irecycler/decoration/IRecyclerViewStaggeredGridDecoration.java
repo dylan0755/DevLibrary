@@ -1,4 +1,4 @@
-package com.dylan.library.widget.irecycler;
+package com.dylan.library.widget.irecycler.decoration;
 
 import android.content.Context;
 import android.graphics.Rect;
@@ -12,7 +12,7 @@ import android.view.View;
  * Date: 2020/3/23
  * Desc:
  */
-public class IRecyclerViewStaggeredGridDivider extends RecyclerView.ItemDecoration {
+public class IRecyclerViewStaggeredGridDecoration extends RecyclerView.ItemDecoration {
     protected int mHorizontalSpace;
     protected int mVerticalSpace;
     private boolean mIncludeEdge = true;
@@ -21,7 +21,7 @@ public class IRecyclerViewStaggeredGridDivider extends RecyclerView.ItemDecorati
 
 
 
-    public IRecyclerViewStaggeredGridDivider(Context context, int horizontalSpace, int verticalSpace, boolean hasHeaderView, boolean includeEdge) {
+    public IRecyclerViewStaggeredGridDecoration(Context context, int horizontalSpace, int verticalSpace, boolean hasHeaderView, boolean includeEdge) {
         mHorizontalSpace = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                 horizontalSpace, context.getResources().getDisplayMetrics());
 

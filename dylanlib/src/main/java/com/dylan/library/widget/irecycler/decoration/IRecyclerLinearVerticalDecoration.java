@@ -1,4 +1,4 @@
-package com.dylan.library.widget.irecycler;//
+package com.dylan.library.widget.irecycler.decoration;//
 
 
 import android.content.Context;
@@ -22,7 +22,7 @@ import android.view.View;
  */
 
 
-public class IRecyclerLinearVerticalDivider extends ItemDecoration {
+public class IRecyclerLinearVerticalDecoration extends ItemDecoration {
     public static final int HORIZONTAL = 0;
     public static final int VERTICAL = 1;
     private static final String TAG = "DividerItem";
@@ -34,7 +34,7 @@ public class IRecyclerLinearVerticalDivider extends ItemDecoration {
     private int mPaddingRightPixel;
     private boolean showBottomLine;
 
-    public IRecyclerLinearVerticalDivider(Context context, int orientation) {
+    public IRecyclerLinearVerticalDecoration(Context context, int orientation) {
         TypedArray a = context.obtainStyledAttributes(ATTRS);
         this.mDivider = a.getDrawable(0);
         if (this.mDivider == null) {

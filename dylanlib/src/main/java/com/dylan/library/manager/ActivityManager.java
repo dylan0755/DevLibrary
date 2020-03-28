@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.dylan.library.utils.Logger;
 
+import java.util.Iterator;
 import java.util.Stack;
 
 
@@ -119,6 +120,18 @@ public class ActivityManager {
             }
         }
         activityStack.clear();
+    }
+
+    public void finishAllActivityWithOut(Class clazz){
+        Iterator<Activity> iterator=activityStack.iterator();
+        while(iterator.hasNext()){
+            Activity activity=iterator.next();
+            if (activity.getClass()!=clazz){
+                activity.finish();
+                iterator.remove();
+            }
+        }
+
     }
 
 

@@ -12,7 +12,7 @@ V3.8.0
   2.增加 removeObserveSoftKeyboard  删除 decorView 绑定的 onGlobalLayoutListener
 6.新增 SystemBarHelper
 7.新增 EntityReflection  相同的两个对象，赋值给另一个
-
+8.新增 HorizontalLeftMarginDecoration 水平方向上RecyclerView第一个item 的左边距
 
 
 

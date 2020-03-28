@@ -30,7 +30,9 @@ public class EntityReflection {
                Object value = cr.invokeGetMethod(newEntity ,f1.getName(),null);
 
                if (!includeEmptyValue){
-                   if (EmptyUtils.isEmpty(value))return;
+                   if (EmptyUtils.isEmpty(value)){
+                       continue;
+                   }
                }
 
 
