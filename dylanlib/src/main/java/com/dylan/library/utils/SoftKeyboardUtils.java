@@ -3,6 +3,7 @@ package com.dylan.library.utils;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Rect;
+import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -21,7 +22,7 @@ import com.dylan.library.screen.ScreenUtils;
 public class SoftKeyboardUtils {
     public static void observeSoftKeyboard(Activity activity, final OnSoftKeyboardChangeListener listener) {
         final View decorView = activity.getWindow().getDecorView();
-        decorView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        ViewTreeObserver.OnGlobalLayoutListener onGlobalLayoutListener=  new ViewTreeObserver.OnGlobalLayoutListener() {
             int previousKeyboardHeight = -1;
             @Override
             public void onGlobalLayout() {
@@ -38,7 +39,21 @@ public class SoftKeyboardUtils {
                 previousKeyboardHeight = height;
 
             }
-        });
+        };
+        decorView.setTag(onGlobalLayoutListener);
+        decorView.getViewTreeObserver().addOnGlobalLayoutListener(onGlobalLayoutListener);
+    }
+
+
+    public static void removeObserveSoftKeyboard(Activity activity) {
+        final View decorView = activity.getWindow().getDecorView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            ViewTreeObserver.OnGlobalLayoutListener listener= (ViewTreeObserver.OnGlobalLayoutListener) decorView.getTag();
+            if (listener!=null){
+                decorView.getViewTreeObserver().removeOnGlobalLayoutListener(listener);
+            }
+
+        }
     }
 
     public interface OnSoftKeyboardChangeListener {

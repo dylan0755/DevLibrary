@@ -92,4 +92,9 @@
         <!--虚线边框间隙-->
         <attr name="dashGap" />
     </declare-styleable>
+
+
+    <!-- 沉浸式状态栏使用 -->
+    <item name="dl_status_bar_view" type="id" />
+    <item name="dl_translucent_view" type="id" />
 </resources>

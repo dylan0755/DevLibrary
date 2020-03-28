@@ -7,10 +7,11 @@ V3.8.0
 2.新增 PhotoViewShowDialog
 3.StringUtils 新增 replaceWithStarSymbol 替换为星号
 4. 新增 AmountUtils 处理金额小数点与零末尾
-
-
-
-
+5.SoftKeyboardUtils
+  1.observeSoftKeyboard 的时候 decorView.setTag 绑定 onGlobalLayoutListener
+  2.增加 removeObserveSoftKeyboard  删除 decorView 绑定的 onGlobalLayoutListener
+6.新增 SystemBarHelper
+7.新增 EntityReflection  相同的两个对象，赋值给另一个
 
 
 
