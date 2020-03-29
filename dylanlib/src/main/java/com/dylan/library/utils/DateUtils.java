@@ -345,6 +345,15 @@ public class DateUtils {
         return dateTimes;
     }
 
+
+    public static String getYMD(long dateL){
+       SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
+       return format.format(new Date(dateL));
+    }
+
+
+
+
     public static class DateTime {
 
         private String year;
