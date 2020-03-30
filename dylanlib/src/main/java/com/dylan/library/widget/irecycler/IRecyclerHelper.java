@@ -17,7 +17,6 @@ import com.dylan.library.exception.OnNextBussinesException;
 import com.dylan.library.exception.ThrowableUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.widget.CircleIndicatorView;
-import com.dylan.library.widget.irecycler.IRecyclerView;
 import com.dylan.library.widget.irecycler.footer.LoadMoreFooterView;
 import com.dylan.library.widget.irecycler.header.RefreshHeaderView;
 import com.dylan.library.widget.irecycler.paging.IRecyclerPage;
@@ -39,6 +38,7 @@ public class IRecyclerHelper {
     private RefreshHeaderView headerView;
     private LoadMoreFooterView footerView;
     private TextView tvEmptyView;
+    private View emptyView;
     private BaseRecyclerAdapter mAdapter;
     private CharSequence emptyTip = "暂无数据";
 
@@ -50,6 +50,14 @@ public class IRecyclerHelper {
     public void bind(IRecyclerView recyclerView, BaseRecyclerAdapter adapter, TextView tvEmptyView) {
         this.recyclerView = recyclerView;
         this.tvEmptyView = tvEmptyView;
+        footerView = (LoadMoreFooterView) recyclerView.getLoadMoreFooterView();
+        headerView = (RefreshHeaderView) recyclerView.getRefreshHeaderView();
+        mAdapter = adapter;
+    }
+
+    public void bind(IRecyclerView recyclerView, BaseRecyclerAdapter adapter, View emptyView) {
+        this.recyclerView = recyclerView;
+        this.emptyView = emptyView;
         footerView = (LoadMoreFooterView) recyclerView.getLoadMoreFooterView();
         headerView = (RefreshHeaderView) recyclerView.getRefreshHeaderView();
         mAdapter = adapter;
@@ -102,6 +110,7 @@ public class IRecyclerHelper {
         } else {
             if (EmptyUtils.isNotEmpty(list)) {
                 if (tvEmptyView != null) tvEmptyView.setText("");
+                if (emptyView!=null)emptyView.setVisibility(View.GONE);
                 if (pageNo == 1) {
                     mAdapter.bind(list);
                     refreshComplete(recyclerView);
@@ -121,6 +130,7 @@ public class IRecyclerHelper {
                     refreshComplete(recyclerView);
                     mAdapter.clear();
                     if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
+                    if (emptyView!=null)emptyView.setVisibility(View.VISIBLE);
                 } else {
                     setNoMore(footerView);
                 }
@@ -148,6 +158,7 @@ public class IRecyclerHelper {
         } else {
             if (EmptyUtils.isNotEmpty(list)) {
                 if (tvEmptyView != null) tvEmptyView.setText("");
+                if (emptyView!=null)emptyView.setVisibility(View.GONE);
                 if (pageNo == 1) {
                     mAdapter.bind(list);
                     refreshComplete(recyclerView);
@@ -162,6 +173,7 @@ public class IRecyclerHelper {
                     refreshComplete(recyclerView);
                     mAdapter.clear();
                     if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
+                    if (emptyView!=null)emptyView.setVisibility(View.VISIBLE);
                 } else {
                     setNoMore(footerView);
                 }
@@ -169,6 +181,8 @@ public class IRecyclerHelper {
 
         }
     }
+
+
 
 
     @Deprecated

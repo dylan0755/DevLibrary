@@ -50,8 +50,8 @@ public class PermissionRequestBuilder {
     }
 
 
-    public void startRequest(int requestCode) {
-        if (permissionRequestList==null)return;
+    public boolean startRequest(int requestCode) {
+        if (permissionRequestList==null)return false;
         Iterator<PermissionRequest> it = permissionRequestList.iterator();
         while (it.hasNext()) {
             PermissionRequest request = it.next();
@@ -67,8 +67,10 @@ public class PermissionRequestBuilder {
         if (EmptyUtils.isNotEmpty(permissionList)) {
             String[] requestPermissions = permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(mActivity, requestPermissions, requestCode);
+            return true;
         }
         mActivity = null;
+        return false;
     }
 
 

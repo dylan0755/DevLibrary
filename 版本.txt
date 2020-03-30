@@ -14,9 +14,9 @@ V3.8.0
 7.新增 EntityReflection  相同的两个对象，赋值给另一个
 8.新增 HorizontalLeftMarginDecoration 水平方向上RecyclerView第一个item 的左边距
 9.新增SmsCodeCounter 短信验证码倒计时
-
-
-
+10.IRecyclerHelper 支持 空占位图
+11.  PermissionRequestBuilder startRequest 返回是否开启申请成功
+12.新增 AppSpManager 全局SharePreference , 在 Application 中初始化 就可以直接使用 AppSpManager.putString(String key,String value);
 
 
 
