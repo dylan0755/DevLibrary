@@ -94,6 +94,18 @@
     </declare-styleable>
 
 
+    <declare-styleable name="DLDrawableTextView">
+            <attr name="drawableLeftWidth" format="dimension"/>
+            <attr name="drawableLeftHeight" format="dimension"/>
+            <attr name="drawableTopWidth" format="dimension"/>
+            <attr name="drawableTopHeight" format="dimension"/>
+            <attr name="drawableRightWidth" format="dimension"/>
+            <attr name="drawableRightHeight" format="dimension"/>
+            <attr name="drawableBottomWidth" format="dimension"/>
+            <attr name="drawableBottomHeight" format="dimension"/>
+    </declare-styleable>
+
+
     <!-- 沉浸式状态栏使用 -->
     <item name="dl_status_bar_view" type="id" />
     <item name="dl_translucent_view" type="id" />

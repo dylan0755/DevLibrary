@@ -1,7 +1,22 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V3.8.0
+
+V3.9.0
+
+1.SearchTool  重命名为 SearchHelper ，调整部分代码
+2.新增 DrawableTextView， 控制 左上右下 的 drawable 宽高
+
+
+
+
+
+
+
+
+
+
+V3.8.0  ---->2020.03.30
 
 1.新增 IRecyclerPage   分页类， 重载 afterGetData(boolean isError, Throwable throwable, IRecyclerPage page)
 2.新增 PhotoViewShowDialog
