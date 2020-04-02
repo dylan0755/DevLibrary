@@ -11,6 +11,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.content.FileProvider;
 import android.text.TextUtils;
 import android.util.Log;
@@ -176,54 +177,6 @@ public class AppUtils {
         }
     }
 
-    /**
-     * 跳到权限设置页面
-     */
-    public static void gotoPermission(Context context) {
-        if (context == null) return;
-        try {
-            if (RomUtils.isFlyme()) {
-                Intent intent = new Intent("com.meizu.safe.security.SHOW_APPSEC");
-                intent.addCategory(Intent.CATEGORY_DEFAULT);
-                intent.putExtra("packageName", context.getPackageName());
-                context.startActivity(intent);
-                return;
-            } else if (RomUtils.isMiui()) {
-                Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
-                ComponentName componentName = new ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
-                intent.setComponent(componentName);
-                intent.putExtra("extra_pkgname", context.getPackageName());
-                context.startActivity(intent);
-                return;
-            } else if (RomUtils.isEmui()) {
-                Intent intent = new Intent();
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                intent.putExtra("packageName", context.getPackageName());
-                ComponentName comp = new ComponentName("com.huawei.systemmanager", "com.huawei.permissionmanager.ui.MainActivity");
-                intent.setComponent(comp);
-                context.startActivity(intent);
-                return;
-            }
-        } catch (Exception e) {
-            gotoApplicationSetting(context);
-            return;
-        }
-        gotoApplicationSetting(context);
-    }
-
-    /**
-     * 跳到应用信息页面
-     *
-     * @param context
-     */
-    public static void gotoApplicationSetting(Context context) {
-        Intent i = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
-        String pkg = "com.android.settings";
-        String cls = "com.android.settings.applications.InstalledAppDetails";
-        i.setComponent(new ComponentName(pkg, cls));
-        i.setData(Uri.parse("package:" + context.getPackageName()));
-        context.startActivity(i);
-    }
 
 
     public List<PackageInfo> getALLInstallApp(Context context) {
@@ -234,27 +187,7 @@ public class AppUtils {
     }
 
 
-    public static boolean toInstallApk(Activity activity,String desFilePath) throws Exception {
-        File desFile=new File(desFilePath);
-        Intent installApkIntent = new Intent();
-        installApkIntent.setAction(Intent.ACTION_VIEW);
-        installApkIntent.addCategory(Intent.CATEGORY_DEFAULT);
-        installApkIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            String fileProvider= AndroidManifestUtils.getFileProviderAuthority(activity);
-            if (fileProvider==null||fileProvider.isEmpty()){
-                throw new Exception("please set fileProvider in AndroidManifest");
-            }
-            installApkIntent.setDataAndType(FileProvider.getUriForFile(activity, fileProvider, desFile), "application/vnd.android.package-archive");
-            installApkIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        } else {
-            installApkIntent.setDataAndType(Uri.fromFile(desFile), "application/vnd.android.package-archive");
-        }
-        if (activity.getPackageManager().queryIntentActivities(installApkIntent, 0).size() > 0) {
-            activity.startActivity(installApkIntent);
-        }
-        return true;
-    }
+
 
 
     public static void unInstallApp(Context context, String packageName) {
@@ -319,6 +252,84 @@ public class AppUtils {
         if (context == null) return;
         if (uri == null) return;
         context.startActivity(IntentUtils.getShareVideoIntent(uri));
+    }
+
+
+    public static boolean gotoInstallApk(Activity activity, String desFilePath) throws Exception {
+        File desFile=new File(desFilePath);
+        Intent installApkIntent = new Intent();
+        installApkIntent.setAction(Intent.ACTION_VIEW);
+        installApkIntent.addCategory(Intent.CATEGORY_DEFAULT);
+        installApkIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
+            String fileProvider= AndroidManifestUtils.getFileProviderAuthority(activity);
+            if (fileProvider==null||fileProvider.isEmpty()){
+                throw new Exception("please set fileProvider in AndroidManifest");
+            }
+            installApkIntent.setDataAndType(FileProvider.getUriForFile(activity, fileProvider, desFile), "application/vnd.android.package-archive");
+            installApkIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        } else {
+            installApkIntent.setDataAndType(Uri.fromFile(desFile), "application/vnd.android.package-archive");
+        }
+        if (activity.getPackageManager().queryIntentActivities(installApkIntent, 0).size() > 0) {
+            activity.startActivity(installApkIntent);
+        }
+        return true;
+    }
+
+
+    /**
+     * 跳到权限设置页面
+     */
+    public static void gotoPermission(Context context) {
+        if (context == null) return;
+        try {
+            if (RomUtils.isFlyme()) {
+                Intent intent = new Intent("com.meizu.safe.security.SHOW_APPSEC");
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                intent.putExtra("packageName", context.getPackageName());
+                context.startActivity(intent);
+                return;
+            } else if (RomUtils.isMiui()) {
+                Intent intent = new Intent("miui.intent.action.APP_PERM_EDITOR");
+                ComponentName componentName = new ComponentName("com.miui.securitycenter", "com.miui.permcenter.permissions.AppPermissionsEditorActivity");
+                intent.setComponent(componentName);
+                intent.putExtra("extra_pkgname", context.getPackageName());
+                context.startActivity(intent);
+                return;
+            } else if (RomUtils.isEmui()) {
+                Intent intent = new Intent();
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                intent.putExtra("packageName", context.getPackageName());
+                ComponentName comp = new ComponentName("com.huawei.systemmanager", "com.huawei.permissionmanager.ui.MainActivity");
+                intent.setComponent(comp);
+                context.startActivity(intent);
+                return;
+            }
+        } catch (Exception e) {
+            gotoApplicationSetting(context);
+            return;
+        }
+        gotoApplicationSetting(context);
+    }
+
+    /**
+     * 跳到应用信息页面
+     *
+     * @param context
+     */
+    public static void gotoApplicationSetting(Context context) {
+        Intent i = new Intent("android.settings.APPLICATION_DETAILS_SETTINGS");
+        String pkg = "com.android.settings";
+        String cls = "com.android.settings.applications.InstalledAppDetails";
+        i.setComponent(new ComponentName(pkg, cls));
+        i.setData(Uri.parse("package:" + context.getPackageName()));
+        context.startActivity(i);
+    }
+
+    public static void gotoOpenLocationService(Context context){
+        Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        context.startActivity(intent);
     }
 
 }

@@ -6,11 +6,11 @@ V3.9.0
 
 1.SearchTool  重命名为 SearchHelper ，调整部分代码
 2.新增 DrawableTextView， 控制 左上右下 的 drawable 宽高
-
-
-
-
-
+3.DateUtils
+ 1.增加 获取当前日期 getCurrentDateTime
+ 2.getWantDateString 增加抛出异常处理
+4.SystemSettings 新增 isGpsLocationServiceEnable 判断GPS服务是否开启
+5.AppUtils 新增 gotoOpenLocationService 打开位置服务
 
 
 

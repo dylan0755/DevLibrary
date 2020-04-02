@@ -51,7 +51,7 @@ public class AutoInstallActivity extends Activity {
                     FileUtils.copyAssets2SDcard(AutoInstallActivity.this,"UtoVRPlayerDemo_1.0.apk",INSTALL_PATH);
 
                 try {
-                    AppUtils.toInstallApk(AutoInstallActivity.this,INSTALL_PATH);
+                    AppUtils.gotoInstallApk(AutoInstallActivity.this,INSTALL_PATH);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

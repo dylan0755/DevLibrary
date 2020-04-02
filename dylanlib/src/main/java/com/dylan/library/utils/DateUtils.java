@@ -37,11 +37,11 @@ public class DateUtils {
     }
 
 
-    public static long parseYMDHM(String dateStr){
+    public static long parseYMDHM(String dateStr) {
         String formatText = "yyyy-MM-dd HH:mm";
         SimpleDateFormat dateFormat = new SimpleDateFormat(formatText);
         try {
-            long selectTime= dateFormat.parse(dateStr).getTime();
+            long selectTime = dateFormat.parse(dateStr).getTime();
             return selectTime;
         } catch (ParseException e) {
             e.printStackTrace();
@@ -50,11 +50,11 @@ public class DateUtils {
     }
 
 
-    public static long parseYMDHMS(String dateStr){
+    public static long parseYMDHMS(String dateStr) {
         String formatText = "yyyy-MM-dd HH:mm:ss";
         SimpleDateFormat dateFormat = new SimpleDateFormat(formatText);
         try {
-            long selectTime= dateFormat.parse(dateStr).getTime();
+            long selectTime = dateFormat.parse(dateStr).getTime();
             return selectTime;
         } catch (ParseException e) {
             e.printStackTrace();
@@ -78,19 +78,18 @@ public class DateUtils {
 
 
     public static String getYear() {
-        Date date=new Date();
-        return String.format("%tY",date);
+        Date date = new Date();
+        return String.format("%tY", date);
     }
 
     public static String getMonth() {
-        Date date=new Date();
-        return  String.format("%tm", date);// 获取当前月份
+        Date date = new Date();
+        return String.format("%tm", date);// 获取当前月份
     }
 
 
-
     public static String getDayOfMonth() {
-        Date date=new Date();
+        Date date = new Date();
         return String.format("%td", date);
 
     }
@@ -205,52 +204,52 @@ public class DateUtils {
 
 
     //是否为今天
-    public static boolean isToday(long desTimeStamp){
-        Date currentDate=new Date();
-        Date desDate=new Date(desTimeStamp);
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-        String todayTime=format.format(currentDate);
-        String desTime=format.format(desDate);
-        if (todayTime.equals(desTime)){
+    public static boolean isToday(long desTimeStamp) {
+        Date currentDate = new Date();
+        Date desDate = new Date(desTimeStamp);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        String todayTime = format.format(currentDate);
+        String desTime = format.format(desDate);
+        if (todayTime.equals(desTime)) {
             return true;
-        }else{
+        } else {
             return false;
         }
     }
 
     //是否为明天
-    public static boolean isTomorrow(long timeStamp){
+    public static boolean isTomorrow(long timeStamp) {
         Calendar todayCalendar = Calendar.getInstance();
         Date currentDay = new Date(System.currentTimeMillis());
         todayCalendar.setTime(currentDay);
         Calendar tomarrowCalendar = Calendar.getInstance();
-        Date date =new Date(timeStamp);
+        Date date = new Date(timeStamp);
         tomarrowCalendar.setTime(date);
         if (todayCalendar.get(Calendar.YEAR) == (tomarrowCalendar.get(Calendar.YEAR))) {
             int diffDay = tomarrowCalendar.get(Calendar.DAY_OF_YEAR) - todayCalendar.get(Calendar.DAY_OF_YEAR);
-            if (diffDay ==1) {
-                return true;
-            }
-        }
-        return false;
-    }
-    //是否为后天
-    public static boolean isDayAfterTomorrow(long timeStamp){
-        Calendar todayCalendar = Calendar.getInstance();
-        Date currentDay = new Date(System.currentTimeMillis());
-        todayCalendar.setTime(currentDay);
-        Calendar desCalendar = Calendar.getInstance();
-        Date date =new Date(timeStamp);
-        desCalendar.setTime(date);
-        if (todayCalendar.get(Calendar.YEAR) == (desCalendar.get(Calendar.YEAR))) {
-            int diffDay = desCalendar.get(Calendar.DAY_OF_YEAR) - todayCalendar.get(Calendar.DAY_OF_YEAR);
-            if (diffDay ==2) {
+            if (diffDay == 1) {
                 return true;
             }
         }
         return false;
     }
 
+    //是否为后天
+    public static boolean isDayAfterTomorrow(long timeStamp) {
+        Calendar todayCalendar = Calendar.getInstance();
+        Date currentDay = new Date(System.currentTimeMillis());
+        todayCalendar.setTime(currentDay);
+        Calendar desCalendar = Calendar.getInstance();
+        Date date = new Date(timeStamp);
+        desCalendar.setTime(date);
+        if (todayCalendar.get(Calendar.YEAR) == (desCalendar.get(Calendar.YEAR))) {
+            int diffDay = desCalendar.get(Calendar.DAY_OF_YEAR) - todayCalendar.get(Calendar.DAY_OF_YEAR);
+            if (diffDay == 2) {
+                return true;
+            }
+        }
+        return false;
+    }
 
 
     //多少毫秒之后是否还是今天
@@ -261,16 +260,22 @@ public class DateUtils {
     }
 
 
-
-
     public static String getYM() {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM");
         Date date = new Date(System.currentTimeMillis());
         return simpleDateFormat.format(date);
     }
 
+    public static String getWantDateString(String yyyMMddHHmmss, String wantFormat) throws ParseException {
+        if (yyyMMddHHmmss == null || "".equals(yyyMMddHHmmss)) return yyyMMddHHmmss;
+        SimpleDateFormat sdf = new SimpleDateFormat(wantFormat);
+        SimpleDateFormat sdfStr = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = sdfStr.parse(yyyMMddHHmmss);
+        return sdf.format(date);
+    }
 
 
+    @Deprecated
     public static String getWantDateStr(String yyyMMddHHmmss, String wantFormat) {
         if (!"".equals(yyyMMddHHmmss) && yyyMMddHHmmss != null) {
             SimpleDateFormat sdf = new SimpleDateFormat(wantFormat);
@@ -286,13 +291,53 @@ public class DateUtils {
     }
 
 
+    public static DateTime getCurrentDateTime() {
+        //今天的日期
+        Date todayDate = new Date();
+        String todayYear = String.format("%tY", todayDate);
+        String todayMonth = String.format("%tm", todayDate);
+        String todayDay = String.format("%td", todayDate);
+
+        //明天的日期
+        Date tomorrowDate = getDateByDaysAfter(1);
+        String tomorrowYear = String.format("%tY", tomorrowDate);
+        String tomorrowMonth = String.format("%tm", tomorrowDate);
+        String tomorrowDay = String.format("%td", tomorrowDate);
 
 
+        SimpleDateFormat sim = new SimpleDateFormat("yyyy-MM-dd");
 
 
+        Date date = new Date(System.currentTimeMillis());
+        DateTime time = new DateTime();
+        String year = String.format("%tY", date);// 获取当前年份
+        String month = String.format("%tm", date);// 获取当前月份
+        String day = String.format("%td", date);// 获取当前日份的日期号码
+        String house = String.format("%tH", date);
+        String minute = String.format("%tM", date);
+        String second = String.format("%tS", date);
+
+        String dateString = sim.format(date);
+        String week = getWeek(dateString);
+
+        if (todayYear.equals(year) && todayMonth.equals(month) && todayDay.equals(day)) {
+            time.setIsToday(true);
+        } else if (tomorrowYear.equals(year) && tomorrowMonth.equals(month) && tomorrowDay.equals(day)) {
+            time.setIsTomorrow(true);
+        }
 
 
+        time.setDayInWeek(week);
+        time.setYear(year);
+        time.setMonth(month);
+        time.setDay(day);
+        time.setHour(house);
+        time.setMinute(minute);
+        time.setSecond(second);
 
+
+        return time;
+    }
 
 
     public static List<DateTime> getAllDaysAfter(int days, boolean inCludeToday) {
@@ -346,15 +391,15 @@ public class DateUtils {
     }
 
 
-    public static String getYMD(long dateL){
-       SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd");
-       return format.format(new Date(dateL));
-    }
-    public static String getYMDHHmm(long dateL){
-        SimpleDateFormat format=new SimpleDateFormat("yyyy-MM-dd  HH:mm");
+    public static String getYMD(long dateL) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
         return format.format(new Date(dateL));
     }
 
+    public static String getYMDHHmm(long dateL) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
+        return format.format(new Date(dateL));
+    }
 
 
     public static class DateTime {
