@@ -73,6 +73,7 @@ public class PhotoView extends AppCompatImageView {
     private GestureDetector mGestureDetector;
 
     private FlingRunnable mFlingRunnable;
+    private boolean isLock;
 
 
     public PhotoView(Context context) {
@@ -186,8 +187,18 @@ public class PhotoView extends AppCompatImageView {
     }
 
 
+    public void lock(){
+          isLock=true;
+    }
+
+    public void unLokc(){
+        isLock=false;
+    }
+
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
+
         interceptEventIfIsZoomIn();
 
         switch (event.getAction() & MotionEvent.ACTION_MASK) {
@@ -203,6 +214,7 @@ public class PhotoView extends AppCompatImageView {
                 currentHeight = rectF.height();
                 break;
             case MotionEvent.ACTION_POINTER_DOWN:
+                if (isLock)return super.onTouchEvent(event);
                 getParent().requestDisallowInterceptTouchEvent(true);
                 //如果动画还在继续，则一步到位，结束动画，防止快速操作
                 if (mAnimator != null && mAnimator.isRunning()) mAnimator.end();
@@ -214,6 +226,7 @@ public class PhotoView extends AppCompatImageView {
                 }
                 break;
             case MotionEvent.ACTION_MOVE:
+                if (isLock)return super.onTouchEvent(event);
                 if (mBitmap == null) return true;
                 if (event.getPointerCount() > 2) return true;
                 mFlingRunnable.addMovement(event);
@@ -236,11 +249,12 @@ public class PhotoView extends AppCompatImageView {
                 }
                 break;
             case MotionEvent.ACTION_POINTER_UP:  //图片的回弹
+                if (isLock)return super.onTouchEvent(event);
                 //双指抬起的时候若缩小至最小宽高，则恢复到最初大小
                 if (currentWidth < showRangeWidth || currentHeight <= showRangeHeight) {
                     autoReboundWhilePointerUp(0, new PointF(viewWidth / 2, viewHeight / 2));
                 }
-                //双指抬起的时候若超过最大宽高则缩至最大宽高
+                //双指抬起的时候若当前宽高都超过最大则恢复到最大
                 if (currentWidth > maxWidth && currentHeight > maxHeight) {
                     autoReboundWhilePointerUp(1, mMidPoint);
                 }

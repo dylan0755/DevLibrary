@@ -40,6 +40,16 @@ import java.util.zip.ZipFile;
 
 public class FileUtils {
 
+    public static boolean isPicture(String fileNameOrPath){
+        String suffix = fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".") + 1).toLowerCase();
+        if (suffix.equals("jpg") || suffix.equals("png")
+                || suffix.equals("jpeg") || suffix.equals("gif")) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
 
     public static boolean isExists(String path) {
         return new File(path).exists();

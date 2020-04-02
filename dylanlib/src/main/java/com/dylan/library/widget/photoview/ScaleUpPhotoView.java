@@ -57,6 +57,7 @@ public class ScaleUpPhotoView extends PhotoView {
     }
     @Override
     protected void onMatrixWhileSettingBitmap(Bitmap bm) {
+        //是否自己调用动画
         if (onPrepareMatrixListener!=null&&bm!=null){
             onPrepareMatrixListener.prepareMatrix(this,bm);
         }
@@ -205,6 +206,10 @@ public class ScaleUpPhotoView extends PhotoView {
         }
         //当前的位置信息
         PointF[] pointFS = MatrixUtils.getLocation(mMatrix, getBitmap());
+        if (pointFS==null){
+            if (listener!=null)listener.onAnimationEnd(null);
+            return false;
+        }
         float fromX = pointFS[0].x;
         float fromY = pointFS[0].y;
         final float fromWidth = pointFS[1].x - pointFS[0].x;
