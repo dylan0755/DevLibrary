@@ -5,12 +5,15 @@ import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dylan.library.proguard.NotProguard;
+
 /**
  * Author: Dylan
  * Date: 2020/2/28
  * Desc:
  */
 public abstract class PrimaryPagerAdapter extends PagerAdapter {
+    @NotProguard
     protected PrimaryItem primaryItem;
     @Override
     public void setPrimaryItem(@NonNull ViewGroup container, int position, @NonNull Object object) {

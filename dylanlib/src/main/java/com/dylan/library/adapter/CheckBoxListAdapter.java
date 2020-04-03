@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 public abstract  class CheckBoxListAdapter<T,VH extends CommonBaseAdapter.ViewHolder> extends CommonBaseAdapter<T,VH> {
     private HashMap<Integer, Boolean> checkMap;
+
     public CheckBoxListAdapter(){
         checkMap  = new HashMap<>();
     }

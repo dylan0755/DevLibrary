@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.utils.Logger;
 
 import java.lang.reflect.Constructor;
@@ -23,6 +24,7 @@ import java.util.List;
  */
 
 public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewHolder> extends RecyclerView.Adapter {
+    @NotProguard
     protected Context mContext;
     private LayoutInflater mInflater;
    private List<T> mDataList;

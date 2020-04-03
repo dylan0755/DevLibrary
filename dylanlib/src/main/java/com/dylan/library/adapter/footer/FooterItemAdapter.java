@@ -7,6 +7,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.widget.RefreshRecyclerView;
 
 import java.util.List;
@@ -19,6 +21,7 @@ import java.util.List;
 public abstract class FooterItemAdapter<T, VH extends RecyclerItemViewHolder> extends RecyclerView.Adapter {
     public static final int TYPE_ITEM = 10; //普通数据item
     public static final int TYPE_FOOTER = 11; //footer item
+    @NotProguard
     protected Context context;
     private LayoutInflater mInflater;
     private RefreshRecyclerView mRecyclerView;

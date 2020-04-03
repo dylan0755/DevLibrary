@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 
+import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.utils.Logger;
 
 import java.lang.reflect.Constructor;
@@ -23,10 +24,11 @@ import java.util.List;
  */
 
 public abstract class CommonBaseAdapter<T, VH extends CommonBaseAdapter.ViewHolder> extends BaseAdapter {
-    private Context mContext;
-    protected LayoutInflater mInflater;
-    protected List<T> dataList;
-    protected SimpleDateFormat mDateFormatter;
+    @NotProguard
+    protected Context mContext;
+    private LayoutInflater mInflater;
+    private List<T> dataList;
+    private SimpleDateFormat mDateFormatter;
     private Constructor<VH> mSubConstrutor;
 
 

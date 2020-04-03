@@ -14,9 +14,19 @@ V3.9.0
 6.PhotoView 增加 lock 和 unlock 方法， 锁住之后 无法进行触摸移动和缩放  修复ScaleUpPhotoView 在没有图片的时候退出动画闪退问题
 7.FileUtils 增加 isPicture
 8.新增 IRecyclerViewGridDecoration2 IRecyclerViewStaggeredGridDecoration2 边缘 和 中间分隔的大小分开设置
-
-
-
+9.新增 NotProguard  被 NotProguard 注解标记过的 类，属性，方法则不被混淆
+  (1) 整个类不混淆
+  @NotProguard
+  public class User {}
+  (2) 单个属性不混淆
+  @NotProguard
+  public int id;
+  (3) 单个方法不混淆
+  @NotProguard
+  public boolean isValid() {
+  …
+  }
+10.对若干类 public  protected 属性改成 private,方便针对 private 进行混淆
 
 
 
