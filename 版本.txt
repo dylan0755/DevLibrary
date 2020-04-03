@@ -13,7 +13,7 @@ V3.9.0
 5.AppUtils 新增 gotoOpenLocationService 打开位置服务
 6.PhotoView 增加 lock 和 unlock 方法， 锁住之后 无法进行触摸移动和缩放  修复ScaleUpPhotoView 在没有图片的时候退出动画闪退问题
 7.FileUtils 增加 isPicture
-
+8.新增 IRecyclerViewGridDecoration2 IRecyclerViewStaggeredGridDecoration2 边缘 和 中间分隔的大小分开设置
 
 
 
