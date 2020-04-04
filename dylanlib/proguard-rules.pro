@@ -293,83 +293,104 @@
 #module中除了widget包进行混淆，其它包中的类不进行混淆
 
 -keep class com.dylan.library.adapter.**{
-     public *;
+      public *;
+      protected *;
 }
 -keep class com.dylan.library.bean.** {
       public *;
+      protected *;
  }
 
  -keep class com.dylan.library.callback.** {
-       public *;
+      public *;
+      protected *;
   }
 
 -keep class com.dylan.library.device.** {
       public *;
+      protected *;
 }
 
 -keep class com.dylan.library.dialog.** {
       public *;
+      protected *;
 }
 
 
 -keep class com.dylan.library.exception.** {
-     public *;
+      public *;
+      protected *;
 }
 
 -keep class com.dylan.library.fragment.** {
       public *;
+      protected *;
 }
 
 -keep class com.dylan.library.graphics.** {
-     public *;
+      public *;
+      protected *;
 }
 
 -keep class com.dylan.library.io.** {
-     public *;
+      public *;
+      protected *;
 }
 
 -keep class com.dylan.library.manager.** {
-     public *;
+      public *;
+      protected *;
 }
 -keep class com.dylan.library.media.** {
       public *;
+      protected *;
 }
 
 -keep class com.dylan.library.net.** {
-     public *;
+      public *;
+      protected *;
 }
 -keep class com.dylan.library.preferecen.** {
       public *;
+      protected *;
 }
 
 -keep class com.dylan.library.proguard.** {
       public *;
+      protected *;
 }
 
 
 -keep class com.dylan.library.screen.** {
-     public *;
+      public *;
+      protected *;
 }
 
 -keep class com.dylan.library.search.** {
       public *;
+      protected *;
 }
 
 -keep class com.dylan.library.service.** {
-     public *;
+      public *;
+      protected *;
 }
 -keep class com.dylan.library.widget.tab.** {
       public *;
+      protected *;
 }
 
 -keep class com.dylan.library.test.** {
       public *;
+      protected *;
 }
 -keep class com.dylan.library.utils.** {
       public *;
+      protected *;
 }
 -keep class com.dylan.library.webview.** {
       public *;
+      protected *;
 }
 
 
