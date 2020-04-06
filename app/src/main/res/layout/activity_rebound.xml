@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <Button
+        android:id="@+id/btnNormal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="普通布局"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="180dp"/>
+
+    <Button
+        android:id="@+id/btnRv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ReboundRecyclerView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnSv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ReboundScrollView"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnLv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="ReboundListView"
+        android:layout_marginTop="16dp"/>
+
+    <Button
+        android:id="@+id/btnVPager"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="ReboundViewPager"
+        android:layout_marginTop="16dp"/>
+</LinearLayout>

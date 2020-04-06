@@ -1,0 +1,485 @@
+
+*** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
+
+
+V4.0.0
+1.ExpandableListItemLayout 重名为 ListItemExpandableLayout  剔除 ListItemWrapperLayout
+2.StringUtils 新增 dealNumericValue， 当用String 表示数量和金额， 会出现为null,或者小数点后面有多个0 的问题
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+V3.9.0 ---->2020.04.04
+
+1.SearchTool  重命名为 SearchHelper ，调整部分代码
+2.新增 DrawableTextView， 控制 左上右下 的 drawable 宽高
+3.DateUtils
+ 1.增加 获取当前日期 getCurrentDateTime
+ 2.getWantDateString 增加抛出异常处理
+4.SystemSettings 新增 isGpsLocationServiceEnable 判断GPS服务是否开启
+5.AppUtils 新增 gotoOpenLocationService 打开位置服务
+6.PhotoView 增加 lock 和 unlock 方法， 锁住之后 无法进行触摸移动和缩放  修复ScaleUpPhotoView 在没有图片的时候退出动画闪退问题
+7.FileUtils 增加 isPicture
+8.新增 IRecyclerViewGridDecoration2 IRecyclerViewStaggeredGridDecoration2 边缘 和 中间分隔的大小分开设置
+9.新增 NotProguard  被 NotProguard 注解标记过的 类，属性，方法则不被混淆
+  (1) 整个类不混淆
+  @NotProguard
+  public class User {}
+  (2) 单个属性不混淆
+  @NotProguard
+  public int id;
+  (3) 单个方法不混淆
+  @NotProguard
+  public boolean isValid() {
+  …
+  }
+10.对若干类 public  protected 属性改成 private,方便针对 private 进行混淆
+
+
+
+
+
+V3.8.0  ---->2020.03.30
+
+1.新增 IRecyclerPage   分页类， 重载 afterGetData(boolean isError, Throwable throwable, IRecyclerPage page)
+2.新增 PhotoViewShowDialog
+3.StringUtils 新增 replaceWithStarSymbol 替换为星号
+4. 新增 AmountUtils 处理金额小数点与零末尾
+5.SoftKeyboardUtils
+  1.observeSoftKeyboard 的时候 decorView.setTag 绑定 onGlobalLayoutListener
+  2.增加 removeObserveSoftKeyboard  删除 decorView 绑定的 onGlobalLayoutListener
+6.新增 SystemBarHelper
+7.新增 EntityReflection  相同的两个对象，赋值给另一个
+8.新增 HorizontalLeftMarginDecoration 水平方向上RecyclerView第一个item 的左边距
+9.新增SmsCodeCounter 短信验证码倒计时
+10.IRecyclerHelper 支持 空占位图
+11.  PermissionRequestBuilder startRequest 返回是否开启申请成功
+12.新增 AppSpManager 全局SharePreference , 在 Application 中初始化 就可以直接使用 AppSpManager.putString(String key,String value);
+
+
+
+
+
+
+V3.7.0 ---->2020.03.27
+
+1.SoftKeyboardUtils 新增 adustScrollView(final ScrollView scrollView, final int originalBottomMargin) 解决键盘弹起遮挡输入框 问题
+2.新增 ViewUtils isOnBottom  isOnTop  isOnRight isOnLeft
+3.DateUtils
+  1.isToday(Date paramDate)
+  2.isTomorrow(Date paramDate)
+  3.getAllDaysAfter(int days,boolean inCludeToday) //获取多少天后的
+  4.isTodayAfterMilliSecond  判断多少毫秒之后是否为今天
+
+4.notifyItemRangeChanged(list) 局部更新，应用场景 瀑布流，内部封装position 与范围
+5.新增 IRecyclerViewStaggeredGridDivider 瀑布流分割条
+6.IRecyclerHelper 新增 invalidateSpanAssignments 处理瀑布流顶部空白问题
+7.新增 DrawableUtils resetShapeColor 更改 shape 的颜色
+8.新增 ShapeTextView
+9.AppUtils
+  1.新增 getProcessName
+  2.修改 toInstallApk 动态判断 7.0 FileProvider
+10.新增 PermissionRequestBuilder add 添加 权限 并且标志该权限是否强制需要，回调中
+   isRejectForcePermissions(String[] permissions, @NonNull int[] grantResults)
+   返回 所拒绝的必须权限  不为空则退出应用
+
+
+
+
+
+V3.6.0 ---->2020.03.24
+
+1.修复PhotoView 不能正常预览长截图bug
+2.原LazyFragment 更名为 LazyFragmentBase,重新新建LazyFragment
+3. 原包名下的tag 目录 移动到widget中， DLTabLayout 更名为 HorizontalScrollTabLayout并优化滚动体验
+4.DensityUtils 新增 setCustomDensity(Activity activity, final Application application) 适配屏幕
+   在Activity onCreate 中使用，
+5.EdiTextUtils 增加 软键盘右下角按键文本更改和点击监听    addSearchAction  addSendAction addDoneAction
+6.FileUtils 新增 getStringFromInputStream inputStream 转字符串
+7.HorizontalScrollTabLayout Tab 增加加粗，增加 setIndicatorLeftMargin
+8.新增 Symbol 类，符号类， 如人民币符号
+9.修复侧滑删除类 点击删除无效果bug
+10. CollectionsUtils 新增 createEntityList(MyPublishDemand.class,8)，返回指定的bean 集合，方便测试
+11.修复PhotoView 从最大缩小 有自动弹到最大bug
+12.新增 IRecyclerViewGridDivider   rvMain.addItemDecoration(new IRecycleViewGridDivider(36,
+                                               true,true));
+13.IRecyclerHelper isCanLoadMore  中增加StaggeredGridLayoutManager 判断
+14.新增 IndicatorSwitcher  圆点指示器 切换器
+15.新增 NormalTabSwitcher  普通的几个按钮之间的切换
+
+
+
+
+V3.5.0 ---->2020.03.01
+
+1.增加MediaStoreLoader  ，MediaStoreFile,  查找输出MediaStoreFile.
+2.FileUtils
+ (1).移除 MediaStore 相关文件操作，交给MediaStoreLoader 管理。
+ (2).getAllTSFilePath  getTSFileDirPath  两个方法，  delete方法判断如果是删除m3u8，则会删除ts文件
+ (3).sortASC(List<File> fileList)升序排序  sortDESC(List<File> fileList) 降序排序
+
+3. 拖拽回弹组件增加 ReboundViewPager
+4.MediaStoreLoader 增加 getPictureDirectoryFromImageStore 返回 List<PictureDirectory> 图片文件夹集合
+5.widget 目录新增PhotoView 模块,原widget 下的PhotoView 迁移到该目录
+    (1)PhotoView 新增支持惯性滚动
+    (2).setMatrixBitmap 重命名为 onMatrixWhileSettingBitmap  表示当 setBitmap 的时候会回调
+    (3).移除 OnFirstImageMatrixListener 类  ,原先 OnFirstImageMatrixListener 中的 preMatrix()
+        是回调 当设置setBitmap时 设置Matrix 操作的， 避免在 preMatrix 写逻辑 从而保持PhotoView 的完整性，
+        要实现逻辑  则重写 (1) 中的 onMatrixWhileSettingBitmap
+
+6.BitmapHelper 新增 readBitmapDegree 读取图片角度  rotateToDegrees 旋转图片
+7.增加ExifHelper ，  getExifInfo(String path) 返回 Exif 详情
+8.新增ImageLoader
+9.MatrixUtils 更新
+10.新增 GridListViewUtils getChildAt(AbsListView view, int position)
+    ListView或GridView 直接getChildAt 返回的是当前可见数量的第几个，
+    所以争取的获取方法是 position-view.getFirstVisiblePosition()
+
+11.新增 PrimaryPagerAdapter ， 通过 PrimaryItem primaryItem= adapter.getPrimaryItem();
+    primaryItem.object, 或者 adapter.getPrimaryItemObject()
+12.新增ScaleUpPhotoView  从点击处扩大到指定位置，场景：图片放大浏览
+
+
+
+
+
+
+V3.4.0 ---->2020.02.25
+
+1.BitmapHelper 修复 getInSampleSizeBitmap  造成内存溢出bug.
+2.增加ImageViewUtils,增加主线程内设置图片，动态获取宽高。
+3.SDCacheDir 标注过期，使用ExternalStorageDir 新类，增加getPackageNameDir 获取报名目录
+4.BitmapHelper 更新：
+ (1). 增加 centerCrop  配合 ImageView xml 中的scaleType centerCrop
+ (2). 增加 centerCropRoundCorner   centerCrop 模式下再进行圆角
+ (3). 优化 原有 transformRoundCorner  transformRoundCornerWithBorder，outPutWidth 和 outPutHeight 必须显示指定
+ (4). 增加 logWidthHeight,打印宽高
+5.增加ArrayUtils  getStringByArray(Object o),printArray(Object o)  转字符串，输出
+6.Logger
+ (1).增加 数组判断并输出数组
+ (2).判断如果是List,输出长度和 数组形式输出
+ (3).增加Bitmap 判断，输出宽高
+7.StringUtils
+ (1).增加 trim方法，支持全角空格去除，原生字符串的trim() 只能去除首尾半角空格
+ (2).字符串和Unicode码互转
+
+8.FileUtils
+ (1).getFileSuffixFromPath  获取文件名后缀
+ (2).getFileNameWithoutSuffix  获取不带后缀的文件名
+
+9. SpannableStringUtils 多个函数更名，方便调用
+ (1).setAbsoluteSizeSpan 更名为 getAbsoluteSizeSpannableString
+ (2).convertBlodStyle 更名为 getBlodStyleSpannableString
+ (3).setTint 更名为 getTintSpannableString
+ (4). tintResize  更名为 getTintResizeSpannableString
+ (5). tintResizeBold 更名为 getTintResizeBoldSpannableString
+ (6).setClickTintResizeSpanStr  接收颜色  字符串改成  int
+
+10. MediaTools 增加 getDurationMinuteFormat   getDurationHourFormat
+11.新增 CompatLineTextView 类， 处理字符串中有小数点和英文出现异常换行的情况，支持 maxLine 限制
+12.AppUtils 新增 shareVideo
+
+
+
+
+
+
+
+V3.3.0  ---->2020.02.20
+1.ScreenUtils
+ (1).增加横竖屏方向判断方法，切换横竖屏方法
+ (2).新增 getStatusBarHeight2，利用反射获取 安卓的R文件 配置里头的  status_hegiht;
+ (3).新增isTablet 方法，判断是否为平板
+2.添加GridDividerItemDecoration
+3.MediaTime 更名为MediaTools,新增获取视频截图，视频规格函数
+4.FileUtils 更新
+(1).计算文件夹总大小(getTotalSizeOfFilesInDir)
+(2).从指定目录，媒体文件库中根据后缀名查找文件(getSpecFilesFromDir、getSpecFileFromMediaFileStore)
+(3).增加 deleteMediaStoreVideoFile 、 deleteMediaStoreImageFile 、deleteMediaStoreAudioFile 、deleteMediaFileStoreFile  从数据库中删除记录
+
+5.增加CollectionsUtils 类，增加mergeList，合并两个集合且去重处理,结构类需继承 MergeCell .
+6.ClipBoardUtils 增加 getPasteString  获取最新复制的内容
+7.增加 SystemSettings 类，获取系统设置，如 亮度，自动旋转等等
+8.增加PlayerGesture和PlayerGestureView 两类，使用PlayerGestureView 可以控制亮度，声音，进度
+9.anim 文件夹下增加 左上右下四个方向 的滑出和滑入  8个动画文件,style.xml 创建4个style,提供调用
+  增加AnimationUtils 来获取、启动这8个动画，getLeftSlideOutAnimation(Context context),startLeftSlideOutAnimation(Context context);
+10.增加 RoundImageView   app:roundRadius="10dp" 控制圆角大小
+11.增加 ReboundHelper 核心类，拖拽回弹效果!
+新增 ReboundLayout,ReboudRecyclerView,ReboundScrollView,ReboundListView,ReboundGridView 5个回弹组件。
+12.AppUtils 增加 backHome，返回桌面。
+13.增加 ActivityManager
+14.PermissionUtils 增加判断是否有显示在应用上层权限 hasDrawOverlaysPermission   startDrawOverlaysActivityForResult
+15.增加 RotationObserver 监听 自动旋转开关发生改变
+
+
+
+
+
+V3.2.0 ---->2020.02.11
+
+
+1.增加 setClickTintResizeSpanStr getClickTintResizeSpanStr 着色并可点击效果的字符串，
+  增加 ClickableSpanTextView 和 ClickableLinkMovementMethod 应对ListView 中的TextView 设置ClickableSpanString 时，item点击没有效果等
+2.tintText 和 tintResize 两个函数重载， 不传入 start,end, 只传全文本，和keyword
+3.PullRefreshLayout 增加 isRefreshing()函数 判断是否正在刷新
+4.LoadingDialog 更新旋转样式
+5.RedPointTextView  增加修改红点颜色
+6.ThrowableUtils 重载show 方法，接收Object ,会判断是String 还是Throwable，
+用于网络请求接口错误和业务failure情况
+7.BaseRecyclerAdapter 增加 addAllAndNotifyDataChanged
+8.增加IRecyclerView
+
+
+
+
+
+V3.1.0 --->2019.09.24
+
+1.BitmapHelper 增加 transformRoundCornerWithBorder 圆角白边框，
+    transformCircleWithBorder 圆形白边框   layOnCenter  两个Bitmap层叠
+2.MathUtils 封装BigDecimal,  增加 加减乘除 对应方法  处理double 运算问题
+3.增加6位数字密码对话框 InputPassWordDialog
+4.EventBundle 补回  putDouble getDouble
+5.SpannableStringUtils tintText 增加SpannableString 传参，
+增加getUnderLineTintSpannableString 函数 着色并下划线处理
+6.Logger 输出字符串若长度超过4k，分段打印
+7.EmptyUtils isEmpty  增加判断TextView 和 EditText
+8.增加 CountDownCircleView ，用于启动页倒计时
+9.增加 WebProgressView，显示WebView 加载的进度
+10.EditTextUtils 增加showCursor 和 hideCursor 方法
+
+
+
+
+V3.0.0 --->2019.09.11
+
+1.CompatUtils增加 setTextAppearance(TextView textView,int resId);
+2.BitmapHelper 增加 Bitmap 与Base64字符串的相互转换
+3.FileUtis notifyScanFile 通知媒体文件刷新增加兼容解决方式
+4.隐藏部分类中的ScaleUtils,删除DLAlertDialog,DLTransparentDialog
+5.增加ThreadPools 核心线程数量8
+6.增加SingleClickListener  单击控制
+7.BitmapHelper  增加 getBitmapFromImageView 从ImageView中获取Bitmap
+8.SpannableStringUtils
+   增加 tintText  convertBlodStyle  setAbsoluteSizeSpan  getUnderLineSpannableString
+   函数，对应文本的着色，加粗，大小 ,下划线
+9.增加 PhotoSelectBottomSheetDialog  底部滑出图片选择对话框，相册选择，拍照
+10.PhotoSelector 集成 从相册选择和拍照 方式选择图片
+     使用：photoSelector.showDialog("这里是tag,一个页面有几个ImageView要选择图片，则靠Tag来标识是哪个ImageView");
+     回调：onPickerResult(File pickFile, String tag)
+     回调:photoSelector.onActivityResult(requestCode, resultCode, data);
+     回调:photoSelector.onRequestPermissionsResult(requestCode,permissions,grantResults);
+11.MathUtils 增加 rvZeroAndDot  去掉多余零
+12.增加PermissionUtils,判断和申请 Camera ,存储权限
+13.AndroidManifestUtils 可动态获取AndroidManifest.xml 中 7.0 配置的FileProvider信息
+14.StringUtils 增加 isNumber 判断字符串是否为数字 (正负小数点)
+15.增加DashLineView  虚线View: app:dashLineColor="#333333" 虚线颜色    app:dashWith="12dp"：虚线宽度  app:dashGap="3dp" 间隙宽度
+16. EditTextUtils 增加 setGravityCenter，解决努比亚手机 EditText内容不能居中问题
+
+
+
+
+
+
+
+
+V2.3.0 ---> 2019.08.27 更新至JCenter
+1.增加 BitmapDownloader ，下载bitmap并缓存到内部磁盘
+2.BitmapHelper中增加压缩图片尺寸方法getInSampleSizeBitmap(String picPath, int reqsW, int reqsH)，
+增加同步，异步方式保存Bitmap到本地 的方法
+3.ToastUtils 对Context 进行空判，防止Context 为空时调用显示空指针异常
+4.FileUtils 增加delectDirFile，删除整个文件夹
+5.CompatUtils 增加 setTint(Drawable drawble,int color) 兼容着色
+6.增加CommonFragmentPagerAdapter adapter.addFragment() 和 adapter.addTitle();
+7.EmptyUtils 新增isNotBlank()判断空格
+8.HtmlUtils 新增 fromHtml() 处理Html.fromHtml()过时问题。
+9.增加EventBus 数据传递类：EventBundle   内部封装Action, Bundle存储 ，附加属性；
+使用 putAction(),putInt(),putString(),putBoolean(),putLong(),putSerializable等方法。
+10.增加ThrowableUtils   ThrowableUtils.show(Throwable throwable)
+
+
+
+
+
+V2.2.0  ---> 2019.08.12 更新至JCenter
+1.增加MathUtils 工具类，  已知两个坐标点和第三个坐标的 X或Y 中的一个坐标，求X或Y;
+2.增加MatixUtils 工具类， 可由Matrix 对象 获取到当前操作图片的四个顶点坐标
+3.MatixUtils更新，增加 zoomOutToMaxRange和 centerInRange 两个方法，缩至指定范围并居中
+4.增加PhotoView 和ViewTouchUtils 类
+5.去掉Gson 包依赖
+6.更新ToastUtil ,增加显示中间位置toast，还有任意时长的toast
+7.增加CompatUtils，和ToastUtils 一样在Application 中initContext()
+8.增加SlidingLayout 和 PullRefreshLayout
+9.增加SpannableStringUtils，SpannableStringUtils.firstLineMarginLeft(leftTagViewWidth,content)
+第一行会有个左边距(如段落文章起行空两个字)
+
+
+
+
+
+
+
+
+V2.1.0  --->  2019.03.20 更新至JCenter
+
+1.Gson 添加  xxxAdapter， 过滤 int ,double, long 解析空字符串 "" 的问题。
+2. 更新RomUtils ，修复读取 build.prop 权限被拒绝问题。
+3.FileUtils 增加压缩到指定目录方法。
+4.FileUtils 增加 getFilefromUri() 和发送广播通知更新文件扫描
+5.ToastUtils 增加 showLongToast() 设置随意
+6.更新CommonAbsListView.Adapter 重命名为CommonBaseAdapter,更新BaseRecycleViewAdapter
+oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
+7.BitmpUtils 增加 convertViewToBitmap，将View 转Bitmap
+8.新增 VerticalTextSwitcherHelper  TextView 由下往上切换
+
+
+
+
+
+
+
+
+
+
+
+
+V2.0.1  2018.05.07更新至JCenter
+1.新增CheckBoxListAdapter  ，只要继承它不用考虑复用性导致 checkbox状态丢失
+2.DeviceUtls 增加获取IMEI getIMEI
+3.新增lazyFragment 懒加载
+4.AutoGridView 增加判断是否测量，CommonAbsListView.Adapter 中判断AutoGridView 类并判断是否测量，防止GridView 中的getView 调用多次问题
+5.TimeUtils增加 倒计时 getCountTimeStartWidthDay（） 返回Strng[] 包含天，时，分，秒 4个值
+6.修复DLTabLayout横竖屏切换  tab宽度没有改变问题
+7.修复TabLayout 标签显示不全问题
+8.新增RedPointTextView,在文本末尾自动追加小红点，可控制隐藏。
+9.StringUtil 增加全角和半角的相互转换
+
+
+
+
+
+
+
+
+
+V2.0.0：
+1.增加ThreadUtils
+    (1) 判断是否在主线程的方法。
+2.增加EditTextUtils  
+    (1).showSoftInputAuto自动弹出键盘并将输入框中的光标移至文本末尾。
+3.增加DLPopupWidnow  
+    (1).解决安卓7.0 真机下的showAsDropDown(View anchor)的位置问题。
+4.增加BothItemAdapter
+    BaseAdapter双布局的封装类。
+5.StringUtils增加splitColor();  
+   对字符串中颜色分离，（SpanableString封装）
+6.增加  RunTaskUtils 
+    判断应用处于前台还是后台，在Application中的oncreate方法中调用 registerActivityLifeCallBack(getApplication())
+    在其它地方可以 调用下列方法来获取状态，注意在MainActivity中oncreate调用可能因时间太短获取到的状态是未注册。
+    final int flag=RunTaskUtils.getRunningState();
+    Log.e( "flag: ","getRunningState "+flag );
+    if (flag==RunTaskUtils.STATE_ON_FRONT) Log.e( "flag: ","在前台" );
+    else if (flag==RunTaskUtils.STATE_ON_BACKROUND) Log.e( "flag: ","在后台" );
+    
+ 7.增加BulletinBoard 公告栏，游戏里面跑马灯效果。
+ 8.修改TabGroup，附加badgeView。
+ 9.增加RSAUtils,Rsa加密
+ 10.优化ToastUtils,避免在使用的时候再实例化。
+ 11.AppUtils增加调往到权限设置页面，直接跳转的有魅族，小米，华为，其它的只是跳到应用信息页面，从应用信息页面在手动点击进入权限设置页面。
+ 12. ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE); 魅族，小米，以及6.0以上的系统设置状态栏颜色为白色，并且字体颜色为黑色
+ 13.增加UrlUtils  截取url中的参数名和参数值
+ 14.修改DateUtil中  getDateByMonthsAfter  getDateByDaysAfter  返回Date
+ 15.增加BankCardCodeUtils  判断银行卡  卡号是否正确
+ 16.增加Logger类，log输出带有包名，方法和行数
+ 17.增加DLWebChormeClinet  集成了视频全屏播放/相册（拍照）选择图片。
+ 18.增加TextViewUitls   支持滚动和  在ScrollView中TextView支持滚动
+ 19.增加DLTranPrentDialog 和DLAlertDialog,自定义Dialog 可以继承DLTranPrentDialog，布局的Match_parent不会失效。
+ 20.增加ResourceManager 代码中可以动态获取 colorPrimary colorPrimaryDark colorAccent 的颜色
+ 21.增加IOUtils  InputStream 转字符串。
+ 22.增加HorizontalScrollBackLayout  右滑销毁Activity
+ 23.封装SlideFromBottomDialog  从底部滑出，滑到底部退出动画
+ 24.SoftKeyBoardUtils 增加 showSoftInputAuto(EditText edittext)
+ 25.增加NavBarUtils  判断是否有包含底部虚拟按键（如华为手机就有），隐藏和显示方法。
+ 26.增加录音，仿微信语音发送。
+ 27.增加WebViewErroPage  当断网或无法访问时可以点击空白处刷新。WebView的父布局要是FrameLayout
+ 28.SignatureUtils  根据包名获取应用的MD5签名
+ 29.增加Base64Utils  安卓的Base64 Api 要选择NO_WRAP,不换行，不要选择DEFAULT,否则如果解码的方式不对，就会出现乱码
+ 30.增加FileUtils  复制文件，更改文件后缀
+ 31.增加FileDownLoader  多线程下载，通知栏Notifcation 更新下载进度。（不能同时下载同名文件，因为各个线程的缓存文件是以下载文件名+threadId命名的）
+ 32.添加 clipboardUtils
+ 33.增加circleImageView
+ 34.TimeUtils 增加判断今天，明天，后天
+ 35.commonAbsListView 中的adapter 增加 SimpleDateFormatter
+ 
+ 
+ 
+ 
+V1.0.1：
+1.2017/3/7 增加RomUtils  支持判断小米，魅族，华为。  
+2.StringUtils  增加判断是否包含中文的方法，支持。，等中文字符。
+增加ListView的侧滑删除
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+V1.0.0：
+
+1.2016/12/10  增加CustomTitleUtil
+2.2016/12/16  增加DateUtil        日期选择器（4.x系统 样式）
+3.2016/12/20 增加EidtNumberHelper 对输入数字输入框 加减  输入计算。
+4.2016/12/22  增加LoginRegUtil
+
+5.2016/12/29
+  将StringCheck重命名为StringUtils,  
+  新增EmptyUtils.
+
+6.2016/12/31 
+  新增 BitmapUtils.
+  新增 自动安装/智能安装   (AccessibilityService)
+
+7.2017/01/01 
+  新增 IOCloser
+  新增 ScreenShoot
+  新增 MemoryUtils 读取sdcard  内存卡，RAM。
+  新增 CrashHandler  系统崩溃异常，写进日志文件，可上传至自己的服务器。
+  新增 TelephonyUtils 从TelePhoneyManager获取电话号码运行商，由号码来判断运营商。(正则)
+
+
+8.2017/01/02
+  TimeUtil重名为TimeUtils  增加获取网络时间。
+  新增Elog 可以以Log.e()的形式输出  Exception和Throwable，因为e.printStack颜色不是红色。
+
+9.2017/01/14
+  新增GridViewPagerAdapter.
+  新增WrapLayoutManager.
+
+10.2017/01/15
+  新增DialogUtils.
+
+11.2017/01/16  为html增加头部样式，适配webView大小。
+
+
+ 
+
+ 
+  

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--公共属性抽出来-->
+    <attr name="radius" format="dimension" />
+    <attr name="dashGap" format="dimension" />
+
+    <declare-styleable name="dl_base_color">
+        <attr name="colorPrimary1" format="color"/>
+        <attr name="colorPrimaryDark1" format="color"/>
+        <attr name="colorAccent1" format="color"/>
+    </declare-styleable>
+
+
+    
+    <declare-styleable name="CircleImageView">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+    
+    <declare-styleable name="RoundImageView">
+        <attr name="roundRadius" format="dimension"/>
+    </declare-styleable>
+    
+    
+
+    <declare-styleable name="RedPointTextView">
+        <attr name="redPointSize" format="dimension"/>
+        <attr name="pointColor" format="color"/>
+    </declare-styleable>
+
+    <declare-styleable name="DashLineView">
+        <attr name="dashLineColor" format="color"/>
+        <attr name="android:paddingLeft"/>
+        <attr name="android:paddingRight"/>
+        <attr name="dashWith" format="dimension"/>
+        <attr name="dashGap"/>
+    </declare-styleable>
+
+
+    <!--自定义密码输入框属性-->
+    <declare-styleable name="DLPayPsdInputView">
+        <attr name="maxCount" format="integer" />
+        <attr name="circleColor" format="color" />
+        <attr name="bottomLineColor" format="color" />
+        <attr name="radius" />
+        <attr name="divideLineWidth" format="dimension" />
+        <attr name="divideLineColor" format="color" />
+        <attr name="rectAngle" format="dimension" />
+        <attr name="focusedColor" format="color" />
+        <attr name="pwType" format="enum">
+            <enum name="weChat" value="0" />
+            <enum name="bottomLine" value="1" />
+        </attr>
+    </declare-styleable>
+
+
+    <declare-styleable name="DLIRecyclerView">
+        <attr name="refreshHeaderLayout" format="reference" />
+        <attr name="loadMoreFooterLayout" format="reference" />
+        <attr name="refreshEnabled" format="boolean" />
+        <attr name="loadMoreEnabled" format="boolean" />
+        <attr name="refreshFinalMoveOffset" format="dimension" />
+    </declare-styleable>
+
+
+    <!--自定义矩形边框的TextView-->
+    <declare-styleable name="DLShapeTextView">
+        <!--是否使用Selector选择器-->
+        <attr name="openSelector" format="boolean" />
+        <!--填充色-->
+        <attr name="solidColor" format="color" />
+        <!--边框色-->
+        <attr name="strokeColor" format="color" />
+        <!--按下填充色-->
+        <attr name="solidTouchColor" format="color" />
+        <!--按下边框色-->
+        <attr name="strokeTouchColor" format="color" />
+        <!--边框宽度-->
+        <attr name="strokeWidth" format="dimension" />
+        <!--圆角弧度-->
+        <attr name="radius" />
+        <!--四个角的圆角弧度-->
+        <attr name="topLeftRadius" format="dimension" />
+        <attr name="topRightRadius" format="dimension" />
+        <attr name="bottomLeftRadius" format="dimension" />
+        <attr name="bottomRightRadius" format="dimension" />
+        <!--虚线边框宽度-->
+        <attr name="dashWidth" format="dimension" />
+        <!--虚线边框间隙-->
+        <attr name="dashGap" />
+    </declare-styleable>
+
+
+    <declare-styleable name="DLDrawableTextView">
+            <attr name="drawableLeftWidth" format="dimension"/>
+            <attr name="drawableLeftHeight" format="dimension"/>
+            <attr name="drawableTopWidth" format="dimension"/>
+            <attr name="drawableTopHeight" format="dimension"/>
+            <attr name="drawableRightWidth" format="dimension"/>
+            <attr name="drawableRightHeight" format="dimension"/>
+            <attr name="drawableBottomWidth" format="dimension"/>
+            <attr name="drawableBottomHeight" format="dimension"/>
+    </declare-styleable>
+
+
+    <!-- 沉浸式状态栏使用 -->
+    <item name="dl_status_bar_view" type="id" />
+    <item name="dl_translucent_view" type="id" />
+</resources>

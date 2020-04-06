@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#bb000000">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp">
+        <ImageView
+            android:id="@+id/ivCenterCropRound"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:scaleType="centerCrop"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:text="BitmapHelper.centerCropRoundCorner(Bitmap srcBitmap, int cornerRadius, int outWidth, int outHeight)"
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="24dp"
+    android:layout_marginLeft="16dp">
+    <ImageView
+        android:id="@+id/ivCenterCropRoundCornerWithBorder"
+        android:layout_width="64dp"
+        android:layout_height="64dp"
+        android:scaleType="centerCrop"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginLeft="16dp"
+        android:text="BitmapHelper.centerCropRoundCornerWithBorder(Bitmap srcBitmap, int cornerRadius,int borderWidth, int borderColor,int outWidth, int outHeight)"
+        android:textColor="#ffffff"
+        android:textSize="16sp"/>
+</LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="16dp">
+        <ImageView
+            android:id="@+id/ivCircle"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:text="BitmapHelper.transformCircle(Bitmap bitmap, int outWidth, int outHeight) "
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginLeft="16dp">
+        <ImageView
+            android:id="@+id/ivCircleWithBorder"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="16dp"
+            android:text="BitmapHelper.transformCircleWithBorder(Bitmap bitmap, int borderWidth, int borderColor, int outWidth, int outHeight) "
+            android:textColor="#ffffff"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

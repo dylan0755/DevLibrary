@@ -1,0 +1,67 @@
+<com.dylan.library.widget.sliding.SlidingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/slidingLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <com.dylan.library.widget.sliding.SlidingTopLayout
+        android:id="@+id/collapsing_toolbar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/cc" />
+
+            <Button
+                android:id="@+id/btnClick"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="15dp"
+                android:text="clickMe" />
+        </FrameLayout>
+
+
+    </com.dylan.library.widget.sliding.SlidingTopLayout>
+
+    <com.dylan.library.widget.sliding.SlidingContentLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="#ffffff">
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabLayout"
+            android:layout_width="match_parent"
+            android:layout_height="45dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.1dp"
+            android:background="#999999" />
+
+        <com.dylan.library.widget.pullrefresh.PullRefreshLayout
+            android:id="@+id/pullRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+
+            >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#ffffff"
+                />
+        </com.dylan.library.widget.pullrefresh.PullRefreshLayout>
+
+
+    </com.dylan.library.widget.sliding.SlidingContentLayout>
+</com.dylan.library.widget.sliding.SlidingLayout>

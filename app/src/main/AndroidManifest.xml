@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.dylan.mylibrary">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.READ_CALENDAR" />
+    <uses-permission android:name="android.permission.WRITE_CALENDAR" />
+    <uses-permission android:name="android.permission.RECEIVE_USER_PRESENT" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    <!-- Optional. Required for location feature -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.READ_CALL_LOG" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+
+    <application
+        android:name="com.dylan.mylibrary.MyApplication"
+        tools:replace="android:allowBackup"
+        android:allowBackup="false"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <meta-data
+            android:name="android.max_aspect"
+            android:value="2.1" />
+
+        <meta-data
+            android:name="com.dylan.mylibrary.ui.onlinepic.glide.MyGlideAppModule"
+            android:value="AppGlideModule" />
+
+        <activity android:name=".ui.CountDownCircleViewActivity"
+            android:theme="@style/statusBarStyle"/>
+
+
+        <activity
+            android:name="com.dylan.mylibrary.ui.DemoListActivity"
+            android:theme="@style/statusBarStyle">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <activity
+            android:name="com.dylan.mylibrary.ui.customtitle.CustomTittleUitlActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.date.DateTestActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.edittext.EditNumberActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.install.AutoInstallActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.ExpandableListItemActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.BulletinBoardActivity"
+            android:screenOrientation="landscape" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.LocalPhotoSelectActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.PermissionSettingActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.ui.WebViewActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.dylan.mylibrary.HorizontalScrollBackActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/transparentTheme" />
+        <activity android:name="com.dylan.mylibrary.ui.VoiceRecordActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.filedownloader.FileDownLoaderActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.tab.TabLayoutActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.CheckBoxListAdapterActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.CustomToastActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.RedPointTextViewActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.PullToRefreshScrollViewActivity" />
+        <activity android:name="com.dylan.mylibrary.ui.TextSwitchActivity" />
+        <activity android:name=".ui.VerticalViewPagerActivity" />
+        <activity android:name=".ui.snaphelper.RecyclerSnapHelperActivity" />
+        <activity android:name=".ui.CircleAnimationActivity" />
+        <activity android:name=".ui.ScaleUpPhotoViewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity
+            android:name=".ui.ModifyFontActivity"
+            android:theme="@style/statusBarStyle" />
+        <activity android:name=".ui.slidingrefresh.SlidingRefreshActivity" />
+        <activity android:name=".ui.marginspan.FirstLineMarginLeftActivity" />
+        <activity android:name=".ui.BezierCurveActivity" />
+        <activity android:name=".ui.DashLineViewActivity" />
+        <activity android:name=".ui.InputPasswordActivity" />
+        <activity android:name=".IRecyclerViewActivity" />
+        <activity android:name=".ui.ProgressWebViewActivity"
+            android:theme="@style/statusBarStyle"/>
+
+        <activity android:name=".ui.VideoPlayerGestureActivity"
+            android:theme="@style/FullScreen"/>
+        <activity android:name=".ui.rebound.ReboundActivity"/>
+        <activity android:name=".ui.rebound.ReboundScrollViewActivity"/>
+        <activity android:name=".ui.rebound.ReboundLayoutActivity"/>
+        <activity android:name=".ui.rebound.ReboundRecyclerViewActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ui.rebound.ReboundListViewActivity"/>
+        <activity android:name=".ui.rebound.ReboundViewPagerActivity"/>
+        <activity android:name=".ui.BitmapHelperActivity"/>
+        <activity android:name=".ui.PhotoPickerDemoActivity"/>
+
+
+        <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
+        所以name,authorities,resource 里面的都不一样-->
+        <provider
+            android:name=".AppFileProvider"
+            android:authorities="${applicationId}.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/dl_file_paths" />
+        </provider>
+
+
+        <meta-data
+            android:name="design_width"
+            android:value="720" />
+        <meta-data
+            android:name="design_height"
+            android:value="1280" />
+
+
+        <service
+            android:name="com.dylan.library.service.AutoInstallService"
+            android:label="@string/acc_service_name"
+            android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
+            <intent-filter>
+                <action android:name="android.accessibilityservice.AccessibilityService" />
+            </intent-filter>
+            <meta-data
+                android:name="android.accessibilityservice"
+                android:resource="@xml/autoinstall_accessibility" />
+        </service>
+    </application>
+
+</manifest>
