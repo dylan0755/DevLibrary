@@ -50,6 +50,14 @@ public class DeviceUtils {
         return model;
     }
 
+
+    public static String getDeviceId(Context context) {
+        String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+        String id = androidID + Build.SERIAL;
+        if (id.isEmpty()) id = String.valueOf(System.currentTimeMillis());
+        return id;
+    }
+
     public static String getAndroidID(Context context) {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }

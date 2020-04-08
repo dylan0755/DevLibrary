@@ -5,9 +5,9 @@
 V4.0.0
 1.ExpandableListItemLayout 重名为 ListItemExpandableLayout  剔除 ListItemWrapperLayout
 2.StringUtils 新增 dealNumericValue， 当用String 表示数量和金额， 会出现为null,或者小数点后面有多个0 的问题
-
-
-
+3.IRecyclerHepler  增加 completeRefresh  completeLoadMore 成员方法
+4.DeviceUtils 增加getDeviceId
+5.IntentUtils 增加 getPhoneCallIntent  getDialIntent
 
 
 
