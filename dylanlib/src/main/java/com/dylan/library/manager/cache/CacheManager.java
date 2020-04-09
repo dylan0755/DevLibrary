@@ -45,7 +45,18 @@ public class CacheManager {
     }
 
 
-
+    public static long cleanAllCacheExcludeSharePreference(Context context){
+        //清除内存下的缓存
+        clearnInternalCache(context);
+        cleanDatabases(context);
+        cleanFiles(context);
+        //清除SDcard
+        String cachepath= SDCacheDir.getInstance(context).cachepath;
+        String filepath= SDCacheDir.getInstance(context).filesDir;
+        deleteFolderFile(cachepath,false);
+        deleteFolderFile(filepath,false);
+        return  getTotalSizeExcludeSharePreference(context);
+    }
 
     public static long cleanAllCache(Context context,String[] parentPaths){
         //清除内存下的缓存
@@ -70,12 +81,35 @@ public class CacheManager {
         return  getTotalSize(context,parentPaths);
     }
 
+
+
+    public static long getTotalSizeExcludeSharePreference(Context context){
+        //获取内存下的缓存
+        totalCacheSize=0;
+        getCacheDirSize(context);
+        getFileDirSize(context);
+        getDataBaseFileSise(context);
+        //获取SDcard下的缓存
+        try {
+            totalCacheSize+=getFolderSize(new File(SDCacheDir.getInstance(context).cachepath));
+            totalCacheSize+=getFolderSize(new File(SDCacheDir.getInstance(context).filesDir));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return totalCacheSize;
+    }
+
+
+
+
+
     /**
      *
      * @param context
      * @param parentPaths  自定义路径的父文件路径即文件夹的路径
      * @return
      */
+
     public static long getTotalSize(Context context,String[] parentPaths){
         //获取内存下的缓存
         totalCacheSize=0;
@@ -145,7 +179,7 @@ public class CacheManager {
      * @param context
      */
     public static void clearnInternalCache(Context context) {
-        deleteFilesByDirectory(context.getCacheDir());
+        deleteFolderFile(context.getCacheDir().getPath(),false);
     }
 
     /**
@@ -154,8 +188,8 @@ public class CacheManager {
      * @param context
      */
     public static void cleanDatabases(Context context) {
-        deleteFilesByDirectory(new File("/data/data/"
-                + context.getPackageName() + "/databases"));
+        deleteFolderFile("/data/data/"
+                + context.getPackageName() + "/databases",false);
     }
 
     /**
@@ -164,8 +198,8 @@ public class CacheManager {
      * @param context
      */
     public static void cleanSharedPreference(Context context) {
-        deleteFilesByDirectory(new File("/data/data/"
-                + context.getPackageName() + "/shared_prefs"));
+        deleteFolderFile("/data/data/"
+                + context.getPackageName() + "/shared_prefs",false);
     }
 
     /**
@@ -175,11 +209,8 @@ public class CacheManager {
      */
     public static void cleanFiles(Context context) {
         File directory = context.getFilesDir();
-        if (directory != null && directory.exists() && directory.isDirectory()) {
-            for (File item : directory.listFiles()) {
-                item.delete();
-            }
-        }
+        deleteFolderFile(directory.getPath(),false);
+
     }
 
     /**
@@ -203,13 +234,7 @@ public class CacheManager {
         return size;
     }
 
-    private static void deleteFilesByDirectory(File directory) {
-        if (directory != null && directory.exists() && directory.isDirectory()) {
-            for (File item : directory.listFiles()) {
-                item.delete();
-            }
-        }
-    }
+
 
     public static void deleteFolderFile(String filePath, boolean deleteThisPath) {
         if (StringUtils.isNotEmpty(filePath)) {
