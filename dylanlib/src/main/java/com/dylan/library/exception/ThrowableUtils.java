@@ -18,7 +18,7 @@ public class ThrowableUtils {
     public static void show(Throwable throwable) {
         if (throwable==null)return;
         if (throwable instanceof SocketTimeoutException || throwable instanceof ConnectTimeoutException) {
-            ToastUtils.show("网路连接超时");
+            ToastUtils.show("网络连接超时");
         } else if (throwable instanceof UnknownHostException) {
             ToastUtils.show("无法连接服务器，请检查网络连接");
         } else {

@@ -11,8 +11,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.dylan.library.utils.Logger;
+import com.dylan.library.widget.ListItemExpandableLayout;
 import com.dylan.mylibrary.R;
-import com.dylan.library.widget.ExpandableListItemLayout;
 
 import java.util.List;
 
@@ -50,11 +50,11 @@ public class ListDataAdapter extends BaseAdapter{
         if (convertView==null){
             holder=new ViewHolder();
             convertView=mInflater.inflate(R.layout.list_item_layout,parent,false);
-            holder.expandableLayout = (ExpandableListItemLayout) convertView.findViewById(R.id.id_slidinglayout);
+            holder.expandableLayout =  convertView.findViewById(R.id.id_slidinglayout);
             //设置按下去的颜色
             holder.expandableLayout.setPressColor("#edfaff");
-            holder.ItemName= (TextView) convertView.findViewById(R.id.id_list_item_text);
-            holder.deleteButton= (Button) convertView.findViewById(R.id.id_listitem_delete_button);
+            holder.ItemName=convertView.findViewById(R.id.id_list_item_text);
+            holder.deleteButton= convertView.findViewById(R.id.id_listitem_delete_button);
             convertView.setTag(holder);
         }else{
             holder= (ViewHolder) convertView.getTag();
@@ -89,7 +89,7 @@ public class ListDataAdapter extends BaseAdapter{
     }
 
     class ViewHolder{
-        ExpandableListItemLayout expandableLayout;
+        ListItemExpandableLayout expandableLayout;
         TextView ItemName;
         Button deleteButton;
 

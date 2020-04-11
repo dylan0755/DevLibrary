@@ -2,6 +2,7 @@
 
 buildscript {
     repositories {
+        flatDir { dirs 'proguard' }
         jcenter()
         maven {
             url 'https://maven.google.com/'
@@ -9,6 +10,7 @@ buildscript {
         }
     }
     dependencies {
+        classpath ':proguard:'
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath 'com.novoda:bintray-release:0.3.4'
         classpath 'com.antfortune.freeline:gradle:0.8.7'

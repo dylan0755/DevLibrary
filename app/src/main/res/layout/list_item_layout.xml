@@ -1,47 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dylan.library.widget.ExpandableListItemLayout
+<com.dylan.library.widget.ListItemExpandableLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/id_slidinglayout"
     android:layout_width="match_parent"
     android:layout_height="65dp"
-    android:id="@+id/id_slidinglayout"
-    android:orientation="horizontal"
-    android:fillViewport="true"
     >
-    <!-- mWrapper-->
-    <com.dylan.library.widget.ListItemWrapperLayout
+
+    <!--内容面板-->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-           <!--内容面板-->
-           <LinearLayout
-               android:layout_width="match_parent"
-               android:layout_height="match_parent">
-               <TextView
-                   android:id="@+id/id_list_item_text"
-                   android:layout_width="match_parent"
-                   android:textSize="18sp"
-                   android:paddingLeft="15dp"
-                   android:gravity="center_vertical"
-                   android:layout_height="65dp"
-                   />
-           </LinearLayout>
-            <!--隐藏在右侧的菜单-->
-           <LinearLayout
-               android:layout_width="83dp"
-               android:layout_height="match_parent"
-               >
-               <Button
-                   android:id="@+id/id_listitem_delete_button"
-                   android:layout_width="83dp"
-                   android:layout_height="match_parent"
-                   android:text="删除"
-                   android:background="#cc0033"
-                   android:textColor="#fff"
-                   android:visibility="visible"
-                   android:clickable="true"
-                   />
 
-           </LinearLayout>
-    </com.dylan.library.widget.ListItemWrapperLayout>
+        <TextView
+            android:id="@+id/id_list_item_text"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="15dp"
+            android:textSize="18sp" />
+    </LinearLayout>
+    <!--隐藏在右侧的菜单-->
+
+    <LinearLayout
+        android:layout_width="83dp"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/id_listitem_delete_button"
+            android:layout_width="83dp"
+            android:layout_height="match_parent"
+            android:background="#cc0033"
+            android:clickable="true"
+            android:text="删除"
+            android:textColor="#fff"
+            android:visibility="visible" />
+
+    </LinearLayout>
 
 
-</com.dylan.library.widget.ExpandableListItemLayout>
+</com.dylan.library.widget.ListItemExpandableLayout>
