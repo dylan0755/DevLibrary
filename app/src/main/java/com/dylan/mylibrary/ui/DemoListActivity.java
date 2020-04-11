@@ -52,7 +52,7 @@ public class DemoListActivity extends AppCompatActivity {
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, LocalPhotoSelectActivity.class,
             SlidingRefreshActivity.class,  HorizontalScrollBackActivity.class,
-            VoiceRecordActivity.class, FileDownLoaderActivity.class, TabLayoutActivity.class,
+            VoiceRecordActivity.class, FileDownLoaderActivity.class, HorizontalScrollTabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
             UnScrollViewPagerActivity.class,TextSwitchActivity.class,
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,

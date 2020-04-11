@@ -83,8 +83,7 @@ public class IntentUtils {
 
     }
 
-<<<<<<< HEAD
-=======
+
     /**
      * 拨打电话
      * @param phoneNumber
@@ -107,5 +106,4 @@ public class IntentUtils {
         return intent;
     }
 
->>>>>>> 312398ff8298740c7633828dd6eadfabc4adab75
 }

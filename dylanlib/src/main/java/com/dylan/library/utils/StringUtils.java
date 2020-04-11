@@ -19,9 +19,6 @@ public class StringUtils {
 
     }
 
-<<<<<<< HEAD
-=======
-
     public static String  dealNumericValue(String string){
         if (string==null||string.isEmpty())string="0";
         return AmountUtils.rvZeroAndDot(string);
@@ -29,7 +26,6 @@ public class StringUtils {
 
 
 
->>>>>>> 312398ff8298740c7633828dd6eadfabc4adab75
     public static boolean isNotEmpty(String strObj) {
         if (strObj != null && !strObj.isEmpty()) {
             return true;

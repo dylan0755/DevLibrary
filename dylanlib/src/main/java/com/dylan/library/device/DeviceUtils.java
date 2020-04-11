@@ -50,8 +50,7 @@ public class DeviceUtils {
         return model;
     }
 
-<<<<<<< HEAD
-=======
+
 
     public static String getDeviceId(Context context) {
         String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -60,7 +59,6 @@ public class DeviceUtils {
         return id;
     }
 
->>>>>>> 312398ff8298740c7633828dd6eadfabc4adab75
     public static String getAndroidID(Context context) {
         return Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
     }
