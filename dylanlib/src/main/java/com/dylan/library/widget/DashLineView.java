@@ -46,7 +46,10 @@ public class DashLineView extends View {
         dashWith=typedArray.getDimension(R.styleable.DashLineView_dashWith,24);
         dashGap=typedArray.getDimension(R.styleable.DashLineView_dashGap,10);
         typedArray.recycle();
+<<<<<<< HEAD
         Logger.e("dashWith "+dashWith+" dashGap "+dashGap);
+=======
+>>>>>>> 312398ff8298740c7633828dd6eadfabc4adab75
         mPaint=new Paint(Paint.ANTI_ALIAS_FLAG);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setColor(dashLineColor);

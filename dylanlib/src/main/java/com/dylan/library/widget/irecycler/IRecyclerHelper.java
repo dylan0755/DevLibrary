@@ -79,6 +79,17 @@ public class IRecyclerHelper {
 
     }
 
+<<<<<<< HEAD
+=======
+    public void completeRefresh(){
+        if (recyclerView!=null)refreshComplete(recyclerView);
+    }
+
+    public void completeLoadMore(){
+        if (footerView!=null)loadMoreComplete(footerView);
+    }
+
+>>>>>>> 312398ff8298740c7633828dd6eadfabc4adab75
     public boolean isCanLoadMore() {
         if (isCanLoadMore(recyclerView, footerView, mAdapter)) {
             pageNo++;

@@ -83,4 +83,29 @@ public class IntentUtils {
 
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * 拨打电话
+     * @param phoneNumber
+     * @return
+     */
+    public static Intent getPhoneCallIntent(String phoneNumber){
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:"+phoneNumber));
+        return intent;
+    }
+
+
+    /**
+     * 调起拨号页面
+     */
+
+
+    public static Intent getDialIntent(String phoneNumber){
+        Uri uri = Uri.parse("tel:"+phoneNumber);
+        Intent intent = new Intent(Intent.ACTION_DIAL, uri);
+        return intent;
+    }
+
+>>>>>>> 312398ff8298740c7633828dd6eadfabc4adab75
 }
