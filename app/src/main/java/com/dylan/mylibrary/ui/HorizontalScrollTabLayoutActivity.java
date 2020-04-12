@@ -13,10 +13,9 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 
 import com.dylan.library.widget.tab.HorizontalScrollTabLayout;
-import com.dylan.library.widget.tab.HorizontalScrollTabLayout2;
+import com.dylan.library.widget.tab.ScrollTabLayout2;
 import com.dylan.library.widget.tab.TabItem;
 import com.dylan.mylibrary.R;
-import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
 import com.dylan.mylibrary.ui.tab.TabLayoutFragment;
 
 import java.util.ArrayList;
@@ -28,7 +27,7 @@ import java.util.List;
  * Desc:
  */
 public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
-    HorizontalScrollTabLayout2 mTabLayout;
+    ScrollTabLayout2 mTabLayout;
     ViewPager mViewPager;
     public static final String TAB_INDEX="tabIndex";
 
@@ -48,11 +47,11 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
         int normalColor = Color.parseColor("#666666");
         mViewPager.setOffscreenPageLimit(2);
         mTabLayout.setTabTextSize(16);
-        mTabLayout.setIndicatorShap(HorizontalScrollTabLayout.SHAPE_TRIANGLE);
+        mTabLayout.setIndicatorShap(HorizontalScrollTabLayout.SHAPE_RECTANGLE);
         mTabLayout.setTabColor(normalColor);
         mTabLayout.setTabSelectColor(selectColor);
         mTabLayout.setIndicatorColor(Color.BLACK);
-        mTabLayout.setMaxVisiableCount(5);
+        mTabLayout.setIndicatorHeight(4);
         mTabLayout.setUpWidthViewPager(mViewPager);
         // mTabLayout.syncTextIconColor(false);
         mTabLayout.addTab(mTabLayout.newTab().setTabTitle("粤菜"))
@@ -64,9 +63,15 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
                 .addTab(mTabLayout.newTab().setTabTitle("测试"))
                 .addTab(mTabLayout.newTab().setTabTitle("测试"))
                 .addTab(mTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试1"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试2"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试3"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试4"))
                 .create();
         List<Fragment> fragmentList = new ArrayList<Fragment>();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
             TabLayoutFragment fragment = new TabLayoutFragment();
             Bundle bundle = new Bundle();
             bundle.putString("page", "" + i);
@@ -104,7 +109,7 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
     }
 
 
-    class TabSelectListenerImpl implements HorizontalScrollTabLayout2.TabSelectListener{
+    class TabSelectListenerImpl implements ScrollTabLayout2.TabSelectListener{
 
         @Override
         public void onSelect(int position, TabItem tabItem) {
