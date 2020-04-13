@@ -79,6 +79,7 @@ public class IRecyclerHelper {
 
     }
 
+
     public void completeRefresh(){
         if (recyclerView!=null)refreshComplete(recyclerView);
     }

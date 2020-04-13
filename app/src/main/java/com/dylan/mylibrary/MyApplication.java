@@ -3,6 +3,7 @@ package com.dylan.mylibrary;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.dylan.library.utils.Logger;
@@ -24,7 +25,7 @@ import retrofit2.Call;
 /**
  * Created by Dylan on 2016/9/1.
  */
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     private static Context mContext;
     private RestApi mRestApi;
     public static String qiniuDomain;

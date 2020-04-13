@@ -45,6 +45,7 @@ public class CacheManager {
     }
 
 
+
     public static long cleanAllCacheExcludeSharePreference(Context context){
         //清除内存下的缓存
         clearnInternalCache(context);
@@ -83,6 +84,7 @@ public class CacheManager {
 
 
 
+
     public static long getTotalSizeExcludeSharePreference(Context context){
         //获取内存下的缓存
         totalCacheSize=0;
@@ -98,8 +100,6 @@ public class CacheManager {
         }
         return totalCacheSize;
     }
-
-
 
 
 
@@ -188,6 +188,7 @@ public class CacheManager {
      * @param context
      */
     public static void cleanDatabases(Context context) {
+
         deleteFolderFile("/data/data/"
                 + context.getPackageName() + "/databases",false);
     }
@@ -210,7 +211,6 @@ public class CacheManager {
     public static void cleanFiles(Context context) {
         File directory = context.getFilesDir();
         deleteFolderFile(directory.getPath(),false);
-
     }
 
     /**
@@ -233,6 +233,7 @@ public class CacheManager {
         }
         return size;
     }
+
 
 
 

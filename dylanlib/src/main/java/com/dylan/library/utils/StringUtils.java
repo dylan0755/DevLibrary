@@ -19,7 +19,6 @@ public class StringUtils {
 
     }
 
-
     public static String  dealNumericValue(String string){
         if (string==null||string.isEmpty())string="0";
         return AmountUtils.rvZeroAndDot(string);

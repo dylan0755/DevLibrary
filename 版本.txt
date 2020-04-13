@@ -9,8 +9,8 @@ V4.0.0
 4.DeviceUtils 增加getDeviceId
 5.IntentUtils 增加 getPhoneCallIntent  getDialIntent
 6.CacheManager 优化删除内部文件逻辑，新增 getTotalSizeExcludeSharePreference   cleanAllCacheExcludeSharePreference
-
-
+7.ThrowableUtils 增加 ConnectException 判断，禁止报错显示ip
+8.新增 BothItemRecyclerAdapter  更新BothItemBaseAdapter
 
 
 

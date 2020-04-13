@@ -51,6 +51,7 @@ public class DeviceUtils {
     }
 
 
+
     public static String getDeviceId(Context context) {
         String androidID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
         String id = androidID + Build.SERIAL;

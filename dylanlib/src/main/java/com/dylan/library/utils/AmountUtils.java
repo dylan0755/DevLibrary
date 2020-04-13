@@ -57,6 +57,7 @@ public class AmountUtils {
         return s;
     }
 
+
     public static String rvZeroAndDot(double d){
         String s = Double.toString(d);
         if (s.isEmpty()) {

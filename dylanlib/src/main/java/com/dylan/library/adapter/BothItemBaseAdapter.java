@@ -6,17 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.dylan.library.proguard.NotProguard;
+
 import java.util.List;
 
 /**
  * Created by Dylan on 2017/3/29.
  */
 
-public abstract class BothItemAdapter<T> extends BaseAdapter {
-    public  static final int ITEM_LABEL = -1;
+public abstract class BothItemBaseAdapter<T> extends BaseAdapter {
+    public  static final int ITEM_DECORATION = -1;
     public  static final int ITEM_CONTENT = 0;
     protected List<T> dataList;
+    @NotProguard
     protected Context mContext;
+    @NotProguard
     protected LayoutInflater mInflater;
 
     public void bind(List<T> list) {
@@ -52,15 +56,15 @@ public abstract class BothItemAdapter<T> extends BaseAdapter {
         }
 
         int viewtype = getItemViewType(position);
-        if (ITEM_LABEL == viewtype) {
-            convertView=getViewAsTagItem(convertView, getItem(position), parent, position);
+        if (ITEM_DECORATION == viewtype) {
+            convertView= getViewAsDecorationItem(convertView, getItem(position), parent, position);
         } else {
             convertView=getViewAsNormalItem(convertView, getItem(position), parent, position);
         }
         return convertView;
     }
 
-    public abstract View getViewAsTagItem(View convertView, T t, ViewGroup parent, int position);
+    public abstract View getViewAsDecorationItem(View convertView, T t, ViewGroup parent, int position);
 
     public abstract View getViewAsNormalItem(View convertView, T t, ViewGroup parent, int position);
 
@@ -72,7 +76,7 @@ public abstract class BothItemAdapter<T> extends BaseAdapter {
 
     @Override
     public int getItemViewType(int position) {
-        if (!isNormalItem(position)) return ITEM_LABEL;
+        if (!isNormalItem(position)) return ITEM_DECORATION;
         else return ITEM_CONTENT;
     }
 
