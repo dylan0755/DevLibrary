@@ -11,7 +11,7 @@ V4.0.0
 6.CacheManager 优化删除内部文件逻辑，新增 getTotalSizeExcludeSharePreference   cleanAllCacheExcludeSharePreference
 7.ThrowableUtils 增加 ConnectException 判断，禁止报错显示ip
 8.新增 BothItemRecyclerAdapter  更新BothItemBaseAdapter
-
+9.IRecyclerHelper 和 RecyclerViewHelper  新增 toStickFromPosition() 将某个item 置顶
 
 
 

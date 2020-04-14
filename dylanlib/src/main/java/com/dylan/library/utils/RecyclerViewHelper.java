@@ -1,6 +1,7 @@
 package com.dylan.library.utils;
 
 import android.graphics.Rect;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import java.lang.reflect.Field;
@@ -53,5 +54,14 @@ public class RecyclerViewHelper {
         return !recyclerView.canScrollHorizontally(-1);
     }
 
+    //将某个item置顶
+    public static void toStickFromPosition(RecyclerView recyclerView,int position,int offset){
+        if (recyclerView==null)return;
+        recyclerView.scrollToPosition(position);
+        if (recyclerView.getLayoutManager() instanceof LinearLayoutManager){
+            LinearLayoutManager mLayoutManager =(LinearLayoutManager) recyclerView.getLayoutManager();
+            mLayoutManager.scrollToPositionWithOffset(position, offset);
+        }
+    }
 }
 

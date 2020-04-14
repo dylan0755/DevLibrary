@@ -16,6 +16,7 @@ import com.dylan.library.adapter.BaseRecyclerAdapter;
 import com.dylan.library.exception.OnNextBussinesException;
 import com.dylan.library.exception.ThrowableUtils;
 import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.RecyclerViewHelper;
 import com.dylan.library.widget.CircleIndicatorView;
 import com.dylan.library.widget.irecycler.footer.LoadMoreFooterView;
 import com.dylan.library.widget.irecycler.header.RefreshHeaderView;
@@ -407,6 +408,10 @@ public class IRecyclerHelper {
                 }
             }
         });
+    }
+
+    public static void toStickFromPosition(RecyclerView recyclerView,int position,int offset){
+        RecyclerViewHelper.toStickFromPosition(recyclerView,position,offset);
     }
 
 }
