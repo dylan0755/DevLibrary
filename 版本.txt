@@ -2,7 +2,9 @@
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
 
-V4.0.0
+V4.0.0  ---->2020.04.15
+
+
 1.ExpandableListItemLayout 重名为 ListItemExpandableLayout  剔除 ListItemWrapperLayout
 2.StringUtils 新增 dealNumericValue， 当用String 表示数量和金额， 会出现为null,或者小数点后面有多个0 的问题
 3.IRecyclerHepler  增加 completeRefresh  completeLoadMore 成员方法
