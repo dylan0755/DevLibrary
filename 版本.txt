@@ -11,8 +11,9 @@ V4.0.0
 6.CacheManager 优化删除内部文件逻辑，新增 getTotalSizeExcludeSharePreference   cleanAllCacheExcludeSharePreference
 7.ThrowableUtils 增加 ConnectException 判断，禁止报错显示ip
 8.新增 BothItemRecyclerAdapter  更新BothItemBaseAdapter
-
-
+9.新增IdCardUtils 检测 18 15 位以及港澳台 身份证
+10.NavBarUtils 增加 获取底部导航栏高度 getNavBarHeight
+11.BankCardCodeUtils 更名为BankCardUtils, 新增 由银行卡号查询银行名称和卡种， 银行列表Json（已按字母排序）
 
 
 

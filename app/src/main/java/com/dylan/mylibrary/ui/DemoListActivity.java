@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.BankCardUtils;
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
@@ -68,10 +69,6 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
-        String signature = SignatureUtils.getMD5Signature(this, "com.wxhkj.weixiuhui");
-        if (EmptyUtils.isNotEmpty(signature)) {
-            Logger.e("signature " + signature);
-        }
 
 
 

@@ -2,6 +2,7 @@ package com.dylan.library.screen;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
 import android.view.View;
@@ -96,5 +97,39 @@ public class NavBarUtils {
             }
 
         }
+    }
+
+
+    public static int getNavBarHeight(Context context) {
+        boolean mInPortrait = context.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT;
+        int result = 0;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
+            if (hasNavBar((Activity) context)) {
+                String key;
+                if (mInPortrait) {
+                    key = "navigation_bar_height";
+                } else {
+                    key = "navigation_bar_height_landscape";
+                }
+                return getInternalDimensionSize(context, key);
+            }
+        }
+        return result;
+    }
+
+
+    private static int getInternalDimensionSize(Context context, String key) {
+        int result = 0;
+        try {
+            int resourceId = context.getResources().getIdentifier(key, "dimen", "android");
+            if (resourceId > 0) {
+                result = Math.round(context.getResources().getDimensionPixelSize(resourceId) *
+                        Resources.getSystem().getDisplayMetrics().density /
+                        context.getResources().getDisplayMetrics().density);
+            }
+        } catch (Resources.NotFoundException ignored) {
+            return 0;
+        }
+        return result;
     }
 }
