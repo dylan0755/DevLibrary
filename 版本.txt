@@ -14,6 +14,8 @@ V4.0.0
 9.新增IdCardUtils 检测 18 15 位以及港澳台 身份证
 10.NavBarUtils 增加 获取底部导航栏高度 getNavBarHeight
 11.BankCardCodeUtils 更名为BankCardUtils, 新增 由银行卡号查询银行名称和卡种， 银行列表Json（已按字母排序）
+12.IRecyclerHelper 和 RecyclerViewHelper  新增 toStickFromPosition() 将某个item 置顶
+
 
 
 
