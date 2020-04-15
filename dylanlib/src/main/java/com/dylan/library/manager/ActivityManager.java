@@ -122,7 +122,7 @@ public class ActivityManager {
         activityStack.clear();
     }
 
-    public void finishAllActivityWithOut(Class clazz){
+    public void finishAllActivityExclude(Class clazz){
         Iterator<Activity> iterator=activityStack.iterator();
         while(iterator.hasNext()){
             Activity activity=iterator.next();

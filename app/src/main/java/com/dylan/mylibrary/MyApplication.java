@@ -25,7 +25,7 @@ import retrofit2.Call;
 /**
  * Created by Dylan on 2016/9/1.
  */
-public class MyApplication extends MultiDexApplication {
+public class MyApplication extends Application {
     private static Context mContext;
     private RestApi mRestApi;
     public static String qiniuDomain;

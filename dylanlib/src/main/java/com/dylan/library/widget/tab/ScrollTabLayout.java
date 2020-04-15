@@ -8,7 +8,6 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -27,7 +26,9 @@ import java.util.List;
 /**
  * Created by Dylan on 2016/8/31.
  */
-public class ScrollTabLayout2 extends LinearLayout {
+
+@Deprecated
+public class ScrollTabLayout extends LinearLayout {
     private int TAB_TEXT_SIZE;
     private int COLOR_TEXT_NORMAL;
     private int COLOR_TEXT_SELECT = Color.BLACK;
@@ -65,12 +66,12 @@ public class ScrollTabLayout2 extends LinearLayout {
     private int tabMargin;
     private int mInitTranslationX;
 
-    public ScrollTabLayout2(Context context) {
+    public ScrollTabLayout(Context context) {
         this(context, null);
 
     }
 
-    public ScrollTabLayout2(Context context, AttributeSet attrs) {
+    public ScrollTabLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(HORIZONTAL);
         setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
@@ -240,12 +241,12 @@ public class ScrollTabLayout2 extends LinearLayout {
     /**
      * 添加标签
      */
-    public ScrollTabLayout2 addTab(TabItem tabItem) {
+    public ScrollTabLayout addTab(TabItem tabItem) {
         mTabItemList.add(tabItem);
         return this;
     }
 
-    public ScrollTabLayout2 addTabs(List<TabItem> tabItems) {
+    public ScrollTabLayout addTabs(List<TabItem> tabItems) {
         if (tabItems == null || tabItems.isEmpty()) return this;
         mTabItemList.addAll(tabItems);
         return this;

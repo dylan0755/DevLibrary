@@ -13,7 +13,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 
 import com.dylan.library.widget.tab.HorizontalScrollTabLayout;
-import com.dylan.library.widget.tab.ScrollTabLayout2;
+import com.dylan.library.widget.tab.ScrollTabLayout;
 import com.dylan.library.widget.tab.TabItem;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.tab.TabLayoutFragment;
@@ -27,7 +27,7 @@ import java.util.List;
  * Desc:
  */
 public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
-    ScrollTabLayout2 mTabLayout;
+    ScrollTabLayout mTabLayout;
     ViewPager mViewPager;
     public static final String TAB_INDEX="tabIndex";
 
@@ -109,7 +109,7 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
     }
 
 
-    class TabSelectListenerImpl implements ScrollTabLayout2.TabSelectListener{
+    class TabSelectListenerImpl implements ScrollTabLayout.TabSelectListener{
 
         @Override
         public void onSelect(int position, TabItem tabItem) {

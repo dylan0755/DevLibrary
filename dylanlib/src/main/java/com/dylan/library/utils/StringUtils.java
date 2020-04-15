@@ -6,6 +6,7 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
+import java.math.BigDecimal;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,6 +20,47 @@ public class StringUtils {
 
     }
 
+    /**
+     *  Formatter.formatFileSize  这个类会出现 单位为中文的情况，如 637KB 变成 637千字节
+     * @param size
+     * @return
+     */
+    public static String formatFileSize(long size) {
+        double kiloByte = size*1.0 / 1024;
+        if (kiloByte < 1) {
+            return "0 B";
+        }
+
+        double megaByte = kiloByte / 1024;
+        if (megaByte < 1) {
+            BigDecimal result1 = new BigDecimal(Double.toString(kiloByte));
+            return result1.setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .toPlainString() + " KB";
+        }
+
+        double gigaByte = megaByte / 1024;
+        if (gigaByte < 1) {
+            BigDecimal result2 = new BigDecimal(Double.toString(megaByte));
+            return result2.setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .toPlainString() + " MB";
+        }
+
+        double teraBytes = gigaByte / 1024;
+        if (teraBytes < 1) {
+            BigDecimal result3 = new BigDecimal(Double.toString(gigaByte));
+            return result3.setScale(2, BigDecimal.ROUND_HALF_UP)
+                    .toPlainString() + " GB";
+        }
+        BigDecimal result4 = new BigDecimal(teraBytes);
+        return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
+                + " TB";
+    }
+
+
+
+    /**
+     * 用字符串表示金额的时候处理字符串为空和小数点问题
+     */
     public static String  dealNumericValue(String string){
         if (string==null||string.isEmpty())string="0";
         return AmountUtils.rvZeroAndDot(string);
