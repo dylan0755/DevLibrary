@@ -1,0 +1,3 @@
+gradlew compileDebugSource --stacktrace -info
+
+gradlew assembleDebug --info

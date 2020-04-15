@@ -9,9 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.dylan.library.dialog.PhotoViewShowDialog;
-import com.dylan.library.screen.ScreenUtils;
-import com.dylan.library.widget.photoview.ViewLocation;
+import com.dylan.library.dialog.PhotoPreviewDialog;
 import com.dylan.mylibrary.R;
 import com.gyf.barlibrary.ImmersionBar;
 
@@ -40,7 +38,7 @@ public class ScaleUpPhotoViewActivity extends AppCompatActivity {
         ivTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhotoViewShowDialog dialog=new PhotoViewShowDialog(v.getContext());
+                PhotoPreviewDialog dialog=new PhotoPreviewDialog(v.getContext());
                 dialog.show((ImageView) v);
             }
         });
@@ -50,7 +48,8 @@ public class ScaleUpPhotoViewActivity extends AppCompatActivity {
         ivCenter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhotoViewShowDialog dialog=new PhotoViewShowDialog(v.getContext());
+                PhotoPreviewDialog dialog=new PhotoPreviewDialog(v.getContext());
+                dialog.setBackgroundColor(Color.BLACK);
                 dialog.show((ImageView) v);
             }
         });
@@ -60,7 +59,7 @@ public class ScaleUpPhotoViewActivity extends AppCompatActivity {
         ivBottom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                PhotoViewShowDialog dialog=new PhotoViewShowDialog(v.getContext());
+                PhotoPreviewDialog dialog=new PhotoPreviewDialog(v.getContext());
                 dialog.show((ImageView) v);
             }
         });

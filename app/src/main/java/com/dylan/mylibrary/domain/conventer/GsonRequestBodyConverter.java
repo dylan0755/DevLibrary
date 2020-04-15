@@ -17,6 +17,7 @@ import java.nio.charset.Charset;
 import okhttp3.MediaType;
 import okhttp3.RequestBody;
 import okio.Buffer;
+import okio.ByteString;
 import retrofit2.Converter;
 
 final class GsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
@@ -37,6 +38,8 @@ final class GsonRequestBodyConverter<T> implements Converter<T, RequestBody> {
         JsonWriter jsonWriter = gson.newJsonWriter(writer);
         adapter.write(jsonWriter, value);
         jsonWriter.close();
-        return RequestBody.create(MEDIA_TYPE, buffer.readByteString());
+        ByteString byteString=buffer.readByteString();
+        buffer.close();
+        return RequestBody.create(MEDIA_TYPE,byteString );
     }
 }

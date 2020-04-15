@@ -5,7 +5,9 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.view.KeyEvent;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -15,6 +17,7 @@ import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.ContextUtils;
 import com.dylan.library.widget.callback.AnimatorEndListener;
+import com.dylan.library.widget.callback.OnTouchCallBack;
 import com.dylan.library.widget.photoview.ScaleUpPhotoView;
 import com.dylan.library.widget.photoview.ViewLocation;
 
@@ -23,20 +26,23 @@ import com.dylan.library.widget.photoview.ViewLocation;
  * Date: 2020/3/1
  * Desc:
  */
-public class PhotoViewShowDialog extends Dialog {
+public class PhotoPreviewDialog extends Dialog {
+    private View rootView;
     private ScaleUpPhotoView scaleUpPhotoView;
     private ViewLocation viewLocation;
 
-    public PhotoViewShowDialog(Context context) {
+    public PhotoPreviewDialog(Context context) {
         this(context,0);
     }
 
-    public PhotoViewShowDialog(Context context, int themeResId) {
+    public PhotoPreviewDialog(Context context, int themeResId) {
         super(context, 0);
-        setContentView(R.layout.dl_dialog_photoview_show);
+        setContentView(R.layout.dl_dialog_photo_preview);
+        rootView=findViewById(R.id.rootView);
         scaleUpPhotoView=findViewById(R.id.ivShow);
         Window window=getWindow();
         window.setBackgroundDrawable(null);
+        window.setDimAmount(0.5f);
         window.setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.MATCH_PARENT);
         WindowManager.LayoutParams layoutParams=window.getAttributes();
         layoutParams .width= WindowManager.LayoutParams.MATCH_PARENT;
@@ -56,7 +62,25 @@ public class PhotoViewShowDialog extends Dialog {
                 return true;
             }
         });
+        //单击消失
+        scaleUpPhotoView.addOnTouchCallBack(new OnTouchCallBack() {
+            @Override
+            public void singleActionUp() {
+                scaleUpPhotoView.startExitAnim(viewLocation, new AnimatorEndListener() {
+                    @Override
+                    public void onAnimationEnd(Animator animation) {
+                        dismiss();
+                    }
+                });
+            }
+        });
     }
+
+    public void setBackgroundColor(int color){
+        rootView.setBackgroundColor(color);
+    }
+
+
 
     public void show(ImageView fromView,int statusBarHeight){
         int[] p = new int[2];
@@ -90,6 +114,8 @@ public class PhotoViewShowDialog extends Dialog {
         scaleUpPhotoView.setImageBitmap(bitmap);
 
     }
+
+
 
 
 

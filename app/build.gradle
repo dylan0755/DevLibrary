@@ -12,9 +12,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        jackOptions {
-            enabled true
-        }
+
 
     }
     buildTypes {
@@ -27,9 +25,7 @@ android {
     lintOptions {
         abortOnError false
     }
-    compileOptions {
-        targetCompatibility = '1.8'
-    }
+
 }
 
 repositories{
@@ -57,7 +53,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     compile 'com.github.bumptech.glide:okhttp3-integration:4.7.1'
     //compile 'com.dylan:devlib:3.5.0'
-    compile project(':dylanlib')
+     compile project(':dylanlib')
     //  compile(name: 'dylanlib-release', ext: 'aar')
     compile files('libs/butterknife-7.0.1.jar')
     compile files('libs/ImmersionBar.jar')

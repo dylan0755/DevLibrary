@@ -3,7 +3,6 @@ package com.dylan.mylibrary;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.support.multidex.MultiDexApplication;
 import android.util.Log;
 
 import com.dylan.library.utils.Logger;
