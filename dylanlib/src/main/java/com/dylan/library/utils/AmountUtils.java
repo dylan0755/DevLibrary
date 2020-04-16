@@ -14,6 +14,15 @@ public class AmountUtils {
 
     static DecimalFormat format = new DecimalFormat("0.00");
 
+    /**
+     * 用字符串表示金额的时候处理字符串为空和小数点问题
+     */
+    public static String  dealAmountValue(String string){
+        if (string==null||string.isEmpty())string="0";
+        return AmountUtils.rvZeroAndDot(string);
+    }
+
+
     public static String formatTwoDecimal(double money) {
         String amount = format.format(money);
         return rvZeroAndDot(amount);
