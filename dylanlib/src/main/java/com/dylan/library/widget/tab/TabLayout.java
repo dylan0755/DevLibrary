@@ -27,8 +27,7 @@ import java.util.List;
  * Created by Dylan on 2016/8/31.
  */
 
-@Deprecated
-public class ScrollTabLayout extends LinearLayout {
+public class TabLayout extends LinearLayout {
     private int TAB_TEXT_SIZE;
     private int COLOR_TEXT_NORMAL;
     private int COLOR_TEXT_SELECT = Color.BLACK;
@@ -66,12 +65,12 @@ public class ScrollTabLayout extends LinearLayout {
     private int tabMargin;
     private int mInitTranslationX;
 
-    public ScrollTabLayout(Context context) {
+    public TabLayout(Context context) {
         this(context, null);
 
     }
 
-    public ScrollTabLayout(Context context, AttributeSet attrs) {
+    public TabLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(HORIZONTAL);
         setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
@@ -241,12 +240,12 @@ public class ScrollTabLayout extends LinearLayout {
     /**
      * 添加标签
      */
-    public ScrollTabLayout addTab(TabItem tabItem) {
+    public TabLayout addTab(TabItem tabItem) {
         mTabItemList.add(tabItem);
         return this;
     }
 
-    public ScrollTabLayout addTabs(List<TabItem> tabItems) {
+    public TabLayout addTabs(List<TabItem> tabItems) {
         if (tabItems == null || tabItems.isEmpty()) return this;
         mTabItemList.addAll(tabItems);
         return this;
@@ -454,23 +453,16 @@ public class ScrollTabLayout extends LinearLayout {
      * 设置指示器的偏移
      */
     private void setIndicatorOffset(int position, float positionOffset) {
-//        mTranslationX = mTabWidth * (position + positionOffset);//指示器的偏移量
-//        invalidate();
-
-        if (positionOffset == 0) {
-            mTranslationX = 0;//指示器的偏移量
-            if (position == 0) {
-                mTranslationX = mInitTranslationX + positionOffset;
-            } else {
-                for (int i = 0; i <= position; i++) {
-                    if (i != position) {
-                        mTranslationX += getChildAt(i).getMeasuredWidth();
-                    } else {
-                        mTranslationX += getChildAt(i).getMeasuredWidth() / 2 - mIndicatorWidth / 2;
-                    }
-                }
-            }
+        //指示器的偏移量
+        int indicatorOffset=0;
+        for (int i = 0; i < position; i++) {
+            indicatorOffset += getChildAt(i).getMeasuredWidth();
         }
+
+        int currentPosition=mViewPager!=null?mViewPager.getCurrentItem():position;
+        int indicatorPadding = getChildAt(currentPosition).getMeasuredWidth() / 2 - mIndicatorWidth / 2;
+        int viewWidth = getChildAt(position).getMeasuredWidth();
+        mTranslationX = indicatorOffset+indicatorPadding+positionOffset * viewWidth;
         invalidate();
     }
 
@@ -489,7 +481,6 @@ public class ScrollTabLayout extends LinearLayout {
                 }
 
                 if (mViewPager != null && mViewPager.getAdapter() != null) {
-                    pageSelectedListener.recordPosition=mViewPager.getCurrentItem();
                     mViewPager.setCurrentItem(clickPosition);
                 } else {
                     setSelectIndex(clickPosition);
@@ -503,45 +494,24 @@ public class ScrollTabLayout extends LinearLayout {
 
 
     class PageSelectedListener implements ViewPager.OnPageChangeListener {
-        //记录上一次滑动的positionOffsetPixels值
-        private int recordPosition;
-        private boolean isDragging;
 
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            //当前偏移量
-            int currentOffset = 0;
+
+
+            //指示器的偏移量
+            setIndicatorOffset(position,positionOffset);
+            //TabLayout的偏移量
+            int tabCurrentOffset = 0;
             for (int i = 0; i < position; i++) {
-                currentOffset += getChildAt(i).getMeasuredWidth();
+                tabCurrentOffset += getChildAt(i).getMeasuredWidth();
             }
-            //指示器偏移量
-            int indicatorPadding=0;
-            Logger.e("recordPosition="+recordPosition+" position="+position);
-
-            if (!isDragging){
-
-            }
-
-            if(positionOffset!=0&&recordPosition ==position&&position+1<getTabCount()){//向左滑，切换下一个
-                indicatorPadding = getChildAt(position + 1).getMeasuredWidth() / 2 - mIndicatorWidth / 2;
-            }else if (positionOffset!=0&&position<recordPosition){
-                indicatorPadding = getChildAt(position).getMeasuredWidth() / 2 - mIndicatorWidth / 2;
-            }
-
-
-            if (positionOffset==0){
-                indicatorPadding = getChildAt(position ).getMeasuredWidth() / 2 - mIndicatorWidth / 2;
-            }
-
-
             int viewWidth = getChildAt(position).getMeasuredWidth();
-            mTranslationX = currentOffset+indicatorPadding  + positionOffset * viewWidth;
-
+            float tabLayoutOffsetX=tabCurrentOffset+positionOffset * viewWidth;
 
             //当滑动ViewPager的时候，TabLayout需要跟着滑动
-        //   linkageTabLayout();
-            //刷新
-            invalidate();
+            linkageTabLayout(tabLayoutOffsetX);
+
 
         }
 
@@ -549,28 +519,21 @@ public class ScrollTabLayout extends LinearLayout {
         @Override
         public void onPageSelected(int position) {
             setSelectIndex(position);
-            isDragging=false;
         }
 
         @Override
         public void onPageScrollStateChanged(int state) {
-             if (state==ViewPager.SCROLL_STATE_DRAGGING){
-                 recordPosition=mViewPager.getCurrentItem();
-                 isDragging=true;
-             }else if (state==ViewPager.SCROLL_STATE_SETTLING){
-                 isDragging=false;
-             }
         }
     }
 
     //TabLayout 随ViewPager 联动
-    private void linkageTabLayout() {
+    private void linkageTabLayout(float translationX) {
         if (mVisibleTabCount > 0) {
             if (beginScrollLeftMargin == 0) {
                 beginScrollLeftMargin = getChildAt(beginScrollTabIndex).getLeft();
             }
 
-            int scrollRange = (int) (mTranslationX - beginScrollLeftMargin);
+            int scrollRange = (int) (translationX - beginScrollLeftMargin);
             if (scrollRange < 0) scrollRange = 0;
             if (scrollRange > mMaxScrollRange) scrollRange = mMaxScrollRange;
             scrollTo(scrollRange, 0);

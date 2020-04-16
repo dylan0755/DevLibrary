@@ -13,7 +13,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 
 import com.dylan.library.widget.tab.HorizontalScrollTabLayout;
-import com.dylan.library.widget.tab.ScrollTabLayout;
+import com.dylan.library.widget.tab.TabLayout;
 import com.dylan.library.widget.tab.TabItem;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.tab.TabLayoutFragment;
@@ -27,7 +27,7 @@ import java.util.List;
  * Desc:
  */
 public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
-    ScrollTabLayout mTabLayout;
+    TabLayout mTabLayout;
     ViewPager mViewPager;
     public static final String TAB_INDEX="tabIndex";
 
@@ -56,19 +56,17 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
         // mTabLayout.syncTextIconColor(false);
         mTabLayout.addTab(mTabLayout.newTab().setTabTitle("粤菜"))
                 .addTab(mTabLayout.newTab().setTabTitle("川菜"))
-                .addTab(mTabLayout.newTab().setTabTitle("家常菜")
-                        .setTabIconRight(R.mipmap.ic_arrow_down))
                 .addTab(mTabLayout.newTab().setTabTitle("卤菜"))
                 .addTab(mTabLayout.newTab().setTabTitle("湘菜"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mTabLayout.newTab().setTabTitle("桂林米粉"))
                 .addTab(mTabLayout.newTab().setTabTitle("测试1"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试"))
                 .addTab(mTabLayout.newTab().setTabTitle("测试2"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试3"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试"))
                 .addTab(mTabLayout.newTab().setTabTitle("测试4"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试5"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mTabLayout.newTab().setTabTitle("测试"))
                 .create();
         List<Fragment> fragmentList = new ArrayList<Fragment>();
         for (int i = 0; i < mTabLayout.getTabCount(); i++) {
@@ -109,7 +107,7 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
     }
 
 
-    class TabSelectListenerImpl implements ScrollTabLayout.TabSelectListener{
+    class TabSelectListenerImpl implements TabLayout.TabSelectListener{
 
         @Override
         public void onSelect(int position, TabItem tabItem) {

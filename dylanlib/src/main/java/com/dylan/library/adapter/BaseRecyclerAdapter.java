@@ -86,10 +86,8 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
     }
 
     public void bind(List<T> list) {
-        if (list!=null&&list.size()>0){
             mDataList = list;
             notifyDataSetChanged();
-        }
     }
 
     public void addAllAndNotifyDataChanged(List<T> list) {

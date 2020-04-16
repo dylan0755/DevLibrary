@@ -66,19 +66,17 @@ public abstract class CommonBaseAdapter<T, VH extends CommonBaseAdapter.ViewHold
     }
 
     public void bind(List<T> dataList) {
-        if (dataList != null && dataList.size() > 0) {
-            this.dataList = dataList;
-            notifyDataSetChanged();
-        }
-    }
-
-
-    public void clear(){
-        dataList=null;
+        this.dataList = dataList;
         notifyDataSetChanged();
     }
 
-    public List<T> getDataList(){
+
+    public void clear() {
+        dataList = null;
+        notifyDataSetChanged();
+    }
+
+    public List<T> getDataList() {
         return dataList;
     }
 

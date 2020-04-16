@@ -9,8 +9,8 @@ V4.1.0
 2.新增CompatCardView
 3.AmountUtils 新增 dealAmountValue
 4.FileUtils 新增 unZipAssetsFolder，将Assets压缩包解压到sdcard
-5.CommonBaseAdapter 增加getDataList 和 clear
-
+5.BaseRecyclerAdapter 和CommonBaseAdapter bind() 不做传参空判  CommonBaseAdapter 增加getDataList 和 clear
+6.新增TabLayout
 
 
 
