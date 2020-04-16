@@ -72,6 +72,16 @@ public abstract class CommonBaseAdapter<T, VH extends CommonBaseAdapter.ViewHold
         }
     }
 
+
+    public void clear(){
+        dataList=null;
+        notifyDataSetChanged();
+    }
+
+    public List<T> getDataList(){
+        return dataList;
+    }
+
     public void initDateFormatter() {
         mDateFormatter = new SimpleDateFormat("yyyy-MM-dd");
     }
