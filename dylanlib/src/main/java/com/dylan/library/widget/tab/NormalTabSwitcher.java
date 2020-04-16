@@ -1,4 +1,4 @@
-package com.dylan.library.widget;
+package com.dylan.library.widget.tab;
 
 import android.content.Context;
 import android.graphics.Color;
