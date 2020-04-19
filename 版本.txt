@@ -12,7 +12,7 @@ V4.1.0
 5.BaseRecyclerAdapter 和CommonBaseAdapter bind() 不做传参空判  CommonBaseAdapter 增加getDataList 和 clear
 6.新增TabLayout
 7.新增ShadowLayout
-
+8.checkBankCardCode 更新，增加 checkCardValid 走阿里公共接口判断
 
 
 
