@@ -217,7 +217,6 @@ public class ShadowLayout extends ViewGroup {
 
 
         if (cornerRadius>0){
-            PaintFlagsDrawFilter  paintFlagsDrawFilter = new PaintFlagsDrawFilter(0, Paint.ANTI_ALIAS_FLAG | Paint.FILTER_BITMAP_FLAG);
             canvas.setDrawFilter(paintFlagsDrawFilter);
             canvas.save();
             canvas.clipPath(clipPath);//裁剪，若设置了圆角，则子View只能为圆角
