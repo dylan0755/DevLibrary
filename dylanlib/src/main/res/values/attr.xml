@@ -106,6 +106,50 @@
     </declare-styleable>
 
 
+
+    <attr name="shadowColor" format="color"/>
+    <attr name="shadowRadius" format="dimension"/>
+    <attr name="shadowWith" format="dimension"/>
+    <attr name="cornerRadius" format="dimension"/>
+    <attr name="shadowDX" format="dimension"/>
+    <attr name="shadowDY" format="dimension"/>
+    <attr name="useCustomShadow" format="boolean"/>
+
+
+
+    <declare-styleable name="ShadowLayout" >
+        <attr name="shadowColor" />
+        <attr name="shadowRadius"/>
+        <attr name="shadowWith"/>
+        <attr name="cornerRadius"/>
+        <attr name="shadowDX"/>
+        <attr name="shadowDY"/>
+    </declare-styleable>
+
+
+
+    <declare-styleable name="ShadowCardView" >
+        <attr format="color" name="cardBackgroundColor"/>
+        <attr format="dimension" name="cardCornerRadius"/>
+        <attr format="dimension" name="cardElevation"/>
+        <attr format="dimension" name="cardMaxElevation"/>
+        <attr format="dimension" name="contentPadding"/>
+        <attr format="dimension" name="contentPaddingLeft"/>
+        <attr format="dimension" name="contentPaddingRight"/>
+        <attr format="dimension" name="contentPaddingTop"/>
+        <attr format="dimension" name="contentPaddingBottom"/>
+        <attr name="android:minWidth"/>
+        <attr name="android:minHeight"/>
+        <attr name="shadowColor" />
+        <attr name="shadowRadius"/>
+        <attr name="shadowWith" />
+        <attr name="cornerRadius"/>
+        <attr name="shadowDX" />
+        <attr name="shadowDY"/>
+        <attr name="useCustomShadow" />
+    </declare-styleable>
+
+
     <!-- 沉浸式状态栏使用 -->
     <item name="dl_status_bar_view" type="id" />
     <item name="dl_translucent_view" type="id" />
