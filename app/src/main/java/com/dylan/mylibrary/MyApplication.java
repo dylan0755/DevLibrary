@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.dylan.library.utils.AndKit;
 import com.dylan.library.utils.Logger;
 import com.dylan.mylibrary.bean.QiNiuDomain;
 import com.dylan.mylibrary.domain.RestApi;
@@ -33,7 +34,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         mContext = this;
-        ToastUtils.initToast(this);
+        AndKit.init(this);
         Logger.setDebugMode(true);
         mRestApi = RestApi.Factory.getInstance(RestApi.Factory.STRING_CONVERTER);
         CrashHandler.getInstance().init(MyApplication.this);
