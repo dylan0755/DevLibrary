@@ -1,14 +1,8 @@
 package com.dylan.library.utils;
 
 import android.graphics.Bitmap;
-import android.os.Build;
 import android.util.Log;
-
 import com.dylan.library.exception.ELog;
-
-import java.lang.reflect.Array;
-import java.lang.reflect.Method;
-import java.security.Policy;
 import java.util.List;
 
 /**

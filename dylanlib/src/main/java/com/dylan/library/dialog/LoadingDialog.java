@@ -2,7 +2,6 @@ package com.dylan.library.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -21,7 +20,7 @@ public class LoadingDialog extends Dialog {
     private ProgressBar loadingBar;
 
     public LoadingDialog(@NonNull Context context) {
-        super(context, R.style.DLCustomDialog);
+        super(context, R.style.LoadingDialog);
         setCancelable(true);
         setCanceledOnTouchOutside(false);
 

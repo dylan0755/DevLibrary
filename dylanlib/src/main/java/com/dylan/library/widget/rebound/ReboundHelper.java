@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AbsListView;
-import android.widget.ScrollView;
 import android.widget.Scroller;
 
 import com.dylan.library.utils.ViewUtils;

@@ -18,7 +18,6 @@ import android.os.Parcelable;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.webkit.ValueCallback;
-import android.webkit.WebView;
 
 import java.io.File;
 import java.util.ArrayList;

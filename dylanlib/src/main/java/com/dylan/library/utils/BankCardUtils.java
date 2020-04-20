@@ -2,10 +2,7 @@ package com.dylan.library.utils;
 
 import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
-
-import org.json.JSONArray;
 import org.json.JSONObject;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
 

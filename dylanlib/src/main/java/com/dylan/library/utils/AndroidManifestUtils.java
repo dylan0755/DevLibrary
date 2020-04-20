@@ -4,10 +4,6 @@ import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.ProviderInfo;
-import android.util.Log;
-
-
-import java.util.List;
 
 /**
  * Author: Dylan

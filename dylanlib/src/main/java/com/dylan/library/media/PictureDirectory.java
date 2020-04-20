@@ -1,7 +1,5 @@
 package com.dylan.library.media;
 
-import android.support.annotation.NonNull;
-
 import java.io.Serializable;
 
 /**

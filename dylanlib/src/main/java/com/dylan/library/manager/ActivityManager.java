@@ -3,8 +3,6 @@ package com.dylan.library.manager;
 import android.app.Activity;
 import android.content.Context;
 
-import com.dylan.library.utils.Logger;
-
 import java.util.Iterator;
 import java.util.Stack;
 

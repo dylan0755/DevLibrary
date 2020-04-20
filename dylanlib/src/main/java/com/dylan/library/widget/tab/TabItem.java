@@ -1,7 +1,6 @@
 package com.dylan.library.widget.tab;
 
 import android.content.Context;
-import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.support.annotation.Nullable;

@@ -11,7 +11,6 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import com.dylan.library.R;
-import com.dylan.library.utils.Logger;
 
 /**
  * Author: Dylan

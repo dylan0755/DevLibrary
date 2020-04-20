@@ -26,7 +26,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dylan.library.R;
-import com.dylan.library.utils.Logger;
 
 
 /**

@@ -10,7 +10,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dylan.library.R;
-import com.dylan.library.widget.CircleIndicatorView;
 
 
 public class LoadMoreFooterView extends FrameLayout {

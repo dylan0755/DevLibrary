@@ -16,7 +16,6 @@ import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.widget.irecycler.RefreshTrigger;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;

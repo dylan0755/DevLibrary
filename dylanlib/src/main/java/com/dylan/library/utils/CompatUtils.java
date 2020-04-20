@@ -11,8 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.widget.TextView;
 
-import com.dylan.library.R;
-
 /**
  * Author: Dylan
  * Date: 2019/8/7

@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -7,7 +7,6 @@ import android.content.ComponentCallbacks;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 public class DensityUtils {
     private static float sNoncompatDensity;

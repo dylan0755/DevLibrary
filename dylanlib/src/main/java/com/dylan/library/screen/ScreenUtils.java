@@ -6,7 +6,6 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.os.Build;
-import android.provider.Settings;
 import android.support.v4.view.ViewCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.dylan.library.device.SystemSettings;
-import com.dylan.library.exception.ELog;
 import com.dylan.library.utils.RomUtils;
 
 import java.lang.reflect.Field;

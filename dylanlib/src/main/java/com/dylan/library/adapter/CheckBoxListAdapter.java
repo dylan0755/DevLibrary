@@ -1,8 +1,5 @@
 package com.dylan.library.adapter;
 
-import android.view.LayoutInflater;
-import android.view.ViewGroup;
-
 import java.util.HashMap;
 
 /**

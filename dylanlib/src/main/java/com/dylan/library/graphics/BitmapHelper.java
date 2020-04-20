@@ -14,20 +14,16 @@ import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.media.ExifInterface;
 import android.os.Build;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 
-import com.bumptech.glide.load.data.ExifOrientationStream;
-import com.bumptech.glide.load.resource.bitmap.TransformationUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.io.IOCloser;
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.Logger;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -35,9 +31,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.Channels;
-import java.nio.channels.ReadableByteChannel;
 
 /**
  * Created by Dylan on 2016/12/30.

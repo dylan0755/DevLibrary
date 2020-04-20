@@ -1,6 +1,5 @@
 package com.dylan.library.device;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.location.LocationManager;
 import android.provider.Settings;
