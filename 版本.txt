@@ -14,6 +14,11 @@ V4.1.0
 7.新增ShadowLayout
 8.checkBankCardCode 更新，增加 checkCardValid 走阿里公共接口判断
 9.新增 BottomSlideDialog  CustomDialog
+10.新增AndKit 一起初始化 ToastUtils  CompatUtils AppSpManager等类
+11.LoadMoreFooterView 增加setGlobalCustomNoMoreText,全局改变 默认的无更多数据文本
+
+
+
 
 
 

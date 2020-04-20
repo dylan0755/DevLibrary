@@ -13,7 +13,7 @@ import com.dylan.library.R;
 
 
 public class LoadMoreFooterView extends FrameLayout {
-
+    private static CharSequence customNoMoreText;
     private Status mStatus;
 
     private View mLoadingView;
@@ -42,7 +42,10 @@ public class LoadMoreFooterView extends FrameLayout {
         mLoadingView = findViewById(R.id.loadingView);
         mErrorView = findViewById(R.id.errorView);
         mTheEndView = findViewById(R.id.theEndView);
-
+        if (customNoMoreText!=null&&customNoMoreText.length()>0){
+            TextView textView=findViewById(R.id.tvTheEnd);
+            if (textView!=null)textView.setText(customNoMoreText);
+        }
         mErrorView.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +56,12 @@ public class LoadMoreFooterView extends FrameLayout {
         });
 
         setStatus(Status.GONE);
+    }
+
+
+
+    public static void setGlobalCustomNoMoreText(CharSequence charSequence){
+        customNoMoreText=charSequence;
     }
 
     public void setOnRetryListener(OnRetryListener listener) {
