@@ -3,7 +3,7 @@
     android:id="@+id/tvTheEnd"
     android:layout_width="match_parent"
     android:layout_height="48dp"
-    android:text="没有更多数据"
+    android:text="已加载全部"
     android:textSize="13sp"
     android:layout_gravity="top"
     android:gravity="center"
