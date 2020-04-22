@@ -12,7 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.dylan.library.adapter.BaseRecyclerAdapter;
+import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.exception.OnNextBussinesException;
 import com.dylan.library.exception.ThrowableUtils;
 import com.dylan.library.utils.EmptyUtils;
@@ -40,7 +40,7 @@ public class IRecyclerHelper {
     private LoadMoreFooterView footerView;
     private TextView tvEmptyView;
     private View emptyView;
-    private BaseRecyclerAdapter mAdapter;
+    private IRecyclerAdapterDataBinder mAdapterBinder;
     private CharSequence emptyTip = "暂无数据";
 
 
@@ -48,20 +48,20 @@ public class IRecyclerHelper {
         return pageNo;
     }
 
-    public void bind(IRecyclerView recyclerView, BaseRecyclerAdapter adapter, TextView tvEmptyView) {
+    public void bind(IRecyclerView recyclerView, IRecyclerAdapterDataBinder adapterBinder, TextView tvEmptyView) {
         this.recyclerView = recyclerView;
         this.tvEmptyView = tvEmptyView;
         footerView = (LoadMoreFooterView) recyclerView.getLoadMoreFooterView();
         headerView = (RefreshHeaderView) recyclerView.getRefreshHeaderView();
-        mAdapter = adapter;
+        mAdapterBinder = adapterBinder;
     }
 
-    public void bind(IRecyclerView recyclerView, BaseRecyclerAdapter adapter, View emptyView) {
+    public void bind(IRecyclerView recyclerView, IRecyclerAdapterDataBinder adapterBinder, View emptyView) {
         this.recyclerView = recyclerView;
         this.emptyView = emptyView;
         footerView = (LoadMoreFooterView) recyclerView.getLoadMoreFooterView();
         headerView = (RefreshHeaderView) recyclerView.getRefreshHeaderView();
-        mAdapter = adapter;
+        mAdapterBinder = adapterBinder;
     }
 
     public void setEmptyTip(CharSequence charSequence) {
@@ -90,7 +90,7 @@ public class IRecyclerHelper {
     }
 
     public boolean isCanLoadMore() {
-        if (isCanLoadMore(recyclerView, footerView, mAdapter)) {
+        if (isCanLoadMore(recyclerView, footerView, mAdapterBinder)) {
             pageNo++;
             return true;
         }
@@ -122,10 +122,10 @@ public class IRecyclerHelper {
                 if (tvEmptyView != null) tvEmptyView.setText("");
                 if (emptyView!=null)emptyView.setVisibility(View.GONE);
                 if (pageNo == 1) {
-                    mAdapter.bind(list);
+                    mAdapterBinder.hookBind(list);
                     refreshComplete(recyclerView);
                 } else {
-                    mAdapter.addAllAndNotifyDataChanged(list);
+                    mAdapterBinder.hookAddAllAndNotifyDataChanged(list);
                     if (footerView != null) {
                         if (isLastPage){
                             setNoMore(footerView);
@@ -138,7 +138,7 @@ public class IRecyclerHelper {
             } else {
                 if (pageNo == 1) {
                     refreshComplete(recyclerView);
-                    mAdapter.clear();
+                    mAdapterBinder.hookClear();
                     if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
                     if (emptyView!=null)emptyView.setVisibility(View.VISIBLE);
                 } else {
@@ -170,10 +170,10 @@ public class IRecyclerHelper {
                 if (tvEmptyView != null) tvEmptyView.setText("");
                 if (emptyView!=null)emptyView.setVisibility(View.GONE);
                 if (pageNo == 1) {
-                    mAdapter.bind(list);
+                    mAdapterBinder.hookBind(list);
                     refreshComplete(recyclerView);
                 } else {
-                    mAdapter.addAllAndNotifyDataChanged(list);
+                    mAdapterBinder.hookAddAllAndNotifyDataChanged(list);
                     if (footerView != null) {
                         loadMoreComplete(footerView);
                     }
@@ -181,7 +181,7 @@ public class IRecyclerHelper {
             } else {
                 if (pageNo == 1) {
                     refreshComplete(recyclerView);
-                    mAdapter.clear();
+                    mAdapterBinder.hookClear();
                     if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
                     if (emptyView!=null)emptyView.setVisibility(View.VISIBLE);
                 } else {
@@ -201,10 +201,10 @@ public class IRecyclerHelper {
             if (EmptyUtils.isNotEmpty(list)) {
                 if (tvEmptyView != null) tvEmptyView.setText("");
                 if (pageNo == 1) {
-                    mAdapter.bind(list);
+                    mAdapterBinder.hookBind(list);
                     refreshComplete(recyclerView);
                 } else {
-                    mAdapter.addAllAndNotifyDataChanged(list);
+                    mAdapterBinder.hookAddAllAndNotifyDataChanged(list);
                     if (footerView != null) {
                         loadMoreComplete(footerView);
                     }
@@ -212,7 +212,7 @@ public class IRecyclerHelper {
             } else {
                 if (pageNo == 1) {
                     refreshComplete(recyclerView);
-                    mAdapter.clear();
+                    mAdapterBinder.hookClear();
                     if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
                 } else {
                     setNoMore(footerView);
@@ -329,10 +329,10 @@ public class IRecyclerHelper {
     }
 
 
-    public static boolean isCanLoadMore(IRecyclerView recyclerView, LoadMoreFooterView loadMoreFooterView, RecyclerView.Adapter adapter) {
+    public static boolean isCanLoadMore(IRecyclerView recyclerView, LoadMoreFooterView loadMoreFooterView, IRecyclerAdapterDataBinder adapterBinder) {
         if (recyclerView == null || loadMoreFooterView == null ||
-                adapter == null) return false;
-        if (loadMoreFooterView.canLoadMore() && adapter.getItemCount() > 0) {
+                adapterBinder == null) return false;
+        if (loadMoreFooterView.canLoadMore() && adapterBinder.hookGetItemCount() > 0) {
             if (recyclerView.getLayoutManager() instanceof LinearLayoutManager && ((LinearLayoutManager) recyclerView.getLayoutManager()).findFirstCompletelyVisibleItemPosition() > 2) {
                 loadMoreFooterView.setStatus(LoadMoreFooterView.Status.LOADING);
                 return true;

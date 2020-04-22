@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.utils.Logger;
 
@@ -23,7 +24,7 @@ import java.util.List;
  * Created by Dylan on 2017/1/11.
  */
 
-public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewHolder> extends RecyclerView.Adapter {
+public  abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewHolder> extends RecyclerView.Adapter implements IRecyclerAdapterDataBinder {
     @NotProguard
     protected Context mContext;
     private LayoutInflater mInflater;
@@ -120,10 +121,8 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
 
 
     public void clear(){
-        if (mDataList!=null){
-            mDataList.clear();
-            notifyDataSetChanged();
-        }
+        mDataList=null;
+        notifyDataSetChanged();
     }
 
     public void loadMore(List<T> list){
@@ -149,15 +148,28 @@ public abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewH
         return (mSubConstrutor==null||mDataList==null)?0:(mDataList.size());
     }
 
+    @Override
+    public void hookBind(List list) {
+        bind(list);
+    }
 
+    @Override
+    public void hookAddAllAndNotifyDataChanged(List list){
+            addAllAndNotifyDataChanged(list);
+    }
+    @Override
+    public void hookClear(){
+        clear();
+    }
+    @Override
+    public int hookGetItemCount(){
+        return getItemCount();
+    }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
         public ViewHolder(View itemView) {
             super(itemView);
 
         }
-
-
-
     }
 }

@@ -16,8 +16,10 @@ V4.1.0
 9.新增 BottomSlideDialog  CustomDialog
 10.新增AndKit 一起初始化 ToastUtils  CompatUtils AppSpManager等类
 11.LoadMoreFooterView 增加setGlobalCustomNoMoreText,全局改变 默认的无更多数据文本
-
-
+12.新增 IRecyclerAdapterDataBinder
+        IRecyclerHelper 不再接受BaseRecyclerAdapter,改为接受 IRecyclerAdapterDataBinder，
+        只要自定义的Adapter 实现IRecyclerAdapterDataBinder，就可以使用 IRecyclerHelper。
+13.EntityReflection 更名为 BeanUtils 增加 copyProperties 拷贝属性
 
 
 
