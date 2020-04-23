@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 
 import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,6 @@ public class TabLayout extends LinearLayout {
     private int mMinimumVelocity;
     private VelocityTracker mVelocityTracker;
     private int tabMargin;
-    private int mInitTranslationX;
 
     public TabLayout(Context context) {
         this(context, null);
@@ -134,10 +134,12 @@ public class TabLayout extends LinearLayout {
      */
     @Override
     protected void dispatchDraw(Canvas canvas) {
-        canvas.save();
-        canvas.translate(mTranslationX, getHeight());
-        canvas.drawPath(mIndicatorPath, mIndicatorPaint);
-        canvas.restore();
+        if (mIndicatorPath!=null){
+            canvas.save();
+            canvas.translate(mTranslationX, getHeight());
+            canvas.drawPath(mIndicatorPath, mIndicatorPaint);
+            canvas.restore();
+        }
         super.dispatchDraw(canvas);
     }
 
@@ -150,22 +152,21 @@ public class TabLayout extends LinearLayout {
         measureTab();
     }
 
-
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-        if (getChildCount() == 0) return;
-        mInitTranslationX = 0;
-        if (mShape == SHAPE_TRIANGLE) {
-            initTriangle();
-            // 初始时指示器的偏移量，Tab的正下方
-            mInitTranslationX = getChildAt(0).getMeasuredWidth() / 2 - mTriangleWidth / 2;
-        } else {
-            initRetangle();
-            mInitTranslationX = (getChildAt(0).getMeasuredWidth() / 2 - mIndicatorWidth / 2);
+    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+        super.onLayout(changed, l, t, r, b);
+        if (getTabCount()>0&&getChildCount()==getTabCount()){
+            if (mShape == SHAPE_TRIANGLE) {
+                initTriangle();
+                // 初始时指示器的偏移量，Tab的正下方
+            } else {
+                initRetangle();
+            }
         }
-        mTranslationX += mInitTranslationX;
+
     }
+
+
 
     private void initRetangle() {
         mIndicatorPath = new Path();
@@ -194,7 +195,7 @@ public class TabLayout extends LinearLayout {
     private void measureTab() {
         int childCount = getChildCount();
         if (childCount == 0) return;
-        int newWidthMeasureSpec = MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
+        int newWidthMeasureSpec = MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED);
         int totalRange = 0;
         for (int i = 0; i < childCount; i++) {
             TabItem tabItem = (TabItem) getChildAt(i);
@@ -395,17 +396,24 @@ public class TabLayout extends LinearLayout {
     }
 
 
-    public void setSelect(int position) {
-        if (mViewPager != null) {
-            if (mViewPager.getAdapter() != null) {
-                mViewPager.setCurrentItem(position);
-            } else {
-                throw new IllegalStateException("ViewPager has not set PageAdapter before setSelect(postion)");
-            }
+    public void setSelect(final int position) {
+        post(new Runnable() {
+            @Override
+            public void run() {
+                if (mViewPager != null) {
+                    if (mViewPager.getAdapter() != null) {
+                        mViewPager.setCurrentItem(position);
+                    } else {
+                        throw new IllegalStateException("ViewPager has not set PageAdapter before setSelect(postion)");
+                    }
 
-        } else {
-            setSelectIndex(position);
-        }
+                } else {
+                    setSelectIndex(position);
+                    setIndicatorOffset(position,0);
+                }
+            }
+        });
+
 
     }
 
@@ -462,6 +470,7 @@ public class TabLayout extends LinearLayout {
         int indicatorPadding = getChildAt(currentPosition).getMeasuredWidth() / 2 - mIndicatorWidth / 2;
         int viewWidth = getChildAt(position).getMeasuredWidth();
         mTranslationX = indicatorOffset+indicatorPadding+positionOffset * viewWidth;
+        Logger.e(mTranslationX);
         invalidate();
     }
 
