@@ -88,11 +88,17 @@ public class FragmentSwitcher {
 
 
     public void select(int index) {
+       select(index,null);
+    }
+
+    public void select(int index,Bundle bundle){
         if (currentIndex == index) return;
         mTransaction = mFragmentManager.beginTransaction();
         hide();
         if (mReferenceMap.get(index) == null) {
-            mTransaction.add(mContainerId, newInstance(index));
+            Fragment fragment=newInstance(index);
+            if (fragment!=null&&bundle!=null)fragment.setArguments(bundle);
+            mTransaction.add(mContainerId,fragment);
         } else {
             mTransaction.show(mReferenceMap.get(index));
         }
