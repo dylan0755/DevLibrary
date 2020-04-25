@@ -6,7 +6,7 @@ V4.2.0
 1.修复TabLayout 闪退bug   setSelect()时指示器位置没有变化问题
 2.FragmentSwitcher 增加 select(int index,Bundle bundle)，支持Fragment创建的时候 setArgument
 3.AppUtils 新增判断微信，支付宝App是否存在
-
+4. IRecyclerView isRefreshing  IRecyclerHelper 针对 Throwalbe 情况下 关闭下拉刷新 状态
 
 
 

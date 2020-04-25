@@ -735,4 +735,9 @@ public class IRecyclerView extends RecyclerView {
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
         return cm.getActiveNetworkInfo();
     }
+
+
+    public boolean isRefreshing(){
+        return mStatus == STATUS_REFRESHING;
+    }
 }
