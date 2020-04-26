@@ -1,4 +1,4 @@
-package com.dylan.library.screen;
+package com.dylan.library.contentObserver;
 
 import android.content.ContentResolver;
 import android.content.Context;
@@ -15,7 +15,7 @@ import android.provider.Settings;
  */
 public class RotationObserver extends ContentObserver {
     ContentResolver mResolver;
-    private RotationSettingChangedListener mListener;
+    private ContentObserverChangeListener mListener;
 
     public RotationObserver(Context context) {
         super(new Handler(Looper.getMainLooper()));
@@ -30,7 +30,7 @@ public class RotationObserver extends ContentObserver {
 
     }
 
-    public void registerObserver(RotationSettingChangedListener listener) {
+    public void registerObserver(ContentObserverChangeListener listener) {
         mListener = listener;
         mResolver.registerContentObserver(Settings.System
                         .getUriFor(Settings.System.ACCELEROMETER_ROTATION), false,
@@ -44,7 +44,5 @@ public class RotationObserver extends ContentObserver {
     }
 
 
-    public interface RotationSettingChangedListener {
-        void onChange(boolean selfChange);
-    }
+
 }
