@@ -33,7 +33,7 @@ public class GpsLocatonObserver extends ContentObserver {
     public void registerObserver(ContentObserverChangeListener listener) {
         mListener = listener;
         mContentResolver.registerContentObserver(Settings.System
-                        .getUriFor(Settings.System.ACCELEROMETER_ROTATION), false,
+                        .getUriFor(Settings.System.LOCATION_PROVIDERS_ALLOWED), false,
                 this);
     }
 

@@ -13,11 +13,11 @@ import android.provider.Settings;
  * Date: 2020/2/20
  * Desc:
  */
-public class RotationObserver extends ContentObserver {
+public class AutoRotationObserver extends ContentObserver {
     ContentResolver mResolver;
     private ContentObserverChangeListener mListener;
 
-    public RotationObserver(Context context) {
+    public AutoRotationObserver(Context context) {
         super(new Handler(Looper.getMainLooper()));
         mResolver = context.getContentResolver();
     }
