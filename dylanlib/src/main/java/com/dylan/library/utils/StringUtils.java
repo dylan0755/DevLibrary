@@ -147,7 +147,8 @@ public class StringUtils {
 
     public static boolean containsOneStr(String[] array, String str) {
         if (array == null || array.length == 0) return false;
-        for (int i = 0, len = str.length(); i < len; i++) {
+        if (str==null)return false;
+        for (int i = 0, len = array.length; i < len; i++) {
             if (array[i].equals(str)) return true;
         }
         return false;

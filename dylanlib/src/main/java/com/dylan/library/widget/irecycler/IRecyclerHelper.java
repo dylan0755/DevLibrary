@@ -113,7 +113,8 @@ public class IRecyclerHelper {
                     pageNo--;
                     setError(footerView);
                 } else {
-                    setRefreshStatus(footerView);
+                    completeRefresh();
+                    completeLoadMore();
                 }
                 ThrowableUtils.show(throwable);
             }
@@ -161,7 +162,8 @@ public class IRecyclerHelper {
                     pageNo--;
                     setError(footerView);
                 } else {
-                    setRefreshStatus(footerView);
+                    completeRefresh();
+                    completeLoadMore();
                 }
                 ThrowableUtils.show(errorMsg);
             }
@@ -227,7 +229,8 @@ public class IRecyclerHelper {
                     pageNo--;
                     setError(footerView);
                 } else {
-                    setRefreshStatus(footerView);
+                    completeRefresh();
+                    completeLoadMore();
                 }
                 ThrowableUtils.show(errorMsg);
             }

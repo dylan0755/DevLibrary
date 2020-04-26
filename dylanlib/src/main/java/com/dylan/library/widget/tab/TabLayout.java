@@ -470,7 +470,6 @@ public class TabLayout extends LinearLayout {
         int indicatorPadding = getChildAt(currentPosition).getMeasuredWidth() / 2 - mIndicatorWidth / 2;
         int viewWidth = getChildAt(position).getMeasuredWidth();
         mTranslationX = indicatorOffset+indicatorPadding+positionOffset * viewWidth;
-        Logger.e(mTranslationX);
         invalidate();
     }
 
