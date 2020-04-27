@@ -7,7 +7,7 @@ V4.2.0
 2.FragmentSwitcher 增加 select(int index,Bundle bundle)，支持Fragment创建的时候 setArgument
 3.AppUtils 新增判断微信，支付宝App是否存在
 4. IRecyclerView isRefreshing  IRecyclerHelper 针对 Throwalbe 情况下 关闭下拉刷新 状态
-
+5.增加ContentObserver包，用于监听系统开关，新增GpsLocationObserver 监听gps开关
 
 
 

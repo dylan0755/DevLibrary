@@ -246,6 +246,11 @@
       protected *;
   }
 
+   -keep class com.dylan.library.contentObserver.** {
+        public *;
+        protected *;
+    }
+
 -keep class com.dylan.library.device.** {
       public *;
       protected *;
