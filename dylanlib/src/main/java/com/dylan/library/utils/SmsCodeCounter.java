@@ -20,7 +20,7 @@ public class SmsCodeCounter {
     private Context context;
     private int count;
     private   int mDuration =60;
-    private String normalStatusText="获取验证码";
+    private String reGetCodeText ="获取验证码";
     private Drawable normalDrawable;
     private Drawable countDownDrawable;
     private int normalTextColor;
@@ -29,6 +29,10 @@ public class SmsCodeCounter {
     public SmsCodeCounter(Context context, TextView tvValidateCode) {
         this.context = context;
         this.tvValidateCode = tvValidateCode;
+    }
+
+    public void setReGetCodeText(String reGetCodeText){
+        this.reGetCodeText=reGetCodeText;
     }
 
     public void setNormalTextColor(int color){
@@ -57,7 +61,7 @@ public class SmsCodeCounter {
         public void handleMessage(Message msg) {
             if (count == 0) {
                 tvValidateCode.setEnabled(true);
-                tvValidateCode.setText(normalStatusText);
+                tvValidateCode.setText(reGetCodeText);
                 tvValidateCode.setTextColor(normalTextColor);
                 tvValidateCode.setBackground(normalDrawable);
             } else {
