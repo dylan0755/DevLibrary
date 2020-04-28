@@ -9,7 +9,9 @@ V4.2.0
 4. IRecyclerView isRefreshing  IRecyclerHelper 针对 Throwalbe 情况下 关闭下拉刷新 状态
 5.增加ContentObserver包，用于监听系统开关，新增GpsLocationObserver 监听gps开关
 6.SmsCodeCounter setReGetCodeText  设置倒计时结束后的文本
-
+7.SoftKeyboardUtils 新增  AdjustPan ，调整页面输入框被软键盘遮挡问题，  方案来源 AndroidBug5497Workaround。
+  使用  SoftKeyboardUtils.assistActivity（Activity activity） 放在setContentView之后
+  要求：布局中要有ScrollView，ListView的滚动组件 Activity 不能设置键盘 setSoftInputMode
 
 
 
