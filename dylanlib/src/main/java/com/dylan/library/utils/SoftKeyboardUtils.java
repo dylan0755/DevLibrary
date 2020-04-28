@@ -156,7 +156,9 @@ public class SoftKeyboardUtils {
             this.activity = activity;
             FrameLayout content = (FrameLayout) activity.findViewById(android.R.id.content);
             mChildOfContent = content.getChildAt(0);
-
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+                mChildOfContent.setBackground(null);
+            }
             //界面出现变动都会调用这个监听事件
             mChildOfContent.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
                 public void onGlobalLayout() {
@@ -184,12 +186,13 @@ public class SoftKeyboardUtils {
                 int heightDifference = usableHeightSansKeyboard - usableHeightNow;
                 if (heightDifference > (usableHeightSansKeyboard / 4)) {
                     // keyboard probably just became visible
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                        //frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
-                        frameLayoutParams.height = usableHeightSansKeyboard - heightDifference + statusBarHeight;
-                    } else {
-                        frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
-                    }
+//                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//                        //frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
+//                        frameLayoutParams.height = usableHeightSansKeyboard - heightDifference + statusBarHeight;
+//                    } else {
+//                        frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
+//                    }
+                    frameLayoutParams.height = usableHeightSansKeyboard - heightDifference;
                 } else {
                     frameLayoutParams.height = contentHeight;
                 }
