@@ -1,9 +1,10 @@
 package com.dylan.library.utils.helper;
 
+import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
@@ -11,23 +12,28 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 import com.dylan.library.dialog.PhotoSelectBottomSheetDialog;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.utils.AndroidManifestUtils;
+import com.dylan.library.utils.AppUtils;
 import com.dylan.library.utils.ContextUtils;
-import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.PermissionUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.PermissionRequestBuilder;
 import com.dylan.library.utils.ToastUtils;
 
 import java.io.File;
-
 
 
 /**
  * Created by Dylan on 2016/9/24.
  */
 public class PhotoSelector {
+    public final int REQUEST_PER_CAMERA_WRITE = 100;
+    public final int REQUEST_PER_EXTERNAL = 101;
+
+
     private final int REQUEST_PHOTOABLUM = 1;//从相册选择
     private final int REQUEST_CAMEAR = 2;//拍照
     private final int PICTURE_CUT = 3;//裁剪
@@ -38,6 +44,8 @@ public class PhotoSelector {
     private boolean operateOriginal = true;//操作原图
     private PhotoPickerCallBack pickerCallBack;
     private String mTag="";//当前标签，一个页面可能有几处上传，比如身份证正反面等等，tag表示来源
+    private PermissionRequestBuilder requestBuilder;
+
 
     public PhotoSelector(PhotoPickerCallBack callBack) {
         if (callBack==null)return;
@@ -61,9 +69,13 @@ public class PhotoSelector {
         bottomSheetDialog.show(new PhotoSelectBottomSheetDialog.SelectListener() {
             @Override
             public void selectCamera() {
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                    if (PermissionUtils.hasNotCameraAndExternalWritePermission(ContextUtils.getActivity(pickerCallBack.getActivityContext()))){
-                        PermissionUtils.requestCameraAndExternalWrite(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestBuilder = new PermissionRequestBuilder(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+                    requestBuilder.addPerm(Manifest.permission.CAMERA, true);
+                    requestBuilder.addPerm(Manifest.permission.READ_EXTERNAL_STORAGE, true);
+                    requestBuilder.addPerm(Manifest.permission.WRITE_EXTERNAL_STORAGE, true);
+                    boolean needRequest = requestBuilder.startRequest(REQUEST_PER_CAMERA_WRITE);
+                    if (needRequest) {
                         return;
                     }
                 }
@@ -72,9 +84,12 @@ public class PhotoSelector {
 
             @Override
             public void selectPhotoAlbum() {
-                if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
-                    if (PermissionUtils.hasNotExternalStoragePermission(ContextUtils.getActivity(pickerCallBack.getActivityContext()))){
-                        PermissionUtils.requestExternalStorage(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    requestBuilder = new PermissionRequestBuilder(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+                    requestBuilder.addPerm(Manifest.permission.READ_EXTERNAL_STORAGE, true);
+                    requestBuilder.addPerm(Manifest.permission.WRITE_EXTERNAL_STORAGE, true);
+                    boolean needRequest = requestBuilder.startRequest(REQUEST_PER_EXTERNAL);
+                    if (needRequest) {
                         return;
                     }
                 }
@@ -184,27 +199,38 @@ public class PhotoSelector {
 
 
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-      if (requestCode==PermissionUtils.REQUEST_PER_CAMERA_WRITE){
-        if (EmptyUtils.isNotEmpty(grantResults)){
-            if (grantResults[0]== PackageManager.PERMISSION_GRANTED&&
-                grantResults[1]==PackageManager.PERMISSION_GRANTED){
-                selectByCamera();
-            }else{
-                ToastUtils.show("相机权限未允许");
-            }
-        }else{
-            ToastUtils.show("相机权限未允许");
-        }
-      }else if (requestCode==PermissionUtils.REQUEST_PER_EXTERNAL_STORAGE){
-          if (EmptyUtils.isNotEmpty(grantResults)){
-              if (grantResults[0]== PackageManager.PERMISSION_GRANTED&&
-                      grantResults[1]==PackageManager.PERMISSION_GRANTED){
-                  toPick();
+      if (requestCode==REQUEST_PER_CAMERA_WRITE){
+          PermissionRequestBuilder.RequestReuslt result = requestBuilder.onRequestPermissionsResult(permissions, grantResults);
+          if (result.hasRejectForceNeed) {
+              if (result.duration<500){
+                  final Context context = pickerCallBack.getActivityContext();
+                  new AlertDialog.Builder(context)
+                          .setMessage("检测到您拒绝掉相机权限，拍照功能无法正常使用，是否前往开启?")
+                          .setPositiveButton("确定", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                  AppUtils.gotoPermission(context);
+                              }
+                          })
+                          .setNegativeButton("取消", new DialogInterface.OnClickListener() {
+                              @Override
+                              public void onClick(DialogInterface dialog, int which) {
+                                  dialog.dismiss();
+                              }
+                          })
+                          .show();
               }else{
-                  ToastUtils.show("存储权限未允许");
+                  ToastUtils.show("相机权限未允许");
               }
-          }else{
+          } else {
+              selectByCamera();
+          }
+      }else if (requestCode==REQUEST_PER_EXTERNAL){
+          PermissionRequestBuilder.RequestReuslt result = requestBuilder.onRequestPermissionsResult(permissions, grantResults);
+          if (result.hasRejectForceNeed) {
               ToastUtils.show("存储权限未允许");
+          } else {
+              toPick();
           }
 
       }

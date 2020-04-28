@@ -19,6 +19,7 @@ public class PermissionRequestBuilder {
 
     private Activity mActivity;
     private List<PermissionRequest> permissionRequestList = new ArrayList<>();
+    private long requestStartTime;
 
 
     public PermissionRequestBuilder(Activity context) {
@@ -51,7 +52,7 @@ public class PermissionRequestBuilder {
 
 
     public boolean startRequest(int requestCode) {
-        if (permissionRequestList==null)return false;
+        if (permissionRequestList == null) return false;
         Iterator<PermissionRequest> it = permissionRequestList.iterator();
         while (it.hasNext()) {
             PermissionRequest request = it.next();
@@ -67,6 +68,7 @@ public class PermissionRequestBuilder {
         if (EmptyUtils.isNotEmpty(permissionList)) {
             String[] requestPermissions = permissionList.toArray(new String[permissionList.size()]);
             ActivityCompat.requestPermissions(mActivity, requestPermissions, requestCode);
+            requestStartTime = System.currentTimeMillis();
             return true;
         }
         mActivity = null;
@@ -80,20 +82,29 @@ public class PermissionRequestBuilder {
 
 
     //检查是否拒绝强制权限
-    public List<String> isRejectForcePermissions(String[] permissions, @NonNull int[] grantResults) {
+    public RequestReuslt onRequestPermissionsResult(String[] permissions, @NonNull int[] grantResults) {
         List<String> list = new ArrayList<>();
-        if (EmptyUtils.isEmpty(permissions) || EmptyUtils.isEmpty(grantResults)) return list;
 
-        for (int i = 0; i < grantResults.length; i++) {
-            int result = grantResults[i];
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                boolean isNeed = getPermission(permissions[i]).isForceNeed();
-                if (isNeed) {//强制需要的权限没有给予
-                    list.add(permissions[i]);
+
+        if (EmptyUtils.isNotEmpty(permissions) && EmptyUtils.isNotEmpty(grantResults)) {
+            for (int i = 0; i < grantResults.length; i++) {
+                int result = grantResults[i];
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    boolean isNeed = getPermission(permissions[i]).isForceNeed();
+                    if (isNeed) {//强制需要的权限没有给予
+                        list.add(permissions[i]);
+                    }
                 }
             }
         }
-        return list;
+
+
+        RequestReuslt requestReuslt = new RequestReuslt();
+        requestReuslt.hasRejectForceNeed = !list.isEmpty();
+        requestReuslt.rejectList = list;
+        requestReuslt.duration = System.currentTimeMillis() - requestStartTime;
+        requestStartTime = 0;
+        return requestReuslt;
 
     }
 
@@ -137,6 +148,14 @@ public class PermissionRequestBuilder {
             isForceNeed = forceNeed;
         }
 
+
+    }
+
+
+    public class RequestReuslt {
+        public boolean hasRejectForceNeed;
+        public long duration;
+        public List<String> rejectList;
 
     }
 }

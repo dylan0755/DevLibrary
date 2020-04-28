@@ -12,7 +12,8 @@ V4.2.0
 7.SoftKeyboardUtils 新增  AdjustPan ，调整页面输入框被软键盘遮挡问题，  方案来源 AndroidBug5497Workaround。
   使用  SoftKeyboardUtils.assistActivity（Activity activity） 放在setContentView之后
   要求：布局中要有ScrollView，ListView的滚动组件 Activity 不能设置键盘 setSoftInputMode
-
+8.PermissionRequestBodyBuilder 修改 返回 RequestReuslt，
+9.PhotoSelector 内部申请权限逻辑 由PermissionUtils 改成  PermissionRequestBodyBuilder 实现
 
 
 
