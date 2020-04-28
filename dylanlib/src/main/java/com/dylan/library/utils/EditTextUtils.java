@@ -20,6 +20,47 @@ import android.widget.TextView;
 
 public class EditTextUtils {
 
+    //保留小数点
+    public static void keepDecimal(final EditText editText,final  int decimalCount){
+
+        editText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (s.toString().contains(".")) {
+                    if (s.length() - 1 - s.toString().indexOf(".") > decimalCount) {
+                        s = s.toString().subSequence(0, s.toString().indexOf(".") +decimalCount+1);
+                        editText.setText(s);
+                        editText.setSelection(s.length());
+                        return;
+                    }
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (null == s)  return;
+
+                if (".".equals(s.toString())) {
+                    editText.setText("0.");
+                    editText.setSelection(2);
+                    return;
+                }
+
+                //长度大于1且以0开头，就将第一位0去掉
+                if (s.toString().length() > 1 && s.toString().startsWith("0") && !s.toString().startsWith("0.")) {
+                    s.replace(0, 1, "");
+                    return;
+                }
+            }
+        });
+    }
+
+
 
     public static void setGravityCenter(EditText editText) {
         if (editText == null) return;

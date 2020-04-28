@@ -14,7 +14,7 @@ V4.2.0
   要求：布局中要有ScrollView，ListView的滚动组件 Activity 不能设置键盘 setSoftInputMode
 8.PermissionRequestBodyBuilder 修改 返回 RequestReuslt，
 9.PhotoSelector 内部申请权限逻辑 由PermissionUtils 改成  PermissionRequestBodyBuilder 实现
-
+10.EditTextUtils 新增 keepDecimal(final EditText editText,final  int decimalCount)  增加小数点控制
 
 
 
