@@ -1,6 +1,7 @@
 package com.dylan.library.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,13 +12,11 @@ import com.dylan.library.proguard.NotProguard;
 import java.util.List;
 
 public abstract class BothItemRecyclerAdapter<T>  extends RecyclerView.Adapter{
-    public  static final int ITEM_DECORATION = -1;//装饰item
-    public  static final int ITEM_NORMAL = 0; //内容item
-    protected List<T> dataList;
-    @NotProguard
-    protected Context mContext;
-    @NotProguard
-    protected LayoutInflater mInflater;
+    private   static final int ITEM_DECORATION = -1;//装饰item
+    private  static final int ITEM_NORMAL = 0; //内容item
+    private List<T> dataList;
+    private Context mContext;
+    private LayoutInflater mInflater;
 
 
     public void bind(List<T> list) {
@@ -90,6 +89,32 @@ public abstract class BothItemRecyclerAdapter<T>  extends RecyclerView.Adapter{
     }
 
 
+    public LayoutInflater getLayoutInflater(){
+        return mInflater;
+    }
+
+    public Context getContext(){
+        return mContext;
+    }
+
+    public List<T> getDataList(){
+        return dataList;
+    }
+
+    public void startActivity(Intent intent){
+        mContext.startActivity(intent);
+    }
+
+    public void startSingleTopActivity(Intent intent){
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        mContext.startActivity(intent);
+    }
+
+    public void startSingleTopActivity(Class clazz){
+        Intent intent=new Intent(mContext,clazz);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        mContext.startActivity(intent);
+    }
 
 
 }

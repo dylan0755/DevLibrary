@@ -15,7 +15,7 @@ V4.2.0
 8.PermissionRequestBodyBuilder 修改 返回 RequestReuslt，
 9.PhotoSelector 内部申请权限逻辑 由PermissionUtils 改成  PermissionRequestBodyBuilder 实现
 10.EditTextUtils 新增 keepDecimal(final EditText editText,final  int decimalCount)  增加小数点控制
-
+11.优化BaseRecyclerAdapter 原有protected 修饰的属性 都改成 private  提供 getter
 
 
 
