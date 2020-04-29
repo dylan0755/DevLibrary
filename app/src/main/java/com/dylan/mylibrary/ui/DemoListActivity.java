@@ -7,7 +7,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.AESUtils;
 import com.dylan.library.utils.BankCardUtils;
+import com.dylan.library.utils.Base64Utils;
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
@@ -30,8 +32,16 @@ import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by Dylan on 2016/12/16.
@@ -45,47 +55,47 @@ public class DemoListActivity extends AppCompatActivity {
             "BulletinBoard", "PhotoSelector", "SlidingRefresh",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "HorizontalScrollTabLayout", "CheckBoxListAdapter",
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
-            "TextSwitchActivity","全局更换字体","FirstLineMargin",
-            "贝塞尔曲线","DashLineView","InputPasswordDialog","CountDownCircleView",
-            "ProgressWebActivity","VideoPlayerGesture","拖拽回弹组件","BitmapHelper","ShadowLayout"};
+            "TextSwitchActivity", "全局更换字体", "FirstLineMargin",
+            "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
+            "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper", "ShadowLayout"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, LocalPhotoSelectActivity.class,
-            SlidingRefreshActivity.class,  HorizontalScrollBackActivity.class,
+            SlidingRefreshActivity.class, HorizontalScrollBackActivity.class,
             VoiceRecordActivity.class, FileDownLoaderActivity.class, HorizontalScrollTabLayoutActivity.class,
             CheckBoxListAdapterActivity.class, LazyFragmentActivity.class, RedPointTextViewActivity.class,
-            UnScrollViewPagerActivity.class,TextSwitchActivity.class,
-            ModifyFontActivity.class, FirstLineMarginLeftActivity.class,BezierCurveActivity.class,
-            DashLineViewActivity.class,InputPasswordActivity.class, CountDownCircleViewActivity.class,
-            ProgressWebViewActivity.class,VideoPlayerGestureActivity.class, ReboundActivity.class,
-            BitmapHelperActivity.class,ShadowLayoutActivity.class};
+            UnScrollViewPagerActivity.class, TextSwitchActivity.class,
+            ModifyFontActivity.class, FirstLineMarginLeftActivity.class, BezierCurveActivity.class,
+            DashLineViewActivity.class, InputPasswordActivity.class, CountDownCircleViewActivity.class,
+            ProgressWebViewActivity.class, VideoPlayerGestureActivity.class, ReboundActivity.class,
+            BitmapHelperActivity.class, ShadowLayoutActivity.class};
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DensityUtils.setCustomDensityInWidth(360,this,getApplication());
+        DensityUtils.setCustomDensityInWidth(360, this, getApplication());
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
 
 
 
+
+
     }
 
 
-
-
     private void initEvent() {
-        mGridPager =  findViewById(R.id.gridPager);
+        mGridPager = findViewById(R.id.gridPager);
 
 
-        List<GridDemoItem> list=new ArrayList<>();
-        for (int i=0;i<demoNames.length;i++){
-            String name=demoNames[i];
-            Class clazz=classes[i];
-            GridDemoItem item=new GridDemoItem(name,clazz);
+        List<GridDemoItem> list = new ArrayList<>();
+        for (int i = 0; i < demoNames.length; i++) {
+            String name = demoNames[i];
+            Class clazz = classes[i];
+            GridDemoItem item = new GridDemoItem(name, clazz);
             list.add(item);
         }
 
@@ -98,21 +108,15 @@ public class DemoListActivity extends AppCompatActivity {
                 adapter.setOnItemClick(new GridDemoItemAdapter.OnItemClick() {
                     @Override
                     public void onItemClick(GridDemoItem item) {
-                        Intent intent = new Intent(DemoListActivity.this,item.getClzz());
+                        Intent intent = new Intent(DemoListActivity.this, item.getClzz());
                         startActivity(intent);
                     }
                 });
             }
         });
-        mGridPager.setDataList(list,3,30);
+        mGridPager.setDataList(list, 3, 30);
 
     }
-
-
-
-
-
-
 
 
 }
