@@ -31,7 +31,7 @@ public class TestAdapter extends BaseRecyclerAdapter<String,TestAdapter.ViewHold
         holder.tvItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mContext, s, Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -3,6 +3,8 @@
 
 
 V4.2.0
+
+
 1.修复TabLayout 闪退bug   setSelect()时指示器位置没有变化问题
 2.FragmentSwitcher 增加 select(int index,Bundle bundle)，支持Fragment创建的时候 setArgument
 3.AppUtils 新增判断微信，支付宝App是否存在
@@ -15,6 +17,12 @@ V4.2.0
 8.PermissionRequestBodyBuilder 修改 返回 RequestReuslt，
 9.PhotoSelector 内部申请权限逻辑 由PermissionUtils 改成  PermissionRequestBodyBuilder 实现
 10.EditTextUtils 新增 keepDecimal(final EditText editText,final  int decimalCount)  增加小数点控制
+11.优化BaseRecyclerAdapter 原有protected 修饰的属性 都改成 private  提供 getter
+
+
+
+
+
 
 
 

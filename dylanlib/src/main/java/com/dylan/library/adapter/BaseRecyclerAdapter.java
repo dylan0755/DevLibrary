@@ -1,6 +1,7 @@
 package com.dylan.library.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.LayoutRes;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -25,8 +26,7 @@ import java.util.List;
 
 
 public  abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.ViewHolder> extends RecyclerView.Adapter implements IRecyclerAdapterDataBinder {
-    @NotProguard
-    protected Context mContext;
+    private Context mContext;
     private LayoutInflater mInflater;
     private List<T> mDataList;
     private Constructor<VH> mSubConstrutor;
@@ -85,9 +85,6 @@ public  abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.View
         return t;
     }
 
-    public Context getContext() {
-        return mContext;
-    }
 
     public void bind(List<T> list) {
         mDataList = list;
@@ -146,6 +143,32 @@ public  abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.View
     public int getItemCount() {
         return (mSubConstrutor == null || mDataList == null) ? 0 : (mDataList.size());
     }
+
+
+    public Context getContext() {
+        return mContext;
+    }
+
+    public LayoutInflater getLayoutInflater(){
+        return mInflater;
+    }
+    public void startActivity(Intent intent){
+        mContext.startActivity(intent);
+    }
+
+    public void startSingleTopActivity(Intent intent){
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        mContext.startActivity(intent);
+    }
+
+    public void startSingleTopActivity(Class clazz){
+        Intent intent=new Intent(mContext,clazz);
+        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        mContext.startActivity(intent);
+    }
+
+
+
 
     @Override
     public void hookBind(List list) {
