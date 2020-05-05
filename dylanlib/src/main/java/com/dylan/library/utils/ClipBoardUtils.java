@@ -18,7 +18,9 @@ public class ClipBoardUtils {
         ClipboardManager myClipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData myClip = ClipData.newPlainText("text", text);
         myClipboard.setPrimaryClip(myClip);
-        Toast.makeText(context,"复制成功",Toast.LENGTH_SHORT).show();
+        Toast toast=Toast.makeText(context, null, Toast.LENGTH_SHORT);
+        toast.setText("复制成功");
+        toast.show();
     }
 
 
@@ -27,7 +29,9 @@ public class ClipBoardUtils {
         ClipboardManager myClipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData myClip = ClipData.newPlainText("text", text);
         myClipboard.setPrimaryClip(myClip);
-        Toast.makeText(context,""+tip,Toast.LENGTH_SHORT).show();
+        Toast toast=Toast.makeText(context, null, Toast.LENGTH_SHORT);
+        toast.setText(tip);
+        toast.show();
     }
 
 
