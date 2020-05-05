@@ -16,9 +16,11 @@ import java.util.TimerTask;
  */
 
 public class ToastUtils {
-    public static Toast shortToast = null;
-    public static Toast longToast = null;
-    public static Toast centerShortToast = null;
+    private static Toast shortToast = null;
+    private static Toast longToast = null;
+    private static Toast centerShortToast = null;
+    private static Toast centerLongToast = null;
+
     private static Application applicationContext;
 
     public static void initToast(Application application) {
@@ -28,6 +30,8 @@ public class ToastUtils {
             longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
             centerShortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
             centerShortToast.setGravity(Gravity.CENTER, 0, 0);
+            centerLongToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
+            centerLongToast.setGravity(Gravity.CENTER, 0, 0);
         } else {
             Log.e("ToastUtils ", "Can't create handler inside thread that has not called Looper.prepare()");
         }
@@ -46,10 +50,23 @@ public class ToastUtils {
         longToast.show();
     }
 
+    @Deprecated
     public static void showCenter(String string) {
         if (applicationContext == null) return;
         centerShortToast.setText(string);
         centerShortToast.show();
+    }
+
+    public static void showCenterShort(String string) {
+        if (applicationContext == null) return;
+        centerShortToast.setText(string);
+        centerShortToast.show();
+    }
+
+    public static void showCenterLong(String string) {
+        if (applicationContext == null) return;
+        centerLongToast.setText(string);
+        centerLongToast.show();
     }
 
 
@@ -59,7 +76,6 @@ public class ToastUtils {
         }
 
     }
-
 
 
     public static void showLongToast(final Toast lenthLongToast, final int duration) {
