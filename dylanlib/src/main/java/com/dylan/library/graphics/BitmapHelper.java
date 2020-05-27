@@ -40,6 +40,32 @@ public class BitmapHelper {
     private static final String TAG = BitmapHelper.class.getSimpleName();
 
 
+    public static Bitmap scale(Bitmap srcBitmap,int outWidth,int outHeight){
+        int width = srcBitmap.getWidth();
+        int height = srcBitmap.getHeight();
+
+        float scaleWidth = (outWidth)*1.0f/width;
+        float scaleHeight = (outHeight)*1.0f/height;
+
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth,scaleHeight);
+        return  Bitmap.createBitmap(srcBitmap,0,0,width,height,matrix,false);
+    }
+
+
+    public static Bitmap scale(Bitmap srcBitmap,float widthScale,float heightScale){
+        int width = srcBitmap.getWidth();
+        int height = srcBitmap.getHeight();
+
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(widthScale,heightScale);
+        return  Bitmap.createBitmap(srcBitmap,0,0,width,height,matrix,true);
+    }
+
+
+
     public  static BitmapSize decodeBitmapSize(String path){
         BitmapFactory.Options options=new BitmapFactory.Options();
         options.inJustDecodeBounds=true;
