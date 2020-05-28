@@ -513,7 +513,8 @@ public class BitmapHelper {
         Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
         try {
             Canvas canvas = new Canvas(bitmap);
-            canvas.drawBitmap(bitmapBottom, 0, 0, null);
+            Rect bottomRect=new Rect(0,0,srcWidth,srcHeight);
+            canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
             canvas.scale(scaleFactor, scaleFactor, srcWidth / 2, srcHeight / 2);
             canvas.drawBitmap(bitmapTop, (srcWidth - logoWidth) / 2, (srcHeight - logoHeight) / 2, null);
 
@@ -548,13 +549,11 @@ public class BitmapHelper {
         if (logoWidth == 0 || logoHeight == 0) {
             return bitmapBottom;
         }
-
-        //logo大小为二维码整体大小的 几分之几
-
         Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
         try {
             Canvas canvas = new Canvas(bitmap);
-            canvas.drawBitmap(bitmapBottom, 0, 0, null);
+            Rect bottomRect=new Rect(0,0,srcWidth,srcHeight);
+            canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
             canvas.drawBitmap(bitmapTop, (srcWidth - logoWidth) / 2, (srcHeight - logoHeight) / 2, null);
 
             canvas.save();

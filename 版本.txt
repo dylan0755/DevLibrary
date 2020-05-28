@@ -7,7 +7,7 @@ V4.3.0
 1.更新NetworkUtils 使用兼容方式获取网络状态
 2.新增 setCustomActivityDensityInWidth
 3.BitmapHelper 增加 scale 对Bitmap 进行缩放。
-
+4.BitmapHelper layOnCenter 更改，底部Bitmap  不能使用canvas.drawBitmap(bitmapBottom, 0, 0, null);  要使用  canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
 
 
 
