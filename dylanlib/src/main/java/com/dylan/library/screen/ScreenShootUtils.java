@@ -18,7 +18,49 @@ import com.dylan.library.graphics.BitmapHelper;
  */
 
 
-public class ScreenShoot {
+public class ScreenShootUtils {
+
+    public static Bitmap captureDecorView(Activity activity) {
+        View decordView = activity.getWindow().getDecorView();
+        decordView.setDrawingCacheEnabled(true);
+        decordView.buildDrawingCache();
+        Bitmap bitmap = decordView.getDrawingCache();
+        decordView.destroyDrawingCache();
+        return bitmap;
+    }
+
+
+    public static Bitmap captureDecorViewExcludeStatusBar(Activity activity) {
+        View decordView = activity.getWindow().getDecorView();
+        decordView.setDrawingCacheEnabled(true);
+        decordView.buildDrawingCache();
+        Bitmap bitmap = decordView.getDrawingCache();
+        int statusBarHeight = ScreenUtils.getStatusBarHeight(activity);
+        bitmap = Bitmap.createBitmap(bitmap, 0,
+                statusBarHeight, bitmap.getWidth(), bitmap.getHeight() - statusBarHeight);
+        decordView.destroyDrawingCache();
+        return bitmap;
+    }
+
+
+    public static Bitmap captureDecorViewExcludeStatusNavBar(Activity activity) {
+        View decordView = activity.getWindow().getDecorView();
+        decordView.setDrawingCacheEnabled(true);
+        decordView.buildDrawingCache();
+        Bitmap bitmap = decordView.getDrawingCache();
+        int statusBarHeight = ScreenUtils.getStatusBarHeight(activity);
+        int navHeight=0;
+        if (NavBarUtils.hasNavBar(activity)){
+            navHeight=NavBarUtils.getNavBarHeight(activity);
+        }
+        bitmap = Bitmap.createBitmap(bitmap, 0,
+                statusBarHeight, bitmap.getWidth(), bitmap.getHeight() - statusBarHeight-navHeight);
+        decordView.destroyDrawingCache();
+        return bitmap;
+    }
+
+
+
 
     public static Bitmap captureDecorView(Activity activity, String savePath) {
         return captureDecorView(activity, savePath, null);

@@ -35,7 +35,7 @@ import java.util.List;
 public class DemoListActivity extends AppCompatActivity {
     private GridViewPager mGridPager;
     private String[] demoNames = {"RecyclerViewSnapHelper", "ScaleUpPhotoView", "IRecyclerView",
-            "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
+            "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShootUtils",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "SlidingRefresh",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "HorizontalScrollTabLayout", "CheckBoxListAdapter",

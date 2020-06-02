@@ -8,8 +8,9 @@ V4.3.0
 2.新增 setCustomActivityDensityInWidth
 3.BitmapHelper 增加 scale 对Bitmap 进行缩放。
 4.BitmapHelper layOnCenter 更改，兼容小米手机，底部Bitmap  不能使用canvas.drawBitmap(bitmapBottom, 0, 0, null);  要使用  canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
-
-
+5.ScreenShoot 更名为ScreenShootUtils 新增  captureDecorViewExcludeStatusBar 不包含状态栏           captureDecorViewExcludeStatusNavBar 不包含状态栏和底部导航栏
+6.BitmapHelper 删除BlurImages 高斯模糊内部类     新增  blurBitmap 方法
+7.SystemBarHelper  tintStatusBar  默认透明度改为0
 
 
 
