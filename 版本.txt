@@ -12,7 +12,7 @@ V4.3.0
 6.BitmapHelper 删除BlurImages 高斯模糊内部类     新增  blurBitmap 方法
 7.SystemBarHelper  tintStatusBar  默认透明度改为0
 8.MediaTools getVideoSpec 获取视频宽高旋转角度 增加网络视频还是本地视频判断
-
+9.AppUtils isActivityOnForeground
 
 
 
