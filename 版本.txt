@@ -14,7 +14,7 @@ V4.3.0
 8.MediaTools getVideoSpec 获取视频宽高旋转角度 增加网络视频还是本地视频判断
 9.AppUtils isActivityOnForeground
 10.setClickTintResizeSpanStr  setClickTintResizeSpanStr  支持两处地方高亮可点击
-
+11.新增 BundleBuilder
 
 
 
