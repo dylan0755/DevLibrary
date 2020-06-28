@@ -17,7 +17,7 @@ V4.3.0
 11.新增 BundleBuilder
 12.CommonFragmentPagerAdapter 新增 addFragment(Fragment fragment, Bundle bundle)
 13.修复 ClipBoardUtils getPasteString 空指针异常
-
+14.HtmlUtils 增加 replaceHtmlContent 适配html 宽高
 
 
 
