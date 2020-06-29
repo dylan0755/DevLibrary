@@ -5,6 +5,8 @@ import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.provider.MediaStore;
 
+import java.util.HashMap;
+
 /**
  * Created by Dylan on 2016/9/22.
  */
@@ -131,7 +133,11 @@ public class MediaTools {
      */
     public static int[] getVideoSpec(String videoPath){
         MediaMetadataRetriever retr = new MediaMetadataRetriever();
-        retr.setDataSource(videoPath);
+        if (videoPath.startsWith("http")){
+            retr.setDataSource(videoPath,new HashMap<String, String>());
+        }else{
+            retr.setDataSource(videoPath);
+        }
         String height = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT); // 视频高度
         String width = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH); // 视频宽度
         String rotation = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION); // 视频旋转方

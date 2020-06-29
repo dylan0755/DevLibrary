@@ -16,7 +16,7 @@ public class DensityUtils {
     /**
      *  Activity#onCreate  中使用
      */
-    public static void setCustomDensityInHeight(int dp,Activity activity, final Application application) {
+    public static void setCustomApplicationDensityInHeight(int dp, Activity activity, final Application application) {
         final DisplayMetrics applicationDisplayMetrics = application.getResources().getDisplayMetrics();
         if (sNoncompatDensity == 0) {
             sNoncompatDensity = applicationDisplayMetrics.density;
@@ -56,7 +56,7 @@ public class DensityUtils {
     /**
      *  Activity#onCreate  中使用
      */
-    public static void setCustomDensityInWidth(int dp,Activity activity, final Application application) {
+    public static void setCustomApplicationDensityInWidth(int dp, Activity activity, final Application application) {
         final DisplayMetrics applicationDisplayMetrics = application.getResources().getDisplayMetrics();
         if (sNoncompatDensity == 0) {
             sNoncompatDensity = applicationDisplayMetrics.density;
@@ -87,8 +87,44 @@ public class DensityUtils {
         activityDisplayMetrics.scaledDensity = targetScaledDensity;
         activityDisplayMetrics.densityDpi = targetDensityDpi;
 
+    }
+
+    /**
+     *  Activity#onCreate  中使用
+     */
+    public static void setCustomActivityDensityInWidth(int dp, Activity activity, final Application application) {
+        final DisplayMetrics applicationDisplayMetrics = application.getResources().getDisplayMetrics();
+        if (sNoncompatDensity == 0) {
+            sNoncompatDensity = applicationDisplayMetrics.density;
+            sNoncompatScaledDensity = applicationDisplayMetrics.scaledDensity;
+            application.registerComponentCallbacks(new ComponentCallbacks() {
+                @Override
+                public void onConfigurationChanged(Configuration newConfig) {
+                    if (newConfig != null && newConfig.fontScale > 0) {
+                        sNoncompatScaledDensity = application.getResources().getDisplayMetrics().scaledDensity;
+                    }
+                }
+
+                @Override
+                public void onLowMemory() { }
+            });
+        }
+
+        //以 640*360 宽度 为标准， 宽度 360
+        final float targetDenisty = applicationDisplayMetrics.widthPixels * 1.0f / dp;
+        final float targetScaledDensity = targetDenisty * (sNoncompatScaledDensity / sNoncompatDensity);
+        final int targetDensityDpi = (int) (160 * targetDenisty);
+        DisplayMetrics activityDisplayMetrics = activity.getResources().getDisplayMetrics();
+        activityDisplayMetrics.density = targetDenisty;
+        activityDisplayMetrics.scaledDensity = targetScaledDensity;
+        activityDisplayMetrics.densityDpi = targetDensityDpi;
 
     }
+
+
+
+
+
 
 
     /**

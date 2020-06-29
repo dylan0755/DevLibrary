@@ -1,5 +1,6 @@
 package com.dylan.library.adapter;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -18,6 +19,7 @@ import java.util.List;
  * Desc:
  */
 public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
+
     private List<Fragment> fragmentList;
     private List<String> titleList;
 
@@ -27,7 +29,12 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
         titleList = new ArrayList<>();
     }
 
-    public void addFragment(Fragment fragment,String title){
+    public void addFragment(Fragment fragment, Bundle bundle) {
+        if (bundle != null) fragment.setArguments(bundle);
+        addFragment(fragment);
+    }
+
+    public void addFragment(Fragment fragment, String title) {
         addFragment(fragment);
         addTitle(title);
     }
@@ -36,16 +43,16 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
         fragmentList.add(fragment);
     }
 
-    public void addFragments(List<Fragment> fragments){
-        fragmentList=fragments;
+    public void addFragments(List<Fragment> fragments) {
+        fragmentList = fragments;
     }
 
     public void addTitle(String title) {
         titleList.add(title);
     }
 
-    public void addTitles(List<String> titleList){
-      this.titleList=titleList;
+    public void addTitles(List<String> titleList) {
+        this.titleList = titleList;
     }
 
     @Override
@@ -65,23 +72,23 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
 
-    public List<Fragment> getFragmentList(){
+    public List<Fragment> getFragmentList() {
         return fragmentList;
     }
 
-    public List<String> getTitleList(){
+    public List<String> getTitleList() {
         return titleList;
     }
 
 
-    public void addTabWithName(TabLayout tabLayout){
-      if (tabLayout!=null){
-          if (EmptyUtils.isNotEmpty(titleList)){
-              for (String title:titleList){
-                  tabLayout.addTab(tabLayout.newTab().setText(title));
-              }
-          }
-      }
+    public void addTabWithName(TabLayout tabLayout) {
+        if (tabLayout != null) {
+            if (EmptyUtils.isNotEmpty(titleList)) {
+                for (String title : titleList) {
+                    tabLayout.addTab(tabLayout.newTab().setText(title));
+                }
+            }
+        }
     }
 
 

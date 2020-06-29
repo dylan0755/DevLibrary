@@ -2,6 +2,28 @@
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
 
+V4.3.0
+
+1.更新NetworkUtils 使用兼容方式获取网络状态
+2.新增 setCustomActivityDensityInWidth
+3.BitmapHelper 增加 scale 对Bitmap 进行缩放。
+4.BitmapHelper layOnCenter 更改，兼容小米手机，底部Bitmap  不能使用canvas.drawBitmap(bitmapBottom, 0, 0, null);  要使用  canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
+5.ScreenShoot 更名为ScreenShootUtils 新增  captureDecorViewExcludeStatusBar 不包含状态栏           captureDecorViewExcludeStatusNavBar 不包含状态栏和底部导航栏
+6.BitmapHelper 删除BlurImages 高斯模糊内部类     新增  blurBitmap 方法
+7.SystemBarHelper  tintStatusBar  默认透明度改为0
+8.MediaTools getVideoSpec 获取视频宽高旋转角度 增加网络视频还是本地视频判断
+9.AppUtils isActivityOnForeground
+10.setClickTintResizeSpanStr  setClickTintResizeSpanStr  支持两处地方高亮可点击
+11.新增 BundleBuilder
+12.CommonFragmentPagerAdapter 新增 addFragment(Fragment fragment, Bundle bundle)
+13.修复 ClipBoardUtils getPasteString 空指针异常
+14.HtmlUtils 增加 replaceHtmlContent 适配html 宽高
+
+
+
+
+
+
 V4.2.0   ---->2020.05.06
 
 

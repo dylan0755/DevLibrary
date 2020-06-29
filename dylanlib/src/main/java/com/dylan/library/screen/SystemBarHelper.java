@@ -36,6 +36,7 @@ import java.util.regex.Pattern;
  * 来源:https://github.com/H07000223/FlycoSystemBar
  */
 public class SystemBarHelper {
+
     private static float DEFAULT_ALPHA = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? 0.2f : 0.3f;
 
     /**
@@ -45,7 +46,7 @@ public class SystemBarHelper {
      * @param statusBarColor 状态栏颜色
      */
     public static void tintStatusBar(Activity activity, @ColorInt int statusBarColor) {
-        tintStatusBar(activity, statusBarColor, DEFAULT_ALPHA);
+        tintStatusBar(activity, statusBarColor, 0);
     }
 
     /**

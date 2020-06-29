@@ -8,10 +8,10 @@ import android.util.Log;
 import android.view.View;
 
 import com.dylan.library.graphics.BitmapHelper;
+import com.dylan.library.screen.ScreenShootUtils;
 import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
 import com.dylan.library.io.FileUtils;
-import com.dylan.library.screen.ScreenShoot;
 import com.dylan.library.test.TestAdapter;
 
 /**
@@ -39,8 +39,8 @@ public class ScreenShootActivity extends Activity {
         Log.e( "shoot: ","响应" );
 
         final String picPath= FileUtils.getSDCardDir()+"/"+"decordView.jpg";
-       // ScreenShoot.captureDecorView(this,picPath);
-        ScreenShoot.captureDecorView(this, picPath, new BitmapHelper.OutPutListenener() {
+       // ScreenShootUtils.captureDecorView(this,picPath);
+        ScreenShootUtils.captureDecorView(this, picPath, new BitmapHelper.OutPutListenener() {
             @Override
             public void onSuccess() {
                 ToastUtils.show("保存成功！  "+picPath);

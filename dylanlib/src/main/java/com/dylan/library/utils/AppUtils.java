@@ -372,4 +372,18 @@ public class AppUtils {
     }
 
 
+    public static boolean  isActivityOnForeground(Activity activity) {
+        String className=activity.getClass().getName();
+        ActivityManager am = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
+        if (list != null && list.size() > 0) {
+            ComponentName cpn = list.get(0).topActivity;
+            if (className.equals(cpn.getClassName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
 }

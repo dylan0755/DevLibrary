@@ -41,8 +41,10 @@ public class ClipBoardUtils {
         ClipData clipData = clipboard.getPrimaryClip();
         if (clipData != null && clipData.getItemCount() > 0) {
             CharSequence text = clipData.getItemAt(0).getText();
-            pasteString=text.toString();
-            return pasteString;
+            if (text!=null){
+                pasteString=text.toString();
+                return pasteString;
+            }
         }
         return pasteString;
     }

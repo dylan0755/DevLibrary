@@ -7,13 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
-import com.dylan.library.utils.AESUtils;
-import com.dylan.library.utils.BankCardUtils;
-import com.dylan.library.utils.Base64Utils;
 import com.dylan.library.utils.DensityUtils;
-import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.SignatureUtils;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -28,20 +22,11 @@ import com.dylan.mylibrary.ui.rebound.ReboundActivity;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dylan.mylibrary.ui.slidingrefresh.SlidingRefreshActivity;
 import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
-import com.dylan.mylibrary.ui.tab.TabLayoutActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 
 /**
  * Created by Dylan on 2016/12/16.
@@ -50,7 +35,7 @@ import javax.crypto.NoSuchPaddingException;
 public class DemoListActivity extends AppCompatActivity {
     private GridViewPager mGridPager;
     private String[] demoNames = {"RecyclerViewSnapHelper", "ScaleUpPhotoView", "IRecyclerView",
-            "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShoot",
+            "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShootUtils",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "SlidingRefresh",
             "侧滑销毁Activity", "语音发送", "FileDownLoader", "HorizontalScrollTabLayout", "CheckBoxListAdapter",
@@ -75,7 +60,7 @@ public class DemoListActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        DensityUtils.setCustomDensityInWidth(360, this, getApplication());
+        DensityUtils.setCustomApplicationDensityInWidth(360, this, getApplication());
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
