@@ -1,5 +1,6 @@
 package com.dylan.library.utils;
 
+import android.graphics.Paint;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
@@ -32,4 +33,17 @@ public class TextViewUtils {
             }
         });
     }
+
+
+    //中划线
+    public static void setStrikeThruText(TextView textView,String text){
+        textView.setText(text);
+        textView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+    }
+
+    //中划线
+    public static void setStrikeThruText(TextView textView){
+        textView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
+    }
+
 }
