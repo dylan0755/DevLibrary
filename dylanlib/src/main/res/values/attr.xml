@@ -150,6 +150,22 @@
     </declare-styleable>
 
 
+
+
+    <!--卫星按钮-->
+    <declare-styleable name="DLArcMenu">
+
+        <attr name="position">
+            <enum name="left_top" value="0" />
+            <enum name="left_bottom" value="1" />
+            <enum name="right_top" value="2" />
+            <enum name="right_bottom" value="3" />
+        </attr>
+
+        <attr name="radius"/>
+    </declare-styleable>
+
+
     <!-- 沉浸式状态栏使用 -->
     <item name="dl_status_bar_view" type="id" />
     <item name="dl_translucent_view" type="id" />

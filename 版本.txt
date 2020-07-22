@@ -11,6 +11,8 @@ V4.4.0
 2.TextUtils 新增 setStrikeThruText 中划线
 3.新增 VerticalViewPager
 4.addDoneAction  addSearchAction   addSendAction 优化,横屏全屏输入法不占满屏
+5.新增 ArcMenu
+
 
 
 
