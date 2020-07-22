@@ -119,21 +119,21 @@ public class EditTextUtils {
 
     public static void addDoneAction(EditText editText, final OnDoneActionCallBack callBack){
         editText.setImeActionLabel("完成", EditorInfo.IME_ACTION_DONE);
-        editText.setImeOptions(EditorInfo.IME_ACTION_DONE);
+        editText.setImeOptions(EditorInfo.IME_ACTION_DONE|EditorInfo.IME_FLAG_NO_EXTRACT_UI);//优化,横屏全屏输入法不占满屏
         addOnEditorActionListener(editText,callBack);
     }
 
 
     public static void addSearchAction(EditText editText, final OnDoneActionCallBack callBack){
         editText.setImeActionLabel("搜索",EditorInfo.IME_ACTION_SEARCH);
-        editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH);
+        editText.setImeOptions(EditorInfo.IME_ACTION_SEARCH|EditorInfo.IME_FLAG_NO_EXTRACT_UI);//优化,横屏全屏输入法不占满屏
         addOnEditorActionListener(editText,callBack);
     }
 
 
     public static void addSendAction(EditText editText, final OnDoneActionCallBack callBack){
         editText.setImeActionLabel("发送",EditorInfo.IME_ACTION_SEND);
-        editText.setImeOptions(EditorInfo.IME_ACTION_SEND);
+        editText.setImeOptions(EditorInfo.IME_ACTION_SEND|EditorInfo.IME_FLAG_NO_EXTRACT_UI);//优化,横屏全屏输入法不占满屏
         addOnEditorActionListener(editText,callBack);
     }
 
