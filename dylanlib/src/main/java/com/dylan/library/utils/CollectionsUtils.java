@@ -1,5 +1,7 @@
 package com.dylan.library.utils;
 
+import android.util.SparseArray;
+
 import com.dylan.library.bean.MergeCell;
 
 import java.util.ArrayList;
@@ -77,5 +79,44 @@ public class CollectionsUtils {
         return Collections.emptyList();
 
     }
+
+
+    public static <T> SparseArray<List<T>> grouping(List<T> sourceList, int countPerPage) {
+        SparseArray<List<T>> sparseArray = new SparseArray();
+        if (EmptyUtils.isEmpty(sourceList)) return sparseArray;
+
+        int totalSize = sourceList.size();
+        int pageCount = totalSize / countPerPage;//计算可以分多少页
+        int remain = totalSize % countPerPage;               //剩余不够一页的作为1页
+        if (remain != 0) pageCount += 1;
+
+
+        if (pageCount == 1) {
+            sparseArray.put(0, sourceList);
+            sparseArray.put(1, new ArrayList<T>());
+        } else {
+            for (int i = 0; i < totalSize; i++) {
+                //计算该元素是第n页
+                int item = (i + 1) /countPerPage;
+                int itemRemain=(i+1)%countPerPage;
+                if (itemRemain!=0)item+=1;
+
+
+                int belongPageIndex=item-1;
+                List<T> pageList=sparseArray.get(belongPageIndex);
+                if (pageList==null){
+                    pageList=new ArrayList<>();
+                    sparseArray.put(belongPageIndex,pageList);
+                }
+                pageList.add(sourceList.get(i));
+            }
+        }
+
+        return sparseArray;
+
+    }
+
+
+
 
 }
