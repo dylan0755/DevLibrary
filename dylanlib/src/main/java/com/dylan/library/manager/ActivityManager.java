@@ -2,6 +2,9 @@ package com.dylan.library.manager;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
+
+import com.dylan.library.exception.ELog;
 
 import java.util.Iterator;
 import java.util.Stack;
@@ -155,4 +158,22 @@ public class ActivityManager {
         } catch (Exception e) {
         }
     }
+
+
+
+
+    public void bringRecordToFrontAndClearTop(Context context,Class clazz){
+        try {
+            Intent intent=new Intent(context,clazz);
+            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            context.startActivity(intent);
+        }catch (Exception e){
+            ELog.e(e);
+        }
+
+    }
+
+
+
 }
