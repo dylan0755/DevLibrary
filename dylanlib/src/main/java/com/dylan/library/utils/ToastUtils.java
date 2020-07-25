@@ -72,7 +72,10 @@ public class ToastUtils {
 
     public static void show(Context context, String text) {
         if (ThreadUtils.isMainThread()) {
-            Toast.makeText(context, text, Toast.LENGTH_SHORT).show();
+            //避免小米系统 吐司待 应用名称，不能使用一行创建显示吐司
+           Toast toast= Toast.makeText(context, text, Toast.LENGTH_SHORT);
+            toast.setText(text);
+            toast.show();
         }
 
     }

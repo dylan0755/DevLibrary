@@ -13,7 +13,7 @@ V4.4.0
 4.addDoneAction  addSearchAction   addSendAction 优化,横屏全屏输入法不占满屏
 5.新增 ArcMenu
 6.CollectionsUtils 新增 SparseArray<List<T>> grouping(List<T> sourceList, int countPerPage)    对List 按 多少为一组进行分组
-
+7.ToastUtils show 方法优化
 
 
 
