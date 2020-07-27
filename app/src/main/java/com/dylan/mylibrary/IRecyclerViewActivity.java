@@ -35,6 +35,8 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         setContentView(R.layout.activity_irecyclerview);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setLoadMoreEnabled(true);
+        recyclerView.setRefreshEnabled(true);
         recyclerView.setOnRefreshListener(this);
         recyclerView.setOnLoadMoreListener(this);
         mAdapter = new TestAdapter();

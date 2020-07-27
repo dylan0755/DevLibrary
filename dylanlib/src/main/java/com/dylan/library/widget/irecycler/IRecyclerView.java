@@ -92,7 +92,17 @@ public class IRecyclerView extends RecyclerView {
             loadMoreEnabled = a.getBoolean(R.styleable.DLIRecyclerView_loadMoreEnabled, false);
             refreshHeaderLayoutRes = a.getResourceId(R.styleable.DLIRecyclerView_refreshHeaderLayout, -1);
             loadMoreFooterLayoutRes = a.getResourceId(R.styleable.DLIRecyclerView_loadMoreFooterLayout, -1);
+
+
             refreshFinalMoveOffset = a.getDimensionPixelOffset(R.styleable.DLIRecyclerView_refreshFinalMoveOffset, -1);
+
+            if (refreshHeaderLayoutRes==-1){
+                refreshHeaderLayoutRes = a.getResourceId(R.styleable.DLIRecyclerView_refreshHeaderLayout, R.layout.dl_header_pull_refresh);
+            }
+
+            if (loadMoreFooterLayoutRes==-1){
+                loadMoreFooterLayoutRes = a.getResourceId(R.styleable.DLIRecyclerView_loadMoreFooterLayout, R.layout.dl_footer_load_more);
+            }
         } finally {
             a.recycle();
         }
