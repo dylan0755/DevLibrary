@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dylan.library.widget.ArcMenu xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/arcMenu"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:position="right_top">
+
+
+    <TextView
+        android:id="@+id/ivFunction"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/lottery_icon_function_button"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="功能"
+        android:textSize="10sp"
+        android:textColor="#ffffff"/>
+
+
+    <TextView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/lottery_icon_function_button"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="中奖"
+        android:textSize="10sp"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/lottery_icon_function_button"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="抽奖"
+        android:textSize="10sp"
+        android:textColor="#ffffff"/>
+
+    <TextView
+        android:layout_width="36dp"
+        android:layout_height="36dp"
+        android:layout_marginLeft="16dp"
+        android:background="@drawable/lottery_icon_function_button"
+        android:layout_marginTop="16dp"
+        android:layout_gravity="right"
+        android:layout_marginRight="16dp"
+        android:gravity="center"
+        android:text="商城"
+        android:textSize="10sp"
+        android:textColor="#ffffff"/>
+
+
+
+
+</com.dylan.library.widget.ArcMenu>

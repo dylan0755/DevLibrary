@@ -5,7 +5,7 @@
 
 
 
-V4.4.0
+V4.4.0 ---->2020.07.29
 
 1.新增 SimplePagerSelectedListener
 2.TextUtils 新增 setStrikeThruText 中划线

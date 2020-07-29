@@ -42,7 +42,8 @@ public class DemoListActivity extends AppCompatActivity {
             "LazyFragment", "RedPointTextView", "UnScrollViewPagerActivity",
             "TextSwitchActivity", "全局更换字体", "FirstLineMargin",
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
-            "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper", "ShadowLayout","ShapeView"};
+            "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
+            "ShadowLayout","ShapeView","ArcMenu"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -54,7 +55,8 @@ public class DemoListActivity extends AppCompatActivity {
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class, BezierCurveActivity.class,
             DashLineViewActivity.class, InputPasswordActivity.class, CountDownCircleViewActivity.class,
             ProgressWebViewActivity.class, VideoPlayerGestureActivity.class, ReboundActivity.class,
-            BitmapHelperActivity.class, ShadowLayoutActivity.class,CustomShapeViewActivity.class};
+            BitmapHelperActivity.class, ShadowLayoutActivity.class,CustomShapeViewActivity.class,
+            ArcMenuActivity.class};
 
 
     @Override

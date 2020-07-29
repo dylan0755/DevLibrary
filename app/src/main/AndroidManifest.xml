@@ -150,7 +150,7 @@
         <activity android:name=".ui.HorizontalScrollTabLayoutActivity"/>
          <activity android:name=".ui.ShadowLayoutActivity"/>
          <activity android:name=".ui.CustomShapeViewActivity"/>
-
+         <activity android:name=".ui.ArcMenuActivity"/>
 
 
 
