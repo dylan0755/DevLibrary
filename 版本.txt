@@ -16,7 +16,7 @@ V4.4.0
 7.ToastUtils show 方法优化
 8.ActivityManager 新增 bringRecordToFrontAndClearTop
 9.IRecyclerView 初始化默认添加上下拉刷新和上拉加载更多，在java 代码中 设置 setLoadMoreEnabled(true);  setRefreshEnabled(true);
-
+10.widget 目录下新增 ShapeEditText ，ShapeFrameLayout，ShapeRelativeLayout,ShapeLinearLayout, 和ShapeTextView 使用方法一致
 
 
 

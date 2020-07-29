@@ -67,7 +67,7 @@
 
 
     <!--自定义矩形边框的TextView-->
-    <declare-styleable name="DLShapeTextView">
+    <declare-styleable name="DLShapeView">
         <!--是否使用Selector选择器-->
         <attr name="openSelector" format="boolean" />
         <!--填充色-->

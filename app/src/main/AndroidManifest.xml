@@ -149,7 +149,7 @@
         <activity android:name=".ui.PhotoPickerDemoActivity"/>
         <activity android:name=".ui.HorizontalScrollTabLayoutActivity"/>
          <activity android:name=".ui.ShadowLayoutActivity"/>
-
+         <activity android:name=".ui.CustomShapeViewActivity"/>
 
 
 

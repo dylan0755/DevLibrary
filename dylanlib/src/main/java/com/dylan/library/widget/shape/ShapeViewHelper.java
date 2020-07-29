@@ -1,4 +1,4 @@
-package com.dylan.library.widget;
+package com.dylan.library.widget.shape;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -6,16 +6,16 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.StateListDrawable;
 import android.os.Build;
 import android.util.AttributeSet;
-import android.widget.TextView;
+import android.view.View;
 
 import com.dylan.library.R;
 
 /**
- * Author: Dylan
- * Date: 2020/3/26
+ * Author: Administrator
+ * Date: 2020/7/29
  * Desc:
  */
-public class ShapeTextView extends TextView {
+public class ShapeViewHelper {
     private boolean openSelector;
     //自定背景边框Drawable
     private GradientDrawable gradientDrawable;
@@ -41,21 +41,42 @@ public class ShapeTextView extends TextView {
     float dashWidth = 0;
     //边框虚线的间隙
     float dashGap = 0;
-    //字体色
-    private int textColor = 0;
 
 
-    public ShapeTextView(Context context) {
-        this(context, null);
+    /**
+     * 初始化参数
+     *
+     * @param context
+     * @param attrs
+     */
+    public void init(Context context, AttributeSet attrs) {
+        TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DLShapeView, 0, 0);
+
+        openSelector = ta.getBoolean(R.styleable.DLShapeView_openSelector, false);
+
+        solidColor = ta.getInteger(R.styleable.DLShapeView_solidColor, 0x00000000);
+        strokeColor = ta.getInteger(R.styleable.DLShapeView_strokeColor, 0x00000000);
+
+        solidTouchColor = ta.getInteger(R.styleable.DLShapeView_solidTouchColor, 0x00000000);
+        strokeTouchColor = ta.getInteger(R.styleable.DLShapeView_strokeTouchColor, 0x00000000);
+        strokeWidth = (int) ta.getDimension(R.styleable.DLShapeView_strokeWidth, 0);
+
+        //四个角单独设置会覆盖radius设置
+        radius = ta.getDimension(R.styleable.DLShapeView_radius, 0);
+        topLeftRadius = ta.getDimension(R.styleable.DLShapeView_topLeftRadius, radius);
+        topRightRadius = ta.getDimension(R.styleable.DLShapeView_topRightRadius, radius);
+        bottomLeftRadius = ta.getDimension(R.styleable.DLShapeView_bottomLeftRadius, radius);
+        bottomRightRadius = ta.getDimension(R.styleable.DLShapeView_bottomRightRadius, radius);
+
+        dashGap = ta.getDimension(R.styleable.DLShapeView_dashGap, 0);
+        dashWidth = ta.getDimension(R.styleable.DLShapeView_dashWidth, 0);
+
+        ta.recycle();
     }
 
-    public ShapeTextView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
 
-    public ShapeTextView(Context context, AttributeSet attrs, int defStyleAttr) {
-        super(context, attrs, defStyleAttr);
-        init(context, attrs);
+
+    public void setCustomBackground(View targetView) {
         //默认背景
         gradientDrawable = getNeedDrawable(new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius,
                         bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius},
@@ -73,43 +94,12 @@ public class ShapeTextView extends TextView {
 
             stateListDrawable.addState(new int[]{pressed}, selectorDrawable);
             stateListDrawable.addState(new int[]{}, gradientDrawable);
-            setBackgroundDrawable(stateListDrawable);
+            targetView.setBackgroundDrawable(stateListDrawable);
         } else {
-            setBackgroundDrawable(gradientDrawable);
+            targetView.setBackgroundDrawable(gradientDrawable);
         }
     }
 
-    /**
-     * 初始化参数
-     *
-     * @param context
-     * @param attrs
-     */
-    private void init(Context context, AttributeSet attrs) {
-        TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.DLShapeTextView, 0, 0);
-
-        openSelector = ta.getBoolean(R.styleable.DLShapeTextView_openSelector, false);
-
-        solidColor = ta.getInteger(R.styleable.DLShapeTextView_solidColor, 0x00000000);
-        strokeColor = ta.getInteger(R.styleable.DLShapeTextView_strokeColor, 0x00000000);
-
-        solidTouchColor = ta.getInteger(R.styleable.DLShapeTextView_solidTouchColor, 0x00000000);
-        strokeTouchColor = ta.getInteger(R.styleable.DLShapeTextView_strokeTouchColor, 0x00000000);
-        textColor = getCurrentTextColor();
-        strokeWidth = (int) ta.getDimension(R.styleable.DLShapeTextView_strokeWidth, 0);
-
-        //四个角单独设置会覆盖radius设置
-        radius = ta.getDimension(R.styleable.DLShapeTextView_radius, 0);
-        topLeftRadius = ta.getDimension(R.styleable.DLShapeTextView_topLeftRadius, radius);
-        topRightRadius = ta.getDimension(R.styleable.DLShapeTextView_topRightRadius, radius);
-        bottomLeftRadius = ta.getDimension(R.styleable.DLShapeTextView_bottomLeftRadius, radius);
-        bottomRightRadius = ta.getDimension(R.styleable.DLShapeTextView_bottomRightRadius, radius);
-
-        dashGap = ta.getDimension(R.styleable.DLShapeTextView_dashGap, 0);
-        dashWidth = ta.getDimension(R.styleable.DLShapeTextView_dashWidth, 0);
-
-        ta.recycle();
-    }
 
     /**
      * @param radius      四个角的半径
@@ -119,9 +109,8 @@ public class ShapeTextView extends TextView {
      * @return
      */
     public static GradientDrawable getNeedDrawable(float[] radius, int[] colors, int strokeWidth, int strokeColor) {
-        //TODO:判断版本是否大于16  项目中默认的都是Linear散射 都是从左到右 都是只有开始颜色和结束颜色
         GradientDrawable drawable;
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
             drawable = new GradientDrawable();
             drawable.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
             drawable.setColors(colors);
@@ -168,4 +157,7 @@ public class ShapeTextView extends TextView {
         drawable.setColor(bgColor);
         return drawable;
     }
+
+
+
 }
