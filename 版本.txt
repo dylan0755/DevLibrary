@@ -6,8 +6,8 @@
 V4.5.0
 
 1.修复Toast 快速点击，只显示第一个后面一小段时间不显示的问题
-
-
+2.NavBarUtils 优化hideNavBar 方法，新增 setNotFocusableFlag  clearNotFocusableFlag
+3.LoadingDialog 和 CustomDialog 支持show 的时候全屏，虚拟键盘不会弹出来,只要在show 之前 调用 hideNavBar即可
 
 
 

@@ -7,6 +7,8 @@ import android.content.res.Resources;
 import android.os.Build;
 import android.view.View;
 import android.view.ViewConfiguration;
+import android.view.Window;
+import android.view.WindowManager;
 
 import java.lang.reflect.Method;
 
@@ -66,28 +68,54 @@ public class NavBarUtils {
     /**
      * 隐藏虚拟按键，并且全屏
      */
-    public static void hideNavBar(Activity activity) {
-        if (activity==null)return;
+    public static void hideNavBar(Window window) {
+        if (window==null)return;
         //隐藏虚拟按键，并且全屏
         if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
-            View v = activity.getWindow().getDecorView();
+            View v = window.getDecorView();
             v.setSystemUiVisibility(View.GONE);
         } else if (Build.VERSION.SDK_INT >= 19) {
-            View decorView = activity.getWindow().getDecorView();
-            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
-            decorView.setSystemUiVisibility(uiOptions);
+//            View decorView = window.getDecorView();
+//            int uiOptions = View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+//                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY | View.SYSTEM_UI_FLAG_FULLSCREEN;
+//            decorView.setSystemUiVisibility(uiOptions);
+
+            fullScreenImmersive(window);
         }
     }
 
 
-    public static void showNavBar(Activity activity, boolean statusLightMode){
-        if (activity==null)return;
+    public static void fullScreenImmersive(Window window) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            int uiOptions = View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                    | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_FULLSCREEN;
+            window.getDecorView().setSystemUiVisibility(uiOptions);
+        }
+    }
+
+    public static void setNotFocusableFlag(Window window){
+        if (window==null)return;
+        window.setFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE, WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+    }
+
+    public static void clearNotFocusableFlag(Window window){
+        if (window==null)return;
+        window.clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE);
+    }
+
+
+
+    public static void showNavBar(Window window, boolean statusLightMode){
+        if (window==null)return;
         if (Build.VERSION.SDK_INT > 11 && Build.VERSION.SDK_INT < 19) {
-            View v = activity.getWindow().getDecorView();
+            View v = window.getDecorView();
             v.setSystemUiVisibility(View.VISIBLE);
         } else if (Build.VERSION.SDK_INT >= 19) {
-            View decorView = activity.getWindow().getDecorView();
+            View decorView =window.getDecorView();
             if (!statusLightMode){
                 int uiOptions = View.SYSTEM_UI_FLAG_VISIBLE;
                 decorView.setSystemUiVisibility(uiOptions);

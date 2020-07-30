@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.dylan.library.dialog.LoadingDialog;
+import com.dylan.library.screen.NavBarUtils;
 import com.dylan.mylibrary.R;
 
 
@@ -16,19 +17,20 @@ import com.dylan.mylibrary.R;
 
 public class LoadingDialogActivity extends Activity{
     Button btn_loading;
-    private com.dylan.mylibrary.widget.LoadingDialog dialog1;
+    private LoadingDialog dialog1;
     private LoadingDialog dialog2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_loadingdialog);
+        NavBarUtils.hideNavBar(getWindow());
         btn_loading= (Button) findViewById(R.id.btn_loading);
 
         btn_loading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog1 =new com.dylan.mylibrary.widget.LoadingDialog(LoadingDialogActivity.this);
+                dialog1 =new LoadingDialog(LoadingDialogActivity.this);
                //dialog1.getBackgroundView().setBackgroundDrawable(getResources().getDrawable(R.drawable.dl_shape_loadingdialog));
                // dialog1.setLoadingTipText("25132");
                 dialog1.show();
@@ -46,6 +48,7 @@ public class LoadingDialogActivity extends Activity{
             public void onClick(View v) {
                 dialog2=new LoadingDialog(v.getContext());
                 //dialog2.setLoadingTipText("查询中，请稍后");
+                dialog2.hideNavBar();
                 dialog2.show();
             }
         });

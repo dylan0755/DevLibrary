@@ -8,6 +8,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dylan.library.R;
+import com.dylan.library.screen.NavBarUtils;
 
 
 /**
@@ -18,6 +19,8 @@ public class LoadingDialog extends Dialog {
     private TextView tipTextView;
     private View backgroudView;
     private ProgressBar loadingBar;
+    private boolean hideNavWhileShowing;//弹出对话框是否隐藏虚拟按键 达到全屏效果
+
 
     public LoadingDialog(@NonNull Context context) {
         super(context, R.style.LoadingDialog);
@@ -29,6 +32,28 @@ public class LoadingDialog extends Dialog {
         tipTextView=findViewById(R.id.tipTextView);
         backgroudView=findViewById(R.id.rootView);
     }
+
+
+    @Override
+    public void show() {
+        if (hideNavWhileShowing){
+            NavBarUtils.setNotFocusableFlag(getWindow());
+        }
+        super.show();
+        if (hideNavWhileShowing){
+            NavBarUtils.hideNavBar(getWindow());
+            NavBarUtils.clearNotFocusableFlag(getWindow());
+        }
+    }
+
+
+    public void hideNavBar(){
+        hideNavWhileShowing=true;
+    }
+
+
+
+
 
 
 
