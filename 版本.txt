@@ -13,6 +13,7 @@ V4.5.0
 
 
 
+
 V4.4.0 ---->2020.07.29
 
 1.ĞÂÔö SimplePagerSelectedListener
