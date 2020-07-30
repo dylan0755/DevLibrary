@@ -4,10 +4,14 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.GridView;
+import android.widget.Toast;
 
+import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;

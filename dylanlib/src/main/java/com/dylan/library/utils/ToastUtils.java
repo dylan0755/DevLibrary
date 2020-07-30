@@ -26,10 +26,9 @@ public class ToastUtils {
     public static void initToast(Application application) {
         if (ThreadUtils.isMainThread()) {
             applicationContext = application;
-            shortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+            createShortToast();
+            createCenterShortToast();
             longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
-            centerShortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
-            centerShortToast.setGravity(Gravity.CENTER, 0, 0);
             centerLongToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
             centerLongToast.setGravity(Gravity.CENTER, 0, 0);
         } else {
@@ -38,9 +37,24 @@ public class ToastUtils {
     }
 
 
+    private static void createShortToast(){
+        shortToast= Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+    }
+
+    private static void createCenterShortToast(){
+        centerShortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
+        centerShortToast.setGravity(Gravity.CENTER, 0, 0);
+    }
+
+
     public static void show(String msg) {
         if (applicationContext == null) return;
+        if (shortToast!=null){
+            shortToast.cancel();
+           createShortToast();
+        }
         shortToast.setText(msg);
+
         shortToast.show();
     }
 
@@ -50,15 +64,14 @@ public class ToastUtils {
         longToast.show();
     }
 
-    @Deprecated
-    public static void showCenter(String string) {
-        if (applicationContext == null) return;
-        centerShortToast.setText(string);
-        centerShortToast.show();
-    }
+
 
     public static void showCenterShort(String string) {
         if (applicationContext == null) return;
+        if (centerShortToast!=null){
+            centerShortToast.cancel();
+            createCenterShortToast();
+        }
         centerShortToast.setText(string);
         centerShortToast.show();
     }
