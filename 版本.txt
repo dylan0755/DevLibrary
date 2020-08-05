@@ -10,7 +10,7 @@ V4.5.0
   1.优化hideNavBar 方法，新增 setNotFocusableFlag  clearNotFocusableFlag
   2.新增 hideNavBarFromWindowAndDecorView 键盘缩下去的时候导航栏自动收缩
 3.LoadingDialog 和 CustomDialog 支持show 的时候全屏，虚拟键盘不会弹出来,只要在show 之前 调用 hideNavBar即可
-
+4.bringRecordToFrontAndClearTop 修复bug
 
 
 

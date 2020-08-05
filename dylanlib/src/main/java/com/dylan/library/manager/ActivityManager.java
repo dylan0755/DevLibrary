@@ -165,7 +165,7 @@ public class ActivityManager {
     public void bringRecordToFrontAndClearTop(Context context,Class clazz){
         try {
             Intent intent=new Intent(context,clazz);
-            intent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
         }catch (Exception e){
