@@ -31,11 +31,31 @@ public class EditTextUtils {
         return value;
     }
 
+    public static double parseDoubleValue(Editable editable) {
+        double value = 0;
+        try {
+            value = Double.parseDouble(editable.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
 
     public static int parseIntValue(TextView textView) {
         int value = 0;
         try {
             value = Integer.parseInt(textView.getText().toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
+    public static int parseIntValue(Editable editable) {
+        int value = 0;
+        try {
+            value = Integer.parseInt(editable.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
