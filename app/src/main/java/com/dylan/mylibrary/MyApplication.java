@@ -1,8 +1,10 @@
 package com.dylan.mylibrary;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Bundle;
 import android.util.Log;
 
 import com.dylan.library.utils.AndKit;
@@ -47,6 +49,16 @@ public class MyApplication extends Application {
             @Override
             public void onBackground() {
                 Log.e( "onBackground: ","在后台" );
+            }
+
+            @Override
+            public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
+
+            }
+
+            @Override
+            public void onActivityDestroyed(Activity activity) {
+
             }
         });
     }

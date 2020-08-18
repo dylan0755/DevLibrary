@@ -246,18 +246,56 @@ public class AppUtils {
 
     }
 
-     public static void backHome(Activity activity){
-         Intent home=new Intent(Intent.ACTION_MAIN);
-         home.addCategory(Intent.CATEGORY_HOME);
-         activity.startActivity(home);
-     }
 
-     public static void backHome(Context context){
+
+     public static void backToHome(Context context){
          Intent home=new Intent(Intent.ACTION_MAIN);
          home.addCategory(Intent.CATEGORY_HOME);
          home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
          context.startActivity(home);
      }
+
+
+    private static void bringAppToFront(Context context,String className){
+
+        if (EmptyUtils.isEmpty(className)){
+            try{
+                Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
+                context.startActivity(intent);
+                return;
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+
+
+        Logger.e("bringAppToFront-->start with old way");
+        //获取ActivityManager
+        ActivityManager mAm = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        //获得当前运行的task
+        List<ActivityManager.RunningTaskInfo> taskList = mAm.getRunningTasks(100);
+        for (ActivityManager.RunningTaskInfo rti : taskList) {
+            //找到当前应用的task，并启动task的栈顶activity，达到程序切换到前台
+            if (rti.topActivity.getPackageName().equals(context.getPackageName())) {
+                Intent LaunchIntent = new Intent(Intent.ACTION_MAIN);
+                ComponentName cn = new ComponentName(context.getPackageName(), EmptyUtils.isEmpty(className)?rti.topActivity.getClassName():className);
+                if (ContextUtils.getActivity(context)==null){
+                    LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                }else{
+                    Logger.e("on activity task");
+                    LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                }
+                LaunchIntent.setComponent(cn);
+                context.startActivity(LaunchIntent);
+                break;
+            }
+
+        }
+    }
+
+
+
 
     public static void shareText(Context context, String content) {
         if (context == null) return;

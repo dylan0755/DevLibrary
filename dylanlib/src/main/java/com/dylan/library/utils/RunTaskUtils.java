@@ -73,6 +73,7 @@ public class RunTaskUtils {
         application.registerActivityLifecycleCallbacks(new Application.ActivityLifecycleCallbacks() {
             @Override
             public void onActivityCreated(Activity activity, Bundle bundle) {
+                if (listner!=null)listner.onActivityCreated(activity,bundle);
             }
 
             @Override
@@ -106,7 +107,7 @@ public class RunTaskUtils {
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-
+                if (listner!=null)listner.onActivityDestroyed(activity);
             }
         });
     }
@@ -127,7 +128,8 @@ public class RunTaskUtils {
 
     public interface RunningListner {
         void onForeground();
-
         void onBackground();
+        void onActivityCreated(Activity activity, Bundle savedInstanceState);
+        void onActivityDestroyed(Activity activity);
     }
 }
