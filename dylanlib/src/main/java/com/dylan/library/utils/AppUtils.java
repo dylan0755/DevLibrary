@@ -31,7 +31,30 @@ import java.util.List;
 public class AppUtils {
 
 
-    public static String getProcessName(int pid) {
+    public static boolean isInMainProcess(Context context){
+        return context.getPackageName().equals(getCurrentProcessName(context));
+    }
+
+
+
+    public static String getCurrentProcessName(Context context){
+        int pid = android.os.Process.myPid();
+        ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
+        if (runningApps == null) {
+            return null;
+        }
+        for (ActivityManager.RunningAppProcessInfo procInfo : runningApps) {
+            if (procInfo.pid == pid) {
+                return procInfo.processName;
+            }
+        }
+        return null;
+    }
+
+
+
+    public static String getProcessNameByPID(int pid) {
         BufferedReader reader = null;
         try {
             reader = new BufferedReader(new FileReader("/proc/" + pid + "/cmdline"));

@@ -13,7 +13,7 @@ V4.5.0
 4.bringRecordToFrontAndClearTop 修复bug
 5.DLPopupWindow 更名为 DLPopWindow，支持背景灰暗度调节 setDimAmount(float dimAmount)
 6.EditTextUtils 新增 parseDoubleValue 和 parseIntValue
-
+7.AppUtils 新增isInMainProcess getCurrentProcessName
 
 
 
