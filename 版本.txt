@@ -14,8 +14,7 @@ V4.5.0
 5.DLPopupWindow 更名为 DLPopWindow，支持背景灰暗度调节 setDimAmount(float dimAmount)
 6.EditTextUtils 新增 parseDoubleValue 和 parseIntValue
 7.AppUtils 新增isInMainProcess getCurrentProcessName,bringAppToFront 将App从后台拉到前台展示
-
-
+8.DrawableUtils  setBackgroundMutateAlpha 避免更改一处布局透明度引起其它地方改变
 
 
 
