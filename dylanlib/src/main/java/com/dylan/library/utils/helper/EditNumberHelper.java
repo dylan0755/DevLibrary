@@ -55,6 +55,11 @@ public class EditNumberHelper {
     }
 
 
+    public void setMaxNum(int maxNum){
+        this.maxNum=maxNum;
+    }
+
+
     public void restore() {
         String numStr = Integer.toString(minNum);
         mEditText.setText(numStr);
