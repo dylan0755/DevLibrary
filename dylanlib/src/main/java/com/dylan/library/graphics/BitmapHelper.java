@@ -233,7 +233,12 @@ public class BitmapHelper {
         v.buildDrawingCache();
         Bitmap cacheBitmap = v.getDrawingCache();
         if (cacheBitmap == null) {
-            return null;
+            //如果View 过大，生成Bitmap会失败
+            Bitmap bitmap = Bitmap.createBitmap(v.getWidth(), v.getHeight(), Bitmap.Config.ARGB_8888);
+            Canvas c = new Canvas(bitmap);
+            v.layout(0, 0, v.getLayoutParams().width, v.getLayoutParams().height);
+            v.draw(c);
+            return bitmap;
         }
         Bitmap bitmap = Bitmap.createBitmap(cacheBitmap);
         v.destroyDrawingCache();

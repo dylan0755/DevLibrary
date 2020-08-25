@@ -3,6 +3,19 @@
 
 
 
+V4.6.0
+1.BitmapHelper convertViewToBitmap优化，解决View过大无法转化成Bitmap 问题
+
+
+
+
+
+
+
+
+
+
+
 V4.5.0
 
 1.修复Toast 快速点击，只显示第一个后面一小段时间不显示的问题
