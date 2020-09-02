@@ -448,7 +448,7 @@ public class StringUtils {
 
 
 
-    public static String printBundle(Bundle bundle){
+    public static String bundleToString(Bundle bundle){
         StringBuilder sb = new StringBuilder();
         for (String key : bundle.keySet()) {
             sb.append("\nkey:" + key + ", value:" + bundle.getString(key));
