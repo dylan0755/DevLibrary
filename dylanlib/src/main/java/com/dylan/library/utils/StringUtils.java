@@ -1,6 +1,7 @@
 package com.dylan.library.utils;
 
 import android.graphics.Color;
+import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -19,6 +20,11 @@ public class StringUtils {
     private StringUtils() {
 
     }
+
+
+
+
+
 
     /**
      *  Formatter.formatFileSize  这个类会出现 单位为中文的情况，如 637KB 变成 637千字节
@@ -438,5 +444,16 @@ public class StringUtils {
         }
 
         return stringBuilder.toString();
+    }
+
+
+
+    public static String printBundle(Bundle bundle){
+        StringBuilder sb = new StringBuilder();
+        for (String key : bundle.keySet()) {
+            sb.append("\nkey:" + key + ", value:" + bundle.getString(key));
+        }
+        return sb.toString();
+
     }
 }
