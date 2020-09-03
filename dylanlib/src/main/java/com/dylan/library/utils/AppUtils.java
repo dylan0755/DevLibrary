@@ -251,6 +251,7 @@ public class AppUtils {
     public static void bringAppToFront(Context context, String className) {
         Intent intentGo = IntentUtils.getLaunchIntentFromBackToFront(context, className);
         Activity activity = ContextUtils.getActivity(context);
+        if (intentGo==null)return;
         if (activity != null) {
             activity.startActivity(intentGo);
         } else {
