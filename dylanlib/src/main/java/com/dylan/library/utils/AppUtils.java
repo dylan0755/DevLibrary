@@ -31,13 +31,12 @@ import java.util.List;
 public class AppUtils {
 
 
-    public static boolean isInMainProcess(Context context){
+    public static boolean isInMainProcess(Context context) {
         return context.getPackageName().equals(getCurrentProcessName(context));
     }
 
 
-
-    public static String getCurrentProcessName(Context context){
+    public static String getCurrentProcessName(Context context) {
         int pid = android.os.Process.myPid();
         ActivityManager am = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningAppProcessInfo> runningApps = am.getRunningAppProcesses();
@@ -51,7 +50,6 @@ public class AppUtils {
         }
         return null;
     }
-
 
 
     public static String getProcessNameByPID(int pid) {
@@ -76,7 +74,6 @@ public class AppUtils {
         }
         return null;
     }
-
 
 
     public static PackageInfo getPackageInfo(Context context) throws PackageManager.NameNotFoundException {
@@ -202,16 +199,12 @@ public class AppUtils {
     }
 
 
-
     public List<PackageInfo> getALLInstallApp(Context context) {
         if (context == null) return Collections.emptyList();
         PackageManager packageManager = context.getPackageManager();
         List<PackageInfo> list = packageManager.getInstalledPackages(0);
         return list;
     }
-
-
-
 
 
     public static void unInstallApp(Context context, String packageName) {
@@ -247,54 +240,25 @@ public class AppUtils {
     }
 
 
-
-     public static void backToHome(Context context){
-         Intent home=new Intent(Intent.ACTION_MAIN);
-         home.addCategory(Intent.CATEGORY_HOME);
-         home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-         context.startActivity(home);
-     }
-
-
-    private static void bringAppToFront(Context context,String className){
-
-        if (EmptyUtils.isEmpty(className)){
-            try{
-                Intent intent = context.getPackageManager().getLaunchIntentForPackage(context.getPackageName());
-                context.startActivity(intent);
-                return;
-            }catch (Exception e){
-                e.printStackTrace();
-            }
-        }
-
-
-
-        Logger.e("bringAppToFront-->start with old way");
-        //获取ActivityManager
-        ActivityManager mAm = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        //获得当前运行的task
-        List<ActivityManager.RunningTaskInfo> taskList = mAm.getRunningTasks(100);
-        for (ActivityManager.RunningTaskInfo rti : taskList) {
-            //找到当前应用的task，并启动task的栈顶activity，达到程序切换到前台
-            if (rti.topActivity.getPackageName().equals(context.getPackageName())) {
-                Intent LaunchIntent = new Intent(Intent.ACTION_MAIN);
-                ComponentName cn = new ComponentName(context.getPackageName(), EmptyUtils.isEmpty(className)?rti.topActivity.getClassName():className);
-                if (ContextUtils.getActivity(context)==null){
-                    LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                }else{
-                    Logger.e("on activity task");
-                    LaunchIntent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-                }
-                LaunchIntent.setComponent(cn);
-                context.startActivity(LaunchIntent);
-                break;
-            }
-
-        }
+    public static void backToHome(Context context) {
+        Intent home = new Intent(Intent.ACTION_MAIN);
+        home.addCategory(Intent.CATEGORY_HOME);
+        home.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        context.startActivity(home);
     }
 
 
+    public static void bringAppToFront(Context context, String className) {
+        Intent intentGo = IntentUtils.getLaunchIntentFromBackToFront(context, className);
+        Activity activity = ContextUtils.getActivity(context);
+        if (activity != null) {
+            activity.startActivity(intentGo);
+        } else {
+            intentGo.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(intentGo);
+        }
+
+    }
 
 
     public static void shareText(Context context, String content) {
@@ -310,7 +274,7 @@ public class AppUtils {
     }
 
 
-    public static void shareVideo(Context context,Uri uri){
+    public static void shareVideo(Context context, Uri uri) {
         if (context == null) return;
         if (uri == null) return;
         context.startActivity(IntentUtils.getShareVideoIntent(uri));
@@ -318,14 +282,14 @@ public class AppUtils {
 
 
     public static boolean gotoInstallApk(Activity activity, String desFilePath) throws Exception {
-        File desFile=new File(desFilePath);
+        File desFile = new File(desFilePath);
         Intent installApkIntent = new Intent();
         installApkIntent.setAction(Intent.ACTION_VIEW);
         installApkIntent.addCategory(Intent.CATEGORY_DEFAULT);
         installApkIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.M) {
-            String fileProvider= AndroidManifestUtils.getFileProviderAuthority(activity);
-            if (fileProvider==null||fileProvider.isEmpty()){
+            String fileProvider = AndroidManifestUtils.getFileProviderAuthority(activity);
+            if (fileProvider == null || fileProvider.isEmpty()) {
                 throw new Exception("please set fileProvider in AndroidManifest");
             }
             installApkIntent.setDataAndType(FileProvider.getUriForFile(activity, fileProvider, desFile), "application/vnd.android.package-archive");
@@ -389,8 +353,8 @@ public class AppUtils {
         context.startActivity(i);
     }
 
-    public static void gotoOpenLocationService(Context context){
-        Intent intent=new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+    public static void gotoOpenLocationService(Context context) {
+        Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         context.startActivity(intent);
     }
 
@@ -433,8 +397,8 @@ public class AppUtils {
     }
 
 
-    public static boolean  isActivityOnForeground(Activity activity) {
-        String className=activity.getClass().getName();
+    public static boolean isActivityOnForeground(Activity activity) {
+        String className = activity.getClass().getName();
         ActivityManager am = (ActivityManager) activity.getSystemService(Context.ACTIVITY_SERVICE);
         List<ActivityManager.RunningTaskInfo> list = am.getRunningTasks(1);
         if (list != null && list.size() > 0) {
