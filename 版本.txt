@@ -6,7 +6,7 @@
 V4.6.0
 1.BitmapHelper convertViewToBitmap优化，解决View过大无法转化成Bitmap 问题
 2.StringUtils 新增 bundleToString
-
+3.ActivityManager 修复 currentActivity() 异常问题，增加getActivityCount() 返回当前Activity的个数
 
 
 

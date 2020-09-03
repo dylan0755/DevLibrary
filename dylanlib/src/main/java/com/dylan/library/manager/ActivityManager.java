@@ -40,13 +40,16 @@ public class ActivityManager {
         activityStack.add(activity);
     }
 
-    public void removeActivity(Activity activity){
+    public void removeActivity(Activity activity) {
         if (activity != null) {
             activityStack.remove(activity);
         }
     }
 
 
+    public int getActivityCount() {
+        return activityStack == null ? 0 : activityStack.size();
+    }
 
     /**
      * 获取第一个压入栈的Activity即MainActivity
@@ -60,8 +63,8 @@ public class ActivityManager {
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
-        Activity activity = activityStack.lastElement();
-        return activity;
+        if (activityStack.isEmpty()) return null;
+        else return activityStack.lastElement();//当没有元素时会闪退;
     }
 
     /**
@@ -100,8 +103,7 @@ public class ActivityManager {
     }
 
 
-
-    public Activity getActivity(Class<?> cls){
+    public Activity getActivity(Class<?> cls) {
         for (Activity activity : activityStack) {
             if (activity.getClass().equals(cls)) {
                 return activity;
@@ -123,20 +125,17 @@ public class ActivityManager {
         activityStack.clear();
     }
 
-    public void finishAllActivityExclude(Class clazz){
-        Iterator<Activity> iterator=activityStack.iterator();
-        while(iterator.hasNext()){
-            Activity activity=iterator.next();
-            if (activity.getClass()!=clazz){
+    public void finishAllActivityExclude(Class clazz) {
+        Iterator<Activity> iterator = activityStack.iterator();
+        while (iterator.hasNext()) {
+            Activity activity = iterator.next();
+            if (activity.getClass() != clazz) {
                 activity.finish();
                 iterator.remove();
             }
         }
 
     }
-
-
-
 
 
     /**
@@ -147,33 +146,30 @@ public class ActivityManager {
             finishAllActivity();
             android.app.ActivityManager activityMgr = (android.app.ActivityManager) context
                     .getSystemService(Context.ACTIVITY_SERVICE);
-            if (activityMgr!=null)activityMgr.killBackgroundProcesses(context.getPackageName());
+            if (activityMgr != null) activityMgr.killBackgroundProcesses(context.getPackageName());
             new android.os.Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     System.exit(0);
                 }
-            },500);
+            }, 500);
 
         } catch (Exception e) {
         }
     }
 
 
-
-
-    public void bringRecordToFrontAndClearTop(Context context,Class clazz){
+    public void bringRecordToFrontAndClearTop(Context context, Class clazz) {
         try {
-            Intent intent=new Intent(context,clazz);
+            Intent intent = new Intent(context, clazz);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
             context.startActivity(intent);
-        }catch (Exception e){
+        } catch (Exception e) {
             ELog.e(e);
         }
 
     }
-
 
 
 }
