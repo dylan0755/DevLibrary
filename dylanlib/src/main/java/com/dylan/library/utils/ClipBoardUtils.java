@@ -35,6 +35,14 @@ public class ClipBoardUtils {
     }
 
 
+    public static void copyNoToast(Context context,String text){
+        if (context==null||(text==null||text.isEmpty()))return;
+        ClipboardManager myClipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData myClip = ClipData.newPlainText("text", text);
+        myClipboard.setPrimaryClip(myClip);
+    }
+
+
     public static String getPasteString(final Context context){
         String pasteString="";
         ClipboardManager clipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);

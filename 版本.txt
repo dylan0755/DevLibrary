@@ -8,7 +8,7 @@ V4.6.0
 2.StringUtils 新增 bundleToString
 3.ActivityManager 修复 currentActivity() 异常问题，增加getActivityCount() 返回当前Activity的个数
 4.IntentUtils 新增 getLaunchIntentFromBackToFront（Context context, String className）,更新AppUtils bringAppToFront(Context context, String className)
-
+5.ClipBoardUtils  新增 copyNoToast
 
 
 
