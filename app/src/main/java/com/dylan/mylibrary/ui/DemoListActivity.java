@@ -10,7 +10,10 @@ import android.widget.Toast;
 
 import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.AESUtils;
+import com.dylan.library.utils.DESUtils;
 import com.dylan.library.utils.DensityUtils;
+import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
@@ -71,6 +74,7 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
+
 
 
 
