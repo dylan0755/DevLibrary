@@ -154,6 +154,9 @@
          <activity android:name=".ui.popwindow.PopWindowDemoActivity"/>
 
           <activity android:name=".ui.ProgressBarActivity"/>
+        <activity android:name=".ui.NoExtraUiEditTextDemoActivity"
+            android:windowSoftInputMode="adjustNothing"/>
+
 
 
 

@@ -14,11 +14,29 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.dylan.library.exception.ELog;
+
+import java.lang.reflect.Method;
+
 /**
  * Created by Dylan on 2017/3/10.
  */
 
 public class EditTextUtils {
+
+
+    public static void disableImeShowWhileClick(EditText editText){
+        //禁止点击EditText自动弹出软键盘,由后面代码控制弹出
+        try {
+            Class<EditText> cls = EditText.class;
+            Method setSoftInputShownOnFocus;
+            setSoftInputShownOnFocus = cls.getMethod("setShowSoftInputOnFocus", boolean.class);
+            setSoftInputShownOnFocus.setAccessible(true);
+            setSoftInputShownOnFocus.invoke(editText, false);
+        } catch (Exception e) {
+            ELog.e(e);
+        }
+    }
 
 
     public static double parseDoubleValue(TextView textView) {

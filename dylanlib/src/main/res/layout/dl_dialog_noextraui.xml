@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dylan.library.widget.ResizableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/resizeLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <View
+        android:id="@+id/viewMask"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/llRoot"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#ffffff"
+        android:orientation="horizontal">
+
+        <com.dylan.library.widget.KeyPreImeEditText
+            android:id="@+id/edtInput"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#0000"
+            android:imeOptions="flagNoExtractUi"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:textColor="#222222"
+            android:textColorHint="#999999"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/btnOk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#0000"
+            android:text="确定"
+            android:textColor="#222222" />
+    </LinearLayout>
+</com.dylan.library.widget.ResizableLinearLayout>
