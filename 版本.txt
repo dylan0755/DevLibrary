@@ -3,6 +3,24 @@
 
 V4.7.0
 1.新增 NotificationHelper，适配安卓8.0
+2.新增 SingleClickAppCompatActivity ，项目的BaseActivity 继承它就可以防止快速点击打开多个Activity的情况
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
