@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+
+
+
+    <TextView
+        android:id="@+id/tvClickTwo"
+        android:layout_width="120dp"
+        android:layout_height="36dp"
+        android:text="Quick Click two"
+        android:background="#a0a0a0"
+        android:gravity="center"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="28dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="跳转前的Activity 继承 SingleClickAppCompatActivity"
+        android:textColor="#222222"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"/>
+
+
+
+</LinearLayout>

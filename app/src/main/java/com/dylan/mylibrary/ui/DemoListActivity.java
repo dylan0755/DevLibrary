@@ -4,17 +4,10 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.GridView;
-import android.widget.Toast;
 
-import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.screen.ScreenUtils;
-import com.dylan.library.utils.AESUtils;
-import com.dylan.library.utils.DESUtils;
 import com.dylan.library.utils.DensityUtils;
-import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -52,7 +45,7 @@ public class DemoListActivity extends AppCompatActivity {
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
             "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
-            "NoExtraUiEditDemo"};
+            "NoExtraUiEditDemo","singleClickDemo"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -66,7 +59,7 @@ public class DemoListActivity extends AppCompatActivity {
             ProgressWebViewActivity.class, VideoPlayerGestureActivity.class, ReboundActivity.class,
             BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
-            NoExtraUiEditTextDemoActivity.class};
+            NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class};
 
 
     @Override

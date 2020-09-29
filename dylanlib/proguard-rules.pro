@@ -231,6 +231,10 @@
 
 
 #module中除了widget包进行混淆，其它包中的类不进行混淆
+-keep class com.dylan.library.activity.**{
+      public *;
+      protected *;
+}
 
 -keep class com.dylan.library.adapter.**{
       public *;
