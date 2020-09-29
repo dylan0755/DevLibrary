@@ -1,9 +1,13 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
+V4.7.0
+1.新增 NotificationHelper，适配安卓8.0
 
 
-V4.6.0
+
+V4.6.0  ---->2020.09.24
+
 1.BitmapHelper convertViewToBitmap优化，解决View过大无法转化成Bitmap 问题
 2.StringUtils 新增 bundleToString
 3.ActivityManager 修复 currentActivity() 异常问题，增加getActivityCount() 返回当前Activity的个数
@@ -14,9 +18,6 @@ V4.6.0
 8. 新增NoExtractUiEditPopHelper 解决横屏下软键盘挡住输入框   使用： NoExtractUiEditTextDialog.buildEditTextDialog(edtDetailAddress,true);
 9.新增 KeyPreImeEditText ，解决 软键盘显示情况下，在Activity dialog 中无法监听到返回键的返回事件问题。
 10.EditTextUtils disableImeShowWhileClick  禁止EditText 点击弹出输入法
-
-
-
 
 
 
@@ -144,16 +145,6 @@ V4.0.0  ---->2020.04.15
 11.BankCardCodeUtils 更名为BankCardUtils, 新增 由银行卡号查询银行名称和卡种， 银行列表Json（已按字母排序）
 12.IRecyclerHelper 和 RecyclerViewHelper  新增 toStickFromPosition() 将某个item 置顶
 13.StringUtils 新增 formatFileSize（long size） 处理文件大小，Formatter.formatFileSize  这个类会出现 单位为中文的情况，如 637KB 变成 637千字节
-
-
-
-
-
-
-
-
-
-
 
 
 
