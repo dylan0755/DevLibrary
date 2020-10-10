@@ -17,7 +17,7 @@ import android.widget.ImageView;
 
 public class MatrixUtils {
 
-    //获取ImageView 点击时在Bitmap的坐标
+    //获取ImageView 点击时落在在Bitmap的坐标
     public static PointF getBitmapClickPointF(ImageView iv, MotionEvent e) {
         float x = e.getX();
         float y = e.getY();

@@ -4,8 +4,9 @@
 V4.7.0
 1.新增 NotificationHelper，适配安卓8.0
 2.新增 SingleClickAppCompatActivity ，项目的BaseActivity 继承它就可以防止快速点击打开多个Activity的情况
-
-
+3.BitmapHelper 新增setCurrentDensity，如果项目因做屏幕适配更改了density, 那么setImageBitmap 之后 获取的drawble 大小和 原先Bitmap的大小不一致，
+需要在setImageBitmap之前设置Bitmap的density
+4.MatrixUtils 新增 getBitmapClickPointF 获取ImageView 点击时落在在Bitmap的坐标
 
 
 
