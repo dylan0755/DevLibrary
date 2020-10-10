@@ -6,6 +6,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.view.MotionEvent;
 import android.widget.ImageView;
 
 /**
@@ -15,6 +16,30 @@ import android.widget.ImageView;
  */
 
 public class MatrixUtils {
+
+    //获取ImageView 点击时在Bitmap的坐标
+    public static PointF getBitmapClickPointF(ImageView iv, MotionEvent e) {
+        float x = e.getX();
+        float y = e.getY();
+        // 目标点的坐标
+        float dst[] = new float[2];
+        // 获取到ImageView的matrix
+        Matrix imageMatrix = iv.getImageMatrix();
+        // 创建一个逆矩阵
+        Matrix inverseMatrix = new Matrix();
+        // 求逆，逆矩阵被赋值
+        imageMatrix.invert(inverseMatrix);
+        // 通过逆矩阵映射得到目标点 dst 的值
+        inverseMatrix.mapPoints(dst, new float[]{x, y});
+        PointF pointF = new PointF();
+        pointF.set(dst[0], dst[1]);
+        return pointF;
+    }
+
+
+
+
+
 
     //四个顶点的坐标
     public static PointF[] getLocation(Matrix matrix, Rect rect) {

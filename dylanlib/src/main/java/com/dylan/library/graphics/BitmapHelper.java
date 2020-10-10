@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.Shader;
@@ -24,6 +25,7 @@ import android.support.annotation.FloatRange;
 import android.support.annotation.RequiresApi;
 import android.util.Base64;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -31,6 +33,8 @@ import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.io.IOCloser;
 import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.MatrixUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -46,40 +50,48 @@ import java.io.IOException;
 public class BitmapHelper {
     private static final String TAG = BitmapHelper.class.getSimpleName();
 
+    //如果项目做了屏幕适配更改了density, 那么setImageBitmap 之后 获取的drawble 大小和 Bitmap的大小不一致，需要设置项目的density
+    public static void setCurrentDensity(Bitmap bitmap, Context context) {
+        bitmap.setDensity(context.getResources().getDisplayMetrics().densityDpi);
+    }
 
-    public static Bitmap scale(Bitmap srcBitmap,int outWidth,int outHeight){
-        int width = srcBitmap.getWidth();
-        int height = srcBitmap.getHeight();
-
-        float scaleWidth = (outWidth)*1.0f/width;
-        float scaleHeight = (outHeight)*1.0f/height;
-
-
-        Matrix matrix = new Matrix();
-        matrix.postScale(scaleWidth,scaleHeight);
-        return  Bitmap.createBitmap(srcBitmap,0,0,width,height,matrix,false);
+    public static PointF getClickPointF(ImageView iv, MotionEvent e) {
+        return MatrixUtils.getBitmapClickPointF(iv,e);
     }
 
 
-    public static Bitmap scale(Bitmap srcBitmap,float widthScale,float heightScale){
+    public static Bitmap scale(Bitmap srcBitmap, int outWidth, int outHeight) {
+        int width = srcBitmap.getWidth();
+        int height = srcBitmap.getHeight();
+
+        float scaleWidth = (outWidth) * 1.0f / width;
+        float scaleHeight = (outHeight) * 1.0f / height;
+
+
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        return Bitmap.createBitmap(srcBitmap, 0, 0, width, height, matrix, false);
+    }
+
+
+    public static Bitmap scale(Bitmap srcBitmap, float widthScale, float heightScale) {
         int width = srcBitmap.getWidth();
         int height = srcBitmap.getHeight();
 
 
         Matrix matrix = new Matrix();
-        matrix.postScale(widthScale,heightScale);
-        return  Bitmap.createBitmap(srcBitmap,0,0,width,height,matrix,true);
+        matrix.postScale(widthScale, heightScale);
+        return Bitmap.createBitmap(srcBitmap, 0, 0, width, height, matrix, true);
     }
 
 
-
-    public  static BitmapSize decodeBitmapSize(String path){
-        BitmapFactory.Options options=new BitmapFactory.Options();
-        options.inJustDecodeBounds=true;
-        BitmapFactory.decodeFile(path,options);
-        BitmapSize size=new BitmapSize();
-        size.width=options.outWidth;
-        size.height=options.outHeight;
+    public static BitmapSize decodeBitmapSize(String path) {
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(path, options);
+        BitmapSize size = new BitmapSize();
+        size.width = options.outWidth;
+        size.height = options.outHeight;
         return size;
     }
 
@@ -92,11 +104,9 @@ public class BitmapHelper {
         Matrix matrix = new Matrix();
         matrix.reset();
         matrix.setRotate(degrees);
-        tmpBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(), tmpBitmap.getHeight(), matrix,true);
+        tmpBitmap = Bitmap.createBitmap(tmpBitmap, 0, 0, tmpBitmap.getWidth(), tmpBitmap.getHeight(), matrix, true);
         return tmpBitmap;
     }
-
-
 
 
     public static Bitmap getInSampleSizeBitmap(String picPath, int reqsW, int reqsH) {
@@ -525,8 +535,8 @@ public class BitmapHelper {
         Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
         try {
             Canvas canvas = new Canvas(bitmap);
-            Rect bottomRect=new Rect(0,0,srcWidth,srcHeight);
-            canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
+            Rect bottomRect = new Rect(0, 0, srcWidth, srcHeight);
+            canvas.drawBitmap(bitmapBottom, bottomRect, bottomRect, null);
             canvas.scale(scaleFactor, scaleFactor, srcWidth / 2, srcHeight / 2);
             canvas.drawBitmap(bitmapTop, (srcWidth - logoWidth) / 2, (srcHeight - logoHeight) / 2, null);
 
@@ -564,8 +574,8 @@ public class BitmapHelper {
         Bitmap bitmap = Bitmap.createBitmap(srcWidth, srcHeight, Bitmap.Config.ARGB_8888);
         try {
             Canvas canvas = new Canvas(bitmap);
-            Rect bottomRect=new Rect(0,0,srcWidth,srcHeight);
-            canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
+            Rect bottomRect = new Rect(0, 0, srcWidth, srcHeight);
+            canvas.drawBitmap(bitmapBottom, bottomRect, bottomRect, null);
             canvas.drawBitmap(bitmapTop, (srcWidth - logoWidth) / 2, (srcHeight - logoHeight) / 2, null);
 
             canvas.save();
@@ -577,6 +587,7 @@ public class BitmapHelper {
 
         return bitmap;
     }
+
     /**
      * bitmap转为base64
      */
@@ -620,7 +631,7 @@ public class BitmapHelper {
 
 
     /**
-     *   高斯模糊
+     * 高斯模糊
      */
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -629,8 +640,8 @@ public class BitmapHelper {
         // 图片缩放比例 (例如 1/10)
         int scaleRatio = 10;
         // 计算图片缩小后的长宽
-        int width = Math.round(image.getWidth()*1.0f / scaleRatio);
-        int height = Math.round(image.getHeight()*1.0f / scaleRatio);
+        int width = Math.round(image.getWidth() * 1.0f / scaleRatio);
+        int height = Math.round(image.getHeight() * 1.0f / scaleRatio);
 
         // 创建一张缩小后的图片做为渲染的图片
         Bitmap bitmap = Bitmap.createScaledBitmap(image, width, height, false);
@@ -665,26 +676,11 @@ public class BitmapHelper {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
     public interface OutPutListenener {
         void onSuccess();
 
         void onFailure();
     }
-
-
 
 
     public static void logWidthHeight(Bitmap bitmap) {
@@ -700,7 +696,7 @@ public class BitmapHelper {
     }
 
 
-    public static class BitmapSize{
+    public static class BitmapSize {
         public int width;
         public int height;
 
