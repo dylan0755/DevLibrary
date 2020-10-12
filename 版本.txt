@@ -4,10 +4,14 @@
 V4.7.0
 1.新增 NotificationHelper，适配安卓8.0
 2.新增 SingleClickAppCompatActivity ，项目的BaseActivity 继承它就可以防止快速点击打开多个Activity的情况
-3.BitmapHelper 新增setCurrentDensity，如果项目因做屏幕适配更改了density, 那么setImageBitmap 之后 获取的drawble 大小和 原先Bitmap的大小不一致，
-需要在setImageBitmap之前设置Bitmap的density
+3.BitmapHelper
+ 1.新增setCurrentDensity，如果项目因做屏幕适配更改了density, 那么setImageBitmap 之后 获取的drawble 大小和 原先Bitmap的大小不一致，
+   需要在setImageBitmap之前设置Bitmap的density
+ 2.clickInTransparentArea(Bitmap bitmap, MotionEvent e) 判断点击是否落在图片的透明区域
 4.MatrixUtils 新增 getBitmapClickPointF 获取ImageView 点击时落在在Bitmap的坐标
-
+5.MathUtils
+  1.新增isInPolygon(PointF point, List<PointF> pts)  isInPolygon(Point point, List<Point> pts) 判断点是否在多边形内
+  2.新增 convertPointsToLinesFloatArray(List<Point> points)，将点转化为canvas.draLines 需要的 float[] 数组，即可绘制出多边形
 
 
 
