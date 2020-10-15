@@ -59,6 +59,12 @@ public class BitmapHelper {
         return MatrixUtils.getBitmapClickPointF(iv,e);
     }
 
+    public static boolean clickInTransparentArea(Bitmap bitmap, MotionEvent e) {
+        if (bitmap == null || e == null) return false;
+        if (bitmap.getPixel((int) (e.getX()), ((int) e.getY())) == 0) return true;
+        return false;
+    }
+
 
     public static Bitmap scale(Bitmap srcBitmap, int outWidth, int outHeight) {
         int width = srcBitmap.getWidth();

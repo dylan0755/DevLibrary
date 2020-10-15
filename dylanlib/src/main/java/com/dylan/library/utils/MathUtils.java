@@ -1,8 +1,10 @@
 package com.dylan.library.utils;
 
+import android.graphics.Point;
 import android.graphics.PointF;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * Author: Dylan
@@ -11,6 +13,188 @@ import java.math.BigDecimal;
  */
 
 public class MathUtils {
+
+
+    /**
+     * 判断点是否在多边形内
+     */
+    public static boolean isInPolygon(PointF point, List<PointF> pts) {
+
+        int N = pts.size();
+        boolean boundOrVertex = true;
+        int intersectCount = 0;//交叉点数量
+        double precision = 2e-10; //浮点类型计算时候与0比较时候的容差
+        PointF p1, p2;//临近顶点
+        PointF p = point; //当前点
+
+        p1 = pts.get(0);
+        for (int i = 1; i <= N; ++i) {
+            if (p.equals(p1)) {
+                return boundOrVertex;
+            }
+
+            p2 = pts.get(i % N);
+            if (p.x < Math.min(p1.x, p2.x) || p.x > Math.max(p1.x, p2.x)) {
+                p1 = p2;
+                continue;
+            }
+
+            //射线穿过算法
+            if (p.x > Math.min(p1.x, p2.x) && p.x < Math.max(p1.x, p2.x)) {
+                if (p.y <= Math.max(p1.y, p2.y)) {
+                    if (p1.x == p2.x && p.y >= Math.min(p1.y, p2.y)) {
+                        return boundOrVertex;
+                    }
+
+                    if (p1.y == p2.y) {
+                        if (p1.y == p.y) {
+                            return boundOrVertex;
+                        } else {
+                            ++intersectCount;
+                        }
+                    } else {
+                        double xinters = (p.x - p1.x) * (p2.y - p1.y) / (p2.x - p1.x) + p1.y;
+                        if (Math.abs(p.y - xinters) < precision) {
+                            return boundOrVertex;
+                        }
+
+                        if (p.y < xinters) {
+                            ++intersectCount;
+                        }
+                    }
+                }
+            } else {
+                if (p.x == p2.x && p.y <= p2.y) {
+                    PointF p3 = pts.get((i + 1) % N);
+                    if (p.x >= Math.min(p1.x, p3.x) && p.x <= Math.max(p1.x, p3.x)) {
+                        ++intersectCount;
+                    } else {
+                        intersectCount += 2;
+                    }
+                }
+            }
+            p1 = p2;
+        }
+        if (intersectCount % 2 == 0) {//偶数在多边形外
+            return false;
+        } else { //奇数在多边形内
+            return true;
+        }
+    }
+
+
+    public static boolean isInPolygon(Point point, List<Point> pts) {
+
+        int N = pts.size();
+        boolean boundOrVertex = true;
+        int intersectCount = 0;//交叉点数量
+        double precision = 2e-10; //浮点类型计算时候与0比较时候的容差
+        Point p1, p2;//临近顶点
+        Point p = point; //当前点
+
+        p1 = pts.get(0);
+        for (int i = 1; i <= N; ++i) {
+            if (p.equals(p1)) {
+                return boundOrVertex;
+            }
+
+            p2 = pts.get(i % N);
+            if (p.x < Math.min(p1.x, p2.x) || p.x > Math.max(p1.x, p2.x)) {
+                p1 = p2;
+                continue;
+            }
+
+            //射线穿过算法
+            if (p.x > Math.min(p1.x, p2.x) && p.x < Math.max(p1.x, p2.x)) {
+                if (p.y <= Math.max(p1.y, p2.y)) {
+                    if (p1.x == p2.x && p.y >= Math.min(p1.y, p2.y)) {
+                        return boundOrVertex;
+                    }
+
+                    if (p1.y == p2.y) {
+                        if (p1.y == p.y) {
+                            return boundOrVertex;
+                        } else {
+                            ++intersectCount;
+                        }
+                    } else {
+                        double xinters = (p.x - p1.x) * (p2.y - p1.y) / (p2.x - p1.x) + p1.y;
+                        if (Math.abs(p.y - xinters) < precision) {
+                            return boundOrVertex;
+                        }
+
+                        if (p.y < xinters) {
+                            ++intersectCount;
+                        }
+                    }
+                }
+            } else {
+                if (p.x == p2.x && p.y <= p2.y) {
+                    Point p3 = pts.get((i + 1) % N);
+                    if (p.x >= Math.min(p1.x, p3.x) && p.x <= Math.max(p1.x, p3.x)) {
+                        ++intersectCount;
+                    } else {
+                        intersectCount += 2;
+                    }
+                }
+            }
+            p1 = p2;
+        }
+        if (intersectCount % 2 == 0) {//偶数在多边形外
+            return false;
+        } else { //奇数在多边形内
+            return true;
+        }
+    }
+
+
+
+    //绘制多边形
+    public static float[] convertPointsToLinesFloatArray(List<Point> points) {
+        if (points.size() < 3) return null;
+        float[] pfloats = new float[points.size() * 4];
+        for (int i = 0; i < points.size(); i++) {
+            Point point = points.get(i);
+            pfloats[i * 4] = point.x;
+            pfloats[i * 4 + 1] = point.y;
+            //下一个点
+            if ((i + 1) == points.size()) break;
+            pfloats[i * 4 + 2] = points.get(i + 1).x;
+            pfloats[i * 4 + 3] = points.get(i + 1).y;
+        }
+        //最后一条线
+        pfloats[pfloats.length - 4] = points.get(points.size() - 1).x;
+        pfloats[pfloats.length - 3] = points.get(points.size() - 1).y;
+        pfloats[pfloats.length - 2] = points.get(0).x;
+        pfloats[pfloats.length - 1] = points.get(0).y;
+        return pfloats;
+    }
+
+    //绘制多边形
+    public static float[] convertPointFsToLinesFloatArray(List<PointF> points) {
+        if (points.size() < 3) return null;
+        float[] pfloats = new float[points.size() * 4];
+        for (int i = 0; i < points.size(); i++) {
+            PointF point = points.get(i);
+            pfloats[i * 4] = point.x;
+            pfloats[i * 4 + 1] = point.y;
+            //下一个点
+            if ((i + 1) == points.size()) break;
+            pfloats[i * 4 + 2] = points.get(i + 1).x;
+            pfloats[i * 4 + 3] = points.get(i + 1).y;
+        }
+        //最后一条线
+        pfloats[pfloats.length - 4] = points.get(points.size() - 1).x;
+        pfloats[pfloats.length - 3] = points.get(points.size() - 1).y;
+        pfloats[pfloats.length - 2] = points.get(0).x;
+        pfloats[pfloats.length - 1] = points.get(0).y;
+        return pfloats;
+    }
+
+
+
+
+
 
     /**
      *  直线方程   y=ax+b   由起点和终点两个点确定a与b，
