@@ -2,6 +2,7 @@ package com.dylan.library.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -35,7 +36,23 @@ public class MatrixUtils {
         pointF.set(dst[0], dst[1]);
         return pointF;
     }
-
+    public static Point getBitmapClickPoint(ImageView iv, MotionEvent e) {
+        float x = e.getX();
+        float y = e.getY();
+        // 目标点的坐标
+        float dst[] = new float[2];
+        // 获取到ImageView的matrix
+        Matrix imageMatrix = iv.getImageMatrix();
+        // 创建一个逆矩阵
+        Matrix inverseMatrix = new Matrix();
+        // 求逆，逆矩阵被赋值
+        imageMatrix.invert(inverseMatrix);
+        // 通过逆矩阵映射得到目标点 dst 的值
+        inverseMatrix.mapPoints(dst, new float[]{x, y});
+        Point pointF = new Point();
+        pointF.set((int) dst[0], (int) dst[1]);
+        return pointF;
+    }
 
 
 

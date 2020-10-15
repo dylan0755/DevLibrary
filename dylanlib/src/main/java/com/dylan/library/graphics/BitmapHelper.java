@@ -9,6 +9,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -57,6 +58,10 @@ public class BitmapHelper {
 
     public static PointF getClickPointF(ImageView iv, MotionEvent e) {
         return MatrixUtils.getBitmapClickPointF(iv,e);
+    }
+
+    public static Point getClickPoint(ImageView iv, MotionEvent e) {
+        return MatrixUtils.getBitmapClickPoint(iv,e);
     }
 
     public static boolean clickInTransparentArea(Bitmap bitmap, MotionEvent e) {
