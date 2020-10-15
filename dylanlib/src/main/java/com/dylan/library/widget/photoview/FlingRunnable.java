@@ -20,6 +20,7 @@ public class FlingRunnable implements Runnable {
     private OnFlingCallBack callBack;
     private VelocityTracker mVelocityTracker;
     private int mMinimumVelocity;
+    private boolean isScrolling;
 
 
 
@@ -107,6 +108,7 @@ public class FlingRunnable implements Runnable {
     @Override
     public void run() {
         if (mScroller.isFinished()) {
+            isScrolling=false;
             return;
         }
 
@@ -122,7 +124,15 @@ public class FlingRunnable implements Runnable {
 
             //每16ms调用一次
             if (callBack!=null)callBack.getImageView().postDelayed(this, 16);
+            isScrolling=true;
+        }else{
+            isScrolling=false;
         }
+
+    }
+
+    public boolean isScrolling(){
+        return isScrolling;
     }
 
     private RectF getMatrixRectF(ImageView imageView) {
