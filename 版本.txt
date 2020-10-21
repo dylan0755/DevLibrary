@@ -14,7 +14,7 @@ V4.7.0
   2.新增 convertPointsToLinesFloatArray(List<Point> points)，将点转化为canvas.draLines 需要的 float[] 数组，即可绘制出多边形
 6.FlingRunnable 新增 isScrolling() 判断是否在滚动
 7.新增 DragMapView ，大图拖拉滚动
-
+8.BaseRecyclerAdapter mClickListener 更名为 mItemClickListener
 
 
 
