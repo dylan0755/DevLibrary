@@ -10,12 +10,12 @@ import com.dylan.library.screen.NavBarUtils;
  * Date: 2020/4/20
  * Desc:
  */
-public abstract class CustomDialog extends Dialog {
+public abstract class CustomFloatingDialog extends Dialog {
     protected abstract int getLayoutId();
     private boolean hideNavWhileShowing;//弹出对话框是否隐藏虚拟按键 达到全屏效果
 
-    public CustomDialog(Context context) {
-        super(context, R.style.DLCustomDialog);
+    public CustomFloatingDialog(Context context) {
+        super(context, R.style.DLCustomFloatingDialog);
         setContentView(getLayoutId());
     }
 
