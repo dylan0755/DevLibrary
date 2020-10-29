@@ -16,7 +16,8 @@ V4.7.0
 7.新增 DragMapView ，大图拖拉滚动
 8.BaseRecyclerAdapter mClickListener 更名为 mItemClickListener
 9.CustomDialog 更名为 CustomFloatingDialog, 新增CustomNotFloatingDialog
-
+10.新增 ParamMapBuilder 链式调用Map<String,Object> put,支持返回JSON
+11.SmsCodeCounter 更新优化，增加倒计时回调
 
 
 

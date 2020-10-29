@@ -1,58 +1,81 @@
 package com.dylan.library.utils;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
+import android.support.annotation.RequiresApi;
 import android.widget.TextView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
+ * Created by Dylan on 2018/4/27.
  * 验证码倒计时工具类
  */
 
 public class SmsCodeCounter {
 
     private TextView tvValidateCode;
-    private Context context;
+    private Context mActivity;
     private int count;
-    private   int mDuration =60;
-    private String reGetCodeText ="获取验证码";
+    private int mDuration = 60;
+    private String reGetCodeText = "重新获取";
+    private String textAfterCountDownNumber="后重新获取";
     private Drawable normalDrawable;
     private Drawable countDownDrawable;
-    private int normalTextColor;
-    private int countDownTextColor;
-
-    public SmsCodeCounter(Context context, TextView tvValidateCode) {
-        this.context = context;
+    private int normalTextColor=Color.WHITE;
+    private int countDownTextColor= Color.WHITE;
+    private static Map<String, PageExitRecord> recordExitMap;
+    private OnCountDownListener mOnCountDownListener;
+    public SmsCodeCounter(Activity activity, TextView tvValidateCode) {
+        mActivity = activity;
         this.tvValidateCode = tvValidateCode;
     }
 
-    public void setReGetCodeText(String reGetCodeText){
-        this.reGetCodeText=reGetCodeText;
+    public void setNormalTextColor(int color) {
+        normalTextColor = color;
     }
 
-    public void setNormalTextColor(int color){
-        normalTextColor=color;
+    public void setCountDownTextColor(int color) {
+        countDownTextColor = color;
     }
 
-    public void setCountDownTextColor(int color){
-        countDownTextColor=color;
+    public void setNormalDrawable(Drawable drawable) {
+        normalDrawable = drawable;
     }
 
-    public void setNormalDrawable(Drawable drawable){
-        normalDrawable=drawable;
+    public void setCountDownDrawable(Drawable drawable) {
+        countDownDrawable = drawable;
     }
 
-    public void setCountDownDrawable(Drawable drawable){
-        countDownDrawable=drawable;
+    public void setReGetCodeText(String text){
+       reGetCodeText=text;
     }
 
+    public void setTextAfterCountDownNumber(String text){
+        textAfterCountDownNumber=text;
+    }
 
+    public void checkRecord() {
+        if (recordExitMap == null) return;
+        PageExitRecord record = recordExitMap.get(mActivity.getClass().getSimpleName());
+        if (record == null || record.getExitMillsTime() == 0) return;
 
+        long recordDuration = (System.currentTimeMillis() - record.getExitMillsTime()) + record.getSurplusMillisDuration();
+        if (recordDuration < mDuration * 1000) {
+            int startCount = (int) ((mDuration * 1000 - recordDuration) / 1000L);
+            start(startCount);
+        }
+    }
 
 
     private Handler counterHandler = new Handler(Looper.getMainLooper()) {
@@ -63,74 +86,72 @@ public class SmsCodeCounter {
                 tvValidateCode.setEnabled(true);
                 tvValidateCode.setText(reGetCodeText);
                 tvValidateCode.setTextColor(normalTextColor);
-                tvValidateCode.setBackground(normalDrawable);
+               if (normalDrawable!=null)tvValidateCode.setBackground(normalDrawable);
+                if (mOnCountDownListener!=null)mOnCountDownListener.onFinish();
             } else {
                 String text = String.format("%1$ds", count);
-                tvValidateCode.setText(text);
+                tvValidateCode.setText(text + textAfterCountDownNumber);
                 count--;
                 counterHandler.sendEmptyMessageDelayed(0, 1000L);
+                if (mOnCountDownListener!=null)mOnCountDownListener.onTick(count);
             }
         }
     };
 
 
-    public  boolean start(PageExitRecord record){
-        if (record==null)return false;
-        if (record.getExitMillsTime()==0)return false;
-        long recordDuration= (System.currentTimeMillis()-record.getExitMillsTime())+record.getSurplusMillisDuration();
-        if (recordDuration<mDuration*1000){
-            int startCount=(int) ((mDuration*1000-recordDuration)/1000L);
-            return start(startCount);
-        }
-        return false;
-    }
-
-    public boolean  start(){
-        count = 59;
+    public boolean start() {
+        count = mDuration-1;
         return start(count);
     }
 
 
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public boolean start(int count) {
-        this.count=count;
+    private boolean start(int count) {
+        this.count = count;
         String text = String.format("%1$ds", count);
-        tvValidateCode.setText(text);
+        tvValidateCode.setText(text + textAfterCountDownNumber);
         tvValidateCode.setTextColor(countDownTextColor);
-        tvValidateCode.setBackground(countDownDrawable);
+        if (countDownDrawable!=null)tvValidateCode.setBackground(countDownDrawable);
         tvValidateCode.setEnabled(false);
         counterHandler.sendEmptyMessageDelayed(0, 1000L);
+        if (mOnCountDownListener!=null)mOnCountDownListener.onStart(count);
         return true;
     }
 
-    public void stop() {
+
+
+    public void destroyAndRecordExitTime(boolean needRecord) {
         counterHandler.removeCallbacksAndMessages(null);
+        if (!needRecord||getCount() == 0){
+            mActivity=null;
+            return;
+        }
+        PageExitRecord record = new PageExitRecord();
+        record.setExitMillsTime(System.currentTimeMillis());
+        record.setSurplusMillisDuration(getSurplusMillsDuration());
+        if (recordExitMap == null) {
+            recordExitMap = new HashMap<>();
+        }
+        recordExitMap.put(mActivity.getClass().getSimpleName(), record);
+        mActivity=null;
     }
 
 
-    public int getCount(){
+    public int getCount() {
         return count;
     }
 
-    public long getSurplusMillsDuration(){
-        return (mDuration-getCount())*1000L;
+    public long getSurplusMillsDuration() {
+        return (mDuration - getCount()) * 1000L;
     }
 
     public int getDuration() {
         return mDuration;
     }
 
-    public void setDuration(int duration){
+    public void setDuration(int duration) {
         this.mDuration = duration;
     }
-
-
-
-
-
-
-
-
 
 
     public static class PageExitRecord {
@@ -152,6 +173,17 @@ public class SmsCodeCounter {
         public void setSurplusMillisDuration(long surplusMillisDuration) {
             this.surplusMillisDuration = surplusMillisDuration;
         }
+    }
+
+
+    public interface OnCountDownListener{
+        void onStart(int duration);
+        void onTick(int duration);
+        void onFinish();
+    }
+
+    public void setOnCountDownListener(OnCountDownListener listener){
+        mOnCountDownListener=listener;
     }
 
 }

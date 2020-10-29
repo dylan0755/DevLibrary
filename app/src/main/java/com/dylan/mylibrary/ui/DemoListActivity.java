@@ -48,7 +48,7 @@ public class DemoListActivity extends AppCompatActivity {
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
             "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
-            "NoExtraUiEditDemo","singleClickDemo","DragMapView"};
+            "NoExtraUiEditDemo","singleClickDemo","DragMapView","SmsCodeCounter"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -62,7 +62,8 @@ public class DemoListActivity extends AppCompatActivity {
             ProgressWebViewActivity.class, VideoPlayerGestureActivity.class, ReboundActivity.class,
             BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
-            NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class,DragMapViewDemoActivity.class};
+            NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class,DragMapViewDemoActivity.class,
+            SmsCodeCounterActivity.class};
 
 
     @Override
@@ -74,18 +75,6 @@ public class DemoListActivity extends AppCompatActivity {
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
 
 
-        Map<String,Object> param= ParamMapBuilder.put("mobile","13567186547")
-                .put("name","李斯")
-                .put("time","2020-03-9")
-                .put("invite",null)
-                .build();
-        Logger.e(param);
-        String json=ParamMapBuilder.put("mobile","13567186547")
-                .put("name","李斯")
-                .put("time","2020-03-9")
-                .put("invite",null)
-                .buildJSONString();
-        Logger.e(json);
     }
 
 
