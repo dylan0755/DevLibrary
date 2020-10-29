@@ -8,6 +8,8 @@ import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.ParamMapBuilder;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -28,6 +30,7 @@ import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by Dylan on 2016/12/16.
@@ -71,6 +74,18 @@ public class DemoListActivity extends AppCompatActivity {
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
 
 
+        Map<String,Object> param= ParamMapBuilder.put("mobile","13567186547")
+                .put("name","李斯")
+                .put("time","2020-03-9")
+                .put("invite",null)
+                .build();
+        Logger.e(param);
+        String json=ParamMapBuilder.put("mobile","13567186547")
+                .put("name","李斯")
+                .put("time","2020-03-9")
+                .put("invite",null)
+                .buildJSONString();
+        Logger.e(json);
     }
 
 
