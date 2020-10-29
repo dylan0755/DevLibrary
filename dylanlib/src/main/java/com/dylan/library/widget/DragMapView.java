@@ -243,7 +243,7 @@ public abstract class DragMapView extends AppCompatImageView {
     }
 
 
-    protected boolean isScrolling() {
+    public boolean isScrolling() {
         return mFlingRunnable.isScrolling();
     }
 
