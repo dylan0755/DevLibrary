@@ -1,7 +1,7 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V4.7.0
+V4.7.0 ---->2020.10.29
 1.新增 NotificationHelper，适配安卓8.0
 2.新增 SingleClickAppCompatActivity ，项目的BaseActivity 继承它就可以防止快速点击打开多个Activity的情况
 3.BitmapHelper
@@ -18,15 +18,6 @@ V4.7.0
 9.CustomDialog 更名为 CustomFloatingDialog, 新增CustomNotFloatingDialog
 10.新增 ParamMapBuilder 链式调用Map<String,Object> put,支持返回JSON
 11.SmsCodeCounter 更新优化，增加倒计时回调
-
-
-
-
-
-
-
-
-
 
 
 
