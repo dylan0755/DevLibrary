@@ -1,6 +1,18 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
+V4.8.0
+
+1.新增 GradientDrawableBuilder, java代码使用可代替  xml  shape样式文件
+
+
+
+
+
+
+
+
+
 V4.7.0 ---->2020.10.29
 1.新增 NotificationHelper，适配安卓8.0
 2.新增 SingleClickAppCompatActivity ，项目的BaseActivity 继承它就可以防止快速点击打开多个Activity的情况

@@ -1,6 +1,7 @@
 package com.dylan.mylibrary.ui;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,8 @@ import android.widget.TextView;
 
 import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.utils.CompatUtils;
-import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.SmsCodeCounter;
-import com.dylan.library.widget.progressbar.ProgressBarDrawableDecorator;
+import com.dylan.library.widget.shape.GradientDrawableBuilder;
 import com.dylan.mylibrary.R;
 
 /**
@@ -35,8 +35,17 @@ public class SmsCodeCounterActivity extends AppCompatActivity {
 
 
         smsCodeCounter=new SmsCodeCounter(this,tvGetCode);
-        smsCodeCounter.setNormalDrawable(CompatUtils.getDrawable(R.drawable.shape_countdown_normal));
-        smsCodeCounter.setCountDownDrawable(CompatUtils.getDrawable(R.drawable.shape_countdown_go));
+        GradientDrawable normalDrawable= new GradientDrawableBuilder(this)
+                .setSolidColor(Color.RED).setCornerRadius(24).build();
+        smsCodeCounter.setNormalDrawable(normalDrawable);
+
+        GradientDrawable countDownDrawable=new GradientDrawableBuilder(this)
+                .setSolidColor(Color.parseColor("#999999"))
+//                .setStroke(1,Color.RED)
+//                .setStroke(1,Color.RED,10,8)
+//                .setCornerRadius(24)
+                .build();
+        smsCodeCounter.setCountDownDrawable(countDownDrawable);
 
         smsCodeCounter.checkRecord();
 
