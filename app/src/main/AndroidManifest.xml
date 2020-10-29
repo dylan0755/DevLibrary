@@ -159,6 +159,12 @@
 
         <activity android:name=".ui.SingleClickTestActivity"/>
         <activity android:name=".ui.SingleClickResult2Activity"/>
+        <activity
+            android:hardwareAccelerated="false"
+            android:name=".ui.DragMapViewDemoActivity"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，

@@ -32,7 +32,7 @@ import java.util.TimerTask;
  * Date: 2020/9/16
  * Desc:
  */
-public class NoExtractUiEditDialogHelper extends CustomDialog {
+public class NoExtractUiEditDialogHelper extends CustomFloatingDialog {
     KeyPreImeEditText dialogEditText;
     Button btnOk;
     ResizableLinearLayout resizeLayout;

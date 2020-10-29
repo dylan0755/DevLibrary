@@ -31,7 +31,7 @@ public  abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.View
     private List<T> mDataList;
     private Constructor<VH> mSubConstrutor;
     @NotProguard
-    protected OnItemClickListener mClickListener;
+    protected OnItemClickListener mItemClickListener;
 
     public BaseRecyclerAdapter() {
         Type type = this.getClass().getGenericSuperclass();
@@ -201,7 +201,7 @@ public  abstract class BaseRecyclerAdapter<T,VH extends BaseRecyclerAdapter.View
     }
 
     public void setOnItemClickListener(OnItemClickListener<T> listener){
-         mClickListener=listener;
+         mItemClickListener =listener;
     }
 
 
