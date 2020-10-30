@@ -108,7 +108,13 @@ public class NoExtractUiEditDialogHelper extends CustomFloatingDialog {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                dialogEditText.setSelection(srcEditText.getSelectionEnd());
+                dialogEditText.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialogEditText.setSelection(srcEditText.getSelectionEnd());
+                    }
+                });
+
             }
         }, 100);
 

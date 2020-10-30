@@ -107,7 +107,13 @@ public class NoExtractUiEditPopHelper extends PopupWindow {
         timer.schedule(new TimerTask() {
             @Override
             public void run() {
-                dialogEditText.setSelection(srcEditText.getSelectionEnd() != 0 ? srcEditText.getSelectionEnd() : srcEditText.getText().length());
+                dialogEditText.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        dialogEditText.setSelection(srcEditText.getSelectionEnd() != 0 ? srcEditText.getSelectionEnd() : srcEditText.getText().length());
+                    }
+                });
+
             }
         }, 100);
 
