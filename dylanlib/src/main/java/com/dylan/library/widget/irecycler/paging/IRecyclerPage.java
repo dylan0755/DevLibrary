@@ -8,44 +8,11 @@ import java.util.List;
  * Desc:
  */
 public class IRecyclerPage {
-    private int total; //总数
-    private int pageNum;//当前页数
-    private int pageSize; //一页数量
-    private int currentSize;//当前页数量
     private boolean isLastPage;
     private List<?> list;
+    private boolean isSucceed;
+    private String failureMsg;
 
-    public int getTotal() {
-        return total;
-    }
-
-    public void setTotal(int total) {
-        this.total = total;
-    }
-
-    public int getPageNum() {
-        return pageNum;
-    }
-
-    public void setPageNum(int pageNum) {
-        this.pageNum = pageNum;
-    }
-
-    public int getPageSize() {
-        return pageSize;
-    }
-
-    public void setPageSize(int pageSize) {
-        this.pageSize = pageSize;
-    }
-
-    public int getCurrentSize() {
-        return currentSize;
-    }
-
-    public void setCurrentSize(int currentSize) {
-        this.currentSize = currentSize;
-    }
 
     public boolean isLastPage() {
         return isLastPage;
@@ -62,4 +29,23 @@ public class IRecyclerPage {
     public void setList(List<?> list) {
         this.list = list;
     }
+
+
+    public boolean isSucceed() {
+        return isSucceed;
+    }
+
+    public void setSucceed(boolean succeed) {
+        isSucceed = succeed;
+    }
+
+    public String getFailureMsg() {
+        return failureMsg;
+    }
+
+    public void setFailureMsg(String failureMsg) {
+        this.failureMsg = failureMsg;
+    }
+
+
 }

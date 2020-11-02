@@ -11,6 +11,7 @@ import com.dylan.library.widget.irecycler.IRecyclerHelper;
 import com.dylan.library.widget.irecycler.IRecyclerView;
 import com.dylan.library.widget.irecycler.OnLoadMoreListener;
 import com.dylan.library.widget.irecycler.OnRefreshListener;
+import com.dylan.library.widget.irecycler.paging.IRecyclerPage;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
@@ -46,7 +47,6 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         iRecyclerHelper = new IRecyclerHelper();
         iRecyclerHelper.bind(recyclerView, mAdapter, null);
         getData(iRecyclerHelper.getPageNo());
-
 //        iRecyclerHelper.setLoadingTextColor(Color.BLUE);
 //        iRecyclerHelper.setNoMoreTextColor(Color.BLUE);
 //        iRecyclerHelper.setErrorTextColor(Color.BLUE);
@@ -75,10 +75,7 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
     }
 
 
-    //模拟请求结果
-    public void afterGetData(boolean isSucceed, Object o, List<String> list) {
-        iRecyclerHelper.afterGetData(isSucceed, o, list);
-    }
+
 
 
     //模拟请求
@@ -91,7 +88,7 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         } else {
             if (pageNo <= 5) {
                 if (pageNo == 4 && !hasError) {//模拟请求网络错误
-                    afterGetData(false, new SocketTimeoutException("Test TimeOut"), list);
+                    iRecyclerHelper.afterGetData(new SocketTimeoutException("Test TimeOut"),false,null, list);
                     hasError = true;
                     return;
                 }
@@ -102,14 +99,15 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         }
 
         if (isFirstRequest) {
-            afterGetData(true, "", list);
+            iRecyclerHelper.afterGetData(null,true,null, null);
             isFirstRequest = false;
             return;
         }
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                afterGetData(true, "", list);
+                iRecyclerHelper.afterGetData(null,true,null, list);
+
             }
         }, 2000);
 
