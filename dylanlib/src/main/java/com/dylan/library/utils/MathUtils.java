@@ -4,6 +4,7 @@ import android.graphics.Point;
 import android.graphics.PointF;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -190,6 +191,18 @@ public class MathUtils {
         pfloats[pfloats.length - 1] = points.get(0).y;
         return pfloats;
     }
+
+    private static List<PointF> convertFloatArrayToPoints(float[] points) {
+        if (points.length % 2 != 0) return new ArrayList<>();
+        List<PointF> pointList = new ArrayList<>(points.length / 2);
+        for (int i = 0; i < points.length; i += 2) {
+            PointF point = new PointF(points[i], points[i + 1]);
+            pointList.add(point);
+        }
+        return pointList;
+    }
+
+
 
 
 
