@@ -11,7 +11,6 @@ import com.dylan.library.widget.irecycler.IRecyclerHelper;
 import com.dylan.library.widget.irecycler.IRecyclerView;
 import com.dylan.library.widget.irecycler.OnLoadMoreListener;
 import com.dylan.library.widget.irecycler.OnRefreshListener;
-import com.dylan.library.widget.irecycler.paging.IRecyclerPage;
 
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
@@ -25,7 +24,7 @@ import java.util.List;
 public class IRecyclerViewActivity extends AppCompatActivity implements OnRefreshListener, OnLoadMoreListener {
     IRecyclerView recyclerView;
     private TestAdapter mAdapter;
-    private IRecyclerHelper iRecyclerHelper;
+    private IRecyclerHelper recyclerHelper;
     private Handler handler = new Handler();
     private boolean isFirstRequest = true;
     private boolean hasError;
@@ -44,34 +43,25 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         recyclerView.setIAdapter(mAdapter);
 
 
-        iRecyclerHelper = new IRecyclerHelper();
-        iRecyclerHelper.bind(recyclerView, mAdapter, null);
-        getData(iRecyclerHelper.getPageNo());
-//        iRecyclerHelper.setLoadingTextColor(Color.BLUE);
-//        iRecyclerHelper.setNoMoreTextColor(Color.BLUE);
-//        iRecyclerHelper.setErrorTextColor(Color.BLUE);
-//        iRecyclerHelper.tintLoadingProgressBar(Color.BLUE);
-//        iRecyclerHelper.setRefreshTextViewColor(Color.BLUE);
-//        iRecyclerHelper.setRefreshCircleIndicatorViewColor(Color.TRANSPARENT,Color.BLUE);
+        recyclerHelper = new IRecyclerHelper();
+        recyclerHelper.bind(recyclerView, mAdapter, null);
+        getData(recyclerHelper.getPageNo());
 
-//        iRecyclerHelper.setLoadingTextSize(18);
-//        iRecyclerHelper.setRefreshTextSize(18);
-//        iRecyclerHelper.setErrorTextSize(18);
-//        iRecyclerHelper.setNoMoreTextSize(18);
+
     }
 
     @Override
     public void onLoadMore() {
-        if (iRecyclerHelper.isCanLoadMore()) {
-            getData(iRecyclerHelper.getPageNo());
+        if (recyclerHelper.isCanLoadMore()) {
+            getData(recyclerHelper.getPageNo());
         }
     }
 
     @Override
     public void onRefresh() {
         hasError = false;
-        iRecyclerHelper.setRefreshStatus();
-        getData(iRecyclerHelper.getPageNo());
+        recyclerHelper.setRefreshStatus();
+        getData(recyclerHelper.getPageNo());
     }
 
 
@@ -88,7 +78,7 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         } else {
             if (pageNo <= 5) {
                 if (pageNo == 4 && !hasError) {//模拟请求网络错误
-                    iRecyclerHelper.afterGetData(new SocketTimeoutException("Test TimeOut"),false,null, list);
+                    recyclerHelper.afterGetData(new SocketTimeoutException("Test TimeOut"),false,null, list);
                     hasError = true;
                     return;
                 }
@@ -99,14 +89,14 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         }
 
         if (isFirstRequest) {
-            iRecyclerHelper.afterGetData(null,true,null, null);
+            recyclerHelper.afterGetData(null,true,null, list);
             isFirstRequest = false;
             return;
         }
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                iRecyclerHelper.afterGetData(null,true,null, list);
+                recyclerHelper.afterGetData(null,true,null, list);
 
             }
         }, 2000);

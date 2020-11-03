@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.exception.OnNextBussinesException;
 import com.dylan.library.exception.ThrowableUtils;
+import com.dylan.library.utils.ArrayUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.RecyclerViewHelper;
 import com.dylan.library.utils.ToastUtils;
@@ -263,6 +264,16 @@ public class IRecyclerHelper {
         indicatorView.setOutRingColor(outRingColor);
     }
 
+    public void scrollToTop(){
+        if (recyclerView==null)return;
+        toStickFromPosition(recyclerView,0,0);
+    }
+
+    public void toStickFromPosition(int position,int offset){
+        if (recyclerView==null)return;
+        toStickFromPosition(recyclerView,position,offset);
+    }
+
 
     public static boolean isCanLoadMore(IRecyclerView recyclerView, LoadMoreFooterView loadMoreFooterView, IRecyclerAdapterDataBinder adapterBinder) {
         if (recyclerView == null || loadMoreFooterView == null ||
@@ -274,7 +285,7 @@ public class IRecyclerHelper {
             } else if (recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
                 int[] lastPositions = new int[((StaggeredGridLayoutManager) recyclerView.getLayoutManager()).getSpanCount()];
                 ((StaggeredGridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPositions(lastPositions);
-                int lastPosition = findMax(lastPositions);
+                int lastPosition = ArrayUtils.findMax(lastPositions);
                 boolean isBottom = lastPosition == recyclerView.getLayoutManager().getItemCount() - 1;
 
                 if (isBottom) {
@@ -288,16 +299,7 @@ public class IRecyclerHelper {
         return false;
     }
 
-    //找到数组中的最大值
-    private static int findMax(int[] lastPositions) {
-        int max = lastPositions[0];
-        for (int value : lastPositions) {
-            if (value > max) {
-                max = value;
-            }
-        }
-        return max;
-    }
+
 
     public static void setRefreshStatus(LoadMoreFooterView loadMoreFooterView) {
         if (loadMoreFooterView == null) return;
@@ -348,5 +350,7 @@ public class IRecyclerHelper {
     public static void toStickFromPosition(RecyclerView recyclerView,int position,int offset){
         RecyclerViewHelper.toStickFromPosition(recyclerView,position,offset);
     }
+
+
 
 }
