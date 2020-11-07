@@ -211,9 +211,11 @@ public abstract class DragMapView extends AppCompatImageView {
             mStartPoint.set(currentX, currentY);
             setImageMatrix(mMatrix);
 
-            Rect rect = MatrixUtils.getMatrixRect(mMatrix, mBitmap);
-            offsetX = rect.left;
-            offsetY=rect.top;
+            if (mBitmap!=null){
+                Rect rect = MatrixUtils.getMatrixRect(mMatrix, mBitmap);
+                offsetX = rect.left;
+                offsetY=rect.top;
+            }
             DragMapView.this.onFiling(currentX, currentY, deltaX, deltaY);
 
         }

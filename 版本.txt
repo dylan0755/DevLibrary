@@ -4,12 +4,12 @@
 V4.8.0
 
 1.新增 GradientDrawableBuilder, java代码使用可代替  xml  shape样式文件
-
-
-
-
-
-
+2.修复 DragMapView onFiling 中 mBitmap 为null的空指针问题
+3.修复 NoExtractUiEditPopHelper NoExtractUiEditDialogHelper 中软键盘延时弹出的子线程修改UI Bug
+4.优化IRecyclerHelper afterGetData方法，IRecyclerPage 封装
+5.IRecyclerHelper 新增 toStickFromPosition成员方法，方便 activity 中 recyclerHelper 实例调用，定位到第几个item,新增scrollToTop 滚动到顶部位置
+6.ArrayUtils 新增 findMax 找最大值
+7.更新BothItemRecyclerAdapter ,实现IRecyclerAdapterDataBinder，以便在recyclerHelper 中使用
 
 
 

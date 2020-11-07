@@ -15,8 +15,10 @@ import android.widget.TextView;
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.exception.OnNextBussinesException;
 import com.dylan.library.exception.ThrowableUtils;
+import com.dylan.library.utils.ArrayUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.RecyclerViewHelper;
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.CircleIndicatorView;
 import com.dylan.library.widget.irecycler.footer.LoadMoreFooterView;
 import com.dylan.library.widget.irecycler.header.RefreshHeaderView;
@@ -97,15 +99,19 @@ public class IRecyclerHelper {
         return false;
     }
 
-    public   void afterGetData(boolean isError, Throwable throwable, IRecyclerPage page){
-        List  list=page==null?null:page.getList();
-        boolean isLastPage=(page!=null&&page.isLastPage());
-        afterGetData(isError,throwable,list,isLastPage);
+    public   void afterGetData(Throwable throwable, IRecyclerPage page){
+        if (page==null)return;
+        List<?>  list=page.getList();
+        boolean isLastPage=page.isLastPage();
+        afterGetData(throwable,page.isSucceed(),page.getFailureMsg(),list,isLastPage);
     }
 
-    public void afterGetData(boolean isError, Throwable throwable, List<?> list,boolean isLastPage) {
-        if (isError) {
-            if (throwable == null) return;
+    public void afterGetData(Throwable throwable, boolean isSucceed,String failureMsg,List<?> list){
+        afterGetData(throwable,isSucceed,failureMsg,list,false);
+    }
+
+    public void afterGetData(Throwable throwable, boolean isSucceed,String failureMsg,List<?> list,boolean isLastPage) {
+        if (throwable!=null) {
             if (throwable instanceof OnNextBussinesException) {
                 ThrowableUtils.show(((OnNextBussinesException) throwable).target);
             } else {
@@ -145,98 +151,25 @@ public class IRecyclerHelper {
                 } else {
                     setNoMore(footerView);
                 }
-            }
 
-        }
-
-    }
-
-
-    public void afterGetData(boolean isError, Throwable errorMsg, List<?> list) {
-        if (isError) {
-            if (errorMsg == null) return;
-            if (errorMsg instanceof OnNextBussinesException) {
-                ThrowableUtils.show(((OnNextBussinesException) errorMsg).target);
-            } else {
-                if (pageNo > firstPageNo) {
-                    pageNo--;
-                    setError(footerView);
-                } else {
-                    completeRefresh();
-                    completeLoadMore();
-                }
-                ThrowableUtils.show(errorMsg);
-            }
-        } else {
-            if (EmptyUtils.isNotEmpty(list)) {
-                if (tvEmptyView != null) tvEmptyView.setText("");
-                if (emptyView!=null)emptyView.setVisibility(View.GONE);
-                if (pageNo == 1) {
-                    mAdapterBinder.hookBind(list);
-                    refreshComplete(recyclerView);
-                } else {
-                    mAdapterBinder.hookAddAllAndNotifyDataChanged(list);
-                    if (footerView != null) {
-                        loadMoreComplete(footerView);
+                if (!isSucceed){
+                    if (EmptyUtils.isNotEmpty(failureMsg)){
+                        ToastUtils.show(failureMsg);
                     }
                 }
-            } else {
-                if (pageNo == 1) {
-                    refreshComplete(recyclerView);
-                    mAdapterBinder.hookClear();
-                    if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
-                    if (emptyView!=null)emptyView.setVisibility(View.VISIBLE);
-                } else {
-                    setNoMore(footerView);
-                }
             }
 
         }
+
     }
 
 
 
 
-    @Deprecated
-    public void afterGetData(boolean isSucceed, Object errorMsg, List<?> list) {
-        if (isSucceed) {
-            if (EmptyUtils.isNotEmpty(list)) {
-                if (tvEmptyView != null) tvEmptyView.setText("");
-                if (pageNo == 1) {
-                    mAdapterBinder.hookBind(list);
-                    refreshComplete(recyclerView);
-                } else {
-                    mAdapterBinder.hookAddAllAndNotifyDataChanged(list);
-                    if (footerView != null) {
-                        loadMoreComplete(footerView);
-                    }
-                }
-            } else {
-                if (pageNo == 1) {
-                    refreshComplete(recyclerView);
-                    mAdapterBinder.hookClear();
-                    if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
-                } else {
-                    setNoMore(footerView);
-                }
-            }
-        } else {
-            if (errorMsg == null) return;
-            if (errorMsg instanceof OnNextBussinesException) {
-                ThrowableUtils.show(((OnNextBussinesException) errorMsg).target);
-            } else {
-                if (pageNo > firstPageNo) {
-                    pageNo--;
-                    setError(footerView);
-                } else {
-                    completeRefresh();
-                    completeLoadMore();
-                }
-                ThrowableUtils.show(errorMsg);
-            }
 
-        }
-    }
+
+
+
 
     public void setNoMoreText(String text) {
         if (footerView != null) footerView.getNoMoreTextView().setText(text);
@@ -331,6 +264,16 @@ public class IRecyclerHelper {
         indicatorView.setOutRingColor(outRingColor);
     }
 
+    public void scrollToTop(){
+        if (recyclerView==null)return;
+        toStickFromPosition(recyclerView,0,0);
+    }
+
+    public void toStickFromPosition(int position,int offset){
+        if (recyclerView==null)return;
+        toStickFromPosition(recyclerView,position,offset);
+    }
+
 
     public static boolean isCanLoadMore(IRecyclerView recyclerView, LoadMoreFooterView loadMoreFooterView, IRecyclerAdapterDataBinder adapterBinder) {
         if (recyclerView == null || loadMoreFooterView == null ||
@@ -342,7 +285,7 @@ public class IRecyclerHelper {
             } else if (recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
                 int[] lastPositions = new int[((StaggeredGridLayoutManager) recyclerView.getLayoutManager()).getSpanCount()];
                 ((StaggeredGridLayoutManager) recyclerView.getLayoutManager()).findLastVisibleItemPositions(lastPositions);
-                int lastPosition = findMax(lastPositions);
+                int lastPosition = ArrayUtils.findMax(lastPositions);
                 boolean isBottom = lastPosition == recyclerView.getLayoutManager().getItemCount() - 1;
 
                 if (isBottom) {
@@ -356,16 +299,7 @@ public class IRecyclerHelper {
         return false;
     }
 
-    //找到数组中的最大值
-    private static int findMax(int[] lastPositions) {
-        int max = lastPositions[0];
-        for (int value : lastPositions) {
-            if (value > max) {
-                max = value;
-            }
-        }
-        return max;
-    }
+
 
     public static void setRefreshStatus(LoadMoreFooterView loadMoreFooterView) {
         if (loadMoreFooterView == null) return;
@@ -416,5 +350,7 @@ public class IRecyclerHelper {
     public static void toStickFromPosition(RecyclerView recyclerView,int position,int offset){
         RecyclerViewHelper.toStickFromPosition(recyclerView,position,offset);
     }
+
+
 
 }

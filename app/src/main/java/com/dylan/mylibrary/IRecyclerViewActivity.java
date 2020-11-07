@@ -24,7 +24,7 @@ import java.util.List;
 public class IRecyclerViewActivity extends AppCompatActivity implements OnRefreshListener, OnLoadMoreListener {
     IRecyclerView recyclerView;
     private TestAdapter mAdapter;
-    private IRecyclerHelper iRecyclerHelper;
+    private IRecyclerHelper recyclerHelper;
     private Handler handler = new Handler();
     private boolean isFirstRequest = true;
     private boolean hasError;
@@ -43,42 +43,29 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         recyclerView.setIAdapter(mAdapter);
 
 
-        iRecyclerHelper = new IRecyclerHelper();
-        iRecyclerHelper.bind(recyclerView, mAdapter, null);
-        getData(iRecyclerHelper.getPageNo());
+        recyclerHelper = new IRecyclerHelper();
+        recyclerHelper.bind(recyclerView, mAdapter, null);
+        getData(recyclerHelper.getPageNo());
 
-//        iRecyclerHelper.setLoadingTextColor(Color.BLUE);
-//        iRecyclerHelper.setNoMoreTextColor(Color.BLUE);
-//        iRecyclerHelper.setErrorTextColor(Color.BLUE);
-//        iRecyclerHelper.tintLoadingProgressBar(Color.BLUE);
-//        iRecyclerHelper.setRefreshTextViewColor(Color.BLUE);
-//        iRecyclerHelper.setRefreshCircleIndicatorViewColor(Color.TRANSPARENT,Color.BLUE);
 
-//        iRecyclerHelper.setLoadingTextSize(18);
-//        iRecyclerHelper.setRefreshTextSize(18);
-//        iRecyclerHelper.setErrorTextSize(18);
-//        iRecyclerHelper.setNoMoreTextSize(18);
     }
 
     @Override
     public void onLoadMore() {
-        if (iRecyclerHelper.isCanLoadMore()) {
-            getData(iRecyclerHelper.getPageNo());
+        if (recyclerHelper.isCanLoadMore()) {
+            getData(recyclerHelper.getPageNo());
         }
     }
 
     @Override
     public void onRefresh() {
         hasError = false;
-        iRecyclerHelper.setRefreshStatus();
-        getData(iRecyclerHelper.getPageNo());
+        recyclerHelper.setRefreshStatus();
+        getData(recyclerHelper.getPageNo());
     }
 
 
-    //模拟请求结果
-    public void afterGetData(boolean isSucceed, Object o, List<String> list) {
-        iRecyclerHelper.afterGetData(isSucceed, o, list);
-    }
+
 
 
     //模拟请求
@@ -91,7 +78,7 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         } else {
             if (pageNo <= 5) {
                 if (pageNo == 4 && !hasError) {//模拟请求网络错误
-                    afterGetData(false, new SocketTimeoutException("Test TimeOut"), list);
+                    recyclerHelper.afterGetData(new SocketTimeoutException("Test TimeOut"),false,null, list);
                     hasError = true;
                     return;
                 }
@@ -102,14 +89,15 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
         }
 
         if (isFirstRequest) {
-            afterGetData(true, "", list);
+            recyclerHelper.afterGetData(null,true,null, list);
             isFirstRequest = false;
             return;
         }
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                afterGetData(true, "", list);
+                recyclerHelper.afterGetData(null,true,null, list);
+
             }
         }, 2000);
 
