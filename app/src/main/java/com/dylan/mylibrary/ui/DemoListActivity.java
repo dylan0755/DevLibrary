@@ -10,7 +10,6 @@ import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.ParamMapBuilder;
-import com.dylan.library.utils.thread.ThreadUtils;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
