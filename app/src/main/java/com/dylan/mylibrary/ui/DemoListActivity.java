@@ -8,8 +8,7 @@ import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
-import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.ParamMapBuilder;
+import com.dylan.library.utils.MathUtils;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -30,7 +29,6 @@ import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by Dylan on 2016/12/16.
@@ -73,6 +71,7 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
+
 
 
     }
