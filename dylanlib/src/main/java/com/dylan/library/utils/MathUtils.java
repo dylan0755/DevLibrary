@@ -14,7 +14,7 @@ import java.util.List;
  */
 
 public class MathUtils {
-
+    private static final double EARTH_RADIUS = 6378137.0;//地球半径
 
     /**
      * 判断点是否在多边形内
@@ -325,6 +325,24 @@ public class MathUtils {
         BigDecimal b1=new BigDecimal(v1);
         BigDecimal b2=new BigDecimal(v2);
         return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
+    }
+
+
+
+    //得出距离  单位米
+    public static double getLatLngMeterDistance(double longitude1, double latitude1 , double longitude2, double latitude2) {
+        double lat1 = rad(latitude1);
+        double lat2 = rad(latitude2);
+        double a = lat1 - lat2;
+        double b = rad(longitude1) - rad(longitude2);
+        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(b / 2), 2)));
+        s = s * EARTH_RADIUS;
+        s = Math.round(s * 10000) / 10000;
+        return s;
+    }
+
+    private static double rad(double d) {
+        return d * Math.PI / 180.0;
     }
 
 

@@ -12,7 +12,7 @@ V4.8.0
 7.更新BothItemRecyclerAdapter ,实现IRecyclerAdapterDataBinder，以便在recyclerHelper 中使用
 8.获取进程四种方式 统一封装于ProcessUtils 中，移除 AppUtils 获取进程的具体实现
 9.ThreadUtils 新增 runOnMainThread(Runnable action)，在没有Activity 上下文的情况下使用主线程
-
+10.MathUtils 新增 getLatLngMeterDistance() 两个经纬度的距离
 
 
 
