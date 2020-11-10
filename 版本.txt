@@ -1,7 +1,7 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V4.8.0
+V4.8.0 ---->2020.11.10
 
 1.新增 GradientDrawableBuilder, java代码使用可代替  xml  shape样式文件
 2.修复 DragMapView onFiling 中 mBitmap 为null的空指针问题
