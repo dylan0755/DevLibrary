@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
@@ -68,6 +69,17 @@ public abstract class ImagePollingPagerAdapter<T> extends PagerAdapter {
         }
         int pageLimit = list.size() % 3 + 1;
         pager.setOffscreenPageLimit(pageLimit);
+        pager.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (event.getAction()==MotionEvent.ACTION_DOWN){
+                    lock();
+                }else if (MotionEvent.ACTION_UP==event.getAction()){
+                   unLock();
+                }
+                return false;
+            }
+        });
         polling();
     }
 
