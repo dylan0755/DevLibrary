@@ -309,17 +309,21 @@ public class PhotoView extends AppCompatImageView {
                 && (showRangeHeight >= viewHeight)) {
             if (currentWidth > showRangeWidth && currentHeight > showRangeHeight) {
                 if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
+            }else{
+                mMidPoint.set(event.getX(), event.getY());
+                doubleClickToMax(mMidPoint);
             }
-            return;
+        }else{
+            if (currentWidth < viewWidth || currentHeight < viewHeight) {
+                if (!isScaling) doubleClickToFull(mMidPoint);//放大
+            } else {
+                if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
+            }
         }
         doubleClick = true;
         mMatrix.set(mSavedMatrix);
-        mMidPoint.set(event.getRawX(), event.getRawY());
-        if (currentWidth < viewWidth || currentHeight < viewHeight) {
-            if (!isScaling) doubleClickToFull(mMidPoint);//放大
-        } else {
-            if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
-        }
+        mMidPoint.set(event.getX(), event.getY());
+
     }
 
 
@@ -483,6 +487,8 @@ public class PhotoView extends AppCompatImageView {
     }
 
 
+
+
     /**
      * 双击最大化
      */
@@ -504,6 +510,59 @@ public class PhotoView extends AppCompatImageView {
             //满屏
             float scaleW = viewWidth / currentWidth;
             float scaleH = viewHeight / currentHeight;
+            float scale= Math.max(scaleW,scaleH);
+            endScaleValue.setScaleX(scale);
+            endScaleValue.setScaleY(scale);
+        }
+
+
+        ValueAnimator mAnimator = ValueAnimator.ofObject(new ScaleEvaluator(), startScaleVaue, endScaleValue);
+
+        mAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                ScaleValue endScaleValue = (ScaleValue) valueAnimator.getAnimatedValue();
+                Matrix matrix = new Matrix(mMatrix);
+                matrix.postScale(endScaleValue.getScaleX(), endScaleValue.getScaleY(), midPint.x, mMidPoint.y);
+                MatrixUtils.centerInRange(matrix, mBitmap, viewWidth, viewHeight);
+                setImageMatrix(matrix);
+            }
+        });
+        mAnimator.addListener(new AnimatorEndListener() {
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                mMatrix = new Matrix(getImageMatrix());
+                mSavedMatrix.set(mMatrix);
+                RectF rectF = MatrixUtils.getMatrixRectF(PhotoView.this);
+                currentWidth = rectF.width();
+                currentHeight = rectF.height();
+                isScaling = false;
+            }
+        });
+        mAnimator.setDuration(200);
+        mAnimator.start();
+        isScaling = true;
+
+    }
+
+    private void doubleClickToMax(final PointF midPint) {
+        ScaleValue startScaleVaue = new ScaleValue();
+        startScaleVaue.setScaleX(1);
+        startScaleVaue.setScaleY(1);
+        ScaleValue endScaleValue = new ScaleValue();
+
+
+        //计算放大 是放到 屏幕等宽还是  最大
+        if (mBitmap.getHeight() > viewHeight) {
+            float scaleW = viewWidth / currentWidth;
+            float scaleH = mBitmap.getHeight() / currentHeight;
+            float scale= Math.max(scaleW,scaleH);
+            endScaleValue.setScaleX(scale);
+            endScaleValue.setScaleY(scale);
+        } else {
+            //满屏
+            float scaleW = maxWidth / currentWidth;
+            float scaleH = maxHeight / currentHeight;
             float scale= Math.max(scaleW,scaleH);
             endScaleValue.setScaleX(scale);
             endScaleValue.setScaleY(scale);
