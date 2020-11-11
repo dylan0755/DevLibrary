@@ -3,6 +3,8 @@ package com.dylan.library.utils;
 import android.graphics.Point;
 import android.graphics.PointF;
 
+import com.dylan.library.map.MapUtils;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +16,6 @@ import java.util.List;
  */
 
 public class MathUtils {
-    private static final double EARTH_RADIUS = 6378137.0;//地球半径
 
     /**
      * 判断点是否在多边形内
@@ -331,19 +332,9 @@ public class MathUtils {
 
     //得出距离  单位米
     public static double getLatLngMeterDistance(double longitude1, double latitude1 , double longitude2, double latitude2) {
-        double lat1 = rad(latitude1);
-        double lat2 = rad(latitude2);
-        double a = lat1 - lat2;
-        double b = rad(longitude1) - rad(longitude2);
-        double s = 2 * Math.asin(Math.sqrt(Math.pow(Math.sin(a / 2), 2) + Math.cos(lat1) * Math.cos(lat2) * Math.pow(Math.sin(b / 2), 2)));
-        s = s * EARTH_RADIUS;
-        s = Math.round(s * 10000) / 10000;
-        return s;
+        return MapUtils.getLatLngMeterDistance(longitude1,latitude1,longitude2,latitude2);
     }
 
-    private static double rad(double d) {
-        return d * Math.PI / 180.0;
-    }
 
 
 }
