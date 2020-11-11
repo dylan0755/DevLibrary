@@ -4,7 +4,7 @@
 V4.9.0
 
 1.新增GeoHash 和 MapUtils,由经纬度转geocode, 业务中需要在地图发生移动后要重新获取信息，而这个判断是否移动就用GeoHash。
-
+2.新增 ImagePollingPagerAdapter ,给ViewPager设置Adapter即可实现轮播
 
 
 
