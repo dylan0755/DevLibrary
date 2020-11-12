@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.ImageView;
 
+
 import com.dylan.library.utils.MatrixUtils;
 import com.dylan.library.utils.ViewTouchUtils;
 import com.dylan.library.widget.callback.AnimatorEndListener;
@@ -309,21 +310,33 @@ public class PhotoView extends AppCompatImageView {
         if ((showRangeWidth >= viewWidth)
                 && (showRangeHeight >= viewHeight)) {
             if (currentWidth > showRangeWidth && currentHeight > showRangeHeight) {
-                if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
+                if (!isScaling){
+                    doubleClick=true;
+                    doubleClickRestore(mMidPoint, ANIM_DURATION);
+                }
             }else{
+                doubleClick=true;
                 mMidPoint.set(event.getX(), event.getY());
                 doubleClickToMax(mMidPoint);
             }
         }else{
             if (currentWidth < viewWidth || currentHeight < viewHeight) {
-                if (!isScaling) doubleClickToFull(mMidPoint);//放大
+                if (!isScaling){
+                    doubleClick = true;
+                    mMidPoint.set(event.getX(), event.getY());
+                    doubleClickToFull(mMidPoint);//放大
+                }
             } else {
-                if (!isScaling) doubleClickRestore(mMidPoint, ANIM_DURATION);
+                if (!isScaling) {
+                    doubleClick = true;
+                    mMatrix.set(mSavedMatrix);
+                    mMidPoint.set(event.getX(), event.getY());
+                    doubleClickRestore(mMidPoint, ANIM_DURATION);
+                }
+
             }
         }
-        doubleClick = true;
-        mMatrix.set(mSavedMatrix);
-        mMidPoint.set(event.getX(), event.getY());
+
 
     }
 
