@@ -317,7 +317,11 @@ public class AppUtils {
 
     public static void gotoOpenLocationService(Context context) {
         Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-        context.startActivity(intent);
+        if (ContextUtils.getActivity(context)!=null){
+            ((Activity)ContextUtils.getActivity(context)).startActivityForResult(intent,117);
+        }else{
+            context.startActivity(intent);
+        }
     }
 
     public static boolean isAppOnForeground(Application application) {
