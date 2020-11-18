@@ -6,6 +6,6 @@ package com.dylan.library.bean;
  * Desc: 符号类
  */
 public interface Symbol {
-
     String RMB="¥";
+    String dollar="$";
 }
