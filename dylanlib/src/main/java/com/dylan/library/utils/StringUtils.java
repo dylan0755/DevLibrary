@@ -7,7 +7,15 @@ import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 
+import com.dylan.library.exception.ELog;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.math.BigDecimal;
+import java.net.URLDecoder;
+import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -456,4 +464,72 @@ public class StringUtils {
         return sb.toString();
 
     }
+
+
+    public static Object decodeJsonUrlEncodeValue(Object objJson) {
+        try {
+            if (objJson instanceof JSONArray) {
+                JSONArray jsonArray = (JSONArray) objJson;
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        decodeJsonUrlEncodeValue(jsonArray.get(i));
+                    }
+                }
+            } else if (objJson instanceof JSONObject) {
+                JSONObject jsonObject = (JSONObject) objJson;
+                Iterator<String> iterator = jsonObject.keys();
+                while (iterator.hasNext()) {
+                    String key = iterator.next();
+                    Object value = jsonObject.get(key);
+                    if (value instanceof JSONArray ||value instanceof JSONObject) {
+                        decodeJsonUrlEncodeValue(value);
+                    } else {
+                        if (UrlEncoderUtils.hasUrlEncoded(value.toString())){
+                            String decodeString= URLDecoder.decode(value.toString());
+                            jsonObject.put(key,decodeString);
+                        }
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            ELog.e(e);
+        }
+        return objJson;
+    }
+
+
+    public static Object forEachJSonValue(Object objJson,OnJSonValueForEachCallBack callBack) {
+        try {
+            if (objJson instanceof JSONArray) {
+                JSONArray jsonArray = (JSONArray) objJson;
+                if (jsonArray.length() > 0) {
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        forEachJSonValue(jsonArray.get(i),callBack);
+                    }
+                }
+            } else if (objJson instanceof JSONObject) {
+                JSONObject jsonObject = (JSONObject) objJson;
+                Iterator<String> iterator = jsonObject.keys();
+                while (iterator.hasNext()) {
+                    String key = iterator.next();
+                    Object value = jsonObject.get(key);
+                    if (value instanceof JSONArray ||value instanceof JSONObject) {
+                        forEachJSonValue(value,callBack);
+                    } else {
+                        callBack.onEach(jsonObject,key,value);
+                    }
+                }
+            }
+        } catch (JSONException e) {
+            ELog.e(e);
+        }
+        return objJson;
+    }
+
+
+    public interface OnJSonValueForEachCallBack{
+          void onEach(JSONObject jsonObject,String key,Object value);
+    }
+
+
 }

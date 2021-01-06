@@ -7,7 +7,8 @@ V4.9.0
 2.新增 ImagePollingPagerAdapter ,给ViewPager设置Adapter即可实现轮播
 3.更新PhotoView  初始和屏幕等大的情况下双击可以放最大
 4.新增LandScapePhotoView 和 LandScapeScaleUpPhotoView  适配横屏，竖屏以宽度为基准，横屏以高度为基准
-
+5.新增UrlEncoderUtils，判断字符串是否包含UrlEncode编码 hasUrlEncoded(String str)
+6.StringUtils 新增decodeJsonUrlEncodeValue，处理Json 中含有URLEncoder编码过的value
 
 
 
