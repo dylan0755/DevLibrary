@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.dylan.library.manager.ActivityManager;
 import com.dylan.library.utils.AndKit;
 import com.dylan.library.utils.Logger;
 import com.dylan.mylibrary.bean.QiNiuDomain;
@@ -44,21 +45,24 @@ public class MyApplication extends Application {
             @Override
             public void onForeground() {
                 Log.e( "onForeground: ","在前台" );
+                ActivityManager.getInstance().setOnBackGround(false);
+
             }
 
             @Override
             public void onBackground() {
                 Log.e( "onBackground: ","在后台" );
+                ActivityManager.getInstance().setOnBackGround(true);
             }
 
             @Override
             public void onActivityCreated(Activity activity, Bundle savedInstanceState) {
-
+                ActivityManager.getInstance().addActivity(activity);
             }
 
             @Override
             public void onActivityDestroyed(Activity activity) {
-
+                ActivityManager.getInstance().removeActivity(activity);
             }
         });
     }

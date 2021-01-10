@@ -16,6 +16,7 @@ public class ActivityManager {
     private static Stack<Activity> activityStack;
     // 单例模式
     private static ActivityManager instance;
+    private boolean isOnBackGround;
 
     private ActivityManager() {
     }
@@ -171,5 +172,12 @@ public class ActivityManager {
 
     }
 
+
+    public boolean isOnBackground(){
+        return isOnBackGround;
+    }
+    public void setOnBackGround(boolean isOnBackGround){
+           this.isOnBackGround=isOnBackGround;
+    }
 
 }
