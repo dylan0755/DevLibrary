@@ -11,7 +11,7 @@ V4.9.0
 6.StringUtils 新增decodeJsonUrlEncodeValue，处理Json 中含有URLEncoder编码过的value
 7.新增OpenGLUtils 实现镜像，裁剪操作
 8.ActivityManager 新增是否为在后台设置 setOnBackGround  isOnBackground
-
+9.新增VerticalTextView
 
 
 
