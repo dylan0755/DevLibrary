@@ -8,7 +8,7 @@ import android.widget.TextView;
 import com.dylan.mylibrary.R;
 import com.zhy.autolayout.AutoLinearLayout;
 
-import butterknife.Bind;
+import butterknife.BindView;
 
 
 /**
@@ -16,41 +16,41 @@ import butterknife.Bind;
  */
 
 public class CustomTittleUitlActivity extends BaseTitleActivity {
-    @Bind(R.id.cv_avatar)
+    @BindView(R.id.cv_avatar)
     ImageView cvAvatar;
-    @Bind(R.id.tv_doctorname)
+    @BindView(R.id.tv_doctorname)
     TextView tvDoctorname;
-    @Bind(R.id.tv_time)
+    @BindView(R.id.tv_time)
     TextView tvTime;
-    @Bind(R.id.tv_price)
+    @BindView(R.id.tv_price)
     TextView tvPrice;
-    @Bind(R.id.edt_phone)
+    @BindView(R.id.edt_phone)
     EditText edtPhone;
-    @Bind(R.id.iv_reduce)
+    @BindView(R.id.iv_reduce)
     ImageView ivReduce;
-    @Bind(R.id.edt_time)
+    @BindView(R.id.edt_time)
     EditText edtTime;
-    @Bind(R.id.iv_add)
+    @BindView(R.id.iv_add)
     ImageView ivAdd;
-    @Bind(R.id.tv_date)
+    @BindView(R.id.tv_date)
     TextView tvDate;
-    @Bind(R.id.ll_date_select)
+    @BindView(R.id.ll_date_select)
     AutoLinearLayout llDateSelect;
-    @Bind(R.id.tv_coupons)
+    @BindView(R.id.tv_coupons)
     TextView tvCoupons;
-    @Bind(R.id.ll_coupons)
+    @BindView(R.id.ll_coupons)
     AutoLinearLayout llCoupons;
-    @Bind(R.id.tv_pay)
+    @BindView(R.id.tv_pay)
     TextView tvPay;
-    @Bind(R.id.label_current_balance)
+    @BindView(R.id.label_current_balance)
     TextView labelCurrentBalance;
-    @Bind(R.id.tv_current_balance)
+    @BindView(R.id.tv_current_balance)
     TextView tvCurrentBalance;
-    @Bind(R.id.tv_balance_diff)
+    @BindView(R.id.tv_balance_diff)
     TextView tvBalanceDiff;
-    @Bind(R.id.tv_charge)
+    @BindView(R.id.tv_charge)
     TextView tvCharge;
-    @Bind(R.id.btn_next)
+    @BindView(R.id.btn_next)
     Button btnNext;
 
     @Override

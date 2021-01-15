@@ -9,7 +9,7 @@ import android.widget.TextView;
 import com.dylan.mylibrary.R;
 import com.dylan.library.utils.helper.EditNumberHelper;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -19,9 +19,9 @@ import butterknife.OnClick;
 
 public class EditNumberActivity extends Activity {
 
-    @Bind(R.id.edt_duration)
+    @BindView(R.id.edt_duration)
     EditText edtDuration;
-    @Bind(R.id.tv_pay)
+    @BindView(R.id.tv_pay)
     TextView tv_pay;
     private int priceUnit = 50;
 
