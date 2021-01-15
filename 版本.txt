@@ -13,7 +13,7 @@ V4.9.0
 8.ActivityManager 新增是否为在后台设置 setOnBackGround  isOnBackground
 9.新增VerticalTextView
 10.更改Logger, 新增 Log.e()  Log.w() Log.i()  Log.d()
-
+11.删除 CarouselView  glide.jar
 
 
 
