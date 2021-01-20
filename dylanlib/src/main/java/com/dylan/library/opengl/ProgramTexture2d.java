@@ -18,7 +18,6 @@ package com.dylan.library.opengl;
 
 import android.opengl.GLES20;
 
-import com.faceunity.gles.core.GlUtil;
 
 
 public class ProgramTexture2d extends Program {
@@ -61,22 +60,22 @@ public class ProgramTexture2d extends Program {
     @Override
     protected void getLocations() {
         maPositionLoc = GLES20.glGetAttribLocation(mProgramHandle, "aPosition");
-        GlUtil.checkLocation(maPositionLoc, "aPosition");
+        GlUtils.checkLocation(maPositionLoc, "aPosition");
         maTextureCoordLoc = GLES20.glGetAttribLocation(mProgramHandle, "aTextureCoord");
-        GlUtil.checkLocation(maTextureCoordLoc, "aTextureCoord");
+        GlUtils.checkLocation(maTextureCoordLoc, "aTextureCoord");
         muMVPMatrixLoc = GLES20.glGetUniformLocation(mProgramHandle, "uMVPMatrix");
-        GlUtil.checkLocation(muMVPMatrixLoc, "uMVPMatrix");
+        GlUtils.checkLocation(muMVPMatrixLoc, "uMVPMatrix");
         muTexMatrixLoc = GLES20.glGetUniformLocation(mProgramHandle, "uTexMatrix");
-        GlUtil.checkLocation(muTexMatrixLoc, "uTexMatrix");
+        GlUtils.checkLocation(muTexMatrixLoc, "uTexMatrix");
     }
 
     @Override
     public void drawFrame(int textureId, float[] texMatrix, float[] mvpMatrix) {
-        GlUtil.checkGlError("draw start");
+        GlUtils.checkGlError("draw start");
 
         // Select the program.
         GLES20.glUseProgram(mProgramHandle);
-        GlUtil.checkGlError("glUseProgram");
+        GlUtils.checkGlError("glUseProgram");
 
         // Set the texture.
         GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
@@ -84,33 +83,33 @@ public class ProgramTexture2d extends Program {
 
         // Copy the model / view / projection matrix over.
         GLES20.glUniformMatrix4fv(muMVPMatrixLoc, 1, false, mvpMatrix, 0);
-        GlUtil.checkGlError("glUniformMatrix4fv");
+        GlUtils.checkGlError("glUniformMatrix4fv");
 
         // Copy the texture transformation matrix over.
         GLES20.glUniformMatrix4fv(muTexMatrixLoc, 1, false, texMatrix, 0);
-        GlUtil.checkGlError("glUniformMatrix4fv");
+        GlUtils.checkGlError("glUniformMatrix4fv");
 
         // Enable the "aPosition" vertex attribute.
         GLES20.glEnableVertexAttribArray(maPositionLoc);
-        GlUtil.checkGlError("glEnableVertexAttribArray");
+        GlUtils.checkGlError("glEnableVertexAttribArray");
 
         // Connect vertexBuffer to "aPosition".
         GLES20.glVertexAttribPointer(maPositionLoc, Drawable2d.COORDS_PER_VERTEX,
                 GLES20.GL_FLOAT, false, Drawable2d.VERTEXTURE_STRIDE, mDrawable2d.vertexArray());
-        GlUtil.checkGlError("glVertexAttribPointer");
+        GlUtils.checkGlError("glVertexAttribPointer");
 
         // Enable the "aTextureCoord" vertex attribute.
         GLES20.glEnableVertexAttribArray(maTextureCoordLoc);
-        GlUtil.checkGlError("glEnableVertexAttribArray");
+        GlUtils.checkGlError("glEnableVertexAttribArray");
 
         // Connect texBuffer to "aTextureCoord".
         GLES20.glVertexAttribPointer(maTextureCoordLoc, 2,
                 GLES20.GL_FLOAT, false, Drawable2d.TEXTURE_COORD_STRIDE, mDrawable2d.texCoordArray());
-        GlUtil.checkGlError("glVertexAttribPointer");
+        GlUtils.checkGlError("glVertexAttribPointer");
 
         // Draw the rect.
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, mDrawable2d.vertexCount());
-        GlUtil.checkGlError("glDrawArrays");
+        GlUtils.checkGlError("glDrawArrays");
 
         // Done -- disable vertex array, texture, and program.
         GLES20.glDisableVertexAttribArray(maPositionLoc);
