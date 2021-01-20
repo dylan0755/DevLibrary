@@ -299,6 +299,10 @@
       public *;
       protected *;
 }
+-keep class com.dylan.library.opengl.** {
+      public *;
+      protected *;
+}
 -keep class com.dylan.library.preferecen.** {
       public *;
       protected *;

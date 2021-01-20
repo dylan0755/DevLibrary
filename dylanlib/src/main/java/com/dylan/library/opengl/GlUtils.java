@@ -1,4 +1,4 @@
-package com.dylan.library.utils;
+package com.dylan.library.opengl;
 
 import android.app.ActivityManager;
 import android.content.Context;
@@ -20,8 +20,8 @@ import java.util.Arrays;
  * Desc:
  */
 
-public class OpenGLUtils {
-    public static final String TAG = OpenGLUtils.class.getSimpleName();
+public class GlUtils {
+    public static final String TAG = GlUtils.class.getSimpleName();
     private static final int SIZEOF_FLOAT = 4;
 
 
