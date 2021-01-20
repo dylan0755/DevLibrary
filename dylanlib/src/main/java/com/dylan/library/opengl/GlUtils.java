@@ -7,12 +7,16 @@ import android.graphics.Bitmap;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.opengl.Matrix;
+import android.os.AsyncTask;
 import android.util.Log;
 
+import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.Arrays;
+
+import javax.microedition.khronos.opengles.GL10;
 
 /**
  * Author: Dylan
@@ -23,6 +27,13 @@ import java.util.Arrays;
 public class GlUtils {
     public static final String TAG = GlUtils.class.getSimpleName();
     private static final int SIZEOF_FLOAT = 4;
+
+    public static final float[] IDENTITY_MATRIX;
+
+    static {
+        IDENTITY_MATRIX = new float[16];
+        Matrix.setIdentityM(IDENTITY_MATRIX, 0);
+    }
 
 
     //通过传入图片宽高和预览宽高，计算变换矩阵，得到的变换矩阵是预览类似ImageView的centerCrop效果
@@ -134,15 +145,7 @@ public class GlUtils {
         }
     }
 
-    /**
-     * Creates a texture from raw data.
-     *
-     * @param data   Image data, in a "direct" ByteBuffer.
-     * @param width  Texture width, in pixels (not bytes).
-     * @param height Texture height, in pixels.
-     * @param format Image data format (use constant appropriate for glTexImage2D(), e.g. GL_RGBA).
-     * @return Handle to texture.
-     */
+    //图片数据转纹理
     public static int createImageTexture(ByteBuffer data, int width, int height, int format) {
         int[] textureHandles = new int[1];
         int textureHandle;
@@ -150,32 +153,19 @@ public class GlUtils {
         GLES20.glGenTextures(1, textureHandles, 0);
         textureHandle = textureHandles[0];
         checkGlError("glGenTextures");
-
-        // Bind the texture handle to the 2D texture target.
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
-
-        // Configure min/mag filtering, i.e. what scaling method do we use if what we're rendering
-        // is smaller or larger than the source image.
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
                 GLES20.GL_LINEAR);
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER,
                 GLES20.GL_LINEAR);
         checkGlError("loadImageTexture");
-
-        // Load the data from the buffer into the texture handle.
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, /*level*/ 0, format,
                 width, height, /*border*/ 0, format, GLES20.GL_UNSIGNED_BYTE, data);
         checkGlError("loadImageTexture");
-
         return textureHandle;
     }
 
-    /**
-     * Creates a texture from bitmap.
-     *
-     * @param bmp bitmap data
-     * @return Handle to texture.
-     */
+    //图片转纹理
     public static int createImageTexture(Bitmap bmp) {
         int[] textureHandles = new int[1];
         int textureHandle;
@@ -183,12 +173,7 @@ public class GlUtils {
         GLES20.glGenTextures(1, textureHandles, 0);
         textureHandle = textureHandles[0];
         checkGlError("glGenTextures");
-
-        // Bind the texture handle to the 2D texture target.
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
-
-        // Configure min/mag filtering, i.e. what scaling method do we use if what we're rendering
-        // is smaller or larger than the source image.
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
                 GLES20.GL_LINEAR);
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER,
@@ -198,12 +183,67 @@ public class GlUtils {
         GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,
                 GLES20.GL_CLAMP_TO_EDGE);
         checkGlError("loadImageTexture");
-
-        // Load the data from the buffer into the texture handle.
         android.opengl.GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, /*level*/ 0, bmp, 0);
         checkGlError("loadImageTexture");
-
         return textureHandle;
+    }
+
+    //图片纹理转Bitmap
+    public void createBitmapFromTexture(int texId, float[] texMatrix, float[] mvpMatrix, final int texWidth, final int texHeight, final OnReadBitmapListener listener){
+        createBitmapFromTexture(texId,texMatrix,mvpMatrix,texWidth,texHeight,listener,false);
+    }
+
+    //图片纹理转Bitmap
+    public void createBitmapFromTexture(int texId, float[] texMatrix, float[] mvpMatrix, final int texWidth, final int texHeight, final OnReadBitmapListener listener, boolean isOes){
+        int[] textures = new int[1];
+        GLES20.glGenTextures(1, textures, 0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
+        GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, texWidth, texHeight, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
+        int[] frameBuffers = new int[1];
+        GLES20.glGenFramebuffers(1, frameBuffers, 0);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, frameBuffers[0]);
+        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0, GLES20.GL_TEXTURE_2D, textures[0], 0);
+        int[] viewport = new int[4];
+        GLES20.glGetIntegerv(GLES20.GL_VIEWPORT, viewport, 0);
+        GLES20.glViewport(0, 0, texWidth, texHeight);
+        GLES20.glClearColor(0, 0, 0, 0);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
+        Program program;
+        if (isOes) {
+            program = new ProgramTextureOES();
+        } else {
+            program = new ProgramTexture2dWithAlpha();
+        }
+        program.drawFrame(texId, texMatrix, mvpMatrix);
+        program.release();
+
+        final ByteBuffer buffer = ByteBuffer.allocateDirect(texWidth * texHeight * 4);
+        buffer.order(ByteOrder.LITTLE_ENDIAN);
+        GLES20.glFinish();
+        GLES20.glReadPixels(0, 0, texWidth, texHeight, GL10.GL_RGBA, GL10.GL_UNSIGNED_BYTE, buffer);
+        checkGlError("glReadPixels");
+        buffer.rewind();
+        GLES20.glViewport(viewport[0], viewport[1], viewport[2], viewport[3]);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, GLES20.GL_NONE);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, GLES20.GL_NONE);
+        GLES20.glDeleteTextures(1, textures, 0);
+        GLES20.glDeleteFramebuffers(1, frameBuffers, 0);
+        AsyncTask.execute(new Runnable() {
+            @Override
+            public void run() {
+                Bitmap bmp = Bitmap.createBitmap(texWidth, texHeight, Bitmap.Config.ARGB_8888);
+                bmp.copyPixelsFromBuffer(buffer);
+                android.graphics.Matrix matrix = new android.graphics.Matrix();
+                matrix.preScale(1f, -1f);
+                Bitmap finalBmp = Bitmap.createBitmap(bmp, 0, 0, bmp.getWidth(), bmp.getHeight(), matrix, false);
+                bmp.recycle();
+                if (listener != null) {
+                    listener.onReadBitmapListener(finalBmp);
+                }
+            }
+        });
+
     }
 
     /**
@@ -338,5 +378,10 @@ public class GlUtils {
         Log.d(TAG, "reqGlEsVersion: " + Integer.toHexString(configurationInfo.reqGlEsVersion)
                 + ", glEsVersion: " + glEsVersion + ", return: " + version);
         return version;
+    }
+
+
+    public interface OnReadBitmapListener {
+        void onReadBitmapListener(Bitmap var1);
     }
 }
