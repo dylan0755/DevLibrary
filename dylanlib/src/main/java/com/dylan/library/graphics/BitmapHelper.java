@@ -7,6 +7,8 @@ import android.graphics.BitmapFactory;
 import android.graphics.BitmapShader;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Point;
@@ -684,6 +686,23 @@ public class BitmapHelper {
         blurScript.destroy();
         rs.destroy();
         return bitmap;
+    }
+
+   //图片变灰
+    public static Bitmap getGrayBitmap(Bitmap bitmap) {
+        int width, height;
+        height = bitmap.getHeight();
+        width = bitmap.getWidth();
+
+        Bitmap bmpGrayScale = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+        Canvas c = new Canvas(bmpGrayScale);
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0);
+        ColorMatrixColorFilter f = new ColorMatrixColorFilter(cm);
+        paint.setColorFilter(f);
+        c.drawBitmap(bitmap, 0, 0, paint);
+        return bmpGrayScale;
     }
 
 
