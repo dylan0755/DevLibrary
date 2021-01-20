@@ -21,6 +21,7 @@ import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
 import com.dylan.mylibrary.ui.lazyload.LazyFragmentActivity;
 import com.dylan.mylibrary.ui.loadingdialog.LoadingDialogActivity;
 import com.dylan.mylibrary.ui.marginspan.FirstLineMarginLeftActivity;
+import com.dylan.mylibrary.ui.opengl.OpenglDemoActivity;
 import com.dylan.mylibrary.ui.popwindow.PopWindowDemoActivity;
 import com.dylan.mylibrary.ui.rebound.ReboundActivity;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
@@ -48,7 +49,7 @@ public class DemoListActivity extends AppCompatActivity {
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
             "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
-            "NoExtraUiEditDemo","singleClickDemo","DragMapView","SmsCodeCounter"};
+            "NoExtraUiEditDemo","singleClickDemo","DragMapView","SmsCodeCounter","Camera+OpenGl"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -63,7 +64,7 @@ public class DemoListActivity extends AppCompatActivity {
             BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
             NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class,DragMapViewDemoActivity.class,
-            SmsCodeCounterActivity.class};
+            SmsCodeCounterActivity.class, OpenglDemoActivity.class};
 
 
     @Override

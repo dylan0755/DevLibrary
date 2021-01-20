@@ -1,0 +1,356 @@
+package com.dylan.library.media.camera;
+
+import android.app.Activity;
+import android.graphics.SurfaceTexture;
+import android.hardware.Camera;
+import android.opengl.GLES11Ext;
+import android.opengl.GLES20;
+import android.opengl.GLSurfaceView;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Process;
+import android.util.Log;
+
+import com.dylan.library.opengl.GlUtils;
+import com.dylan.library.opengl.ProgramTexture2d;
+import com.dylan.library.opengl.ProgramTextureOES;
+
+import java.util.Arrays;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
+
+import javax.microedition.khronos.egl.EGLConfig;
+import javax.microedition.khronos.opengles.GL10;
+
+/**
+ * Author: Dylan
+ * Date: 2021/1/20
+ * Desc:
+ */
+public class CameraRender implements GLSurfaceView.Renderer {
+    private static final String TAG = CameraRender.class.getSimpleName();
+    private CameraHelper mCameraHelper;//相机
+
+    //画布纹理
+    private int cameraTextureId;
+    private int m2DTexId;
+    private SurfaceTexture mSurfaceTexture;
+    private float[] mMvpMatrix;
+    private ProgramTextureOES mProgramTextureOES;
+    private ProgramTexture2d mProgramTexture2d;
+    private static final float[] TEXTURE_MATRIX = {0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f};
+    private float[] mTexMatrix = Arrays.copyOf(TEXTURE_MATRIX, TEXTURE_MATRIX.length);
+    protected byte[] mCameraNv21Byte;
+    private byte[] mNv21ByteCopy;
+
+    //开关
+    protected boolean mIsPreviewing;
+    protected volatile boolean mIsSwitchCamera;
+    protected volatile boolean mIsStopPreview;
+    protected boolean mIsOpenMirror;//是否开启镜像
+    private CameraRenderStatusListener mRenderStatusListener;
+    protected GLSurfaceView mGlSurfaceView;
+    protected int mViewWidth;
+    protected int mViewHeight;
+    protected Handler mBackgroundHandler;
+
+    public CameraRender(GLSurfaceView surfaceView, CameraRenderStatusListener renderStatusListener) {
+        mGlSurfaceView = surfaceView;
+        mRenderStatusListener = renderStatusListener;
+        mCameraHelper = new CameraHelper(new CameraHelper.PreViewFrameCallBack() {
+            @Override
+            public void onPreviewFrame(byte[] data, Camera camera) {  //相机摄像头数据采集回调
+                mCameraNv21Byte = data;
+                camera.addCallbackBuffer(data);
+                if (!mIsStopPreview) {
+                    mGlSurfaceView.requestRender();
+                }
+            }
+        });
+    }
+
+
+    //打开摄像头
+    protected void openCamera(int cameraFacing, Activity activity) {
+        boolean isSuccess = mCameraHelper.openCamera(cameraFacing, activity);
+        if (isSuccess) {
+            if (mViewWidth > 0 && mViewHeight > 0) {
+                mMvpMatrix = GlUtils.changeMvpMatrixCrop(GlUtils.IDENTITY_MATRIX, mViewWidth, mViewHeight, mCameraHelper.getCameraHeight(), mCameraHelper.getCameraWidth());
+                openMirrorIfNeed();
+            }
+            mRenderStatusListener.onCameraChanged(mCameraHelper.getCameraFacing(), mCameraHelper.getCameraOrientation());
+        }
+
+
+    }
+
+
+    protected void closeCamera() {
+        mCameraHelper.closeCamera();
+        mIsPreviewing = false;
+        mCameraNv21Byte = null;
+        mNv21ByteCopy = null;
+    }
+
+
+    protected void startPreview() {
+        if (cameraTextureId <= 0 || mIsPreviewing) {
+            return;
+        }
+        try {
+            mCameraHelper.startPreview(mSurfaceTexture);
+            mIsPreviewing = true;
+        } catch (Exception e) {
+            Log.e(TAG, "cameraStartPreview: ", e);
+        }
+    }
+
+
+    //以下是底层OpenGl 的回调
+    @Override
+    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
+        mProgramTexture2d = new ProgramTexture2d();
+        mProgramTextureOES = new ProgramTextureOES();
+
+        cameraTextureId = GlUtils.createTextureObject(GLES11Ext.GL_TEXTURE_EXTERNAL_OES);
+        mSurfaceTexture = new SurfaceTexture(cameraTextureId);
+        mBackgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {//开启摄像头
+                openCamera(mCameraHelper.getCameraFacing(), mRenderStatusListener.getActivity());
+                startPreview();
+            }
+        });
+        LimitFpsUtil.setTargetFps(LimitFpsUtil.DEFAULT_FPS);
+        mRenderStatusListener.onSurfaceCreated();
+    }
+
+    @Override
+    public void onSurfaceChanged(GL10 gl, int width, int height) {
+        if (mViewWidth != width || mViewHeight != height) {
+            mMvpMatrix = GlUtils.changeMvpMatrixCrop(GlUtils.IDENTITY_MATRIX, width, height, mCameraHelper.getCameraHeight(), mCameraHelper.getCameraWidth());
+            openMirrorIfNeed();
+        }
+        mViewWidth = width;
+        mViewHeight = height;
+        mRenderStatusListener.onSurfaceChanged(width, height);
+    }
+
+    @Override
+    public void onDrawFrame(GL10 gl) {
+        if (mProgramTexture2d == null || mSurfaceTexture == null) {
+            return;
+        }
+        try {
+            mSurfaceTexture.updateTexImage();
+            mSurfaceTexture.getTransformMatrix(TEXTURE_MATRIX);
+        } catch (Exception e) {
+            Log.e(TAG, "onDrawFrame: ", e);
+        }
+
+        if (!mIsStopPreview) {
+            if (mCameraNv21Byte != null) {
+                if (mNv21ByteCopy == null) {
+                    mNv21ByteCopy = new byte[mCameraNv21Byte.length];
+                }
+                System.arraycopy(mCameraNv21Byte, 0, mNv21ByteCopy, 0, mCameraNv21Byte.length);
+            }
+            if (mNv21ByteCopy != null) {
+                m2DTexId = mRenderStatusListener.onDrawFrame(mNv21ByteCopy, cameraTextureId,
+                        mCameraHelper.getCameraWidth(), mCameraHelper.getCameraHeight(), mMvpMatrix, mTexMatrix, mSurfaceTexture.getTimestamp());
+            }
+        }
+
+        if (m2DTexId > 0) {
+            mProgramTexture2d.drawFrame(m2DTexId, mTexMatrix, mMvpMatrix);
+        } else if (cameraTextureId > 0) {
+            mProgramTextureOES.drawFrame(cameraTextureId, mTexMatrix, mMvpMatrix);
+        }
+        LimitFpsUtil.limitFrameRate();
+        if (!mIsStopPreview) {
+            mGlSurfaceView.requestRender();
+        }
+
+    }
+
+
+    private void openMirrorIfNeed() {
+        if (mIsOpenMirror && mCameraHelper.isFrontCameraNow()) {//当前为前置摄像头并且开启了镜像
+            GlUtils.frontCameraMirror(mMvpMatrix);
+        }
+    }
+
+    public void setSupportMirror(boolean bl) {
+        mIsOpenMirror = bl;
+    }
+
+
+    public void onResume() {
+        startBackgroundThread();
+        mBackgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                openCamera(mCameraHelper.getCameraFacing(), mRenderStatusListener.getActivity());
+                startPreview();
+            }
+        });
+        mGlSurfaceView.onResume();
+    }
+
+    public void onPause() {
+        mBackgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                closeCamera();
+            }
+        });
+        stopBackgroundThread();
+        final CountDownLatch countDownLatch = new CountDownLatch(1);
+        mGlSurfaceView.queueEvent(new Runnable() {
+            @Override
+            public void run() {
+                destroyGlSurface();
+                countDownLatch.countDown();
+            }
+        });
+        try {
+            countDownLatch.await(500, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            // ignored
+        }
+        mGlSurfaceView.onPause();
+    }
+
+
+    //当改变SurfaceView的大小则调用此方法
+    public void resizeGlSurfaceView(final int cameraWidth, final int cameraHeight) {
+        mBackgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mIsStopPreview = true;
+                mIsSwitchCamera = true;
+                mCameraHelper.setCameraWidth(cameraWidth);
+                mCameraHelper.setCameraHeight(cameraHeight);
+                closeCamera();
+                openCamera(mCameraHelper.getCameraFacing(), mRenderStatusListener.getActivity());
+                startPreview();
+                mIsSwitchCamera = false;
+                mIsStopPreview = false;
+            }
+        });
+    }
+
+    //镜像开关
+    public void toggleMirror() {
+        mIsOpenMirror = !mIsOpenMirror;
+        mIsStopPreview = true;
+        mIsSwitchCamera = true;
+        closeCamera();
+        openCamera(mCameraHelper.getCameraFacing(), mRenderStatusListener.getActivity());
+        startPreview();
+        mIsSwitchCamera = false;
+        mIsStopPreview = false;
+    }
+
+
+    public void switchCamera() {
+        if (mBackgroundHandler == null) {
+            return;
+        }
+        mBackgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mIsStopPreview = true;
+                mIsSwitchCamera = true;
+                mCameraHelper.switchCamera(mRenderStatusListener.getActivity(),mSurfaceTexture);
+                mIsSwitchCamera = false;
+                mIsStopPreview = false;
+            }
+        });
+    }
+
+    //切换分辨率
+    public void changeResolution(final int cameraWidth, final int cameraHeight) {
+        mBackgroundHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mIsStopPreview = true;
+                mIsSwitchCamera = true;
+                mCameraHelper.setCameraWidth(cameraWidth);
+                mCameraHelper.setCameraHeight(cameraHeight);
+                closeCamera();
+                openCamera(mCameraHelper.getCameraFacing(), mRenderStatusListener.getActivity());
+                startPreview();
+                mIsSwitchCamera = false;
+                mIsStopPreview = false;
+            }
+        });
+    }
+
+
+    private void startBackgroundThread() {
+        if (mBackgroundHandler == null) {
+            HandlerThread backgroundThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
+            backgroundThread.start();
+            mBackgroundHandler = new Handler(backgroundThread.getLooper());
+        } else {
+            mBackgroundHandler.removeCallbacks(mQuitEvent);
+        }
+    }
+
+    private void stopBackgroundThread() {
+        if (mBackgroundHandler != null) {
+            mBackgroundHandler.removeCallbacks(mQuitEvent);
+            // 5s 后销毁相机线程，减少快速切换前后台带来的开销
+            mBackgroundHandler.postDelayed(mQuitEvent, 5000);
+        }
+    }
+
+    private final Runnable mQuitEvent = new Runnable() {
+        @Override
+        public void run() {
+            mBackgroundHandler.getLooper().quitSafely();
+            mBackgroundHandler = null;
+        }
+    };
+
+
+    //销毁
+    private void destroyGlSurface() {
+        if (cameraTextureId != 0) {
+            GLES20.glDeleteTextures(1, new int[]{cameraTextureId}, 0);
+            cameraTextureId = 0;
+        }
+        if (mProgramTexture2d != null) {
+            mProgramTexture2d.release();
+            mProgramTexture2d = null;
+        }
+        if (mProgramTextureOES != null) {
+            mProgramTextureOES.release();
+            mProgramTextureOES = null;
+        }
+        if (mSurfaceTexture != null) {
+            mSurfaceTexture.release();
+            mSurfaceTexture = null;
+        }
+        m2DTexId = -1;
+        mRenderStatusListener.onSurfaceDestroy();
+    }
+
+
+    public int getViewWidth() {
+        return mViewWidth;
+    }
+
+    public void setViewWidth(int viewWidth) {
+        this.mViewWidth = viewWidth;
+    }
+
+    public int getViewHeight() {
+        return mViewHeight;
+    }
+
+    public void setViewHeight(int viewHeight) {
+        this.mViewHeight = viewHeight;
+    }
+}

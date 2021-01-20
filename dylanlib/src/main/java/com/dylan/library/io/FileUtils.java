@@ -8,8 +8,10 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.support.annotation.RequiresApi;
 
 import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.exception.ELog;
@@ -17,6 +19,8 @@ import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -273,6 +277,30 @@ public class FileUtils {
             e.printStackTrace();
         }
 
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void copyFile(File src, File dest) throws IOException {
+        copyFile(new FileInputStream(src), dest);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void copyFile(InputStream is, File dest) throws IOException {
+        if (is == null) {
+            return;
+        }
+        if (dest.exists()) {
+            dest.delete();
+        }
+        try (BufferedInputStream bis = new BufferedInputStream(is); BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(dest))) {
+            byte[] bytes = new byte[1024 * 10];
+            int length;
+            while ((length = bis.read(bytes)) != -1) {
+                bos.write(bytes, 0, length);
+            }
+            bos.flush();
+        }
     }
 
 

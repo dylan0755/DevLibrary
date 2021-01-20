@@ -4,7 +4,7 @@
 V5.0.0
 1.新增opengl包,增加opengl相关封装类
 2.IOUtils 新增getBytes 方法，直接将InputStream 转成字节数组
-
+3.FileUtils 增加 copyFile(File src, File dest) 文件拷贝方法
 
 
 

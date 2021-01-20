@@ -16,7 +16,7 @@ public class MediaMuxerWrapper {
     private final MediaMuxer mMediaMuxer;    // API >= 18
     private int mEncoderCount, mStatredCount;
     private boolean mIsStarted;
-    private MediaEncoder mVideoEncoder, mAudioEncoder, mAudioFileEncoder;
+    private MediaEncoder mVideoEncoder, mAudioEncoder;
 
     /**
      * Constructor
@@ -39,8 +39,6 @@ public class MediaMuxerWrapper {
             mVideoEncoder.prepare();
         if (mAudioEncoder != null)
             mAudioEncoder.prepare();
-        if (mAudioFileEncoder != null)
-            mAudioFileEncoder.prepare();
     }
 
     public void startRecording() {
@@ -48,8 +46,6 @@ public class MediaMuxerWrapper {
             mVideoEncoder.startRecording();
         if (mAudioEncoder != null)
             mAudioEncoder.startRecording();
-        if (mAudioFileEncoder != null)
-            mAudioFileEncoder.startRecording();
     }
 
     public void stopRecording() {
@@ -59,9 +55,6 @@ public class MediaMuxerWrapper {
         if (mAudioEncoder != null)
             mAudioEncoder.stopRecording();
         mAudioEncoder = null;
-        if (mAudioFileEncoder != null)
-            mAudioFileEncoder.stopRecording();
-        mAudioFileEncoder = null;
     }
 
     public synchronized boolean isStarted() {
@@ -84,7 +77,7 @@ public class MediaMuxerWrapper {
             mAudioEncoder = encoder;
         } else
             throw new IllegalArgumentException("unsupported encoder");
-        mEncoderCount = (mVideoEncoder != null ? 1 : 0) + (mAudioEncoder != null ? 1 : 0) + (mAudioFileEncoder != null ? 1 : 0);
+        mEncoderCount = (mVideoEncoder != null ? 1 : 0) + (mAudioEncoder != null ? 1 : 0);
     }
 
     /**

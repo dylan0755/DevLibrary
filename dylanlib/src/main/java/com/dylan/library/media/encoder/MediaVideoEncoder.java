@@ -11,6 +11,7 @@ import android.view.Surface;
 
 import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.opengl.ProgramTexture2d;
+import com.dylan.library.opengl.ProgramTextureOES;
 
 import java.io.IOException;
 
@@ -42,6 +43,7 @@ public class MediaVideoEncoder extends MediaEncoder {
     private Surface mSurface;
 
     private ProgramTexture2d program;
+    private ProgramTextureOES programTextureOES;
     private int[] mFboTex;
     private int[] mFboId;
     private int[] mViewPort = new int[4];
@@ -143,14 +145,28 @@ public class MediaVideoEncoder extends MediaEncoder {
     }
 
 
-    public boolean frameAvailableSoon(int texId, float[] texMatrix, float[] mvpMatrix) {
-        if (program == null) {
+    /**
+     *
+     * @param texId
+     * @param isCameraTextureId 是否为原生相机的cameraTextureId
+     * @param texMatrix
+     * @param mvpMatrix
+     * @return
+     */
+    public boolean frameAvailableSoon(int texId, boolean isCameraTextureId,float[] texMatrix, float[] mvpMatrix) {
+        if (program == null&&programTextureOES==null) {
             return false;
         }
         GLES20.glGetIntegerv(GLES20.GL_VIEWPORT, mViewPort, 0);
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFboId[0]);
         GLES20.glViewport(cropX, cropY, textureWidth, textureHeight);
-        program.drawFrame(texId, texMatrix, mvpMatrix);
+        if (isCameraTextureId){
+            programTextureOES.drawFrame(texId, texMatrix, mvpMatrix);
+        }else{
+            program.drawFrame(texId, texMatrix, mvpMatrix);
+        }
+
+
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
         GLES20.glViewport(mViewPort[0], mViewPort[1], mViewPort[2], mViewPort[3]);
         // 先绘制三次，不进行编码，解决黑屏问题
@@ -170,6 +186,7 @@ public class MediaVideoEncoder extends MediaEncoder {
         mFboId = new int[1];
         GlUtils.createFrameBuffers(mFboTex, mFboId, mWidth, mHeight);
         program = new ProgramTexture2d();
+        programTextureOES=new ProgramTextureOES();
         mRenderHandler.setEglContext(sharedContext, mSurface, mFboTex[0]);
     }
 
@@ -204,6 +221,10 @@ public class MediaVideoEncoder extends MediaEncoder {
         if (program != null) {
             program.release();
             program = null;
+        }
+        if (programTextureOES!=null){
+            programTextureOES.release();
+            programTextureOES=null;
         }
         mFrameCount = 0;
         super.release();

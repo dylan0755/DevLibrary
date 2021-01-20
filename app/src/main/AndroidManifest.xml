@@ -33,6 +33,12 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
+
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
+
     <application
         android:name="com.dylan.mylibrary.MyApplication"
         tools:replace="android:allowBackup"
@@ -167,7 +173,8 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
         <activity android:name=".ui.SmsCodeCounterActivity"/>
-        <activity android:name=".ui.opengl.OpenglDemoActivity"/>
+        <activity android:name=".ui.opengl.OpenglDemoActivity"
+            android:theme="@style/FullScreenTheme"/>
 
 
 
