@@ -199,6 +199,15 @@ public class CameraHelper implements Camera.PreviewCallback{
         return mCameraFacing == FACE_FRONT;
     }
 
+
+
+    public void handleFocusMetering(float rawX, float rawY, int focusRectSize,int viewWidth,int viewHeigth){
+        CameraUtils.handleFocusMetering(mCamera,rawX,rawY,viewWidth,viewHeigth,mCameraWidth,mCameraHeight,focusRectSize,mCameraFacing);
+    }
+
+
+
+
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
          if (mPreViewFrameCallBack!=null)mPreViewFrameCallBack.onPreviewFrame(data,camera);

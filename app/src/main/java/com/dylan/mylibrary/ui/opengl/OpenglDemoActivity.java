@@ -27,6 +27,7 @@ import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.media.MediaTools;
+import com.dylan.library.media.camera.CameraFocusView;
 import com.dylan.library.media.camera.CameraRender;
 import com.dylan.library.media.camera.CameraRenderStatusListener;
 import com.dylan.library.media.encoder.MediaEncoder;
@@ -34,6 +35,7 @@ import com.dylan.library.media.encoder.MediaMuxerWrapper;
 import com.dylan.library.media.encoder.MediaShareAudioEncoder;
 import com.dylan.library.media.encoder.MediaStandardAudioEncoder;
 import com.dylan.library.media.encoder.MediaVideoEncoder;
+import com.dylan.library.opengl.CameraGLSurfaceView;
 import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.PermissionRequestBuilder;
@@ -49,11 +51,12 @@ import java.util.concurrent.CountDownLatch;
 
 /**
  * Author: Dylan
- * Date: 2021/1/20 0020
+ * Date: 2021/1/20
  * Desc:
  */
-public class OpenglDemoActivity extends AppCompatActivity {
-    private GLSurfaceView mGlSurfaceView;
+public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSurfaceView.OnTouchFocusCallBack {
+    private CameraGLSurfaceView mGlSurfaceView;
+    private CameraFocusView cameraFocusView;
     private TextView tvTime;
     private CameraRender cameraRender;
     private final byte[] mRecordLock = new byte[1];
@@ -78,6 +81,9 @@ public class OpenglDemoActivity extends AppCompatActivity {
         tvTime = findViewById(R.id.tvTime);
         mGlSurfaceView = findViewById(R.id.glSurfaceView);
         mGlSurfaceView.setEGLContextClientVersion(2);
+        mGlSurfaceView.setOnTouchFocusCallBack(this);
+        cameraFocusView = findViewById(R.id.cameraFocusView);
+        cameraFocusView.setImageResource(R.drawable.photograph_focus);
         cameraRender = new CameraRender(mGlSurfaceView, new RenderCallBack());
         mGlSurfaceView.setRenderer(cameraRender);//设置画笔
         mGlSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);//手动刷新
@@ -125,6 +131,12 @@ public class OpenglDemoActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         cameraRender.onPause();
+    }
+
+    @Override
+    public void onTouchFocus(float rawX, float rawY, int focusRectSize) {
+        cameraRender.handleFocus(rawX, rawY, focusRectSize);
+        cameraFocusView.showCameraFocus(rawX, rawY);
     }
 
 
@@ -269,8 +281,8 @@ public class OpenglDemoActivity extends AppCompatActivity {
             @Override
             public void onReadBitmapListener(Bitmap var1) {
                 try {
-                    final String filePath=Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
-                    BitmapHelper.saveBitmapSync(var1,filePath );
+                    final String filePath = Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
+                    BitmapHelper.saveBitmapSync(var1, filePath);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

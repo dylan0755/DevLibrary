@@ -169,4 +169,13 @@
     <!-- 沉浸式状态栏使用 -->
     <item name="dl_status_bar_view" type="id" />
     <item name="dl_translucent_view" type="id" />
+
+
+
+
+    <declare-styleable name="DLCameraFocus">
+        <attr name="focus_width" format="integer|dimension" />
+        <attr name="focus_height" format="integer|dimension" />
+        <attr name="focus_scale" format="float" />
+    </declare-styleable>
 </resources>

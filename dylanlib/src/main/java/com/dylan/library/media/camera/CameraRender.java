@@ -11,6 +11,7 @@ import android.os.HandlerThread;
 import android.os.Process;
 import android.util.Log;
 
+import com.dylan.library.opengl.CameraGLSurfaceView;
 import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.opengl.Texture2dDrawer;
 import com.dylan.library.opengl.TextureOESDrawer;
@@ -54,8 +55,8 @@ public class CameraRender implements GLSurfaceView.Renderer {
     protected int mViewHeight;
     protected Handler mBackgroundHandler;
 
-    public CameraRender(GLSurfaceView surfaceView, CameraRenderStatusListener renderStatusListener) {
-        mGlSurfaceView = surfaceView;
+    public CameraRender(GLSurfaceView glSurfaceView, CameraRenderStatusListener renderStatusListener) {
+        mGlSurfaceView = glSurfaceView;
         mRenderStatusListener = renderStatusListener;
         mCameraHelper = new CameraHelper(new CameraHelper.PreViewFrameCallBack() {
             @Override
@@ -111,7 +112,8 @@ public class CameraRender implements GLSurfaceView.Renderer {
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         mTexture2DDrawer = new Texture2dDrawer();
         mTextureOESDrawer = new TextureOESDrawer();
-        //创建纹理对象并关联纹理ID，这里创建的是OES,所以摄像头采集的纹理要使用OES 着色器才能渲染，不然就是一片黑色
+        //创建纹理对象并关联纹理ID，注意是OES 纹理格式,因为摄像头采集的图片数据是YUV 编码的，
+        // 必须通过OES 采样器和着色器才能转化成RGB，如果用2D 着色器绘制，虽然不会报错，但是画面漆黑，不能正常渲染
         cameraTextureId = GlUtils.createTextureObject(GLES11Ext.GL_TEXTURE_EXTERNAL_OES);
         mSurfaceTexture = new SurfaceTexture(cameraTextureId);
         mBackgroundHandler.post(new Runnable() {
@@ -299,6 +301,11 @@ public class CameraRender implements GLSurfaceView.Renderer {
     }
 
 
+    public void handleFocus(float rawX, float rawY, int focusRectSize){
+        mCameraHelper.handleFocusMetering(rawX, rawY, focusRectSize,mViewWidth,mViewHeight);
+    }
+
+
     private void startBackgroundThread() {
         if (mBackgroundHandler == null) {
             HandlerThread backgroundThread = new HandlerThread(TAG, Process.THREAD_PRIORITY_BACKGROUND);
@@ -363,5 +370,12 @@ public class CameraRender implements GLSurfaceView.Renderer {
 
     public void setViewHeight(int viewHeight) {
         this.mViewHeight = viewHeight;
+    }
+
+
+
+
+    public CameraHelper getCameraHelper() {
+        return mCameraHelper;
     }
 }
