@@ -98,16 +98,16 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         ivVideoRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                takePic();//点击拍照
-//                if (!v.isSelected()) {
-//                    startRecording();
-//                    v.setSelected(true);
-//                    ivVideoRecord.setImageResource(R.drawable.icon_videorecord_doing);
-//                } else {
-//                    stopRecording();
-//                    v.setSelected(false);
-//                    ivVideoRecord.setImageResource(R.drawable.icon_videorecord_normal);
-//                }
+ //               takePic();//点击拍照
+                if (!v.isSelected()) {
+                    startRecording();
+                    v.setSelected(true);
+                    ivVideoRecord.setImageResource(R.drawable.icon_videorecord_doing);
+                } else {
+                    stopRecording();
+                    v.setSelected(false);
+                    ivVideoRecord.setImageResource(R.drawable.icon_videorecord_normal);
+                }
             }
         });
 

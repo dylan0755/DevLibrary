@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
@@ -108,7 +109,7 @@ public class DemoListActivity extends AppCompatActivity {
             }
         });
         mGridPager.setDataList(list, 3, 30);
-
+        Logger.e("测试堆栈输出");
     }
 
 

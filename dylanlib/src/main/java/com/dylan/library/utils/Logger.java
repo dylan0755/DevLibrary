@@ -20,13 +20,25 @@ public class Logger {
     private static boolean isDebug = true;
 
     public static void d(Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_DEBUG, LOGTAG, msg);
     }
 
     public static void d(String tag, Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_DEBUG, tag, msg);
     }
     public static void d(Object... objects) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         if (EmptyUtils.isNotEmpty(objects)) {
             String printStr = "";
             for (Object o : objects) {
@@ -40,14 +52,28 @@ public class Logger {
 
 
     public static void e(Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_ERROR, LOGTAG, msg);
     }
 
+
+
     public static void e(String tag, Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_ERROR, tag, msg);
     }
 
     public static void e(Object... objects) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         if (EmptyUtils.isNotEmpty(objects)) {
             String printStr = "";
             for (Object o : objects) {
@@ -59,14 +85,26 @@ public class Logger {
 
 
     public static void w(Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_WARN, LOGTAG, msg);
     }
 
     public static void w(String tag, Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_WARN, tag, msg);
     }
 
     public static void w(Object... objects) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         if (EmptyUtils.isNotEmpty(objects)) {
             String printStr = "";
             for (Object o : objects) {
@@ -78,14 +116,26 @@ public class Logger {
 
 
     public static void i(Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_INFO, LOGTAG, msg);
     }
 
     public static void i(String tag, Object msg) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         log(LOG_TYPE_INFO, tag, msg);
     }
 
     public static void i(Object... objects) {
+        String stackInfo = getStackInfo();
+        if (isDebug){
+            Log.e(LOGTAG,stackInfo);
+        }
         if (EmptyUtils.isNotEmpty(objects)) {
             String printStr = "";
             for (Object o : objects) {
@@ -98,27 +148,24 @@ public class Logger {
 
     private static void log(int logType, String tag, Object msg) {
         if (isDebug) {
-            String stackInfo = getStackInfo();
-
             if (msg instanceof List) {
                 int len = ((List) msg).size();
                 String arrayString = ArrayUtils.getStringByArray(((List) msg).toArray());
-                logString(logType, tag, stackInfo + ":\n" + "List-> size=" + len + "  " + arrayString);
+                logString(logType, tag,  "List-> size=" + len + "  " + arrayString);
                 return;
             } else if (msg instanceof Throwable) {
-                logString(logType, tag, stackInfo);
                 Throwable throwable = (Throwable) msg;
                 ELog.e(throwable);
                 return;
             } else if (msg != null && msg.getClass().isArray()) {
                 String str = ArrayUtils.getStringByArray(msg);
-                logString(logType, tag, stackInfo + ":\n" + "array-> " + str);
+                logString(logType, tag,  "array-> " + str);
                 return;
             } else if (msg instanceof Bitmap) {
-                logString(logType, tag, stackInfo + ":\n" + "bitmap-> with=" + ((Bitmap) msg).getWidth() + " height=" + ((Bitmap) msg).getHeight());
+                logString(logType, tag, "bitmap-> with=" + ((Bitmap) msg).getWidth() + " height=" + ((Bitmap) msg).getHeight());
                 return;
             }
-            logString(logType, tag, stackInfo + ":\n" + msg);
+            logString(logType, tag, (String) msg);
         }
     }
 
@@ -181,6 +228,8 @@ public class Logger {
             String methodName = elements[4].getMethodName();
             String lineNumber = String.valueOf(elements[4].getLineNumber());
             String tag = packAndClassName + "." + methodName + "(" + simpleClassName + ".java:" + lineNumber + ")";
+
+
             return tag;
         }
     }
@@ -196,4 +245,6 @@ public class Logger {
     public static boolean isDebugMode() {
         return isDebug;
     }
+
+
 }
