@@ -3,9 +3,10 @@
 
 V5.0.0
 1.新增opengl包,增加opengl相关封装类
-2.IOUtils 新增getBytes 方法，直接将InputStream 转成字节数组
-3.FileUtils 增加 copyFile(File src, File dest) 文件拷贝方法
-4.BitmapHelper增加 getGrayBitmap方法，将图片变灰
+2.新增CameraFocusView CameraHelper 相机类
+3.IOUtils 新增getBytes 方法，直接将InputStream 转成字节数组
+4.FileUtils 增加 copyFile(File src, File dest) 文件拷贝方法
+5.BitmapHelper增加 getGrayBitmap方法，将图片变灰
 
 
 
