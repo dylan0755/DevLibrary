@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.hardware.SensorManager;
 import android.net.Uri;
 import android.opengl.EGL14;
@@ -22,6 +23,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.dylan.library.callback.SingleClickListener;
+import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.media.MediaTools;
 import com.dylan.library.media.camera.CameraRender;
@@ -31,6 +34,7 @@ import com.dylan.library.media.encoder.MediaMuxerWrapper;
 import com.dylan.library.media.encoder.MediaShareAudioEncoder;
 import com.dylan.library.media.encoder.MediaStandardAudioEncoder;
 import com.dylan.library.media.encoder.MediaVideoEncoder;
+import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.PermissionRequestBuilder;
 import com.dylan.library.utils.PermissionUtils;
@@ -64,7 +68,8 @@ public class OpenglDemoActivity extends AppCompatActivity {
     private CountDownTimer mCountDownTimer;
     private long millisInFuture = 20 * 3600 * 1000L;//20个小时
     private volatile long mStartTime = 0;
-
+    protected volatile boolean mIsTakingPic = false;
+    protected volatile boolean mIsNeedTakePic = false;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,22 +88,29 @@ public class OpenglDemoActivity extends AppCompatActivity {
                 .addPerm(Manifest.permission.RECORD_AUDIO, true)
                 .startRequest(1);
 
-       final ImageView ivVideoRecord=findViewById(R.id.ivVideoRecord);
+        final ImageView ivVideoRecord = findViewById(R.id.ivVideoRecord);
         ivVideoRecord.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                 if (!v.isSelected()){
-                     startRecording();
-                     v.setSelected(true);
-                     ivVideoRecord.setImageResource(R.drawable.icon_videorecord_doing);
-                 }else{
-                     stopRecording();
-                     v.setSelected(false);
-                     ivVideoRecord.setImageResource(R.drawable.icon_videorecord_normal);
-                 }
+                takePic();//点击拍照
+//                if (!v.isSelected()) {
+//                    startRecording();
+//                    v.setSelected(true);
+//                    ivVideoRecord.setImageResource(R.drawable.icon_videorecord_doing);
+//                } else {
+//                    stopRecording();
+//                    v.setSelected(false);
+//                    ivVideoRecord.setImageResource(R.drawable.icon_videorecord_normal);
+//                }
             }
         });
 
+        findViewById(R.id.tvSwitchCamera).setOnClickListener(new SingleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                cameraRender.switchCamera();
+            }
+        });
 
     }
 
@@ -129,9 +141,11 @@ public class OpenglDemoActivity extends AppCompatActivity {
 
             int newTextId = 0;//这里可以接入美颜sdk 处理完返回个纹理Id
             if (newTextId != 0) {
-                sendRecordingData(newTextId,false, mvpMatrix, texMatrix, timeStamp);
+                sendRecordingData(newTextId, false, mvpMatrix, texMatrix, timeStamp);
+                takePicture(newTextId, false, GlUtils.IDENTITY_MATRIX, texMatrix, cameraHeight, cameraWidth);
             } else {//原相机图片的纹理Id
-                sendRecordingData(cameraTexId,true, mvpMatrix, texMatrix, timeStamp);
+                sendRecordingData(cameraTexId, true, mvpMatrix, texMatrix, timeStamp);
+                takePicture(cameraTexId, true, GlUtils.IDENTITY_MATRIX, texMatrix, cameraHeight, cameraWidth);
             }
             return 0;
         }
@@ -166,13 +180,13 @@ public class OpenglDemoActivity extends AppCompatActivity {
      * @param texMatrix
      * @param timeStamp
      */
-    protected void sendRecordingData(int texId,boolean isCameraTextureId, float[] mvpMatrix, float[] texMatrix, final long timeStamp) {
+    protected void sendRecordingData(int texId, boolean isCameraTextureId, float[] mvpMatrix, float[] texMatrix, final long timeStamp) {
         synchronized (mRecordLock) {
             if (mVideoEncoder == null) {
                 return;
             }
 
-            mVideoEncoder.frameAvailableSoon(texId,isCameraTextureId, texMatrix, mvpMatrix);
+            mVideoEncoder.frameAvailableSoon(texId, isCameraTextureId, texMatrix, mvpMatrix);
             if (mStartTime == 0) {
                 mStartTime = timeStamp;
             }
@@ -197,7 +211,7 @@ public class OpenglDemoActivity extends AppCompatActivity {
 
             int videoWidth = cameraRender.getViewWidth();
             int videoHeight = cameraRender.getViewHeight();
-            Logger.e("videoWidth="+videoWidth+" videoHeight="+videoHeight);
+            Logger.e("videoWidth=" + videoWidth + " videoHeight=" + videoHeight);
             new MediaVideoEncoder(muxerWrapper, mMediaEncoderListener, videoWidth, videoHeight);
             if (needOpenAudioRecord) {
                 new MediaStandardAudioEncoder(muxerWrapper, mMediaEncoderListener);
@@ -229,6 +243,49 @@ public class OpenglDemoActivity extends AppCompatActivity {
         stopTime();
     }
 
+
+    public void takePic() {
+        if (mIsTakingPic) {
+            return;
+        }
+        mIsNeedTakePic = true;
+        mIsTakingPic = true;
+    }
+
+    /**
+     * 拍照
+     *
+     * @param texId
+     * @param texMatrix
+     * @param texWidth
+     * @param texHeight
+     */
+    protected void takePicture(int texId, boolean isOES, float[] mvpMatrix, float[] texMatrix, final int texWidth, final int texHeight) {
+        if (!mIsNeedTakePic) {
+            return;
+        }
+        mIsNeedTakePic = false;
+        GlUtils.createBitmapFromTexture(texId, texMatrix, mvpMatrix, texWidth, texHeight, isOES, new GlUtils.OnReadBitmapListener() {
+            @Override
+            public void onReadBitmapListener(Bitmap var1) {
+                try {
+                    final String filePath=Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
+                    BitmapHelper.saveBitmapSync(var1,filePath );
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ToastUtils.show("保存图片成功");
+                            Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(filePath)));
+                            sendBroadcast(intent);
+                        }
+                    });
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                mIsTakingPic = false;
+            }
+        });
+    }
 
     /**
      * 录制封装回调
@@ -291,7 +348,7 @@ public class OpenglDemoActivity extends AppCompatActivity {
                     @Override
                     public void run() {
                         sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(mVideoOutFile)));
-                        ToastUtils.show( "保存视频成功");
+                        ToastUtils.show("保存视频成功");
                     }
                 });
 

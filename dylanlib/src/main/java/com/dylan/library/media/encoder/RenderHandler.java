@@ -8,8 +8,8 @@ import android.util.Log;
 import android.view.Surface;
 
 import com.dylan.library.opengl.EglCore;
-import com.dylan.library.opengl.Program;
-import com.dylan.library.opengl.ProgramTexture2d;
+import com.dylan.library.opengl.TextureDrawer;
+import com.dylan.library.opengl.Texture2dDrawer;
 import com.dylan.library.opengl.WindowSurface;
 
 public final class RenderHandler implements Runnable {
@@ -29,7 +29,7 @@ public final class RenderHandler implements Runnable {
 
     private WindowSurface mInputWindowSurface;
     private EglCore mEglCore;
-    private Program mFullScreen;
+    private TextureDrawer mFullScreen;
 
     public static RenderHandler createHandler(final String name) {
         if (DEBUG)
@@ -174,7 +174,7 @@ public final class RenderHandler implements Runnable {
         mEglCore = new EglCore(mShardContext, EglCore.FLAG_RECORDABLE);
         mInputWindowSurface = new WindowSurface(mEglCore, mSurface, true);
         mInputWindowSurface.makeCurrent();
-        mFullScreen = new ProgramTexture2d();
+        mFullScreen = new Texture2dDrawer();
         mSurface = null;
         mLock.notifyAll();
     }

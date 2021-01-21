@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * Author: Dylan
- * Date: 2021/1/20 0020
+ * Date: 2021/1/20
  * Desc:
  */
 public class CameraHelper implements Camera.PreviewCallback{
@@ -132,6 +132,8 @@ public class CameraHelper implements Camera.PreviewCallback{
             mCamera = null;
         }
     }
+
+
 
 
     public void switchCamera(Activity activity,SurfaceTexture surfaceTexture) {

@@ -20,8 +20,15 @@ import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 
 
+/**
+ * 不同的纹理要用不同的着色器，不然渲染不出来，external 2D 纹理对应的像素是YUV 格式，而2D 纹理是RBG 格式
+ * 摄像头采集的图片是YUV 编码格式的，所以我们要用到的纹理采样器就得用GL_TEXTURE_EXTERNAL_OES,用了这个纹理格式，
+ * 片段着色器则使用samplerExternalOES 片段着色器会将YUV数据转换为RGB数据
+ */
 
-public class ProgramTextureOES extends Program {
+public class TextureOESDrawer extends TextureDrawer {
+
+    //下面两段代码是GLSL （OpenGL Shading Language  OpenGL着色语言）语法
 
     // Simple vertex shader, used for all programs.
     private static final String VERTEX_SHADER =
@@ -54,7 +61,7 @@ public class ProgramTextureOES extends Program {
     /**
      * Prepares the program in the current EGL context.
      */
-    public ProgramTextureOES() {
+    public TextureOESDrawer() {
         super(VERTEX_SHADER, FRAGMENT_SHADER_EXT);
     }
 

@@ -12,8 +12,8 @@ import android.os.Process;
 import android.util.Log;
 
 import com.dylan.library.opengl.GlUtils;
-import com.dylan.library.opengl.ProgramTexture2d;
-import com.dylan.library.opengl.ProgramTextureOES;
+import com.dylan.library.opengl.Texture2dDrawer;
+import com.dylan.library.opengl.TextureOESDrawer;
 
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
@@ -36,11 +36,11 @@ public class CameraRender implements GLSurfaceView.Renderer {
     private int m2DTexId;
     private SurfaceTexture mSurfaceTexture;
     private float[] mMvpMatrix;
-    private ProgramTextureOES mProgramTextureOES;
-    private ProgramTexture2d mProgramTexture2d;
+    private TextureOESDrawer mTextureOESDrawer;
+    private Texture2dDrawer mTexture2DDrawer;
     private static final float[] TEXTURE_MATRIX = {0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f};
     private float[] mTexMatrix = Arrays.copyOf(TEXTURE_MATRIX, TEXTURE_MATRIX.length);
-    protected byte[] mCameraNv21Byte;
+    protected byte[] mCameraNv21Byte;  //Nv21 属于YUV420
     private byte[] mNv21ByteCopy;
 
     //开关
@@ -109,9 +109,9 @@ public class CameraRender implements GLSurfaceView.Renderer {
     //以下是底层OpenGl 的回调
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        mProgramTexture2d = new ProgramTexture2d();
-        mProgramTextureOES = new ProgramTextureOES();
-
+        mTexture2DDrawer = new Texture2dDrawer();
+        mTextureOESDrawer = new TextureOESDrawer();
+        //创建纹理对象并关联纹理ID，这里创建的是OES,所以摄像头采集的纹理要使用OES 着色器才能渲染，不然就是一片黑色
         cameraTextureId = GlUtils.createTextureObject(GLES11Ext.GL_TEXTURE_EXTERNAL_OES);
         mSurfaceTexture = new SurfaceTexture(cameraTextureId);
         mBackgroundHandler.post(new Runnable() {
@@ -138,12 +138,15 @@ public class CameraRender implements GLSurfaceView.Renderer {
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        if (mProgramTexture2d == null || mSurfaceTexture == null) {
+        if (mTexture2DDrawer == null || mSurfaceTexture == null) {
             return;
         }
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         try {
-            mSurfaceTexture.updateTexImage();
-            mSurfaceTexture.getTransformMatrix(TEXTURE_MATRIX);
+            //这两行代码一定要一起使用
+            mSurfaceTexture.updateTexImage();//将最新的摄像头数据更新到OpenGl 纹理中
+            // 这里如果用TEXTURE_MATRIX，而下面的代码用mTexMatrix   那么后置摄像头就是上下颠倒的
+            mSurfaceTexture.getTransformMatrix(mTexMatrix);
         } catch (Exception e) {
             Log.e(TAG, "onDrawFrame: ", e);
         }
@@ -161,11 +164,17 @@ public class CameraRender implements GLSurfaceView.Renderer {
             }
         }
 
-        if (m2DTexId > 0) {
-            mProgramTexture2d.drawFrame(m2DTexId, mTexMatrix, mMvpMatrix);
-        } else if (cameraTextureId > 0) {
-            mProgramTextureOES.drawFrame(cameraTextureId, mTexMatrix, mMvpMatrix);
+
+
+        if (!mIsSwitchCamera) {
+            if (m2DTexId > 0) {
+                mTexture2DDrawer.drawFrame(m2DTexId, mTexMatrix, mMvpMatrix);
+            } else if (cameraTextureId > 0) {
+                mTextureOESDrawer.drawFrame(cameraTextureId, mTexMatrix, mMvpMatrix);
+            }
         }
+
+
         LimitFpsUtil.limitFrameRate();
         if (!mIsStopPreview) {
             mGlSurfaceView.requestRender();
@@ -177,6 +186,8 @@ public class CameraRender implements GLSurfaceView.Renderer {
     private void openMirrorIfNeed() {
         if (mIsOpenMirror && mCameraHelper.isFrontCameraNow()) {//当前为前置摄像头并且开启了镜像
             GlUtils.frontCameraMirror(mMvpMatrix);
+        }else{
+            Log.e(TAG, "openMirrorIfNeed: "+false );
         }
     }
 
@@ -321,13 +332,13 @@ public class CameraRender implements GLSurfaceView.Renderer {
             GLES20.glDeleteTextures(1, new int[]{cameraTextureId}, 0);
             cameraTextureId = 0;
         }
-        if (mProgramTexture2d != null) {
-            mProgramTexture2d.release();
-            mProgramTexture2d = null;
+        if (mTexture2DDrawer != null) {
+            mTexture2DDrawer.release();
+            mTexture2DDrawer = null;
         }
-        if (mProgramTextureOES != null) {
-            mProgramTextureOES.release();
-            mProgramTextureOES = null;
+        if (mTextureOESDrawer != null) {
+            mTextureOESDrawer.release();
+            mTextureOESDrawer = null;
         }
         if (mSurfaceTexture != null) {
             mSurfaceTexture.release();

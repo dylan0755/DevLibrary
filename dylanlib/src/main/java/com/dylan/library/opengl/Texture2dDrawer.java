@@ -19,8 +19,10 @@ package com.dylan.library.opengl;
 import android.opengl.GLES20;
 
 
-
-public class ProgramTexture2d extends Program {
+/**
+ * 不同的纹理要用不同的着色器，不然渲染不出来
+ */
+public class Texture2dDrawer extends TextureDrawer {
 
     // Simple vertex shader, used for all programs.
     private static final String VERTEX_SHADER =
@@ -43,12 +45,35 @@ public class ProgramTexture2d extends Program {
                     "    gl_FragColor = texture2D(sTexture, vTextureCoord);\n" +
                     "}\n";
 
+
+    //一段高斯模糊的着色器代码
+    private static final String FRAGMENT_SHADER_2D_BLUR="precision lowp float;\n" +
+            "precision lowp int;\n" +
+            "varying vec2 vTextureCoord;\n" +
+            "uniform sampler2D sTexture;\n" +
+            "\n" +
+            "varying vec2 blurCoordinates[5];\n" +
+            "\n" +
+            "void main()\n" +
+            "{\n" +
+            "    vec4 original = texture2D(sTexture, vTextureCoord);\n" +
+            "    lowp vec4 sum = vec4(0.0);\n" +
+            "    sum += texture2D(sTexture, blurCoordinates[0]) * 0.204164;\n" +
+            "    sum += texture2D(sTexture, blurCoordinates[1]) * 0.304005;\n" +
+            "    sum += texture2D(sTexture, blurCoordinates[2]) * 0.304005;\n" +
+            "    sum += texture2D(sTexture, blurCoordinates[3]) * 0.093913;\n" +
+            "    sum += texture2D(sTexture, blurCoordinates[4]) * 0.093913;\n" +
+            "    gl_FragColor = vec4(sum.xyz,  1.0);\n" +
+            "    gl_FragColor=vec4(mix(gl_FragColor.rgb, vec3(0.0), 0.02), gl_FragColor.a);\n" +
+            "}";
+
+
     private int muMVPMatrixLoc;
     private int muTexMatrixLoc;
     private int maPositionLoc;
     private int maTextureCoordLoc;
 
-    public ProgramTexture2d() {
+    public Texture2dDrawer() {
         super(VERTEX_SHADER, FRAGMENT_SHADER_2D);
     }
 

@@ -9,8 +9,8 @@ import com.dylan.library.io.IOUtils;
  * Created by tujh on 2018/1/24.
  */
 
-public abstract class Program {
-    private static final String TAG = Program.class.getSimpleName();
+public abstract class TextureDrawer {
+    private static final String TAG = TextureDrawer.class.getSimpleName();
 
     // Handles to the GL program and various components of it.
     protected int mProgramHandle;
@@ -22,13 +22,13 @@ public abstract class Program {
     /**
      * Prepares the program in the current EGL context.
      */
-    public Program(String VERTEX_SHADER, String FRAGMENT_SHADER_2D) {
+    public TextureDrawer(String VERTEX_SHADER, String FRAGMENT_SHADER_2D) {
         mProgramHandle = GlUtils.createProgram(VERTEX_SHADER, FRAGMENT_SHADER_2D);
         mDrawable2d = getDrawable2d();
         getLocations();
     }
 
-    public Program(Context context, int vertexShaderResourceId, int fragmentShaderResourceId) {
+    public TextureDrawer(Context context, int vertexShaderResourceId, int fragmentShaderResourceId) {
         this(IOUtils.readTextFileFromResource(context, vertexShaderResourceId), IOUtils.readTextFileFromResource(context, fragmentShaderResourceId));
     }
 

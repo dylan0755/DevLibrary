@@ -10,7 +10,6 @@ import android.opengl.Matrix;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import java.nio.Buffer;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
@@ -189,12 +188,12 @@ public class GlUtils {
     }
 
     //图片纹理转Bitmap
-    public void createBitmapFromTexture(int texId, float[] texMatrix, float[] mvpMatrix, final int texWidth, final int texHeight, final OnReadBitmapListener listener){
-        createBitmapFromTexture(texId,texMatrix,mvpMatrix,texWidth,texHeight,listener,false);
+    public static void createBitmapFromTexture(int texId, float[] texMatrix, float[] mvpMatrix, final int texWidth, final int texHeight, final OnReadBitmapListener listener){
+        createBitmapFromTexture(texId,texMatrix,mvpMatrix,texWidth,texHeight,false,listener);
     }
 
     //图片纹理转Bitmap
-    public void createBitmapFromTexture(int texId, float[] texMatrix, float[] mvpMatrix, final int texWidth, final int texHeight, final OnReadBitmapListener listener, boolean isOes){
+    public static void createBitmapFromTexture(int texId, float[] texMatrix, float[] mvpMatrix, final int texWidth, final int texHeight,  boolean isOes,final OnReadBitmapListener listener){
         int[] textures = new int[1];
         GLES20.glGenTextures(1, textures, 0);
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
@@ -209,14 +208,14 @@ public class GlUtils {
         GLES20.glViewport(0, 0, texWidth, texHeight);
         GLES20.glClearColor(0, 0, 0, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT);
-        Program program;
+        TextureDrawer textureDrawer;
         if (isOes) {
-            program = new ProgramTextureOES();
+            textureDrawer = new TextureOESDrawer();
         } else {
-            program = new ProgramTexture2dWithAlpha();
+            textureDrawer = new Texture2dAlphaDrawer();
         }
-        program.drawFrame(texId, texMatrix, mvpMatrix);
-        program.release();
+        textureDrawer.drawFrame(texId, texMatrix, mvpMatrix);
+        textureDrawer.release();
 
         final ByteBuffer buffer = ByteBuffer.allocateDirect(texWidth * texHeight * 4);
         buffer.order(ByteOrder.LITTLE_ENDIAN);

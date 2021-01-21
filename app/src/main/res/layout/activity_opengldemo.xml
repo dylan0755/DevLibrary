@@ -26,15 +26,30 @@
         android:background="@drawable/bg_shape_countdonw"/>
 
 
-    <ImageView
-        android:id="@+id/ivVideoRecord"
-        android:layout_width="52dp"
-        android:layout_height="52dp"
-        android:layout_marginLeft="66dp"
-        android:layout_marginRight="66dp"
-        android:src="@drawable/icon_videorecord_normal"
-        android:layout_gravity="bottom|center_horizontal"
-        android:layout_marginBottom="36dp"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/tvSwitchCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="切换摄像头"/>
+
+
+        <ImageView
+            android:id="@+id/ivVideoRecord"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/icon_videorecord_normal"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="36dp"/>
+
+    </RelativeLayout>
+
+
 
 
 </FrameLayout>

@@ -22,7 +22,7 @@ import android.opengl.GLES20;
 /**
  * alpha 通道为 1
  */
-public class ProgramTexture2dWithAlpha extends Program {
+public class Texture2dAlphaDrawer extends TextureDrawer {
 
     // Simple vertex shader, used for all programs.
     private static final String VERTEX_SHADER =
@@ -50,7 +50,7 @@ public class ProgramTexture2dWithAlpha extends Program {
     private int maPositionLoc;
     private int maTextureCoordLoc;
 
-    public ProgramTexture2dWithAlpha() {
+    public Texture2dAlphaDrawer() {
         super(VERTEX_SHADER, FRAGMENT_SHADER_2D);
     }
 

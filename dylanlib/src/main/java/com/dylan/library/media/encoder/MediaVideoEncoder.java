@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.Surface;
 
 import com.dylan.library.opengl.GlUtils;
-import com.dylan.library.opengl.ProgramTexture2d;
-import com.dylan.library.opengl.ProgramTextureOES;
+import com.dylan.library.opengl.Texture2dDrawer;
+import com.dylan.library.opengl.TextureOESDrawer;
 
 import java.io.IOException;
 
@@ -42,8 +42,8 @@ public class MediaVideoEncoder extends MediaEncoder {
     private RenderHandler mRenderHandler;
     private Surface mSurface;
 
-    private ProgramTexture2d program;
-    private ProgramTextureOES programTextureOES;
+    private Texture2dDrawer texture2dDrawer;
+    private TextureOESDrawer textureOESDrawer;
     private int[] mFboTex;
     private int[] mFboId;
     private int[] mViewPort = new int[4];
@@ -154,16 +154,17 @@ public class MediaVideoEncoder extends MediaEncoder {
      * @return
      */
     public boolean frameAvailableSoon(int texId, boolean isCameraTextureId,float[] texMatrix, float[] mvpMatrix) {
-        if (program == null&&programTextureOES==null) {
+        if (texture2dDrawer == null&& textureOESDrawer ==null) {
             return false;
         }
         GLES20.glGetIntegerv(GLES20.GL_VIEWPORT, mViewPort, 0);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFboId[0]);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFboId[0]);//绑定缓冲区
         GLES20.glViewport(cropX, cropY, textureWidth, textureHeight);
+        ////往缓冲区绘制
         if (isCameraTextureId){
-            programTextureOES.drawFrame(texId, texMatrix, mvpMatrix);
+            textureOESDrawer.drawFrame(texId, texMatrix, mvpMatrix);
         }else{
-            program.drawFrame(texId, texMatrix, mvpMatrix);
+            texture2dDrawer.drawFrame(texId, texMatrix, mvpMatrix);
         }
 
 
@@ -174,7 +175,7 @@ public class MediaVideoEncoder extends MediaEncoder {
             return true;
         }
         boolean result;
-        //有新的数据进来了 让MediaCoder 结束线程等待，同时去绘制MediaCodec 中的Surface
+        //将缓冲区的数据刷入MediaCodec中的Surface进行编码H264，通知MediaCodec 读取已经编码过的视频帧然后写入本地视频文件中
         if (result = super.frameAvailableSoon()) {
             mRenderHandler.draw(mFboTex[0], GlUtils.IDENTITY_MATRIX, GlUtils.IDENTITY_MATRIX);
         }
@@ -185,8 +186,8 @@ public class MediaVideoEncoder extends MediaEncoder {
         mFboTex = new int[1];
         mFboId = new int[1];
         GlUtils.createFrameBuffers(mFboTex, mFboId, mWidth, mHeight);
-        program = new ProgramTexture2d();
-        programTextureOES=new ProgramTextureOES();
+        texture2dDrawer = new Texture2dDrawer();
+        textureOESDrawer =new TextureOESDrawer();
         mRenderHandler.setEglContext(sharedContext, mSurface, mFboTex[0]);
     }
 
@@ -218,13 +219,13 @@ public class MediaVideoEncoder extends MediaEncoder {
         if (mFboTex != null) {
             mFboTex[0] = -1;
         }
-        if (program != null) {
-            program.release();
-            program = null;
+        if (texture2dDrawer != null) {
+            texture2dDrawer.release();
+            texture2dDrawer = null;
         }
-        if (programTextureOES!=null){
-            programTextureOES.release();
-            programTextureOES=null;
+        if (textureOESDrawer !=null){
+            textureOESDrawer.release();
+            textureOESDrawer =null;
         }
         mFrameCount = 0;
         super.release();
