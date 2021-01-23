@@ -34,15 +34,12 @@ public class CameraRender implements GLSurfaceView.Renderer {
 
     //画布纹理
     private int cameraTextureId;
-    private int m2DTexId;
     private SurfaceTexture mSurfaceTexture;
     private float[] mMvpMatrix;
     private TextureOESDrawer mTextureOESDrawer;
-    private Texture2dDrawer mTexture2DDrawer;
     private static final float[] TEXTURE_MATRIX = {0.0f, -1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f};
     private float[] mTexMatrix = Arrays.copyOf(TEXTURE_MATRIX, TEXTURE_MATRIX.length);
     protected byte[] mCameraNv21Byte;  //Nv21 属于YUV420
-    private byte[] mNv21ByteCopy;
 
     //开关
     protected boolean mIsPreviewing;
@@ -90,7 +87,6 @@ public class CameraRender implements GLSurfaceView.Renderer {
         mCameraHelper.closeCamera();
         mIsPreviewing = false;
         mCameraNv21Byte = null;
-        mNv21ByteCopy = null;
     }
 
 
@@ -110,7 +106,6 @@ public class CameraRender implements GLSurfaceView.Renderer {
     //以下是底层OpenGl 的回调
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        mTexture2DDrawer = new Texture2dDrawer();
         mTextureOESDrawer = new TextureOESDrawer();
         //创建纹理对象并关联纹理ID，注意是OES 纹理格式,因为摄像头采集的图片数据是YUV 编码的，
         // 必须通过OES 采样器和着色器才能转化成RGB，如果用2D 着色器绘制，虽然不会报错，但是画面漆黑，不能正常渲染
@@ -140,10 +135,11 @@ public class CameraRender implements GLSurfaceView.Renderer {
 
     @Override
     public void onDrawFrame(GL10 gl) {
-        if (mTexture2DDrawer == null || mSurfaceTexture == null) {
-            return;
-        }
-        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        if (mSurfaceTexture == null)return;
+       GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+       //开启GL的混合模式，即图像叠加,不开启一边是sampe2D 一边是sampeOES,黑色渲染不出来
+      GLES20.glEnable(GLES20.GL_BLEND);
+       GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
         try {
             //这两行代码一定要一起使用
             mSurfaceTexture.updateTexImage();//将最新的摄像头数据更新到OpenGl 纹理中
@@ -153,29 +149,18 @@ public class CameraRender implements GLSurfaceView.Renderer {
             Log.e(TAG, "onDrawFrame: ", e);
         }
 
+
+        if (!mIsSwitchCamera) {
+            GLES20.glViewport(0,0,mViewWidth,mViewHeight);
+            mTextureOESDrawer.drawFrame(cameraTextureId, mTexMatrix, mMvpMatrix);
+        }
+
         if (!mIsStopPreview) {
             if (mCameraNv21Byte != null) {
-                if (mNv21ByteCopy == null) {
-                    mNv21ByteCopy = new byte[mCameraNv21Byte.length];
-                }
-                System.arraycopy(mCameraNv21Byte, 0, mNv21ByteCopy, 0, mCameraNv21Byte.length);
-            }
-            if (mNv21ByteCopy != null) {
-                m2DTexId = mRenderStatusListener.onDrawFrame(mNv21ByteCopy, cameraTextureId,
+               mRenderStatusListener.onDrawFrame(mCameraNv21Byte, cameraTextureId,
                         mCameraHelper.getCameraWidth(), mCameraHelper.getCameraHeight(), mMvpMatrix, mTexMatrix, mSurfaceTexture.getTimestamp());
             }
         }
-
-
-
-        if (!mIsSwitchCamera) {
-            if (m2DTexId > 0) {
-                mTexture2DDrawer.drawFrame(m2DTexId, mTexMatrix, mMvpMatrix);
-            } else if (cameraTextureId > 0) {
-                mTextureOESDrawer.drawFrame(cameraTextureId, mTexMatrix, mMvpMatrix);
-            }
-        }
-
 
         LimitFpsUtil.limitFrameRate();
         if (!mIsStopPreview) {
@@ -339,10 +324,7 @@ public class CameraRender implements GLSurfaceView.Renderer {
             GLES20.glDeleteTextures(1, new int[]{cameraTextureId}, 0);
             cameraTextureId = 0;
         }
-        if (mTexture2DDrawer != null) {
-            mTexture2DDrawer.release();
-            mTexture2DDrawer = null;
-        }
+
         if (mTextureOESDrawer != null) {
             mTextureOESDrawer.release();
             mTextureOESDrawer = null;
@@ -351,7 +333,6 @@ public class CameraRender implements GLSurfaceView.Renderer {
             mSurfaceTexture.release();
             mSurfaceTexture = null;
         }
-        m2DTexId = -1;
         mRenderStatusListener.onSurfaceDestroy();
     }
 

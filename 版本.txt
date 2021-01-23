@@ -10,7 +10,7 @@ V5.0.0
 6.修复Logger 调用入口堆栈信息丢失问题
 7.AnimationUtils 增加获取style的方法，增加300动画时长的动画
 8.ScreenUtils 增加 hasNotchScreen，判断是不是刘海屏
-
+9.BitmapHelper 新增 getBitmapFromText，文字转图片
 
 
 

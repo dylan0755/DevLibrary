@@ -4,8 +4,10 @@ import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
+import android.opengl.GLUtils;
 import android.opengl.Matrix;
 import android.os.AsyncTask;
 import android.util.Log;
@@ -144,7 +146,7 @@ public class GlUtils {
         }
     }
 
-    //图片数据转纹理
+    //创建纹理
     public static int createImageTexture(ByteBuffer data, int width, int height, int format) {
         int[] textureHandles = new int[1];
         int textureHandle;
@@ -164,27 +166,22 @@ public class GlUtils {
         return textureHandle;
     }
 
-    //图片转纹理
+    //创建一个图片纹理对象
     public static int createImageTexture(Bitmap bmp) {
-        int[] textureHandles = new int[1];
-        int textureHandle;
-
-        GLES20.glGenTextures(1, textureHandles, 0);
-        textureHandle = textureHandles[0];
-        checkGlError("glGenTextures");
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
-                GLES20.GL_LINEAR);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER,
-                GLES20.GL_LINEAR);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,
-                GLES20.GL_CLAMP_TO_EDGE);
-        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,
-                GLES20.GL_CLAMP_TO_EDGE);
-        checkGlError("loadImageTexture");
-        android.opengl.GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, /*level*/ 0, bmp, 0);
-        checkGlError("loadImageTexture");
-        return textureHandle;
+        //生产一个纹理
+        int[] textureIds = new int[1];
+        GLES20.glGenTextures(1, textureIds, 0);
+        //绑定为 2D纹理
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureIds[0]);
+        //设置环绕模式
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_REPEAT);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_REPEAT);
+        //设置过滤模式
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameteri(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bmp, 0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+        return textureIds[0];
     }
 
     //图片纹理转Bitmap
@@ -304,8 +301,9 @@ public class GlUtils {
         int texId = textures[0];
         GLES20.glBindTexture(textureTarget, texId);
        checkGlError("glBindTexture " + texId);
-
+        //设置缩小的时候（GL_TEXTURE_MIN_FILTER）使用mipmap三线程过滤
         GLES20.glTexParameterf(textureTarget, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+        //设置放大的时候（GL_TEXTURE_MAG_FILTER）使用双线程过滤
         GLES20.glTexParameterf(textureTarget, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
         GLES20.glTexParameteri(textureTarget, GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
         GLES20.glTexParameteri(textureTarget, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);

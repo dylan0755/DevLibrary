@@ -26,6 +26,9 @@ import android.renderscript.ScriptIntrinsicBlur;
 import android.renderscript.Type;
 import android.support.annotation.FloatRange;
 import android.support.annotation.RequiresApi;
+import android.text.Layout;
+import android.text.StaticLayout;
+import android.text.TextPaint;
 import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
@@ -35,6 +38,7 @@ import android.widget.ImageView;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.io.IOCloser;
+import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.MatrixUtils;
@@ -600,6 +604,23 @@ public class BitmapHelper {
 
         return bitmap;
     }
+
+
+    public static Bitmap getBitmapFromText(Context context,String text, int textSize, int textColor) {
+        TextPaint textPaint = new TextPaint();
+        textPaint.setDither(true);
+        textPaint.setAntiAlias(true);
+        textPaint.setTextSize(DensityUtils.dp2px(context,textSize));
+        textPaint.setColor(textColor);
+        int width = (int) Math.ceil(textPaint.measureText(text));
+        Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();
+        int height = (int) Math.ceil(Math.abs(fontMetrics.bottom) + Math.abs(fontMetrics.top));
+        Bitmap bitmap = Bitmap.createBitmap(width,height, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        canvas.drawText(text,0,Math.abs(fontMetrics.ascent),textPaint);
+        return bitmap;
+    }
+
 
     /**
      * bitmap转为base64
