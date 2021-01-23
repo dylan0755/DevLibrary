@@ -129,7 +129,7 @@ public class Logger {
                 logString(logType, tag, stackInfo+"\n"+"bitmap-> with=" + ((Bitmap) msg).getWidth() + " height=" + ((Bitmap) msg).getHeight());
                 return;
             }
-            logString(logType, tag, stackInfo+"\n"+(String) msg);
+            logString(logType, tag, stackInfo+"\n"+msg);
         }
     }
 
