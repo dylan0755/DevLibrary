@@ -9,7 +9,7 @@ V5.0.0
 5.BitmapHelper增加 getGrayBitmap方法，将图片变灰
 6.修复Logger 调用入口堆栈信息丢失问题
 7.AnimationUtils 增加获取style的方法，增加300动画时长的动画
-
+8.ScreenUtils 增加 hasNotchScreen，判断是不是刘海屏
 
 
 
