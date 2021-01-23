@@ -66,26 +66,49 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--window动画-->
 
-
-    <style name="dl_anim_left_sliding">
-        <item name="android:windowEnterAnimation">@anim/anim_left_enter_slide_out</item>
-        <item name="android:windowExitAnimation">@anim/anim_left_exit_slide_back</item>
+    <style name="dl_anim_400_left_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_left_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_left_exit_slide_back</item>
     </style>
-    <style name="dl_anim_top_sliding">
-        <item name="android:windowEnterAnimation">@anim/anim_top_enter_slide_out</item>
-        <item name="android:windowExitAnimation">@anim/anim_top_exit_slide_back</item>
-    </style>
-
-    <style name="dl_anim_right_sliding">
-        <item name="android:windowEnterAnimation">@anim/anim_right_enter_slide_out</item>
-        <item name="android:windowExitAnimation">@anim/anim_right_exit_slide_back</item>
+    <style name="dl_anim_400_top_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_top_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_top_exit_slide_back</item>
     </style>
 
-    <style name="dl_anim_bottom_sliding">
-        <item name="android:windowEnterAnimation">@anim/anim_bottom_enter_slide_out</item>
-        <item name="android:windowExitAnimation">@anim/anim_bottom_exit_slide_back</item>
+    <style name="dl_anim_400_right_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_right_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_right_exit_slide_back</item>
     </style>
+
+    <style name="dl_anim_400_bottom_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_bottom_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_bottom_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_300_left_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_left_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_left_exit_slide_back</item>
+    </style>
+    <style name="dl_anim_300_top_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_top_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_top_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_300_right_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_right_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_right_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_300_bottom_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_bottom_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_bottom_exit_slide_back</item>
+    </style>
+    <!--window动画-->
+
+
+
 
     <style name="AppCompatDialogStyle" parent="@style/Theme.AppCompat.Dialog">
         <item name="android:windowBackground">@color/transparent</item>

@@ -8,7 +8,7 @@ V5.0.0
 4.FileUtils 增加 copyFile(File src, File dest) 文件拷贝方法
 5.BitmapHelper增加 getGrayBitmap方法，将图片变灰
 6.修复Logger 调用入口堆栈信息丢失问题
-
+7.AnimationUtils 增加获取style的方法，增加300动画时长的动画
 
 
 
