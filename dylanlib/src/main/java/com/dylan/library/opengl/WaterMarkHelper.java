@@ -51,6 +51,9 @@ public class WaterMarkHelper {
         waterDrawer.drawFrame(textId);
     }
 
+    public void drawDateTimeText(WaterDateBean dateBean) {
+        drawDateTimeText(dateBean.getX(),dateBean.getY(),dateBean.getColor(),dateBean.getTextSize());
+    }
 
     public void drawDateTimeText(int x, int y, int color,int textSize) {
         if (waterDrawer == null || textBitmapMap == null || textIdMap == null) {
@@ -103,7 +106,10 @@ public class WaterMarkHelper {
 
 
     public void releaseTextureId(int textId) {
-        GlUtils.deleteTextures(new int[]{textId});
+        if (textId!=0){
+            GlUtils.deleteTextures(new int[]{textId});
+        }
+
         //释放纹理
         if (textIdMap != null) {
             if (!textIdMap.isEmpty()) {
@@ -128,6 +134,48 @@ public class WaterMarkHelper {
             waterDrawer.release();
             waterDrawer = null;
         }
+    }
+
+
+    public static class WaterDateBean{
+        private int x;
+        private int y;
+        private int color;
+        private int textSize;
+
+        public int getX() {
+            return x;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
+
+        public int getColor() {
+            return color;
+        }
+
+        public void setColor(int color) {
+            this.color = color;
+        }
+
+        public int getTextSize() {
+            return textSize;
+        }
+
+        public void setTextSize(int textSize) {
+            this.textSize = textSize;
+        }
+
+
     }
 
 }

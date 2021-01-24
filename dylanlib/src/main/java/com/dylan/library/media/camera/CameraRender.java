@@ -138,7 +138,7 @@ public class CameraRender implements GLSurfaceView.Renderer {
         if (mSurfaceTexture == null)return;
        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
        //开启GL的混合模式，即图像叠加,不开启一边是sampe2D 一边是sampeOES,黑色渲染不出来
-      GLES20.glEnable(GLES20.GL_BLEND);
+       GLES20.glEnable(GLES20.GL_BLEND);
        GLES20.glBlendFunc(GLES20.GL_ONE, GLES20.GL_ONE_MINUS_SRC_ALPHA);
         try {
             //这两行代码一定要一起使用

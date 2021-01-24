@@ -1,5 +1,6 @@
 package com.dylan.library.media.encoder;
 
+import android.graphics.Color;
 import android.opengl.EGLContext;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
@@ -10,6 +11,7 @@ import android.view.Surface;
 import com.dylan.library.opengl.EglCore;
 import com.dylan.library.opengl.TextureDrawer;
 import com.dylan.library.opengl.Texture2dDrawer;
+import com.dylan.library.opengl.WaterMarkHelper;
 import com.dylan.library.opengl.WindowSurface;
 
 public final class RenderHandler implements Runnable {
@@ -30,6 +32,9 @@ public final class RenderHandler implements Runnable {
     private WindowSurface mInputWindowSurface;
     private EglCore mEglCore;
     private TextureDrawer mFullScreen;
+    private WaterMarkHelper waterMarkHelper;
+    private WaterMarkHelper.WaterDateBean dateBean;
+    private int videoWidth,videoHeight;
 
     public static RenderHandler createHandler(final String name) {
         if (DEBUG)
@@ -65,17 +70,17 @@ public final class RenderHandler implements Runnable {
         }
     }
 
-    public final void draw(final int texId) {
-        draw(texId, mtx, mvp);
-    }
 
-    public final void draw(final int texId, final float[] texMatrix) {
-        draw(texId, texMatrix, mvp);
-    }
+
+
 
 
     //有新数据进来了，结束线程等待，通知绘制图像
-    public final void draw( final int texId, final float[] texMatrix, final float[] mvpMatrix) {
+    public final void draw(final int texId, final float[] texMatrix, final float[] mvpMatrix,
+                           int videoWidth, int videoHeight, WaterMarkHelper.WaterDateBean data) {
+        this.dateBean =data;
+        this.videoWidth=videoWidth;
+        this.videoHeight=videoHeight;
         synchronized (mLock) {
             if (mRequestRelease)
                 return;
@@ -145,7 +150,14 @@ public final class RenderHandler implements Runnable {
                     // clear screen with yellow color so that you can see rendering rectangle
                     GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
                     GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+                    GLES20.glEnable(GLES20.GL_BLEND);
+                    GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
+                    GLES20.glViewport(0,0,videoWidth,videoHeight);
                     mFullScreen.drawFrame(mTexId, mtx, mvp);
+                    if (dateBean !=null){
+                        waterMarkHelper.drawDateTimeText(dateBean.getX(), dateBean.getY(),Color.WHITE,
+                                dateBean.getTextSize());
+                    }
                     mInputWindowSurface.swapBuffers();
                 }
             } else {//没数据则线程进行等待
@@ -175,6 +187,8 @@ public final class RenderHandler implements Runnable {
         mInputWindowSurface = new WindowSurface(mEglCore, mSurface, true);
         mInputWindowSurface.makeCurrent();
         mFullScreen = new Texture2dDrawer();
+        waterMarkHelper=new WaterMarkHelper();
+        waterMarkHelper.initConfig();
         mSurface = null;
         mLock.notifyAll();
     }
@@ -194,6 +208,7 @@ public final class RenderHandler implements Runnable {
             mEglCore.release();
             mEglCore = null;
         }
+        if (waterMarkHelper!=null)waterMarkHelper.releaseTextureId(0);
     }
 
 }

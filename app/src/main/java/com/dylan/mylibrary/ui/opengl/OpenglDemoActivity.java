@@ -31,7 +31,6 @@ import com.dylan.library.media.encoder.MediaVideoEncoder;
 import com.dylan.library.opengl.CameraGLSurfaceView;
 import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.opengl.WaterMarkHelper;
-import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.PermissionRequestBuilder;
@@ -144,6 +143,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
         private int textBitmapWidth;
         private int textBitmapHeight;
+        private WaterMarkHelper.WaterDateBean data;
 
         @Override
         public Activity getActivity() {
@@ -154,14 +154,20 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         @Override
         public int onDrawFrame(byte[] cameraNv21Byte, int cameraTexId, int cameraWidth, int cameraHeight, float[] mvpMatrix, float[] texMatrix, long timeStamp) {
 
+
             markHelper.drawFrame(50,0,textBitmapWidth,textBitmapHeight,waterMarkTextureId);
 
-
-            sendRecordingData(cameraTexId, true, mvpMatrix, texMatrix, timeStamp);
+            if (data==null){
+                data=new WaterMarkHelper.WaterDateBean();
+            }
+            data.setColor(Color.WHITE);
+            data.setTextSize(DensityUtils.dp2px(OpenglDemoActivity.this,26));
+            data.setX(100);
+            data.setY((int) (cameraRender.getViewHeight()*0.85f));
+            sendRecordingData(cameraTexId, true, mvpMatrix,
+                    texMatrix, timeStamp,data);
             takePicture(cameraTexId, true, GlUtils.IDENTITY_MATRIX, texMatrix, cameraHeight, cameraWidth);
-
-            markHelper.drawDateTimeText(100, (int) (cameraRender.getViewHeight()*0.85f),Color.WHITE,
-                    DensityUtils.dp2px(OpenglDemoActivity.this,26));
+            markHelper.drawDateTimeText(data);
 
             return 0;
         }
@@ -200,13 +206,14 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
      * @param texMatrix
      * @param timeStamp
      */
-    protected void sendRecordingData(int texId, boolean isCameraTextureId, float[] mvpMatrix, float[] texMatrix, final long timeStamp) {
+    protected void sendRecordingData(int texId, boolean isCameraTextureId, float[] mvpMatrix,
+                                     float[] texMatrix, final long timeStamp, WaterMarkHelper.WaterDateBean data) {
         synchronized (mRecordLock) {
             if (mVideoEncoder == null) {
                 return;
             }
 
-            mVideoEncoder.frameAvailableSoon(texId, isCameraTextureId, texMatrix, mvpMatrix);
+            mVideoEncoder.frameAvailableSoon(texId, isCameraTextureId, texMatrix, mvpMatrix,data);
             if (mStartTime == 0) {
                 mStartTime = timeStamp;
             }

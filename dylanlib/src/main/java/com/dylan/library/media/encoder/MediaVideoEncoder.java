@@ -12,6 +12,7 @@ import android.view.Surface;
 import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.opengl.Texture2dDrawer;
 import com.dylan.library.opengl.TextureOESDrawer;
+import com.dylan.library.opengl.WaterMarkHelper;
 
 import java.io.IOException;
 
@@ -153,7 +154,7 @@ public class MediaVideoEncoder extends MediaEncoder {
      * @param mvpMatrix
      * @return
      */
-    public boolean frameAvailableSoon(int texId, boolean isCameraTextureId,float[] texMatrix, float[] mvpMatrix) {
+    public boolean frameAvailableSoon(int texId, boolean isCameraTextureId, float[] texMatrix, float[] mvpMatrix, WaterMarkHelper.WaterDateBean dateBean) {
         if (texture2dDrawer == null&& textureOESDrawer ==null) {
             return false;
         }
@@ -177,7 +178,8 @@ public class MediaVideoEncoder extends MediaEncoder {
         boolean result;
         //将缓冲区的数据刷入MediaCodec中的Surface进行编码H264，通知MediaCodec 读取已经编码过的视频帧然后写入本地视频文件中
         if (result = super.frameAvailableSoon()) {
-            mRenderHandler.draw(mFboTex[0], GlUtils.IDENTITY_MATRIX, GlUtils.IDENTITY_MATRIX);
+            mRenderHandler.draw(mFboTex[0], GlUtils.IDENTITY_MATRIX,
+                    GlUtils.IDENTITY_MATRIX,textureWidth,textureHeight,dateBean);
         }
         return result;
     }
