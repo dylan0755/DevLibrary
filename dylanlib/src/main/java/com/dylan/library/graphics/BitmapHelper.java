@@ -606,11 +606,12 @@ public class BitmapHelper {
     }
 
 
-    public static Bitmap getBitmapFromText(Context context,String text, int textSize, int textColor) {
+
+    public static Bitmap getBitmapFromText(String text,int textColor,int textSizePx) {
         TextPaint textPaint = new TextPaint();
         textPaint.setDither(true);
         textPaint.setAntiAlias(true);
-        textPaint.setTextSize(DensityUtils.dp2px(context,textSize));
+        textPaint.setTextSize(textSizePx);
         textPaint.setColor(textColor);
         int width = (int) Math.ceil(textPaint.measureText(text));
         Paint.FontMetrics fontMetrics = textPaint.getFontMetrics();

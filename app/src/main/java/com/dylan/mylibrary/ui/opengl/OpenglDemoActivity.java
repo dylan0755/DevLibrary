@@ -7,7 +7,6 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.opengl.EGL14;
-import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -31,8 +30,9 @@ import com.dylan.library.media.encoder.MediaStandardAudioEncoder;
 import com.dylan.library.media.encoder.MediaVideoEncoder;
 import com.dylan.library.opengl.CameraGLSurfaceView;
 import com.dylan.library.opengl.GlUtils;
-import com.dylan.library.opengl.Texture2dDrawer;
-import com.dylan.library.opengl.WaterMarkTextureDrawer;
+import com.dylan.library.opengl.WaterMarkHelper;
+import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.PermissionRequestBuilder;
 import com.dylan.library.utils.ToastUtils;
@@ -69,12 +69,15 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
     protected volatile boolean mIsNeedTakePic = false;
     //画水印
     private int waterMarkTextureId;
-    private WaterMarkTextureDrawer waterDrawer;
+    private WaterMarkHelper markHelper;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opengldemo);
+        markHelper=new WaterMarkHelper();
         tvTime = findViewById(R.id.tvTime);
         mGlSurfaceView = findViewById(R.id.glSurfaceView);
         mGlSurfaceView.setEGLContextClientVersion(2);
@@ -151,13 +154,14 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         @Override
         public int onDrawFrame(byte[] cameraNv21Byte, int cameraTexId, int cameraWidth, int cameraHeight, float[] mvpMatrix, float[] texMatrix, long timeStamp) {
 
+            markHelper.drawFrame(50,0,textBitmapWidth,textBitmapHeight,waterMarkTextureId);
 
-            //画水印（非动态）
-            GLES20.glViewport(20, 20, textBitmapWidth, textBitmapHeight);
-            waterDrawer.drawFrame(waterMarkTextureId);
 
             sendRecordingData(cameraTexId, true, mvpMatrix, texMatrix, timeStamp);
             takePicture(cameraTexId, true, GlUtils.IDENTITY_MATRIX, texMatrix, cameraHeight, cameraWidth);
+
+            markHelper.drawDateTimeText(100, (int) (cameraRender.getViewHeight()*0.85f),Color.WHITE,
+                    DensityUtils.dp2px(OpenglDemoActivity.this,26));
 
             return 0;
         }
@@ -169,11 +173,11 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
         @Override
         public void onSurfaceCreated() {
-            waterDrawer = new WaterMarkTextureDrawer();
-            Bitmap bitmap = BitmapHelper.getBitmapFromText(OpenglDemoActivity.this, "驰@水印测试", 22, Color.RED);
+            Bitmap bitmap = BitmapHelper.getBitmapFromText("驰@水印测试",  Color.RED,DensityUtils.dp2px(OpenglDemoActivity.this,22));
             waterMarkTextureId = GlUtils.createImageTexture(bitmap);
             textBitmapWidth = bitmap.getWidth();
             textBitmapHeight = bitmap.getHeight();
+            markHelper.initConfig();
         }
 
 
@@ -184,10 +188,9 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
         @Override
         public void onSurfaceDestroy() {
-            GlUtils.deleteTextures(new int[]{waterMarkTextureId});
+            markHelper.releaseTextureId(waterMarkTextureId);//记得调用释放
         }
     }
-
 
     /**
      * 发送录制数据给VideoEnCode
@@ -405,6 +408,9 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
             tvTime.setVisibility(View.GONE);
         }
     }
+
+
+
 
 
 }

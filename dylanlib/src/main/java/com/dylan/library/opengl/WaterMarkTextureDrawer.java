@@ -80,7 +80,6 @@ public class WaterMarkTextureDrawer {
     }
 
     public WaterMarkTextureDrawer() {
-
         mVertexArray = createFloatBuffer(FULL_RECTANGLE_COORDS);
         mTexCoordArray = createFloatBuffer(FULL_RECTANGLE_TEX_COORDS);
         mCoordsPerVertex = 2;
@@ -139,6 +138,9 @@ public class WaterMarkTextureDrawer {
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
         GLES20.glUseProgram(0);
     }
+
+
+
 
     /**
      * terminatinng, this should be called in GL context
