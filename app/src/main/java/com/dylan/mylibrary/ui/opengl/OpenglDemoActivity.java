@@ -66,8 +66,6 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
     private volatile long mStartTime = 0;
     protected volatile boolean mIsTakingPic = false;
     protected volatile boolean mIsNeedTakePic = false;
-    //画水印
-    private int waterMarkTextureId;
     private WaterMarkHelper markHelper;
 
 
@@ -141,9 +139,9 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
     class RenderCallBack implements CameraRenderStatusListener {
 
-        private int textBitmapWidth;
-        private int textBitmapHeight;
-        private WaterMarkHelper.WaterDateBean data;
+        private WaterMarkHelper.WaterDateBean waterDateBean;
+        //画水印
+        private WaterMarkHelper.WaterBean waterBean;
 
         @Override
         public Activity getActivity() {
@@ -155,46 +153,47 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         public int onDrawFrame(byte[] cameraNv21Byte, int cameraTexId, int cameraWidth, int cameraHeight, float[] mvpMatrix, float[] texMatrix, long timeStamp) {
 
 
-            markHelper.drawFrame(50,0,textBitmapWidth,textBitmapHeight,waterMarkTextureId);
-
-            if (data==null){
-                data=new WaterMarkHelper.WaterDateBean();
-            }
-            data.setColor(Color.WHITE);
-            data.setTextSize(DensityUtils.dp2px(OpenglDemoActivity.this,26));
-            data.setX(100);
-            data.setY((int) (cameraRender.getViewHeight()*0.85f));
+            markHelper.drawFrame(waterBean);
             sendRecordingData(cameraTexId, true, mvpMatrix,
-                    texMatrix, timeStamp,data);
+                    texMatrix, timeStamp,waterBean, waterDateBean);
             takePicture(cameraTexId, true, GlUtils.IDENTITY_MATRIX, texMatrix, cameraHeight, cameraWidth);
-            markHelper.drawDateTimeText(data);
+            markHelper.drawDateTimeText(waterDateBean);
 
             return 0;
         }
 
         @Override
         public void onCameraChanged(int cameraFacing, int cameraOrientation) {
-
         }
 
         @Override
         public void onSurfaceCreated() {
-            Bitmap bitmap = BitmapHelper.getBitmapFromText("驰@水印测试",  Color.RED,DensityUtils.dp2px(OpenglDemoActivity.this,22));
-            waterMarkTextureId = GlUtils.createImageTexture(bitmap);
-            textBitmapWidth = bitmap.getWidth();
-            textBitmapHeight = bitmap.getHeight();
+            Bitmap bitmap = BitmapHelper.getBitmapFromText("驰@水印测试",Color.RED,DensityUtils.dp2px(OpenglDemoActivity.this,22));
+            //静态水印
+            waterBean=new WaterMarkHelper.WaterBean();
+            waterBean.setBitmap(bitmap);
+            waterBean.setX(150);
             markHelper.initConfig();
+
+            //日期水印
+            waterDateBean =new WaterMarkHelper.WaterDateBean();
+            waterDateBean.setColor(Color.WHITE);
+            waterDateBean.setTextSize(DensityUtils.dp2px(OpenglDemoActivity.this,26));
+            waterDateBean.setX(100);
+
         }
 
 
         @Override
         public void onSurfaceChanged(int viewWidth, int viewHeight) {
-
+            if (waterBean!=null)waterBean.setY((int) (cameraRender.getViewHeight()*0.85f));
+            if (waterDateBean !=null) waterDateBean.setY((int) (cameraRender.getViewHeight()*0.75f));
         }
 
         @Override
         public void onSurfaceDestroy() {
-            markHelper.releaseTextureId(waterMarkTextureId);//记得调用释放
+            markHelper.releaseTextureId(waterBean);//记得调用释放
+            waterBean=null;
         }
     }
 
@@ -207,13 +206,15 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
      * @param timeStamp
      */
     protected void sendRecordingData(int texId, boolean isCameraTextureId, float[] mvpMatrix,
-                                     float[] texMatrix, final long timeStamp, WaterMarkHelper.WaterDateBean data) {
+                                     float[] texMatrix, final long timeStamp,
+                                     WaterMarkHelper.WaterBean bean,
+                                     WaterMarkHelper.WaterDateBean data) {
         synchronized (mRecordLock) {
             if (mVideoEncoder == null) {
                 return;
             }
 
-            mVideoEncoder.frameAvailableSoon(texId, isCameraTextureId, texMatrix, mvpMatrix,data);
+            mVideoEncoder.frameAvailableSoon(texId, isCameraTextureId, texMatrix, mvpMatrix,bean,data);
             if (mStartTime == 0) {
                 mStartTime = timeStamp;
             }

@@ -154,7 +154,7 @@ public class MediaVideoEncoder extends MediaEncoder {
      * @param mvpMatrix
      * @return
      */
-    public boolean frameAvailableSoon(int texId, boolean isCameraTextureId, float[] texMatrix, float[] mvpMatrix, WaterMarkHelper.WaterDateBean dateBean) {
+    public boolean frameAvailableSoon(int texId, boolean isCameraTextureId, float[] texMatrix, float[] mvpMatrix, WaterMarkHelper.WaterBean waterBean, WaterMarkHelper.WaterDateBean dateBean) {
         if (texture2dDrawer == null&& textureOESDrawer ==null) {
             return false;
         }
@@ -179,7 +179,7 @@ public class MediaVideoEncoder extends MediaEncoder {
         //将缓冲区的数据刷入MediaCodec中的Surface进行编码H264，通知MediaCodec 读取已经编码过的视频帧然后写入本地视频文件中
         if (result = super.frameAvailableSoon()) {
             mRenderHandler.draw(mFboTex[0], GlUtils.IDENTITY_MATRIX,
-                    GlUtils.IDENTITY_MATRIX,textureWidth,textureHeight,dateBean);
+                    GlUtils.IDENTITY_MATRIX,textureWidth,textureHeight,waterBean,dateBean);
         }
         return result;
     }

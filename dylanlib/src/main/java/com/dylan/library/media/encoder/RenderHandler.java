@@ -34,6 +34,7 @@ public final class RenderHandler implements Runnable {
     private TextureDrawer mFullScreen;
     private WaterMarkHelper waterMarkHelper;
     private WaterMarkHelper.WaterDateBean dateBean;
+    private WaterMarkHelper.WaterBean waterBean;
     private int videoWidth,videoHeight;
 
     public static RenderHandler createHandler(final String name) {
@@ -77,7 +78,16 @@ public final class RenderHandler implements Runnable {
 
     //有新数据进来了，结束线程等待，通知绘制图像
     public final void draw(final int texId, final float[] texMatrix, final float[] mvpMatrix,
-                           int videoWidth, int videoHeight, WaterMarkHelper.WaterDateBean data) {
+                           int videoWidth, int videoHeight, WaterMarkHelper.WaterBean waterBean,
+                           WaterMarkHelper.WaterDateBean data) {
+        if (this.waterBean==null){
+            //要重新创建个对象不能使用 GlSurfaceView显示中的水印对象，因为在不同的GL线程环境中，textId也是不一样的
+            this.waterBean=new WaterMarkHelper.WaterBean();
+            this.waterBean.setX(waterBean.getX());
+            this.waterBean.setY(waterBean.getY());
+            this.waterBean.setBitmap(waterBean.getBitmap());
+        }
+
         this.dateBean =data;
         this.videoWidth=videoWidth;
         this.videoHeight=videoHeight;
@@ -154,9 +164,13 @@ public final class RenderHandler implements Runnable {
                     GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
                     GLES20.glViewport(0,0,videoWidth,videoHeight);
                     mFullScreen.drawFrame(mTexId, mtx, mvp);
+
+                    if (waterBean!=null&&waterBean.isValid()){
+                        waterMarkHelper.drawFrame(waterBean);
+                    }
+
                     if (dateBean !=null){
-                        waterMarkHelper.drawDateTimeText(dateBean.getX(), dateBean.getY(),Color.WHITE,
-                                dateBean.getTextSize());
+                        waterMarkHelper.drawDateTimeText(dateBean);
                     }
                     mInputWindowSurface.swapBuffers();
                 }

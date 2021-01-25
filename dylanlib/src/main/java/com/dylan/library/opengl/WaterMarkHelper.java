@@ -41,6 +41,16 @@ public class WaterMarkHelper {
         textBitmapMap = new HashMap<>();
     }
 
+    public void drawFrame(WaterBean waterBean) {
+        if (waterDrawer == null) {
+            Log.e(TAG, "please call initConfig method before drawFrame");
+            return;
+        }
+        GLES20.glViewport(waterBean.getX(), waterBean.getY(), waterBean.getBitmapWidth(), waterBean.getBitmapHeight());
+        waterDrawer.drawFrame(waterBean.getTextId());
+    }
+
+
     //绘制静态水印
     public void drawFrame(int x, int y, int width, int height, int textId) {
         if (waterDrawer == null) {
@@ -52,10 +62,10 @@ public class WaterMarkHelper {
     }
 
     public void drawDateTimeText(WaterDateBean dateBean) {
-        drawDateTimeText(dateBean.getX(),dateBean.getY(),dateBean.getColor(),dateBean.getTextSize());
+        drawDateTimeText(dateBean.getX(), dateBean.getY(), dateBean.getColor(), dateBean.getTextSize());
     }
 
-    public void drawDateTimeText(int x, int y, int color,int textSize) {
+    public void drawDateTimeText(int x, int y, int color, int textSize) {
         if (waterDrawer == null || textBitmapMap == null || textIdMap == null) {
             Log.e(TAG, "please call initConfig method before drawFrame");
             return;
@@ -66,11 +76,11 @@ public class WaterMarkHelper {
             String timeChar = "" + time.charAt(i);
             Bitmap bitmap = textBitmapMap.get(timeChar);
             if (bitmap == null) {
-                bitmap = BitmapHelper.getBitmapFromText(timeChar,color,textSize);
+                bitmap = BitmapHelper.getBitmapFromText(timeChar, color, textSize);
                 textBitmapMap.put(timeChar, bitmap);
             }
             if (bitmap != null) {
-                GLES20.glViewport(x+ marginLeft, y, bitmap.getWidth(), bitmap.getHeight());
+                GLES20.glViewport(x + marginLeft, y, bitmap.getWidth(), bitmap.getHeight());
                 marginLeft += bitmap.getWidth();
                 int textId = createTexture(bitmap);
                 if (textId != 0) {
@@ -105,8 +115,16 @@ public class WaterMarkHelper {
     }
 
 
+    public void releaseTextureId(WaterBean waterBean){
+        if (waterBean!=null&&waterBean.isValid()){
+            GlUtils.deleteTextures(new int[]{waterBean.getTextId()});
+        }
+
+    }
+
+
     public void releaseTextureId(int textId) {
-        if (textId!=0){
+        if (textId != 0) {
             GlUtils.deleteTextures(new int[]{textId});
         }
 
@@ -137,7 +155,8 @@ public class WaterMarkHelper {
     }
 
 
-    public static class WaterDateBean{
+    //日期水印
+    public static class WaterDateBean {
         private int x;
         private int y;
         private int color;
@@ -173,6 +192,60 @@ public class WaterMarkHelper {
 
         public void setTextSize(int textSize) {
             this.textSize = textSize;
+        }
+    }
+
+    //静态水印
+    public static class WaterBean {
+        private int textId;
+        private int x;
+        private int y;
+        private Bitmap bitmap;
+
+        public Bitmap getBitmap() {
+            return bitmap;
+        }
+
+        public void setBitmap(Bitmap bitmap) {
+            this.bitmap = bitmap;
+            if (bitmap!=null){
+                textId = GlUtils.createImageTexture(bitmap);
+            }
+
+        }
+
+        public int getX() {
+            return x;
+        }
+
+        public void setX(int x) {
+            this.x = x;
+        }
+
+        public int getY() {
+            return y;
+        }
+
+        public void setY(int y) {
+            this.y = y;
+        }
+
+        public int getBitmapWidth() {
+            return bitmap!=null?bitmap.getWidth():0;
+        }
+
+
+        public int getBitmapHeight() {
+            return bitmap!=null?bitmap.getHeight():0;
+        }
+
+
+        public boolean isValid(){
+           return textId!=0;
+        }
+
+        public int getTextId() {
+            return textId;
         }
 
 
