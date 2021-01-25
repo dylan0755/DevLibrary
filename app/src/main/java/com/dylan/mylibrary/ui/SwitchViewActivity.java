@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.SwitchView;
 import com.dylan.mylibrary.R;
 
@@ -23,19 +24,17 @@ public class SwitchViewActivity extends AppCompatActivity {
         switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
             @Override
             public void toggleToOn(SwitchView view) {
-                Logger.e("打开");
+                ToastUtils.show("打开");
 
             }
 
             @Override
             public void toggleToOff(SwitchView view) {
-                Logger.e("关闭");
+                ToastUtils.show("关闭");
 
             }
         });
-        Logger.e(" is opened="+switchView.isOpened());
-        switchView.setOpened(true);
-        Logger.e(" is opened="+switchView.isOpened());
+        switchView.setOpened(false);
     }
 
 
