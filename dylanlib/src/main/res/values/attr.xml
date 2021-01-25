@@ -178,4 +178,12 @@
         <attr name="focus_height" format="integer|dimension" />
         <attr name="focus_scale" format="float" />
     </declare-styleable>
+
+    <!--仿IOS开关-->
+    <declare-styleable name="DLSwitchView">
+        <attr name="hasShadow" format="boolean"/>
+        <attr name="primaryColor" format="color"/>
+        <attr name="primaryColorDark" format="color"/>
+        <attr name="isOpened" format="boolean"/>
+    </declare-styleable>
 </resources>

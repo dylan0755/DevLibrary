@@ -176,6 +176,7 @@
         <activity android:name=".ui.opengl.OpenglDemoActivity"
             android:theme="@style/FullScreenTheme"/>
 
+        <activity android:name=".ui.SwitchViewActivity"/>
 
 
 

@@ -50,7 +50,8 @@ public class DemoListActivity extends AppCompatActivity {
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
             "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
-            "NoExtraUiEditDemo","singleClickDemo","DragMapView","SmsCodeCounter","Camera+OpenGl"};
+            "NoExtraUiEditDemo","singleClickDemo","DragMapView","SmsCodeCounter",
+            "Camera+OpenGl","IOSSwitchView"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -65,7 +66,7 @@ public class DemoListActivity extends AppCompatActivity {
             BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
             NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class,DragMapViewDemoActivity.class,
-            SmsCodeCounterActivity.class, OpenglDemoActivity.class};
+            SmsCodeCounterActivity.class, OpenglDemoActivity.class,SwitchViewActivity.class};
 
 
     @Override
