@@ -9,7 +9,8 @@
         android:id="@+id/switchView"
         android:layout_width="48dp"
         android:layout_height="32dp"
-        android:layout_gravity="center_vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp"
         android:layout_marginRight="15dp"/>
 
 

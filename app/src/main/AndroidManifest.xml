@@ -177,6 +177,7 @@
             android:theme="@style/FullScreenTheme"/>
 
         <activity android:name=".ui.SwitchViewActivity"/>
+        <activity android:name=".ui.VerticalSeekBarActivity"/>
 
 
 
