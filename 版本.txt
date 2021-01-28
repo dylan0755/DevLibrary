@@ -14,7 +14,7 @@ V5.0.0
 10.新增仿IOS的SwitchView
 11.新增VerticalSeekBar
 12.新增 全屏dialog的style DLDialogFullscreen
-
+13.ThreadUtils 新增runOnMainThreadDelay
 
 
 V4.9.0 ---->2021.1.16
