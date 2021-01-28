@@ -13,7 +13,7 @@ V5.0.0
 9.BitmapHelper 新增 getBitmapFromText，文字转图片
 10.新增仿IOS的SwitchView
 11.新增VerticalSeekBar
-
+12.新增 全屏dialog的style DLDialogFullscreen
 
 
 
