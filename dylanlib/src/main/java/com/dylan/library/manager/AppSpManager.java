@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Set;
 
 /**
@@ -70,6 +71,11 @@ public class AppSpManager {
         sharedPreferences.edit().putString(key, value).apply();
     }
 
+    public static String getString(String key) {
+        if (!check())return "";
+        return sharedPreferences.getString(key, "");
+    }
+
     public static String getString(String key, String defValue) {
         if (!check())return "";
         return sharedPreferences.getString(key, defValue);
@@ -127,7 +133,7 @@ public class AppSpManager {
     }
 
 
-    public static void putStringSet(Set<String> set, String key) {
+    public static void putStringSet( String key,Set<String> set) {
         if (!check())return ;
         sharedPreferences.edit().putStringSet(key, set).apply();
     }
@@ -141,7 +147,6 @@ public class AppSpManager {
         if (!check())return ;
         sharedPreferences.edit().remove(key).apply();
     }
-
 
     public static boolean isFirstOpenWhileInstalled(){
        return sharedPreferences.getBoolean(FIST_OPEN_WHILE_INSTALLED,true);
