@@ -31,6 +31,8 @@ public class ShapeViewHelper {
     private int strokeTouchColor = 0;
     //边框宽度
     private int strokeWidth = 0;
+    //背景透明度
+    private float shapeAlpha=1.0f;
     //四个角的弧度
     private float radius;
     private float topLeftRadius;
@@ -70,7 +72,7 @@ public class ShapeViewHelper {
 
         dashGap = ta.getDimension(R.styleable.DLShapeView_dashGap, 0);
         dashWidth = ta.getDimension(R.styleable.DLShapeView_dashWidth, 0);
-
+        shapeAlpha=ta.getFloat(R.styleable.DLShapeView_shapeAlpha,1.0f);
         ta.recycle();
     }
 
@@ -94,8 +96,10 @@ public class ShapeViewHelper {
 
             stateListDrawable.addState(new int[]{pressed}, selectorDrawable);
             stateListDrawable.addState(new int[]{}, gradientDrawable);
+            stateListDrawable.setAlpha((int) (shapeAlpha*255.0f));
             targetView.setBackgroundDrawable(stateListDrawable);
         } else {
+            gradientDrawable.setAlpha((int) (shapeAlpha*255.0f));
             targetView.setBackgroundDrawable(gradientDrawable);
         }
     }

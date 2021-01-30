@@ -91,6 +91,8 @@
         <attr name="dashWidth" format="dimension" />
         <!--虚线边框间隙-->
         <attr name="dashGap" />
+        <!--背景透明度-->
+        <attr name="shapeAlpha" format="float"/>
     </declare-styleable>
 
 
