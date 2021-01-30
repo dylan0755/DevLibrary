@@ -186,4 +186,12 @@
         <attr name="primaryColorDark" format="color"/>
         <attr name="isOpened" format="boolean"/>
     </declare-styleable>
+
+
+    <!--中粗字体TextVie-->
+
+    <declare-styleable name="MediumTextView">
+        <attr name="textBold" format="float"/>
+    </declare-styleable>
+    
 </resources>

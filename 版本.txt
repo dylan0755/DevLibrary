@@ -16,6 +16,9 @@ V5.0.0
 12.新增 全屏dialog的style DLDialogFullscreen
 13.ThreadUtils 新增runOnMainThreadDelay
 14.优化AppSpManager getString(String key)
+15.新增MediumTextView 和 ShapeMediumTextView 可以改变字体的粗细
+
+
 
 
 V4.9.0 ---->2021.1.16
