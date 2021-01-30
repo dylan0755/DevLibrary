@@ -121,4 +121,17 @@
         <item name="android:splitMotionEvents">false</item>
         <item name="android:windowBackground">@drawable/bg_window_background</item>
     </style>
+
+
+    <style name="splashTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/splash_bg</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <!--导航栏背景色-->
+        <item name="android:navigationBarColor">@color/transparent</item>
+        <!--状态栏背景色-->
+        <item name="android:statusBarColor">@color/transparent</item>
+    </style>
 </resources>

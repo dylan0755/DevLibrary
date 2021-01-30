@@ -182,5 +182,9 @@
         android:paddingLeft="24dp"
         android:paddingRight="24dp"
         app:textBold="1"/>
+    
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="100dp"/>
 </LinearLayout>
 </ScrollView>

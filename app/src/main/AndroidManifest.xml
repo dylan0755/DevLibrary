@@ -59,17 +59,22 @@
             android:theme="@style/statusBarStyle"/>
 
 
-        <activity
-            android:name="com.dylan.mylibrary.ui.DemoListActivity"
-            android:theme="@style/statusBarStyle">
+        <activity android:name=".ui.SplashActivity"
+            android:theme="@style/splashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <action android:name="android.intent.action.VIEW" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
+
+
+        <activity
+            android:name="com.dylan.mylibrary.ui.DemoListActivity"
+            android:theme="@style/statusBarStyle"/>
+
+
 
         <activity
             android:name="com.dylan.mylibrary.ui.customtitle.CustomTittleUitlActivity"

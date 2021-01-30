@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--底色-->
+    <item>
+        <color android:color="#FADB22" />
+    </item>
+
+    <!--顶部logo-->
+    <item
+        android:top="165dp">
+
+        <bitmap
+            android:gravity="top|center_horizontal"
+            android:src="@drawable/icon_splash_word" />
+    </item>
+
+
+    <!--底部白色,宽要设置长一点，防止地图图片宽度不够，
+    两边漏出底色-->
+    <item android:gravity="bottom">
+        <shape>
+            <size
+                android:width="1400dp"
+                android:height="167dp" />
+            <solid android:color="#ffffff" />
+        </shape>
+    </item>
+
+    <!--底部logo-->
+    <item android:gravity="bottom"
+        android:bottom="56dp">
+        <bitmap
+            android:gravity="bottom"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_launcher" />
+    </item>
+
+    <!--底部文字-->
+    <item android:gravity="bottom"
+        android:bottom="26dp">
+        <bitmap
+            android:gravity="bottom"
+            android:scaleType="centerCrop"
+            android:src="@drawable/icon_splash_bottom_word" />
+    </item>
+
+</layer-list>
