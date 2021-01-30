@@ -29,7 +29,7 @@
 
     <!--底部logo-->
     <item android:gravity="bottom"
-        android:bottom="56dp">
+        android:bottom="66dp">
         <bitmap
             android:gravity="bottom"
             android:scaleType="centerCrop"
