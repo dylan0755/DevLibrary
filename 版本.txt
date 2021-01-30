@@ -17,7 +17,7 @@ V5.0.0
 13.ThreadUtils 新增runOnMainThreadDelay
 14.优化AppSpManager getString(String key)
 15.新增MediumTextView 和 ShapeMediumTextView 可以改变字体的粗细
-
+16.删除LoginRegUtils,新增RegexUtils 正则工具类
 
 
 
