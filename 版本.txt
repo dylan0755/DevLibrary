@@ -21,6 +21,13 @@ V5.0.0
 17.ShapeView 增加自定义 shapeAlpha 属性，设置背景 drawable 的透明度，不需要在代码中设置
 
 
+
+
+
+
+
+
+
 V4.9.0 ---->2021.1.16
 
 1.新增GeoHash 和 MapUtils,由经纬度转geocode, 业务中需要在地图发生移动后要重新获取信息，而这个判断是否移动就用GeoHash。

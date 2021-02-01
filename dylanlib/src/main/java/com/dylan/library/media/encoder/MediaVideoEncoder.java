@@ -29,8 +29,8 @@ public class MediaVideoEncoder extends MediaEncoder {
     /**
      * 视频宽、高
      */
-    private final int mWidth;
-    private final int mHeight;
+    private  int mWidth;
+    private  int mHeight;
     /**
      * 纹理绘制的起始位置（左下角为（0，0））
      */
@@ -119,6 +119,13 @@ public class MediaVideoEncoder extends MediaEncoder {
         }
         if (DEBUG)
             Log.i(TAG, "selected codec: " + videoCodecInfo.getName());
+
+        if ((mWidth & 1) == 1) {
+            mWidth--;
+        }
+        if ((mHeight & 1) == 1) {
+            mHeight--;
+        }
 
         final MediaFormat format = MediaFormat.createVideoFormat(MIME_TYPE, mWidth, mHeight);
         format.setInteger(MediaFormat.KEY_COLOR_FORMAT, MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);    // API >= 18
