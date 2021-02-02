@@ -25,6 +25,11 @@ public class ShapeViewHelper {
     private int solidColor = 0;
     //边框色
     private int strokeColor = 0;
+    //渐变开始颜色
+    private int startColor=0;
+    //渐变结束颜色
+    private int endColor=0;
+    private float angle=0;
     //按下填充色
     private int solidTouchColor = 0;
     //按下边框色
@@ -43,6 +48,7 @@ public class ShapeViewHelper {
     float dashWidth = 0;
     //边框虚线的间隙
     float dashGap = 0;
+    private int[] colors;
 
 
     /**
@@ -58,6 +64,15 @@ public class ShapeViewHelper {
 
         solidColor = ta.getInteger(R.styleable.DLShapeView_solidColor, 0x00000000);
         strokeColor = ta.getInteger(R.styleable.DLShapeView_strokeColor, 0x00000000);
+        startColor=ta.getInteger(R.styleable.DLShapeView_startColor,-1);
+        endColor=ta.getInteger(R.styleable.DLShapeView_endColor,-1);
+        angle=ta.getFloat(R.styleable.DLShapeView_angle,0);
+
+        if (startColor!=-1&&endColor!=-1){
+            colors=new int[]{startColor,endColor};
+        }else{
+            colors=new int[]{solidColor};
+        }
 
         solidTouchColor = ta.getInteger(R.styleable.DLShapeView_solidTouchColor, 0x00000000);
         strokeTouchColor = ta.getInteger(R.styleable.DLShapeView_strokeTouchColor, 0x00000000);
@@ -73,6 +88,10 @@ public class ShapeViewHelper {
         dashGap = ta.getDimension(R.styleable.DLShapeView_dashGap, 0);
         dashWidth = ta.getDimension(R.styleable.DLShapeView_dashWidth, 0);
         shapeAlpha=ta.getFloat(R.styleable.DLShapeView_shapeAlpha,1.0f);
+
+
+
+
         ta.recycle();
     }
 
@@ -82,12 +101,12 @@ public class ShapeViewHelper {
         //默认背景
         gradientDrawable = getNeedDrawable(new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius,
                         bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius},
-                solidColor, strokeWidth, strokeColor, dashWidth, dashGap);
+                colors, angle,strokeWidth, strokeColor, dashWidth, dashGap);
         //如果设置了选中时的背景
         if (openSelector) {
             selectorDrawable = getNeedDrawable(new float[]{topLeftRadius, topLeftRadius, topRightRadius, topRightRadius,
                             bottomRightRadius, bottomRightRadius, bottomLeftRadius, bottomLeftRadius},
-                    solidTouchColor, strokeWidth, strokeTouchColor, dashWidth, dashGap);
+                    new int[]{startColor,solidTouchColor,endColor}, angle, strokeWidth, strokeTouchColor, dashWidth, dashGap);
 
             //动态生成Selector
             StateListDrawable stateListDrawable = new StateListDrawable();
@@ -105,44 +124,8 @@ public class ShapeViewHelper {
     }
 
 
-    /**
-     * @param radius      四个角的半径
-     * @param colors      渐变的颜色
-     * @param strokeWidth 边框宽度
-     * @param strokeColor 边框颜色
-     * @return
-     */
-    public static GradientDrawable getNeedDrawable(float[] radius, int[] colors, int strokeWidth, int strokeColor) {
-        GradientDrawable drawable;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            drawable = new GradientDrawable();
-            drawable.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
-            drawable.setColors(colors);
-        } else {
-            drawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
-        }
 
-        drawable.setCornerRadii(radius);
-        drawable.setStroke(strokeWidth, strokeColor);
-        drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);
-        return drawable;
-    }
 
-    /**
-     * @param radius      四个角的半径
-     * @param bgColor     背景颜色
-     * @param strokeWidth 边框宽度
-     * @param strokeColor 边框颜色
-     * @return
-     */
-    public static GradientDrawable getNeedDrawable(float[] radius, int bgColor, int strokeWidth, int strokeColor) {
-        GradientDrawable drawable = new GradientDrawable();
-        drawable.setShape(GradientDrawable.RECTANGLE);
-        drawable.setCornerRadii(radius);
-        drawable.setStroke(strokeWidth, strokeColor);
-        drawable.setColor(bgColor);
-        return drawable;
-    }
 
     /**
      * @param radius      四个角的半径
@@ -153,12 +136,26 @@ public class ShapeViewHelper {
      * @param dashGap     虚线边框间隙
      * @return
      */
-    public static GradientDrawable getNeedDrawable(float[] radius, int bgColor, int strokeWidth, int strokeColor, float dashWidth, float dashGap) {
+    public static GradientDrawable getNeedDrawable(float[] radius, int[]bgColor, float angle,int strokeWidth, int strokeColor, float dashWidth, float dashGap) {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadii(radius);
         drawable.setStroke(strokeWidth, strokeColor, dashWidth, dashGap);
-        drawable.setColor(bgColor);
+        if (bgColor.length>1){
+            drawable.setColors(bgColor);
+            drawable.setGradientType(GradientDrawable.LINEAR_GRADIENT);//线性渐变
+            if (angle==0||angle==360){
+                drawable.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+            }else if (angle==90){
+                drawable.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+            }else if (angle==180){
+                drawable.setOrientation(GradientDrawable.Orientation.RIGHT_LEFT);
+            }else if (angle==270){//上到下
+                drawable.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+            }
+        }else{
+            drawable.setColor(bgColor[0]);
+        }
         return drawable;
     }
 

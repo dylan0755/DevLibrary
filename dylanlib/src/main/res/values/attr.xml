@@ -93,6 +93,10 @@
         <attr name="dashGap" />
         <!--背景透明度-->
         <attr name="shapeAlpha" format="float"/>
+        <!--渐变-->
+        <attr name="startColor" format="color"/>
+        <attr name="endColor" format="color"/>
+        <attr name="angle" format="float"/>
     </declare-styleable>
 
 
