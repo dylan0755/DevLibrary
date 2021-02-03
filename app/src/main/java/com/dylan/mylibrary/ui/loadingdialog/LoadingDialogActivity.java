@@ -30,9 +30,9 @@ public class LoadingDialogActivity extends Activity{
         btn_loading.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog1 =new LoadingDialog(LoadingDialogActivity.this);
-               //dialog1.getBackgroundView().setBackgroundDrawable(getResources().getDrawable(R.drawable.dl_shape_loadingdialog));
-               // dialog1.setLoadingTipText("25132");
+                dialog1 =new LoadingDialog.Builder(LoadingDialogActivity.this).build();
+               dialog1.getBackgroundView().setBackgroundDrawable(getResources().getDrawable(R.drawable.dl_shape_loadingdialog));
+                dialog1.setLoadingTipText("25132");
                 dialog1.show();
                 new Handler().postDelayed(new Runnable() {
                     @Override
@@ -46,9 +46,9 @@ public class LoadingDialogActivity extends Activity{
         findViewById(R.id.btn_loading2).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog2=new LoadingDialog(v.getContext());
-                //dialog2.setLoadingTipText("查询中，请稍后");
-                dialog2.hideNavBar();
+                dialog2=new LoadingDialog.Builder(v.getContext())
+                .setLoadingTipText("加载中")
+                .hideNavBar(true).build();
                 dialog2.show();
             }
         });

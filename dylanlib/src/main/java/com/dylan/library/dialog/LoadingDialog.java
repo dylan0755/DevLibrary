@@ -22,7 +22,7 @@ public class LoadingDialog extends Dialog {
     private boolean hideNavWhileShowing;//弹出对话框是否隐藏虚拟按键 达到全屏效果
 
 
-    public LoadingDialog(@NonNull Context context) {
+    private LoadingDialog(@NonNull Context context) {
         super(context, R.style.LoadingDialog);
         setCancelable(true);
         setCanceledOnTouchOutside(false);
@@ -78,4 +78,38 @@ public class LoadingDialog extends Dialog {
     public ProgressBar getLoadingBar(){
         return loadingBar;
     }
+
+
+    public static class Builder {
+         private Context context;
+         private boolean hideNavWhileShowing=false;
+         private String loadingTip;
+
+         public Builder(Context context){
+              this.context=context;
+         }
+
+
+        public Builder hideNavBar(boolean bl){
+            hideNavWhileShowing=bl;
+            return this;
+        }
+
+        public Builder setLoadingTipText(String tipText) {
+            loadingTip=tipText;
+            return this;
+        }
+
+
+        public LoadingDialog build(){
+            LoadingDialog loadingDialog=new LoadingDialog(context);
+            loadingDialog.setLoadingTipText(loadingTip);
+            if (hideNavWhileShowing)loadingDialog.hideNavBar();
+            return loadingDialog;
+        }
+    }
+
+
+
+
 }
