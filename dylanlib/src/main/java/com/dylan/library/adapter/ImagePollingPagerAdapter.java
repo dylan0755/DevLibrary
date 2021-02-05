@@ -29,12 +29,12 @@ public abstract class ImagePollingPagerAdapter<T> extends PagerAdapter {
     private List<ImageView> viewList = new ArrayList<>();
 
     public ImagePollingPagerAdapter(ViewPager pager, List<T> list) {
-      this(pager,list,5000,1000);
+        this(pager, list, 5000, 1000);
     }
 
 
     public ImagePollingPagerAdapter(ViewPager pager, List<T> list, int PollingDuration, int scrollDuration) {
-        this.pollDuration=PollingDuration;
+        this.pollDuration = PollingDuration;
         if (list.size() != 1 && list.size() < 3) {
             List<T> finalList = new ArrayList<>();
             finalList.addAll(list);
@@ -43,7 +43,7 @@ public abstract class ImagePollingPagerAdapter<T> extends PagerAdapter {
             }
             list = finalList;
         }
-        if (EmptyUtils.isNotEmpty(list)){
+        if (EmptyUtils.isNotEmpty(list)) {
             setPlayAuto(list.size() > 1);
         }
 
@@ -72,12 +72,32 @@ public abstract class ImagePollingPagerAdapter<T> extends PagerAdapter {
         pager.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-                if (event.getAction()==MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     lock();
-                }else if (MotionEvent.ACTION_UP==event.getAction()){
-                   unLock();
+                } else if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    mHandler.removeCallbacksAndMessages(null);
+                } else if (MotionEvent.ACTION_UP == event.getAction()) {
+                    unLock();
                 }
                 return false;
+            }
+        });
+        pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                final int finalPosition = position % viewList.size();
+                ImagePollingPagerAdapter.this.onPageScrolled(finalPosition, positionOffset, positionOffsetPixels);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                final int finalPosition = position % viewList.size();
+                ImagePollingPagerAdapter.this.onPageSelected(finalPosition);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
             }
         });
         polling();
@@ -127,12 +147,18 @@ public abstract class ImagePollingPagerAdapter<T> extends PagerAdapter {
     public abstract void onBindItem(ImageView iv, int position);
 
 
+    public abstract void onPageScrolled(int position, float positionOffset, int positionOffsetPixels);
+
+    public abstract void onPageSelected(int position);
+
     public void lock() {
         isLock = true;
+        mHandler.removeCallbacksAndMessages(null);
     }
 
     public void unLock() {
         isLock = false;
+        polling();
     }
 
     private void polling() {

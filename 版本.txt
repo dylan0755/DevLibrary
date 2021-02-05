@@ -21,7 +21,7 @@ V5.0.0
 17.ShapeView 增加自定义 shapeAlpha 属性，设置背景 drawable 的透明度，不需要在代码中设置
 18.ShapeView 新增 startColor，endColor, angle 支持渐变
 19.封装优化LoadingDialog 屏蔽直接new 使用Builder 创建LoadingDialog
-
+20.更新ImagePollingPagerAdapter
 
 
 
