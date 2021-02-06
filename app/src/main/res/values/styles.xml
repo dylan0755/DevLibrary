@@ -47,7 +47,7 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <declare-styleable name="CircleProgressView">
+    <declare-styleable name="CircleRingProgressViewActivity">
         <attr name="cpv_progressNormalColor" format="color"/>
         <attr name="cpv_progressReachColor" format="color"/>
         <attr name="cpv_progressTextColor" format="color"/>

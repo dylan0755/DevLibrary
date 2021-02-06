@@ -19,7 +19,7 @@ import com.dylan.library.utils.ArrayUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.RecyclerViewHelper;
 import com.dylan.library.utils.ToastUtils;
-import com.dylan.library.widget.CircleIndicatorView;
+import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.library.widget.irecycler.footer.LoadMoreFooterView;
 import com.dylan.library.widget.irecycler.header.RefreshHeaderView;
 import com.dylan.library.widget.irecycler.paging.IRecyclerPage;
@@ -259,9 +259,9 @@ public class IRecyclerHelper {
     public void setRefreshCircleIndicatorViewColor(int innerRingColor, int outRingColor) {
         if (headerView == null) return;
         if (headerView.getIndicatorView() == null) return;
-        CircleIndicatorView indicatorView = headerView.getIndicatorView();
-        indicatorView.setInnerRingColor(innerRingColor);
-        indicatorView.setOutRingColor(outRingColor);
+        CircleRingProgressView indicatorView = headerView.getIndicatorView();
+        indicatorView.setRingBackgroundColor(innerRingColor);
+        indicatorView.setRingProgressColor(outRingColor);
     }
 
     public void scrollToTop(){

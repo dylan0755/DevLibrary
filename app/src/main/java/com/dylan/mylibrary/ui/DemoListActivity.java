@@ -12,6 +12,7 @@ import com.dylan.library.utils.DensityUtils;
 
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.ParamMapBuilder;
+import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -51,7 +52,7 @@ public class DemoListActivity extends AppCompatActivity {
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
             "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
             "NoExtraUiEditDemo","singleClickDemo","DragMapView","SmsCodeCounter",
-            "Camera+OpenGl","IOSSwitchView","VerticalSeekBar","MediumTextView"};
+            "Camera+OpenGl","IOSSwitchView","VerticalSeekBar","MediumTextView","CircleRingProgressView"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -67,7 +68,7 @@ public class DemoListActivity extends AppCompatActivity {
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
             NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class,DragMapViewDemoActivity.class,
             SmsCodeCounterActivity.class, OpenglDemoActivity.class,SwitchViewActivity.class,
-            VerticalSeekBarActivity.class,MediumTextViewActivity.class};
+            VerticalSeekBarActivity.class,MediumTextViewActivity.class, CircleRingProgressViewActivity.class};
 
 
     @Override

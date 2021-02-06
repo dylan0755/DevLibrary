@@ -6,13 +6,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dylan.library.R;
-import com.dylan.library.widget.CircleIndicatorView;
+import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.library.widget.irecycler.RefreshTrigger;
 
 
 public class RefreshHeaderView extends RelativeLayout implements RefreshTrigger {
 
-    private CircleIndicatorView indicatorView;
+    private CircleRingProgressView indicatorView;
     private TextView tvRefresh;
 
 
@@ -41,7 +41,7 @@ public class RefreshHeaderView extends RelativeLayout implements RefreshTrigger 
         return tvRefresh;
     }
 
-    public CircleIndicatorView getIndicatorView() {
+    public CircleRingProgressView getIndicatorView() {
         return indicatorView;
     }
 
