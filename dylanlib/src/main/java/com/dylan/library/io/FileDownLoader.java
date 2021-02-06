@@ -116,6 +116,10 @@ public class FileDownLoader {
                             if (cancel){
                                 if (mDownLoadListener != null) mDownLoadListener.onCancel();
                                 cancel=false;
+                                File des=new File(downloadFilePath);
+                                if (des.exists()){
+                                    des.delete();
+                                }
                                 return;
                             }
                             if (mDownLoadListener != null) {
