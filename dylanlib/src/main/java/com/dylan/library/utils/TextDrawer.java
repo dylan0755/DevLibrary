@@ -5,6 +5,7 @@ import android.graphics.Paint;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
+import android.text.TextUtils;
 
 /**
  * Author: Dylan
@@ -14,6 +15,7 @@ import android.text.TextPaint;
 public class TextDrawer {
     private TextPaint textPaint;
     private StaticLayout staticLayout;
+    private String recordText;
 
     public TextDrawer(){
         textPaint = new TextPaint();
@@ -40,7 +42,13 @@ public class TextDrawer {
 
     public void draw(Canvas canvas,String text, int parentWidth,int parentHeight){
         if (staticLayout==null) {
+            recordText=text;
             staticLayout = new StaticLayout(text, textPaint, parentWidth, Layout.Alignment.ALIGN_CENTER, 1.0F, 0.0F, true);
+        }else{
+            if (!TextUtils.isEmpty(recordText)&&!recordText.equals(text)){//更新了文本
+                recordText=text;
+                staticLayout = new StaticLayout(text, textPaint, parentWidth, Layout.Alignment.ALIGN_CENTER, 1.0F, 0.0F, true);
+            }
         }
         canvas.save();//锁画布(为了保存之前的画布状态)
         //开始绘制的位置

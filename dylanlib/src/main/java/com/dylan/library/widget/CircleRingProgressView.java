@@ -161,6 +161,14 @@ public class CircleRingProgressView extends View {
         invalidate();
     }
 
+    public void setProgress(int progress,String centerText) {
+        mCurrentProgress = (int) (360 * (progress / 100f));
+        mCenterText=centerText;
+        invalidate();
+    }
+
+
+
     public void refresh() {
         isRefreshing = true;
         startAngle += 10;

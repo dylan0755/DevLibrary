@@ -6,79 +6,81 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.dylan.library.exception.ELog;
+import com.dylan.library.utils.Logger;
+
+import java.io.Closeable;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.GZIPInputStream;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 
 public class FileDownLoader {
-    private int ThreadCount = 6;
+    private final static int DATA_BUFFER = 8192;
     private String downLoadDir;
     private String downloadFilePath;
-    private double currentSize = 0;//当前的进度
+    private boolean isDownLoading;
     private long mTotalLength;
-    private Handler mHandler;
-    private DownLoadListener listener;
+    private DownLoadListener mDownLoadListener;
     public static final int UDAPTE_PROGRESS = 3;
-    private List<DownLoadThread> downLoadThreads = new ArrayList<>();
-    private boolean isPause;
-    private boolean isCancel;
     public static final int ERROR_URLPARSE_FILE = 20;
     public static final int ERROR_ACCESS_RESOURCE = 21;
     public static final int ERROR_DONWLOAD = 22;
-
+    private boolean cancel;
     public FileDownLoader() {
-        mHandler = new Handler(Looper.getMainLooper()) {
-            @Override
-            public void handleMessage(Message msg) {
-                if (msg.what == UDAPTE_PROGRESS) {
-                    if (listener != null) {
-                        int perProgress = msg.arg1;
-                        currentSize += perProgress;
-                        double percent = (currentSize / mTotalLength) * 100;
-                        listener.onProgress((long) mTotalLength, (long) currentSize, (int) percent);
-                        if (percent == 100) {
-                            listener.onComplete(mTotalLength, downloadFilePath);
-                            downLoadThreads.clear();
-                            currentSize = 0;
-                        }
-                        if (isCancel) {
-                            currentSize = 0;
-                            mTotalLength = 0;
-                        }
 
-                    }
-                } else if (msg.what == ERROR_ACCESS_RESOURCE ||
-                        msg.what == ERROR_URLPARSE_FILE ||
-                        msg.what == ERROR_DONWLOAD) {
-                    if (listener != null) {
-                        listener.onError(msg.what,(String) msg.obj);
-                    }
-                }
-                super.handleMessage(msg);
-            }
-        };
     }
 
 
-    public void downLoad(final Context context, final String downLoadUrl, final String filename) {
-        isCancel = false;
-        isPause = false;
+    public void downLoad(final Context context, final String downLoadUrl, final String filename)  {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                int downloadProgress = 0;
+                long totalSize = -1;
+                InputStream is = null;
+                FileOutputStream os = null;
+
                 try {
+                    //忽略https 证书问题
+                    SSLContext sslcontext = SSLContext.getInstance("SSL");//第一个参数为协议,第二个参数为提供者(可以缺省)
+                    TrustManager[] tm = {new MyX509TrustManager()};
+                    sslcontext.init(null, tm, new SecureRandom());
+                    HostnameVerifier ignoreHostnameVerifier = new HostnameVerifier() {
+                        public boolean verify(String s, SSLSession sslsession) {
+                            return true;
+                        }
+                    };
+                    HttpsURLConnection.setDefaultHostnameVerifier(ignoreHostnameVerifier);
+                    HttpsURLConnection.setDefaultSSLSocketFactory(sslcontext.getSocketFactory());
+
+
+
                     URL url = new URL(downLoadUrl);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-                    connection.setConnectTimeout(5000);
+                    connection.setConnectTimeout(10000);
+                    connection.setReadTimeout(10000);
                     connection.setRequestMethod("GET");
                     int responseCode = connection.getResponseCode();
                     if (responseCode == 200) {
-                        int fileLength = connection.getContentLength();
-                        mTotalLength = fileLength;
-                        downLoadDir = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS).getAbsolutePath();
+                        mTotalLength = connection.getContentLength();
+                        downLoadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
                         try {
                             String fileName = filename;
                             if (filename == null || filename.isEmpty()) {
@@ -91,101 +93,68 @@ public class FileDownLoader {
                             if ("".equals(finalFileName)) {
                                 throw new UrlFileNameException();
                             }
-                            mHandler.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    if (listener != null) listener.onDownLoadFileName(finalFileName);
-                                }
-                            });
                         } catch (UrlFileNameException e) {
-                            Message msg = Message.obtain();
-                            msg.what = ERROR_URLPARSE_FILE;
-                            msg.obj = "无法下载该文件,请检查下载链接";
-                            mHandler.sendMessage(msg);
+                            if (mDownLoadListener != null) mDownLoadListener.onError(ERROR_URLPARSE_FILE, "无法下载该文件,请检查下载链接");
                             return;
                         }
 
+                        is = connection.getInputStream();
+                        String contentEncoding = connection.getContentEncoding();
+                        if (contentEncoding != null && contentEncoding.equalsIgnoreCase("gzip")) {
+                            is = new GZIPInputStream(is);
+                        }
 
-                        //在本地创建和服务器中一样大小的临时文件
-                        BufferedRandomAccessFile raf = new BufferedRandomAccessFile(downloadFilePath, "rwd");
-                        raf.setLength(fileLength);
-                        raf.close();
-                        int blockSize = fileLength / ThreadCount;
-                        for (int threadId = 1; threadId <= ThreadCount; threadId++) {
-                            int startIndex = (threadId - 1) * blockSize;
-                            int endIndex = threadId * blockSize - 1;
-                            if (threadId == ThreadCount) {
-                                endIndex = fileLength;
+                        os = new FileOutputStream(new File(downloadFilePath));
+                        byte buffer[] = new byte[DATA_BUFFER];
+                        int readSize = 0;
+                        int temp = 0;
+                        while ((readSize = is.read(buffer)) > 0) {
+                            isDownLoading=true;
+                            os.write(buffer, 0, readSize);
+                            os.flush();
+                            totalSize += readSize;
+                            if (cancel){
+                                if (mDownLoadListener != null) mDownLoadListener.onCancel();
+                                cancel=false;
+                                return;
                             }
-                            DownLoadThread thread = new DownLoadThread(downLoadUrl, downloadFilePath, mHandler,
-                                    threadId, startIndex, endIndex);
-                            downLoadThreads.add(thread);
-                            thread.start();
+                            if (mDownLoadListener != null) {
+                                downloadProgress = (int) (totalSize * 100 / mTotalLength);
+                                if (downloadProgress >= temp) {
+                                    temp++;
+                                    mDownLoadListener.onProgress(mTotalLength,totalSize,downloadProgress);
+                                }
+                            }
+                        }
+                        if (totalSize>0){
+                            mDownLoadListener.onProgress(mTotalLength,mTotalLength,100);
                         }
                     } else {
-                        Message message = Message.obtain();
-                        message.what = ERROR_ACCESS_RESOURCE;
+                        String errorText="";
                         if (responseCode==404){
-                            message.obj = "找不到该文件";
+                            errorText= "找不到该文件";
                         }else{
-                            message.obj = "资源连接失败";
+                            errorText= "资源连接失败";
                         }
-                        mHandler.sendMessage(message);
+                        if (mDownLoadListener != null) mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, errorText);
                     }
                 } catch (Exception e) {
-                    Message message = Message.obtain();
-                    message.what = ERROR_ACCESS_RESOURCE;
-                    message.obj = "资源连接失败";
-                    mHandler.sendMessage(message);
+                    if (mDownLoadListener != null) mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, e.getMessage());
                 }
-
+                isDownLoading=false;
+                closeIO(os);
+                closeIO(is);
+                if (mDownLoadListener != null) {
+                    mDownLoadListener.onComplete(mTotalLength,downloadFilePath);
+                }
             }
         }).start();
 
     }
 
-    public boolean isPause() {
-        return isPause;
-    }
-
-    public void pause() {
-        for (DownLoadThread thread : downLoadThreads) {
-            thread.toPause();
-            isPause = true;
-        }
-    }
-
-    public void cancel() {
-        for (DownLoadThread thread : downLoadThreads) {
-            thread.toCancel();
-            isCancel = true;
-        }
-        downLoadThreads.clear();
-        currentSize = 0;
-        mTotalLength = 0;
-        isPause = false;
-        if (downloadFilePath != null && !downloadFilePath.isEmpty()) {
-            File file = new File(downloadFilePath);
-            if (file.exists()) {
-                file.delete();
-            }
-        }
-    }
-
-
-    public void restart() {
-        if (downLoadThreads.size() > 0) {
-            for (DownLoadThread thread : downLoadThreads) {
-                thread.reStart();
-            }
-        }
-        isPause = false;
-        isCancel = false;
-    }
-
 
     public interface DownLoadListener {
-        void onDownLoadFileName(String fileName);
+        void onCancel();
 
         void onError(int erroType, String error);
 
@@ -196,7 +165,13 @@ public class FileDownLoader {
     }
 
     public void setDownLoadListener(DownLoadListener listener) {
-        this.listener = listener;
+        this.mDownLoadListener = listener;
+    }
+
+    public void cancel(){
+        if (isDownLoading){
+            cancel=true;
+        }
     }
 
 
@@ -223,6 +198,35 @@ public class FileDownLoader {
 
     public static class UrlFileNameException extends Exception {
 
+    }
+
+
+
+    public static class MyX509TrustManager implements X509TrustManager {
+
+        @Override
+        public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+        }
+
+        @Override
+        public X509Certificate[] getAcceptedIssuers() {
+            return null;
+        }
+
+    }
+
+    public static void closeIO(Closeable closeable) {
+        if (closeable != null) {
+            try {
+                closeable.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
 

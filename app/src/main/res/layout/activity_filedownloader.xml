@@ -1,58 +1,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
 
     <EditText
         android:id="@+id/url_editext"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_height="wrap_content"
         android:maxLines="5"
-        android:text="http://system.weixiuhui.cn/app_download/weixiuhui1130.apk" />
+        android:text="https://downloads.gradle-dn.com/distributions/gradle-5.4.1-all.zip" />
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <Button
             android:id="@+id/download_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:text="download"/>
+            android:text="download" />
 
-        <Button
-            android:id="@+id/download_stop_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
-            android:text="stop"/>
+
     </LinearLayout>
 
     <ProgressBar
         android:id="@+id/download_progressbar"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
         android:layout_marginTop="15dp"
-        style="?android:attr/progressBarStyleHorizontal"/>
+        android:layout_marginRight="50dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="下载进度"/>
+            android:text="下载进度" />
+
         <TextView
             android:id="@+id/tv_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="5dp"
-            android:text=""/>
+            android:text="" />
+
+
     </LinearLayout>
+
+    <com.dylan.library.widget.CircleRingProgressView
+        android:id="@+id/crProgressView1"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="100dp" />
+
 </LinearLayout>
