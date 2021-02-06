@@ -22,6 +22,7 @@ V5.0.0
 18.ShapeView 新增 startColor，endColor, angle 支持渐变
 19.封装优化LoadingDialog 屏蔽直接new 使用Builder 创建LoadingDialog
 20.更新ImagePollingPagerAdapter
+21.CircleIndicatorView 更名为CircleRingProgressView,优化增加文字和背景支持
 
 
 

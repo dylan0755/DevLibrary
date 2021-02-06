@@ -118,7 +118,7 @@ public class CircleRingProgressView extends View {
         //背景颜色不透明
         if (backgroundColor!=0){
             //背景颜色
-            mPaint.setColor(Color.parseColor("#E32C3035"));
+            mPaint.setColor(backgroundColor);
             //空心
             mPaint.setStyle(Paint.Style.FILL);
             //宽度
