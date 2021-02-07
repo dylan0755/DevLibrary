@@ -35,6 +35,11 @@ public class MediumTextView extends AppCompatTextView {
     }
 
 
+    public void setBold(float fraction){
+        mStrokeWidth=fraction;
+        invalidate();
+    }
+
     @Override
     protected void onDraw(Canvas canvas) {
         TextPaint textPaint=getPaint();
