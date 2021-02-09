@@ -28,13 +28,13 @@ public class FileDownLoaderActivity extends Activity{
     private ProgressBar pb;
     private TextView text_progress;
     private CircleRingProgressView crProgress1;
+    private FileDownLoader fileDownLoader;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_filedownloader);
 
         edittext = (EditText) findViewById(R.id.url_editext);
-        edittext.setText("https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fac0000br101goa2pen9ebi2adg&ratio=720p&line=0");
         button_download = (Button) findViewById(R.id.download_button);
         pb = (ProgressBar) findViewById(R.id.download_progressbar);
         pb.setMax(100);
@@ -49,7 +49,7 @@ public class FileDownLoaderActivity extends Activity{
         crProgress1.setCenterTextColor(Color.BLACK);
         crProgress1.setCenterTextSize(18);
 
-        final FileDownLoader fileDownLoader=new FileDownLoader();
+        fileDownLoader=new FileDownLoader();
 
 
         button_download.setOnClickListener(new View.OnClickListener() {
@@ -119,5 +119,7 @@ public class FileDownLoaderActivity extends Activity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        if (fileDownLoader!=null)fileDownLoader.cancel();
+
     }
 }
