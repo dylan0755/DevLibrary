@@ -11,7 +11,9 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.dylan.library.io.FileDownLoader;
+import com.dylan.library.io.FileUtils;
 import com.dylan.library.utils.DensityUtils;
+import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.mylibrary.R;
@@ -32,6 +34,7 @@ public class FileDownLoaderActivity extends Activity{
         setContentView(R.layout.activity_filedownloader);
 
         edittext = (EditText) findViewById(R.id.url_editext);
+        edittext.setText("https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200fac0000br101goa2pen9ebi2adg&ratio=720p&line=0");
         button_download = (Button) findViewById(R.id.download_button);
         pb = (ProgressBar) findViewById(R.id.download_progressbar);
         pb.setMax(100);
@@ -63,8 +66,14 @@ public class FileDownLoaderActivity extends Activity{
                     }
 
                     @Override
-                    public void onError(int erroType, String error) {
-                        ToastUtils.show(error);
+                    public void onError(int erroType,final String error) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                ToastUtils.show(error);
+                            }
+                        });
+
                     }
 
                     @Override
@@ -80,11 +89,12 @@ public class FileDownLoaderActivity extends Activity{
                     }
 
                     @Override
-                    public void onComplete(long totalSize, String downLoadFilePath) {
+                    public void onComplete(long totalSize, final String downLoadFilePath) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 button_download.setEnabled(true);
+                               FileUtils.notifyScanFile(FileDownLoaderActivity.this,downLoadFilePath);
                             }
                         });
 

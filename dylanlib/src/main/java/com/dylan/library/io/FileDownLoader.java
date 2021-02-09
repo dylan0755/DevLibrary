@@ -2,13 +2,8 @@ package com.dylan.library.io;
 
 import android.content.Context;
 import android.os.Environment;
-import android.os.Handler;
-import android.os.Looper;
-import android.os.Message;
-
 import com.dylan.library.exception.ELog;
-import com.dylan.library.utils.Logger;
-
+import com.dylan.library.utils.EmptyUtils;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -19,8 +14,6 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.zip.GZIPInputStream;
 
 import javax.net.ssl.HostnameVerifier;
@@ -43,12 +36,13 @@ public class FileDownLoader {
     public static final int ERROR_ACCESS_RESOURCE = 21;
     public static final int ERROR_DONWLOAD = 22;
     private boolean cancel;
+
     public FileDownLoader() {
 
     }
 
 
-    public void downLoad(final Context context, final String downLoadUrl, final String filename)  {
+    public void downLoad(final Context context, final String downLoadUrl, final String filename) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -71,7 +65,6 @@ public class FileDownLoader {
                     HttpsURLConnection.setDefaultSSLSocketFactory(sslcontext.getSocketFactory());
 
 
-
                     URL url = new URL(downLoadUrl);
                     HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                     connection.setConnectTimeout(10000);
@@ -82,20 +75,18 @@ public class FileDownLoader {
                         mTotalLength = connection.getContentLength();
                         downLoadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
                         try {
-                            String fileName = filename;
+
                             if (filename == null || filename.isEmpty()) {
-                                fileName = parseFileNameFormUrl(downLoadUrl);
+                                String fileName = parseFileNameFormUrl(downLoadUrl);
+                                if (EmptyUtils.isEmpty(fileName)){
+                                    fileName=System.currentTimeMillis()+".mp4";
+                                }
                                 downloadFilePath = downLoadDir + "/" + fileName;
                             } else {
                                 downloadFilePath = downLoadDir + "/" + filename;
                             }
-                            final String finalFileName = fileName;
-                            if ("".equals(finalFileName)) {
-                                throw new UrlFileNameException();
-                            }
                         } catch (UrlFileNameException e) {
-                            if (mDownLoadListener != null) mDownLoadListener.onError(ERROR_URLPARSE_FILE, "无法下载该文件,请检查下载链接");
-                            return;
+                            downloadFilePath = downLoadDir + "/" + System.currentTimeMillis()+".mp4";
                         }
 
                         is = connection.getInputStream();
@@ -103,21 +94,20 @@ public class FileDownLoader {
                         if (contentEncoding != null && contentEncoding.equalsIgnoreCase("gzip")) {
                             is = new GZIPInputStream(is);
                         }
-
                         os = new FileOutputStream(new File(downloadFilePath));
                         byte buffer[] = new byte[DATA_BUFFER];
                         int readSize = 0;
                         int temp = 0;
                         while ((readSize = is.read(buffer)) > 0) {
-                            isDownLoading=true;
+                            isDownLoading = true;
                             os.write(buffer, 0, readSize);
                             os.flush();
                             totalSize += readSize;
-                            if (cancel){
+                            if (cancel) {
                                 if (mDownLoadListener != null) mDownLoadListener.onCancel();
-                                cancel=false;
-                                File des=new File(downloadFilePath);
-                                if (des.exists()){
+                                cancel = false;
+                                File des = new File(downloadFilePath);
+                                if (des.exists()) {
                                     des.delete();
                                 }
                                 return;
@@ -126,30 +116,38 @@ public class FileDownLoader {
                                 downloadProgress = (int) (totalSize * 100 / mTotalLength);
                                 if (downloadProgress >= temp) {
                                     temp++;
-                                    mDownLoadListener.onProgress(mTotalLength,totalSize,downloadProgress);
+                                    mDownLoadListener.onProgress(mTotalLength, totalSize, downloadProgress);
                                 }
                             }
                         }
-                        if (totalSize>0){
-                            mDownLoadListener.onProgress(mTotalLength,mTotalLength,100);
+                        if (totalSize > 0) {
+                            mDownLoadListener.onProgress(mTotalLength, mTotalLength, 100);
                         }
+                    } else if (responseCode == 301 || responseCode == 302) {
+                        String location = connection.getHeaderField("Location");
+                        connection.disconnect();
+                        downLoad(context, location, filename);
+                        return;
                     } else {
-                        String errorText="";
-                        if (responseCode==404){
-                            errorText= "找不到该文件";
-                        }else{
-                            errorText= "资源连接失败";
+                        String errorText = "";
+                        if (responseCode == 404) {
+                            errorText = "找不到该文件";
+                        } else {
+                            errorText = "资源连接失败";
                         }
-                        if (mDownLoadListener != null) mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, errorText);
+                        if (mDownLoadListener != null)
+                            mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, errorText);
                     }
                 } catch (Exception e) {
-                    if (mDownLoadListener != null) mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, e.getMessage());
+                    ELog.e(e);
+                    if (mDownLoadListener != null)
+                        mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, e.getMessage());
                 }
-                isDownLoading=false;
+                isDownLoading = false;
                 closeIO(os);
                 closeIO(is);
                 if (mDownLoadListener != null) {
-                    mDownLoadListener.onComplete(mTotalLength,downloadFilePath);
+                    mDownLoadListener.onComplete(mTotalLength, downloadFilePath);
                 }
             }
         }).start();
@@ -172,9 +170,9 @@ public class FileDownLoader {
         this.mDownLoadListener = listener;
     }
 
-    public void cancel(){
-        if (isDownLoading){
-            cancel=true;
+    public void cancel() {
+        if (isDownLoading) {
+            cancel = true;
         }
     }
 
@@ -203,7 +201,6 @@ public class FileDownLoader {
     public static class UrlFileNameException extends Exception {
 
     }
-
 
 
     public static class MyX509TrustManager implements X509TrustManager {
