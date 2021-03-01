@@ -118,5 +118,6 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
     protected void onDestroy() {
         super.onDestroy();
         if (handler != null) handler.removeCallbacksAndMessages(null);
+        recyclerHelper.release();
     }
 }

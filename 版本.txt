@@ -5,7 +5,7 @@
 V5.1.0
 1.更新FileUtils  getFileByUri,解决uri 返回路径无法正常读取文件
 2.BaseDialog 重写 dismiss() 解决dialog消失，键盘不跟着消失的问题
-
+3.IRecyclerHelper 封装 AdapterDataObserver， 没有数据则显示emptyView
 
 
 
