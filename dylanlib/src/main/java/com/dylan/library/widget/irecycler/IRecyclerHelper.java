@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.dylan.library.adapter.BaseRecyclerAdapter;
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.exception.OnNextBussinesException;
 import com.dylan.library.exception.ThrowableUtils;
@@ -44,6 +45,7 @@ public class IRecyclerHelper {
     private View emptyView;
     private IRecyclerAdapterDataBinder mAdapterBinder;
     private CharSequence emptyTip = "暂无数据";
+    private RecyclerView.AdapterDataObserver recyclerDataObserver;
 
 
     public int getPageNo() {
@@ -56,6 +58,7 @@ public class IRecyclerHelper {
         footerView = (LoadMoreFooterView) recyclerView.getLoadMoreFooterView();
         headerView = (RefreshHeaderView) recyclerView.getRefreshHeaderView();
         mAdapterBinder = adapterBinder;
+        registerAdapterDataChanged();
     }
 
     public void bind(IRecyclerView recyclerView, IRecyclerAdapterDataBinder adapterBinder, View emptyView) {
@@ -64,6 +67,26 @@ public class IRecyclerHelper {
         footerView = (LoadMoreFooterView) recyclerView.getLoadMoreFooterView();
         headerView = (RefreshHeaderView) recyclerView.getRefreshHeaderView();
         mAdapterBinder = adapterBinder;
+        registerAdapterDataChanged();
+    }
+
+
+    private void registerAdapterDataChanged() {
+        if (mAdapterBinder instanceof BaseRecyclerAdapter) {
+            BaseRecyclerAdapter adapter = (BaseRecyclerAdapter) mAdapterBinder;
+            recyclerDataObserver = new RecyclerView.AdapterDataObserver() {
+                @Override
+                public void onChanged() {
+                    if (mAdapterBinder.isEmpty()){
+                        showEmptyView();
+                    }else{
+                        hideEmptyView();
+                    }
+
+                }
+            };
+            adapter.registerAdapterDataObserver(recyclerDataObserver);
+        }
     }
 
     public void setEmptyTip(CharSequence charSequence) {
@@ -83,12 +106,12 @@ public class IRecyclerHelper {
     }
 
 
-    public void completeRefresh(){
-        if (recyclerView!=null)refreshComplete(recyclerView);
+    public void completeRefresh() {
+        if (recyclerView != null) refreshComplete(recyclerView);
     }
 
-    public void completeLoadMore(){
-        if (footerView!=null)loadMoreComplete(footerView);
+    public void completeLoadMore() {
+        if (footerView != null) loadMoreComplete(footerView);
     }
 
     public boolean isCanLoadMore() {
@@ -99,19 +122,19 @@ public class IRecyclerHelper {
         return false;
     }
 
-    public   void afterGetData(Throwable throwable, IRecyclerPage page){
-        if (page==null)return;
-        List<?>  list=page.getList();
-        boolean isLastPage=page.isLastPage();
-        afterGetData(throwable,page.isSucceed(),page.getFailureMsg(),list,isLastPage);
+    public void afterGetData(Throwable throwable, IRecyclerPage page) {
+        if (page == null) return;
+        List<?> list = page.getList();
+        boolean isLastPage = page.isLastPage();
+        afterGetData(throwable, page.isSucceed(), page.getFailureMsg(), list, isLastPage);
     }
 
-    public void afterGetData(Throwable throwable, boolean isSucceed,String failureMsg,List<?> list){
-        afterGetData(throwable,isSucceed,failureMsg,list,false);
+    public void afterGetData(Throwable throwable, boolean isSucceed, String failureMsg, List<?> list) {
+        afterGetData(throwable, isSucceed, failureMsg, list, false);
     }
 
-    public void afterGetData(Throwable throwable, boolean isSucceed,String failureMsg,List<?> list,boolean isLastPage) {
-        if (throwable!=null) {
+    public void afterGetData(Throwable throwable, boolean isSucceed, String failureMsg, List<?> list, boolean isLastPage) {
+        if (throwable != null) {
             if (throwable instanceof OnNextBussinesException) {
                 ThrowableUtils.show(((OnNextBussinesException) throwable).target);
             } else {
@@ -127,16 +150,16 @@ public class IRecyclerHelper {
         } else {
             if (EmptyUtils.isNotEmpty(list)) {
                 if (tvEmptyView != null) tvEmptyView.setText("");
-                if (emptyView!=null)emptyView.setVisibility(View.GONE);
+                if (emptyView != null) emptyView.setVisibility(View.GONE);
                 if (pageNo == 1) {
                     mAdapterBinder.hookBind(list);
                     refreshComplete(recyclerView);
                 } else {
                     mAdapterBinder.hookAddAllAndNotifyDataChanged(list);
                     if (footerView != null) {
-                        if (isLastPage){
+                        if (isLastPage) {
                             setNoMore(footerView);
-                        }else{
+                        } else {
                             loadMoreComplete(footerView);
                         }
 
@@ -146,14 +169,13 @@ public class IRecyclerHelper {
                 if (pageNo == 1) {
                     refreshComplete(recyclerView);
                     mAdapterBinder.hookClear();
-                    if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
-                    if (emptyView!=null)emptyView.setVisibility(View.VISIBLE);
+                    showEmptyView();
                 } else {
                     setNoMore(footerView);
                 }
 
-                if (!isSucceed){
-                    if (EmptyUtils.isNotEmpty(failureMsg)){
+                if (!isSucceed) {
+                    if (EmptyUtils.isNotEmpty(failureMsg)) {
                         ToastUtils.show(failureMsg);
                     }
                 }
@@ -164,11 +186,15 @@ public class IRecyclerHelper {
     }
 
 
+    private void showEmptyView() {
+        if (tvEmptyView != null) tvEmptyView.setText(emptyTip);
+        if (emptyView != null) emptyView.setVisibility(View.VISIBLE);
+    }
 
-
-
-
-
+    private void hideEmptyView(){
+        if (tvEmptyView != null) tvEmptyView.setText("");
+        if (emptyView != null) emptyView.setVisibility(View.GONE);
+    }
 
 
     public void setNoMoreText(String text) {
@@ -264,14 +290,14 @@ public class IRecyclerHelper {
         indicatorView.setRingProgressColor(outRingColor);
     }
 
-    public void scrollToTop(){
-        if (recyclerView==null)return;
-        toStickFromPosition(recyclerView,0,0);
+    public void scrollToTop() {
+        if (recyclerView == null) return;
+        toStickFromPosition(recyclerView, 0, 0);
     }
 
-    public void toStickFromPosition(int position,int offset){
-        if (recyclerView==null)return;
-        toStickFromPosition(recyclerView,position,offset);
+    public void toStickFromPosition(int position, int offset) {
+        if (recyclerView == null) return;
+        toStickFromPosition(recyclerView, position, offset);
     }
 
 
@@ -298,7 +324,6 @@ public class IRecyclerHelper {
         }
         return false;
     }
-
 
 
     public static void setRefreshStatus(LoadMoreFooterView loadMoreFooterView) {
@@ -347,10 +372,18 @@ public class IRecyclerHelper {
         });
     }
 
-    public static void toStickFromPosition(RecyclerView recyclerView,int position,int offset){
-        RecyclerViewHelper.toStickFromPosition(recyclerView,position,offset);
+    public static void toStickFromPosition(RecyclerView recyclerView, int position, int offset) {
+        RecyclerViewHelper.toStickFromPosition(recyclerView, position, offset);
     }
 
 
+    public void release() {
+        if (recyclerDataObserver != null) {
+            if (mAdapterBinder instanceof BaseRecyclerAdapter) {
+                BaseRecyclerAdapter adapter = (BaseRecyclerAdapter) mAdapterBinder;
+                adapter.unregisterAdapterDataObserver(recyclerDataObserver);
+            }
+        }
+    }
 
 }
