@@ -79,6 +79,20 @@ public class GradientDrawableBuilder {
         return this;
     }
 
+    public GradientDrawableBuilder setGradientColors(int[] colors,int angle){
+        drawable.setColors(colors);
+        if (angle==0||angle==360){
+            drawable.setOrientation(GradientDrawable.Orientation.LEFT_RIGHT);
+        }else if (angle==90){
+            drawable.setOrientation(GradientDrawable.Orientation.BOTTOM_TOP);
+        }else if (angle==180){
+            drawable.setOrientation(GradientDrawable.Orientation.RIGHT_LEFT);
+        }else if (angle==270){//上到下
+            drawable.setOrientation(GradientDrawable.Orientation.TOP_BOTTOM);
+        }
+        return this;
+    }
+
 
     public GradientDrawable build() {
         mContext=null;
