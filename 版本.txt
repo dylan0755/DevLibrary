@@ -7,7 +7,7 @@ V5.1.0
 2.BaseDialog 重写 dismiss() 解决dialog消失，键盘不跟着消失的问题
 3.IRecyclerHelper 封装 AdapterDataObserver， 没有数据则显示emptyView
 4.GradientDrawableBuilder 新增 setGradientColors 渐变
-
+5.新增 FragmentAddDelPagerAdapter ViewPager 动态增删Fragment
 
 
 
