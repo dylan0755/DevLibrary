@@ -10,7 +10,7 @@ V5.1.0
 5.新增 FragmentAddDelPagerAdapter ViewPager 动态增删Fragment
 6.BaseRecyclerAdapter 和 CommonBaseAdapter 新增 attachContext(Context context),
 在Adapter 初始化Context的时候回调，子类可以在这个方法中 做一些需要Context 的操作
-
+7.BaseRecyclerAdapter 封装  选中属性，选中判断
 
 
 V5.0.0 ---->2021.2.10

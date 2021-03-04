@@ -32,6 +32,11 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     private Constructor<VH> mSubConstrutor;
     @NotProguard
     protected OnItemClickListener mItemClickListener;
+    private int selectPos;
+
+
+
+
 
     public BaseRecyclerAdapter() {
         Type type = this.getClass().getGenericSuperclass();
@@ -53,6 +58,21 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     protected void attachContext(Context context){
 
     }
+
+    public void setSelectItemPos(int selectPos) {
+        this.selectPos = selectPos;
+        notifyDataSetChanged();
+    }
+
+    public int getSelectItemPos(){
+        return selectPos;
+    }
+
+
+    public boolean isItemSelected(int position){
+        return selectPos==position;
+    }
+
 
 
     @Override
