@@ -48,11 +48,16 @@ public abstract class BothItemBaseAdapter<T> extends BaseAdapter {
         return position;
     }
 
+    protected void attachContext(Context context){
+
+    }
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (mContext == null) {
             mContext=parent.getContext();
             mInflater = LayoutInflater.from(mContext);
+            attachContext(mContext);
         }
 
         int viewtype = getItemViewType(position);

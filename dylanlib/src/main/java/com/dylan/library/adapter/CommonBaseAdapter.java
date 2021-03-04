@@ -104,6 +104,7 @@ public abstract class CommonBaseAdapter<T, VH extends CommonBaseAdapter.ViewHold
         if (mContext == null) {
             mContext = parent.getContext();
             mInflater = LayoutInflater.from(mContext);
+            attachContext(mContext);
         }
 
         VH holder = null;
@@ -124,6 +125,13 @@ public abstract class CommonBaseAdapter<T, VH extends CommonBaseAdapter.ViewHold
         }
         return convertView;
     }
+
+
+    protected void attachContext(Context context){
+
+    }
+
+
 
     public abstract @LayoutRes
     int getLayoutId();

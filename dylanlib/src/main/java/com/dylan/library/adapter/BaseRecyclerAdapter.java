@@ -50,11 +50,17 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     }
 
 
+    protected void attachContext(Context context){
+
+    }
+
+
     @Override
     public VH onCreateViewHolder(ViewGroup parent, int viewType) {
         if (mContext == null) {
             mContext = parent.getContext();
             mInflater = LayoutInflater.from(mContext);
+            attachContext(mContext);
         }
         View convertView = mInflater.inflate(getLayoutId(), parent, false);
         try {

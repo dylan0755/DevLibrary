@@ -27,6 +27,10 @@ public abstract class BothItemRecyclerAdapter<T> extends RecyclerView.Adapter im
         }
 
     }
+    protected void attachContext(Context context){
+
+    }
+
 
     @NonNull
     @Override
@@ -34,6 +38,7 @@ public abstract class BothItemRecyclerAdapter<T> extends RecyclerView.Adapter im
         if (mContext == null) {
             mContext = viewGroup.getContext();
             mInflater = LayoutInflater.from(mContext);
+            attachContext(mContext);
         }
 
 
