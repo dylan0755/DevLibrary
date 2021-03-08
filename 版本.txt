@@ -13,7 +13,7 @@ V5.1.0
 7.BaseRecyclerAdapter 封装  选中属性，选中判断
 8.HtmlUtils 对fromHtml(String html) 入参空判
 9.BaseRecyclerAdapter 新增startActivityForResult
-
+10.CompatUtils 新增 compatAlertDialogAfterShowMethod,解决AlertDialog 在部分机型不居中问题
 
 
 
