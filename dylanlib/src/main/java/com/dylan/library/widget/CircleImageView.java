@@ -213,6 +213,8 @@ public class CircleImageView extends ImageView {
 		setup();
 	}
 
+
+
 	@Override
 	public void setImageResource(@DrawableRes int resId) {
 		super.setImageResource(resId);

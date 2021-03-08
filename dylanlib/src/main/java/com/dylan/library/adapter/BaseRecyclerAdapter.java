@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.proguard.NotProguard;
+import com.dylan.library.utils.ContextUtils;
 import com.dylan.library.utils.Logger;
 
 import java.lang.reflect.Constructor;
@@ -180,6 +181,11 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
 
     public void startActivity(Intent intent) {
         mContext.startActivity(intent);
+    }
+
+    public void startActivityForResult(Intent intent,int requestCode){
+        if (mContext==null)return;
+        ContextUtils.getActivity(mContext).startActivityForResult(intent,requestCode);
     }
 
     public void startSingleTopActivity(Intent intent) {

@@ -12,7 +12,7 @@ V5.1.0
 在Adapter 初始化Context的时候回调，子类可以在这个方法中 做一些需要Context 的操作
 7.BaseRecyclerAdapter 封装  选中属性，选中判断
 8.HtmlUtils 对fromHtml(String html) 入参空判
-
+9.BaseRecyclerAdapter 新增startActivityForResult
 
 
 
