@@ -70,7 +70,7 @@ public class CompatUtils {
     }
 
 
-    public void compatAlertDialogAfterShowMethod(AlertDialog dialog){
+    public static void compatAlertDialogAfterShowMethod(AlertDialog dialog){
         if (dialog.getWindow()!=null){
             WindowManager.LayoutParams layoutParams= dialog.getWindow().getAttributes();
             layoutParams.width= (int) (ScreenUtils.getScreenWidth(dialog.getContext())* 0.95);
