@@ -71,10 +71,11 @@ public class CompatUtils {
 
 
     public void compatAlertDialogAfterShowMethod(AlertDialog dialog){
-        if (dialog!=null&&dialog.getWindow()!=null){
+        if (dialog.getWindow()!=null){
             WindowManager.LayoutParams layoutParams= dialog.getWindow().getAttributes();
             layoutParams.width= (int) (ScreenUtils.getScreenWidth(dialog.getContext())* 0.95);
             layoutParams.gravity= Gravity.CENTER;
+            dialog.getWindow().setAttributes(layoutParams);//要重新set 一遍，系统才会通知更新属性
         }
     }
 
