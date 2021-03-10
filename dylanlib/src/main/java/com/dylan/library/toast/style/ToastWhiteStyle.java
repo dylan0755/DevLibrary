@@ -1,4 +1,4 @@
-package com.hjq.toast.style;
+package com.dylan.library.toast.style;
 
 import android.content.Context;
 

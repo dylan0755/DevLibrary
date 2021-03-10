@@ -1,7 +1,4 @@
-package com.hjq.toast;
-
-import android.app.Application;
-import android.widget.Toast;
+package com.dylan.library.toast;
 
 /**
  *    author : Android 轮子哥
@@ -16,15 +13,7 @@ public interface IToastStrategy {
     /** 长吐司显示的时长 */
     int LONG_DURATION_TIMEOUT = 3500;
 
-    /**
-     * 创建 Toast
-     */
-    Toast create(Application application);
 
-    /**
-     * 绑定 Toast
-     */
-    void bind(Toast toast);
 
     /**
      * 显示 Toast

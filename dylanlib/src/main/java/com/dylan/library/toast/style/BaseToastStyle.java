@@ -1,10 +1,10 @@
-package com.hjq.toast.style;
+package com.dylan.library.toast.style;
 
 import android.content.Context;
 import android.util.TypedValue;
 import android.view.Gravity;
 
-import com.hjq.toast.IToastStyle;
+import com.dylan.library.toast.IToastStyle;
 
 /**
  *    author : Android 轮子哥

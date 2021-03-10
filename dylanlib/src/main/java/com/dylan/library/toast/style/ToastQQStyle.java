@@ -1,4 +1,4 @@
-package com.hjq.toast.style;
+package com.dylan.library.toast.style;
 
 import android.content.Context;
 
@@ -6,12 +6,17 @@ import android.content.Context;
  *    author : Android 轮子哥
  *    github : https://github.com/getActivity/ToastUtils
  *    time   : 2018/09/01
- *    desc   : 默认黑色样式实现
+ *    desc   : QQ 样式实现
  */
-public class ToastBlackStyle extends BaseToastStyle {
+public class ToastQQStyle extends BaseToastStyle {
 
-    public ToastBlackStyle(Context context) {
+    public ToastQQStyle(Context context) {
         super(context);
+    }
+
+    @Override
+    public int getZ() {
+        return 0;
     }
 
     @Override
@@ -21,17 +26,17 @@ public class ToastBlackStyle extends BaseToastStyle {
 
     @Override
     public int getBackgroundColor() {
-        return 0X88000000;
+        return 0XFF333333;
     }
 
     @Override
     public int getTextColor() {
-        return 0XEEFFFFFF;
+        return 0XFFE3E3E3;
     }
 
     @Override
     public float getTextSize() {
-        return sp2px(14);
+        return sp2px(12);
     }
 
     @Override
@@ -41,6 +46,6 @@ public class ToastBlackStyle extends BaseToastStyle {
 
     @Override
     public int getPaddingTop() {
-        return dp2px(8);
+        return dp2px(14);
     }
 }
