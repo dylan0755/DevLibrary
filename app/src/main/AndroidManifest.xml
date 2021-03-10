@@ -187,6 +187,7 @@
         <activity android:name=".ui.VerticalSeekBarActivity"/>
         <activity android:name=".ui.MediumTextViewActivity"/>
         <activity android:name=".ui.CircleRingProgressViewActivity"/>
+        <activity android:name=".ui.ToastUtilsActivity"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，

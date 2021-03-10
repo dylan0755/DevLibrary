@@ -2,8 +2,13 @@ package com.dylan.library.dialog;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.TextView;
+
 import com.dylan.library.R;
 import com.dylan.library.screen.NavBarUtils;
+import com.dylan.library.utils.SoftKeyboardUtils;
 
 /**
  * Author: Dylan
@@ -35,5 +40,15 @@ public abstract class CustomFloatingDialog extends Dialog {
 
     protected void hideNavBar(){
         hideNavWhileShowing=true;
+    }
+
+
+    @Override
+    public void dismiss() {
+        View view = getCurrentFocus();
+        if(view instanceof TextView){
+            SoftKeyboardUtils.hideSoftInput(view);
+        }
+        super.dismiss();
     }
 }

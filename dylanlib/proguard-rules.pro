@@ -337,6 +337,10 @@
       public *;
       protected *;
 }
+-keep class com.dylan.library.toast.** {
+      public *;
+      protected *;
+}
 -keep class com.dylan.library.utils.** {
       public *;
       protected *;

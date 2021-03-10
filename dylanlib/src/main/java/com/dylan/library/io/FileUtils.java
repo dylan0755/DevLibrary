@@ -1,6 +1,8 @@
 package com.dylan.library.io;
 
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
+import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +12,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
+import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 
@@ -427,49 +430,90 @@ public class FileUtils {
 
 
     public static File getFileByUri(Uri uri, Context context) {
-        String path = null;
-        if ("file".equals(uri.getScheme())) {
-            path = uri.getEncodedPath();
-            if (path != null) {
-                path = Uri.decode(path);
-                ContentResolver cr = context.getContentResolver();
-                StringBuffer buff = new StringBuffer();
-                buff.append("(").append(MediaStore.Images.ImageColumns.DATA).append("=").append("'" + path + "'").append(")");
-                Cursor cur = cr.query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, new String[]{MediaStore.Images.ImageColumns._ID, MediaStore.Images.ImageColumns.DATA}, buff.toString(), null, null);
-                int index = 0;
-                int dataIdx = 0;
-                for (cur.moveToFirst(); !cur.isAfterLast(); cur.moveToNext()) {
-                    index = cur.getColumnIndex(MediaStore.Images.ImageColumns._ID);
-                    index = cur.getInt(index);
-                    dataIdx = cur.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-                    path = cur.getString(dataIdx);
-                }
-                cur.close();
-                if (index == 0) {
-                } else {
-                    Uri u = Uri.parse("content://media/external/images/media/" + index);
-                    System.out.println("temp uri is :" + u);
-                }
-            }
-            if (path != null) {
-                return new File(path);
-            }
-        } else if ("content".equals(uri.getScheme())) {
-            // 4.2.2以后
-            String[] proj = {MediaStore.Images.Media.DATA};
-            Cursor cursor = context.getContentResolver().query(uri, proj, null, null, null);
-            if (cursor.moveToFirst()) {
-                int columnIndex = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
-                path = cursor.getString(columnIndex);
-            }
-            cursor.close();
+        String filePath=getPathByUri4kitkat(context,uri);
+        if (EmptyUtils.isNotEmpty(filePath))return new File(filePath);
+        return null;
+    }
 
-            return new File(path);
-        } else {
-            //Log.i(TAG, "Uri Scheme:" + uri.getScheme());
+    //从Uri获取文件绝对路径
+    @SuppressLint("NewApi")
+    private static String getPathByUri4kitkat(final Context context, final Uri uri) {
+        final boolean isKitKat = Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT;
+        if (isKitKat && DocumentsContract.isDocumentUri(context, uri)) {
+            if (isExternalStorageDocument(uri)) {// ExternalStorageProvider
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+                if ("primary".equalsIgnoreCase(type)) {
+                    return Environment.getExternalStorageDirectory() + "/" + split[1];
+                }
+            } else if (isDownloadsDocument(uri)) {// DownloadsProvider
+                final String id = DocumentsContract.getDocumentId(uri);
+                final Uri contentUri = ContentUris.withAppendedId(Uri.parse("content://downloads/public_downloads"),
+                        Long.valueOf(id));
+                return getDataColumn(context, contentUri, null, null);
+            } else if (isMediaDocument(uri)) {// MediaProvider
+                final String docId = DocumentsContract.getDocumentId(uri);
+                final String[] split = docId.split(":");
+                final String type = split[0];
+                Uri contentUri = null;
+                if ("image".equals(type)) {
+                    contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI;
+                } else if ("video".equals(type)) {
+                    contentUri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
+                } else if ("audio".equals(type)) {
+                    contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
+                }
+                final String selection = "_id=?";
+                final String[] selectionArgs = new String[] { split[1] };
+                return getDataColumn(context, contentUri, selection, selectionArgs);
+            }
+        } else if ("content".equalsIgnoreCase(uri.getScheme())) {// MediaStore
+            // (and
+            // general)
+            return getDataColumn(context, uri, null, null);
+        } else if ("file".equalsIgnoreCase(uri.getScheme())) {// File
+            return uri.getPath();
         }
         return null;
     }
+
+    public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
+        Cursor cursor = null;
+        final String column = "_data";
+        final String[] projection = { column };
+        try {
+            try{
+                cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
+            }catch (Exception e) {
+
+            }
+            if (cursor != null && cursor.moveToFirst()) {
+                final int column_index = cursor.getColumnIndexOrThrow(column);
+                return cursor.getString(column_index);
+            }
+        } finally {
+            if (cursor != null)
+                cursor.close();
+        }
+        return null;
+    }
+
+    public static boolean isExternalStorageDocument(Uri uri) {
+        return "com.android.externalstorage.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isDownloadsDocument(Uri uri) {
+        return "com.android.providers.downloads.documents".equals(uri.getAuthority());
+    }
+
+    public static boolean isMediaDocument(Uri uri) {
+        return "com.android.providers.media.documents".equals(uri.getAuthority());
+    }
+
+
+
+
 
     public static void notifyScanImageFile(Context context, String desFilePath) {
         notifyScanImageFile(context, desFilePath, false);

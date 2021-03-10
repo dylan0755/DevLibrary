@@ -6,8 +6,10 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.dylan.library.R;
+import com.dylan.library.utils.SoftKeyboardUtils;
 
 
 /**
@@ -77,6 +79,16 @@ public abstract class CustomNotFloatingDialog extends Dialog {
         contentView.postInvalidate();
     }
 
+
+
+    @Override
+    public void dismiss() {
+        View view = getCurrentFocus();
+        if(view instanceof TextView){
+            SoftKeyboardUtils.hideSoftInput(view);
+        }
+        super.dismiss();
+    }
 
 
 }

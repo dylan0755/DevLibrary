@@ -1,115 +1,99 @@
 package com.dylan.library.utils;
 
 import android.app.Application;
-import android.content.Context;
 import android.util.Log;
 import android.view.Gravity;
-import android.widget.Toast;
 
+import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.thread.ThreadUtils;
-
-import java.util.Timer;
-import java.util.TimerTask;
+import com.dylan.library.toast.IToastStrategy;
+import com.dylan.library.toast.ToastMsg;
 
 /**
  * Created by Dylan on 2016/4/16.
  */
 
 public class ToastUtils {
-    private static Toast shortToast = null;
-    private static Toast longToast = null;
-    private static Toast centerShortToast = null;
-    private static Toast centerLongToast = null;
-
     private static Application applicationContext;
 
     public static void initToast(Application application) {
+        HJQToastUtils.init(application);
         if (ThreadUtils.isMainThread()) {
             applicationContext = application;
-            createShortToast();
-            createCenterShortToast();
-            longToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
-            centerLongToast = Toast.makeText(applicationContext, "", Toast.LENGTH_LONG);
-            centerLongToast.setGravity(Gravity.CENTER, 0, 0);
         } else {
-            Log.e("ToastUtils ", "Can't create handler inside thread that has not called Looper.prepare()");
+            Log.e("HJQToastUtils ", "Can't create handler inside thread that has not called Looper.prepare()");
         }
     }
 
 
-    private static void createShortToast(){
-        shortToast= Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
-    }
-
-    private static void createCenterShortToast(){
-        centerShortToast = Toast.makeText(applicationContext, "", Toast.LENGTH_SHORT);
-        centerShortToast.setGravity(Gravity.CENTER, 0, 0);
-    }
 
 
     public static void show(String msg) {
         if (applicationContext == null) return;
-        if (shortToast!=null){
-            shortToast.cancel();
-           createShortToast();
-        }
-        shortToast.setText(msg);
-
-        shortToast.show();
+        ToastMsg toastMsg=new ToastMsg();
+        toastMsg.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+        toastMsg.setOffsetX(0);
+        toastMsg.setOffsetY(ScreenUtils.getScreenHeight(applicationContext) / 8);
+        toastMsg.setText(msg);
+        toastMsg.setDuration(IToastStrategy.SHORT_DURATION_TIMEOUT);
+        HJQToastUtils.show(toastMsg);
     }
 
     public static void showLong(String msg) {
         if (applicationContext == null) return;
-        longToast.setText(msg);
-        longToast.show();
+        ToastMsg toastMsg=new ToastMsg();
+        toastMsg.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL,0,ScreenUtils.getScreenHeight(applicationContext) / 8);
+        toastMsg.setText(msg);
+        toastMsg.setDuration(IToastStrategy.LONG_DURATION_TIMEOUT);
+        HJQToastUtils.show(toastMsg);
+
     }
 
 
-
-    public static void showCenterShort(String string) {
+    public static void showCenterShort(String msg) {
         if (applicationContext == null) return;
-        if (centerShortToast!=null){
-            centerShortToast.cancel();
-            createCenterShortToast();
-        }
-        centerShortToast.setText(string);
-        centerShortToast.show();
+        ToastMsg toastMsg=new ToastMsg();
+        toastMsg.setGravity(Gravity.CENTER, 0, 0);
+        toastMsg.setText(msg);
+        toastMsg.setDuration(IToastStrategy.SHORT_DURATION_TIMEOUT);
+        HJQToastUtils.show(toastMsg);
     }
 
     public static void showCenterLong(String string) {
         if (applicationContext == null) return;
-        centerLongToast.setText(string);
-        centerLongToast.show();
+//        centerLongToast.setText(string);
+//        centerLongToast.show();
+        ToastMsg toastMsg=new ToastMsg();
+        toastMsg.setGravity(Gravity.CENTER, 0, 0);
+        toastMsg.setText(string);
+        toastMsg.setDuration(IToastStrategy.LONG_DURATION_TIMEOUT);
+        HJQToastUtils.show(toastMsg);
     }
 
 
-    public static void show(Context context, String text) {
-        if (ThreadUtils.isMainThread()) {
-            //避免小米系统 吐司待 应用名称，不能使用一行创建显示吐司
-           Toast toast= Toast.makeText(context, text, Toast.LENGTH_SHORT);
-            toast.setText(text);
-            toast.show();
-        }
-
-    }
-
-
-    public static void showLongToast(final Toast lenthLongToast, final int duration) {
+    public static void showLongToast(String text, final int durationMills) {
         if (applicationContext == null) return;
-        final Timer timer = new Timer();
-        timer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                lenthLongToast.show();
-            }
-        }, 0, 3500);
-        new Timer().schedule(new TimerTask() {
-            @Override
-            public void run() {
-                lenthLongToast.cancel();
-                timer.cancel();
-            }
-        }, duration);
+        ToastMsg toastMsg=new ToastMsg();
+        toastMsg.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+        toastMsg.setOffsetX(0);
+        toastMsg.setOffsetY(ScreenUtils.getScreenHeight(applicationContext) / 8);
+        toastMsg.setText(text);
+        toastMsg.setDuration(durationMills);
+        HJQToastUtils.show(toastMsg);
     }
+
+
+
+
+    /**
+     * 取消吐司的显示
+     */
+    public static synchronized void cancel() {
+        HJQToastUtils.cancel();
+    }
+
+
+
+
 
 }

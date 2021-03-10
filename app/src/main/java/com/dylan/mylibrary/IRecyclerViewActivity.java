@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.view.View;
+import android.widget.TextView;
 
 import com.dylan.library.test.TestAdapter;
 import com.dylan.library.widget.irecycler.IRecyclerHelper;
@@ -23,6 +25,7 @@ import java.util.List;
  */
 public class IRecyclerViewActivity extends AppCompatActivity implements OnRefreshListener, OnLoadMoreListener {
     IRecyclerView recyclerView;
+    TextView tvEmptyView;
     private TestAdapter mAdapter;
     private IRecyclerHelper recyclerHelper;
     private Handler handler = new Handler();
@@ -33,6 +36,7 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_irecyclerview);
+        tvEmptyView=findViewById(R.id.tvEmptyView);
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setLoadMoreEnabled(true);
@@ -44,9 +48,15 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
 
 
         recyclerHelper = new IRecyclerHelper();
-        recyclerHelper.bind(recyclerView, mAdapter, null);
+        recyclerHelper.bind(recyclerView, mAdapter, tvEmptyView);
         getData(recyclerHelper.getPageNo());
 
+        findViewById(R.id.btnClear).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mAdapter.clear();
+            }
+        });
 
     }
 
@@ -108,5 +118,6 @@ public class IRecyclerViewActivity extends AppCompatActivity implements OnRefres
     protected void onDestroy() {
         super.onDestroy();
         if (handler != null) handler.removeCallbacksAndMessages(null);
+        recyclerHelper.release();
     }
 }

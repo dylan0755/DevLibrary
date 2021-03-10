@@ -1,5 +1,6 @@
 package com.dylan.library.utils;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -9,7 +10,12 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.app.AlertDialog;
+import android.view.Gravity;
+import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.dylan.library.screen.ScreenUtils;
 
 /**
  * Author: Dylan
@@ -61,6 +67,16 @@ public class CompatUtils {
 
     public static ColorDrawable getCompatBitmapDrawable(){
         return new ColorDrawable(android.graphics.Color.TRANSPARENT);
+    }
+
+
+    public static void compatAlertDialogAfterShowMethod(AlertDialog dialog){
+        if (dialog.getWindow()!=null){
+            WindowManager.LayoutParams layoutParams= dialog.getWindow().getAttributes();
+            layoutParams.width= (int) (ScreenUtils.getScreenWidth(dialog.getContext())* 0.95);
+            layoutParams.gravity= Gravity.CENTER;
+            dialog.getWindow().setAttributes(layoutParams);//要重新set 一遍，系统才会通知更新属性
+        }
     }
 
 }

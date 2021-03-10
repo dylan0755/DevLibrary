@@ -43,7 +43,7 @@ public class MediaShareAudioEncoder extends MediaEncoder {
             return;
         }
         audioFormat = createMediaFormat();
-        mMediaCodec = createMediaCodec();
+        mMediaCodec =  MediaCodec.createEncoderByType(MIME_TYPE);;
         mMediaCodec.configure(audioFormat, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
         mMediaCodec.start();
         if (DEBUG)
@@ -68,24 +68,6 @@ public class MediaShareAudioEncoder extends MediaEncoder {
         return mediaFormat;
     }
 
-    public MediaCodec createMediaCodec() throws IOException {
-        MediaCodecList mediaCodecList = null;
-        String name = null;
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            mediaCodecList = new MediaCodecList(MediaCodecList.ALL_CODECS);
-            name = mediaCodecList.findEncoderForFormat(audioFormat);
-            if (name != null) {
-                try {
-                    return MediaCodec.createByCodecName(name);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        } else {
-            MediaCodec.createEncoderByType(MIME_TYPE);
-        }
-        return null;
-    }
 
 
     @Override

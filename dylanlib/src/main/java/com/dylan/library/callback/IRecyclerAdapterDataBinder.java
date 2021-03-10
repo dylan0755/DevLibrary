@@ -12,5 +12,6 @@ public interface IRecyclerAdapterDataBinder {
     void hookAddAllAndNotifyDataChanged(List list);
     int hookGetItemCount();
     void hookClear();
+    boolean isEmpty();
 
 }

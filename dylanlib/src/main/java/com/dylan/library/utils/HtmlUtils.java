@@ -28,6 +28,7 @@ public class HtmlUtils {
      }
 
     public static Spanned fromHtml(String inputStr) {
+         if (inputStr==null)return null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             return Html.fromHtml(inputStr, Html.FROM_HTML_MODE_LEGACY);
         } else {
