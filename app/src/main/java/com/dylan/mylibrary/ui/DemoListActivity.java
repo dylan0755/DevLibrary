@@ -51,8 +51,9 @@ public class DemoListActivity extends AppCompatActivity {
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
             "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
-            "NoExtraUiEditDemo","singleClickDemo","DragMapView","SmsCodeCounter",
-            "Camera+OpenGl","IOSSwitchView","VerticalSeekBar","MediumTextView","CircleRingProgressView"};
+            "NoExtraUiEditDemo", "singleClickDemo", "DragMapView", "SmsCodeCounter",
+            "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
+            "ToastActivity"};
     private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -66,9 +67,10 @@ public class DemoListActivity extends AppCompatActivity {
             ProgressWebViewActivity.class, VideoPlayerGestureActivity.class, ReboundActivity.class,
             BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
-            NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class,DragMapViewDemoActivity.class,
-            SmsCodeCounterActivity.class, OpenglDemoActivity.class,SwitchViewActivity.class,
-            VerticalSeekBarActivity.class,MediumTextViewActivity.class, CircleRingProgressViewActivity.class};
+            NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class, DragMapViewDemoActivity.class,
+            SmsCodeCounterActivity.class, OpenglDemoActivity.class, SwitchViewActivity.class,
+            VerticalSeekBarActivity.class, MediumTextViewActivity.class, CircleRingProgressViewActivity.class,
+            ToastUtilsActivity.class};
 
 
     @Override
@@ -78,7 +80,6 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
-
 
 
     }
