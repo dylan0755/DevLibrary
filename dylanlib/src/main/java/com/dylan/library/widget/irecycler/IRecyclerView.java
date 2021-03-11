@@ -8,6 +8,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.view.MotionEventCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
@@ -24,7 +25,11 @@ import android.widget.LinearLayout;
 
 import com.dylan.library.R;
 import com.dylan.library.callback.EndAnimatorCallBack;
+import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.widget.irecycler.footer.LoadMoreFooterView;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -70,6 +75,10 @@ public class IRecyclerView extends RecyclerView {
 
     private LoadMoreFooterView mLoadMoreFooterView;
 
+    private List<OnTouchListener> touchListeners;
+    private boolean hasSetAppLayout;
+    private boolean isAppBarLayoutExpand;
+
     public IRecyclerView(Context context) {
         this(context, null);
     }
@@ -96,11 +105,11 @@ public class IRecyclerView extends RecyclerView {
 
             refreshFinalMoveOffset = a.getDimensionPixelOffset(R.styleable.DLIRecyclerView_refreshFinalMoveOffset, -1);
 
-            if (refreshHeaderLayoutRes==-1){
+            if (refreshHeaderLayoutRes == -1) {
                 refreshHeaderLayoutRes = a.getResourceId(R.styleable.DLIRecyclerView_refreshHeaderLayout, R.layout.dl_header_pull_refresh);
             }
 
-            if (loadMoreFooterLayoutRes==-1){
+            if (loadMoreFooterLayoutRes == -1) {
                 loadMoreFooterLayoutRes = a.getResourceId(R.styleable.DLIRecyclerView_loadMoreFooterLayout, R.layout.dl_footer_load_more);
             }
         } finally {
@@ -121,6 +130,24 @@ public class IRecyclerView extends RecyclerView {
             setRefreshFinalMoveOffset(refreshFinalMoveOffset);
         }
         setStatus(STATUS_DEFAULT);
+
+
+        OnTouchListener defaultTouchListener = new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                if (hasSetAppLayout) {
+                    setRefreshEnabled(isAppBarLayoutExpand);
+                }
+                if (EmptyUtils.isNotEmpty(touchListeners)) {
+                    for (OnTouchListener listener : touchListeners) {
+                        boolean bl = listener.onTouch(v, event);
+                        if (bl) return true;
+                    }
+                }
+                return false;
+            }
+        };
+        setOnTouchListener(defaultTouchListener);
     }
 
     @Override
@@ -153,6 +180,24 @@ public class IRecyclerView extends RecyclerView {
 
     public void setOnLoadMoreListener(OnLoadMoreListener listener) {
         this.mOnLoadMoreListener = listener;
+    }
+
+    public void addTouchListener(OnTouchListener touchListener) {
+        if (touchListeners == null) {
+            touchListeners = new ArrayList<>();
+        }
+        touchListeners.add(touchListener);
+    }
+
+    public void dealPullRefreshInAppBarLayout(AppBarLayout appBarLayout) {
+        if (appBarLayout == null) return;
+        hasSetAppLayout = true;
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                isAppBarLayoutExpand=(i == 0);
+            }
+        });
     }
 
     public void setRefreshing(boolean refreshing) {
@@ -681,13 +726,13 @@ public class IRecyclerView extends RecyclerView {
         @Override
         public void onLoadMore(RecyclerView recyclerView) {
             if (mOnLoadMoreListener != null && mStatus == STATUS_DEFAULT) {
-                if (!isAvailable(getContext())){
-                    if (mLoadMoreFooterView!=null){
+                if (!isAvailable(getContext())) {
+                    if (mLoadMoreFooterView != null) {
                         mLoadMoreFooterView.setErrorText("当前网络不可用");
                         mLoadMoreFooterView.setStatus(LoadMoreFooterView.Status.ERROR);
                     }
-                }else{
-                    if (mLoadMoreFooterView!=null){
+                } else {
+                    if (mLoadMoreFooterView != null) {
                         mLoadMoreFooterView.setErrorText(LoadMoreFooterView.defaultErrorTip);
                         mOnLoadMoreListener.onLoadMore();
                     }
@@ -747,7 +792,7 @@ public class IRecyclerView extends RecyclerView {
     }
 
 
-    public boolean isRefreshing(){
+    public boolean isRefreshing() {
         return mStatus == STATUS_REFRESHING;
     }
 }

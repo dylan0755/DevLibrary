@@ -15,7 +15,7 @@ V5.1.0
 9.BaseRecyclerAdapter 新增startActivityForResult
 10.CompatUtils 新增 compatAlertDialogAfterShowMethod,解决AlertDialog 在部分机型不居中问题
 11.ToastUtils 更新，统一样式，解决部分手机因关闭通知弹不出吐司问题
-
+12.IRecyclerView 增加dealPullRefreshInAppBarLayout(AppBarLayout layout),处理IRecyclerView 的下拉刷新和AppBarLayout的展开折叠冲突;
 
 
 
