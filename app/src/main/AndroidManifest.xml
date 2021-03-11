@@ -74,6 +74,8 @@
             android:name="com.dylan.mylibrary.ui.DemoListActivity"
             android:theme="@style/statusBarStyle"/>
 
+        <activity android:name=".ui.apksign.ApkSignListActivity"
+            android:screenOrientation="portrait" />
 
 
         <activity

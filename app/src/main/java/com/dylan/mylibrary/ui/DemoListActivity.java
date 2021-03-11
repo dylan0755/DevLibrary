@@ -17,6 +17,7 @@ import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
 import com.dylan.mylibrary.R;
+import com.dylan.mylibrary.ui.apksign.ApkSignListActivity;
 import com.dylan.mylibrary.ui.edittext.EditNumberActivity;
 import com.dylan.mylibrary.ui.filedownloader.FileDownLoaderActivity;
 import com.dylan.mylibrary.ui.gridviewpager.GridViewPagerActivity;
@@ -41,7 +42,7 @@ import java.util.List;
 
 public class DemoListActivity extends AppCompatActivity {
     private GridViewPager mGridPager;
-    private String[] demoNames = {"RecyclerViewSnapHelper", "ScaleUpPhotoView", "IRecyclerView",
+    private String[] demoNames = {"ApkSignList","RecyclerViewSnapHelper", "ScaleUpPhotoView", "IRecyclerView",
             "EditnnumberHelper", "LayoutCircleAnimation", "ScreenShootUtils",
             "GridViewPager", "WrapLayoutManager", "LoadingDialog", "listview侧滑删除",
             "BulletinBoard", "PhotoSelector", "SlidingRefresh",
@@ -54,7 +55,7 @@ public class DemoListActivity extends AppCompatActivity {
             "NoExtraUiEditDemo", "singleClickDemo", "DragMapView", "SmsCodeCounter",
             "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
             "ToastActivity"};
-    private Class[] classes = {RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
+    private Class[] classes = {ApkSignListActivity.class,RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
             ExpandableListItemActivity.class, BulletinBoardActivity.class, LocalPhotoSelectActivity.class,
