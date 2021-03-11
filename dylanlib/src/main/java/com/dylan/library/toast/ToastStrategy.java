@@ -161,6 +161,7 @@ public class ToastStrategy extends Handler implements IToastStrategy {
                         mToast.cancel();
                         if (!(mToast instanceof CustomToast)){//使用系统的Toast,则重新创建
                             mToast=create();
+                            mToast.setView(createTextView(mApplication,new ToastBlackStyle(mApplication)));
                         }
                     }
 
