@@ -81,15 +81,6 @@ public class CommonFragmentPagerAdapter extends FragmentPagerAdapter {
     }
 
 
-    public void addTabWithName(TabLayout tabLayout) {
-        if (tabLayout != null) {
-            if (EmptyUtils.isNotEmpty(titleList)) {
-                for (String title : titleList) {
-                    tabLayout.addTab(tabLayout.newTab().setText(title));
-                }
-            }
-        }
-    }
 
 
 }

@@ -17,8 +17,10 @@ import java.util.List;
  * Desc:
  */
 public class CompatLineTextView extends TextView {
-    private int maxLine=Integer.MAX_VALUE;
+    private int maxLine = Integer.MAX_VALUE;
     private String ellipString = "...";
+    private static final int DEFAULT_VIEW_WIDTH = 200;
+    private int maxWidth;
 
     public CompatLineTextView(Context context) {
         this(context, null);
@@ -37,6 +39,21 @@ public class CompatLineTextView extends TextView {
     }
 
 
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        int parentSpecMode = MeasureSpec.getMode(widthMeasureSpec);
+        int parentSpecWidth = MeasureSpec.getSize(widthMeasureSpec);
+        //设置自身宽度
+        if (parentSpecMode == MeasureSpec.EXACTLY) {
+            maxWidth = parentSpecWidth; //建议：result直接使用确定值
+        } else if (parentSpecMode == MeasureSpec.AT_MOST) {
+            maxWidth = Math.min(DEFAULT_VIEW_WIDTH, parentSpecWidth);
+        } else {
+            maxWidth = DEFAULT_VIEW_WIDTH;
+        }
+        super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+    }
+
     protected void onDraw(Canvas canvas) {
         TextPaint mPaint = getPaint();
         mPaint.setColor(getCurrentTextColor());  //这里获取字体颜色
@@ -51,7 +68,10 @@ public class CompatLineTextView extends TextView {
         String contentText = getText().toString();
         if (contentText.isEmpty()) return;
 
-        int actualWidth = getMeasuredWidth() - getPaddingLeft() - getPaddingRight();
+        if (maxWidth<DEFAULT_VIEW_WIDTH){
+            maxWidth=DEFAULT_VIEW_WIDTH;
+        }
+        int actualWidth =maxWidth- getPaddingLeft() - getPaddingRight();
 
         //文本自动换行
         List<String> texts = autoSplit(contentText, mPaint, actualWidth);
@@ -68,7 +88,6 @@ public class CompatLineTextView extends TextView {
         int length = content.length();
         float textWidth = p.measureText(content);
         List<String> list = new ArrayList<>();
-
         //小于直接显示
         if (textWidth <= maxWidth) {
             list.add(content);
@@ -97,10 +116,10 @@ public class CompatLineTextView extends TextView {
         while (start < length) {
             float currentWidth = p.measureText(content, start, end);
             //到了最大行数显示
-            if (lineList.size()+1 == maxLine) {
+            if (lineList.size() + 1 == maxLine) {
                 if (currentWidth + ellipLength > maxWidth) { //文本宽度超出控件宽度时,要退1,从前一个字符截取做为一行
                     String endLine = (String) content.subSequence(start, end - 1);
-                    endLine=endLine.concat(ellipString);
+                    endLine = endLine.concat(ellipString);
                     lineList.add(endLine);
                     break;//结束
                 }
@@ -111,7 +130,8 @@ public class CompatLineTextView extends TextView {
             } //没有到最大行数限制
             else {
                 if (currentWidth > maxWidth) { //文本宽度超出控件宽度时,要退1,从前一个字符截取做为一行
-                    lineList.add((String) content.subSequence(start, end - 1));
+                    String lineStr = (String) content.subSequence(start, end - 1);
+                    lineList.add(lineStr);
                     end -= 1;
                     start = end;
                     continue;//开始下一行
