@@ -90,7 +90,9 @@ public class DensityUtils {
     }
 
     /**
-     *  Activity#onCreate  中使用
+     *  Activity#onCreate  和 onResume 中使用  ,如果Activity间 跳转，
+     *  如果其中一个activity 做适配 另一个activity 不做适配，
+     *  那么做适配的activity onResume 中要再设置一次
      */
     public static void setCustomActivityDensityInWidth(int dp, Activity activity, final Application application) {
         final DisplayMetrics applicationDisplayMetrics = application.getResources().getDisplayMetrics();
