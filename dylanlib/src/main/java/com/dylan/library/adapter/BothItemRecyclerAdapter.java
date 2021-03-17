@@ -8,11 +8,12 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
+import com.dylan.library.utils.EmptyUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class BothItemRecyclerAdapter<T> extends RecyclerView.Adapter implements IRecyclerAdapterDataBinder {
+public  abstract class BothItemRecyclerAdapter<T> extends RecyclerView.Adapter implements IRecyclerAdapterDataBinder {
     private static final int ITEM_SECOND = -1;//装饰item
     private static final int ITEM_ONE = 0; //内容item
     private List<T> mDataList;
@@ -138,6 +139,11 @@ public abstract class BothItemRecyclerAdapter<T> extends RecyclerView.Adapter im
         clear();
     }
 
+    @Override
+    public boolean isEmpty() {
+        return false;
+    }
+
 
     public void clear() {
         mDataList = null;
@@ -165,6 +171,14 @@ public abstract class BothItemRecyclerAdapter<T> extends RecyclerView.Adapter im
                 getDataList().addAll(list);
                 super.notifyItemRangeChanged(start, list.size());
             }
+        }
+
+    }
+
+    public void notifyAllData(){
+        if (EmptyUtils.isNotEmpty(getDataList())){
+            int len = getDataList().size();
+            super.notifyItemRangeChanged(0,len);
         }
 
     }

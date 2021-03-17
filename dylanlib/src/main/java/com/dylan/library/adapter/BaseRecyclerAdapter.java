@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.utils.ContextUtils;
+import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
 import java.lang.reflect.Constructor;
@@ -144,6 +145,8 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     }
 
 
+
+
     public void clear() {
         mDataList = null;
         notifyDataSetChanged();
@@ -164,6 +167,8 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     public boolean isEmpty() {
         return (mDataList == null || mDataList.size() == 0) ? true : false;
     }
+
+
 
     @Override
     public int getItemCount() {
@@ -235,6 +240,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     public void setOnItemClickListener(OnItemClickListener<T> listener) {
         mItemClickListener = listener;
     }
+
 
 
 }

@@ -15,8 +15,10 @@ import com.dylan.library.toast.ToastMsg;
 
 public class ToastUtils {
     private static Application applicationContext;
+    private static boolean hasInit;
 
     public static void initToast(Application application) {
+        hasInit=true;
         HJQToastUtils.init(application);
         if (ThreadUtils.isMainThread()) {
             applicationContext = application;
@@ -25,6 +27,10 @@ public class ToastUtils {
         }
     }
 
+
+    public static boolean hasInit(){
+        return hasInit;
+    }
 
 
 

@@ -9,9 +9,14 @@ import java.util.List;
  */
 public interface IRecyclerAdapterDataBinder {
     void hookBind(List list);
+
     void hookAddAllAndNotifyDataChanged(List list);
+
     int hookGetItemCount();
+
     void hookClear();
+
     boolean isEmpty();
+
 
 }
