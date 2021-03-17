@@ -38,6 +38,16 @@ public class FragmentAddDelPagerAdapter extends FragmentStatePagerAdapter {
         notifyDataSetChanged();
     }
 
+    public void bindFragment(List<Fragment> fragments,List<String> titles,OnBeforeNotifyDataChangedListener listener) {
+        if (EmptyUtils.isEmpty(fragments)) return;
+        this.mFragments.clear();
+        this.mFragments.addAll(fragments);
+        mTitles.clear();
+        mTitles.addAll(titles);
+        if (listener!=null)listener.onBeforeChanged();
+        notifyDataSetChanged();
+    }
+
     @Override
     public Fragment getItem(int arg0) {
         return mFragments.get(arg0);//
@@ -93,5 +103,9 @@ public class FragmentAddDelPagerAdapter extends FragmentStatePagerAdapter {
         mFragmentManager.beginTransaction().remove(fragment).commitNowAllowingStateLoss();
     }
 
+
+    public interface OnBeforeNotifyDataChangedListener{
+        void onBeforeChanged();
+    }
 
 }
