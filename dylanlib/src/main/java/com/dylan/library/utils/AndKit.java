@@ -12,7 +12,6 @@ import com.dylan.library.manager.AppSpManager;
 public class AndKit {
     public static void init(Application application){
         ToastUtils.initToast(application);
-        HJQToastUtils.init(application);
         CompatUtils.initContext(application);
         AppSpManager.init(application);
     }
