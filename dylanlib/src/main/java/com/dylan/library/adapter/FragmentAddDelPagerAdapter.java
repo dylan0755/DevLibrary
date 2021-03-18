@@ -1,7 +1,6 @@
 package com.dylan.library.adapter;
 
 import android.os.Parcelable;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -38,13 +37,24 @@ public class FragmentAddDelPagerAdapter extends FragmentStatePagerAdapter {
         notifyDataSetChanged();
     }
 
+
+    /**
+     * 在notifyDataSetChanged 先改变TabLayout,
+     *   mPagerAdapter.bindFragment(fragments, titles, new FragmentAddDelPagerAdapter.OnBeforeNotifyDataChangedListener() {
+     *                 @Override
+     *                 public void onBeforeNotify() {
+     *                     tabLayout.notifyDataSetChanged();
+     *                 }
+     *
+     *             });
+     */
     public void bindFragment(List<Fragment> fragments,List<String> titles,OnBeforeNotifyDataChangedListener listener) {
         if (EmptyUtils.isEmpty(fragments)) return;
         this.mFragments.clear();
         this.mFragments.addAll(fragments);
         mTitles.clear();
         mTitles.addAll(titles);
-        if (listener!=null)listener.onBeforeChanged();
+        if (listener!=null)listener.onBeforeNotify();
         notifyDataSetChanged();
     }
 
@@ -105,7 +115,7 @@ public class FragmentAddDelPagerAdapter extends FragmentStatePagerAdapter {
 
 
     public interface OnBeforeNotifyDataChangedListener{
-        void onBeforeChanged();
+        void onBeforeNotify();
     }
 
 }
