@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.dylan.library.adapter.CommonFragmentPagerAdapter;
 import com.dylan.library.graphics.ColorShades;
@@ -30,19 +29,18 @@ public class ColorShadesActivity extends AppCompatActivity {
     ViewPager viewPager;
     private List<Fragment> fragments = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
-    String[] colors = new String[]{"#323443", "#FFF9E4CF", "#182063"};
-
+    String[] backgroundColors = new String[]{"#323443", "#FFF9E4CF", "#FFAA2423"};
+    String[] tabColors = new String[]{"#FFFDE4BB", "#FF532622", "#FFF7D7A6"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_colorshades);
-        llTabLayoutBackground=findViewById(R.id.llTabLayoutBackground);
-        tabLayout=findViewById(R.id.tabLayout);
-        viewPager=findViewById(R.id.viewPager);
+        llTabLayoutBackground = findViewById(R.id.llTabLayoutBackground);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager = findViewById(R.id.viewPager);
         initView();
     }
-
 
 
     private void initView() {
@@ -58,20 +56,36 @@ public class ColorShadesActivity extends AppCompatActivity {
         commonFragmentPagerAdapter.addFragments(fragments);
         viewPager.setAdapter(commonFragmentPagerAdapter);
         tabLayout.setViewPager(viewPager);
-        llTabLayoutBackground.setBackgroundColor(Color.parseColor(colors[0]));
+        llTabLayoutBackground.setBackgroundColor(Color.parseColor(backgroundColors[0]));
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
-            ColorShades colorShades = new ColorShades();
+            ColorShades backgroundShades = new ColorShades();
+            ColorShades tabTextColorShades = new ColorShades();
+
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                String frontColorStr = colors[position % colors.length];
+                String frontColorStr = backgroundColors[position % backgroundColors.length];
                 if (EmptyUtils.isEmpty(frontColorStr)) frontColorStr = "#ffffff";
-                String toColorStr = colors[(position + 1) % colors.length];
+                String toColorStr = backgroundColors[(position + 1) % backgroundColors.length];
                 if (EmptyUtils.isEmpty(toColorStr)) toColorStr = "#ffffff";
-                colorShades.setFromColor(frontColorStr)
+                backgroundShades.setFromColor(frontColorStr)
                         .setToColor(toColorStr)
                         .setShade(positionOffset);
-                llTabLayoutBackground.setBackgroundColor(colorShades.generate());
+                llTabLayoutBackground.setBackgroundColor(backgroundShades.generate());
+
+
+                frontColorStr = tabColors[position % tabColors.length];
+                if (EmptyUtils.isEmpty(frontColorStr)) frontColorStr = "#ffffff";
+                toColorStr = tabColors[(position + 1) % tabColors.length];
+                if (EmptyUtils.isEmpty(toColorStr)) toColorStr = "#ffffff";
+                tabTextColorShades.setFromColor(frontColorStr)
+                        .setToColor(toColorStr)
+                        .setShade(positionOffset);
+                int tabColor = tabTextColorShades.generate();
+                tabLayout.setTextSelectColor(tabColor);
+                tabLayout.setTextUnselectColor(tabColor);
             }
+
+
         });
 
 
