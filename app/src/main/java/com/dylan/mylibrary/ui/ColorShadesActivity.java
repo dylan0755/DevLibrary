@@ -29,8 +29,7 @@ public class ColorShadesActivity extends AppCompatActivity {
     ViewPager viewPager;
     private List<Fragment> fragments = new ArrayList<>();
     private List<String> titles = new ArrayList<>();
-    String[] backgroundColors = new String[]{"#323443", "#FFF9E4CF", "#FFAA2423"};
-    String[] tabColors = new String[]{"#FFFDE4BB", "#FF532622", "#FFF7D7A6"};
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,6 +55,10 @@ public class ColorShadesActivity extends AppCompatActivity {
         commonFragmentPagerAdapter.addFragments(fragments);
         viewPager.setAdapter(commonFragmentPagerAdapter);
         tabLayout.setViewPager(viewPager);
+
+
+        final String[] backgroundColors = new String[]{"#323443", "#FFF9E4CF", "#FFAA2423"};
+        final String[] tabColors = new String[]{"#FFFDE4BB", "#FF532622", "#FFF7D7A6"};
         llTabLayoutBackground.setBackgroundColor(Color.parseColor(backgroundColors[0]));
         viewPager.addOnPageChangeListener(new ViewPager.SimpleOnPageChangeListener() {
             ColorShades backgroundShades = new ColorShades();
