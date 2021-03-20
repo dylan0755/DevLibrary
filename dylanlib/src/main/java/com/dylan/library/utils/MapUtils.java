@@ -13,7 +13,7 @@ import java.util.Map;
  * Desc:
  */
 
-class MapUtils {
+public class MapUtils {
 
 
     public static void sortMapByASCII(Map<String, ?> paraMap){
