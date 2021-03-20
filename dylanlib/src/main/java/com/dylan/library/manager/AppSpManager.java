@@ -46,6 +46,8 @@ public class AppSpManager {
         return appSpManager;
     }
 
+
+
     /**
      * 单例模式，获取instance实例
      *
@@ -61,7 +63,10 @@ public class AppSpManager {
 
         return true;
     }
-
+    public static boolean contains(String key) {
+        if (!check()) return false;
+        return sharedPreferences.contains(key);
+    }
 
     public static void putBoolean(String key, boolean value) {
         if (!check()) return;
@@ -201,7 +206,7 @@ public class AppSpManager {
 
 
     //保存list数据
-    public static void putList(String key, Gson gson, List<String> list) {
+    public static void putList(String key,List<String> list, Gson gson) {
         if (EmptyUtils.isEmpty(list)) return;
         //转换成json数据，再保存
         putString(key, gson.toJson(list));
