@@ -104,12 +104,12 @@ public class AppSpManager {
         sharedPreferences.edit().putInt(key, value).apply();
     }
 
-    public static float getInt(String key) {
+    public static int getInt(String key) {
         if (!check())return  0;
         return sharedPreferences.getInt(key,0);
     }
 
-    public static float getInt(String key, int defValue) {
+    public static int getInt(String key, int defValue) {
         if (!check())return  0;
         return sharedPreferences.getInt(key,defValue);
     }

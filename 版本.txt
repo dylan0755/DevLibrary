@@ -6,7 +6,7 @@ V5.2.0
 1.CompatUtils 默认初始化 AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); 安卓5.0 以下使用Vector
 2.新增 ColorShades ,两个颜色之间进行渐变，应用于滑动ViewPager,顶部TabLayout 颜色渐变
 3.MapUtils,对Map 排序，拼接 Map 中的value
-
+4.修復AppSpManager getInt 返回 float問題 
 
 
 
