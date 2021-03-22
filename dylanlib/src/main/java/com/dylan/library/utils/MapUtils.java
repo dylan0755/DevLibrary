@@ -16,17 +16,6 @@ import java.util.Map;
 public class MapUtils {
 
 
-    public static void sortMapByASCII(Map<String, ?> paraMap){
-        List<Map.Entry<String, ?>> infoIds = new ArrayList<Map.Entry<String, ?>>(paraMap.entrySet());
-        // 对所有传入参数按照字段名的 ASCII 码从小到大排序（字典序）
-        Collections.sort(infoIds, new Comparator<Map.Entry<String, ?>>() {
-            @Override
-            public int compare(Map.Entry<String, ?> o1, Map.Entry<String, ?> o2) {
-                return (o1.getKey()).compareTo(o2.getKey());
-            }
-        });
-    }
-
 
     public static String sortAndJointMapValue(Map<String,String> map){
         return sortAndJointMapValue(map,false);
@@ -35,9 +24,16 @@ public class MapUtils {
     public static String sortAndJointMapValue(Map<String, String> paraMap, boolean urlEncode) {
         String buff = "";
         try {
-            sortMapByASCII(paraMap);
+            List<Map.Entry<String, String>> infoIds = new ArrayList<Map.Entry<String, String>>(paraMap.entrySet());
+            // 对所有传入参数按照字段名的 ASCII 码从小到大排序（字典序）
+            Collections.sort(infoIds, new Comparator<Map.Entry<String, ?>>() {
+                @Override
+                public int compare(Map.Entry<String, ?> o1, Map.Entry<String, ?> o2) {
+                    return (o1.getKey()).compareTo(o2.getKey());
+                }
+            });
             StringBuilder buf = new StringBuilder();
-            for (Map.Entry<String, String> item : paraMap.entrySet()) {
+            for (Map.Entry<String, String> item : infoIds) {
                 if (EmptyUtils.isNotBlank(item.getKey())) {
                     String val = item.getValue();
                     if (urlEncode) {
