@@ -29,7 +29,7 @@ public class SmsCodeCounter {
     private int count;
     private int mDuration = 60;
     private String reGetCodeText = "重新获取";
-    private String textAfterCountDownNumber="后重新获取";
+    private String CountDownNumberText="重新获取";
     private Drawable normalDrawable;
     private Drawable countDownDrawable;
     private int normalTextColor=Color.WHITE;
@@ -62,7 +62,7 @@ public class SmsCodeCounter {
     }
 
     public void setTextAfterCountDownNumber(String text){
-        textAfterCountDownNumber=text;
+        CountDownNumberText=text;
     }
 
     public void checkRecord() {
@@ -90,7 +90,7 @@ public class SmsCodeCounter {
                 if (mOnCountDownListener!=null)mOnCountDownListener.onFinish();
             } else {
                 String text = String.format("%1$ds", count);
-                tvValidateCode.setText(text + textAfterCountDownNumber);
+                tvValidateCode.setText(CountDownNumberText+" "+text);
                 count--;
                 counterHandler.sendEmptyMessageDelayed(0, 1000L);
                 if (mOnCountDownListener!=null)mOnCountDownListener.onTick(count);
@@ -109,7 +109,7 @@ public class SmsCodeCounter {
     private boolean start(int count) {
         this.count = count;
         String text = String.format("%1$ds", count);
-        tvValidateCode.setText(text + textAfterCountDownNumber);
+        tvValidateCode.setText(CountDownNumberText+" "+text);
         tvValidateCode.setTextColor(countDownTextColor);
         if (countDownDrawable!=null)tvValidateCode.setBackground(countDownDrawable);
         tvValidateCode.setEnabled(false);
