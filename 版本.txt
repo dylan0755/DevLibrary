@@ -7,7 +7,7 @@ V5.2.0
 2.新增 ColorShades ,两个颜色之间进行渐变，应用于滑动ViewPager,顶部TabLayout 颜色渐变
 3.MapUtils,对Map 排序，拼接 Map 中的value
 4.新增 contains(String key)  修复AppSpManager getInt 返回 float問題,AppSpManager 新增 Bean 和 List 的存取
-
+5.新增 LetterNumberEditText 封装只能输入字母数字
 
 
 
