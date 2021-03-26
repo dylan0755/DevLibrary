@@ -12,6 +12,7 @@ import com.dylan.library.utils.DensityUtils;
 
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.ParamMapBuilder;
+import com.dylan.library.utils.SpannableStringUtils;
 import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
@@ -81,7 +82,6 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
-
 
     }
 

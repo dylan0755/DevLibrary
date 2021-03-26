@@ -154,7 +154,63 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    public static SpannableString getClickTintResizeSpanStr(String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
+
+
+
+
+
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
+        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, start, end, colorValue, clickListener);
+        textView.setText(spannableString);
+        if (textView instanceof ClickableSpanTextView) {
+            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        } else {
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        return spannableString;
+    }
+
+
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, String tintKeyWord,int dp,  int colorValue, final View.OnClickListener clickListener) {
+        SpannableString spannableString = getClickTintResizeSpanStr(fullText,tintKeyWord, dp, colorValue, clickListener);
+        textView.setText(spannableString);
+        if (textView instanceof ClickableSpanTextView) {
+            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        } else {
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        return spannableString;
+    }
+
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener) {
+        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, start1, end1, start2, end2, colorValue1, colorValue2, clickListener);
+        textView.setText(spannableString);
+        if (textView instanceof ClickableSpanTextView) {
+            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        } else {
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        return spannableString;
+    }
+
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp,String keyWord1,String keyWord2, final int colorValue1, final int colorValue2,final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
+        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, keyWord1, keyWord2, colorValue1, colorValue2, clickListener1,clickListener2);
+        textView.setText(spannableString);
+        if (textView instanceof ClickableSpanTextView) {
+            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
+        } else {
+            textView.setMovementMethod(LinkMovementMethod.getInstance());
+        }
+        return spannableString;
+    }
+
+
+
+
+
+
+
+    private static SpannableString getClickTintResizeSpanStr(String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
         ClickableSpan clickableSpan = new ClickableSpan() {
             public void onClick(View v) {
                 Selection.removeSelection((Spannable) ((TextView) v).getText());
@@ -184,7 +240,7 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    public static SpannableString getClickTintResizeSpanStr(String text, String tintKeyWord,int dp, final int  colorValue, final View.OnClickListener clickListener) {
+    private static SpannableString getClickTintResizeSpanStr(String text, String tintKeyWord,int dp, final int  colorValue, final View.OnClickListener clickListener) {
         if (text == null) text = "";
         if (tintKeyWord == null) tintKeyWord = "";
         int start=text.indexOf(tintKeyWord);
@@ -218,7 +274,7 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    public static SpannableString getClickTintResizeSpanStr(String fullText, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener) {
+    private static SpannableString getClickTintResizeSpanStr(String fullText, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener) {
         ClickableSpan clickableSpan = new ClickableSpan() {
             public void onClick(View v) {
                 Selection.removeSelection((Spannable) ((TextView) v).getText());
@@ -251,7 +307,7 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    public static SpannableString getClickTintResizeSpanStr(String fullText, int dp,String keyWord1,String keyWord2, final int colorValue1, final int colorValue2,final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
+    private static SpannableString getClickTintResizeSpanStr(String fullText, int dp,String keyWord1,String keyWord2, final int colorValue1, final int colorValue2,final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
 
         int start1=fullText.indexOf(keyWord1);
         int end1=start1+keyWord1.length();
@@ -308,54 +364,6 @@ public class SpannableStringUtils {
         //点击
         spannableString.setSpan(clickableSpan1, start1, end1, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         spannableString.setSpan(clickableSpan2, start2, end2, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
-        return spannableString;
-    }
-
-
-
-
-    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
-        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, start, end, colorValue, clickListener);
-        textView.setText(spannableString);
-        if (textView instanceof ClickableSpanTextView) {
-            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
-        } else {
-            textView.setMovementMethod(LinkMovementMethod.getInstance());
-        }
-        return spannableString;
-    }
-
-
-    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, String tintKeyWord,int dp,  int colorValue, final View.OnClickListener clickListener) {
-        SpannableString spannableString = getClickTintResizeSpanStr(fullText,tintKeyWord, dp, colorValue, clickListener);
-        textView.setText(spannableString);
-        if (textView instanceof ClickableSpanTextView) {
-            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
-        } else {
-            textView.setMovementMethod(LinkMovementMethod.getInstance());
-        }
-        return spannableString;
-    }
-
-    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp, int start1, int end1, int start2, int end2, int colorValue1, final int colorValue2, final View.OnClickListener clickListener) {
-        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, start1, end1, start2, end2, colorValue1, colorValue2, clickListener);
-        textView.setText(spannableString);
-        if (textView instanceof ClickableSpanTextView) {
-            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
-        } else {
-            textView.setMovementMethod(LinkMovementMethod.getInstance());
-        }
-        return spannableString;
-    }
-
-    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp,String keyWord1,String keyWord2, final int colorValue1, final int colorValue2,final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
-        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, keyWord1, keyWord2, colorValue1, colorValue2, clickListener1,clickListener2);
-        textView.setText(spannableString);
-        if (textView instanceof ClickableSpanTextView) {
-            ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
-        } else {
-            textView.setMovementMethod(LinkMovementMethod.getInstance());
-        }
         return spannableString;
     }
 }
