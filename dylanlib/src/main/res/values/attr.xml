@@ -36,6 +36,7 @@
         <attr name="android:paddingLeft"/>
         <attr name="android:paddingRight"/>
         <attr name="dashWith" format="dimension"/>
+        <attr name="dashHeight" format="dimension"/>
         <attr name="dashGap"/>
     </declare-styleable>
 

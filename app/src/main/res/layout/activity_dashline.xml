@@ -66,4 +66,15 @@
         app:dashWith="12dp"
         app:dashGap="3dp"
         />
+
+
+
+    <com.dylan.library.widget.VerticalDashLineView
+        android:layout_width="1dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="18dp"
+        app:dashLineColor="#333333"
+        app:dashHeight="3dp"
+        app:dashGap="3dp"/>
 </LinearLayout>
