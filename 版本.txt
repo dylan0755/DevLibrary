@@ -10,7 +10,7 @@ V5.2.0
 5.新增 LetterNumberEditText 封装只能输入字母数字
 6.SpannableStringUtils 隐藏 getClickTintResizeSpanStr方法，设置点击用setClickTintResizeSpanStr
 7.新增 VerticalDashLineView 垂直虚线
-
+8.新增FastClickUtils
 
 
 V5.1.0 ---->2021.3.18
