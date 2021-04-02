@@ -11,6 +11,11 @@ V5.2.0
 6.SpannableStringUtils 隐藏 getClickTintResizeSpanStr方法，设置点击用setClickTintResizeSpanStr
 7.新增 VerticalDashLineView 垂直虚线
 8.新增FastClickUtils
+9.DateUtils 新增 isSameDay(Date firstDate,Date secondDate) 判断是否为同一天
+
+
+
+
 
 
 V5.1.0 ---->2021.3.18

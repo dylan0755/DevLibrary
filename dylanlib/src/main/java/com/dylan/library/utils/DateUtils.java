@@ -491,4 +491,23 @@ public class DateUtils {
 
     }
 
+
+
+    public static boolean isSameDay(Date firstDate,Date secondDate) {
+        if (firstDate == null) {
+            throw new IllegalArgumentException("date is null");
+        }
+        if (secondDate == null) {
+            throw new IllegalArgumentException("date is null");
+        }
+
+        Calendar firstCalendar = Calendar.getInstance();
+        firstCalendar.setTime(firstDate);
+        Calendar secondCalendar = Calendar.getInstance();
+        secondCalendar.setTime(secondDate);
+        return (firstCalendar.get(Calendar.ERA) == secondCalendar.get(Calendar.ERA) &&
+                firstCalendar.get(Calendar.YEAR) == secondCalendar.get(Calendar.YEAR) &&
+                firstCalendar.get(Calendar.DAY_OF_YEAR) == secondCalendar.get(Calendar.DAY_OF_YEAR));
+    }
+
 }
