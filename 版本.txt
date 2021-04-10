@@ -12,7 +12,7 @@ V5.2.0
 7.新增 VerticalDashLineView 垂直虚线
 8.新增FastClickUtils
 9.DateUtils 新增 isSameDay(Date firstDate,Date secondDate) 判断是否为同一天
-
+10.新增 TimerClock 计时器
 
 
 
