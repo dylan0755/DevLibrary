@@ -19,6 +19,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -225,6 +226,19 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     public int hookGetItemCount() {
         return getItemCount();
     }
+
+
+    public void onItemMove(int fromPosition, int toPosition) {
+        Collections.swap(getDataList(), fromPosition, toPosition);
+        notifyItemMoved(fromPosition, toPosition);
+    }
+
+    public void onItemDismiss(int position) {
+        getDataList().remove(position);
+        notifyItemRemoved(position);
+    }
+
+
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public ViewHolder(View itemView) {

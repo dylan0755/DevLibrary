@@ -13,7 +13,7 @@ V5.2.0
 8.新增FastClickUtils
 9.DateUtils 新增 isSameDay(Date firstDate,Date secondDate) 判断是否为同一天
 10.新增 TimerClock 计时器
-
+11.新增 LongPressDragItemTouchHelper ，RecyclerView长按拖拽
 
 
 
