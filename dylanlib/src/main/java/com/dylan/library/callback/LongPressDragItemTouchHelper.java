@@ -25,6 +25,7 @@ public class LongPressDragItemTouchHelper extends ItemTouchHelper.Callback {
     private final Vibrator mVibrator;
     private Drawable backgroundDrawable;
     private int pressColor=Color.LTGRAY;
+    private OnAfterDragCallBack mDragCallBack;
 
     public LongPressDragItemTouchHelper(Context context, BaseRecyclerAdapter adapter) {
         mAdapter = adapter;
@@ -68,6 +69,9 @@ public class LongPressDragItemTouchHelper extends ItemTouchHelper.Callback {
         if (backgroundDrawable!=null){
             viewHolder.itemView.setBackground(backgroundDrawable);
         }
+        if (mDragCallBack!=null){
+            mDragCallBack.afterDrag();
+        }
 
     }
 
@@ -85,5 +89,16 @@ public class LongPressDragItemTouchHelper extends ItemTouchHelper.Callback {
     @Override
     public boolean isLongPressDragEnabled() {
         return true;
+    }
+
+
+
+    public interface OnAfterDragCallBack{
+        void afterDrag();
+    }
+
+
+    public void setOnAfterDragCallBack(OnAfterDragCallBack callBack){
+        mDragCallBack=callBack;
     }
 }
