@@ -1,6 +1,12 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
+V5.2.1
+1.GradientDrawableBuilder 增加 setAlpha
+
+
+
+
 
 V5.2.0 ---->2021.4.13
 1.CompatUtils 默认初始化 AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); 安卓5.0 以下使用Vector

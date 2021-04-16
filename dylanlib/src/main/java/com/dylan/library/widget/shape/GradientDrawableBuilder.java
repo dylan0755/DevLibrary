@@ -79,6 +79,11 @@ public class GradientDrawableBuilder {
         return this;
     }
 
+    public GradientDrawableBuilder setAlpha(float alpha){
+        drawable.setAlpha((int) (alpha*255.0f));
+        return this;
+    }
+
     public GradientDrawableBuilder setGradientColors(int[] colors,int angle){
         drawable.setColors(colors);
         if (angle==0||angle==360){
@@ -92,6 +97,10 @@ public class GradientDrawableBuilder {
         }
         return this;
     }
+
+
+
+
 
 
     public GradientDrawable build() {
