@@ -95,13 +95,12 @@ public class NormalTabSwitcher extends LinearLayout implements View.OnClickListe
         int position = (int) v.getTag();
         if (position == currentPosition) return;
         switchTo(position);
-        currentPosition = position;
         if (tabListener != null) tabListener.select(position, v);
-
     }
 
 
     public void switchTo(int position) {
+        currentPosition = position;
         for (int i = 0; i < getChildCount(); i++) {
             if (i == position) {
                 select(i);
@@ -109,6 +108,7 @@ public class NormalTabSwitcher extends LinearLayout implements View.OnClickListe
                 unselect(i);
             }
         }
+
     }
 
 
