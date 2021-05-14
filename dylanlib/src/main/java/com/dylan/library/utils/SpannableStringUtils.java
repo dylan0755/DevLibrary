@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.text.Selection;
 import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
@@ -19,6 +20,10 @@ import android.widget.TextView;
 
 import com.dylan.library.widget.ClickableLinkMovementMethod;
 import com.dylan.library.widget.ClickableSpanTextView;
+
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -373,5 +378,43 @@ public class SpannableStringUtils {
         return spanStrikethrough;
     }
 
+
+    public static SpannableStringBuilder findSpecWordAndHighLight(String srcText,String keyWord,int highLightColor){
+        if (EmptyUtils.isEmpty(srcText))return new SpannableStringBuilder("");
+        SpannableStringBuilder spannable = new SpannableStringBuilder(srcText);
+        Pattern p = Pattern.compile(Pattern.quote(keyWord));//关键字
+        Matcher m = p.matcher(srcText);//匹配关键字
+        while (m.find()) {
+            int start = m.start();
+            if (start >= 0) {
+                int end = start + keyWord.length();
+                spannable.setSpan(new ForegroundColorSpan(highLightColor), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
+            }
+        }
+        return spannable;
+    }
+
+
+
+    public static SpannableStringBuilder findSpecWordAndHighLight(String srcText, List<String> keyWords, int highLightColor){
+        if (EmptyUtils.isEmpty(srcText))return new SpannableStringBuilder("");
+        SpannableStringBuilder spannable = new SpannableStringBuilder(srcText);
+        if (EmptyUtils.isNotEmpty(keyWords)) {
+            for (String sensitiveContentWord : keyWords) {
+                Pattern p = Pattern.compile(Pattern.quote(sensitiveContentWord));//关键字
+                Matcher m = p.matcher(srcText);//匹配关键字
+                while (m.find()) {
+                    int start = m.start();
+                    if (start >= 0) {
+                        int end = start + sensitiveContentWord.length();
+                        spannable.setSpan(new ForegroundColorSpan(highLightColor), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
+                    }
+
+                }
+            }
+        }
+
+        return spannable;
+    }
 
 }

@@ -2,7 +2,9 @@ package com.dylan.library.utils;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Spannable;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
@@ -16,6 +18,7 @@ import org.json.JSONObject;
 import java.math.BigDecimal;
 import java.net.URLDecoder;
 import java.util.Iterator;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -452,6 +455,17 @@ public class StringUtils {
         }
 
         return stringBuilder.toString();
+    }
+
+    public static SpannableStringBuilder findSpecWordAndHighLight(String srcText,String keyWord,int highLightColor){
+
+        return SpannableStringUtils.findSpecWordAndHighLight(srcText,keyWord,highLightColor);
+    }
+
+
+
+    public static SpannableStringBuilder findSpecWordAndHighLight(String srcText, List<String> keyWords, int highLightColor){
+        return SpannableStringUtils.findSpecWordAndHighLight(srcText,keyWords,highLightColor);
     }
 
 
