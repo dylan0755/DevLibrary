@@ -5,7 +5,7 @@ V5.3.0
 1.GradientDrawableBuilder 增加 setAlpha
 2.BeanUtils cloneSerializableObject  拷贝对象，要序列化
 3.StringUtils, SpannableStringUtils 新增 findSpecWordAndHighLight ，从字符串中找出关键字并高亮，如检测敏感词场景
-
+4.新增DialogUtils ，keepStatusBarSameStyleWithActivity Dialog 弹出时状态栏字体颜色不会改变
 
 
 V5.2.0 ---->2021.4.13
