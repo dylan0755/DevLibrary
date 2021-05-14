@@ -3,7 +3,7 @@
 
 V5.2.1
 1.GradientDrawableBuilder 增加 setAlpha
-
+2.BeanUtils cloneSerializableObject  拷贝对象，要序列化
 
 
 

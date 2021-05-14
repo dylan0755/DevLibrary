@@ -11,6 +11,7 @@ import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.LeadingMarginSpan;
+import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
 import android.text.style.UnderlineSpan;
 import android.view.View;
@@ -146,17 +147,13 @@ public class SpannableStringUtils {
     public static SpannableString getUnderLineTintSpannableString(String fullText, String tintKeyWord, String colorString) {
         if (fullText == null) fullText = "";
         if (tintKeyWord == null) tintKeyWord = "";
-        int colorValue=Color.parseColor(colorString);
+        int colorValue = Color.parseColor(colorString);
         int start = fullText.indexOf(tintKeyWord);
         int end = start + tintKeyWord.length();
         SpannableString spannableString = getUnderLineSpannableString(fullText);
         spannableString = getTintSpannableString(spannableString, start, end, colorValue);
         return spannableString;
     }
-
-
-
-
 
 
     public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
@@ -171,8 +168,8 @@ public class SpannableStringUtils {
     }
 
 
-    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, String tintKeyWord,int dp,  int colorValue, final View.OnClickListener clickListener) {
-        SpannableString spannableString = getClickTintResizeSpanStr(fullText,tintKeyWord, dp, colorValue, clickListener);
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, String tintKeyWord, int dp, int colorValue, final View.OnClickListener clickListener) {
+        SpannableString spannableString = getClickTintResizeSpanStr(fullText, tintKeyWord, dp, colorValue, clickListener);
         textView.setText(spannableString);
         if (textView instanceof ClickableSpanTextView) {
             ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
@@ -193,8 +190,8 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp,String keyWord1,String keyWord2, final int colorValue1, final int colorValue2,final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
-        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, keyWord1, keyWord2, colorValue1, colorValue2, clickListener1,clickListener2);
+    public static SpannableString setClickTintResizeSpanStr(TextView textView, String fullText, int dp, String keyWord1, String keyWord2, final int colorValue1, final int colorValue2, final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
+        SpannableString spannableString = getClickTintResizeSpanStr(fullText, dp, keyWord1, keyWord2, colorValue1, colorValue2, clickListener1, clickListener2);
         textView.setText(spannableString);
         if (textView instanceof ClickableSpanTextView) {
             ((ClickableSpanTextView) textView).setLocalLinkMovementMethod(ClickableLinkMovementMethod.getInstance());
@@ -203,11 +200,6 @@ public class SpannableStringUtils {
         }
         return spannableString;
     }
-
-
-
-
-
 
 
     private static SpannableString getClickTintResizeSpanStr(String text, int dp, int start, int end, final int colorValue, final View.OnClickListener clickListener) {
@@ -240,11 +232,11 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    private static SpannableString getClickTintResizeSpanStr(String text, String tintKeyWord,int dp, final int  colorValue, final View.OnClickListener clickListener) {
+    private static SpannableString getClickTintResizeSpanStr(String text, String tintKeyWord, int dp, final int colorValue, final View.OnClickListener clickListener) {
         if (text == null) text = "";
         if (tintKeyWord == null) tintKeyWord = "";
-        int start=text.indexOf(tintKeyWord);
-        int end=start+tintKeyWord.length();
+        int start = text.indexOf(tintKeyWord);
+        int end = start + tintKeyWord.length();
         ClickableSpan clickableSpan = new ClickableSpan() {
             public void onClick(View v) {
                 Selection.removeSelection((Spannable) ((TextView) v).getText());
@@ -307,13 +299,13 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
-    private static SpannableString getClickTintResizeSpanStr(String fullText, int dp,String keyWord1,String keyWord2, final int colorValue1, final int colorValue2,final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
+    private static SpannableString getClickTintResizeSpanStr(String fullText, int dp, String keyWord1, String keyWord2, final int colorValue1, final int colorValue2, final View.OnClickListener clickListener1, final View.OnClickListener clickListener2) {
 
-        int start1=fullText.indexOf(keyWord1);
-        int end1=start1+keyWord1.length();
+        int start1 = fullText.indexOf(keyWord1);
+        int end1 = start1 + keyWord1.length();
 
-        int start2=fullText.indexOf(keyWord2);
-        int end2=start2+keyWord2.length();
+        int start2 = fullText.indexOf(keyWord2);
+        int end2 = start2 + keyWord2.length();
 
 
         ClickableSpan clickableSpan1 = new ClickableSpan() {
@@ -366,4 +358,20 @@ public class SpannableStringUtils {
         spannableString.setSpan(clickableSpan2, start2, end2, Spanned.SPAN_INCLUSIVE_INCLUSIVE);
         return spannableString;
     }
+
+
+    public static SpannableString getStrikeThruText(String text) {
+        if (text==null)return null;
+        return getStrikeThruText(text,0,text.length());
+    }
+
+    public static SpannableString getStrikeThruText(String text, int start, int end) {
+        if (text == null) return null;
+        SpannableString spanStrikethrough = new SpannableString(text);
+        StrikethroughSpan stSpan = new StrikethroughSpan();
+        spanStrikethrough.setSpan(stSpan, start, end, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        return spanStrikethrough;
+    }
+
+
 }
