@@ -51,6 +51,7 @@ public abstract class BottomSlideDialogFragment extends DialogFragment {
         params.horizontalMargin = 0;
         getDialog().getWindow().setAttributes(params);
         contentView = inflater.inflate(getLayoutId(), container, false);
+        hasInitContentView(contentView);
         onFragmentCreate();
         return contentView;
     }
@@ -81,6 +82,9 @@ public abstract class BottomSlideDialogFragment extends DialogFragment {
     }
 
 
+    protected void hasInitContentView(View view){
+
+    }
 
 
 
