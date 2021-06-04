@@ -8,7 +8,7 @@ V5.3.0
 4.新增DialogUtils ，keepStatusBarSameStyleWithActivity Dialog 弹出时状态栏字体颜色不会改变
 5.新增 HighLightStateDrawableGroup ，处理页面按钮的置灰与高亮的切换
 6.新增 BottomSlideDialogFragment
-
+7.更新 BundleBuilder  支持链式
 
 
 V5.2.0 ---->2021.4.13
