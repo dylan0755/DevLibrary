@@ -2,11 +2,13 @@ package com.dylan.library.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.AppCompatTextView;
 import android.text.Layout;
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -15,18 +17,21 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.AlignmentSpan;
 import android.text.style.ClickableSpan;
+import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
+import com.dylan.library.utils.Logger;
+
 import java.lang.reflect.Field;
 
 /**
  * Author: Dylan
  * Date: 2021/05/29
- * Desc:
+ * Desc: 布局里面不要设置padding， 用margin 代替，否则展开 不会在文本末尾
  */
 public class ExpandableTextView extends AppCompatTextView {
     private static final String TAG = ExpandableTextView.class.getSimpleName();
@@ -54,6 +59,10 @@ public class ExpandableTextView extends AppCompatTextView {
     private String mOpenSuffixStr = DEFAULT_OPEN_SUFFIX;
     private String mCloseSuffixStr = DEFAULT_CLOSE_SUFFIX;
     private int mOpenSuffixColor, mCloseSuffixColor;
+    private Drawable openDrawable,closeDrawable;
+    private int openDrawableWidth,openDrawableHeight;
+    private int closeDrawableWidth,closeDrawableHeight;
+    private boolean isSuffixBold;
 
     private OnClickListener mOnClickListener;
 
@@ -76,6 +85,7 @@ public class ExpandableTextView extends AppCompatTextView {
 
     /** 初始化 */
     private void initialize() {
+        setHighlightColor(Color.TRANSPARENT);
         mOpenSuffixColor = mCloseSuffixColor = Color.parseColor("#F23030");
         setMovementMethod(OverLinkMovementMethod.getInstance());
         setIncludeFontPadding(false);
@@ -137,13 +147,13 @@ public class ExpandableTextView extends AppCompatTextView {
                     tempLayout = createStaticLayout(tempText2);
 
                 }
-                int lastSpace = mCloseSpannableStr.length() - mOpenSuffixSpan.length();
-                if(lastSpace >= 0 && originalText.length() > lastSpace){
-                    CharSequence redundantChar = originalText.subSequence(lastSpace, lastSpace + mOpenSuffixSpan.length());
-                    int offset = hasEnCharCount(redundantChar) - hasEnCharCount(mOpenSuffixSpan) + 1;
-                    lastSpace = offset <= 0 ? lastSpace : lastSpace - offset;
-                    mCloseSpannableStr = charSequenceToSpannable(originalText.subSequence(0, lastSpace));
-                }
+//                int lastSpace = mCloseSpannableStr.length() - mOpenSuffixSpan.length();
+//                if(lastSpace >= 0 && originalText.length() > lastSpace){
+//                    CharSequence redundantChar = originalText.subSequence(lastSpace, lastSpace + mOpenSuffixSpan.length());
+//                    int offset = hasEnCharCount(redundantChar) - hasEnCharCount(mOpenSuffixSpan) + 1;
+//                    lastSpace = offset <= 0 ? lastSpace : lastSpace - offset;
+//                    mCloseSpannableStr = charSequenceToSpannable(originalText.subSequence(0, lastSpace));
+//                }
                 //计算收起的文本高度
                 mCLoseHeight = tempLayout.getHeight() + getPaddingTop() + getPaddingBottom();
 
@@ -430,6 +440,25 @@ public class ExpandableTextView extends AppCompatTextView {
         updateCloseSuffixSpan();
     }
 
+    public void setSuffixBold(boolean suffixBold) {
+        isSuffixBold = suffixBold;
+    }
+
+    public void setOpenDrawable(Drawable drawable, int width, int height){
+        openDrawable=drawable;
+        openDrawableWidth=width;
+        openDrawableHeight=height;
+        updateOpenSuffixSpan();
+    }
+
+
+    public void setCloseDrawable(Drawable drawable,int width,int height){
+        closeDrawable=drawable;
+        closeDrawableWidth=width;
+        closeDrawableHeight=height;
+        updateCloseSuffixSpan();
+    }
+
     /** 更新展开后缀Spannable */
     private void updateOpenSuffixSpan() {
         if (TextUtils.isEmpty(mOpenSuffixStr)) {
@@ -437,7 +466,16 @@ public class ExpandableTextView extends AppCompatTextView {
             return;
         }
         mOpenSuffixSpan = new SpannableString(mOpenSuffixStr);
-        mOpenSuffixSpan.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, mOpenSuffixStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //把"展开"替换成图片
+        if (openDrawable!=null){
+            openDrawable.setBounds(0, 0, openDrawableWidth, openDrawableHeight);  //确定图标所在的矩形位置，这里应该是要以text文本的下边距为基准的
+            ImageSpan imageSpan = new ImageSpan(openDrawable);
+            mOpenSuffixSpan.setSpan(imageSpan,mOpenSuffixStr.length()-2,mOpenSuffixStr.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        }else{
+            if (isSuffixBold)mOpenSuffixSpan.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, mOpenSuffixStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+
         mOpenSuffixSpan.setSpan(new ClickableSpan() {
             @Override
             public void onClick(@NonNull View widget) {
@@ -446,9 +484,10 @@ public class ExpandableTextView extends AppCompatTextView {
 
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
-                super.updateDrawState(ds);
                 ds.setColor(mOpenSuffixColor);
                 ds.setUnderlineText(false);
+                ds.bgColor=Color.TRANSPARENT;
+                ds.linkColor=Color.TRANSPARENT;
             }
         },0, mOpenSuffixStr.length(), Spanned.SPAN_EXCLUSIVE_INCLUSIVE);
     }
@@ -460,7 +499,15 @@ public class ExpandableTextView extends AppCompatTextView {
             return;
         }
         mCloseSuffixSpan = new SpannableString(mCloseSuffixStr);
-        mCloseSuffixSpan.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, mCloseSuffixStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        if (closeDrawable!=null){
+            closeDrawable.setBounds(0, 0, closeDrawableWidth, closeDrawableHeight);  //确定图标所在的矩形位置，这里应该是要以text文本的下边距为基准的
+            ImageSpan imageSpan = new ImageSpan(closeDrawable);
+            mCloseSuffixSpan.setSpan(imageSpan,mOpenSuffixStr.length()-2,mOpenSuffixStr.length(), Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
+        }else{
+            if (isSuffixBold)mCloseSuffixSpan.setSpan(new StyleSpan(android.graphics.Typeface.BOLD), 0, mCloseSuffixStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
+
         if (mCloseInNewLine) {
             AlignmentSpan alignmentSpan = new AlignmentSpan.Standard(Layout.Alignment.ALIGN_OPPOSITE);
             mCloseSuffixSpan.setSpan(alignmentSpan, 0, 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -473,9 +520,10 @@ public class ExpandableTextView extends AppCompatTextView {
 
             @Override
             public void updateDrawState(@NonNull TextPaint ds) {
-                super.updateDrawState(ds);
                 ds.setColor(mCloseSuffixColor);
                 ds.setUnderlineText(false);
+                ds.bgColor=Color.TRANSPARENT;
+                ds.linkColor=Color.TRANSPARENT;
             }
         },1, mCloseSuffixStr.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
     }
