@@ -10,7 +10,7 @@ V5.3.0
 6.新增 BottomSlideDialogFragment
 7.更新 BundleBuilder  支持链式
 8.新增ExpandableTextView
-
+9.新增 AutoSplitTextView 解决 数字、字母、汉字混排
 
 V5.2.0 ---->2021.4.13
 1.CompatUtils 默认初始化 AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); 安卓5.0 以下使用Vector

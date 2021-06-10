@@ -117,6 +117,14 @@ public class CollectionsUtils {
     }
 
 
+    public static <T> void bringTargetElementToFront(List<T> list,int targetPos){
+         if (EmptyUtils.isNotEmpty(list)&&targetPos<=list.size()-1){
+             T temp=list.remove(targetPos);
+             list.add(0,temp);
+         }
+    }
+
+
 
 
 }

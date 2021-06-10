@@ -2,6 +2,7 @@ package com.dylan.library.widget;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.ColorInt;
@@ -24,8 +25,6 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
 
-import com.dylan.library.utils.Logger;
-
 import java.lang.reflect.Field;
 
 /**
@@ -34,7 +33,7 @@ import java.lang.reflect.Field;
  * Desc: 布局里面不要设置padding， 用margin 代替，否则展开 不会在文本末尾
  */
 public class ExpandableTextView extends AppCompatTextView {
-    private static final String TAG = ExpandableTextView.class.getSimpleName();
+    private static final String TAG = com.dylan.library.widget.ExpandableTextView.class.getSimpleName();
 
     public static final String ELLIPSIS_STRING = new String(new char[]{'\u2026'});
     private static final int DEFAULT_MAX_LINE = 3;
@@ -98,8 +97,8 @@ public class ExpandableTextView extends AppCompatTextView {
         return false;
     }
 
-    public void setOriginalText(CharSequence originalText) {
-        this.originalText = originalText;
+    public void setOriginalText(CharSequence srcText) {
+        this.originalText =  autoSplitText(srcText);
         mExpandable = false;
         mCloseSpannableStr = new SpannableStringBuilder();
         final int maxLines = mMaxLines;
@@ -325,7 +324,7 @@ public class ExpandableTextView extends AppCompatTextView {
         int contentWidth = initWidth - getPaddingLeft() - getPaddingRight();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             StaticLayout.Builder builder = StaticLayout.Builder.obtain(spannable, 0, spannable.length(), getPaint(), contentWidth);
-            builder.setAlignment(Layout.Alignment.ALIGN_NORMAL);
+            builder.setAlignment(Layout.Alignment.ALIGN_OPPOSITE);
             builder.setIncludePad(getIncludeFontPadding());
             builder.setLineSpacing(getLineSpacingExtra(), getLineSpacingMultiplier());
             return builder.build();
@@ -575,5 +574,44 @@ public class ExpandableTextView extends AppCompatTextView {
             mTargetView.getLayoutParams().height = (int) ((mEndHeight - mStartHeight) * interpolatedTime + mStartHeight);
             mTargetView.requestLayout();
         }
+    }
+
+
+    private String autoSplitText(CharSequence originalText) {
+        final String rawText = originalText.toString(); //原始文本
+        final Paint tvPaint = getPaint(); //paint，包含字体等信息
+        final float tvWidth = initWidth; //控件可用宽度
+
+        //将原始文本按行拆分
+        String[] rawTextLines = rawText.replaceAll("\r", "").split("\n");
+        StringBuilder sbNewText = new StringBuilder();
+        for (String rawTextLine : rawTextLines) {
+            if (tvPaint.measureText(rawTextLine) <= tvWidth) {
+                //如果整行宽度在控件可用宽度之内，就不处理了
+                sbNewText.append(rawTextLine);
+            } else {
+                //如果整行宽度超过控件可用宽度，则按字符测量，在超过可用宽度的前一个字符处手动换行
+                float lineWidth = 0;
+                for (int cnt = 0; cnt != rawTextLine.length(); ++cnt) {
+                    char ch = rawTextLine.charAt(cnt);
+                    lineWidth += tvPaint.measureText(String.valueOf(ch));
+                    if (lineWidth <= tvWidth) {
+                        sbNewText.append(ch);
+                    } else {
+                        sbNewText.append("\n");
+                        lineWidth = 0;
+                        --cnt;
+                    }
+                }
+            }
+            sbNewText.append("\n");
+        }
+
+        //把结尾多余的\n去掉
+        if (!rawText.endsWith("\n")) {
+            sbNewText.deleteCharAt(sbNewText.length() - 1);
+        }
+
+        return sbNewText.toString();
     }
 }
