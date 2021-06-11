@@ -16,6 +16,8 @@ import java.util.List;
  * Date: 2020/2/25
  * Desc:
  */
+
+@Deprecated
 public class CompatLineTextView extends TextView {
     private int maxLine = Integer.MAX_VALUE;
     private String ellipString = "...";
