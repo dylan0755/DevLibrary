@@ -304,6 +304,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
                         }
                     });
 
+
                 mIsTakingPic = false;
             }
         });
