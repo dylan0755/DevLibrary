@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'//添加
 apply plugin: 'com.github.dcendents.android-maven'
-group='com.github.dylanweb'
+group='com.gitee.dylanweb'
 
 
 
