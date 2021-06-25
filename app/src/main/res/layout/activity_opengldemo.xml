@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.dylan.library.opengl.CameraGLSurfaceView
+        android:id="@+id/glSurfaceView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+
+
+
+
+    <TextView
+        android:id="@+id/tvTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:layout_marginTop="32dp"
+        android:text="00:00:00"
+        android:textColor="#ffffff"
+        android:visibility="gone"
+        android:background="@drawable/bg_shape_countdonw"/>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/tvSwitchCamera"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="切换摄像头"/>
+
+
+        <ImageView
+            android:id="@+id/ivVideoRecord"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:src="@drawable/icon_videorecord_normal"
+            android:layout_gravity="bottom|center_horizontal"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="36dp"/>
+
+
+        <!--焦点图标-->
+        <com.dylan.library.media.camera.CameraFocusView
+            android:id="@+id/cameraFocusView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerInside"
+            android:src="@drawable/photograph_focus"
+            app:focus_height="70dp"
+            app:focus_scale="0.666"
+            app:focus_width="70dp" />
+
+    </RelativeLayout>
+
+
+
+
+
+</FrameLayout>

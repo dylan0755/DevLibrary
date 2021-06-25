@@ -1,0 +1,13 @@
+.gradle
+/local.properties
+/.idea
+/.idea/workspace.xml
+/.idea/misc.xml
+/.idea/libraries
+/.idea/caches/
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+.idea/misc.xml
+

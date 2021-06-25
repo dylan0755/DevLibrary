@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#ffffff">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@drawable/dl_dialog_shape_white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="52dp">
+            <TextView
+                android:id="@+id/id_alert_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:maxLines="1"
+                android:singleLine="true"
+                android:textColor="#000000"
+                android:textSize="20sp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/id_alert_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="25dp"
+            android:textColor="#333333"
+            android:textSize="18sp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="12dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:gravity="right"
+            android:layout_marginBottom="4dp"
+            android:layout_marginRight="18dp">
+
+            <TextView
+                android:id="@+id/id_alert_cancel"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:text="取消"
+                android:textSize="13sp"
+                 />
+
+            <TextView
+                android:id="@+id/id_alert_ensure"
+                android:layout_width="64dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center"
+                android:layout_marginLeft="4dp"
+                android:gravity="center"
+                android:text="确定"
+                android:textSize="13sp"
+                 />
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.zhy.autolayout.AutoLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/ll_videoitem_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+    <com.zhy.autolayout.AutoLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/iv_videoitem_videothumb"
+            android:layout_width="360px"
+            android:layout_height="270px"
+            android:scaleType="centerCrop"/>
+
+
+        <TextView
+            android:id="@+id/tv_videoitem_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8px"
+            android:maxLines="1"
+            android:textSize="30px"
+            android:layout_marginLeft="15px"
+            />
+
+        <TextView
+            android:id="@+id/tv_videoitem_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5px"
+            android:layout_marginBottom="3px"
+            android:layout_marginLeft="15px"
+            android:textSize="26px"
+            android:maxLines="1"
+            />
+    </com.zhy.autolayout.AutoLinearLayout>
+
+</com.zhy.autolayout.AutoLinearLayout>

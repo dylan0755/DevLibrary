@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/llSound"
+        android:layout_width="@dimen/llSoundWidth"
+        android:layout_height="@dimen/llSoundHeight"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/ivSound"
+            android:layout_width="@dimen/ivSoundWidth"
+            android:layout_height="@dimen/ivSoundHeight"
+            android:layout_gravity="center_horizontal"/>
+
+        <ProgressBar
+            style="@style/PlayerGestureProgressBarStyle"
+            android:id="@+id/pbSound"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:progressDrawable="@drawable/dl_player_gesture_progressbar"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llLight"
+        android:layout_width="@dimen/llLigthWidth"
+        android:layout_height="@dimen/llLigthHeight"
+        android:gravity="center"
+        android:orientation="vertical"
+        >
+
+        <ImageView
+            android:id="@+id/ivLight"
+            android:layout_width="@dimen/ivLightWidth"
+            android:layout_height="@dimen/ivLightHeight"
+            android:layout_gravity="center_horizontal"/>
+
+        <ProgressBar
+            style="@style/PlayerGestureProgressBarStyle"
+            android:id="@+id/pbLight"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+            android:progressDrawable="@drawable/dl_player_gesture_progressbar"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llSpeed"
+        android:layout_width="@dimen/llSpeedWidth"
+        android:layout_height="@dimen/llSpeedHeight"
+        android:orientation="vertical"
+        android:gravity="center">
+        <TextView
+            android:id="@+id/tvSpeed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="8dp"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            />
+
+        <ProgressBar
+            style="@style/PlayerGestureProgressBarStyle"
+            android:id="@+id/pbSpeed"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="16dp"
+           android:progressDrawable="@drawable/dl_player_gesture_progressbar"
+            />
+
+    </LinearLayout>
+</LinearLayout>

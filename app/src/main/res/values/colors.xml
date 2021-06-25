@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#6f83ff</color>
+    <color name="colorPrimaryDark">#5e73f6</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="littleColorPrimary">#96a5ff</color>
+    <color name="tagbackground">#d5dbff</color>
+
+
+
+    <color name="background">#f9fcfd</color>
+    <color name="white">#ffffff</color>
+    <color name="red">#ffff4444</color>
+
+    <color name="line_gray">#e5e5e5</color>
+    <color name="button_gray_drak">#d7d7d7</color>
+
+    <color name="divider_gray">#f5f5f5</color>
+
+    <color name="black_deep">#FF000000</color>
+
+    <color name="gray33">#333333</color>
+    <color name="gray66">#666666</color>
+    <color name="gray69">#696969</color>
+    <color name="gray99">#999999</color>
+
+    <color name="green">#00d49d</color>
+    <color name="greenDark">#03c391</color>
+
+    <color name="orange">#ff9800</color>
+    <color name="transparent">@android:color/transparent</color>
+
+    <color name="pic_consult">#6f83ff</color>
+    <color name="hone_consult">#ff9800</color>
+    <color name="video_consult">#00d49d</color>
+    <color name="private_doctor">#1ed0e0</color>
+    <color name="post_guidance">#f922e7</color>
+    <color name="red_packet">#fa5171</color>
+</resources>

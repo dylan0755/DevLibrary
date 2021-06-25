@@ -1,0 +1,11 @@
+﻿{
+   "updateCode":42,
+   "updateName":"V2.3.0",
+   "imposedUpdate":true,
+   "updateContent":"
+   1.更新推送机制，旧版本将接收不到推送消息，请确认升级至新版本
+   2.解决网页视频不能全屏播放问题
+   3.解决魅族，魅蓝安卓6.0系统下不能启动问题
+  ", 
+   "updateUrl":"http://system.weixiuhui.cn/app_download/weixiuhui1023.apk"
+}

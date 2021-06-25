@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <style name="datePickerTheme" parent="android:Theme.Holo.Light.NoActionBar">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+    <style name="anim_popWindowStyle">
+        <item name="android:windowShowAnimation">@anim/dialog_enter_fromalpha</item>
+        <item name="android:windowHideAnimation">@anim/dialog_exit_fromalpha</item>
+    </style>
+
+
+    <style name="edt_phone_style">
+        <item name="android:inputType">number</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLength">11</item>
+    </style>
+
+    <style name="edt_pass_style">
+        <item name="android:singleLine">true</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:digits">
+            "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.@_*#"
+        </item>
+    </style>
+
+
+
+
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:backgroundDimAmount">0.6</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+
+
+
+    <style name="DLInputPasswordDialog" parent="android:style/Theme.Dialog">
+        <item name="android:background">#00000000</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+    <style name="DLProgressLoading">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <!--window动画-->
+
+    <style name="dl_anim_400_left_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_left_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_left_exit_slide_back</item>
+    </style>
+    <style name="dl_anim_400_top_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_top_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_top_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_400_right_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_right_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_right_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_400_bottom_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_400_bottom_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_400_bottom_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_300_left_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_left_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_left_exit_slide_back</item>
+    </style>
+    <style name="dl_anim_300_top_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_top_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_top_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_300_right_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_right_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_right_exit_slide_back</item>
+    </style>
+
+    <style name="dl_anim_300_bottom_sliding">
+        <item name="android:windowEnterAnimation">@anim/anim_300_bottom_enter_slide_out</item>
+        <item name="android:windowExitAnimation">@anim/anim_300_bottom_exit_slide_back</item>
+    </style>
+    <!--window动画-->
+
+
+
+
+    <style name="AppCompatDialogStyle" parent="@style/Theme.AppCompat.Dialog">
+        <item name="android:windowBackground">@color/transparent</item>
+    </style>
+
+
+    <style name="DLBottomSheetDialogStyle" parent="@android:style/Theme.Dialog">
+        <!-- 背景透明 -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <!-- 浮于Activity之上 -->
+        <item name="android:windowIsFloating">true</item>
+        <!-- 边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- Dialog以外的区域模糊效果 -->
+        <item name="android:backgroundDimEnabled">true</item>
+        <!-- 无标题 -->
+        <item name="android:windowNoTitle">true</item>
+        <!-- 半透明 -->
+        <item name="android:windowIsTranslucent">false</item>
+        <!-- Dialog进入及退出动画 -->
+        <item name="android:windowAnimationStyle">@style/DLBottomSheetDialogAnimation</item>
+    </style>
+
+
+    <style name="DLCustomFloatingDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+    <style name="DLCustomNotFloatingDialog" parent="Theme.AppCompat.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
+
+
+    <style name="DLDialogFullscreen">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">true</item>
+    </style>
+
+
+
+
+    <!-- ActionSheet进出动画 -->
+    <style name="DLBottomSheetDialogAnimation" parent="@android:style/Animation.Dialog">
+        <item name="android:windowEnterAnimation">@anim/dl_actionsheet_dialog_in</item>
+        <item name="android:windowExitAnimation">@anim/dl_actionsheet_dialog_out</item>
+    </style>
+
+    <style name="PlayerGestureProgressBarStyle" parent="@android:style/Widget.ProgressBar.Horizontal">
+        <item name="android:maxHeight">50dp</item>
+        <item name="android:minHeight">10dp</item>
+        <item name="android:indeterminateOnly">false</item>
+        <item name="android:indeterminateDrawable">@android:drawable/progress_indeterminate_horizontal</item>
+    </style>
+
+
+    <style name="DLHorizontalProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
+
+    </style>
+</resources>

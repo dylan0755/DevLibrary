@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#bb000000">
+
+  <TextView
+      android:id="@+id/tvProgressText"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="100dp"
+      android:text="0"
+      android:textColor="#ffffff"/>
+
+
+  <com.dylan.library.widget.VerticalSeekBar
+      android:id="@+id/seekBar"
+      android:layout_width="wrap_content"
+      android:layout_height="288dp"
+      android:layout_gravity="center_horizontal"
+      android:layout_marginTop="30dp"
+      android:progressDrawable="@drawable/photograph_seek_bar_color"
+      android:thumb="@drawable/photograph_light_thumb"
+      />
+
+</LinearLayout>

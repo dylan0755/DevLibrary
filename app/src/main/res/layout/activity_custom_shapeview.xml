@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_girl"
+    >
+
+
+    <LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:text="使用ShapeView,减少drawable 样式文件的创建"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="16sp" />
+
+
+        <com.dylan.library.widget.shape.ShapeEditText xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/edtCount"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:hint="请输入数量"
+            android:textCursorDrawable="@drawable/shape_edt_cursor_9a6b43"
+            android:textSize="12sp"
+            app:radius="8dp"
+            app:solidColor="#DFB880"
+            app:strokeColor="#9A6B4E"
+            app:strokeWidth="1dp" />
+
+
+        <com.dylan.library.widget.shape.ShapeTextView
+            android:id="@+id/tvCount"
+            android:layout_width="120dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:text="ShapeTextView"
+            android:textCursorDrawable="@drawable/shape_edt_cursor_9a6b43"
+            app:radius="8dp"
+            app:solidColor="#DFB880"
+            app:strokeColor="#9A6B4E"
+            app:strokeWidth="1dp"
+            />
+
+
+        <com.dylan.library.widget.shape.ShapeLinearLayout
+            android:layout_width="250dp"
+            android:layout_height="140dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:radius="16dp"
+            app:solidColor="#DFB880"
+            app:strokeColor="@android:color/holo_green_light"
+            app:strokeWidth="1dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="这是ShapeLinearLayout"
+                android:textColor="#222222" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Button 1" />
+
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Button 1" />
+
+        </com.dylan.library.widget.shape.ShapeLinearLayout>
+
+
+        <com.dylan.library.widget.shape.ShapeFrameLayout
+            android:layout_width="250dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="14dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            app:radius="16dp"
+            app:solidColor="#DFB880"
+            app:strokeColor="@android:color/holo_blue_light"
+            app:strokeWidth="1dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp"
+                android:text="这是ShapeFrameLayout"
+                android:textColor="#222222" />
+
+        </com.dylan.library.widget.shape.ShapeFrameLayout>
+
+
+        <com.dylan.library.widget.shape.ShapeRelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="120dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            app:bottomLeftRadius="24dp"
+            app:bottomRightRadius="48dp"
+            app:solidColor="#DFB880"
+            app:strokeColor="@android:color/holo_red_light"
+            app:strokeWidth="1dp"
+            app:topLeftRadius="8dp"
+            app:topRightRadius="16dp">
+
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:text="这是ShapeRelativeLayout"
+                android:textColor="#222222" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:text="test below"
+                android:textColor="#222222" />
+
+        </com.dylan.library.widget.shape.ShapeRelativeLayout>
+
+
+        <com.dylan.library.widget.shape.ShapeRelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="90dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            app:radius="24dp"
+            app:solidColor="#000000"
+            app:strokeWidth="1dp"
+            app:shapeAlpha="0.5"
+            >
+
+
+            <TextView
+                android:id="@+id/tvTitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="12dp"
+                android:text="设置透明度"
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTitle2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="直接在布局中设置背景drawable\n的透明度 0.5"
+                android:textColor="#ffffff" />
+
+        </com.dylan.library.widget.shape.ShapeRelativeLayout>
+
+        <com.dylan.library.widget.shape.ShapeRelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="14dp"
+            android:orientation="vertical"
+            app:radius="24dp"
+            app:solidColor="#000000"
+            app:strokeWidth="1dp"
+            >
+
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTitle2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="没有设置背景透明度"
+                android:textColor="#ffffff" />
+
+        </com.dylan.library.widget.shape.ShapeRelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:gravity="center"
+            android:layout_marginTop="14dp"
+            android:paddingBottom="20dp">
+
+        <com.dylan.library.widget.shape.ShapeRelativeLayout
+            android:layout_width="250dp"
+            android:layout_height="40dp"
+            android:orientation="vertical"
+            android:layout_marginTop="4dp"
+            app:radius="24dp"
+            app:strokeWidth="1dp"
+            app:startColor="#FFF3DCA8"
+            app:endColor="#FFE2B66F"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvTitle2"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:gravity="center"
+                android:text="设置渐变"
+                android:textColor="#FF7B4E07" />
+
+        </com.dylan.library.widget.shape.ShapeRelativeLayout>
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

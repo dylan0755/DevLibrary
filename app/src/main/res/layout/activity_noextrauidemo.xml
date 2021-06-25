@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom">
+
+    
+    
+    
+    <EditText
+        android:id="@+id/edtDialog"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="dialog实现"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+    <EditText
+        android:id="@+id/edtPop"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:text="PopupWindow实现"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
+
+
+</LinearLayout>

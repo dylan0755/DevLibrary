@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <item
+        android:id="@+id/type_all"
+        android:title="全部"/>
+
+    <item
+        android:id="@+id/type_has_accept"
+        android:title="已签收"/>
+    <item
+        android:id="@+id/type_back"
+        android:title="已打回"/>
+    <item
+        android:id="@+id/type_cancle"
+        android:title="已取消"/>
+
+</menu>

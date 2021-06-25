@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+
+    <com.dylan.library.widget.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cornerRadius="10dp"
+        app:shadowWith="8dp"
+        app:shadowDX="2dp"
+        app:shadowDY="2dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="测试阴影"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:gravity="center"/>
+    </com.dylan.library.widget.ShadowLayout>
+
+    <com.dylan.library.widget.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        app:cornerRadius="10dp"
+        app:shadowWith="8dp"
+        app:shadowColor="#29ff6161"
+        app:shadowDX="2dp"
+        app:shadowDY="2dp"
+        >
+       <TextView
+           android:layout_width="match_parent"
+           android:layout_height="100dp"
+           android:text="测试阴影"
+           android:textSize="16sp"
+           android:textColor="#333333"
+           android:gravity="center"/>
+    </com.dylan.library.widget.ShadowLayout>
+</LinearLayout>

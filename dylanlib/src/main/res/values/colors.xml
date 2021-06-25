@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="transparent">#00000000</color>
+    <color name="outRingColor">#999999</color>
+    <color name="innerRingColor">#d0d0d0</color>
+    <color name="refreshTextColor">#555657</color>
+</resources>
