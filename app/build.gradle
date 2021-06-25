@@ -52,7 +52,8 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.7.1'
     //compile 'com.dylan:devlib:4.8.0'
-    implementation project(':dylanlib')
+    implementation 'com.github.dylan0755:DevLibrary:5.3.0'
+    //implementation project(':dylanlib')
     //    compile(name: 'dylanlib-debug', ext: 'aar')
     implementation(name: 'FlycoTabLayout_Lib', ext: 'aar')
     implementation 'com.jakewharton:butterknife:8.8.1'
