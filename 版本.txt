@@ -2,6 +2,18 @@
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
 
+V5.4.0
+
+1.新增MD5Utils,FileUtils 新增getFileMD5String   getFileSHA1String
+
+
+
+
+
+
+
+
+
 V5.3.0 ---->2021.6.25
 
 1.GradientDrawableBuilder 增加 setAlpha

@@ -7,12 +7,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.GridView;
 
+import com.dylan.library.io.FileUtils;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.MD5Utils;
 import com.dylan.library.utils.ParamMapBuilder;
 import com.dylan.library.utils.SpannableStringUtils;
+import com.dylan.library.utils.thread.ThreadPools;
 import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
@@ -34,6 +37,8 @@ import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -83,6 +88,17 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
+//            ThreadPools.getInstance().fixedThreadPoolRun(new Runnable() {
+//                @Override
+//                public void run() {
+//                    try {
+//                        Logger.e(FileUtils.getFileMD5String(new File("/storage/emulated/0/ticibao_1620371596474.mp4")));
+//                        Logger.e(FileUtils.getFileSHA1String(new File("/storage/emulated/0/ticibao_1620371596474.mp4")));
+//                    } catch (IOException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
 
     }
 

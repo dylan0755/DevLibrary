@@ -230,9 +230,11 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
             mRecordBarrier = new CountDownLatch(2);
             String videoFileName = "opengl" + System.currentTimeMillis() + ".mp4";
             mVideoOutFile = new File(Environment.getExternalStorageDirectory().toString(), videoFileName);
+        try {
             muxerWrapper = new MediaMuxerWrapper(mVideoOutFile.getAbsolutePath());
 
-            // for video capturing
+
+        // for video capturing
 //            int videoWidth = mCameraRenderer.getCameraHeight();
 //            int videoHeight = mCameraRenderer.getCameraWidth();
 
@@ -249,7 +251,9 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
             muxerWrapper.startRecording();
             startTime();
 
-
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -293,6 +297,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         GlUtils.createBitmapFromTexture(texId, texMatrix, mvpMatrix, texWidth, texHeight, isOES, new GlUtils.OnReadBitmapListener() {
             @Override
             public void onReadBitmapListener(Bitmap var1) {
+                try {
                     final String filePath = Environment.getExternalStorageDirectory().toString() + "/" + System.currentTimeMillis() + ".png";
                     BitmapHelper.saveBitmapSync(var1, filePath);
                     runOnUiThread(new Runnable() {
@@ -305,7 +310,11 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
                     });
 
 
-                mIsTakingPic = false;
+                    mIsTakingPic = false;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
             }
         });
     }

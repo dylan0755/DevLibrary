@@ -38,7 +38,7 @@ public class SignatureUtils {
         MessageDigest messageDigest = null;
         StringBuffer md5StrBuff = new StringBuffer();
         try {
-            messageDigest = MessageDigest.getInstance("MD5");
+            messageDigest = MessageDigest.getInstance("MD5Utils");
             messageDigest.reset();
             messageDigest.update(byteStr);
             byte[] byteArray = messageDigest.digest();

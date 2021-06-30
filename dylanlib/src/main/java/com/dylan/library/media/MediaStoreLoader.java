@@ -35,6 +35,17 @@ public class MediaStoreLoader {
 
     };
 
+    public static final String[] LocalAudioColumns = {
+            MediaStore.Audio.Media._ID, // 视频id
+            MediaStore.Audio.Media.DATA, // 视频路径
+            MediaStore.Audio.Media.SIZE, // 视频字节大小
+            MediaStore.Audio.Media.DISPLAY_NAME, // 视频名称 xxx.mp4
+            MediaStore.Audio.Media.TITLE, // 视频标题
+            MediaStore.Audio.Media.DURATION, // 视频时长
+            MediaStore.Audio.Media.MIME_TYPE
+
+    };
+
     public static boolean insertVideo(Context context,String newPath){
         ContentResolver resolver = context.getContentResolver();
         Uri uri = MediaStore.Video.Media.EXTERNAL_CONTENT_URI;
@@ -89,6 +100,29 @@ public class MediaStoreLoader {
                 storeFile.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.TITLE)));
                 storeFile.setDuration(cursor.getLong(cursor.getColumnIndex(MediaStore.Video.Media.DURATION)));
                 storeFile.setMimeType(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.MIME_TYPE)));
+                mediaStoreFiles.add(storeFile);
+            }
+            cursor.close();
+        }
+
+        return mediaStoreFiles;
+    }
+
+    public static List<MediaStoreFile> getAudiosFromVideoStore(Context context){
+        List<MediaStoreFile> mediaStoreFiles = new ArrayList<>();
+        Cursor cursor = context.getContentResolver().query(getAudioStoreUri(), LocalAudioColumns,
+                null, null, MediaStore.Audio.AudioColumns.DATE_ADDED + " DESC");
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                MediaStoreFile storeFile = new MediaStoreFile();
+                storeFile.setSourceType(MediaStoreLoader.SOURCE_TYPE_MEDIASTORE_VIDEO);
+                storeFile.set_ID(cursor.getInt(cursor.getColumnIndex(MediaStore.Audio.Media._ID)));
+                storeFile.setPath(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DATA)));
+                storeFile.setLength(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.SIZE)));
+                storeFile.setDisplayName(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.DISPLAY_NAME)));
+                storeFile.setTitle(cursor.getString(cursor.getColumnIndex(MediaStore.Audio.Media.TITLE)));
+                storeFile.setDuration(cursor.getLong(cursor.getColumnIndex(MediaStore.Audio.Media.DURATION)));
+                storeFile.setMimeType(cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Audio.Media.MIME_TYPE)));
                 mediaStoreFiles.add(storeFile);
             }
             cursor.close();

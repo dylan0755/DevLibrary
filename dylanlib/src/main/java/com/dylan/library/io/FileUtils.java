@@ -1,7 +1,6 @@
 package com.dylan.library.io;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.Context;
@@ -21,6 +20,7 @@ import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.MD5Utils;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -28,10 +28,16 @@ import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigInteger;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
+import java.security.DigestInputStream;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -641,6 +647,42 @@ public class FileUtils {
     public static void saveBitmapASync(Bitmap bitmap, String savePath, BitmapHelper.OutPutListenener outPutListenener) {
         if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
         BitmapHelper.saveBitmapASync(bitmap, savePath, outPutListenener);
+    }
+
+    public static String getFileMD5String(File file) throws IOException {
+        return MD5Utils.getFileMD5String(file);
+    }
+
+
+    public static String getFileSHA1String(File file) {
+        int bufferSize = 1024;
+        FileInputStream fis = null;
+        DigestInputStream dis = null;
+
+        try {
+            MessageDigest messageDigest = MessageDigest.getInstance("SHA-1");
+            fis = new FileInputStream(file);
+            dis = new DigestInputStream(fis, messageDigest);
+            byte[] buffer = new byte[bufferSize];
+
+            while (dis.read(buffer) > 0) ;
+            messageDigest = dis.getMessageDigest();
+            byte[] array = messageDigest.digest();
+            StringBuilder hex = new StringBuilder(array.length * 2);
+            for (byte b : array) {
+                if ((b & 0xFF) < 0x10) {
+                    hex.append("0");
+                }
+                hex.append(Integer.toHexString(b & 0xFF));
+            }
+            return hex.toString();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
 
