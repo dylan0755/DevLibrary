@@ -37,10 +37,17 @@ import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.math.BigInteger;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by Dylan on 2016/12/16.
@@ -92,8 +99,9 @@ public class DemoListActivity extends AppCompatActivity {
 //                @Override
 //                public void run() {
 //                    try {
-//                        Logger.e(FileUtils.getFileMD5String(new File("/storage/emulated/0/ticibao_1620371596474.mp4")));
-//                        Logger.e(FileUtils.getFileSHA1String(new File("/storage/emulated/0/ticibao_1620371596474.mp4")));
+//                        File sourceFile=new File("/storage/emulated/0/DCIM/Camera/IMG_20210522_140649.jpg");
+//                        Logger.e("原MD5:"+FileUtils.getFileMD5String(sourceFile));
+//                        Logger.e("修改后MD5:"+FileUtils.modifyFileMD5String(sourceFile));
 //                    } catch (IOException e) {
 //                        e.printStackTrace();
 //                    }
@@ -101,6 +109,7 @@ public class DemoListActivity extends AppCompatActivity {
 //            });
 
     }
+
 
 
     private void initEvent() {
@@ -133,6 +142,9 @@ public class DemoListActivity extends AppCompatActivity {
         mGridPager.setDataList(list, 3, 30);
         Logger.e("测试堆栈输出");
     }
+
+
+
 
 
 }

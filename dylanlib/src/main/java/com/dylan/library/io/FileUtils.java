@@ -25,6 +25,7 @@ import com.dylan.library.utils.MD5Utils;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -33,6 +34,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.math.BigInteger;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -43,6 +45,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.UUID;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -651,6 +654,35 @@ public class FileUtils {
 
     public static String getFileMD5String(File file) throws IOException {
         return MD5Utils.getFileMD5String(file);
+    }
+
+
+    public static String modifyFileMD5String(File file){
+        //在文本文本中追加内容
+        BufferedWriter out = null;
+        try {
+            String content=UUID.randomUUID().toString().replace("-", "");
+            out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
+            out.newLine();//换行
+            out.write(content);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if(out != null){
+                    out.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        //返回一个获取视频的MD5
+        try {
+            return FileUtils.getFileMD5String(file);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "";
     }
 
 
