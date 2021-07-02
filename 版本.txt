@@ -5,7 +5,7 @@
 V5.4.0
 
 1.新增MD5Utils,FileUtils 新增getFileMD5String   getFileSHA1String
-
+2.DrawableUtils setSeekBarColor(SeekBar seekBar, int color)
 
 
 
