@@ -103,7 +103,7 @@ public class MediaTools {
 
 
     public static String formatHmsS(long ms){
-        return formatHmsS(ms,true);
+        return formatHmsS(ms,false);
     }
     public static String formatHmsS(long ms,boolean isVideoClip) {
         Integer ss = 1000;
