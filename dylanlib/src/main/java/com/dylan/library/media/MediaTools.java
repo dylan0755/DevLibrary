@@ -101,6 +101,55 @@ public class MediaTools {
         return endtime;
     }
 
+
+    public static String formatHmsS(long ms){
+        return formatHmsS(ms,true);
+    }
+    public static String formatHmsS(long ms,boolean isVideoClip) {
+        Integer ss = 1000;
+        Integer mi = ss * 60;
+        Integer hh = mi * 60;
+        Integer dd = hh * 24;
+
+        Long day = ms / dd;
+        Long hour = (ms - day * dd) / hh;
+        Long minute = (ms - day * dd - hour * hh) / mi;
+        Long second = (ms - day * dd - hour * hh - minute * mi) / ss;
+        Long milliSecond = ms - day * dd - hour * hh - minute * mi - second * ss;
+
+        StringBuffer sb = new StringBuffer();
+        if (day>0)sb.append(day + ":");
+        if (hour > 0) {
+            sb.append(hour >= 10 ? (hour + ":") : ("0" + hour + ":"));
+        } else {
+            sb.append(0 + "0:");
+        }
+        if (minute > 0) {
+            sb.append(minute >= 10 ? (minute + ":") : ("0" + minute + ":"));
+        } else {
+            sb.append(0 + "0:");
+        }
+        String lastTag=isVideoClip?".":":";
+        if (second > 0) {
+            sb.append(second >= 10 ? (second +lastTag) : ("0" + second +lastTag));
+        } else {
+            sb.append(0 + "0"+lastTag);
+        }
+        sb.append(milliSecond);
+        return sb.toString();
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     public static Bitmap createThumbnailAtTime(String filePath, int timeInSeconds){
         MediaMetadataRetriever mMMR = new MediaMetadataRetriever();
         mMMR.setDataSource(filePath);
