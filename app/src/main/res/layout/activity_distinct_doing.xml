@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FF181818">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/transparent"
+        android:orientation="vertical">
+
+
+        <ImageView
+            android:id="@+id/btn_left"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:padding="8dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_centerVertical="true"
+            android:onClick="onHeadLeftButtonClick"
+            android:layout_marginLeft="16dp"
+            android:tint="#ffffff"/>
+
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:maxEms="10"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:maxLength="50"
+            android:maxLines="1"
+            android:textColor="#ffffff"
+            android:textSize="19sp"/>
+
+
+        <LinearLayout
+            android:id="@+id/ll_right"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:gravity="center"
+            android:paddingHorizontal="10dp"
+            android:visibility="gone"
+            >
+
+            <ImageView
+                android:id="@+id/iv_right"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:visibility="visible" />
+
+            <TextView
+                android:id="@+id/tv_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textColor="#ffffff"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+
+
+
+
+    </RelativeLayout>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="28dp"
+        android:text="视频正在消重中…"
+        android:textColor="#ffffffff"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="80dp"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="请保持屏幕常亮，不要锁屏或切换应用"
+        android:textColor="#ffffffff"
+        android:textSize="14sp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="6dp"
+        />
+    
+    
+    <RelativeLayout
+        android:layout_width="180dp"
+        android:layout_height="320dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="31dp">
+
+        <ImageView
+            android:id="@+id/ivVideoThumb"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#c0c0c0"/>
+
+        <com.dylan.library.widget.SquareProgressView
+            android:id="@+id/squareView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="2dp"
+            />
+
+
+
+        <TextView
+            android:id="@+id/tvProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#ffffffff"
+            android:textSize="23sp"
+            android:layout_centerInParent="true"
+            />
+
+
+
+    </RelativeLayout>
+
+</LinearLayout>

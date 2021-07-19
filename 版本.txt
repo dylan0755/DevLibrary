@@ -10,7 +10,7 @@ V5.4.0
 4.StringUtils formatFileSize 移动位置到FileUtils
 5.新增ShapeDrawableTextView
 6.新增 DrawableCenterTextView，ShapeDrawableCenterTextView drawable 和 文字居中对齐
-
+7.新增 SquareProgressView 方形进度条，音视频处理进度
 
 
 

@@ -67,7 +67,7 @@ public class DemoListActivity extends AppCompatActivity {
             "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
             "NoExtraUiEditDemo", "singleClickDemo", "DragMapView", "SmsCodeCounter",
             "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
-            "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView"};
+            "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView","SquareProgress方形进度条"};
     private Class[] classes = {ApkSignListActivity.class, RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -85,7 +85,7 @@ public class DemoListActivity extends AppCompatActivity {
             SmsCodeCounterActivity.class, OpenglDemoActivity.class, SwitchViewActivity.class,
             VerticalSeekBarActivity.class, MediumTextViewActivity.class, CircleRingProgressViewActivity.class,
             ToastUtilsActivity.class, ColorShadesActivity.class, ExpandableTextViewActivity.class,
-            AutoSplitTextViewActivity.class};
+            AutoSplitTextViewActivity.class,SquareProgressViewActivity.class};
 
 
     @Override
