@@ -2,6 +2,8 @@ package com.dylan.library.utils;
 
 import android.widget.DatePicker;
 
+import com.dylan.library.media.MediaTools;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -508,6 +510,11 @@ public class DateUtils {
         return (firstCalendar.get(Calendar.ERA) == secondCalendar.get(Calendar.ERA) &&
                 firstCalendar.get(Calendar.YEAR) == secondCalendar.get(Calendar.YEAR) &&
                 firstCalendar.get(Calendar.DAY_OF_YEAR) == secondCalendar.get(Calendar.DAY_OF_YEAR));
+    }
+
+
+    public static String formatHmsS(long ms){
+        return MediaTools.formatHmsS(ms,false);
     }
 
 }
