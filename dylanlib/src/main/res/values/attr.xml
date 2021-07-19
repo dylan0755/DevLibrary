@@ -6,38 +6,36 @@
     <attr name="dashGap" format="dimension" />
 
     <declare-styleable name="dl_base_color">
-        <attr name="colorPrimary1" format="color"/>
-        <attr name="colorPrimaryDark1" format="color"/>
-        <attr name="colorAccent1" format="color"/>
+        <attr name="colorPrimary1" format="color" />
+        <attr name="colorPrimaryDark1" format="color" />
+        <attr name="colorAccent1" format="color" />
     </declare-styleable>
 
 
-    
     <declare-styleable name="CircleImageView">
         <attr name="civ_border_width" format="dimension" />
         <attr name="civ_border_color" format="color" />
         <attr name="civ_border_overlay" format="boolean" />
         <attr name="civ_fill_color" format="color" />
     </declare-styleable>
-    
+
     <declare-styleable name="RoundImageView">
-        <attr name="roundRadius" format="dimension"/>
+        <attr name="roundRadius" format="dimension" />
     </declare-styleable>
-    
-    
+
 
     <declare-styleable name="RedPointTextView">
-        <attr name="redPointSize" format="dimension"/>
-        <attr name="pointColor" format="color"/>
+        <attr name="redPointSize" format="dimension" />
+        <attr name="pointColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="DashLineView">
-        <attr name="dashLineColor" format="color"/>
-        <attr name="android:paddingLeft"/>
-        <attr name="android:paddingRight"/>
-        <attr name="dashWith" format="dimension"/>
-        <attr name="dashHeight" format="dimension"/>
-        <attr name="dashGap"/>
+        <attr name="dashLineColor" format="color" />
+        <attr name="android:paddingLeft" />
+        <attr name="android:paddingRight" />
+        <attr name="dashWith" format="dimension" />
+        <attr name="dashHeight" format="dimension" />
+        <attr name="dashGap" />
     </declare-styleable>
 
 
@@ -93,70 +91,77 @@
         <!--虚线边框间隙-->
         <attr name="dashGap" />
         <!--背景透明度-->
-        <attr name="shapeAlpha" format="float"/>
+        <attr name="shapeAlpha" format="float" />
         <!--渐变-->
-        <attr name="startColor" format="color"/>
-        <attr name="endColor" format="color"/>
-        <attr name="angle" format="float"/>
+        <attr name="startColor" format="color" />
+        <attr name="endColor" format="color" />
+        <attr name="angle" format="float" />
     </declare-styleable>
 
 
     <declare-styleable name="DLDrawableTextView">
-            <attr name="drawableLeftWidth" format="dimension"/>
-            <attr name="drawableLeftHeight" format="dimension"/>
-            <attr name="drawableTopWidth" format="dimension"/>
-            <attr name="drawableTopHeight" format="dimension"/>
-            <attr name="drawableRightWidth" format="dimension"/>
-            <attr name="drawableRightHeight" format="dimension"/>
-            <attr name="drawableBottomWidth" format="dimension"/>
-            <attr name="drawableBottomHeight" format="dimension"/>
+           
+        <attr name="drawableLeftWidth" format="dimension" />
+           
+        <attr name="drawableLeftHeight" format="dimension" />
+           
+        <attr name="drawableTopWidth" format="dimension" />
+           
+        <attr name="drawableTopHeight" format="dimension" />
+           
+        <attr name="drawableRightWidth" format="dimension" />
+           
+        <attr name="drawableRightHeight" format="dimension" />
+           
+        <attr name="drawableBottomWidth" format="dimension" />
+           
+        <attr name="drawableBottomHeight" format="dimension" />
+        <attr name="leftDrawable" format="reference|color" />
+        <attr name="rightDrawable" format="reference|color" />
+        <attr name="topDrawable" format="reference|color" />
+        <attr name="bottomDrawable" format="reference|color" />
     </declare-styleable>
 
 
-
-    <attr name="shadowColor" format="color"/>
-    <attr name="shadowRadius" format="dimension"/>
-    <attr name="shadowWith" format="dimension"/>
-    <attr name="cornerRadius" format="dimension"/>
-    <attr name="shadowDX" format="dimension"/>
-    <attr name="shadowDY" format="dimension"/>
-    <attr name="useCustomShadow" format="boolean"/>
-
+    <attr name="shadowColor" format="color" />
+    <attr name="shadowRadius" format="dimension" />
+    <attr name="shadowWith" format="dimension" />
+    <attr name="cornerRadius" format="dimension" />
+    <attr name="shadowDX" format="dimension" />
+    <attr name="shadowDY" format="dimension" />
+    <attr name="useCustomShadow" format="boolean" />
 
 
-    <declare-styleable name="ShadowLayout" >
+    <declare-styleable name="ShadowLayout">
         <attr name="shadowColor" />
-        <attr name="shadowRadius"/>
-        <attr name="shadowWith"/>
-        <attr name="cornerRadius"/>
-        <attr name="shadowDX"/>
-        <attr name="shadowDY"/>
-    </declare-styleable>
-
-
-
-    <declare-styleable name="ShadowCardView" >
-        <attr format="color" name="cardBackgroundColor"/>
-        <attr format="dimension" name="cardCornerRadius"/>
-        <attr format="dimension" name="cardElevation"/>
-        <attr format="dimension" name="cardMaxElevation"/>
-        <attr format="dimension" name="contentPadding"/>
-        <attr format="dimension" name="contentPaddingLeft"/>
-        <attr format="dimension" name="contentPaddingRight"/>
-        <attr format="dimension" name="contentPaddingTop"/>
-        <attr format="dimension" name="contentPaddingBottom"/>
-        <attr name="android:minWidth"/>
-        <attr name="android:minHeight"/>
-        <attr name="shadowColor" />
-        <attr name="shadowRadius"/>
+        <attr name="shadowRadius" />
         <attr name="shadowWith" />
-        <attr name="cornerRadius"/>
+        <attr name="cornerRadius" />
         <attr name="shadowDX" />
-        <attr name="shadowDY"/>
+        <attr name="shadowDY" />
+    </declare-styleable>
+
+
+    <declare-styleable name="ShadowCardView">
+        <attr name="cardBackgroundColor" format="color" />
+        <attr name="cardCornerRadius" format="dimension" />
+        <attr name="cardElevation" format="dimension" />
+        <attr name="cardMaxElevation" format="dimension" />
+        <attr name="contentPadding" format="dimension" />
+        <attr name="contentPaddingLeft" format="dimension" />
+        <attr name="contentPaddingRight" format="dimension" />
+        <attr name="contentPaddingTop" format="dimension" />
+        <attr name="contentPaddingBottom" format="dimension" />
+        <attr name="android:minWidth" />
+        <attr name="android:minHeight" />
+        <attr name="shadowColor" />
+        <attr name="shadowRadius" />
+        <attr name="shadowWith" />
+        <attr name="cornerRadius" />
+        <attr name="shadowDX" />
+        <attr name="shadowDY" />
         <attr name="useCustomShadow" />
     </declare-styleable>
-
-
 
 
     <!--卫星按钮-->
@@ -169,15 +174,13 @@
             <enum name="right_bottom" value="3" />
         </attr>
 
-        <attr name="radius"/>
+        <attr name="radius" />
     </declare-styleable>
 
 
     <!-- 沉浸式状态栏使用 -->
     <item name="dl_status_bar_view" type="id" />
     <item name="dl_translucent_view" type="id" />
-
-
 
 
     <declare-styleable name="DLCameraFocus">
@@ -188,17 +191,17 @@
 
     <!--仿IOS开关-->
     <declare-styleable name="DLSwitchView">
-        <attr name="hasShadow" format="boolean"/>
-        <attr name="primaryColor" format="color"/>
-        <attr name="primaryColorDark" format="color"/>
-        <attr name="isOpened" format="boolean"/>
+        <attr name="hasShadow" format="boolean" />
+        <attr name="primaryColor" format="color" />
+        <attr name="primaryColorDark" format="color" />
+        <attr name="isOpened" format="boolean" />
     </declare-styleable>
 
 
     <!--中粗字体TextVie-->
 
     <declare-styleable name="MediumTextView">
-        <attr name="textBold" format="float"/>
+        <attr name="textBold" format="float" />
     </declare-styleable>
-    
+
 </resources>

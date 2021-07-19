@@ -9,7 +9,7 @@ V5.4.0
 3.DateUtils,MediaTools 新增 formatHmsS  时分秒毫秒
 4.StringUtils formatFileSize 移动位置到FileUtils
 5.新增ShapeDrawableTextView
-
+6.新增 DrawableCenterTextView，ShapeDrawableCenterTextView drawable 和 文字居中对齐
 
 
 

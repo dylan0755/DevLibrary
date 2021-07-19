@@ -54,26 +54,44 @@
             app:strokeWidth="1dp"
             />
 
-        <com.dylan.library.widget.shape.ShapeDrawableTextView
+        <com.dylan.library.widget.shape.ShapeDrawableCenterTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="24dp"
-            android:gravity="center"
-            android:text="ShapeDrawableTextView"
+            android:text="ShapeDrawableCenterTextView\n文字与Drawable居中"
             app:radius="8dp"
             app:solidColor="#DFB880"
             app:strokeColor="#9A6B4E"
             app:strokeWidth="1dp"
-            android:drawableTop="@mipmap/ic_launcher"
-            app:drawableTopWidth="16dp"
-            app:drawableTopHeight="16dp"
-            android:paddingTop="8dp"
+            android:drawableTop="@mipmap/ic_buy_add"
+            app:drawableTopWidth="24dp"
+            app:drawableTopHeight="24dp"
             android:paddingBottom="8dp"
-            android:paddingLeft="8dp"
-            android:paddingRight="8dp"
+            android:paddingTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             />
 
+        <com.dylan.library.widget.shape.ShapeDrawableCenterTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="24dp"
+            android:text="文字与Drawable居中"
+            app:radius="8dp"
+            app:solidColor="#DFB880"
+            app:strokeColor="#9A6B4E"
+            app:strokeWidth="1dp"
+            android:drawableLeft="@mipmap/ic_buy_add"
+            app:drawableLeftWidth="24dp"
+            app:drawableLeftHeight="24dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawablePadding="4dp"
+            />
 
         <com.dylan.library.widget.shape.ShapeLinearLayout
             android:layout_width="250dp"

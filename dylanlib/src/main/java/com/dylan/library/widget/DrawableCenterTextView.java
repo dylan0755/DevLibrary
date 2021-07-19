@@ -1,24 +1,28 @@
-package com.dylan.library.widget.shape;
+package com.dylan.library.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.Layout;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.widget.TextView;
 
 import com.dylan.library.R;
+import com.dylan.library.utils.Logger;
+
 
 /**
  * Author: Dylan
- * Date: 2021/07/19
+ * Date: 2020/4/1
  * Desc:
  */
-public class ShapeDrawableTextView extends TextView {
-    private ShapeViewHelper shapeViewHelper;
+public class DrawableCenterTextView extends TextView {
     public final static int  POSITION_LEFT=0;
     public final static int  POSITION_TOP=1;
     public final static int  POSITION_RIGHT=2;
@@ -39,29 +43,25 @@ public class ShapeDrawableTextView extends TextView {
     Drawable top;
     Drawable right;
     Drawable bottom;
-    public ShapeDrawableTextView(Context context) {
+    public DrawableCenterTextView(Context context) {
         this(context,null,0);
     }
 
-    public ShapeDrawableTextView(Context context, AttributeSet attrs) {
+    public DrawableCenterTextView(Context context, AttributeSet attrs) {
         this(context, attrs,0);
     }
 
-    public ShapeDrawableTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DrawableCenterTextView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         getAttributes(context, attrs, defStyleAttr);
-        shapeViewHelper=new ShapeViewHelper();
-        shapeViewHelper.init(context,attrs);
-        shapeViewHelper.setCustomBackground(this);
+        setIncludeFontPadding(false);
     }
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
-    public ShapeDrawableTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+    public DrawableCenterTextView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes) {
         super(context, attrs, defStyleAttr, defStyleRes);
         getAttributes(context, attrs, defStyleAttr);
-        shapeViewHelper=new ShapeViewHelper();
-        shapeViewHelper.init(context,attrs);
-        shapeViewHelper.setCustomBackground(this);
+        setIncludeFontPadding(false);
     }
 
 
@@ -174,4 +174,70 @@ public class ShapeDrawableTextView extends TextView {
     }
 
 
+    @Override
+    protected void onDraw(Canvas canvas) {
+        // 获取TextView的Drawable对象，返回的数组长度应该是4，对应左上右下
+        Drawable[] drawables = getCompoundDrawables();
+        if (drawables != null) {
+
+            if (drawables[0]!=null||drawables[2]!=null){//左边和右边
+                setGravity(Gravity.CENTER_VERTICAL);
+                int drawableWidth;
+                if (drawables[0]!=null){
+                    drawableWidth=leftDrawableWidth;
+                }else{
+                    drawableWidth=rightDrawableWidth;
+                }
+
+
+                int drawablePadding = getCompoundDrawablePadding();
+                //文本宽度
+                float textWidth =0;
+                if (getLineCount()>1){
+                    Layout layout=getLayout();
+                    String firstLineStr = getText().toString().substring(0, layout.getLineEnd(0));
+                    textWidth=getPaint().measureText(firstLineStr);
+                }else{
+                    textWidth=getPaint().measureText(getText().toString());
+                }
+
+                float bodyWidth = textWidth + drawablePadding + drawableWidth+getPaddingLeft()+getPaddingRight();
+                // 移动画布开始绘制的X轴
+                canvas.translate((getWidth() - bodyWidth) / 2, 0);
+
+            }else if (drawables[1]!=null||drawables[3]!=null){//上边 跟底部
+                setGravity(Gravity.CENTER_HORIZONTAL);
+                int drawableHeight=0;
+                if (drawables[1]!=null){
+                    drawableHeight=topDrawableHeight;
+                }else{
+                    drawableHeight=bottomDrawableHeight;
+                }
+
+                Rect rect = new Rect();
+                getPaint().getTextBounds(getText().toString(), 0, getText().toString().length(), rect);
+//                float textHeight = rect.height(); //该方法不准确
+                Paint.FontMetrics fontMetrics2 = getPaint().getFontMetrics();
+                float textHeight = (int) (Math.ceil(fontMetrics2.descent - fontMetrics2.ascent));
+                textHeight*=getLineCount();
+
+                int drawablePadding = getCompoundDrawablePadding();
+                // 计算总高度（文本高度 + drawablePadding + drawableHeight）
+                float bodyHeight = textHeight + drawablePadding + drawableHeight+getPaddingTop()+getPaddingBottom();
+                // 移动画布开始绘制的Y轴
+                canvas.translate(0, (getHeight() - bodyHeight) / 2);
+            }
+
+
+        }
+        super.onDraw(canvas);
+    }
+
+
+
+
+
 }
+
+
+
