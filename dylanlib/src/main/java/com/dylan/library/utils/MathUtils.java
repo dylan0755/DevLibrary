@@ -6,6 +6,8 @@ import android.graphics.PointF;
 import com.dylan.library.map.MapUtils;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -335,6 +337,22 @@ public class MathUtils {
         return MapUtils.getLatLngMeterDistance(longitude1,latitude1,longitude2,latitude2);
     }
 
+
+    public static float nextInclusiveExclusiveFloat(final float startInclusive, final float endExclusive) {
+        return MathUtils.nextInclusiveExclusiveFloat(startInclusive,endExclusive);
+    }
+
+    public static float nextInclusiveInclusiveFloat(final float startInclusive, final float endInclusive,int keepPoint) {
+        return MathUtils.nextInclusiveInclusiveFloat(startInclusive,endInclusive,keepPoint);
+    }
+
+    public static float getFloatFromInclusiveInclusiveRange(float min,float max,int keepPoint,float excludeValue){
+       return MathUtils.getFloatFromInclusiveInclusiveRange(min,max,keepPoint,excludeValue);
+    }
+
+    public static double getDoubleFromInclusiveInclusiveRange(double min,double max,int keepPoint,double excludeValue){
+        return MathUtils.getDoubleFromInclusiveInclusiveRange(min,max,keepPoint,excludeValue);
+    }
 
 
 }

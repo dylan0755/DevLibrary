@@ -11,7 +11,7 @@ V5.4.0
 5.新增ShapeDrawableTextView
 6.新增 DrawableCenterTextView，ShapeDrawableCenterTextView drawable 和 文字居中对齐
 7.新增 SquareProgressView 方形进度条，音视频处理进度
-
+8.新增RandomUtils, 随机工具类， java 随机类都是[0,100),不包括最后个值，本工具类解决小数点区间，末端可以取到，某范围内随机，并且排除某值之外
 
 
 
