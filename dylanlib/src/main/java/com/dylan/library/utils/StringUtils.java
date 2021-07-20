@@ -39,8 +39,8 @@ public class StringUtils {
 
 
 
-    public static String formatFileSize(long size) {
-       return FileUtils.formatFileSize(size);
+    public static String getFormatFileSize(long size) {
+       return FileUtils.getFormatFileSize(size);
     }
 
     /**

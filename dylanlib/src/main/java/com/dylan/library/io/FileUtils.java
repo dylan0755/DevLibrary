@@ -723,7 +723,7 @@ public class FileUtils {
      * @param size
      * @return
      */
-    public static String formatFileSize(long size) {
+    public static String getFormatFileSize(long size) {
         double kiloByte = size*1.0 / 1024;
         if (kiloByte < 1) {
             return "0 B";
