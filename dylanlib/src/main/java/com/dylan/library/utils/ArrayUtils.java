@@ -4,7 +4,9 @@ import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Author: Dylan
@@ -60,4 +62,12 @@ public class ArrayUtils {
         }
         return max;
     }
+
+    /**
+     * 从数组中随即抽出若干项非重复的元素
+     */
+    public static List<Integer> getRandomDistinctElementsFromSpecArrays(int[] srcArrays, int elementCount) {
+        return  RandomUtils.getRandomDistinctElementsFromSpecArrays(srcArrays,elementCount);
+    }
+
 }
