@@ -16,6 +16,8 @@
  */
 package com.dylan.library.utils;
 
+import com.dylan.library.bean.VersionBean;
+
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
@@ -167,7 +169,7 @@ public class RandomUtils {
     /**
      * 从数组中随即抽出若干项非重复的元素
      */
-    public static List<Integer> getRandomDistinctElementsFromSpecArrays(int[] srcArrays, int elementCount) {
+    public static List<Integer> getRandomDistinctElementsFromArray(int[] srcArrays, int elementCount) {
         if (elementCount <= 0) elementCount = 1;
         if (elementCount>srcArrays.length)elementCount=srcArrays.length;
 
@@ -185,6 +187,23 @@ public class RandomUtils {
         return new ArrayList<>(map.values());
     }
 
+    public static <T> List<T> getRandomDistinctElementsFromList(List<T> list, int elementCount) {
+        if (elementCount <= 0) elementCount = 1;
+        if (elementCount>list.size())elementCount=list.size();
+
+        HashMap<Integer,T> map = new HashMap<>();
+        Random random = new Random();
+        while (true) {
+            int index = random.nextInt(list.size());
+            if (map.containsKey(index)) {
+                continue;
+            } else {
+                map.put(index,list.get(index));
+            }
+            if (map.size() == elementCount) break;
+        }
+        return new ArrayList<>(map.values());
+    }
 
 
 
