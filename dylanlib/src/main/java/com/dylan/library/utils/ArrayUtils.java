@@ -68,7 +68,7 @@ public class ArrayUtils {
         return  RandomUtils.getRandomDistinctElementsFromArray(srcArrays,elementCount);
     }
 
-    public static <T> List<T> getRandomDistinctElementsFromArray(List<T> list, int elementCount) {
+    public static <T> List<T> getRandomDistinctElementsFromList(List<T> list, int elementCount) {
         return  RandomUtils.getRandomDistinctElementsFromList(list,elementCount);
     }
 }
