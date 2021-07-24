@@ -73,6 +73,7 @@ public class FileUtils {
     }
 
     public static boolean delete(String path){
+        if (EmptyUtils.isEmpty(path))return false;
         File file=new File(path);
         if (file.exists()){
             if (file.isFile()){
