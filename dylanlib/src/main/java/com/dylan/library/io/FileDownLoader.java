@@ -42,7 +42,12 @@ public class FileDownLoader {
     }
 
 
-    public void downLoad(final Context context, final String downLoadUrl, final String filename) {
+    public void downLoad(final String url, final String filename){
+        downLoad(null,url,filename);
+    }
+
+
+    public void downLoad(final String downLoadDirPath,final String url, final String filename) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -65,19 +70,25 @@ public class FileDownLoader {
                     HttpsURLConnection.setDefaultSSLSocketFactory(sslcontext.getSocketFactory());
 
 
-                    URL url = new URL(downLoadUrl);
-                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    URL mURL = new URL(url);
+                    HttpURLConnection connection = (HttpURLConnection) mURL.openConnection();
                     connection.setConnectTimeout(10000);
                     connection.setReadTimeout(10000);
                     connection.setRequestMethod("GET");
                     int responseCode = connection.getResponseCode();
                     if (responseCode == 200) {
                         mTotalLength = connection.getContentLength();
-                        downLoadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+                        if (EmptyUtils.isNotEmpty(downLoadDirPath)){
+                            downLoadDir = downLoadDirPath;
+                            if (FileUtils.createDirIfNotExists(downLoadDirPath));
+                        }else{
+                            downLoadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+                        }
+
                         try {
 
                             if (filename == null || filename.isEmpty()) {
-                                String fileName = parseFileNameFormUrl(downLoadUrl);
+                                String fileName = parseFileNameFormUrl(url);
                                 if (EmptyUtils.isEmpty(fileName)){
                                     fileName=System.currentTimeMillis()+".mp4";
                                 }
@@ -126,7 +137,7 @@ public class FileDownLoader {
                     } else if (responseCode == 301 || responseCode == 302) {
                         String location = connection.getHeaderField("Location");
                         connection.disconnect();
-                        downLoad(context, location, filename);
+                        downLoad(downLoadDirPath,location, filename);
                         return;
                     } else {
                         String errorText = "";
