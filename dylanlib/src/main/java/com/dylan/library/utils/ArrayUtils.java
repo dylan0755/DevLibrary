@@ -4,9 +4,7 @@ import android.util.Log;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Random;
 
 /**
  * Author: Dylan
@@ -66,8 +64,11 @@ public class ArrayUtils {
     /**
      * 从数组中随即抽出若干项非重复的元素
      */
-    public static List<Integer> getRandomDistinctElementsFromSpecArrays(int[] srcArrays, int elementCount) {
-        return  RandomUtils.getRandomDistinctElementsFromSpecArrays(srcArrays,elementCount);
+    public static List<Integer> getRandomDistinctElementsFromArray(int[] srcArrays, int elementCount) {
+        return  RandomUtils.getRandomDistinctElementsFromArray(srcArrays,elementCount);
     }
 
+    public static <T> List<T> getRandomDistinctElementsFromList(List<T> list, int elementCount) {
+        return  RandomUtils.getRandomDistinctElementsFromList(list,elementCount);
+    }
 }

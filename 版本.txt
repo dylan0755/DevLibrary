@@ -12,7 +12,9 @@ V5.4.0
 6.新增 DrawableCenterTextView，ShapeDrawableCenterTextView drawable 和 文字居中对齐
 7.新增 SquareProgressView 方形进度条，音视频处理进度
 8.新增RandomUtils, 随机工具类， java 随机类都是[0,100),不包括最后个值，本工具类解决小数点区间，末端可以取到，某范围内随机，并且排除某值之外
-9.ArrayUtils、新增RandomUtils 增加 getRandomDistinctElementsFromSpecArrays 从数组中随即抽出若干项非重复的元素
+9.ArrayUtils、新增RandomUtils 增加
+  getRandomDistinctElementsFromArray 从数组中随即抽出若干项非重复的元素
+  getRandomDistinctElementsFromList 从列表中随即抽出若干项非重复的元素
 10.FileDownLoader 可以自定义下载目录
 
 
