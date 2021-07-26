@@ -17,6 +17,10 @@ V5.4.0
   getRandomDistinctElementsFromList 从列表中随即抽出若干项非重复的元素
 10.FileDownLoader 可以自定义下载目录
 11.FileUtils 入参空判
+12.新增 MediaConverter 多媒体转换工具，pcm转wav, 多个wav 合并
+
+
+
 
 V5.3.0 ---->2021.6.25
 

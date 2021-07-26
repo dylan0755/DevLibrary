@@ -14,26 +14,27 @@ import java.util.List;
 public class ArrayUtils {
    private static final String TAG=ArrayUtils.class.getSimpleName();
 
-   public static String getStringByArray(Object o){
+   public static String getStringByArray(Object o,String separator){
        if (o==null|| !o .getClass().isArray())return "invalid Array";
+       if (separator==null||separator.isEmpty())separator=",";
        StringBuilder builder=new StringBuilder();
        builder.append("[");
        int len= Array.getLength(o);
        for (int i=0;i<len;i++){
            builder.append(Array.get(o,i));
-           if (i!=len-1)builder.append(",");
+           if (i!=len-1)builder.append(separator);
        }
        builder.append("]");
        return builder.toString();
    }
     public static void printArray(Object o){
-       String arrayString=getStringByArray(o);
+        String arrayString=getStringByArray(o,null);
         Log.e(TAG, arrayString );
     }
 
-    public static void printArray(String tag,Object o){
-        String arrayString=getStringByArray(o);
-        Log.e(tag, arrayString );
+    public static void printArray(Object o,String separator){
+        String arrayString=getStringByArray(o,separator);
+        Log.e(TAG, arrayString );
     }
 
 
