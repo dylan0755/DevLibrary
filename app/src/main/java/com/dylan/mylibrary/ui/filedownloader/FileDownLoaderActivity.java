@@ -56,7 +56,7 @@ public class FileDownLoaderActivity extends Activity{
             @Override
             public void onClick(View v) {
                 String downloadUrl=edittext.getText().toString();
-                fileDownLoader.downLoad(v.getContext(), downloadUrl, "" );
+                fileDownLoader.downLoad(downloadUrl, "" );
                 fileDownLoader.setDownLoadListener(new FileDownLoader.DownLoadListener() {
 
 

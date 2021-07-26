@@ -114,7 +114,7 @@ public class Logger {
         if (isDebug) {
             if (msg instanceof List) {
                 int len = ((List) msg).size();
-                String arrayString = ArrayUtils.getStringByArray(((List) msg).toArray());
+                String arrayString = ArrayUtils.getStringByArray(((List) msg).toArray(),null);
                 logString(logType, tag,  stackInfo+"\n"+"List-> size=" + len + "  " + arrayString);
                 return;
             } else if (msg instanceof Throwable) {
@@ -122,7 +122,7 @@ public class Logger {
                 ELog.e(throwable);
                 return;
             } else if (msg != null && msg.getClass().isArray()) {
-                String str = ArrayUtils.getStringByArray(msg);
+                String str = ArrayUtils.getStringByArray(msg,null);
                 logString(logType, tag,  stackInfo+"\n"+"array-> " + str);
                 return;
             } else if (msg instanceof Bitmap) {
