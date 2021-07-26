@@ -32,7 +32,7 @@ public class MediaConverter {
      * @param wavOutPath
      * @throws Exception
      */
-    public void pcmToWav(String pcmInPath, int sampleRate, int channel, int encoding, String wavOutPath) throws Exception {
+    public static void pcmToWav(String pcmInPath, int sampleRate, int channel, int encoding, String wavOutPath) throws Exception {
         int bufferSize = AudioRecord.getMinBufferSize(sampleRate, channel, encoding);
         FileInputStream in;
         FileOutputStream out;
@@ -60,7 +60,7 @@ public class MediaConverter {
     /**
      * 加入wav文件头
      */
-    private void writeWaveFileHeader(FileOutputStream out, long totalAudioLen,
+    private static void writeWaveFileHeader(FileOutputStream out, long totalAudioLen,
                                      long totalDataLen, long longSampleRate, int channels, long byteRate)
             throws IOException {
         byte[] header = new byte[44];
