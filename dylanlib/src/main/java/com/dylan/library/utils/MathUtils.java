@@ -354,5 +354,35 @@ public class MathUtils {
         return MathUtils.getDoubleFromInclusiveInclusiveRange(min,max,keepPoint,excludeValue);
     }
 
+    /**
+     * 求一个数在一个范围内的百分比
+     * @param rangStartValue
+     * @param rangeEndValue
+     * @param positionValue
+     * @return
+     */
+    public static double getPercentInRange(Number rangStartValue,Number rangeEndValue,Number positionValue){
+        double totolRange=Math.max(rangStartValue.doubleValue(),rangeEndValue.doubleValue())-Math.min(rangStartValue.doubleValue(),rangeEndValue.doubleValue());
+        boolean flag=positionValue.doubleValue()>=rangStartValue.doubleValue()&&positionValue.doubleValue()<=rangeEndValue.doubleValue();
+        if (!flag)return 0;
+        BigDecimal bigDecimal1=new BigDecimal(String.valueOf(positionValue));
+        BigDecimal bigDecimal2=new BigDecimal(String.valueOf(rangStartValue));
+        BigDecimal result=bigDecimal1.subtract(bigDecimal2);
+        double percentRange=result.doubleValue();
+        DecimalFormat decimal=new DecimalFormat("#.00");
+        decimal.setRoundingMode(RoundingMode.FLOOR);
+        return Double.parseDouble(decimal.format(percentRange*1.0f/totolRange));
+    }
+
+
+    public static double getSpecValueInRangeByPercent(Number rangStartValue,Number rangeEndValue,double percent){
+        double totalRange=Math.max(rangStartValue.doubleValue(),rangeEndValue.doubleValue())-Math.min(rangStartValue.doubleValue(),rangeEndValue.doubleValue());
+        BigDecimal bigDecimal1=new BigDecimal(String.valueOf(totalRange));
+        BigDecimal bigDecimal2=new BigDecimal(String.valueOf(percent));
+        BigDecimal result=new BigDecimal(String.valueOf(rangStartValue)).add(bigDecimal1.multiply(bigDecimal2));
+        DecimalFormat decimal=new DecimalFormat("#.00");
+        decimal.setRoundingMode(RoundingMode.FLOOR);
+        return  Double.parseDouble(decimal.format(result.doubleValue()));
+    }
 
 }
