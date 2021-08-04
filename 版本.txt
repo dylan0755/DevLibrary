@@ -7,7 +7,7 @@ V5.5.0
 如-39 在[-50,50] 对应[-2,2] 中的那个数,场景：改变视频饱和度进度条UI上的值是-50,50，
 而ffmpeg 是-2，2。
 2.DrawableUtils setColorFilter
-
+3.MediaTools 更新 getVideoSpec，修复宽高的获取和MediaMetadataRetriever 的释放
 
 
 
