@@ -1,6 +1,8 @@
 package com.dylan.library.utils;
 
+import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ClipDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
@@ -42,6 +44,11 @@ public class DrawableUtils {
         dra.setColorFilter(color, PorterDuff.Mode.SRC);
         seekBar.getThumb().setColorFilter(color, PorterDuff.Mode.SRC_ATOP);
         seekBar.invalidate();
+    }
+
+    public static void setColorFilter(Drawable drawable,int filterColor){
+        PorterDuffColorFilter colorFilter= new PorterDuffColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
+        drawable.setColorFilter(colorFilter);
     }
 
 

@@ -6,9 +6,10 @@ V5.5.0
 某个数在一组范围内的百分比，根据百分比在一组范围内数中找出特定的那个数
 如-39 在[-50,50] 对应[-2,2] 中的那个数,场景：改变视频饱和度进度条UI上的值是-50,50，
 而ffmpeg 是-2，2。
-2.新增Sonic、AudioUtils 、VideoUtils, 支持修改视频声音（速度、音调、rate)
-3.新增 getReNameFilePath，返回一个和原文件重命名后的路径
-
+2.DrawableUtils setColorFilter
+3.MediaTools 更新 getVideoSpec，修复宽高的获取和MediaMetadataRetriever 的释放
+4.新增Sonic、AudioUtils 、VideoUtils, 支持修改视频声音（速度、音调、rate)
+5.新增 getReNameFilePath，返回一个和原文件重命名后的路径
 
 
 

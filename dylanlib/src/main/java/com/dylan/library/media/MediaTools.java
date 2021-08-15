@@ -194,6 +194,12 @@ public class MediaTools {
         infos[0]=Integer.parseInt(width);
         infos[1]=Integer.parseInt(height);
         infos[2]=Integer.parseInt(rotation);
+        if (infos[2]==90){//画面经过旋转的视频
+            int temp=infos[1];
+            infos[1]=infos[0];
+            infos[0]=temp;
+        }
+        retr.release();
         return infos;
     }
 
