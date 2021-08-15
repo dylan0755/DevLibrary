@@ -57,7 +57,7 @@ import java.util.zip.ZipInputStream;
 
 public class FileUtils {
 
-    public static boolean isPicture(String fileNameOrPath){
+    public static boolean isPicture(String fileNameOrPath) {
         String suffix = fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".") + 1).toLowerCase();
         if (suffix.equals("jpg") || suffix.equals("png")
                 || suffix.equals("jpeg") || suffix.equals("gif")) {
@@ -72,59 +72,63 @@ public class FileUtils {
         return new File(path).exists();
     }
 
-    public static boolean delete(String path){
-        if (EmptyUtils.isEmpty(path))return false;
-        File file=new File(path);
-        if (file.exists()){
-            if (file.isFile()){
+    public static boolean delete(String path) {
+        if (EmptyUtils.isEmpty(path)) return false;
+        File file = new File(path);
+        if (file.exists()) {
+            if (file.isFile()) {
                 //如果是m3u8 则删除ts 文件
-                 if (path.endsWith(".m3u8")||path.endsWith(".M3U8")){
-                     String dirPath=getTSFileDirPath(path);
-                     if (isExists(dirPath)){
-                         delectDirFile(dirPath);
-                     }
-                     //ts 有可能和当前的m3u8 同一个文件夹，所以删除了文件夹还要判断
-                     // m3u8 是否存在，存在则继续删除
-                     if (file.exists()){
-                         return file.delete();
-                     }else{
-                         return true;
-                     }
-                 }else{
-                     return file.delete();
-                 }
-            }else if (file.isDirectory()){
+                if (path.endsWith(".m3u8") || path.endsWith(".M3U8")) {
+                    String dirPath = getTSFileDirPath(path);
+                    if (isExists(dirPath)) {
+                        delectDirFile(dirPath);
+                    }
+                    //ts 有可能和当前的m3u8 同一个文件夹，所以删除了文件夹还要判断
+                    // m3u8 是否存在，存在则继续删除
+                    if (file.exists()) {
+                        return file.delete();
+                    } else {
+                        return true;
+                    }
+                } else {
+                    return file.delete();
+                }
+            } else if (file.isDirectory()) {
                 return delectDirFile(path);
             }
         }
         return false;
     }
+
     //通知更新单个文件
-    public static void notifyScanFile(Context context,String filePath){
+    public static void notifyScanFile(Context context, String filePath) {
         Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
         scanIntent.setData(Uri.fromFile(new File(filePath)));
         context.sendBroadcast(scanIntent);
     }
 
 
-
-
-
-
     public static String getFileNameFromPath(String filePath) {
         return filePath.substring(filePath.lastIndexOf("/") + 1);
     }
 
-    public static String getFileNameWithoutSuffix(String filePath){
-        int startIndex=filePath.lastIndexOf("/") + 1;
-        int endIndex=filePath.lastIndexOf(".");
-        endIndex=endIndex>0?endIndex:filePath.length();
-        return filePath.substring(startIndex,endIndex);
+    public static String getFileNameWithoutSuffix(String filePath) {
+        int startIndex = filePath.lastIndexOf("/") + 1;
+        int endIndex = filePath.lastIndexOf(".");
+        endIndex = endIndex > 0 ? endIndex : filePath.length();
+        return filePath.substring(startIndex, endIndex);
     }
 
-    public static String getFileSuffixFromPath(String filePath){
-        int pointIndex=filePath.lastIndexOf(".");
-        return pointIndex>0?filePath.substring( pointIndex+ 1):filePath;
+    public static String getFileSuffixFromPath(String filePath) {
+        int pointIndex = filePath.lastIndexOf(".");
+        return pointIndex > 0 ? filePath.substring(pointIndex + 1) : filePath;
+    }
+
+    public static String getReNameFilePath(String path, String fileName) {
+        String dirPath = new File(path).getParentFile().getAbsolutePath();
+        String suffix = getFileSuffixFromPath(path);
+        if (fileName == null || fileName.isEmpty()) fileName = "" + System.currentTimeMillis();
+        return dirPath + "/" + fileName +"."+suffix;
     }
 
     //递归获取文件夹大小
@@ -142,13 +146,13 @@ public class FileUtils {
 
     //从指定目录查找指定文件
     public static List<File> getSpecFilesFromDir(String dirPath, String suffix) {
-        return getSpecFilesFromDir(dirPath,new String[]{suffix});
+        return getSpecFilesFromDir(dirPath, new String[]{suffix});
     }
 
     //从指定目录查找指定文件
     public static List<File> getSpecFilesFromDir(String dirPath, String[] suffixs) {
         List<File> fileList = new ArrayList<>();
-        if (EmptyUtils.isEmpty(suffixs))return fileList;
+        if (EmptyUtils.isEmpty(suffixs)) return fileList;
         File file = new File(dirPath);
         if (!file.exists()) return fileList;
         File[] files = file.listFiles();
@@ -161,7 +165,7 @@ public class FileUtils {
                     if (EmptyUtils.isNotEmpty(list)) fileList.addAll(list);
                 }
             } else {
-                for (String suffix:suffixs){
+                for (String suffix : suffixs) {
                     if (path.endsWith(suffix)) {
                         fileList.add(new File(path));
                     }
@@ -173,9 +177,9 @@ public class FileUtils {
     }
 
 
-   //m3u8 里头的Ts 文件
-    public static List<String> getAllTSFilePath(String m3u8FilePath){
-        List<String> tsFileList=new ArrayList<>();
+    //m3u8 里头的Ts 文件
+    public static List<String> getAllTSFilePath(String m3u8FilePath) {
+        List<String> tsFileList = new ArrayList<>();
         String filePath = null;
         FileInputStream fileInputStream = null;
         try {
@@ -183,7 +187,7 @@ public class FileUtils {
             BufferedReader reader = new BufferedReader(new InputStreamReader(fileInputStream));
             String line;
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("file://")&&line.endsWith(".ts")) {
+                if (line.startsWith("file://") && line.endsWith(".ts")) {
                     tsFileList.add(line);
                 }
             }
@@ -207,10 +211,10 @@ public class FileUtils {
             String line;
             //找到就退出
             while ((line = reader.readLine()) != null) {
-                if (line.startsWith("file://")&&line.endsWith("ts")) {
+                if (line.startsWith("file://") && line.endsWith("ts")) {
                     //获取目录路径
                     filePath = new File(line).getParentFile().getPath();
-                    filePath=filePath.substring("file://".length()-1);
+                    filePath = filePath.substring("file://".length() - 1);
                     //  Logger.e(filePath);
                     break;
                 }
@@ -229,7 +233,7 @@ public class FileUtils {
 
     //升序
     @SuppressWarnings("all")
-    public static List<File> sortASC(List<File> fileList){
+    public static List<File> sortASC(List<File> fileList) {
         if (fileList == null || fileList.isEmpty()) return fileList;
         Collections.sort(fileList, new Comparator<File>() {
             @Override
@@ -265,9 +269,6 @@ public class FileUtils {
         });
         return fileList;
     }
-
-
-
 
 
     /**
@@ -361,7 +362,7 @@ public class FileUtils {
                 if (!((i = is.read()) != -1)) break;
                 baos.write(i);
             }
-            String result=baos.toString();
+            String result = baos.toString();
             baos.close();
             is.close();
             return result;
@@ -403,7 +404,6 @@ public class FileUtils {
     }
 
 
-
     public static void unZipAssetsFolder(Context context, String zipFileName, String outPathString) throws Exception {
 
         ZipInputStream inZip = new ZipInputStream(context.getAssets().open(zipFileName));
@@ -418,7 +418,7 @@ public class FileUtils {
                 folder.mkdirs();
             } else {
                 File file = new File(outPathString + File.separator + szName);
-                    if (!file.exists()) {
+                if (!file.exists()) {
                     file.getParentFile().mkdirs();
                     file.createNewFile();
                 }
@@ -436,13 +436,12 @@ public class FileUtils {
             }
         }
         inZip.close();
-}
-
+    }
 
 
     public static File getFileByUri(Uri uri, Context context) {
-        String filePath=getPathByUri4kitkat(context,uri);
-        if (EmptyUtils.isNotEmpty(filePath))return new File(filePath);
+        String filePath = getPathByUri4kitkat(context, uri);
+        if (EmptyUtils.isNotEmpty(filePath)) return new File(filePath);
         return null;
     }
 
@@ -476,7 +475,7 @@ public class FileUtils {
                     contentUri = MediaStore.Audio.Media.EXTERNAL_CONTENT_URI;
                 }
                 final String selection = "_id=?";
-                final String[] selectionArgs = new String[] { split[1] };
+                final String[] selectionArgs = new String[]{split[1]};
                 return getDataColumn(context, contentUri, selection, selectionArgs);
             }
         } else if ("content".equalsIgnoreCase(uri.getScheme())) {// MediaStore
@@ -492,11 +491,11 @@ public class FileUtils {
     public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs) {
         Cursor cursor = null;
         final String column = "_data";
-        final String[] projection = { column };
+        final String[] projection = {column};
         try {
-            try{
+            try {
                 cursor = context.getContentResolver().query(uri, projection, selection, selectionArgs, null);
-            }catch (Exception e) {
+            } catch (Exception e) {
 
             }
             if (cursor != null && cursor.moveToFirst()) {
@@ -521,9 +520,6 @@ public class FileUtils {
     public static boolean isMediaDocument(Uri uri) {
         return "com.android.providers.media.documents".equals(uri.getAuthority());
     }
-
-
-
 
 
     public static void notifyScanImageFile(Context context, String desFilePath) {
@@ -659,11 +655,11 @@ public class FileUtils {
     }
 
 
-    public static String modifyFileMD5String(File file){
+    public static String modifyFileMD5String(File file) {
         //在文本文本中追加内容
         BufferedWriter out = null;
         try {
-            String content=UUID.randomUUID().toString().replace("-", "");
+            String content = UUID.randomUUID().toString().replace("-", "");
             out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true)));
             out.newLine();//换行
             out.write(content);
@@ -671,7 +667,7 @@ public class FileUtils {
             e.printStackTrace();
         } finally {
             try {
-                if(out != null){
+                if (out != null) {
                     out.close();
                 }
             } catch (IOException e) {
@@ -720,12 +716,13 @@ public class FileUtils {
     }
 
     /**
-     *  Formatter.formatFileSize  这个类会出现 单位为中文的情况，如 637KB 变成 637千字节
+     * Formatter.formatFileSize  这个类会出现 单位为中文的情况，如 637KB 变成 637千字节
+     *
      * @param size
      * @return
      */
     public static String getFormatFileSize(long size) {
-        double kiloByte = size*1.0 / 1024;
+        double kiloByte = size * 1.0 / 1024;
         if (kiloByte < 1) {
             return "0 B";
         }
