@@ -10,6 +10,12 @@ import android.widget.ScrollView;
  */
 public class ViewUtils {
 
+    public static void setClickListener(View.OnClickListener onClickListener,View...views){
+      for (View view:views){
+          view.setOnClickListener(onClickListener);
+      }
+    }
+
     public static boolean isOnBottom(View scrollTarget){
         if (scrollTarget instanceof ScrollView) {
             ScrollView scrollView= (ScrollView) scrollTarget;

@@ -10,7 +10,7 @@ V5.5.0
 3.MediaTools 更新 getVideoSpec，修复宽高的获取和MediaMetadataRetriever 的释放
 4.新增Sonic、AudioUtils 、VideoUtils, 支持修改视频声音（速度、音调、rate)
 5.新增 getReNameFilePath，返回一个和原文件重命名后的路径
-
+6.ViewUtils setClickListener  传入多个View,设置相同的点击事件
 
 
 
