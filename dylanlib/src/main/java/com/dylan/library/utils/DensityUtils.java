@@ -6,6 +6,7 @@ import android.app.Application;
 import android.content.ComponentCallbacks;
 import android.content.Context;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.util.DisplayMetrics;
 
 public class DensityUtils {
@@ -86,8 +87,10 @@ public class DensityUtils {
         activityDisplayMetrics.density = targetDenisty;
         activityDisplayMetrics.scaledDensity = targetScaledDensity;
         activityDisplayMetrics.densityDpi = targetDensityDpi;
-
     }
+
+
+
 
     /**
      *  Activity#onCreate  和 onResume 中使用  ,如果Activity间 跳转，
@@ -123,9 +126,97 @@ public class DensityUtils {
 
     }
 
+    public static void setCustomActivityDensityInWidth(int dp, Resources resources, final Application application) {
+        final DisplayMetrics applicationDisplayMetrics = application.getResources().getDisplayMetrics();
+        if (sNoncompatDensity == 0) {
+            sNoncompatDensity = applicationDisplayMetrics.density;
+            sNoncompatScaledDensity = applicationDisplayMetrics.scaledDensity;
+            application.registerComponentCallbacks(new ComponentCallbacks() {
+                @Override
+                public void onConfigurationChanged(Configuration newConfig) {
+                    if (newConfig != null && newConfig.fontScale > 0) {
+                        sNoncompatScaledDensity = application.getResources().getDisplayMetrics().scaledDensity;
+                    }
+                }
+
+                @Override
+                public void onLowMemory() { }
+            });
+        }
+
+        //以 640*360 宽度 为标准， 宽度 360
+        final float targetDenisty = applicationDisplayMetrics.widthPixels * 1.0f / dp;
+        final float targetScaledDensity = targetDenisty * (sNoncompatScaledDensity / sNoncompatDensity);
+        final int targetDensityDpi = (int) (160 * targetDenisty);
+        DisplayMetrics activityDisplayMetrics =resources.getDisplayMetrics();
+        activityDisplayMetrics.density = targetDenisty;
+        activityDisplayMetrics.scaledDensity = targetScaledDensity;
+        activityDisplayMetrics.densityDpi = targetDensityDpi;
+
+    }
 
 
+    public static void setCustomActivityDensityInHeight(int dp, Activity activity, final Application application) {
+        final DisplayMetrics applicationDisplayMetrics = application.getResources().getDisplayMetrics();
+        if (sNoncompatDensity == 0) {
+            sNoncompatDensity = applicationDisplayMetrics.density;
+            sNoncompatScaledDensity = applicationDisplayMetrics.scaledDensity;
+            application.registerComponentCallbacks(new ComponentCallbacks() {
+                @Override
+                public void onConfigurationChanged(Configuration newConfig) {
+                    if (newConfig != null && newConfig.fontScale > 0) {
+                        sNoncompatScaledDensity = application.getResources().getDisplayMetrics().scaledDensity;
+                    }
+                }
 
+                @Override
+                public void onLowMemory() { }
+            });
+        }
+
+        //以 640*360 宽度 为标准， 宽度 360
+        final float targetDenisty = applicationDisplayMetrics.heightPixels * 1.0f / dp;
+        final float targetScaledDensity = targetDenisty * (sNoncompatScaledDensity / sNoncompatDensity);
+        final int targetDensityDpi = (int) (160 * targetDenisty);
+
+
+        DisplayMetrics activityDisplayMetrics = activity.getResources().getDisplayMetrics();
+        activityDisplayMetrics.density = targetDenisty;
+        activityDisplayMetrics.scaledDensity = targetScaledDensity;
+        activityDisplayMetrics.densityDpi = targetDensityDpi;
+
+
+    }
+
+    public static void setCustomActivityDensityInHeight(int dp, Resources resources, final Application application) {
+        final DisplayMetrics applicationDisplayMetrics = application.getResources().getDisplayMetrics();
+        if (sNoncompatDensity == 0) {
+            sNoncompatDensity = applicationDisplayMetrics.density;
+            sNoncompatScaledDensity = applicationDisplayMetrics.scaledDensity;
+            application.registerComponentCallbacks(new ComponentCallbacks() {
+                @Override
+                public void onConfigurationChanged(Configuration newConfig) {
+                    if (newConfig != null && newConfig.fontScale > 0) {
+                        sNoncompatScaledDensity = application.getResources().getDisplayMetrics().scaledDensity;
+                    }
+                }
+
+                @Override
+                public void onLowMemory() { }
+            });
+        }
+
+        //以 640*360 宽度 为标准， 宽度 360
+        final float targetDenisty = applicationDisplayMetrics.heightPixels * 1.0f / dp;
+        final float targetScaledDensity = targetDenisty * (sNoncompatScaledDensity / sNoncompatDensity);
+        final int targetDensityDpi = (int) (160 * targetDenisty);
+
+
+        DisplayMetrics activityDisplayMetrics =resources.getDisplayMetrics();
+        activityDisplayMetrics.density = targetDenisty;
+        activityDisplayMetrics.scaledDensity = targetScaledDensity;
+        activityDisplayMetrics.densityDpi = targetDensityDpi;
+    }
 
 
 
