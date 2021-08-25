@@ -62,6 +62,11 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
 
     }
 
+
+    public void setInitSelectItemPos(int pos){
+        this.selectPos = pos;
+    }
+
     public void setSelectItemPos(int selectPos) {
         this.selectPos = selectPos;
         notifyDataSetChanged();

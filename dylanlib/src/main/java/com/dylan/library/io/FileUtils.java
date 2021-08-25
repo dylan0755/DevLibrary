@@ -120,8 +120,13 @@ public class FileUtils {
     }
 
     public static String getFileSuffixFromPath(String filePath) {
-        int pointIndex = filePath.lastIndexOf(".");
-        return pointIndex > 0 ? filePath.substring(pointIndex + 1) : filePath;
+        int index=filePath.lastIndexOf("/");
+        if (index>0){
+            String fileName=filePath.substring(index+1);
+            int pointIndex = fileName.lastIndexOf(".");
+            return pointIndex > 0 ? fileName.substring(pointIndex + 1) : "";
+        }
+        return "";
     }
 
     public static String getReNameFilePath(String path, String fileName) {

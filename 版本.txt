@@ -11,7 +11,8 @@ V5.5.0
 4.新增Sonic、AudioUtils 、VideoUtils, 支持修改视频声音（速度、音调、rate)
 5.新增 getReNameFilePath，返回一个和原文件重命名后的路径
 6.ViewUtils setClickListener  传入多个View,设置相同的点击事件
-
+7. 修复FileUtils getFileSuffixFromPath 没有后缀名则返回空字符串
+8.BaseRecyclerAdapter 增加setInitSelectItemPos 初始化选中下标
 
 
 
