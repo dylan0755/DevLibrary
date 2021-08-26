@@ -13,7 +13,7 @@ V5.5.0
 6.ViewUtils setClickListener  传入多个View,设置相同的点击事件
 7. 修复FileUtils getFileSuffixFromPath 没有后缀名则返回空字符串
 8.BaseRecyclerAdapter 增加setInitSelectItemPos 初始化选中下标
-
+9.新增 FullWidthAutoImageView,宽度铺满,高度自适应
 
 
 
