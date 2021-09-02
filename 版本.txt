@@ -14,7 +14,7 @@ V5.5.0
 7. 修复FileUtils getFileSuffixFromPath 没有后缀名则返回空字符串
 8.BaseRecyclerAdapter 增加setInitSelectItemPos 初始化选中下标
 9.新增 FullWidthAutoImageView,宽度铺满,高度自适应
-
+10.新增IndicatorView
 
 
 V5.4.0 ---->2021.7.26

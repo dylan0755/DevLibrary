@@ -13,13 +13,13 @@ import com.dylan.library.utils.DensityUtils;
  * Date: 2020/3/23
  * Desc:
  */
-public class IndicatorSwitcher extends LinearLayout {
+public class CircleIndicatorSwitcher extends LinearLayout {
 
-    public IndicatorSwitcher(Context context) {
+    public CircleIndicatorSwitcher(Context context) {
         this(context,null);
     }
 
-    public IndicatorSwitcher(Context context, AttributeSet attrs) {
+    public CircleIndicatorSwitcher(Context context, AttributeSet attrs) {
         super(context, attrs);
 
 
