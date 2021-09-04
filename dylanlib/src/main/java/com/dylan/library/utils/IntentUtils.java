@@ -4,6 +4,8 @@ import android.app.ActivityManager;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.net.Uri;
 
 import com.dylan.library.exception.ELog;
@@ -159,5 +161,29 @@ public class IntentUtils {
         Intent intent = new Intent(Intent.ACTION_DIAL, uri);
         return intent;
     }
+
+    //打开系统相册App
+    public static Intent getSystemAppGallery(Context context){
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType("image/*");
+        PackageManager packageManager =context.getPackageManager();
+        List<ResolveInfo> infos =packageManager.queryIntentActivities(intent, PackageManager.MATCH_SYSTEM_ONLY);
+        String targetPack = null;
+        if (infos.size() == 1) {
+            targetPack = infos.get(0).activityInfo.packageName;
+        } else {
+            for (ResolveInfo info : infos) {
+                String packName = info.activityInfo.packageName;
+                if (packName != null && packName.contains("gallery")) {
+                    targetPack = packName;
+                }
+            }
+            if (EmptyUtils.isEmpty(targetPack))
+                targetPack = infos.get(0).activityInfo.packageName;
+        }
+        intent = getLaunchAppIntent(context, targetPack);
+        return intent;
+    }
+
 
 }

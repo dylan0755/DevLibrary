@@ -18,7 +18,7 @@ V5.5.0
 11.FileUtils ExternalStorageDir 新增 CameraRootDir, 相册的根目录，视频保存到该目录，确保所有手机都能够正常显示
 12.FileDownLoader 新增文件是否存在的选项，存在不下载
 13.新增MimeTypeFile 文件，根据文件后缀从而用Intent 打开
-
+14.getSystemAppGallery 获取打开系统相册Intent
 
 
 
