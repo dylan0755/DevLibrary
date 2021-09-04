@@ -15,6 +15,14 @@ V5.5.0
 8.BaseRecyclerAdapter 增加setInitSelectItemPos 初始化选中下标
 9.新增 FullWidthAutoImageView,宽度铺满,高度自适应
 10.新增IndicatorView
+11.FileUtils ExternalStorageDir 新增 CameraRootDir, 相册的根目录，视频保存到该目录，确保所有手机都能够正常显示
+12.FileDownLoader 新增文件是否存在的选项，存在不下载
+13.新增MimeTypeFile 文件，根据文件后缀从而用Intent 打开
+
+
+
+
+
 
 
 V5.4.0 ---->2021.7.26

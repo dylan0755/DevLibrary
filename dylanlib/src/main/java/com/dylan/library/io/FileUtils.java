@@ -18,6 +18,7 @@ import android.support.annotation.RequiresApi;
 import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
+import com.dylan.library.manager.ExternalStorageDir;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.MD5Utils;
@@ -36,9 +37,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.math.BigDecimal;
-import java.math.BigInteger;
-import java.nio.MappedByteBuffer;
-import java.nio.channels.FileChannel;
 import java.security.DigestInputStream;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -47,6 +45,7 @@ import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipInputStream;
@@ -56,6 +55,15 @@ import java.util.zip.ZipInputStream;
  */
 
 public class FileUtils {
+
+
+    public static String getCameraRootDir(){
+        return ExternalStorageDir.CameraRootDir;
+    }
+
+
+
+
 
     public static boolean isPicture(String fileNameOrPath) {
         String suffix = fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".") + 1).toLowerCase();
@@ -445,7 +453,12 @@ public class FileUtils {
 
 
     public static File getFileByUri(Uri uri, Context context) {
-        String filePath = getPathByUri4kitkat(context, uri);
+        String filePath=null;
+        try {
+            filePath= getPathByUri4kitkat(context, uri);
+        }catch (Exception e){
+            filePath=GetRealPath.getFPUriToPath(context,uri);
+        }
         if (EmptyUtils.isNotEmpty(filePath)) return new File(filePath);
         return null;
     }
@@ -513,6 +526,8 @@ public class FileUtils {
         }
         return null;
     }
+
+
 
     public static boolean isExternalStorageDocument(Uri uri) {
         return "com.android.externalstorage.documents".equals(uri.getAuthority());
@@ -756,5 +771,9 @@ public class FileUtils {
         return result4.setScale(2, BigDecimal.ROUND_HALF_UP).toPlainString()
                 + " TB";
     }
+
+
+
+
 
 }

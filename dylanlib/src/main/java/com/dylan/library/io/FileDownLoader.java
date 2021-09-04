@@ -46,8 +46,14 @@ public class FileDownLoader {
         downLoad(null,url,filename);
     }
 
-
     public void downLoad(final String downLoadDirPath,final String url, final String filename) {
+        downLoad(downLoadDirPath, url,filename,false);
+    }
+
+
+
+
+    public void downLoad(final String downLoadDirPath, final String url, final String filename, final boolean checkIsExist) {
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -57,6 +63,38 @@ public class FileDownLoader {
                 FileOutputStream os = null;
 
                 try {
+                    if (EmptyUtils.isNotEmpty(downLoadDirPath)){
+                        downLoadDir = downLoadDirPath;
+                        FileUtils.createDirIfNotExists(downLoadDirPath);
+                    }else{
+                        downLoadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+                    }
+                    try {
+                        if (filename == null || filename.isEmpty()) {
+                            String fileName = parseFileNameFormUrl(url);
+                            if (EmptyUtils.isEmpty(fileName)){
+                                fileName=System.currentTimeMillis()+".mp4";
+                            }
+                            downloadFilePath = downLoadDir + "/" + fileName;
+                        } else {
+                            downloadFilePath = downLoadDir + "/" + filename;
+                        }
+                    } catch (UrlFileNameException e) {
+                        downloadFilePath = downLoadDir + "/" + System.currentTimeMillis()+".mp4";
+                    }
+
+                    //检查是否存在
+                    if (checkIsExist){
+                        File file =new File(downloadFilePath);
+                       if (file.exists()){
+                           if (mDownLoadListener != null) {
+                               mDownLoadListener.onComplete(file.length(), downloadFilePath);
+                               return;
+                           }
+                       }
+                    }
+
+
                     //忽略https 证书问题
                     SSLContext sslcontext = SSLContext.getInstance("SSL");//第一个参数为协议,第二个参数为提供者(可以缺省)
                     TrustManager[] tm = {new MyX509TrustManager()};
@@ -78,28 +116,6 @@ public class FileDownLoader {
                     int responseCode = connection.getResponseCode();
                     if (responseCode == 200) {
                         mTotalLength = connection.getContentLength();
-                        if (EmptyUtils.isNotEmpty(downLoadDirPath)){
-                            downLoadDir = downLoadDirPath;
-                            if (FileUtils.createDirIfNotExists(downLoadDirPath));
-                        }else{
-                            downLoadDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-                        }
-
-                        try {
-
-                            if (filename == null || filename.isEmpty()) {
-                                String fileName = parseFileNameFormUrl(url);
-                                if (EmptyUtils.isEmpty(fileName)){
-                                    fileName=System.currentTimeMillis()+".mp4";
-                                }
-                                downloadFilePath = downLoadDir + "/" + fileName;
-                            } else {
-                                downloadFilePath = downLoadDir + "/" + filename;
-                            }
-                        } catch (UrlFileNameException e) {
-                            downloadFilePath = downLoadDir + "/" + System.currentTimeMillis()+".mp4";
-                        }
-
                         is = connection.getInputStream();
                         String contentEncoding = connection.getContentEncoding();
                         if (contentEncoding != null && contentEncoding.equalsIgnoreCase("gzip")) {
@@ -137,7 +153,7 @@ public class FileDownLoader {
                     } else if (responseCode == 301 || responseCode == 302) {
                         String location = connection.getHeaderField("Location");
                         connection.disconnect();
-                        downLoad(downLoadDirPath,location, filename);
+                        downLoad(downLoadDirPath,location, filename,checkIsExist);
                         return;
                     } else {
                         String errorText = "";
