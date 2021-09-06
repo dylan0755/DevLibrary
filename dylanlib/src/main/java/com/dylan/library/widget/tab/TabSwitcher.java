@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 
 import com.dylan.library.R;
+import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.EmptyUtils;
 
@@ -32,8 +33,11 @@ public class TabSwitcher extends LinearLayout implements View.OnClickListener {
     private int selectTextColor;
     private int normalTextColor;
     private int indicatorTopPadding;
+    @NotProguard
     public static final int TEXT_BOLD_NONE = 0;
+    @NotProguard
     public static final int TEXT_BOLD_WHEN_SELECT = 1;
+    @NotProguard
     public static final int TEXT_BOLD_BOTH = 2;
 
     @IntDef({TEXT_BOLD_NONE, TEXT_BOLD_WHEN_SELECT, TEXT_BOLD_BOTH})
