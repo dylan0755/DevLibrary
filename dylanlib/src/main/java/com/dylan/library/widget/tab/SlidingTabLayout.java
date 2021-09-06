@@ -18,7 +18,6 @@ import android.widget.LinearLayout;
 import android.widget.OverScroller;
 
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.Logger;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.List;
  * Created by Dylan on 2016/8/31.
  */
 
-public class TabLayout extends LinearLayout {
+public class SlidingTabLayout extends LinearLayout {
     private int TAB_TEXT_SIZE;
     private int COLOR_TEXT_NORMAL;
     private int COLOR_TEXT_SELECT = Color.BLACK;
@@ -64,12 +63,12 @@ public class TabLayout extends LinearLayout {
     private VelocityTracker mVelocityTracker;
     private int tabMargin;
 
-    public TabLayout(Context context) {
+    public SlidingTabLayout(Context context) {
         this(context, null);
 
     }
 
-    public TabLayout(Context context, AttributeSet attrs) {
+    public SlidingTabLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         setOrientation(HORIZONTAL);
         setDescendantFocusability(FOCUS_BLOCK_DESCENDANTS);
@@ -240,12 +239,12 @@ public class TabLayout extends LinearLayout {
     /**
      * 添加标签
      */
-    public TabLayout addTab(TabItem tabItem) {
+    public SlidingTabLayout addTab(TabItem tabItem) {
         mTabItemList.add(tabItem);
         return this;
     }
 
-    public TabLayout addTabs(List<TabItem> tabItems) {
+    public SlidingTabLayout addTabs(List<TabItem> tabItems) {
         if (tabItems == null || tabItems.isEmpty()) return this;
         mTabItemList.addAll(tabItems);
         return this;

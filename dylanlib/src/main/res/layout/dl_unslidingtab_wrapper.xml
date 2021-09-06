@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dylan.library.widget.tab.MediumTabItem xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_horizontal">
+
+
+    <com.dylan.library.widget.MediumTextView
+        android:id="@+id/tvTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"/>
+
+    <View
+        android:id="@+id/indicatorView"
+        android:layout_width="20dp"
+        android:layout_height="2dp"
+        android:background="#FFFADB22"/>
+
+
+
+</com.dylan.library.widget.tab.MediumTabItem>

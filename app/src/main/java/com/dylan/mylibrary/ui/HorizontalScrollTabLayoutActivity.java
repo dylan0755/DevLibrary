@@ -13,7 +13,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 
 import com.dylan.library.widget.tab.HorizontalScrollTabLayout;
-import com.dylan.library.widget.tab.TabLayout;
+import com.dylan.library.widget.tab.SlidingTabLayout;
 import com.dylan.library.widget.tab.TabItem;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.tab.TabLayoutFragment;
@@ -27,7 +27,7 @@ import java.util.List;
  * Desc:
  */
 public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
-    TabLayout mTabLayout;
+    SlidingTabLayout mSlidingTabLayout;
     ViewPager mViewPager;
     public static final String TAB_INDEX="tabIndex";
 
@@ -35,7 +35,7 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_horizontalscrolltab);
-        mTabLayout= findViewById(R.id.tabLayout);
+        mSlidingTabLayout = findViewById(R.id.tabLayout);
         mViewPager=  findViewById(R.id.vpager);
         initTabLayout();
     }
@@ -46,30 +46,30 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
         int selectColor = Color.parseColor("#333333");
         int normalColor = Color.parseColor("#666666");
         mViewPager.setOffscreenPageLimit(2);
-        mTabLayout.setTabTextSize(16);
-        mTabLayout.setIndicatorShap(HorizontalScrollTabLayout.SHAPE_RECTANGLE);
-        mTabLayout.setTabColor(normalColor);
-        mTabLayout.setTabSelectColor(selectColor);
-        mTabLayout.setIndicatorColor(Color.BLACK);
-        mTabLayout.setIndicatorHeight(4);
-        mTabLayout.setUpWidthViewPager(mViewPager);
+        mSlidingTabLayout.setTabTextSize(16);
+        mSlidingTabLayout.setIndicatorShap(HorizontalScrollTabLayout.SHAPE_RECTANGLE);
+        mSlidingTabLayout.setTabColor(normalColor);
+        mSlidingTabLayout.setTabSelectColor(selectColor);
+        mSlidingTabLayout.setIndicatorColor(Color.BLACK);
+        mSlidingTabLayout.setIndicatorHeight(4);
+        mSlidingTabLayout.setUpWidthViewPager(mViewPager);
         // mTabLayout.syncTextIconColor(false);
-        mTabLayout.addTab(mTabLayout.newTab().setTabTitle("粤菜"))
-                .addTab(mTabLayout.newTab().setTabTitle("川菜"))
-                .addTab(mTabLayout.newTab().setTabTitle("卤菜"))
-                .addTab(mTabLayout.newTab().setTabTitle("湘菜"))
-                .addTab(mTabLayout.newTab().setTabTitle("桂林米粉"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试1"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试2"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试4"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试5"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
-                .addTab(mTabLayout.newTab().setTabTitle("测试"))
+        mSlidingTabLayout.addTab(mSlidingTabLayout.newTab().setTabTitle("粤菜"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("川菜"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("卤菜"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("湘菜"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("桂林米粉"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试1"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试2"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试4"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试5"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试"))
+                .addTab(mSlidingTabLayout.newTab().setTabTitle("测试"))
                 .create();
         List<Fragment> fragmentList = new ArrayList<Fragment>();
-        for (int i = 0; i < mTabLayout.getTabCount(); i++) {
+        for (int i = 0; i < mSlidingTabLayout.getTabCount(); i++) {
             TabLayoutFragment fragment = new TabLayoutFragment();
             Bundle bundle = new Bundle();
             bundle.putString("page", "" + i);
@@ -78,12 +78,12 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
         }
         MyPagerAdapter adapter = new MyPagerAdapter(getSupportFragmentManager(), fragmentList);
         mViewPager.setAdapter(adapter);
-        mTabLayout.setTabSelectListener(new TabSelectListenerImpl());
+        mSlidingTabLayout.setTabSelectListener(new TabSelectListenerImpl());
 
         Intent intent=getIntent();
         int index=intent.getIntExtra(TAB_INDEX,0);
         mViewPager.setCurrentItem(index);
-        mTabLayout.setSelect(index);
+        mSlidingTabLayout.setSelect(index);
     }
 
 
@@ -107,7 +107,7 @@ public class HorizontalScrollTabLayoutActivity extends AppCompatActivity {
     }
 
 
-    class TabSelectListenerImpl implements TabLayout.TabSelectListener{
+    class TabSelectListenerImpl implements SlidingTabLayout.TabSelectListener{
 
         @Override
         public void onSelect(int position, TabItem tabItem) {
