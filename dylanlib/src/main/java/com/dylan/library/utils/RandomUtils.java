@@ -206,5 +206,12 @@ public class RandomUtils {
     }
 
 
+    public static String genSpecLengthRandomNum(int len){
+        String randomStr="";
+        for (int i=0;i<len;i++) {
+            randomStr+=String.valueOf((int)(Math.random()*10));
+        }
+        return randomStr;
+    }
 
 }

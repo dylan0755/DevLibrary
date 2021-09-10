@@ -4,7 +4,7 @@
 
 V5.6.0
 1.NormalTabSwitcher 更名为TabSwitcher，支持下划线宽度、高度、颜色自定义，标签字体加粗处理
-
+2.RandomUtils 新增 genSpecLengthRandomNum，获取指定位数的随机数
 
 
 
