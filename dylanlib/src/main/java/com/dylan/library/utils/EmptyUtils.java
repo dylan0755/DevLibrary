@@ -28,6 +28,7 @@ public class EmptyUtils {
 
 
         if (object instanceof String && ((String) object).isEmpty()) return true;
+        else if (object instanceof CharSequence&&((CharSequence)object).length()==0)return true;
         else if (object.getClass().isArray() && Array.getLength(object) == 0) return true;
         else if (object instanceof Map && ((Map) object).isEmpty()) return true;
             //ArrayList,LinkList,HashSet即其父类
