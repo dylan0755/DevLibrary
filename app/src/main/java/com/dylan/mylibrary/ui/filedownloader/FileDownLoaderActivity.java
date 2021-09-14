@@ -89,16 +89,17 @@ public class FileDownLoaderActivity extends Activity{
                     }
 
                     @Override
-                    public void onComplete(long totalSize, final String downLoadFilePath) {
+                    public void onComplete(long totalSize, final String downLoadFilePath, boolean loadFromCache) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 button_download.setEnabled(true);
-                               FileUtils.notifyScanFile(FileDownLoaderActivity.this,downLoadFilePath);
+                                FileUtils.notifyScanFile(FileDownLoaderActivity.this,downLoadFilePath);
                             }
                         });
-
                     }
+
+
                 });
                 button_download.setEnabled(false);
             }

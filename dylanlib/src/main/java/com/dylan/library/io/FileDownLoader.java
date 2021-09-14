@@ -88,7 +88,7 @@ public class FileDownLoader {
                         File file =new File(downloadFilePath);
                        if (file.exists()){
                            if (mDownLoadListener != null) {
-                               mDownLoadListener.onComplete(file.length(), downloadFilePath);
+                               mDownLoadListener.onComplete(file.length(), downloadFilePath,true);
                                return;
                            }
                        }
@@ -174,7 +174,7 @@ public class FileDownLoader {
                 closeIO(os);
                 closeIO(is);
                 if (mDownLoadListener != null) {
-                    mDownLoadListener.onComplete(mTotalLength, downloadFilePath);
+                    mDownLoadListener.onComplete(mTotalLength, downloadFilePath,false);
                 }
             }
         }).start();
@@ -189,7 +189,7 @@ public class FileDownLoader {
 
         void onProgress(long totalSize, long hasDownLoadSize, int progressPercent);
 
-        void onComplete(long totalSize, String downLoadFilePath);
+        void onComplete(long totalSize, String downLoadFilePath,boolean loadFromCache);
 
     }
 
