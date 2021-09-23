@@ -6,7 +6,7 @@ V5.6.0
 1.NormalTabSwitcher 更名为TabSwitcher，支持下划线宽度、高度、颜色自定义，标签字体加粗处理
 2.RandomUtils 新增 genSpecLengthRandomNum，获取指定位数的随机数
 3.FileDownLoader 下载完成回调 方法 增加 isFromCache, 是否读取本地缓存
-
+4.ExpandableTextView 重载  setOriginalText(SpannableString styleSpan)，折叠支持样式
 
 
 

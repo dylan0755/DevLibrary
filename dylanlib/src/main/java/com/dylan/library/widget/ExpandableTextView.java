@@ -97,6 +97,78 @@ public class ExpandableTextView extends AppCompatTextView {
         return false;
     }
 
+
+    public void setOriginalText(SpannableString styleSpan){
+        this.originalText =  autoSplitText(styleSpan);
+        mExpandable = false;
+        mCloseSpannableStr = new SpannableStringBuilder();
+        final int maxLines = mMaxLines;
+        SpannableStringBuilder tempText = charSequenceToSpannable(originalText);
+        mOpenSpannableStr = charSequenceToSpannable(styleSpan);
+
+
+        if (maxLines != -1) {
+            Layout layout = createStaticLayout(tempText);
+            mExpandable = layout.getLineCount() > maxLines;
+            if (mExpandable) {
+                //拼接展开内容
+                if (mCloseInNewLine) {
+                    mOpenSpannableStr.append("\n");
+                }
+                if (mCloseSuffixSpan != null) {
+                    mOpenSpannableStr.append(mCloseSuffixSpan);
+                }
+                //计算原文截取位置
+                int endPos = layout.getLineEnd(maxLines - 1);
+                if (originalText.length() <= endPos) {
+                    mCloseSpannableStr = charSequenceToSpannable(originalText);
+                } else {
+                    mCloseSpannableStr = charSequenceToSpannable(originalText.subSequence(0, endPos));
+                }
+
+                SpannableStringBuilder tempText2 = charSequenceToSpannable(mCloseSpannableStr).append(ELLIPSIS_STRING);
+                if (mOpenSuffixSpan != null) {
+                    tempText2.append(mOpenSuffixSpan);
+                }
+                //循环判断，收起内容添加展开后缀后的内容
+                Layout tempLayout = createStaticLayout(tempText2);
+                while (tempLayout.getLineCount() > maxLines) {
+                    int lastSpace = mCloseSpannableStr.length() - 1;
+                    if (lastSpace == -1) {
+                        break;
+                    }
+                    if (originalText.length() <= lastSpace) {
+                        mCloseSpannableStr = charSequenceToSpannable(styleSpan);
+                    } else {
+                        mCloseSpannableStr = charSequenceToSpannable(styleSpan.subSequence(0, lastSpace));
+                    }
+                    tempText2 = charSequenceToSpannable(mCloseSpannableStr).append(ELLIPSIS_STRING);
+                    if (mOpenSuffixSpan != null) {
+                        tempText2.append(mOpenSuffixSpan);
+                    }
+                    tempLayout = createStaticLayout(tempText2);
+
+                }
+
+                //计算收起的文本高度
+                mCLoseHeight = tempLayout.getHeight() + getPaddingTop() + getPaddingBottom();
+
+                mCloseSpannableStr.append(ELLIPSIS_STRING);
+                if (mOpenSuffixSpan != null) {
+                    mCloseSpannableStr.append(mOpenSuffixSpan);
+                }
+            }
+        }
+        isClosed = mExpandable;
+        if (mExpandable) {
+            setText(mCloseSpannableStr);
+        } else {
+            setText(mOpenSpannableStr);
+        }
+    }
+
+
+
     public void setOriginalText(CharSequence srcText) {
         this.originalText =  autoSplitText(srcText);
         mExpandable = false;
