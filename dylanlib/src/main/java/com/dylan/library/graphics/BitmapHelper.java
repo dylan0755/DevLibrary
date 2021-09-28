@@ -31,6 +31,7 @@ import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.Base64;
 import android.util.Log;
+import android.util.Size;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -102,18 +103,22 @@ public class BitmapHelper {
     }
 
 
-    public static BitmapSize decodeBitmapSize(String path) {
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(path, options);
-        BitmapSize size = new BitmapSize();
-        size.width = options.outWidth;
-        size.height = options.outHeight;
-        return size;
-    }
+
 
     public static int readBitmapDegree(String path) {
         return ExifHelper.readPictureDegree(path);
+    }
+
+    public static BitmapSize decodeBitmapSize(String path) {
+        return readBitmapSize(path);
+    }
+    public static BitmapSize readBitmapSize(String filePath){
+        BitmapFactory.Options options=new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+        int imageWidth = options.outWidth;
+        int imageHeight = options.outHeight;
+        return new BitmapSize(imageWidth,imageHeight);
     }
 
 
@@ -751,6 +756,14 @@ public class BitmapHelper {
     public static class BitmapSize {
         public int width;
         public int height;
+
+        public BitmapSize() {
+        }
+
+        public BitmapSize(int width, int height) {
+            this.width = width;
+            this.height = height;
+        }
 
         @Override
         public String toString() {
