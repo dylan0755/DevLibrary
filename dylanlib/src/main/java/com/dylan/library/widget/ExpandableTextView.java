@@ -140,7 +140,9 @@ public class ExpandableTextView extends AppCompatTextView {
                     if (originalText.length() <= lastSpace) {
                         mCloseSpannableStr = charSequenceToSpannable(styleSpan);
                     } else {
-                        mCloseSpannableStr = charSequenceToSpannable(styleSpan.subSequence(0, lastSpace));
+                        int end=lastSpace;
+                        if (styleSpan.length()-1<end)end=styleSpan.length()-1;
+                        mCloseSpannableStr = charSequenceToSpannable(styleSpan.subSequence(0, end));
                     }
                     tempText2 = charSequenceToSpannable(mCloseSpannableStr).append(ELLIPSIS_STRING);
                     if (mOpenSuffixSpan != null) {
