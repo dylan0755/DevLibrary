@@ -44,8 +44,8 @@ public class ExpandableTextView extends AppCompatTextView {
 
     public static final String ELLIPSIS_STRING = new String(new char[]{'\u2026'});
     private static final int DEFAULT_MAX_LINE = 3;
-    private static final String DEFAULT_OPEN_SUFFIX = " 展开";
-    private static final String DEFAULT_CLOSE_SUFFIX = " 收起";
+    private static final String DEFAULT_OPEN_SUFFIX = "展开";
+    private static final String DEFAULT_CLOSE_SUFFIX = "收起";
     volatile boolean animating = false;
     boolean isClosed = false;
     private int mMaxLines = DEFAULT_MAX_LINE;
@@ -137,6 +137,7 @@ public class ExpandableTextView extends AppCompatTextView {
                 if (mOpenSuffixSpan != null) {
                     tempText2.append(mOpenSuffixSpan);
                 }
+                Logger.e(tempText2);
                 //循环判断，收起内容添加展开后缀后的内容
                 Layout tempLayout = createStaticLayout(tempText2);
                 while (tempLayout.getLineCount() > maxLines) {
@@ -158,43 +159,29 @@ public class ExpandableTextView extends AppCompatTextView {
                     tempLayout = createStaticLayout(tempText2);
                 }
 
-
-                SpannableStringBuilder tempCloseSpannableStr=new SpannableStringBuilder(mCloseSpannableStr);
-
+                //添加省略号
+                int ellipsisEnd=mCloseSpannableStr.length();
+                mCloseSpannableStr.append(ELLIPSIS_STRING);
 
                 //折叠的最后一行未满一行，展开按钮不能放在最右，所以填充空格
                 boolean hasFillSpace=false;//是否有填充空格
                 int spaceCount=0;
                 if (tempLayout.getLineCount()==maxLines
                         &&mOpenSuffixSpan!=null){
-                    SpannableStringBuilder temSpan=new SpannableStringBuilder(tempCloseSpannableStr);
+                    SpannableStringBuilder temSpan=new SpannableStringBuilder(mCloseSpannableStr);
                     Layout tempLayout333 = createStaticLayout(temSpan);
                     while(tempLayout333.getLineCount()==maxLines){
-                        SpannableStringBuilder spanInner=new SpannableStringBuilder(tempCloseSpannableStr);
+                        SpannableStringBuilder spanInner=new SpannableStringBuilder(mCloseSpannableStr);
                         spanInner.append(" ").append(ELLIPSIS_STRING).append(mOpenSuffixSpan);
                         tempLayout333=createStaticLayout(spanInner);
                         if (tempLayout333.getLineCount()==maxLines){
                             hasFillSpace=true;
-                            tempCloseSpannableStr.append(" ");
+                            mCloseSpannableStr.append(" ");
                             spaceCount++;
                         }else{
                             break;
                         }
                     }
-                }
-
-                mCloseSpannableStr.append(ELLIPSIS_STRING);
-                if (hasFillSpace){
-//                    if (spaceCount<=3){//填充多个空格后不需要添加省略号
-//                        //添加省略号
-//                        mCloseSpannableStr.append(ELLIPSIS_STRING);
-//                    }
-                    for (int i=0;i<spaceCount;i++){
-                        mCloseSpannableStr.append(" ");
-                    }
-                }else{
-                    //添加省略号
-                    mCloseSpannableStr.append(ELLIPSIS_STRING);
                 }
                 mCloseSpannableStr.append(mOpenSuffixSpan);
                 //计算收起的文本高度
