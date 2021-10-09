@@ -18,12 +18,19 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.AlignmentSpan;
 import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
+import android.widget.TextView;
+
+import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.HtmlUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.widget.OverLinkMovementMethod;
 
 import java.lang.reflect.Field;
 
@@ -33,7 +40,7 @@ import java.lang.reflect.Field;
  * Desc: 布局里面不要设置padding， 用margin 代替，否则展开 不会在文本末尾
  */
 public class ExpandableTextView extends AppCompatTextView {
-    private static final String TAG = com.dylan.library.widget.ExpandableTextView.class.getSimpleName();
+    private static final String TAG = ExpandableTextView.class.getSimpleName();
 
     public static final String ELLIPSIS_STRING = new String(new char[]{'\u2026'});
     private static final int DEFAULT_MAX_LINE = 3;
@@ -45,7 +52,7 @@ public class ExpandableTextView extends AppCompatTextView {
     /** TextView可展示宽度，包含paddingLeft和paddingRight */
     private int initWidth = 0;
     /** 原始文本 */
-    private CharSequence originalText;
+    private SpannableString mStyleSpan;
 
     private SpannableStringBuilder mOpenSpannableStr, mCloseSpannableStr;
 
@@ -98,12 +105,13 @@ public class ExpandableTextView extends AppCompatTextView {
     }
 
 
+
     public void setOriginalText(SpannableString styleSpan){
-        this.originalText =  autoSplitText(styleSpan);
+        this.mStyleSpan=styleSpan;
         mExpandable = false;
         mCloseSpannableStr = new SpannableStringBuilder();
         final int maxLines = mMaxLines;
-        SpannableStringBuilder tempText = charSequenceToSpannable(originalText);
+        SpannableStringBuilder tempText = charSequenceToSpannable(mStyleSpan);
         mOpenSpannableStr = charSequenceToSpannable(styleSpan);
 
 
@@ -120,12 +128,11 @@ public class ExpandableTextView extends AppCompatTextView {
                 }
                 //计算原文截取位置
                 int endPos = layout.getLineEnd(maxLines - 1);
-                if (originalText.length() <= endPos) {
-                    mCloseSpannableStr = charSequenceToSpannable(originalText);
+                if (mStyleSpan.length() <= endPos) {
+                    mCloseSpannableStr = charSequenceToSpannable(mStyleSpan);
                 } else {
-                    mCloseSpannableStr = charSequenceToSpannable(originalText.subSequence(0, endPos));
+                    mCloseSpannableStr = charSequenceToSpannable(mStyleSpan.subSequence(0, endPos));
                 }
-
                 SpannableStringBuilder tempText2 = charSequenceToSpannable(mCloseSpannableStr).append(ELLIPSIS_STRING);
                 if (mOpenSuffixSpan != null) {
                     tempText2.append(mOpenSuffixSpan);
@@ -137,7 +144,7 @@ public class ExpandableTextView extends AppCompatTextView {
                     if (lastSpace == -1) {
                         break;
                     }
-                    if (originalText.length() <= lastSpace) {
+                    if (mStyleSpan.length() <= lastSpace) {
                         mCloseSpannableStr = charSequenceToSpannable(styleSpan);
                     } else {
                         int end=lastSpace;
@@ -149,16 +156,49 @@ public class ExpandableTextView extends AppCompatTextView {
                         tempText2.append(mOpenSuffixSpan);
                     }
                     tempLayout = createStaticLayout(tempText2);
-
                 }
 
+
+                SpannableStringBuilder tempCloseSpannableStr=new SpannableStringBuilder(mCloseSpannableStr);
+
+
+                //折叠的最后一行未满一行，展开按钮不能放在最右，所以填充空格
+                boolean hasFillSpace=false;//是否有填充空格
+                int spaceCount=0;
+                if (tempLayout.getLineCount()==maxLines
+                        &&mOpenSuffixSpan!=null){
+                    SpannableStringBuilder temSpan=new SpannableStringBuilder(tempCloseSpannableStr);
+                    Layout tempLayout333 = createStaticLayout(temSpan);
+                    while(tempLayout333.getLineCount()==maxLines){
+                        SpannableStringBuilder spanInner=new SpannableStringBuilder(tempCloseSpannableStr);
+                        spanInner.append(" ").append(ELLIPSIS_STRING).append(mOpenSuffixSpan);
+                        tempLayout333=createStaticLayout(spanInner);
+                        if (tempLayout333.getLineCount()==maxLines){
+                            hasFillSpace=true;
+                            tempCloseSpannableStr.append(" ");
+                            spaceCount++;
+                        }else{
+                            break;
+                        }
+                    }
+                }
+
+
+                if (hasFillSpace){
+                    if (spaceCount<=3){//填充多个空格后不需要添加省略号
+                        //添加省略号
+                        mCloseSpannableStr.append(ELLIPSIS_STRING);
+                    }
+                    for (int i=0;i<spaceCount;i++){
+                        mCloseSpannableStr.append(" ");
+                    }
+                }else{
+                    //添加省略号
+                    mCloseSpannableStr.append(ELLIPSIS_STRING);
+                }
+                mCloseSpannableStr.append(mOpenSuffixSpan);
                 //计算收起的文本高度
                 mCLoseHeight = tempLayout.getHeight() + getPaddingTop() + getPaddingBottom();
-
-                mCloseSpannableStr.append(ELLIPSIS_STRING);
-                if (mOpenSuffixSpan != null) {
-                    mCloseSpannableStr.append(mOpenSuffixSpan);
-                }
             }
         }
         isClosed = mExpandable;
@@ -169,89 +209,11 @@ public class ExpandableTextView extends AppCompatTextView {
         }
     }
 
+    public void setOriginalText(String srcText) {
+        if (EmptyUtils.isEmpty(srcText))return;
+        SpannableString spannableString = new SpannableString(autoSplitText(srcText));
+        setOriginalText(spannableString);
 
-
-    public void setOriginalText(CharSequence srcText) {
-        this.originalText =  autoSplitText(srcText);
-        mExpandable = false;
-        mCloseSpannableStr = new SpannableStringBuilder();
-        final int maxLines = mMaxLines;
-        SpannableStringBuilder tempText = charSequenceToSpannable(originalText);
-        mOpenSpannableStr = charSequenceToSpannable(originalText);
-
-        if (maxLines != -1) {
-            Layout layout = createStaticLayout(tempText);
-            mExpandable = layout.getLineCount() > maxLines;
-            if (mExpandable) {
-                //拼接展开内容
-                if (mCloseInNewLine) {
-                    mOpenSpannableStr.append("\n");
-                }
-                if (mCloseSuffixSpan != null) {
-                    mOpenSpannableStr.append(mCloseSuffixSpan);
-                }
-                //计算原文截取位置
-                int endPos = layout.getLineEnd(maxLines - 1);
-                if (originalText.length() <= endPos) {
-                    mCloseSpannableStr = charSequenceToSpannable(originalText);
-                } else {
-                    mCloseSpannableStr = charSequenceToSpannable(originalText.subSequence(0, endPos));
-                }
-                SpannableStringBuilder tempText2 = charSequenceToSpannable(mCloseSpannableStr).append(ELLIPSIS_STRING);
-                if (mOpenSuffixSpan != null) {
-                    tempText2.append(mOpenSuffixSpan);
-                }
-                //循环判断，收起内容添加展开后缀后的内容
-                Layout tempLayout = createStaticLayout(tempText2);
-                while (tempLayout.getLineCount() > maxLines) {
-                    int lastSpace = mCloseSpannableStr.length() - 1;
-                    if (lastSpace == -1) {
-                        break;
-                    }
-                    if (originalText.length() <= lastSpace) {
-                        mCloseSpannableStr = charSequenceToSpannable(originalText);
-                    } else {
-                        mCloseSpannableStr = charSequenceToSpannable(originalText.subSequence(0, lastSpace));
-                    }
-                    tempText2 = charSequenceToSpannable(mCloseSpannableStr).append(ELLIPSIS_STRING);
-                    if (mOpenSuffixSpan != null) {
-                        tempText2.append(mOpenSuffixSpan);
-                    }
-                    tempLayout = createStaticLayout(tempText2);
-
-                }
-//                int lastSpace = mCloseSpannableStr.length() - mOpenSuffixSpan.length();
-//                if(lastSpace >= 0 && originalText.length() > lastSpace){
-//                    CharSequence redundantChar = originalText.subSequence(lastSpace, lastSpace + mOpenSuffixSpan.length());
-//                    int offset = hasEnCharCount(redundantChar) - hasEnCharCount(mOpenSuffixSpan) + 1;
-//                    lastSpace = offset <= 0 ? lastSpace : lastSpace - offset;
-//                    mCloseSpannableStr = charSequenceToSpannable(originalText.subSequence(0, lastSpace));
-//                }
-                //计算收起的文本高度
-                mCLoseHeight = tempLayout.getHeight() + getPaddingTop() + getPaddingBottom();
-
-                mCloseSpannableStr.append(ELLIPSIS_STRING);
-                if (mOpenSuffixSpan != null) {
-                    mCloseSpannableStr.append(mOpenSuffixSpan);
-                }
-            }
-        }
-        isClosed = mExpandable;
-        if (mExpandable) {
-            setText(mCloseSpannableStr);
-            //设置监听
-            super.setOnClickListener(new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    switchOpenClose();
-//                    if (mOnClickListener != null) {
-//                        mOnClickListener.onClick(v);
-//                    }
-                }
-            });
-        } else {
-            setText(mOpenSpannableStr);
-        }
     }
 
     private int hasEnCharCount(CharSequence str){
@@ -395,7 +357,8 @@ public class ExpandableTextView extends AppCompatTextView {
      * @return
      */
     private Layout createStaticLayout(SpannableStringBuilder spannable) {
-        int contentWidth = initWidth - getPaddingLeft() - getPaddingRight();
+        // int contentWidth = initWidth - getPaddingLeft() - getPaddingRight();
+        int contentWidth = initWidth;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             StaticLayout.Builder builder = StaticLayout.Builder.obtain(spannable, 0, spannable.length(), getPaint(), contentWidth);
             builder.setAlignment(Layout.Alignment.ALIGN_OPPOSITE);
