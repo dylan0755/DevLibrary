@@ -183,12 +183,12 @@ public class ExpandableTextView extends AppCompatTextView {
                     }
                 }
 
-
+                mCloseSpannableStr.append(ELLIPSIS_STRING);
                 if (hasFillSpace){
-                    if (spaceCount<=3){//填充多个空格后不需要添加省略号
-                        //添加省略号
-                        mCloseSpannableStr.append(ELLIPSIS_STRING);
-                    }
+//                    if (spaceCount<=3){//填充多个空格后不需要添加省略号
+//                        //添加省略号
+//                        mCloseSpannableStr.append(ELLIPSIS_STRING);
+//                    }
                     for (int i=0;i<spaceCount;i++){
                         mCloseSpannableStr.append(" ");
                     }
