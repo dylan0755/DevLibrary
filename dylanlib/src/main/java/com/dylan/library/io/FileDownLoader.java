@@ -162,13 +162,19 @@ public class FileDownLoader {
                         } else {
                             errorText = "资源连接失败";
                         }
-                        if (mDownLoadListener != null)
+                        if (mDownLoadListener != null){
                             mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, errorText);
+                            return;
+                        }
+
                     }
                 } catch (Exception e) {
                     ELog.e(e);
-                    if (mDownLoadListener != null)
+                    if (mDownLoadListener != null){
                         mDownLoadListener.onError(ERROR_ACCESS_RESOURCE, e.getMessage());
+                        return;
+                    }
+
                 }
                 isDownLoading = false;
                 closeIO(os);
