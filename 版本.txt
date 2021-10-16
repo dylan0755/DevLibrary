@@ -8,7 +8,7 @@ V5.6.0
 3.FileDownLoader 下载完成回调 方法 增加 isFromCache, 是否读取本地缓存
 4.ExpandableTextView 重载  setOriginalText(SpannableString styleSpan)，折叠支持样式
 5.新增RoundFullAutoImageView
-
+6.新增EmojiFilter StringUtils 新增表情符过滤
 
 
 

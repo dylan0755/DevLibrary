@@ -34,8 +34,14 @@ public class StringUtils {
     }
 
 
+    public static boolean containsEmoji(String source) {
+        return EmojiFilter.containsEmoji(source);
+    }
 
 
+    public static String filterEmoji(String source, String replaceStr) {
+        return EmojiFilter.filterEmoji(source,replaceStr);
+    }
 
 
 
@@ -87,6 +93,8 @@ public class StringUtils {
     public static boolean isEmpty(String strObj, String variableName) {
         return !isNotEmpty(strObj, variableName);
     }
+
+
 
 
     public static String upperFirstLetter(String str) {
