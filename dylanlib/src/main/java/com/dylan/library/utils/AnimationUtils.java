@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.StyleRes;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
 
 import com.dylan.library.R;
 
@@ -13,6 +14,16 @@ import com.dylan.library.R;
  * Desc:
  */
 public class AnimationUtils {
+
+
+    public static RotateAnimation getRotateInSef360(int durationMills){
+        RotateAnimation rotate  = new RotateAnimation(0f, 360f, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotate.setDuration(durationMills);//设置动画持续时间
+        rotate.setRepeatCount(-1);//设置重复次数
+        rotate.setFillAfter(true);//动画执行完后是否停留在执
+        return rotate;
+    }
+
 
 
     //-----View 动画

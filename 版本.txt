@@ -9,7 +9,7 @@ V5.6.0
 4.ExpandableTextView 重载  setOriginalText(SpannableString styleSpan)，折叠支持样式
 5.新增RoundFullAutoImageView
 6.新增EmojiFilter StringUtils 新增表情符过滤
-
+7.AnimationUtils 新增 getRotateInSef360
 
 
 
