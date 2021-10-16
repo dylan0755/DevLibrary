@@ -21,8 +21,8 @@ import com.dylan.library.R;
  * Desc:
  */
 public class RoundImageView extends AppCompatImageView {
-    private Path mPath;
-    private RectF mRectF;
+    protected Path mPath;
+    protected RectF mRectF;
     /**
      * 利用clip剪切的四个角半径，八个数据分别代表左上角（x轴半径，y轴半径），右上角（**），右下角（**），左下角（**）
      */

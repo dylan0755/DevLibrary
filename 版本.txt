@@ -10,7 +10,7 @@ V5.6.0
 5.新增RoundFullAutoImageView
 6.新增EmojiFilter StringUtils 新增表情符过滤
 7.AnimationUtils 新增 getRotateInSef360
-
+8.新增 RoundCropTopImageView  截取图片上部分，（ImageView centerCrop 截取中间，并不能截取上部）
 
 
 
