@@ -38,6 +38,31 @@ public class VideoUtils {
 
     private static final Object TAG = VideoUtils.class.getSimpleName() ;
 
+
+    public static boolean hasAudioTrack(String videoIn) {
+        MediaExtractor oriExtrator = new MediaExtractor();
+        try {
+            oriExtrator.setDataSource(videoIn);
+            int numTracks = oriExtrator.getTrackCount();
+            for(int i = 0; i < numTracks; ++i) {
+                MediaFormat format = oriExtrator.getTrackFormat(i);
+                String mime = format.getString("mime");
+                if (mime.startsWith("audio/")) {
+                    oriExtrator.release();
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        oriExtrator.release();
+        return false;
+    }
+
+
+
+
+
     public static void changVideoSound(Context context, final String videoIn, final String videoOut, Sound sound) throws IOException {
         File cacheDir = new File(Environment.getExternalStorageDirectory().toString(), "1");
         cacheDir.mkdir();
