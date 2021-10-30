@@ -11,6 +11,9 @@ V5.6.0
 6.新增EmojiFilter StringUtils 新增表情符过滤
 7.AnimationUtils 新增 getRotateInSef360
 8.新增 RoundCropTopImageView  截取图片上部分，（ImageView centerCrop 截取中间，并不能截取上部）
+9.IntentUtils 新增getMarketIntent
+10.新增 AppMarket，应用商店合集
+
 
 
 

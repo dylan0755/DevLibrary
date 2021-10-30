@@ -18,6 +18,9 @@ import java.util.List;
 
 public class IntentUtils {
 
+
+
+
     public static Intent getShareTextIntent(String content) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("text/plain");
@@ -183,6 +186,24 @@ public class IntentUtils {
         }
         intent = getLaunchAppIntent(context, targetPack);
         return intent;
+    }
+
+
+    public static List<ResolveInfo> queryIntentActivities(Context context,Intent intent){
+        return queryIntentActivities(context,intent, PackageManager.MATCH_ALL);
+    }
+
+    public static List<ResolveInfo> queryIntentActivities(Context context,Intent intent,int flag){
+        PackageManager packageManager =context.getPackageManager();
+        return packageManager.queryIntentActivities(intent, flag);
+    }
+
+
+
+
+    public static Intent getMarketIntent(Context context){
+       AppMarket appMarket=new AppMarket();
+       return appMarket.getMarketIntent(context);
     }
 
 
