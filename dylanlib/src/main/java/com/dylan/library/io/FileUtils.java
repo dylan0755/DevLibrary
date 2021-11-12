@@ -332,6 +332,16 @@ public class FileUtils {
     }
 
 
+    public static byte[] readFileByBytes(String filePath){
+        try {
+            return IOUtils.getBytes(new FileInputStream(filePath));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        return new byte[]{};
+    }
+
+
     public static String getSDCardDir() {
         return SDCardUtils.getSDcardDir();
     }

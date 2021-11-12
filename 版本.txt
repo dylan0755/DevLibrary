@@ -14,7 +14,7 @@ V5.6.0
 9.IntentUtils 新增getMarketIntent
 10.新增 AppMarket，应用商店合集
 11.VideoUtils 新增 hasAudioTrack 判断视频有没有音轨
-
+12.FileUtils 新增 readFileByBytes，将文件转为字节数组
 
 
 V5.5.0 ---->2021.9.5
