@@ -265,8 +265,11 @@
       protected *;
 }
 
-
 -keep class com.dylan.library.exception.** {
+      public *;
+      protected *;
+}
+-keep class com.dylan.library.glide.** {
       public *;
       protected *;
 }

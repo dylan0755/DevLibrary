@@ -504,7 +504,7 @@ V3.4.0 ---->2020.02.25
 10. MediaTools 增加 getDurationMinuteFormat   getDurationHourFormat
 11.新增 CompatLineTextView 类， 处理字符串中有小数点和英文出现异常换行的情况，支持 maxLine 限制
 12.AppUtils 新增 shareVideo
-
+13.新增Glide 辅助类，RoundCornerTransform CornerType 圆角处理
 
 
 
