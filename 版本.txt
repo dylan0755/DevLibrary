@@ -15,7 +15,7 @@ V5.6.0
 10.新增 AppMarket，应用商店合集
 11.VideoUtils 新增 hasAudioTrack 判断视频有没有音轨
 12.FileUtils 新增 readFileByBytes，将文件转为字节数组
-
+13.新增DataTypeConversionUtils 数据类型转换工具
 
 V5.5.0 ---->2021.9.5
 1.MathUtils 新增getPercentInRange getSpecValueInRangeByPercent
@@ -505,7 +505,7 @@ V3.4.0 ---->2020.02.25
 11.新增 CompatLineTextView 类， 处理字符串中有小数点和英文出现异常换行的情况，支持 maxLine 限制
 12.AppUtils 新增 shareVideo
 13.新增Glide 辅助类，RoundCornerTransform CornerType 圆角处理
-14.新增DataTypeConversionUtils 数据类型转换工具
+
 
 
 
