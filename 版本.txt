@@ -1,8 +1,14 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
+V5.7.0
 
-V5.6.0
+
+
+
+
+
+V5.6.0 ---->2021.11.27
 1.NormalTabSwitcher 更名为TabSwitcher，支持下划线宽度、高度、颜色自定义，标签字体加粗处理
 2.RandomUtils 新增 genSpecLengthRandomNum，获取指定位数的随机数
 3.FileDownLoader 下载完成回调 方法 增加 isFromCache, 是否读取本地缓存
