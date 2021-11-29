@@ -207,4 +207,11 @@ public class IntentUtils {
     }
 
 
+    public static Intent getChooseVideoIntent(){
+        Intent intent = new Intent();
+        intent.setType("video/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        return intent;
+    }
+
 }
