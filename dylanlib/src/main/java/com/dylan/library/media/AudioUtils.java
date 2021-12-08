@@ -57,6 +57,48 @@ public class AudioUtils {
     final static String TAG = "VideoProcessor";
     public static int VOLUMN_MAX_RATIO = 1;
 
+
+    //调节PCM数据音量  multiple 4.0 表示4倍
+    //pData原始音频byte数组，nLen原始音频byte数组长度，data2转换后新音频byte数组，nBitsPerSample采样率，multiple表示Math.pow()返回值
+    public int amplifyPCMData(byte[] pData, int nLen, byte[] data2, int nBitsPerSample, float multiple) {
+        int nCur = 0;
+        short SHRT_MAX = (short) 0x7F00;
+
+        short SHRT_MIN = (short)-0x7F00;
+
+        if (16 == nBitsPerSample) {
+            while (nCur < nLen) {
+                short volum = getShort(pData, nCur);
+                volum = (short) (volum * multiple);
+
+                if (volum < SHRT_MIN) {
+                    volum = SHRT_MIN;
+
+                } else if (volum > SHRT_MAX)//爆音的处理
+
+                {
+                    volum = SHRT_MAX;
+
+                }
+
+                data2[nCur] = (byte) (volum & 0xFF);
+
+                data2[nCur + 1] = (byte) ((volum >> 8) & 0xFF);
+
+                nCur += 2;
+
+            }
+
+        }
+        return 0;
+
+    }
+
+    private short getShort(byte[] data, int start) {
+        return (short) ((data[start] & 0xFF) | (data[start + 1] << 8));
+
+    }
+
     /**
      * @param volume IntRange [0,100]
      */
