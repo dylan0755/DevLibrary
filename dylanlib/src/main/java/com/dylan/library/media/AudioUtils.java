@@ -62,36 +62,25 @@ public class AudioUtils {
     //pData原始音频byte数组，nLen原始音频byte数组长度，data2转换后新音频byte数组，nBitsPerSample采样率，multiple表示Math.pow()返回值
     public int amplifyPCMData(byte[] pData, int nLen, byte[] data2, int nBitsPerSample, float multiple) {
         int nCur = 0;
-        short SHRT_MAX = (short) 0x7F00;
-
-        short SHRT_MIN = (short)-0x7F00;
-
-        if (16 == nBitsPerSample) {
-            while (nCur < nLen) {
+        if (16 == nBitsPerSample){
+            while (nCur < nLen){
                 short volum = getShort(pData, nCur);
-                volum = (short) (volum * multiple);
+                float pcmval = volum * multiple;
 
-                if (volum < SHRT_MIN) {
-                    volum = SHRT_MIN;
-
-                } else if (volum > SHRT_MAX)//爆音的处理
-
-                {
-                    volum = SHRT_MAX;
-
+                //数据溢出处理
+                if (pcmval < 32767 && pcmval > -32768){
+                    volum = (short)pcmval;
+                }else if (pcmval > 32767) {
+                    volum = (short)32767;
+                } else if (pcmval < -32768) {
+                    volum = (short)-32768;
                 }
-
-                data2[nCur] = (byte) (volum & 0xFF);
-
+                data2[nCur]   = (byte)( volum& 0xFF);
                 data2[nCur + 1] = (byte) ((volum >> 8) & 0xFF);
-
                 nCur += 2;
-
             }
-
         }
         return 0;
-
     }
 
     private short getShort(byte[] data, int start) {
