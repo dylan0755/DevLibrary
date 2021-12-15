@@ -179,10 +179,15 @@ public class AppUtils {
      *
      * @param context 上下文
      */
-    public static void launchApp(Context context, String packageName) {
-        if (context == null) return;
-        if (StringUtils.isEmpty(packageName)) return;
-        context.startActivity(IntentUtils.getLaunchAppIntent(context, packageName));
+    public static boolean launchApp(Context context, String packageName) {
+        if (context == null||StringUtils.isEmpty(packageName)) return false;
+        if (isAppInstalled(context,packageName)){
+            context.startActivity(context.getPackageManager().getLaunchIntentForPackage(packageName));
+            return true;
+        }else{
+            return false;
+        }
+
     }
 
 
@@ -341,18 +346,23 @@ public class AppUtils {
     }
 
 
-    public static boolean checkIsWxPayInstalled(Context context) {
+    public static boolean isAppInstalled(Context context,String targetPackageName) {
         final PackageManager packageManager = context.getPackageManager();// 获取packagemanager
         List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
         if (pinfo != null) {
             for (int i = 0; i < pinfo.size(); i++) {
                 String pn = pinfo.get(i).packageName;
-                if (pn.equals("com.tencent.mm")) {
+                if (pn.equals(targetPackageName)) {
                     return true;
                 }
             }
         }
         return false;
+    }
+
+
+    public static boolean checkIsWxPayInstalled(Context context) {
+        return isAppInstalled(context,"com.tencent.mm");
     }
 
     public static boolean checkIsAliPayInstalled(Context context) {
@@ -361,6 +371,7 @@ public class AppUtils {
         ComponentName componentName = intent.resolveActivity(context.getPackageManager());
         return componentName != null;
     }
+
 
 
     public static boolean isActivityOnForeground(Activity activity) {
