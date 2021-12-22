@@ -8,7 +8,7 @@ V5.7.0
 3.AudioUtils 新增 amplifyPCMData ，增强pcm音量
 4.新增HttpUtils ，封装 get he post 请求
 5.AppUtils 新增 checkIsAppInstalled
-
+6.MediaTools 新增 getDurationDayHourMinuteSecond
 
 
 

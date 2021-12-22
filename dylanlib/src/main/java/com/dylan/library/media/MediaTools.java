@@ -14,14 +14,59 @@ public class MediaTools {
     public static int HOUR_TIME = 1;
     public static int MINUTE_TIME = 2;
 
-
+    //xx分：xx秒
     public static String getDurationMinuteFormat(long time){
         return getMediaDurtionTime(time,MINUTE_TIME);
     }
-
+    //xx时：xx分：xx秒
     public static String getDurationHourFormat(long time){
         return getMediaDurtionTime(time, HOUR_TIME);
     }
+    //xx天xx时：xx分：xx秒
+    public static String getDurationDayHourMinuteSecond(long time){
+        long secondTime = time / 1000L;
+        int hour = (int)(secondTime / 3600L);
+        int minute = (int)(secondTime % 3600L);
+        if (minute != 0) {
+            minute /= 60;
+        }
+
+        int day=hour/24;
+        hour=hour%24;
+
+
+
+        int second = (int)(secondTime % 60L);
+        String houstr = null;
+        String minuteStr = null;
+        String secondStr = null;
+        if (hour < 10) {
+            houstr = "0" + hour;
+        } else {
+            houstr = String.valueOf(hour);
+        }
+
+        if (minute < 10) {
+            minuteStr = "0" + minute;
+        } else {
+            minuteStr = String.valueOf(minute);
+        }
+
+        if (second < 10) {
+            secondStr = "0" + second;
+        } else {
+            secondStr = String.valueOf(second);
+        }
+
+        String dayStr="";
+        if (day<10&&day!=0){
+            dayStr="0"+day;
+        }else{
+            dayStr=""+day;
+        }
+        return dayStr+"天"+ houstr + ":" + minuteStr + ":" + secondStr;
+    }
+
 
 
     /**
