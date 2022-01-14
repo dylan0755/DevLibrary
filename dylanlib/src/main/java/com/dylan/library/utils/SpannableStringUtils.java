@@ -98,6 +98,25 @@ public class SpannableStringUtils {
         spannableString = getAbsoluteSizeSpannableString(spannableString, dip, start, end);
         return spannableString;
     }
+    public static SpannableString getTintResizeSpannableString(String fullText,int dp,String keyWord1,int colorValue1,String keyWord2,int colorValue2){
+        SpannableString spannableString = new SpannableString(fullText);
+        try {
+            ForegroundColorSpan colorSpan1 = new ForegroundColorSpan(colorValue1);
+            ForegroundColorSpan colorSpan2 = new ForegroundColorSpan(colorValue2);
+            int start1=fullText.indexOf(keyWord1);
+            int end1=start1+keyWord1.length();
+            int start2=fullText.indexOf(keyWord2);
+            int end2=start2+keyWord2.length();
+            spannableString.setSpan(new AbsoluteSizeSpan(dp, true), start1, end1, 18);
+            spannableString.setSpan(new AbsoluteSizeSpan(dp, true), start2, end2, 18);
+            spannableString.setSpan(colorSpan1, start1, end1, 18);
+            spannableString.setSpan(colorSpan2, start2, end2, 18);
+            spannableString.setSpan(spannableString, start2, end2, 18);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return spannableString;
+    }
 
     public static SpannableString getTintResizeSpannableString(String fullText, String tintKeyWord, int dp, int tintColor) {
         if (fullText == null) fullText = "";
