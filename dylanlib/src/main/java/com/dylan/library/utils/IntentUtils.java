@@ -109,7 +109,7 @@ public class IntentUtils {
         //场景二：直接回到桌面，栈中有Activity实例
         for (ActivityManager.RunningTaskInfo rti : taskList) {
             //找到当前应用的task，并启动task的栈顶activity，达到程序切换到前台
-            Logger.e(rti.topActivity.getPackageName()+"   "+context.getPackageName());
+            //Logger.e(rti.topActivity.getPackageName()+"   "+context.getPackageName());
             if (rti.topActivity.getPackageName().equals(context.getPackageName())) {
                 launchIntent= new Intent(Intent.ACTION_MAIN);
                 ComponentName cn = new ComponentName(context.getPackageName(), EmptyUtils.isEmpty(className) ? rti.topActivity.getClassName() : className);
