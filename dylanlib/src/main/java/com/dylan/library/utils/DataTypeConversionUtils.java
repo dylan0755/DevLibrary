@@ -1,6 +1,5 @@
 package com.dylan.library.utils;
 
-import java.nio.ByteOrder;
 
 /**
  * Author: Dylan
@@ -9,48 +8,42 @@ import java.nio.ByteOrder;
  */
 public class DataTypeConversionUtils {
 
-    public short[] byteArrayToShortArray(byte[] buf) {
-        byte bLength = 2;
-        short[] s = new short[buf.length / bLength];
-        for (int iLoop = 0; iLoop < s.length; iLoop++) {
-            byte[] temp = new byte[bLength];
-            for (int jLoop = 0; jLoop < bLength; jLoop++) {
-                temp[jLoop] = buf[iLoop * bLength + jLoop];
-            }
-            s[iLoop] = getShort(temp,testCPU());
+
+    public static byte[] shortsToBytes(short[] data) {
+        byte[] buffer = new byte[data.length * 2];
+        int shortIndex, byteIndex;
+        shortIndex = byteIndex = 0;
+        for (; shortIndex != data.length; ) {
+            buffer[byteIndex] = (byte) (data[shortIndex] & 0x00FF);
+            buffer[byteIndex + 1] = (byte) ((data[shortIndex] & 0xFF00) >> 8);
+            ++shortIndex;
+            byteIndex += 2;
         }
-        return s;
-    }
-    public boolean testCPU() {
-        if (ByteOrder.nativeOrder() == ByteOrder.BIG_ENDIAN) {
-            // System.out.println("is big ending");
-            return true;
-        } else {
-            // System.out.println("is little ending");
-            return false;
-        }
+        return buffer;
     }
 
-    public short getShort(byte[] buf, boolean bBigEnding) {
-        if (buf == null) {
-            throw new IllegalArgumentException("byte array is null!");
-        }
-        if (buf.length > 2) {
-            throw new IllegalArgumentException("byte array size > 2 !");
-        }
-        short r = 0;
-        if (bBigEnding) {
-            for (int i = 0; i < buf.length; i++) {
-                r <<= 8;
-                r |= (buf[i] & 0x00ff);
-            }
-        } else {
-            for (int i = buf.length - 1; i >= 0; i--) {
-                r <<= 8;
-                r |= (buf[i] & 0x00ff);
-            }
-        }
 
-        return r;
+
+
+    public static short[] bytesToShorts(byte[] data){
+        if (data == null) return new short[]{};
+        int newDataLength = data.length / 2;
+        if (data.length % 2 == 1) {
+            newDataLength += 1;
+        }
+        //此处是将字节数据转换为short数据
+        short[] newData = new short[newDataLength];
+        for (int i = 0; i < newDataLength; i++) {
+            byte low = 0;
+            byte high = 0;
+            if (2 * i < data.length) {
+                low = data[2 * i];
+            }
+            if ((2 * i + 1) < data.length) {
+                high = data[2 * i + 1];
+            }
+            newData[i] = (short) (((high << 8) & 0xff00) | (low & 0x00ff));
+        }
+        return newData;
     }
 }
