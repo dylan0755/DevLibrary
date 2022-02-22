@@ -149,7 +149,7 @@ public class AudioUtils {
         if (oriChannelCount == 2) {
             channelConfig = AudioFormat.CHANNEL_IN_STEREO;
         }
-        new PcmToWavUtil(sampleRate, channelConfig, oriChannelCount, AudioFormat.ENCODING_PCM_16BIT).pcmToWav(pcmFile2.getAbsolutePath(), wavFile.getAbsolutePath());
+        new PcmToWavUtils(sampleRate,  oriChannelCount).pcmToWav(pcmFile2.getAbsolutePath(), wavFile.getAbsolutePath());
         AudioUtils.encodeWAVToAAC(wavFile.getPath(), outPath, aacFormat, listener);
     }
 
@@ -586,7 +586,7 @@ public class AudioUtils {
             channelConfig = AudioFormat.CHANNEL_IN_STEREO;
         }
         extractPCM(audioSource,videoPcmFile.getAbsolutePath(),startTimeUs,endTimeUs);
-        new PcmToWavUtil(sampleRate, channelConfig, channelCount, AudioFormat.ENCODING_PCM_16BIT).pcmToWav(videoPcmFile.getAbsolutePath(),outPath );
+        new PcmToWavUtils(sampleRate,channelCount, AudioFormat.ENCODING_PCM_16BIT).pcmToWav(videoPcmFile.getAbsolutePath(),outPath );
         oriExtrator.release();
         videoPcmFile.delete();
     }

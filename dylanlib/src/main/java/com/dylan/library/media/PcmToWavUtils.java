@@ -11,28 +11,41 @@ import java.io.IOException;
  * Created by huangwei on 2018/2/9.
  */
 
-public class PcmToWavUtil {
+public class PcmToWavUtils {
     private int mBufferSize;  //缓存的音频大小
-    private int mSampleRate = 8000;// 8000|16000
+    private int mSampleRate = 16000;// 8000|16000
     private int mChannelConfig = AudioFormat.CHANNEL_IN_STEREO;   //立体声
     private int mChannelCount = 2;
-    private int mEncoding = AudioFormat.ENCODING_PCM_16BIT;
+    public static int mEncoding = AudioFormat.ENCODING_PCM_16BIT;
 
-    public PcmToWavUtil() {
-        this.mBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mEncoding);
+
+    public PcmToWavUtils(int sampleRate, int channelCount) {
+        this(sampleRate,channelCount,mEncoding);
     }
+
+
 
     /**
      * @param sampleRate sample rate、采样率
-     * @param channelConfig    channel、声道
      * @param encoding   Audio data format、音频格式
      */
-    public PcmToWavUtil(int sampleRate, int channelConfig, int channelCount, int encoding) {
+    public PcmToWavUtils(int sampleRate, int channelCount, int encoding) {
         this.mSampleRate = sampleRate;
-        this.mChannelConfig = channelConfig;
+        this.mChannelConfig = findFormatFromChannels(channelCount);
         this.mChannelCount = channelCount;
         this.mEncoding = encoding;
         this.mBufferSize = AudioRecord.getMinBufferSize(mSampleRate, mChannelConfig, mEncoding);
+    }
+
+
+
+    private int findFormatFromChannels(int numChannels)
+    {
+        switch(numChannels) {
+            case 1: return AudioFormat.CHANNEL_IN_MONO;
+            case 2: return AudioFormat.CHANNEL_IN_STEREO;
+            default: return -1; // Error
+        }
     }
 
     /**

@@ -90,7 +90,7 @@ public class VideoUtils {
             channelConfig = AudioFormat.CHANNEL_IN_STEREO;
         }
         AudioUtils.changeSound(videoWavFileBefore.getAbsolutePath(),videoChangSoundPcmFile.getAbsolutePath(),sound);
-        new PcmToWavUtil(sampleRate, channelConfig, channelCount, AudioFormat.ENCODING_PCM_16BIT).pcmToWav(videoChangSoundPcmFile.getAbsolutePath(), videoFinalWavFile.getAbsolutePath());
+        new PcmToWavUtils(sampleRate, channelCount, AudioFormat.ENCODING_PCM_16BIT).pcmToWav(videoChangSoundPcmFile.getAbsolutePath(), videoFinalWavFile.getAbsolutePath());
 
 
 
