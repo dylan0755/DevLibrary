@@ -12,6 +12,7 @@ V5.7.0
 7.SpannableStringUtils  getTintResizeSpannableString 新增 两段着色
 8.AutoLinearLayoutManager RecyclerView 随Item 高度自适应
 9.DataTypeConversionUtils 更新，short[] 和 byte[] 相互转换
+10.PcmToWavUtils 优化
 
 V5.6.0 ---->2021.11.27
 1.NormalTabSwitcher 更名为TabSwitcher，支持下划线宽度、高度、颜色自定义，标签字体加粗处理
