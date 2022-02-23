@@ -16,19 +16,43 @@ public class TextViewUtils {
         textView.setMovementMethod(ScrollingMovementMethod.getInstance());
     }
 
-    public static void setSupportMoveInScrollView(TextView textView){
+    public static void setMovementMethodInScrollView(TextView textView){
+        textView.setMovementMethod(ScrollingMovementMethod.getInstance());
+        setSupportMoveInScrollView(textView);
+    }
+
+    public static void setSupportMoveInScrollView(final TextView textView) {
         textView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
+            private float downY;
             public boolean onTouch(View v, MotionEvent event) {
-                if(event.getAction()==MotionEvent.ACTION_DOWN){
+                if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     v.getParent().requestDisallowInterceptTouchEvent(true);
+                    downY=event.getY();
                 }
-                if(event.getAction()== MotionEvent.ACTION_MOVE){
-                    v.getParent().requestDisallowInterceptTouchEvent(true);
+
+                if (event.getAction() == MotionEvent.ACTION_MOVE) {
+                    float deltaY=event.getY()-downY;
+                    if (deltaY>0){//判断是否到顶
+                        if (ViewUtils.isOnTop(textView)){
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                        }else{
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                        }
+                    }else if (deltaY<0){//判断是否到底
+                        if (ViewUtils.isOnBottom(textView)){
+                            v.getParent().requestDisallowInterceptTouchEvent(false);
+                        }else{
+                            v.getParent().requestDisallowInterceptTouchEvent(true);
+                        }
+                    }else{
+                        v.getParent().requestDisallowInterceptTouchEvent(true);
+                    }
                 }
-                if(event.getAction()==MotionEvent.ACTION_UP){
+                if (event.getAction() == MotionEvent.ACTION_UP) {
                     v.getParent().requestDisallowInterceptTouchEvent(false);
+                    downY=0;
                 }
+
                 return false;
             }
         });
