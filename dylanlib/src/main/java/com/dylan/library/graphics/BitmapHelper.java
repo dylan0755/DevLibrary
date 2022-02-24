@@ -102,7 +102,25 @@ public class BitmapHelper {
         return Bitmap.createBitmap(srcBitmap, 0, 0, width, height, matrix, true);
     }
 
+    //水平镜像
+    public static Bitmap toHorizontalMirror(Bitmap bmp) {
+        if (bmp==null)return null;
+        int  w = bmp.getWidth();
+        int h = bmp.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.postScale(-1f, 1f); // 水平镜像翻转
+        return Bitmap.createBitmap(bmp, 0, 0, w, h, matrix, true);
+    }
 
+    //垂直镜像
+    public static Bitmap toVerticalMirror(Bitmap bmp) {
+        if (bmp==null)return null;
+        int w = bmp.getWidth();
+        int h = bmp.getHeight();
+        Matrix matrix = new Matrix();
+        matrix.postScale(1f, -1f); // 垂直镜像翻转
+        return Bitmap.createBitmap(bmp, 0, 0, w, h, matrix, true);
+    }
 
 
     public static int readBitmapDegree(String path) {
