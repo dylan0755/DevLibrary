@@ -140,6 +140,7 @@ public class ShapeViewHelper {
         GradientDrawable drawable = new GradientDrawable();
         drawable.setShape(GradientDrawable.RECTANGLE);
         drawable.setCornerRadii(radius);
+        drawable.setUseLevel(false);
         drawable.setStroke(strokeWidth, strokeColor, dashWidth, dashGap);
         if (bgColor.length>1){
             drawable.setColors(bgColor);
