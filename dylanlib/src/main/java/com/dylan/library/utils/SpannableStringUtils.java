@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.CharacterStyle;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.LeadingMarginSpan;
@@ -434,6 +435,59 @@ public class SpannableStringUtils {
         }
 
         return spannable;
+    }
+
+    public static SpannableStringBuilder findSpecWordAndHighLight(String srcText, List<HighLight> highLights){
+        if (EmptyUtils.isEmpty(srcText))return new SpannableStringBuilder("");
+        SpannableStringBuilder spannable = new SpannableStringBuilder(srcText);
+        if (EmptyUtils.isNotEmpty(highLights)) {
+            for (HighLight highLight : highLights) {
+                String sensitiveContentWord=highLight.getKeyWord();
+                Pattern p = Pattern.compile(Pattern.quote(sensitiveContentWord));//关键字
+                Matcher m = p.matcher(srcText);//匹配关键字
+                while (m.find()) {
+                    int start = m.start();
+                    if (start >= 0) {
+                        int end = start + sensitiveContentWord.length();
+                        spannable.setSpan(new ForegroundColorSpan(highLight.getHighLightColor()), start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE );
+                        if (highLight.getExtraCharacterStyle()!=null)spannable.setSpan(highLight.getExtraCharacterStyle(),start, end, Spannable.SPAN_INCLUSIVE_INCLUSIVE);
+                    }
+
+                }
+            }
+        }
+
+        return spannable;
+    }
+
+    public static class HighLight{
+        private String keyWord;
+        private int highLightColor;
+        private CharacterStyle extraCharacterStyle;
+
+        public String getKeyWord() {
+            return keyWord;
+        }
+
+        public void setKeyWord(String keyWord) {
+            this.keyWord = keyWord;
+        }
+
+        public int getHighLightColor() {
+            return highLightColor;
+        }
+
+        public void setHighLightColor(int highLightColor) {
+            this.highLightColor = highLightColor;
+        }
+
+        public CharacterStyle getExtraCharacterStyle() {
+            return extraCharacterStyle;
+        }
+
+        public void setExtraCharacterStyle(CharacterStyle extraCharacterStyle) {
+            this.extraCharacterStyle = extraCharacterStyle;
+        }
     }
 
 }
