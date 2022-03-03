@@ -16,6 +16,7 @@ V5.7.0
 11.TextViewUtils 新增 setMovementMethodInScrollView，TextView 在 ScrollView 滑动冲突问题
 12.BitmapHelper toHorizontalMirror toVerticalMirror
 13.DensityFontUtils 在oncreate 和 onResume 使用，屏幕适配+固定字体大小不随系统改变而改变
+14.HttpUtils 新增 postJson
 
 V5.6.0 ---->2021.11.27
 1.NormalTabSwitcher 更名为TabSwitcher，支持下划线宽度、高度、颜色自定义，标签字体加粗处理

@@ -3,6 +3,8 @@ package com.dylan.library.utils;
 import android.util.Log;
 
 
+import com.dylan.library.exception.ELog;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -171,6 +173,53 @@ public class HttpUtils {
     public static String post(String url,Map<String, String> params,Map<String, String> headers) throws IOException {
         HttpURLConnection connection=ObtainPostRequest(url,params,headers);
         return getResponseString(connection);
+    }
+
+
+    public static String postJson(String reqUrl, String json){
+        String result = "";
+        HttpURLConnection httpURLConnection = null;
+        BufferedReader reader = null;
+        try {
+            URL url = new URL(reqUrl);
+            httpURLConnection = (HttpURLConnection) url.openConnection();
+            httpURLConnection.setRequestMethod("POST");
+            httpURLConnection.setConnectTimeout(5000);
+            httpURLConnection.setDoOutput(true);
+            httpURLConnection.setDoInput(true);
+            httpURLConnection.setUseCaches(false);
+            httpURLConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            httpURLConnection.connect();
+            OutputStream os = httpURLConnection.getOutputStream();
+            os.write(json.getBytes("utf-8"));
+            os.flush();
+            os.close();
+            if (httpURLConnection.getResponseCode() == 200) {
+                reader = new BufferedReader(
+                        new InputStreamReader(httpURLConnection.getInputStream())
+                );
+                String data = "";
+                StringBuilder builder = new StringBuilder();
+                while ((data = reader.readLine()) != null) {
+                    builder.append(data);
+                }
+                result = builder.toString();
+            }
+        } catch (Exception e) {
+            ELog.e(e);
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+                if (httpURLConnection != null) {
+                    httpURLConnection.disconnect();
+                }
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
     }
 
 
