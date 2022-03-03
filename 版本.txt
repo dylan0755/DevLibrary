@@ -17,7 +17,7 @@ V5.7.0
 12.BitmapHelper toHorizontalMirror toVerticalMirror
 13.DensityFontUtils 在oncreate 和 onResume 使用，屏幕适配+固定字体大小不随系统改变而改变
 14.HttpUtils 新增 postJson
-15.SpannableStringUtils 新增 findSpecWordAndHighLight(String srcText, List<HighLight> highLights)
+15.SpannableStringUtils StringUtils 新增 findSpecWordAndHighLight(String srcText, List<HighLight> highLights)
 
 
 

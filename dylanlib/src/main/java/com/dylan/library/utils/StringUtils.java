@@ -459,7 +459,6 @@ public class StringUtils {
     }
 
     public static SpannableStringBuilder findSpecWordAndHighLight(String srcText,String keyWord,int highLightColor){
-
         return SpannableStringUtils.findSpecWordAndHighLight(srcText,keyWord,highLightColor);
     }
 
@@ -468,7 +467,9 @@ public class StringUtils {
     public static SpannableStringBuilder findSpecWordAndHighLight(String srcText, List<String> keyWords, int highLightColor){
         return SpannableStringUtils.findSpecWordAndHighLight(srcText,keyWords,highLightColor);
     }
-
+    public static SpannableStringBuilder findSpecWordAndHighLight(String srcText, List<SpannableStringUtils.HighLight> keyWords){
+        return SpannableStringUtils.findSpecWordAndHighLight(srcText,keyWords);
+    }
 
 
     public static String bundleToString(Bundle bundle){
