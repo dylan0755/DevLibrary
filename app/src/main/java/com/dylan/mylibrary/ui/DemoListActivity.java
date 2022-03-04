@@ -64,7 +64,7 @@ public class DemoListActivity extends AppCompatActivity {
             "TextSwitchActivity", "全局更换字体", "FirstLineMargin",
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
-            "ShadowLayout", "ShapeView", "ArcMenu", "PopWindow", "ProgressBarActivity",
+            "ShadowLayout", "ShapeView", "文字图片","ArcMenu", "PopWindow", "ProgressBarActivity",
             "NoExtraUiEditDemo", "singleClickDemo", "DragMapView", "SmsCodeCounter",
             "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
             "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView","SquareProgress方形进度条","Sonic变音"};
@@ -79,7 +79,7 @@ public class DemoListActivity extends AppCompatActivity {
             ModifyFontActivity.class, FirstLineMarginLeftActivity.class, BezierCurveActivity.class,
             DashLineViewActivity.class, InputPasswordActivity.class, CountDownCircleViewActivity.class,
             ProgressWebViewActivity.class, VideoPlayerGestureActivity.class, ReboundActivity.class,
-            BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,
+            BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,TextDrawableActivity.class,
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
             NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class, DragMapViewDemoActivity.class,
             SmsCodeCounterActivity.class, OpenglDemoActivity.class, SwitchViewActivity.class,

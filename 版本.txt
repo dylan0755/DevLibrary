@@ -18,7 +18,7 @@ V5.7.0
 13.DensityFontUtils 在oncreate 和 onResume 使用，屏幕适配+固定字体大小不随系统改变而改变
 14.HttpUtils 新增 postJson
 15.SpannableStringUtils StringUtils 新增 findSpecWordAndHighLight(String srcText, List<HighLight> highLights)
-
+16.新增TextDrawable 文字图片 文字drawable
 
 
 V5.6.0 ---->2021.11.27

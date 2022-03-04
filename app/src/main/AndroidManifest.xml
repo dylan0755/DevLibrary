@@ -193,6 +193,7 @@
         <activity android:name=".ui.AutoSplitTextViewActivity"/>
         <activity android:name=".ui.SquareProgressViewActivity"/>
         <activity android:name=".ui.SonicTestActivity"/>
+        <activity android:name=".ui.TextDrawableActivity"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
