@@ -1,10 +1,12 @@
 package com.dylan.library.utils;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.text.TextWatcher;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -23,6 +25,19 @@ import java.lang.reflect.Method;
  */
 
 public class EditTextUtils {
+
+
+    public static void insert(EditText editText,CharSequence text){
+        int start=editText.getSelectionStart();
+        Editable edit = editText.getEditableText();//获取EditText的文字
+        if (start < 0 || start >= edit.length() ){
+            edit.append(text);
+        }else{
+            edit.insert(start,text);//光标所在位置插入文字
+        }
+    }
+
+
 
 
     public static void disableImeShowWhileClick(EditText editText){
@@ -157,6 +172,8 @@ public class EditTextUtils {
     public static void showCursor(EditText editText) {
         if (editText != null) editText.setCursorVisible(true);
     }
+
+
 
 
     public static abstract class AfterTextChangedListener implements TextWatcher {

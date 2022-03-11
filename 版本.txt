@@ -1,6 +1,19 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
+V5.8.0
+
+1.  EditTextUtils insert(EditText editText,CharSequence text)在光标位置插入文本
+
+
+
+
+
+
+
+
+
+
 V5.7.0 ---->2022.3.7
 
 1.新增SupportFlowLayout,拷贝android.support.design.internal下的FlowLayout,更改protect 为 public
