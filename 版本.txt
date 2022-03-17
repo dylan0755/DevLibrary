@@ -3,8 +3,8 @@
 
 V5.8.0
 
-1.  EditTextUtils insert(EditText editText,CharSequence text)在光标位置插入文本
-
+1.EditTextUtils insert(EditText editText,CharSequence text)在光标位置插入文本
+2.新增M3U8DownLoader 视频下载
 
 
 

@@ -481,6 +481,37 @@ public class StringUtils {
 
     }
 
+    public static boolean isUrl(String str) {
+        if (isEmpty(str))
+            return false;
+        str = str.trim();
+        return str.matches("^(http|https)://.+");
+    }
+
+    public static String convertToDownloadSpeed(BigDecimal bigDecimal, int scale) {
+        BigDecimal unit = new BigDecimal(1);
+        BigDecimal kb = new BigDecimal(1 << 10);
+        BigDecimal mb = new BigDecimal(1 << 10).multiply(kb);
+        BigDecimal gb = new BigDecimal(1 << 10).multiply(mb);
+        BigDecimal tb = new BigDecimal(1 << 10).multiply(gb);
+        BigDecimal pb = new BigDecimal(1 << 10).multiply(tb);
+        BigDecimal eb = new BigDecimal(1 << 10).multiply(pb);
+        if (bigDecimal.divide(kb, scale, BigDecimal.ROUND_HALF_UP).compareTo(unit) < 0)
+            return bigDecimal.divide(unit, scale, BigDecimal.ROUND_HALF_UP).toString() + " B";
+        else if (bigDecimal.divide(mb, scale, BigDecimal.ROUND_HALF_UP).compareTo(unit) < 0)
+            return bigDecimal.divide(kb, scale, BigDecimal.ROUND_HALF_UP).toString() + " KB";
+        else if (bigDecimal.divide(gb, scale, BigDecimal.ROUND_HALF_UP).compareTo(unit) < 0)
+            return bigDecimal.divide(mb, scale, BigDecimal.ROUND_HALF_UP).toString() + " MB";
+        else if (bigDecimal.divide(tb, scale, BigDecimal.ROUND_HALF_UP).compareTo(unit) < 0)
+            return bigDecimal.divide(gb, scale, BigDecimal.ROUND_HALF_UP).toString() + " GB";
+        else if (bigDecimal.divide(pb, scale, BigDecimal.ROUND_HALF_UP).compareTo(unit) < 0)
+            return bigDecimal.divide(tb, scale, BigDecimal.ROUND_HALF_UP).toString() + " TB";
+        else if (bigDecimal.divide(eb, scale, BigDecimal.ROUND_HALF_UP).compareTo(unit) < 0)
+            return bigDecimal.divide(pb, scale, BigDecimal.ROUND_HALF_UP).toString() + " PB";
+        return bigDecimal.divide(eb, scale, BigDecimal.ROUND_HALF_UP).toString() + " EB";
+    }
+
+
 
     public static Object decodeJsonUrlEncodeValue(Object objJson) {
         try {
