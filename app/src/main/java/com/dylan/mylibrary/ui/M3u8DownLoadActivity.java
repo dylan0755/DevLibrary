@@ -65,10 +65,10 @@ public class M3u8DownLoadActivity extends AppCompatActivity {
 
     private void testM3u8DownLoad(){
         String url= M3u8DownLoader.M3U8URL;
-        String outPutDir= Environment.getExternalStorageDirectory().toString()+"/ticibao/m3u8";
+        String outPutDir= Environment.getExternalStorageDirectory().toString();
         final StringBuilder stringBuilder=new StringBuilder();
         M3u8DownloadFactory.addProvider(new BouncyCastleProvider());
-        M3u8DownLoader.downLoad(url,outPutDir,"测试1",new DownloadListener() {
+        M3u8DownLoader.downLoad(url,outPutDir,"m3u8_test_"+System.currentTimeMillis(),new DownloadListener() {
             @Override
             public void start() {
                 stringBuilder.append("\n"+"开始下载！");
