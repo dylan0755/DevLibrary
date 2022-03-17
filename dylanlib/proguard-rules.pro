@@ -285,9 +285,14 @@
 }
 
 -keep class com.dylan.library.io.** {
-      public *;
-      protected *;
-}
+       public *;
+       protected *;
+ }
+
+ -keep class com.dylan.library.m3u8.** {
+       public *;
+       protected *;
+ }
 
 -keep class com.dylan.library.manager.** {
       public *;
