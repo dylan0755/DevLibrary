@@ -85,7 +85,7 @@ public class M3U8Utils {
             totalDuration+=seconds;
             seconds = 0;
         }
-        ret.setTotalDuration(totalDuration);
+        ret.setTotalSecondDuration(totalDuration);
         reader.close();
         inputStream.close();
         return ret;

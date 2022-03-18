@@ -10,16 +10,16 @@ import java.util.List;
  */
 
 public class M3U8 {
-    private double totalDuration;
+    private double totalSecondDuration;
     private List<M3U8Ts> tsList = new ArrayList<M3U8Ts>();
 
 
-    public double getTotalDuration() {
-        return totalDuration;
+    public double getTotalSecondDuration() {
+        return totalSecondDuration;
     }
 
-    public void setTotalDuration(double totalDuration) {
-        this.totalDuration = totalDuration;
+    public void setTotalSecondDuration(double totalSecondDuration) {
+        this.totalSecondDuration = totalSecondDuration;
     }
 
     public List<M3U8Ts> getTsList() {
