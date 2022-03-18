@@ -19,7 +19,7 @@ public class M3u8DownLoader {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                M3u8DownloadFactory.M3u8Download m3u8Download = M3u8DownloadFactory.getInstance(M3U8URL);
+                M3u8DownloadFactory.M3u8Download m3u8Download = M3u8DownloadFactory.getInstance(url);
                 FileUtils.createDirIfNotExists(outDirPath);
                 //设置生成目录
                 m3u8Download.setDir(outDirPath);
