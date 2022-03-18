@@ -19,6 +19,7 @@ import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.manager.ExternalStorageDir;
+import com.dylan.library.net.UrlUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.MD5Utils;
@@ -135,6 +136,10 @@ public class FileUtils {
             return pointIndex > 0 ? fileName.substring(pointIndex + 1) : "";
         }
         return "";
+    }
+
+    public static String getSuffixFromUrl(String url) {
+        return UrlUtils.getSuffixFromUrl(url);
     }
 
     public static String getReNameFilePath(String path, String fileName) {

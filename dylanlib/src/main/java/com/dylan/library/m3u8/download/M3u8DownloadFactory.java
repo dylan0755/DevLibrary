@@ -7,6 +7,7 @@ import com.dylan.library.m3u8.listener.DownloadListener;
 import com.dylan.library.m3u8.utils.Constant;
 import com.dylan.library.m3u8.utils.Log;
 import com.dylan.library.m3u8.utils.MediaFormat;
+import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.StringUtils;
 
 import java.io.BufferedReader;
@@ -576,7 +577,9 @@ public class M3u8DownloadFactory {
          * 字段校验
          */
         private void checkField() {
-            if ("m3u8".compareTo(MediaFormat.getMediaFormat(DOWNLOADURL)) != 0)
+            String suffix=MediaFormat.getMediaFormat(DOWNLOADURL);
+            Logger.e("suffix="+suffix);
+            if ("m3u8".compareTo(suffix) != 0)
                 throw new M3u8Exception(DOWNLOADURL + "不是一个完整m3u8链接！");
             if (threadCount <= 0)
                 throw new M3u8Exception("同时下载线程数只能大于0！");

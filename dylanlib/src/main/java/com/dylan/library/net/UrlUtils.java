@@ -1,5 +1,7 @@
 package com.dylan.library.net;
 
+import android.webkit.MimeTypeMap;
+
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +71,11 @@ public class UrlUtils {
             e.printStackTrace();
         }
         return url;
+    }
+
+
+    public static String getSuffixFromUrl(String url){
+        return MimeTypeMap.getFileExtensionFromUrl(url);
     }
 
 }
