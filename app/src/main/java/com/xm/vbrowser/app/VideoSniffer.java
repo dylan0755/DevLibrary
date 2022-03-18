@@ -3,15 +3,17 @@ package com.xm.vbrowser.app;
 
 import com.alibaba.fastjson.JSON;
 import com.dylan.library.bean.EventBundle;
+import com.dylan.library.m3u8.M3U8;
+import com.dylan.library.m3u8.utils.M3U8Utils;
 import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.HttpRequestUtils;
 import com.xm.vbrowser.app.activity.WebVideoGrabActivity;
 import com.xm.vbrowser.app.entity.DetectedVideoInfo;
 import com.xm.vbrowser.app.entity.VideoFormat;
 import com.xm.vbrowser.app.entity.VideoInfo;
-import com.xm.vbrowser.app.util.Log;
-import com.dylan.library.m3u8.utils.M3U8Utils;
 import com.xm.vbrowser.app.util.UUIDUtil;
 import com.xm.vbrowser.app.util.VideoFormatUtil;
+import com.xm.vbrowser.app.util.VideoSnifferLogger;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -42,34 +44,34 @@ public class VideoSniffer {
         this.retryCountOnFail = retryCountOnFail;
     }
 
-    public void startSniffer(){
+    public void startSniffer() {
         stopSniffer();
         threadList = new ArrayList<Thread>();
-        for(int i=0;i< threadPoolSize;i++){
+        for (int i = 0; i < threadPoolSize; i++) {
             WorkerThread workerThread = new WorkerThread(detectedTaskUrlQueue, foundVideoInfoMap, retryCountOnFail);
             threadList.add(workerThread);
         }
-        for(Thread thread:threadList){
+        for (Thread thread : threadList) {
             try {
                 thread.start();
-            }catch (IllegalThreadStateException e){
-                Log.d("VideoSniffer", "线程已启动, Pass");
+            } catch (IllegalThreadStateException e) {
+                VideoSnifferLogger.d("VideoSniffer", "线程已启动, Pass");
             }
         }
     }
 
 
-    public void stopSniffer(){
-        for(Thread thread:threadList){
+    public void stopSniffer() {
+        for (Thread thread : threadList) {
             try {
                 thread.interrupt();
-            }catch (Exception e){
-                Log.d("VideoSniffer", "线程已中止, Pass");
+            } catch (Exception e) {
+                VideoSnifferLogger.d("VideoSniffer", "线程已中止, Pass");
             }
         }
     }
 
-    private class WorkerThread extends Thread{
+    private class WorkerThread extends Thread {
         private LinkedBlockingQueue<DetectedVideoInfo> detectedTaskUrlQueue;
         private SortedMap<String, VideoInfo> foundVideoInfoMap;
         private int retryCountOnFail;
@@ -83,81 +85,81 @@ public class VideoSniffer {
         @Override
         public void run() {
             super.run();
-            Log.d("WorkerThread", "thread (" + Thread.currentThread().getId() + ") :start");
-            while(!Thread.currentThread().isInterrupted()){
+            VideoSnifferLogger.d("WorkerThread", "thread (" + Thread.currentThread().getId() + ") :start");
+            while (!Thread.currentThread().isInterrupted()) {
                 try {
                     DetectedVideoInfo detectedVideoInfo = detectedTaskUrlQueue.take();
-                    Log.d("WorkerThread", "start taskUrl=" + detectedVideoInfo.getUrl());
+                    VideoSnifferLogger.d("WorkerThread", "start taskUrl=" + detectedVideoInfo.getUrl());
                     int failCount = 0;
-                    while(!detectUrl(detectedVideoInfo)){
+                    while (!detectUrl(detectedVideoInfo)) {
                         //如果检测失败
                         failCount++;
-                        if(failCount>= retryCountOnFail){
+                        if (failCount >= retryCountOnFail) {
                             break;
                         }
                     }
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    Log.d("WorkerThread", "thread (" + Thread.currentThread().getId() +") :Interrupted");
+                    VideoSnifferLogger.d("WorkerThread", "thread (" + Thread.currentThread().getId() + ") :Interrupted");
                     return;
                 }
             }
-            Log.d("WorkerThread", "thread (" + Thread.currentThread().getId() +") :exited");
+            VideoSnifferLogger.d("WorkerThread", "thread (" + Thread.currentThread().getId() + ") :exited");
         }
 
-        private boolean detectUrl(DetectedVideoInfo detectedVideoInfo){
+        private boolean detectUrl(DetectedVideoInfo detectedVideoInfo) {
             String url = detectedVideoInfo.getUrl();
             String sourcePageUrl = detectedVideoInfo.getSourcePageUrl();
             String sourcePageTitle = detectedVideoInfo.getSourcePageTitle();
             try {
-                HttpRequestUtil.HeadRequestResponse headRequestResponse = HttpRequestUtil.performHeadRequest(url);
+                HttpRequestUtils.HeadRequestResponse headRequestResponse = HttpRequestUtils.performHeadRequest(url);
                 url = headRequestResponse.getRealUrl();
                 detectedVideoInfo.setUrl(url);
                 Map<String, List<String>> headerMap = headRequestResponse.getHeaderMap();
                 if (headerMap == null || !headerMap.containsKey("Content-Type")) {
                     //检测失败，未找到Content-Type
-                    Log.d("WorkerThread", "fail 未找到Content-Type:" + JSON.toJSONString(headerMap) + " taskUrl=" + url);
+                    VideoSnifferLogger.d("WorkerThread", "fail 未找到Content-Type:" + JSON.toJSONString(headerMap) + " taskUrl=" + url);
                     return false;
                 }
-                Log.d("WorkerThread", "Content-Type:" + headerMap.get("Content-Type").toString() + " taskUrl=" + url);
+                VideoSnifferLogger.d("WorkerThread", "Content-Type:" + headerMap.get("Content-Type").toString() + " taskUrl=" + url);
                 VideoFormat videoFormat = VideoFormatUtil.detectVideoFormat(url, headerMap.get("Content-Type").toString());
                 if (videoFormat == null) {
                     //检测成功，不是视频
-                    Log.d("WorkerThread", "fail not video taskUrl=" + url);
+                    VideoSnifferLogger.d("WorkerThread", "fail not video taskUrl=" + url);
                     return true;
                 }
                 VideoInfo videoInfo = new VideoInfo();
-                if("m3u8".equals(videoFormat.getName())){
-                    double duration = M3U8Utils.figureM3U8Duration(url);
-                    if(duration<=0){
+                if ("m3u8".equals(videoFormat.getName())) {
+                    M3U8 m3U8 = M3U8Utils.parse(url);
+                    if (m3U8.getTotalSecondDuration() <= 0) {
                         //检测成功，不是m3u8的视频
-                        Log.d("WorkerThread", "fail not m3u8 taskUrl=" + url);
+                        VideoSnifferLogger.d("WorkerThread", "fail not m3u8 taskUrl=" + url);
                         return true;
                     }
-                    videoInfo.setDuration(duration);
-                }else{
+                    videoInfo.setM3U8(m3U8);
+                    videoInfo.setDuration(m3U8.getTotalSecondDuration());
+                } else {
                     long size = 0;
-                    Log.d("WorkerThread", JSON.toJSONString(headerMap));
-                    if (headerMap.containsKey("Content-Length") && headerMap.get("Content-Length").size()>0) {
+                    VideoSnifferLogger.d("WorkerThread", JSON.toJSONString(headerMap));
+                    if (headerMap.containsKey("Content-Length") && headerMap.get("Content-Length").size() > 0) {
                         try {
                             size = Long.parseLong(headerMap.get("Content-Length").get(0));
-                        }catch (NumberFormatException e){
+                        } catch (NumberFormatException e) {
                             e.printStackTrace();
-                            Log.d("WorkerThread", "NumberFormatException", e);
+                            VideoSnifferLogger.d("WorkerThread", "NumberFormatException", e);
                         }
                     }
                     videoInfo.setSize(size);
                 }
 
 
-
-                if (foundVideoInfoMap.containsKey(url)){
-                    Log.e("url: ", "视频已存在："+url);
+                if (foundVideoInfoMap.containsKey(url)) {
+                    VideoSnifferLogger.e("url: ", "视频已存在：" + url);
                     return false;//视频已存在
-                }else{
-                    Iterator<VideoInfo> iterator=foundVideoInfoMap.values().iterator();
-                    while(iterator.hasNext()){
-                        VideoInfo element= iterator.next();
+                } else {
+                    Iterator<VideoInfo> iterator = foundVideoInfoMap.values().iterator();
+                    while (iterator.hasNext()) {
+                        VideoInfo element = iterator.next();
                         //同一个视频判断，来源相同，格式相同，大小相同,时长相同
                         if (EmptyUtils.isNotEmpty(element.getSourcePageUrl())
                                 && element.getSourcePageUrl().equals(sourcePageUrl)) {
@@ -172,8 +174,6 @@ public class VideoSniffer {
                 }
 
 
-
-
                 videoInfo.setUrl(url);
                 videoInfo.setFileName(UUIDUtil.genUUID());
                 videoInfo.setVideoFormat(videoFormat);
@@ -182,11 +182,11 @@ public class VideoSniffer {
                 foundVideoInfoMap.put(url, videoInfo);
                 EventBus.getDefault().post(new EventBundle(WebVideoGrabActivity.ACTION_DETECTED_NEW_VIDEO));
                 //检测成功，是视频
-                Log.d("WorkerThread", "found video taskUrl=" + url);
+                VideoSnifferLogger.d("WorkerThread", "found video taskUrl=" + url);
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
-                Log.d("WorkerThread", "fail IO错误 taskUrl=" + url);
+                VideoSnifferLogger.d("WorkerThread", "fail IO错误 taskUrl=" + url);
                 return false;
             }
         }

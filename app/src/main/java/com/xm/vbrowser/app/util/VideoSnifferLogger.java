@@ -7,11 +7,11 @@ package com.xm.vbrowser.app.util;
  * Desc:
  */
 
-public class Log {
-    private  static boolean isDebug;
+public class VideoSnifferLogger {
+    private  static boolean isDebug=true;
 
     public static void setIsDebug(boolean isDebug) {
-        Log.isDebug = isDebug;
+        VideoSnifferLogger.isDebug = isDebug;
     }
 
     public static void d(String tag,String msg){
