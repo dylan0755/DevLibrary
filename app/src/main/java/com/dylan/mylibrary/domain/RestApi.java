@@ -111,7 +111,7 @@ public interface RestApi {
                     .readTimeout(10, TimeUnit.SECONDS)//设置读取超时时间
                     .writeTimeout(10, TimeUnit.SECONDS);//设置写入超时时间
             int cacheSize = 10 * 1024 * 1024; // 10 MiB
-            Cache cache = new Cache(MyApplication.getContext().getCacheDir(), cacheSize);
+            Cache cache = new Cache(MyApplication.getApplication().getCacheDir(), cacheSize);
 
             builder.cache(cache);
 //            builder.addInterceptor(interceptor);

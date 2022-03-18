@@ -1,0 +1,99 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <include layout="@layout/include_vidograb_header_element3"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:background="#ffffff">
+
+
+
+
+        <com.dylan.library.widget.shape.ShapeRelativeLayout
+            android:layout_width="345dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="15dp"
+            android:layout_centerInParent="true"
+            app:solidColor="#F7F7F7"
+            app:radius="20dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            >
+
+            <EditText
+                android:id="@+id/edtLink"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:singleLine="true"
+                android:ellipsize="end"
+                android:background="#0000"
+                android:textColor="#333333"
+                android:textSize="14sp"
+                android:paddingLeft="15dp"
+                android:paddingRight="50dp"
+                android:textColorHint="#333333"
+                android:hint="请输入网址点击搜索"
+                android:gravity="center_vertical"
+                android:imeOptions="actionSearch"/>
+
+            <ImageView
+                android:id="@+id/ivCloseSearch"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginRight="14dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/icon_grabvideo_search_close"
+                android:visibility="gone"/>
+
+        </com.dylan.library.widget.shape.ShapeRelativeLayout>
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#F7F7F7"/>
+
+
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_below="@+id/headHintArea"
+        android:layout_above="@+id/pageBottomArea"
+        >
+
+
+        <WebView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/mainWebView"
+            />
+
+        <com.dylan.library.webview.WebProgressView
+            android:id="@+id/webViewProgressVIew"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"/>
+
+
+        <ImageView
+            android:id="@+id/ivGrabVideoFloat"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="133dp"
+            android:layout_marginRight="15dp"
+            android:visibility="gone"
+            android:src="@drawable/icon_grabvideo_float"/>
+
+    </RelativeLayout>
+</LinearLayout>
+
+

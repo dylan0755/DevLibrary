@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:orientation="horizontal"
+        android:id="@+id/rootView">
+
+        <ImageView
+            android:id="@+id/ivPic"
+            android:layout_width="108dp"
+            android:layout_height="60dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="#a0a0a0"/>
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginRight="8dp"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:textSize="12sp"
+                android:maxLines="2"
+                android:ellipsize="end"/>
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_below="@id/tvTitle"
+                android:max="100"
+                style="?android:attr/progressBarStyleHorizontal" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="5dp"
+                android:gravity="center_vertical">
+
+                <com.dylan.library.widget.DrawableTextView
+                    android:id="@+id/tvDuration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:drawableLeftWidth="12dp"
+                    app:drawableLeftHeight="12dp"
+                    android:drawablePadding="4dp"
+                    android:gravity="center"
+                    android:text="01:23"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:drawableLeft="@drawable/icon_grabvideo_clock"
+                    android:layout_marginRight="40dp"
+                    android:visibility="gone"/>
+
+                <com.dylan.library.widget.DrawableTextView
+                    android:id="@+id/tvSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:drawableLeftWidth="12dp"
+                    app:drawableLeftHeight="12dp"
+                    android:drawablePadding="4dp"
+                    android:textSize="12sp"
+                    android:textColor="#666666"
+                    android:gravity="center"
+                    android:drawableLeft="@drawable/icon_grabvideo_size"
+                    android:visibility="gone"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/llDownLoad"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dp"
+            >
+
+            <ImageView
+                android:id="@+id/ivDownLoad"
+                android:layout_width="18dp"
+                android:layout_height="20dp"
+                android:src="@drawable/icon_grabvideo_download"/>
+
+            <TextView
+                android:id="@+id/tvDownLoad"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="点击下载"
+                android:textColor="#ff2d2d2d"
+                android:textSize="12sp"
+                android:layout_marginTop="10dp"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#FAFAFA"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"/>
+
+</LinearLayout>
+
+
+
+</LinearLayout>

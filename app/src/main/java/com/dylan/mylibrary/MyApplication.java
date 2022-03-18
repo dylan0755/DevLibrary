@@ -29,7 +29,7 @@ import retrofit2.Call;
  * Created by Dylan on 2016/9/1.
  */
 public class MyApplication extends Application {
-    private static Context mContext;
+    private static MyApplication mContext;
     private RestApi mRestApi;
     public static String qiniuDomain;
     private static String mUploadToken;
@@ -119,7 +119,7 @@ public class MyApplication extends Application {
         return "";
 
     }
-    public static Context getContext() {
+    public static Application getApplication() {
         return mContext;
     }
 }
