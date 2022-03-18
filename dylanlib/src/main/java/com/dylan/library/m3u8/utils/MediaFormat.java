@@ -5,6 +5,7 @@ import android.webkit.MimeTypeMap;
 
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.m3u8.Exception.M3u8Exception;
+import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.StringUtils;
 
@@ -41,10 +42,11 @@ public class MediaFormat {
         if (!StringUtils.isUrl(url))
             throw new M3u8Exception(url + "不是一个完整URL链接！");
         String suffix=MimeTypeMap.getFileExtensionFromUrl(url);
-        Logger.e(suffix);
-        for (String s : set) {
-            if (s.equals(suffix))
-                return s;
+        if (EmptyUtils.isNotEmpty(suffix)){
+            for (String s : set) {
+                if (s.equals(suffix.toLowerCase()))
+                    return s;
+            }
         }
         throw new M3u8Exception("非视频链接！");
     }
