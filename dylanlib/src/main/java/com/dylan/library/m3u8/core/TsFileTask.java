@@ -10,6 +10,7 @@ import com.dylan.library.utils.HttpRequestUtils;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class TsFileTask implements SubTask {
     private VideoTs videoFileTS;
@@ -33,7 +34,7 @@ public class TsFileTask implements SubTask {
           tsFile.createNewFile();
           FileOutputStream fileOutputStream = new FileOutputStream(tsFile);
 
-            HttpURLConnection connection= (HttpURLConnection) HttpRequestUtils.sendGetRequest(videoFileTS.getUrl());
+            HttpURLConnection connection= (HttpURLConnection) new URL(videoFileTS.getUrl()).openConnection();
             int code=connection.getResponseCode();
             if ( code>= 200 && code < 300) {
                 if (code!= 200){

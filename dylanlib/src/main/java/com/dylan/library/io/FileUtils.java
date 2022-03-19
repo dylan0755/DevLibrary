@@ -342,6 +342,8 @@ public class FileUtils {
             return IOUtils.getBytes(new FileInputStream(filePath));
         } catch (FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return new byte[]{};
     }

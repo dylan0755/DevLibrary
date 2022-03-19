@@ -5,6 +5,8 @@ import android.opengl.GLES20;
 
 import com.dylan.library.io.IOUtils;
 
+import java.io.IOException;
+
 /**
  * Created by tujh on 2018/1/24.
  */
@@ -28,7 +30,7 @@ public abstract class TextureDrawer {
         getLocations();
     }
 
-    public TextureDrawer(Context context, int vertexShaderResourceId, int fragmentShaderResourceId) {
+    public TextureDrawer(Context context, int vertexShaderResourceId, int fragmentShaderResourceId) throws IOException {
         this(IOUtils.readTextFileFromResource(context, vertexShaderResourceId), IOUtils.readTextFileFromResource(context, fragmentShaderResourceId));
     }
 

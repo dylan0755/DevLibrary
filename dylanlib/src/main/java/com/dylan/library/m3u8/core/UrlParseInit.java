@@ -6,11 +6,13 @@ import com.dylan.library.m3u8.entry.VideoMeta;
 import com.dylan.library.m3u8.entry.VideoTs;
 import com.dylan.library.m3u8.utils.CommonUtil;
 import com.dylan.library.utils.HttpRequestUtils;
+import com.dylan.library.utils.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,7 +39,7 @@ class UrlParseInit {
 
 
   public void initUrl() throws Exception {
-   HttpURLConnection connection= (HttpURLConnection) HttpRequestUtils.sendGetRequest(url);
+    HttpURLConnection connection= (HttpURLConnection) new URL(url).openConnection();
    int code=connection.getResponseCode();
    if ( code>= 200 && code < 300) {
       if (code!= 200){
@@ -86,7 +88,7 @@ class UrlParseInit {
     videoMeta.setProperty(property);
     List<VideoTs> videoTsList = new LinkedList<>();
 
-    HttpURLConnection connection= (HttpURLConnection) HttpRequestUtils.sendGetRequest(videoUrl);
+    HttpURLConnection connection= (HttpURLConnection) new URL(videoUrl).openConnection();
     int code=connection.getResponseCode();
     if ( code>= 200 && code < 300) {
       if (code!= 200){
@@ -117,20 +119,23 @@ class UrlParseInit {
               if ("URI".equals(key)){
                 value = value.replace("\"", "");
 
-                HttpURLConnection connection2= (HttpURLConnection) HttpRequestUtils.sendGetRequest(videoUrl);
-                int responseCode=connection.getResponseCode();
+
+                HttpURLConnection connection2= (HttpURLConnection) new URL(value).openConnection();
+                int responseCode=connection2.getResponseCode();
                 if ( responseCode>= 200 && responseCode < 300) {
                   if (responseCode!= 200){
-                    connection.disconnect();
+                    connection2.disconnect();
                     throw new M3u8Exception("响应码异常：" + responseCode);
                   }
                 }else {
-                  connection.disconnect();
+                  connection2.disconnect();
                   throw new M3u8Exception("HTTP请求失败");
                 }
 
+                byte[] keyByte=IOUtils.getBytes(connection2.getInputStream());
+                Logger.e(keyByte.length);
 
-                videoMeta.setKeyByte(IOUtils.getBytes(connection2.getInputStream()));
+                videoMeta.setKeyByte(keyByte);
                 videoMeta.setKeyUrl(value);
                 continue;
               }else if ("IV".equals(key)){

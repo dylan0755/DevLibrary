@@ -32,17 +32,15 @@ public class IOUtils {
         return "";
     }
 
-    public static byte[] getBytes(InputStream inputStream) {
-        try {
-            byte[] bytes = new byte[inputStream.available()];
-            inputStream.read(bytes);
-            inputStream.close();
-            return bytes;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        return new byte[0];
+    public static byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream output = new ByteArrayOutputStream();
+        byte[] buffer = new byte[1024 * 4];
+        int n = 0;
+        while (-1 != (n = inputStream.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
+        return output.toByteArray();
     }
 
     public static byte[] getBytes(AssetManager assetManager, String fileName) {
@@ -55,7 +53,7 @@ public class IOUtils {
         return new byte[0];
     }
 
-    public static String readTextFileFromResource(Context context, int resourceId) {
+    public static String readTextFileFromResource(Context context, int resourceId) throws IOException {
         return new String(getBytes(context.getResources().openRawResource(resourceId)));
     }
 }
