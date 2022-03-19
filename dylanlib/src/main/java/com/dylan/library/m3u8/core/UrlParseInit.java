@@ -133,8 +133,6 @@ class UrlParseInit {
                 }
 
                 byte[] keyByte=IOUtils.getBytes(connection2.getInputStream());
-                Logger.e(keyByte.length);
-
                 videoMeta.setKeyByte(keyByte);
                 videoMeta.setKeyUrl(value);
                 continue;
