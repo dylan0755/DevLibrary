@@ -74,75 +74,70 @@ public class M3u8DownLoadActivity extends AppCompatActivity {
         FileUtils.createDirIfNotExists(outPutDir);
         final StringBuilder stringBuilder=new StringBuilder();
 
-        ThreadPools.getInstance().fixedThreadPoolRun(new Runnable() {
+        //文件名称
+        String fileName = "test.mp4";
+        //创建下载实例，设置并发线程数
+        M3u8DownLoader videoDownload = new M3u8DownLoader(3,new BouncyCastleProvider());
+        //设置下载后的文件存储路径
+        videoDownload.setDirPath(outPutDir);
+        //设置视频过滤器，当下载链接包含多个视频文件时，由用户指定选择哪个视频文件，可以不设置
+        videoDownload.setVideoListFilter(new DefaultVideoFilter());
+        //开始下载
+        videoDownload.startDownload(videoUrl, fileName, new DownLoadListener() {
+
             @Override
-            public void run() {
-                //文件名称
-                String fileName = "test.mp4";
-                //创建下载实例，设置并发线程数
-                M3u8DownLoader videoDownload = new M3u8DownLoader(3,new BouncyCastleProvider());
-                //设置下载后的文件存储路径
-                videoDownload.setDirPath(outPutDir);
-                //设置视频过滤器，当下载链接包含多个视频文件时，由用户指定选择哪个视频文件，可以不设置
-                videoDownload.setVideoListFilter(new DefaultVideoFilter());
-                //开始下载
-                videoDownload.startDownload(videoUrl, fileName, new DownLoadListener() {
-
+            public void onStart() {
+                stringBuilder.append("\n"+"开始下载！");
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onStart() {
-                        stringBuilder.append("\n"+"开始下载！");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvInfo.setText(stringBuilder);
-                                scrollView.fullScroll(View.FOCUS_DOWN);
-                            }
-                        });
+                    public void run() {
+                        tvInfo.setText(stringBuilder);
+                        scrollView.fullScroll(View.FOCUS_DOWN);
                     }
+                });
+            }
 
+            @Override
+            public void onProgress(int finished, int sum, float percent) {
+                stringBuilder.append("\n"+"已下载" + finished + "个\t一共" + sum + "个\t已完成 " + percent + "%");
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onProgress(int finished, int sum, float percent) {
-                        stringBuilder.append("\n"+"已下载" + finished + "个\t一共" + sum + "个\t已完成 " + percent + "%");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvInfo.setText(stringBuilder);
-                                scrollView.fullScroll(View.FOCUS_DOWN);
-                            }
-                        });
+                    public void run() {
+                        tvInfo.setText(stringBuilder);
+                        scrollView.fullScroll(View.FOCUS_DOWN);
                     }
+                });
+            }
 
+            @Override
+            public void onComplete(final String savePath) {
+                stringBuilder.append("\n"+"下载完毕");
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onComplete(final String savePath) {
-                        stringBuilder.append("\n"+"下载完毕");
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvInfo.setText(stringBuilder);
-                                scrollView.fullScroll(View.FOCUS_DOWN);
-                                ToastUtils.show("下载成功");
-                                FileUtils.notifyScanFile(scrollView.getContext(),savePath);
-                                tvDownLoad.setEnabled(true);
-                            }
-                        });
+                    public void run() {
+                        tvInfo.setText(stringBuilder);
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                        ToastUtils.show("下载成功");
+                        FileUtils.notifyScanFile(scrollView.getContext(),savePath);
+                        tvDownLoad.setEnabled(true);
                     }
+                });
+            }
 
+            @Override
+            public void onError(Exception exception) {
+                ByteArrayOutputStream baos=new ByteArrayOutputStream();
+                PrintStream printStream=new PrintStream(baos);
+                exception.printStackTrace(printStream);
+                String exceptionStr = baos.toString();
+                IOCloser.closeIOArray(baos,printStream);
+                stringBuilder.append(exceptionStr);
+                runOnUiThread(new Runnable() {
                     @Override
-                    public void onError(Exception exception) {
-                        ByteArrayOutputStream baos=new ByteArrayOutputStream();
-                        PrintStream printStream=new PrintStream(baos);
-                        exception.printStackTrace(printStream);
-                        String exceptionStr = baos.toString();
-                        IOCloser.closeIOArray(baos,printStream);
-                        stringBuilder.append(exceptionStr);
-                        runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                tvInfo.setText(stringBuilder);
-                                scrollView.fullScroll(View.FOCUS_DOWN);
-                                tvDownLoad.setEnabled(true);
-                            }
-                        });
+                    public void run() {
+                        tvInfo.setText(stringBuilder);
+                        scrollView.fullScroll(View.FOCUS_DOWN);
+                        tvDownLoad.setEnabled(true);
                     }
                 });
             }
