@@ -1,4 +1,4 @@
-package com.dylan.library.m3u8.download;
+package com.dylan.library.m3u8.other;
 
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.m3u8.listener.DownloadListener;
@@ -11,7 +11,8 @@ import com.dylan.library.m3u8.utils.Constant;
  * @date 2019/12/14 16:02
  */
 
-public class M3u8DownLoader {
+@Deprecated
+public class DeprectedM3u8DownLoader {
 
     public static final String M3U8URL = "http://devimages.apple.com/iphone/samples/bipbop/gear1/prog_index.m3u8";
 
@@ -19,14 +20,14 @@ public class M3u8DownLoader {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                M3u8DownloadFactory.M3u8Download m3u8Download = M3u8DownloadFactory.getInstance(url);
+                M3u8DownloadFactory.M3u8Download m3u8Download = new M3u8DownloadFactory.M3u8Download(url);
                 FileUtils.createDirIfNotExists(outDirPath);
                 //设置生成目录
                 m3u8Download.setDir(outDirPath);
                 //设置视频名称
                 m3u8Download.setFileName(saveFileName);
                 //设置线程数
-                m3u8Download.setThreadCount(8);
+                m3u8Download.setThreadCount(3);
                 //设置重试次数
                 m3u8Download.setRetryCount(10);
                 //设置连接超时时间（单位：毫秒）

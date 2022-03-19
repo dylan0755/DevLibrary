@@ -1,6 +1,6 @@
 package com.xm.vbrowser.app.entity;
 
-import com.dylan.library.m3u8.M3U8;
+import com.dylan.library.m3u8.entry.M3U8;
 
 /**
  * Created by xm on 17-8-17.

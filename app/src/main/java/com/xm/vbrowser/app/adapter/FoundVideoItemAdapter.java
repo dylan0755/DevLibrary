@@ -17,9 +17,9 @@ import android.widget.TextView;
 
 import com.dylan.library.io.FileDownLoader;
 import com.dylan.library.io.FileUtils;
-import com.dylan.library.m3u8.M3U8;
-import com.dylan.library.m3u8.download.M3u8DownLoader;
-import com.dylan.library.m3u8.download.M3u8DownloadFactory;
+import com.dylan.library.m3u8.entry.M3U8;
+import com.dylan.library.m3u8.other.DeprectedM3u8DownLoader;
+import com.dylan.library.m3u8.other.M3u8DownloadFactory;
 import com.dylan.library.m3u8.listener.DownloadListener;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.widget.progressbar.ProgressBarDrawableDecorator;
@@ -198,7 +198,7 @@ public class FoundVideoItemAdapter extends BaseAdapter {
 
     private void toDownLoad(final VideoInfo videoInfo, final ViewHolder viewHolder, final View finalConvertView) {
         if ("m3u8".equals(videoInfo.getVideoFormat().getName())) {
-            M3u8DownLoader.downLoad(videoInfo.getUrl(), dirPath, "grabVideo_" + System.currentTimeMillis(), new DownloadListener() {
+            DeprectedM3u8DownLoader.downLoad(videoInfo.getUrl(), dirPath, "grabVideo_" + System.currentTimeMillis(), new DownloadListener() {
                 @Override
                 public void start() {
                     finalConvertView.post(new Runnable() {

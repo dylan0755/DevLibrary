@@ -1,4 +1,4 @@
-package com.dylan.library.m3u8;
+package com.dylan.library.m3u8.entry;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -3,20 +3,20 @@ package com.dylan.mylibrary.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.widget.GridView;
 
+import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
+import com.dylan.library.m3u8.core.DefaultVideoFilter;
+import com.dylan.library.m3u8.core.DownLoadListener;
+import com.dylan.library.m3u8.core.M3u8DownLoader;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.MD5Utils;
-import com.dylan.library.utils.ParamMapBuilder;
-import com.dylan.library.utils.SpannableStringUtils;
 import com.dylan.library.utils.thread.ThreadPools;
-import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -37,18 +37,9 @@ import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 import com.xm.vbrowser.app.activity.WebVideoGrabActivity;
-
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.math.BigInteger;
-import java.security.MessageDigest;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 /**
  * Created by Dylan on 2016/12/16.
@@ -101,13 +92,8 @@ public class DemoListActivity extends AppCompatActivity {
 //            ThreadPools.getInstance().fixedThreadPoolRun(new Runnable() {
 //                @Override
 //                public void run() {
-//                    try {
-//                        File sourceFile=new File("/storage/emulated/0/DCIM/Camera/IMG_20210522_140649.jpg");
-//                        Logger.e("原MD5:"+FileUtils.getFileMD5String(sourceFile));
-//                        Logger.e("修改后MD5:"+FileUtils.modifyFileMD5String(sourceFile));
-//                    } catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
+//
+//
 //                }
 //            });
 

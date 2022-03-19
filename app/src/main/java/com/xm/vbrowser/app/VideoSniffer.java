@@ -3,7 +3,7 @@ package com.xm.vbrowser.app;
 
 import com.alibaba.fastjson.JSON;
 import com.dylan.library.bean.EventBundle;
-import com.dylan.library.m3u8.M3U8;
+import com.dylan.library.m3u8.entry.M3U8;
 import com.dylan.library.m3u8.utils.M3U8Utils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.HttpRequestUtils;
