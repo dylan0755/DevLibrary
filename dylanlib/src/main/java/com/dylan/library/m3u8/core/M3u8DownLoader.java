@@ -14,6 +14,7 @@ public class M3u8DownLoader {
     private VideoListFilter videoListFilter;
     private Downloader downloader;
 
+    @Deprecated
     public M3u8DownLoader(int threadCount) {
         downloader = new Downloader(threadCount);
     }
