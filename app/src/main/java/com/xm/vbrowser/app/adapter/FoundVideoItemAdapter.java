@@ -100,7 +100,7 @@ public class FoundVideoItemAdapter extends BaseRecyclerAdapter<VideoInfo, FoundV
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final VideoInfo videoInfo, int i) {
+    public void onBindViewHolder(final ViewHolder holder, final VideoInfo videoInfo, int i) {
         VideoFormat videoFormat = videoInfo.getVideoFormat();
         holder.tvTitle.setText(videoInfo.getFileName() + "." + videoFormat.getName());
         if ("m3u8".equals(videoFormat.getName())) {
@@ -145,11 +145,17 @@ public class FoundVideoItemAdapter extends BaseRecyclerAdapter<VideoInfo, FoundV
             if (taskCount<2){
                 //取出队列
                 if (!waitQueue.isEmpty()){
-                    if (videoInfo==waitQueue.removeLast()){
-                        toDownLoad(videoInfo,holder.llDownLoad);
+                    if (videoInfo==waitQueue.getFirst()){
+                        mHandler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                waitQueue.removeFirst();
+                                toDownLoad(videoInfo,holder.llDownLoad);
+                            }
+                        });
+
                     }
                 }
-
             }
         }
 
@@ -161,7 +167,7 @@ public class FoundVideoItemAdapter extends BaseRecyclerAdapter<VideoInfo, FoundV
                 if (videoInfo.getDownLoadStatus() == 0) {
                     if (taskCount>=2){
                         videoInfo.setDownLoadStatus(VideoInfo.TASK_WAITTING);
-                        waitQueue.addFirst(videoInfo);
+                        waitQueue.add(videoInfo);
                         notifyDataSetChanged();
                         return;
                     }
