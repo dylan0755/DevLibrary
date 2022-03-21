@@ -1,28 +1,34 @@
 package com.xm.vbrowser.app.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.dylan.common.ButterKnifeRecyclerViewHolder;
+import com.dylan.library.adapter.BaseRecyclerAdapter;
+import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.io.FileDownLoader;
 import com.dylan.library.io.FileUtils;
+import com.dylan.library.m3u8.core.DefaultVideoFilter;
+import com.dylan.library.m3u8.core.DownLoadListener;
+import com.dylan.library.m3u8.core.M3u8DownLoader;
 import com.dylan.library.m3u8.entry.M3U8;
-import com.dylan.library.m3u8.other.DeprectedM3u8DownLoader;
-import com.dylan.library.m3u8.other.M3u8DownloadFactory;
-import com.dylan.library.m3u8.listener.DownloadListener;
+import com.dylan.library.utils.ContextUtils;
 import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
+import com.dylan.library.widget.DrawableTextView;
 import com.dylan.library.widget.progressbar.ProgressBarDrawableDecorator;
+
 import com.dylan.mylibrary.R;
 import com.xm.vbrowser.app.entity.VideoFormat;
 import com.xm.vbrowser.app.entity.VideoInfo;
@@ -32,10 +38,11 @@ import com.xm.vbrowser.app.util.TimeUtil;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.SortedMap;
+
+import butterknife.BindView;
+
 
 /**
  * Author: Dylan
@@ -43,16 +50,16 @@ import java.util.SortedMap;
  * Desc:
  */
 
-public class FoundVideoItemAdapter extends BaseAdapter {
-    public static final String dirPath = Environment.getExternalStorageDirectory().toString();
-    private LayoutInflater mInflater;
-    private SortedMap<String, VideoInfo> foundVideoInfoMap;
-    private List<VideoInfo> dataList;
+public class FoundVideoItemAdapter extends BaseRecyclerAdapter<VideoInfo, FoundVideoItemAdapter.ViewHolder> {
+
+
     private static int MSG_UPDATE = 10;
     private int colorBlack = Color.parseColor("#666666");
     private int colorGray = Color.parseColor("#999999");
     private int colorRed = Color.parseColor("#EB0636");
     private boolean isActivityBack;
+    private int taskCount;
+    private LinkedList<VideoInfo> waitQueue = new LinkedList();
 
     public void setActivityBack(boolean activityBack) {
         isActivityBack = activityBack;
@@ -68,144 +75,136 @@ public class FoundVideoItemAdapter extends BaseAdapter {
         }
     };
 
-    public FoundVideoItemAdapter(Context context, SortedMap<String, VideoInfo> foundVideoInfoMap) {
-        this.mInflater = LayoutInflater.from(context);
-        this.foundVideoInfoMap = foundVideoInfoMap;
-        M3u8DownloadFactory.addProvider(new BouncyCastleProvider());
-        prepareData();
+    public FoundVideoItemAdapter() {
+
     }
 
-    @Override
-    public void notifyDataSetChanged() {
-        prepareData();
-        super.notifyDataSetChanged();
-    }
 
-    @Override
-    public void notifyDataSetInvalidated() {
-        prepareData();
-        super.notifyDataSetInvalidated();
-    }
 
-    private void prepareData() {
-        dataList = new ArrayList<>(foundVideoInfoMap.values());
-        //倒序  最新的在最前面
-        Collections.sort(dataList, new Comparator<VideoInfo>() {
-            @Override
-            public int compare(VideoInfo o1, VideoInfo o2) {
-                if (o1.genTimestamp > o2.genTimestamp) {
-                    return -1;
-                } else {
-                    return 1;
-                }
-
-            }
-        });
-    }
-
-    @Override
-    public int getCount() {
-        return dataList.size();
-    }
-
-    @Override
-    public Object getItem(int arg0) {
-        return dataList.get(arg0);
-    }
-
-    @Override
-    public long getItemId(int arg0) {
-        return dataList.get(arg0).hashCode();
-    }
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-
-        ViewHolder holder = null;
-        if (convertView == null) {
-            holder = new ViewHolder();
-            convertView = mInflater.inflate(R.layout.item_video_detected, null);
-            holder.tvTitle = convertView.findViewById(R.id.tvTitle);
-            holder.ivPic = convertView.findViewById(R.id.ivPic);
-            holder.ivDownLoadStatus = convertView.findViewById(R.id.ivDownLoad);
-            holder.progressBar = convertView.findViewById(R.id.progressBar);
-            ProgressBarDrawableDecorator decorator = new ProgressBarDrawableDecorator(holder.progressBar);
-            decorator.setBGSolidColor(Color.parseColor("#EEEEEE"));
-            decorator.setProgressColor(Color.parseColor("#FADB22"));
-            decorator.setCornerRadius(2);
-            decorator.decorate();
-            holder.tvDuration = convertView.findViewById(R.id.tvDuration);
-            holder.tvSize = convertView.findViewById(R.id.tvSize);
-            holder.tvDownLoad = convertView.findViewById(R.id.tvDownLoad);
-            holder.llDownLoad = convertView.findViewById(R.id.llDownLoad);
-            holder.rootView = convertView.findViewById(R.id.rootView);
-            convertView.setTag(holder);
-        } else {
-            holder = (ViewHolder) convertView.getTag();
+    public void appendNotifyDataChanged(VideoInfo videoInfo) {
+        if (EmptyUtils.isEmpty(getDataList())){
+            List<VideoInfo> list=new ArrayList<>();
+            list.add(videoInfo);
+            bind(list);
+        }else{
+            getDataList().add(0,videoInfo);
+            notifyDataSetChanged();
         }
 
-        final VideoInfo videoInfo = dataList.get(position);
+    }
+
+
+    @Override
+    public int getLayoutId() {
+        return R.layout.item_video_detected;
+    }
+
+    @Override
+    public void onBindViewHolder(ViewHolder holder, final VideoInfo videoInfo, int i) {
         VideoFormat videoFormat = videoInfo.getVideoFormat();
         holder.tvTitle.setText(videoInfo.getFileName() + "." + videoFormat.getName());
         if ("m3u8".equals(videoFormat.getName())) {
             holder.tvDuration.setVisibility(View.VISIBLE);
             holder.tvDuration.setText(TimeUtil.formatTime((int) videoInfo.getDuration()));
             holder.tvSize.setVisibility(View.GONE);
-            final ViewHolder holder22 = holder;
-            M3U8 m3U8=videoInfo.getM3U8();
+            M3U8 m3U8 = videoInfo.getM3U8();
             if (EmptyUtils.isNotEmpty(m3U8.getTsList())) {
                 String filePath = m3U8.getTsList().get(0).getTsUrl();
-                com.bumptech.glide.Glide.with(holder22.tvSize.getContext()).load(filePath).into(holder22.ivPic);
+                Glide.with(holder.tvSize.getContext()).load(filePath).into(holder.ivPic);
             }
         } else {
             holder.tvSize.setVisibility(View.VISIBLE);
             holder.tvSize.setText(FileUtil.getFormatedFileSize(videoInfo.getSize()));
             holder.tvDuration.setVisibility(View.GONE);
-            com.bumptech.glide.Glide.with(holder.tvSize.getContext()).load(videoInfo.getUrl()).into(holder.ivPic);
+            Glide.with(holder.tvSize.getContext()).load(videoInfo.getUrl()).into(holder.ivPic);
 
         }
 
-        holder.ivDownLoadStatus.setImageResource(R.drawable.icon_grabvideo_download);
-        if (videoInfo.getDownLoadStatus() == 0) {
+        holder.ivDownLoad.setImageResource(R.drawable.icon_grabvideo_download);
+        if (videoInfo.getDownLoadStatus() == VideoInfo.TASK_NONE) {
             holder.tvDownLoad.setText("点击下载");
             holder.tvDownLoad.setTextColor(colorBlack);
-        } else if (videoInfo.getDownLoadStatus() == 1) {
+            holder.progressBar.setProgress(0);
+        } else if (videoInfo.getDownLoadStatus() == VideoInfo.TASK_DOWNLOADING) {
             holder.tvDownLoad.setText("正在下载");
             holder.tvDownLoad.setTextColor(colorGray);
-        } else if (videoInfo.getDownLoadStatus() == 2) {
+            holder.progressBar.setProgress(videoInfo.getDownLoadProgress());
+        } else if (videoInfo.getDownLoadStatus() == VideoInfo.TASK_FINISHED) {
             holder.tvDownLoad.setText("已下载");
             holder.tvDownLoad.setTextColor(colorGray);
-            holder.ivDownLoadStatus.setImageResource(R.drawable.icon_grabvideo_downloadfinish);
-        } else {
+            holder.ivDownLoad.setImageResource(R.drawable.icon_grabvideo_downloadfinish);
+            holder.progressBar.setProgress(100);
+        } else if (videoInfo.getDownLoadStatus()== VideoInfo.TASK_ERROR){
             holder.tvDownLoad.setText("下载失败");
             holder.tvDownLoad.setTextColor(colorRed);
+            holder.progressBar.setProgress(videoInfo.getDownLoadProgress());
+        }else{
+            holder.tvDownLoad.setText("排队中");
+            holder.tvDownLoad.setTextColor(colorBlack);
+            holder.progressBar.setProgress(0);
+            if (taskCount<2){
+                //取出队列
+                if (!waitQueue.isEmpty()){
+                    if (videoInfo==waitQueue.removeLast()){
+                        toDownLoad(videoInfo,holder.llDownLoad);
+                    }
+                }
+
+            }
         }
-        holder.progressBar.setProgress(videoInfo.getDownLoadProgress());
-        holder.rootView.setTag(videoInfo);
-        final View finalConvertView = convertView;
-        final ViewHolder viewHolder = holder;
-        holder.llDownLoad.setOnClickListener(new View.OnClickListener() {
+
+        final ViewHolder holder1=holder;
+        holder.llDownLoad.setOnClickListener(null);
+        holder.llDownLoad.setOnClickListener(new SingleClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onSingleClick(View view) {
                 if (videoInfo.getDownLoadStatus() == 0) {
-                    toDownLoad(videoInfo, viewHolder, finalConvertView);
+                    if (taskCount>=2){
+                        videoInfo.setDownLoadStatus(VideoInfo.TASK_WAITTING);
+                        waitQueue.addFirst(videoInfo);
+                        notifyDataSetChanged();
+                        return;
+                    }
+                    toDownLoad(videoInfo,holder1.llDownLoad);
                 }
             }
         });
 
-        return convertView;
     }
 
-    private void toDownLoad(final VideoInfo videoInfo, final ViewHolder viewHolder, final View finalConvertView) {
+
+    private void toDownLoad(final VideoInfo videoInfo, final LinearLayout llDownLoad) {
+        taskCount++;
+        videoInfo.setDownLoadStatus(VideoInfo.TASK_DOWNLOADING);
+        notifyDataSetChanged();
         if ("m3u8".equals(videoInfo.getVideoFormat().getName())) {
-            DeprectedM3u8DownLoader.downLoad(videoInfo.getUrl(), dirPath, "grabVideo_" + System.currentTimeMillis(), new DownloadListener() {
+            String dirPath =Environment.getExternalStorageDirectory().toString()+"/grabvideo";
+            FileUtils.createDirIfNotExists(dirPath);
+            //文件名称
+            String fileName = System.currentTimeMillis()+".mp4";
+            //创建下载实例，设置并发线程数
+            M3u8DownLoader videoDownload = new M3u8DownLoader(3,new BouncyCastleProvider());
+            //设置下载后的文件存储路径
+            videoDownload.setDirPath(dirPath);
+            //设置视频过滤器，当下载链接包含多个视频文件时，由用户指定选择哪个视频文件，可以不设置
+            videoDownload.setVideoListFilter(new DefaultVideoFilter());
+            //开始下载
+            Logger.e("ideoInfo.getUrl()="+videoInfo.getUrl());
+            videoDownload.startDownload(videoInfo.getUrl(), fileName, new DownLoadListener() {
                 @Override
-                public void start() {
-                    finalConvertView.post(new Runnable() {
+                public void onStart() {
+
+                }
+
+                @Override
+                public void onProgress(int finished, int sum, final float percent) {
+                    llDownLoad.post(new Runnable() {
                         @Override
                         public void run() {
-                            videoInfo.setDownLoadStatus(1);
-                            videoInfo.setDownLoadProgress(0);
+                            videoInfo.setDownLoadStatus(VideoInfo.TASK_DOWNLOADING);
+                            int progress = (int) percent;
+                            Logger.e("progress=" + progress);
+                            videoInfo.setDownLoadProgress(progress);
                             mHandler.removeCallbacksAndMessages(null);
                             mHandler.sendEmptyMessage(MSG_UPDATE);
                         }
@@ -213,43 +212,27 @@ public class FoundVideoItemAdapter extends BaseAdapter {
                 }
 
                 @Override
-                public void process(final String s, int i, int i1, final float v) {
-                    finalConvertView.post(new Runnable() {
+                public void onComplete(final String savePath) {
+                    llDownLoad.post(new Runnable() {
                         @Override
                         public void run() {
-                            videoInfo.setDownLoadStatus(1);
-                            videoInfo.setDownLoadProgress((int) v);
-                            mHandler.removeCallbacksAndMessages(null);
-                            mHandler.sendEmptyMessage(MSG_UPDATE);
-                        }
-                    });
-                }
-
-                @Override
-                public void speed(String s) {
-
-                }
-
-                @Override
-                public void onComplete(final String s) {
-                    finalConvertView.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            FileUtils.notifyScanFile(finalConvertView.getContext(), s);
+                            taskCount--;
+                            FileUtils.notifyScanFile(getContext(), savePath);
                             videoInfo.setDownLoadProgress(100);
-                            videoInfo.setDownLoadStatus(2);
-                            mHandler.removeCallbacksAndMessages(null);
+                            videoInfo.setDownLoadStatus(VideoInfo.TASK_FINISHED);
                             mHandler.sendEmptyMessage(MSG_UPDATE);
+                           
                         }
                     });
                 }
 
                 @Override
-                public void onError(Exception e) {
-                    finalConvertView.post(new Runnable() {
+                public void onError(Exception exception) {
+                    taskCount--;
+                    llDownLoad.post(new Runnable() {
                         @Override
                         public void run() {
-                            videoInfo.setDownLoadStatus(3);
+                            videoInfo.setDownLoadStatus(VideoInfo.TASK_ERROR);
                             mHandler.removeCallbacksAndMessages(null);
                             mHandler.sendEmptyMessage(MSG_UPDATE);
                         }
@@ -267,10 +250,11 @@ public class FoundVideoItemAdapter extends BaseAdapter {
 
                 @Override
                 public void onError(int i, String s) {
-                    finalConvertView.post(new Runnable() {
+                    taskCount--;
+                    llDownLoad.post(new Runnable() {
                         @Override
                         public void run() {
-                            videoInfo.setDownLoadStatus(3);
+                            videoInfo.setDownLoadStatus(VideoInfo.TASK_ERROR);
                             mHandler.removeCallbacksAndMessages(null);
                             mHandler.sendEmptyMessage(MSG_UPDATE);
                         }
@@ -279,12 +263,11 @@ public class FoundVideoItemAdapter extends BaseAdapter {
 
                 @Override
                 public void onProgress(long l, long l1, final int i) {
-                    finalConvertView.post(new Runnable() {
+                    llDownLoad.post(new Runnable() {
                         @Override
                         public void run() {
-                            videoInfo.setDownLoadStatus(1);
+                            videoInfo.setDownLoadStatus(VideoInfo.TASK_DOWNLOADING);
                             videoInfo.setDownLoadProgress(i);
-                            mHandler.removeCallbacksAndMessages(null);
                             mHandler.sendEmptyMessage(MSG_UPDATE);
                         }
                     });
@@ -293,14 +276,15 @@ public class FoundVideoItemAdapter extends BaseAdapter {
 
                 @Override
                 public void onComplete(long l, final String s, boolean b) {
-                    finalConvertView.post(new Runnable() {
+                    taskCount--;
+                    llDownLoad.post(new Runnable() {
                         @Override
                         public void run() {
-                            FileUtils.notifyScanFile(finalConvertView.getContext(), s);
+                            FileUtils.notifyScanFile(llDownLoad.getContext(), s);
                             videoInfo.setDownLoadProgress(100);
-                            videoInfo.setDownLoadStatus(2);
-                            mHandler.removeCallbacksAndMessages(null);
+                            videoInfo.setDownLoadStatus(VideoInfo.TASK_FINISHED);
                             mHandler.sendEmptyMessage(MSG_UPDATE);
+                           
                         }
                     });
 
@@ -309,21 +293,35 @@ public class FoundVideoItemAdapter extends BaseAdapter {
         }
     }
 
-    private static class ViewHolder {
+     class ViewHolder extends ButterKnifeRecyclerViewHolder {
+        @BindView(R.id.ivPic)
         ImageView ivPic;
-        ImageView ivDownLoadStatus;
+        @BindView(R.id.tvTitle)
         TextView tvTitle;
+        @BindView(R.id.progressBar)
         ProgressBar progressBar;
-        TextView tvDuration;
-        TextView tvSize;
+        @BindView(R.id.tvDuration)
+        DrawableTextView tvDuration;
+        @BindView(R.id.tvSize)
+        DrawableTextView tvSize;
+        @BindView(R.id.ivDownLoad)
+        ImageView ivDownLoad;
+        @BindView(R.id.tvDownLoad)
         TextView tvDownLoad;
+        @BindView(R.id.llDownLoad)
         LinearLayout llDownLoad;
+        @BindView(R.id.rootView)
         LinearLayout rootView;
 
+        public ViewHolder(View view) {
+            super(view);
+            ProgressBarDrawableDecorator decorator = new ProgressBarDrawableDecorator(progressBar);
+            decorator.setBGSolidColor(Color.parseColor("#EEEEEE"));
+            decorator.setProgressColor(Color.parseColor("#FADB22"));
+            decorator.setCornerRadius(2);
+            decorator.decorate();
+        }
     }
-
-
-
 
 
 }

@@ -19,10 +19,12 @@ import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -30,18 +32,17 @@ import java.util.concurrent.LinkedBlockingQueue;
  */
 public class VideoSniffer {
     private LinkedBlockingQueue<DetectedVideoInfo> detectedTaskUrlQueue;
-    private SortedMap<String, VideoInfo> foundVideoInfoMap;
     private int threadPoolSize;
     private int retryCountOnFail;
-
+    private SortedMap<String, VideoInfo> foundVideoInfoMap = Collections.synchronizedSortedMap(new TreeMap<String, VideoInfo>());
     private List<Thread> threadList = new ArrayList<Thread>();
 
 
-    public VideoSniffer(LinkedBlockingQueue<DetectedVideoInfo> detectedTaskUrlQueue, SortedMap<String, VideoInfo> foundVideoInfoMap, int threadPoolSize, int retryCountOnFail) {
+    public VideoSniffer(LinkedBlockingQueue<DetectedVideoInfo> detectedTaskUrlQueue, int threadPoolSize, int retryCountOnFail) {
         this.detectedTaskUrlQueue = detectedTaskUrlQueue;
-        this.foundVideoInfoMap = foundVideoInfoMap;
         this.threadPoolSize = threadPoolSize;
         this.retryCountOnFail = retryCountOnFail;
+
     }
 
     public void startSniffer() {
@@ -180,7 +181,9 @@ public class VideoSniffer {
                 videoInfo.setSourcePageTitle(sourcePageTitle);
                 videoInfo.setSourcePageUrl(sourcePageUrl);
                 foundVideoInfoMap.put(url, videoInfo);
-                EventBus.getDefault().post(new EventBundle(WebVideoGrabActivity.ACTION_DETECTED_NEW_VIDEO));
+                EventBundle bundle= new EventBundle(WebVideoGrabActivity.ACTION_DETECTED_NEW_VIDEO);
+                bundle.setExtraData(videoInfo);
+                EventBus.getDefault().post(bundle);
                 //检测成功，是视频
                 VideoSnifferLogger.d("WorkerThread", "found video taskUrl=" + url);
                 return true;

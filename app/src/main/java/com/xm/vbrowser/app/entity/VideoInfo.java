@@ -1,11 +1,19 @@
 package com.xm.vbrowser.app.entity;
 
+
 import com.dylan.library.m3u8.entry.M3U8;
 
 /**
  * Created by xm on 17-8-17.
  */
 public class VideoInfo {
+    //0  是未下载  1 是下载中  2 是下载完成 3 是下载失败  4 是等待下载
+    public static final int TASK_NONE=0;
+    public static final int TASK_DOWNLOADING=1;
+    public static final int TASK_FINISHED=2;
+    public static final int TASK_ERROR=3;
+    public static final int TASK_WAITTING=4;
+
     public long  genTimestamp=System.currentTimeMillis();
     private String fileName;
     private String url;
@@ -15,7 +23,7 @@ public class VideoInfo {
     private double duration;//单位s m3u8专用
     private String sourcePageUrl;//原网页url
     private String sourcePageTitle;//原网页标题
-    private int downLoadStatus;//0  是未下载  1 是下载中  2 是下载完成 3 是下载失败
+    private int downLoadStatus;
     private int downLoadProgress;
 
     public M3U8 getM3U8() {

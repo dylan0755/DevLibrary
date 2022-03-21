@@ -41,6 +41,7 @@ import com.xm.vbrowser.app.entity.DetectedVideoInfo;
 import com.xm.vbrowser.app.entity.VideoInfo;
 import com.xm.vbrowser.app.util.FoundItemDialog;
 import com.xm.vbrowser.app.util.VideoFormatUtil;
+import com.xm.vbrowser.app.util.VideoSnifferLogger;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -49,9 +50,6 @@ import org.greenrobot.eventbus.ThreadMode;
 import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.net.URLEncoder;
-import java.util.Collections;
-import java.util.SortedMap;
-import java.util.TreeMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
@@ -67,7 +65,7 @@ public class WebVideoGrabActivity extends BaseActivity {
     private WebView mWebView;
     private EditText searchInput;
     private LinkedBlockingQueue<DetectedVideoInfo> detectedTaskUrlQueue = new LinkedBlockingQueue<DetectedVideoInfo>();
-    private SortedMap<String, VideoInfo> foundVideoInfoMap = Collections.synchronizedSortedMap(new TreeMap<String, VideoInfo>());
+
     private VideoSniffer videoSniffer;
     private String currentTitle = "";
     private String currentUrl = "";
@@ -94,7 +92,9 @@ public class WebVideoGrabActivity extends BaseActivity {
             requestBuilder.addPerm(Manifest.permission.READ_EXTERNAL_STORAGE,true)
                     .startRequest(100);
         }
+
         if (videoSniffer != null) {
+            VideoSnifferLogger.setIsDebug(true);
             videoSniffer.startSniffer();
         }
     }
@@ -106,8 +106,8 @@ public class WebVideoGrabActivity extends BaseActivity {
         searchInput =findViewById(R.id.edtLink);
         ivCloseSearch=findViewById(R.id.ivCloseSearch);
         initWebView();
-        videoSniffer = new VideoSniffer(detectedTaskUrlQueue, foundVideoInfoMap, 5, 1);
-        mFoundItemDialog=new FoundItemDialog(this,foundVideoInfoMap);
+        videoSniffer = new VideoSniffer(detectedTaskUrlQueue, 5, 1);
+        mFoundItemDialog=new FoundItemDialog(this);
 
         searchInput.addTextChangedListener(new EditTextUtils.AfterTextChangedListener() {
             @Override
@@ -127,8 +127,9 @@ public class WebVideoGrabActivity extends BaseActivity {
                 loadOrSearch(textView.getText().toString());
             }
         });
-
-        loadOrSearch(HOME_URL);
+        String url=getIntent().getStringExtra("url");
+        if (EmptyUtils.isEmpty(url))url=HOME_URL;
+        loadOrSearch(url);
     }
 
     private void initWebView() {
@@ -197,7 +198,7 @@ public class WebVideoGrabActivity extends BaseActivity {
                     mFoundItemDialog.show();
                 }
             });
-            mFoundItemDialog.show();
+            mFoundItemDialog.show((VideoInfo) bundle.getExtraData());
         }
     }
 
@@ -303,6 +304,7 @@ public class WebVideoGrabActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         if (mWebView.canGoBack()) {
+
             mWebView.goBack();
         }else{
             super.onBackPressed();
@@ -317,6 +319,8 @@ public class WebVideoGrabActivity extends BaseActivity {
         if (videoSniffer != null) {
             videoSniffer.stopSniffer();
         }
+
+
         EventBus.getDefault().unregister(this);
     }
 

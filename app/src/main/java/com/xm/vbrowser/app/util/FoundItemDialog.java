@@ -1,8 +1,9 @@
 package com.xm.vbrowser.app.util;
 
 import android.content.Context;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.ListView;
 
 import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.dialog.BottomSlideDialog;
@@ -11,8 +12,6 @@ import com.dylan.mylibrary.R;
 import com.xm.vbrowser.app.adapter.FoundVideoItemAdapter;
 import com.xm.vbrowser.app.entity.VideoInfo;
 
-import java.util.SortedMap;
-
 /**
  * Author: Dylan
  * Date: 2022/3/18
@@ -20,14 +19,15 @@ import java.util.SortedMap;
  */
 
 public class FoundItemDialog extends BottomSlideDialog {
-   ListView listView;
+    RecyclerView recyclerView;
    private FoundVideoItemAdapter mFoundVideoItemAdapter;
-    public FoundItemDialog(Context context, SortedMap<String, VideoInfo> foundVideoInfoMap) {
+    public FoundItemDialog(Context context) {
         super(context);
         setContentView(R.layout.dialog_detect_video_item);
-        listView=findViewById(R.id.listView);
-        mFoundVideoItemAdapter=new FoundVideoItemAdapter(context, foundVideoInfoMap);
-        listView.setAdapter(mFoundVideoItemAdapter);
+        recyclerView=findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(context));
+        mFoundVideoItemAdapter=new FoundVideoItemAdapter();
+        recyclerView.setAdapter(mFoundVideoItemAdapter);
         ViewUtils.setClickListener(new SingleClickListener() {
             @Override
             public void onSingleClick(View view) {
@@ -39,9 +39,8 @@ public class FoundItemDialog extends BottomSlideDialog {
         mFoundVideoItemAdapter.setActivityBack(activityBack);
     }
 
-    @Override
-    public void show() {
+    public void show(VideoInfo videoInfo) {
         super.show();
-        mFoundVideoItemAdapter.notifyDataSetChanged();
+        mFoundVideoItemAdapter.appendNotifyDataChanged(videoInfo);
     }
 }
