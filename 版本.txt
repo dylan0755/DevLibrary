@@ -7,7 +7,7 @@ V5.8.0
 2.新增M3U8DownLoader 视频下载,获取m3u8 信息
 3.UrlUtils 和 FileUtils 新增 getSuffixFromUrl 获取url后缀
 4.修复IOUtils getBytes(InputStream inputStream) 为空问题
-
+5.新增EditDoubleInputHelper 小数
 
 
 
