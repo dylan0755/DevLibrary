@@ -197,6 +197,7 @@
         <activity android:name=".ui.M3u8DownLoadActivity"/>
         <activity android:name="com.xm.vbrowser.app.activity.WebVideoGrabActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ui.PosterBannerActivity"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，

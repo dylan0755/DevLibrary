@@ -8,7 +8,7 @@ V5.8.0
 3.UrlUtils 和 FileUtils 新增 getSuffixFromUrl 获取url后缀
 4.修复IOUtils getBytes(InputStream inputStream) 为空问题
 5.新增EditDoubleInputHelper 小数
-
+6.新增Banner 快速实现海报左右滑动Banner
 
 
 
