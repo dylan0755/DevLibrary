@@ -24,7 +24,7 @@
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
-            android:background="#a0a0a0"/>
+            android:background="#fafafa"/>
 
         <RelativeLayout
             android:layout_width="0dp"

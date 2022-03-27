@@ -59,7 +59,7 @@ public class M3U8Utils {
 
 
     public static M3U8 parse(String url) throws IOException {
-        HttpURLConnection httpURLConnection = (HttpURLConnection) HttpRequestUtils.sendGetRequest(url);
+        HttpURLConnection httpURLConnection = (HttpURLConnection) new URL(url).openConnection();
         InputStream inputStream = httpURLConnection.getInputStream();
         BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
         M3U8 ret = new M3U8();
