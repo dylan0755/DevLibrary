@@ -10,7 +10,7 @@ V5.8.0
 5.新增EditDoubleInputHelper 小数
 6.新增Banner 快速实现海报左右滑动Banner
 7.新增ColorUtils changeAlpha(int color,float fraction)改变颜色透明度
-
+8.优化WebProgressView 高度计算
 
 
 
