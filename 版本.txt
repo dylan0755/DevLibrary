@@ -11,7 +11,7 @@ V5.8.0
 6.新增Banner 快速实现海报左右滑动Banner
 7.新增ColorUtils changeAlpha(int color,float fraction)改变颜色透明度
 8.优化WebProgressView 高度计算
-
+9.新增LayoutInflateAdapter ,为各种布局动态添加数据，方便操作
 
 
 V5.7.0 ---->2022.3.7
@@ -493,8 +493,8 @@ V3.5.0 ---->2020.03.01
     ListView或GridView 直接getChildAt 返回的是当前可见数量的第几个，
     所以争取的获取方法是 position-view.getFirstVisiblePosition()
 
-11.新增 PrimaryPagerAdapter ， 通过 PrimaryItem primaryItem= adapter.getPrimaryItem();
-    primaryItem.object, 或者 adapter.getPrimaryItemObject()
+11.新增 PrimaryPagerAdapter ， 通过 PrimaryItem primaryItem= layoutInflaterAdapter.getPrimaryItem();
+    primaryItem.object, 或者 layoutInflaterAdapter.getPrimaryItemObject()
 12.新增ScaleUpPhotoView  从点击处扩大到指定位置，场景：图片放大浏览
 
 
@@ -648,7 +648,7 @@ V2.3.0 ---> 2019.08.27 更新至JCenter
 3.ToastUtils 对Context 进行空判，防止Context 为空时调用显示空指针异常
 4.FileUtils 增加delectDirFile，删除整个文件夹
 5.CompatUtils 增加 setTint(Drawable drawble,int color) 兼容着色
-6.增加CommonFragmentPagerAdapter adapter.addFragment() 和 adapter.addTitle();
+6.增加CommonFragmentPagerAdapter layoutInflaterAdapter.addFragment() 和 layoutInflaterAdapter.addTitle();
 7.EmptyUtils 新增isNotBlank()判断空格
 8.HtmlUtils 新增 fromHtml() 处理Html.fromHtml()过时问题。
 9.增加EventBus 数据传递类：EventBundle   内部封装Action, Bundle存储 ，附加属性；

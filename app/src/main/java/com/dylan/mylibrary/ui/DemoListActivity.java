@@ -3,20 +3,13 @@ package com.dylan.mylibrary.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
-import com.dylan.library.exception.ELog;
-import com.dylan.library.io.FileUtils;
-import com.dylan.library.m3u8.core.DefaultVideoFilter;
-import com.dylan.library.m3u8.core.DownLoadListener;
-import com.dylan.library.m3u8.core.M3u8DownLoader;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.thread.ThreadPools;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
