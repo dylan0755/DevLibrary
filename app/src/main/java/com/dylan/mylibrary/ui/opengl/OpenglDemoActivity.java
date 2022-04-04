@@ -19,7 +19,9 @@ import android.widget.TextView;
 
 import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.graphics.BitmapHelper;
+import com.dylan.library.io.FileUtils;
 import com.dylan.library.media.MediaTools;
+import com.dylan.library.media.VideoPlayHelper;
 import com.dylan.library.media.camera.CameraFocusView;
 import com.dylan.library.media.camera.CameraRender;
 import com.dylan.library.media.camera.CameraRenderStatusListener;
@@ -32,6 +34,7 @@ import com.dylan.library.opengl.CameraGLSurfaceView;
 import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.opengl.WaterMarkHelper;
 import com.dylan.library.utils.DensityUtils;
+import com.dylan.library.utils.IntentUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.PermissionRequestBuilder;
 import com.dylan.library.utils.ToastUtils;
@@ -67,14 +70,14 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
     protected volatile boolean mIsTakingPic = false;
     protected volatile boolean mIsNeedTakePic = false;
     private WaterMarkHelper markHelper;
-
+    private VideoPlayHelper playHelper;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_opengldemo);
-        markHelper=new WaterMarkHelper();
+        markHelper = new WaterMarkHelper();
         tvTime = findViewById(R.id.tvTime);
         mGlSurfaceView = findViewById(R.id.glSurfaceView);
         mGlSurfaceView.setEGLContextClientVersion(2);
@@ -115,6 +118,13 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
             }
         });
 
+        findViewById(R.id.selectVideo).setOnClickListener(new SingleClickListener() {
+            @Override
+            public void onSingleClick(View v) {
+                startActivityForResult(IntentUtils.getChooseVideoIntent(), 100);
+            }
+        });
+        playHelper = new VideoPlayHelper(mVideoDecoderListener, mGlSurfaceView,false);
     }
 
 
@@ -128,6 +138,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
     protected void onPause() {
         super.onPause();
         cameraRender.onPause();
+        if (playHelper != null) playHelper.pausePlay();
     }
 
     @Override
@@ -155,7 +166,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
             markHelper.drawFrame(waterBean);
             sendRecordingData(cameraTexId, true, mvpMatrix,
-                    texMatrix, timeStamp,waterBean, waterDateBean);
+                    texMatrix, timeStamp, waterBean, waterDateBean);
             takePicture(cameraTexId, true, GlUtils.IDENTITY_MATRIX, texMatrix, cameraHeight, cameraWidth);
             markHelper.drawDateTimeText(waterDateBean);
 
@@ -168,17 +179,17 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
         @Override
         public void onSurfaceCreated() {
-            Bitmap bitmap = BitmapHelper.getBitmapFromText("驰@水印测试",Color.RED,DensityUtils.dp2px(OpenglDemoActivity.this,22));
+            Bitmap bitmap = BitmapHelper.getBitmapFromText("驰@水印测试", Color.RED, DensityUtils.dp2px(OpenglDemoActivity.this, 22));
             //静态水印
-            waterBean=new WaterMarkHelper.WaterBean();
+            waterBean = new WaterMarkHelper.WaterBean();
             waterBean.setBitmap(bitmap);
             waterBean.setX(150);
             markHelper.initConfig();
 
             //日期水印
-            waterDateBean =new WaterMarkHelper.WaterDateBean();
+            waterDateBean = new WaterMarkHelper.WaterDateBean();
             waterDateBean.setColor(Color.WHITE);
-            waterDateBean.setTextSize(DensityUtils.dp2px(OpenglDemoActivity.this,26));
+            waterDateBean.setTextSize(DensityUtils.dp2px(OpenglDemoActivity.this, 26));
             waterDateBean.setX(100);
 
         }
@@ -186,14 +197,15 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
         @Override
         public void onSurfaceChanged(int viewWidth, int viewHeight) {
-            if (waterBean!=null)waterBean.setY((int) (cameraRender.getViewHeight()*0.85f));
-            if (waterDateBean !=null) waterDateBean.setY((int) (cameraRender.getViewHeight()*0.75f));
+            if (waterBean != null) waterBean.setY((int) (cameraRender.getViewHeight() * 0.85f));
+            if (waterDateBean != null)
+                waterDateBean.setY((int) (cameraRender.getViewHeight() * 0.75f));
         }
 
         @Override
         public void onSurfaceDestroy() {
             markHelper.releaseTextureId(waterBean);//记得调用释放
-            waterBean=null;
+            waterBean = null;
         }
     }
 
@@ -214,7 +226,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
                 return;
             }
 
-            mVideoEncoder.frameAvailableSoon(texId, isCameraTextureId, texMatrix, mvpMatrix,bean,data);
+            mVideoEncoder.frameAvailableSoon(texId, isCameraTextureId, texMatrix, mvpMatrix, bean, data);
             if (mStartTime == 0) {
                 mStartTime = timeStamp;
             }
@@ -226,15 +238,15 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
      * 开始录制
      */
     protected void startRecording() {
-            mStartTime = 0;
-            mRecordBarrier = new CountDownLatch(2);
-            String videoFileName = "opengl" + System.currentTimeMillis() + ".mp4";
-            mVideoOutFile = new File(Environment.getExternalStorageDirectory().toString(), videoFileName);
+        mStartTime = 0;
+        mRecordBarrier = new CountDownLatch(2);
+        String videoFileName = "opengl" + System.currentTimeMillis() + ".mp4";
+        mVideoOutFile = new File(Environment.getExternalStorageDirectory().toString(), videoFileName);
         try {
             muxerWrapper = new MediaMuxerWrapper(mVideoOutFile.getAbsolutePath());
 
 
-        // for video capturing
+            // for video capturing
 //            int videoWidth = mCameraRenderer.getCameraHeight();
 //            int videoHeight = mCameraRenderer.getCameraWidth();
 
@@ -421,8 +433,37 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         }
     }
 
+    private VideoPlayHelper.VideoDecoderListener mVideoDecoderListener = new VideoPlayHelper.VideoDecoderListener() {
+
+        @Override
+        public void onReadVideoPixel(final byte[] bytes, final int width, final int height) {
+
+           // BitmapHelper.loadBitmapFromByteArray(bytes,width,height);
+
+        }
+
+        @Override
+        public void onReadImagePixel(byte[] bytes, int width, int height) {
+
+        }
+    };
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (100 == requestCode && data != null && data.getData() != null) {
+            File selectFile = FileUtils.getFileByUri(data.getData(), this);
+            if (selectFile == null) return;
+            playHelper.playVideo(selectFile.getAbsolutePath());
+        }
+    }
 
 
+    @Override
+    public void onDestroy() {
+        if (playHelper != null) playHelper.release();
+        super.onDestroy();
+    }
 
 
 }

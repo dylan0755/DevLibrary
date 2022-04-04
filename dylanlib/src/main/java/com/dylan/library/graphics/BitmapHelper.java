@@ -50,6 +50,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.ByteBuffer;
 
 /**
  * Created by Dylan on 2016/12/30.
@@ -149,11 +150,10 @@ public class BitmapHelper {
     }
 
 
-    public static Bitmap getInSampleSizeBitmap(String picPath, int reqsW, int reqsH) {
+    public static Bitmap loadBitmap(String picPath, int reqsW, int reqsH) {
         Bitmap bitmap = null;
         try {
             BitmapFactory.Options option = new BitmapFactory.Options();
-            option.inPreferredConfig = Bitmap.Config.RGB_565;
             option.inJustDecodeBounds = true;//不添加到内存，只测量宽高
             BitmapFactory.decodeFile(picPath, option);
             option.inSampleSize = getInSampleSize(option, reqsW, reqsH);
@@ -169,6 +169,38 @@ public class BitmapHelper {
             ELog.e(e);
             return null;
         }
+    }
+
+    public static Bitmap loadBitmapFromExternal(String path , int reqWidth, int reqHeight) {
+        try {
+            BitmapFactory.Options  opt =new  BitmapFactory.Options();
+            opt.inJustDecodeBounds = true;
+            BitmapFactory.decodeFile(path, opt);
+            int  picWidth = opt.outWidth;
+            int picHeight = opt.outHeight;
+            int  inSampleSize = 1;
+            // 根据屏的大小和图片大小计算出缩放比例
+            if (picHeight > reqHeight || picWidth > reqWidth) {
+                int halfHeight= picHeight / 2;
+                int halfWidth = picWidth / 2;
+                while (halfHeight / inSampleSize >= reqHeight && halfWidth / inSampleSize >= reqWidth) {
+                    inSampleSize *= 2;
+                }
+            }
+            opt.inSampleSize = inSampleSize;
+            opt.inJustDecodeBounds = false;
+            return BitmapFactory.decodeFile(path, opt);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Bitmap loadBitmapFromByteArray(byte[] bytes,int width,int height){
+            ByteBuffer buffer = ByteBuffer.wrap(bytes);
+            Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            bitmap.copyPixelsFromBuffer(buffer);
+            return bitmap;
     }
 
     //获得采样率

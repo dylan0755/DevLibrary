@@ -4,6 +4,8 @@ import android.content.Context;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+
 import com.dylan.library.utils.DensityUtils;
 
 /**
@@ -11,8 +13,9 @@ import com.dylan.library.utils.DensityUtils;
  * Date: 2021/1/20
  * Desc:
  */
-public class CameraGLSurfaceView extends GLSurfaceView {
+public class CameraGLSurfaceView extends GLSurfaceView implements SurfaceHolder.Callback{
 
+    private SurfaceHolder mSurfaceHolder;
 
 
     public CameraGLSurfaceView(Context context) {
@@ -21,6 +24,12 @@ public class CameraGLSurfaceView extends GLSurfaceView {
 
     public CameraGLSurfaceView(Context context, AttributeSet attrs) {
         super(context, attrs);
+    }
+
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        super.surfaceCreated(holder);
+        mSurfaceHolder=holder;
     }
 
     @Override

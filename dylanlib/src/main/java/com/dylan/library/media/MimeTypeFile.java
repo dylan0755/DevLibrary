@@ -1,4 +1,4 @@
-package com.dylan.library.io;
+package com.dylan.library.media;
 
 import android.content.Context;
 import android.content.Intent;
@@ -188,7 +188,7 @@ public class MimeTypeFile {
      * @param fileType file type integer value
      * @return if is audio type , return true;otherwise , return false
      */
-    public  boolean isAudioFileType(int fileType) {
+    public static boolean isAudioFileType(int fileType) {
         return ((fileType >= FIRST_AUDIO_FILE_TYPE &&
                 fileType <= LAST_AUDIO_FILE_TYPE) ||
                 (fileType >= FIRST_MIDI_FILE_TYPE &&
@@ -200,7 +200,7 @@ public class MimeTypeFile {
      * @param fileType file type integer value
      * @return if is video type , return true ; otherwise , return false
      */
-    public  boolean isVideoFileType(int fileType) {
+    public static boolean isVideoFileType(int fileType) {
         return (fileType >= FIRST_VIDEO_FILE_TYPE &&
                 fileType <= LAST_VIDEO_FILE_TYPE)
                 || (fileType >= FIRST_VIDEO_FILE_TYPE2 &&
@@ -212,7 +212,7 @@ public class MimeTypeFile {
      * @param fileType file type integer value
      * @return if is image type , return true ; otherwise , return false ;
      */
-    public  boolean isImageFileType(int fileType) {
+    public static boolean isImageFileType(int fileType) {
         return (fileType >= FIRST_IMAGE_FILE_TYPE &&
                 fileType <= LAST_IMAGE_FILE_TYPE);
     }

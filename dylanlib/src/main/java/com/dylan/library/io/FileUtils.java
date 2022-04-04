@@ -19,6 +19,7 @@ import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.exception.ELog;
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.manager.ExternalStorageDir;
+import com.dylan.library.media.MimeTypeFile;
 import com.dylan.library.net.UrlUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
@@ -65,7 +66,36 @@ public class FileUtils {
 
 
 
+    //根据图片文件路径判断文件类型
+    public static boolean isImageFileType(String path) {
+        MimeTypeFile.MediaFileType type = MimeTypeFile.getFileType(path);
+        if(null != type) {
+            return MimeTypeFile.isImageFileType(type.fileType);
+        }
+        return false;
+    }
 
+    //根据音频文件路径判断文件类型
+    public static boolean isAudioFileType(String path) {
+        MimeTypeFile.MediaFileType type = MimeTypeFile.getFileType(path);
+        if(null != type) {
+            return MimeTypeFile.isAudioFileType(type.fileType);
+        }
+        return false;
+    }
+
+    //根据视频文件路径判断文件类型
+    public static boolean isVideoFileType(String path) {
+        MimeTypeFile.MediaFileType type = MimeTypeFile.getFileType(path);
+        if(null != type) {
+            return MimeTypeFile.isVideoFileType(type.fileType);
+        }
+        return false;
+    }
+
+
+
+    @Deprecated
     public static boolean isPicture(String fileNameOrPath) {
         String suffix = fileNameOrPath.substring(fileNameOrPath.lastIndexOf(".") + 1).toLowerCase();
         if (suffix.equals("jpg") || suffix.equals("png")
@@ -76,6 +106,8 @@ public class FileUtils {
         }
 
     }
+
+
 
     public static boolean isExists(String path) {
         return new File(path).exists();
@@ -298,6 +330,7 @@ public class FileUtils {
         if (context == null) return;
         FileOutputStream out = null;
         try {
+            createDirIfNotExists(new File(outputFilePath).getParentFile().getAbsolutePath());
             out = new FileOutputStream(outputFilePath);
             byte[] buffer = new byte[1024];
             InputStream in = context.getAssets().open(assetsFileName);

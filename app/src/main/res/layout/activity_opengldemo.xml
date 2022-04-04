@@ -33,11 +33,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+
+
         <Button
             android:id="@+id/tvSwitchCamera"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="切换摄像头"/>
+
+        <Button
+            android:id="@+id/selectVideo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="选取视频"
+            android:layout_below="@id/tvSwitchCamera"/>
+
 
 
         <ImageView

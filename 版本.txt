@@ -12,6 +12,10 @@ V5.8.0
 7.新增ColorUtils changeAlpha(int color,float fraction)改变颜色透明度
 8.优化WebProgressView 高度计算
 9.新增LayoutInflateAdapter ,为各种布局动态添加数据，方便操作
+10.FileUtils isImageFileType  isAudioFileType isVideoFileType
+11.BitmapHelper loadBitmapFromByteArray
+
+
 
 
 V5.7.0 ---->2022.3.7
