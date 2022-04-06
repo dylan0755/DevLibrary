@@ -45,6 +45,21 @@ public class WeChatDocumentFileReader {
         }
     }
 
+    private void readWxVideoCache2() {// com.tencent.mm->cache->
+        documentFiles.clear();
+        Uri uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata");
+        DocumentFile documentFile = DocumentFile.fromTreeUri(mContext, uri);
+        DocumentFile[] files = documentFile.listFiles();
+        for (DocumentFile file : files) {
+            if ("com.tencent.mm".equals(file.getName())) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    readCache(file.getUri());
+                }
+                break;
+            }
+        }
+    }
+
     public void readWxDownLoadDir() {
         documentFiles.clear();
         Uri uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata");
@@ -81,19 +96,7 @@ public class WeChatDocumentFileReader {
     }
 
 
-    private void readWxVideoCache2(Uri uri) {// com.tencent.mm->cache->
-        documentFiles.clear();
-        DocumentFile documentFile = DocumentFile.fromTreeUri(mContext, uri);
-        DocumentFile[] files = documentFile.listFiles();
-        for (DocumentFile file : files) {
-            if ("com.tencent.mm".equals(file.getName())) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    readCache(file.getUri());
-                }
-                break;
-            }
-        }
-    }
+
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
