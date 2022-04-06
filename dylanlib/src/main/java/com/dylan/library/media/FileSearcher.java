@@ -102,7 +102,7 @@ public class FileSearcher {
                             }
                         }
                     } else {
-                        if (path.contains("/Android/data/com.tencent.mm/MicroMsg/Download")) {
+                        if (Build.VERSION.SDK_INT>=30&&path.contains("/Android/data/com.tencent.mm/MicroMsg/Download")) {
                             WeChatDocumentFileReader fileReader = new WeChatDocumentFileReader(context);
                             fileReader.readWxDownLoadDir();
                             List<DocumentFile> documentFiles = fileReader.getDocumentFiles();
