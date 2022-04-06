@@ -1,6 +1,12 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
+V5.9.0
+1.新增FileSearcher,集成Android 11 Storage Access 权限获取，读取微信缓存
+2.新增 WeChatDocumentFileReader  读取 微信中DownLoad文件夹下的文件
+
+
+
 V5.8.0 ---->2022.4.5
 
 1.EditTextUtils insert(EditText editText,CharSequence text)在光标位置插入文本
