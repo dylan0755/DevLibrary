@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="280dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+
+    <RelativeLayout
+        android:layout_width="280dp"
+        android:layout_height="365dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/dl_icon_android_r_auth" />
+
+
+        <TextView
+            android:layout_width="90dp"
+            android:layout_height="25dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="21dp"
+            android:text="授权申请"
+            android:textColor="#ff2d2d2d"
+            android:textSize="18sp" />
+
+
+        <com.dylan.library.widget.shape.ShapeTextView
+            android:id="@+id/tvIKnow"
+            android:layout_width="230dp"
+            android:layout_height="36dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="16dp"
+            android:gravity="center"
+            android:text="知道啦"
+            android:textColor="#FF2D2D2D"
+            app:radius="18dp"
+            app:solidColor="#FFFADB22" />
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:id="@+id/ivClose"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_gravity="center"
+        android:src="@drawable/dl_close_white"
+        android:layout_marginTop="20dp"
+        />
+</LinearLayout>

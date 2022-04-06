@@ -4,12 +4,18 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.UriPermission;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.provider.DocumentsContract;
 import android.provider.Settings;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.view.View;
+
+import com.dylan.library.R;
 
 import java.lang.reflect.Method;
 
@@ -18,7 +24,7 @@ import java.lang.reflect.Method;
  */
 
 public class PermissionUtils {
-
+    public static final int REQUEST_PER_CAMERA =100;
     public static final int REQUEST_PER_CAMERA_WRITE =101;
     public static final int REQUEST_PER_EXTERNAL_STORAGE =102;
     public static final int REQUEST_PER_DRAW_OVER_LAY=103;
@@ -55,6 +61,18 @@ public class PermissionUtils {
         }
     }
 
+    public static boolean hasCameraPermission(Activity activity) {
+        int hasCameraPerm = ContextCompat.checkSelfPermission(activity, Manifest.permission.CAMERA);
+        //权限还没有授予，需要在这里写申请权限的代码
+        if (hasCameraPerm != PackageManager.PERMISSION_GRANTED ) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+    public static boolean hasNotCameraPermission(Activity activity) {
+        return !hasCameraPermission(activity);
+    }
 
     public static boolean hasDrawOverlaysPermission(Context context){
         Boolean result = false;
@@ -87,7 +105,11 @@ public class PermissionUtils {
                 new String[]{Manifest.permission.CAMERA,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PER_CAMERA_WRITE);
     }
+    public static void requestCameraPerm(Activity activity){
+        ActivityCompat.requestPermissions(activity,
+                new String[]{Manifest.permission.CAMERA}, REQUEST_PER_CAMERA);
 
+    }
 
     public static void requestExternalStorage(Activity activity){
         ActivityCompat.requestPermissions(activity,
@@ -95,6 +117,21 @@ public class PermissionUtils {
                         Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PER_EXTERNAL_STORAGE);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static boolean isGrantAndroidData(Context context) {
+        for (UriPermission persistedUriPermission : context.getContentResolver().getPersistedUriPermissions()) {
+            if (persistedUriPermission.getUri().toString().
+                    equals("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata")) {
+                return true;
+            }
+        }
+        return false;
+    }
 
+
+    private void showAuthGuideDialog(){
+
+
+    }
 
 }
