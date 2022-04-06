@@ -45,7 +45,7 @@ public class WeChatDocumentFileReader {
         }
     }
 
-    private void readWxVideoCache2() {// com.tencent.mm->cache->
+    public void readWxVideoCache2() {// com.tencent.mm->cache->
         documentFiles.clear();
         Uri uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata");
         DocumentFile documentFile = DocumentFile.fromTreeUri(mContext, uri);
