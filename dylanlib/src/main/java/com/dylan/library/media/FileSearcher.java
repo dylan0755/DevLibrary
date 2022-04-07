@@ -73,6 +73,13 @@ public class FileSearcher {
         if (loadingDialog.getBackgroundView() != null && loadingDialog.getBackgroundView().getBackground() != null) {
             loadingDialog.getBackgroundView().getBackground().setAlpha(200);
         }
+        ThreadUtils.runOnMainThread(new Runnable() {
+            @Override
+            public void run() {
+                loadingDialog.show();
+            }
+        });
+
         final List<String> pathLists = new ArrayList<>();
         pathLists.add("");
         if (EmptyUtils.isNotEmpty(customScanDir)) {
