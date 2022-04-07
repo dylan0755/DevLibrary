@@ -3,13 +3,16 @@ package com.dylan.mylibrary.ui;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.provider.DocumentFile;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 
+import com.dylan.library.utils.DocumentFileReader;
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.thread.ThreadPools;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -81,13 +84,22 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
-//            ThreadPools.getInstance().fixedThreadPoolRun(new Runnable() {
-//                @Override
-//                public void run() {
-//
-//
-//                }
-//            });
+            ThreadPools.getInstance().fixedThreadPoolRun(new Runnable() {
+                @Override
+                public void run() {
+
+                    DocumentFileReader fileReader=new DocumentFileReader(DemoListActivity.this);
+                    try {
+                       List<DocumentFile> documentFiles=fileReader.getFileFromAndroidDataDirectory("/Android/data/com.tencent.mm/MicroMsg/Download");
+                       Logger.e(documentFiles);
+
+
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
 
     }
 

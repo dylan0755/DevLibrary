@@ -8,9 +8,6 @@ import android.provider.DocumentsContract;
 import android.support.annotation.RequiresApi;
 import android.support.v4.provider.DocumentFile;
 
-import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.Logger;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,13 +32,10 @@ public class DocumentFileReader {
         documentFiles.clear();
         Uri uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata");
         if (!dirPath.contains("Android/data"))throw new Exception("Invalid path, dir path format :  Android/data/xxxx");
-        String prefix="Android/data";
-        if (dirPath.startsWith(prefix)){
-            dirPath=dirPath.substring(prefix.length());
-        }
+        String prefix="Android/data/";
+        dirPath=dirPath.substring(dirPath.indexOf(prefix)+prefix.length());
         final String[] dirsName=dirPath.split("/");
         if (EmptyUtils.isEmpty(dirsName))return documentFiles;
-
         DocumentFile documentFile = DocumentFile.fromTreeUri(mContext, uri);
         DocumentFile[] files = documentFile.listFiles();
         for (DocumentFile file : files) {
@@ -50,7 +44,9 @@ public class DocumentFileReader {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     for (int i=1;i<dirsName.length;i++){
                         DocumentFile targetFile=findSubDir(lastStep.getUri(),dirsName[i]);
-                        if (targetFile==null)return documentFiles;
+                        if (targetFile==null){
+                            return documentFiles;
+                        }
                         lastStep=targetFile;
                         if (i==dirsName.length-1){
                             loadFile(lastStep.getUri());

@@ -111,9 +111,9 @@ public class FileSearcher {
                     } else {
                         if (Build.VERSION.SDK_INT>=30&&accessWeChatCache&&path.contains("/Android/data/com.tencent.mm/MicroMsg/Download")) {
                             DocumentFileReader fileReader = new DocumentFileReader(context);
-                            fileReader.readWxDownLoadDir();
-                            List<DocumentFile> documentFiles = fileReader.getDocumentFiles();
+                            List<DocumentFile> documentFiles;
                             try {
+                                documentFiles=fileReader.getFileFromAndroidDataDirectory(path);
                                 for (DocumentFile documentFile : documentFiles) {
                                     File originFile = FileUtils.getFileByUri(documentFile.getUri(), context);//微信
                                     boolean matchSuffix=false;
