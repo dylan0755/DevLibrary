@@ -8,6 +8,7 @@ import android.provider.DocumentsContract;
 import android.support.annotation.RequiresApi;
 import android.support.v4.provider.DocumentFile;
 
+import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
 import java.util.ArrayList;
@@ -19,15 +20,75 @@ import java.util.List;
  * Desc:
  */
 
-public class WeChatDocumentFileReader {
+public class DocumentFileReader {
 
     private Context mContext;
     private List<DocumentFile> documentFiles;
 
-    public WeChatDocumentFileReader(Context context) {
+    public DocumentFileReader(Context context) {
         mContext = context;
         documentFiles = new ArrayList<>();
     }
+
+
+    public List<DocumentFile> getFileFromAndroidDataDirectory (String dirPath) throws Exception {//从 指定文件夹加载路径
+        documentFiles.clear();
+        Uri uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata");
+        if (!dirPath.contains("Android/data"))throw new Exception("Invalid path, dir path format :  Android/data/xxxx");
+        String prefix="Android/data";
+        if (dirPath.startsWith(prefix)){
+            dirPath=dirPath.substring(prefix.length());
+        }
+        final String[] dirsName=dirPath.split("/");
+        if (EmptyUtils.isEmpty(dirsName))return documentFiles;
+
+        DocumentFile documentFile = DocumentFile.fromTreeUri(mContext, uri);
+        DocumentFile[] files = documentFile.listFiles();
+        for (DocumentFile file : files) {
+            if (dirsName[0].equals(file.getName())) {
+                DocumentFile lastStep=file;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    for (int i=1;i<dirsName.length;i++){
+                        DocumentFile targetFile=findSubDir(lastStep.getUri(),dirsName[i]);
+                        if (targetFile==null)return documentFiles;
+                        lastStep=targetFile;
+                        if (i==dirsName.length-1){
+                            loadFile(lastStep.getUri());
+                        }
+                    }
+                }
+                break;
+            }
+        }
+        return documentFiles;
+    }
+
+
+
+    //查找子目录
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    private DocumentFile findSubDir(Uri dirUri, String dirName) {
+        Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(dirUri, DocumentsContract.getDocumentId(dirUri));
+        Cursor cursor = mContext.getContentResolver().query(childrenUri, new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID}, null, null, null);
+        if (cursor != null) {
+            while (cursor.moveToNext()) {
+                String documentId = cursor.getString(0);
+                Uri uri = DocumentsContract.buildDocumentUriUsingTree(dirUri, documentId);
+                DocumentFile file = DocumentFile.fromSingleUri(mContext, uri);
+                if (dirName.equals(file.getName())) {
+                    cursor.close();
+                    return file;
+                }
+            }
+            cursor.close();
+        }
+        return null;
+    }
+
+
+
+
+
 
 
     public void readWxVideoCache() {// com.tencent.mm->MicroMsg->
@@ -43,9 +104,13 @@ public class WeChatDocumentFileReader {
                 break;
             }
         }
+
+        if (EmptyUtils.isEmpty(documentFiles)){
+            readWxVideoCache2();
+        }
     }
 
-    public void readWxVideoCache2() {// com.tencent.mm->cache->
+    private void readWxVideoCache2() {// com.tencent.mm->cache->
         documentFiles.clear();
         Uri uri = Uri.parse("content://com.android.externalstorage.documents/tree/primary%3AAndroid%2Fdata");
         DocumentFile documentFile = DocumentFile.fromTreeUri(mContext, uri);
@@ -225,7 +290,7 @@ public class WeChatDocumentFileReader {
                 DocumentFile f = DocumentFile.fromSingleUri(mContext, uri);
                 if ("video".equals(f.getName())) {
                     cursor.close();
-                    loadVideo(f.getUri());
+                    loadFile(f.getUri());
                     return;
                 }
             }
@@ -235,7 +300,7 @@ public class WeChatDocumentFileReader {
 
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void loadVideo(Uri dirUri) {
+    private void loadFile(Uri dirUri) {
         Uri childrenUri = DocumentsContract.buildChildDocumentsUriUsingTree(dirUri, DocumentsContract.getDocumentId(dirUri));
         Cursor cursor = mContext.getContentResolver().query(childrenUri, new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID}, null, null, null);
         if (cursor != null) {
@@ -255,4 +320,10 @@ public class WeChatDocumentFileReader {
     }
 
 
+
+
+    public interface OnDirScanListener{
+        void onFound(DocumentFile file);
+        void notFound();
+    }
 }

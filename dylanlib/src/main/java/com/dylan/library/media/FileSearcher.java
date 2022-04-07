@@ -13,7 +13,7 @@ import com.dylan.library.dialog.LoadingDialog;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.PermissionUtils;
-import com.dylan.library.utils.WeChatDocumentFileReader;
+import com.dylan.library.utils.DocumentFileReader;
 import com.dylan.library.utils.thread.ThreadPools;
 import com.dylan.library.utils.thread.ThreadUtils;
 
@@ -110,7 +110,7 @@ public class FileSearcher {
                         }
                     } else {
                         if (Build.VERSION.SDK_INT>=30&&accessWeChatCache&&path.contains("/Android/data/com.tencent.mm/MicroMsg/Download")) {
-                            WeChatDocumentFileReader fileReader = new WeChatDocumentFileReader(context);
+                            DocumentFileReader fileReader = new DocumentFileReader(context);
                             fileReader.readWxDownLoadDir();
                             List<DocumentFile> documentFiles = fileReader.getDocumentFiles();
                             try {
