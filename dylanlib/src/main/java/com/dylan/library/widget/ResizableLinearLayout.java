@@ -49,7 +49,12 @@ public class ResizableLinearLayout extends LinearLayout {
          }
         if (!isShowing&&h< mHeight-200){
             if (observerListener!=null)observerListener.onShow();
-            isShowing=true;
+            postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    isShowing=true;
+                }
+            },300);
         }else{
             if (isShowing){
                 postDelayed(new Runnable() {
