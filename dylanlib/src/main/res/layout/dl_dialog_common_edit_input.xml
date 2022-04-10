@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dylan.library.widget.ResizableLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dylan.library.widget.ObserveKeyBoardRootLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/resizeLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,8 +15,9 @@
     <LinearLayout
         android:id="@+id/llRoot"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:background="#ffffff"
+        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <com.dylan.library.widget.KeyPreImeEditText
@@ -23,21 +25,27 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="#0000"
-            android:imeOptions="flagNoExtractUi"
-            android:maxLines="1"
+            android:background="@drawable/dl_shape_dialog_input"
             android:paddingLeft="16dp"
             android:paddingRight="16dp"
             android:textColor="#222222"
             android:textColorHint="#999999"
-            android:textSize="15sp" />
+            android:textSize="15sp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="6dp"/>
 
         <Button
             android:id="@+id/btnOk"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="#0000"
-            android:text="确定"
-            android:textColor="#222222" />
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@mipmap/icon_live_widget_input_ok"
+            android:textColor="#222222"
+            android:layout_marginRight="8dp"
+            />
+
+
+
     </LinearLayout>
-</com.dylan.library.widget.ResizableLinearLayout>
+</com.dylan.library.widget.ObserveKeyBoardRootLayout>

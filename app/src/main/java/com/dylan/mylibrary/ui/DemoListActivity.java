@@ -52,7 +52,7 @@ public class DemoListActivity extends AppCompatActivity {
             "贝塞尔曲线", "DashLineView", "InputPasswordDialog", "CountDownCircleView",
             "ProgressWebActivity", "VideoPlayerGesture", "拖拽回弹组件", "BitmapHelper",
             "ShadowLayout", "ShapeView", "文字图片","ArcMenu", "PopWindow", "ProgressBarActivity",
-            "NoExtraUiEditDemo", "singleClickDemo", "DragMapView", "SmsCodeCounter",
+            "EditTouchDialogInput", "singleClickDemo", "DragMapView", "SmsCodeCounter",
             "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
             "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView","SquareProgress方形进度条",
             "Sonic变音","M3U8视频下载","网页视频嗅探下载","PostBanner"};
@@ -69,7 +69,7 @@ public class DemoListActivity extends AppCompatActivity {
             ProgressWebViewActivity.class, VideoPlayerGestureActivity.class, ReboundActivity.class,
             BitmapHelperActivity.class, ShadowLayoutActivity.class, CustomShapeViewActivity.class,TextDrawableActivity.class,
             ArcMenuActivity.class, PopWindowDemoActivity.class, ProgressBarActivity.class,
-            NoExtraUiEditTextDemoActivity.class, SingleClickTestActivity.class, DragMapViewDemoActivity.class,
+            EditTouchDialogInputDemoActivity.class, SingleClickTestActivity.class, DragMapViewDemoActivity.class,
             SmsCodeCounterActivity.class, OpenglDemoActivity.class, SwitchViewActivity.class,
             VerticalSeekBarActivity.class, MediumTextViewActivity.class, CircleRingProgressViewActivity.class,
             ToastUtilsActivity.class, ColorShadesActivity.class, ExpandableTextViewActivity.class,

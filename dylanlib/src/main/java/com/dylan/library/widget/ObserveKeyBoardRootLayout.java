@@ -7,40 +7,33 @@ import android.widget.LinearLayout;
 
 import com.dylan.library.R;
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.Logger;
 
 /**
  * Author: Administrator
  * Date: 2020/9/17
- * Desc:
+ * Desc: 不管Activity还是Dialog 使用要配置：getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+ *
  */
-public class ResizableLinearLayout extends LinearLayout {
+public class ObserveKeyBoardRootLayout extends LinearLayout {
     private boolean isShowing;
     private int mHeight;
     private int heightOnKeyBoard;
-    public ResizableLinearLayout(Context context) {
+    public ObserveKeyBoardRootLayout(Context context) {
         super(context);
     }
 
-    public ResizableLinearLayout(Context context, AttributeSet attrs) {
+    public ObserveKeyBoardRootLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
         mHeight= ScreenUtils.getScreenHeight(context);
     }
 
-    public ResizableLinearLayout(Context context, AttributeSet attrs, int defStyleAttr) {
+    public ObserveKeyBoardRootLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         mHeight= ScreenUtils.getScreenHeight(context);
     }
 
-    @Override
-    protected void onFinishInflate() {
-        super.onFinishInflate();
-        findViewById(R.id.viewMask).setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (observerListener!=null)observerListener.onTouchOutSide();
-            }
-        });
-    }
+
 
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
@@ -78,7 +71,6 @@ public class ResizableLinearLayout extends LinearLayout {
     public interface OnKeyBoardObserverListener{
         void onShow();
         void onHide();
-        void onTouchOutSide();
     }
 
     public void setOnKeyBoardObserverListener(OnKeyBoardObserverListener listener){

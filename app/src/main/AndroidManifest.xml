@@ -167,8 +167,8 @@
          <activity android:name=".ui.popwindow.PopWindowDemoActivity"/>
 
           <activity android:name=".ui.ProgressBarActivity"/>
-        <activity android:name=".ui.NoExtraUiEditTextDemoActivity"
-            android:windowSoftInputMode="adjustNothing"/>
+        <activity android:name=".ui.EditTouchDialogInputDemoActivity"
+            android:windowSoftInputMode="adjustResize|stateAlwaysHidden"/>
 
         <activity android:name=".ui.SingleClickTestActivity"/>
         <activity android:name=".ui.SingleClickResult2Activity"/>

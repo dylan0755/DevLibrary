@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dylan.library.widget.ObserveKeyBoardRootLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="bottom">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textColor="#2d2d2d"
+        android:layout_marginTop="20dp"
+        android:text="不管Activity还是Dialog 使用要配置：getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE | WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);"/>
+    
+    
+    <EditText
+        android:id="@+id/edtDialog"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="对话框弹出输入"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+       />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:hint="根部局软键盘监听"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginTop="30dp"/>
+</com.dylan.library.widget.ObserveKeyBoardRootLayout>
