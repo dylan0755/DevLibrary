@@ -5,6 +5,11 @@ V5.9.0
 1.新增FileSearcher,集成Android 11 Storage Access 权限获取，读取微信缓存
 2.新增 DocumentFileReader Android 11 读取其它应用的目录，如微信中DownLoad文件夹目录
 3.新增 MediumEditText
+4.ResizableLayout  更名为ObserveKeyBoardRootLayout 监听软键盘弹出与关闭
+5.删除NoExtraUiDialog, 新增 EditTouchDialogInputHelper  在页面点击输入框弹出对话框，在对话框中输入
+
+
+
 
 
 V5.8.0 ---->2022.4.5
