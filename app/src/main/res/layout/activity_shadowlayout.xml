@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <com.dylan.library.widget.ShadowLayout
+    <com.dylan.library.widget.shape.ShadowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -24,9 +24,9 @@
             android:textSize="16sp"
             android:textColor="#333333"
             android:gravity="center"/>
-    </com.dylan.library.widget.ShadowLayout>
+    </com.dylan.library.widget.shape.ShadowLayout>
 
-    <com.dylan.library.widget.ShadowLayout
+    <com.dylan.library.widget.shape.ShadowLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
@@ -45,7 +45,7 @@
            android:textSize="16sp"
            android:textColor="#333333"
            android:gravity="center"/>
-    </com.dylan.library.widget.ShadowLayout>
+    </com.dylan.library.widget.shape.ShadowLayout>
 
 
 
