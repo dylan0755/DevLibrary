@@ -46,4 +46,26 @@
            android:textColor="#333333"
            android:gravity="center"/>
     </com.dylan.library.widget.ShadowLayout>
+
+
+
+    <LinearLayout
+        android:id="@+id/layout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:text="测试阴影"
+            android:textSize="16sp"
+            android:textColor="#333333"
+            android:gravity="center"/>
+    </LinearLayout>
+
+
 </LinearLayout>
