@@ -10,12 +10,16 @@ import com.dylan.library.io.FileUtils;
 import com.dylan.library.net.UrlUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.MultiDownloader;
+import com.dylan.library.utils.ToastUtils;
+import com.dylan.library.utils.thread.ThreadUtils;
 
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.List;
 
 
 /**
@@ -85,6 +89,34 @@ public class BitmapDownloader {
         }).start();
 
 
+    }
+
+
+
+    public void downloadMultiImages(Context context,String saveDirPath,final List<String> imgUrls,final MultiDownloader.DownloadStateListener listener){
+        new MultiDownloader(context,saveDirPath, imgUrls, new MultiDownloader.DownloadStateListener() {
+            @Override
+            public void onFinish(final List<String> cachePathList) {
+                ThreadUtils.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (listener!=null)listener.onFinish(cachePathList);
+                    }
+                });
+
+            }
+
+            @Override
+            public void onFailed() {
+                ThreadUtils.runOnMainThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (listener!=null)listener.onFailed();
+                    }
+                });
+
+            }
+        }).startDownload();
     }
 
 
