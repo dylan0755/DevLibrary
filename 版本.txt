@@ -7,7 +7,8 @@ V5.9.0
 3.新增 MediumEditText
 4.ResizableLayout  更名为ObserveKeyBoardRootLayout 监听软键盘弹出与关闭
 5.删除NoExtraUiDialog, 新增 EditTouchDialogInputHelper  在页面点击输入框弹出对话框，在对话框中输入
-
+6.新增MultiDownloader，下载多个文件，只有全部下载成功才回调成功，使用场景：多图片下载，
+  Api:downloadMultiImages(Context context,String ,final List<String> imgUrls, MultiDownloader.DownloadStateListener listener)
 
 
 
