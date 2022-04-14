@@ -10,7 +10,7 @@ V5.9.0
 6.新增MultiDownloader，下载多个文件，只有全部下载成功才回调成功，使用场景：多图片下载，
   Api:downloadMultiImages(Context context,String ,final List<String> imgUrls, MultiDownloader.DownloadStateListener listener)
 7.新增ShadowDrawable ,java 代码快速为View 设置阴影
-
+8.新增CenterCropVideoView;
 
 
 V5.8.0 ---->2022.4.5

@@ -199,6 +199,9 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
         <activity android:name=".ui.PosterBannerActivity"/>
         <activity android:name=".ui.LayoutInflateAdapterActivity"/>
+        <activity android:name=".ui.ClipVideoViewActivity"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreen"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
