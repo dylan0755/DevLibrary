@@ -8,10 +8,14 @@ import android.media.MediaPlayer;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.opengl.GLU;
+import android.opengl.GLUtils;
+import android.opengl.Matrix;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.Surface;
 
+import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
@@ -53,6 +57,7 @@ public class CenterCropVideoView extends GLSurfaceView {
     public CenterCropVideoView(Context context) {
         this(context, null);
     }
+
     /**
      * 构造函数
      */
@@ -162,23 +167,34 @@ public class CenterCropVideoView extends GLSurfaceView {
          */
         private static final int FLOAT_SIZE = 4;
         /**
-         * 定点坐标
+         * * 定点坐标
          */
-        private  float[] QUAD_COORDS = {
-                -1.0f, 1.0f, 0.0f,  // top left
-                -1.0f, -1.0f, 0.0f,  // bottom left
-                1.0f, -1.0f, 0.0f,  // bottom right
-                1.0f, 1.0f, 0.0f  // top right
-        };
+        private float[] QUAD_COORDS;
         /**
          * 纹理坐标
          */
-        private float[] quadTexCoords = {
-                0.0f, 1.0f,
-                1.0f, 1.0f,
-                1.0f, 0.0f,
-                0.0f, 0.0f
-        };
+        private float[] quadTexCoords;
+
+        public void resetVerticesAndTextCoords() {
+            QUAD_COORDS = new float[]{
+                    1.0f, 1.0f, 0,   // 3 top right
+                    -1.0f, 1.0f, 0,   // 2 top left
+                    -1.0f, -1.0f, 0,   // 0 bottom left
+                    1.0f, -1.0f, 0,    // 1 bottom right
+
+
+            };
+
+
+            quadTexCoords = new float[]{
+                    1f, 0f,  //bottom right
+                    0.0f, 0.0f, //bottom left
+                    0f, 1f,//top left
+                    1f, 1f, //Top right
+
+            };
+        }
+
         /**
          * index
          */
@@ -229,6 +245,7 @@ public class CenterCropVideoView extends GLSurfaceView {
          */
         public VideoRenderer(Context context) {
             this.context = context;
+            resetVerticesAndTextCoords();
         }
 
         @Override
@@ -245,7 +262,7 @@ public class CenterCropVideoView extends GLSurfaceView {
             GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
 
 
-            String base_vertex="attribute vec4 a_Position;\n" +
+            String base_vertex = "attribute vec4 a_Position;\n" +
                     "attribute vec2 a_TexCoordinate;\n" +
                     "\n" +
                     "varying vec2 v_TexCoord;\n" +
@@ -259,17 +276,16 @@ public class CenterCropVideoView extends GLSurfaceView {
                     loadGLShader(TAG, context, GLES20.GL_VERTEX_SHADER, base_vertex);
 
 
-
-           String base_fragment_oes="#extension GL_OES_EGL_image_external : require\n" +
-                   "precision mediump float;\n" +
-                   "\n" +
-                   "uniform samplerExternalOES u_Texture;\n" +
-                   "varying vec2 v_TexCoord;\n" +
-                   "\n" +
-                   "void main()\n" +
-                   "{\n" +
-                   "    gl_FragColor = texture2D(u_Texture, v_TexCoord);\n" +
-                   "}\n";
+            String base_fragment_oes = "#extension GL_OES_EGL_image_external : require\n" +
+                    "precision mediump float;\n" +
+                    "\n" +
+                    "uniform samplerExternalOES u_Texture;\n" +
+                    "varying vec2 v_TexCoord;\n" +
+                    "\n" +
+                    "void main()\n" +
+                    "{\n" +
+                    "    gl_FragColor = texture2D(u_Texture, v_TexCoord);\n" +
+                    "}\n";
 
             int fragmentShader =
                     loadGLShader(
@@ -301,6 +317,12 @@ public class CenterCropVideoView extends GLSurfaceView {
                     }
                 }
             });
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mediaPlayer) {
+                    resetVerticesAndTextCoords();
+                }
+            });
             mediaPlayer.setSurface(surface);
             if (!"".equals(videoPath) && !mediaPlayer.isPlaying()) {
                 start(videoPath);
@@ -314,6 +336,31 @@ public class CenterCropVideoView extends GLSurfaceView {
             GLES20.glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
 
+            updateFloatData(width, height);
+
+
+        }
+
+        private void updateFloatData(float width, float height) {
+
+
+            int degrees = 0;
+            int videoWidth = 0, videoHeight = 0;
+            if (EmptyUtils.isNotEmpty(videoPath)) {
+                MediaMetadataRetriever retriever = new MediaMetadataRetriever();
+                retriever.setDataSource(videoPath);
+                degrees = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION));
+                videoWidth = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_WIDTH));
+                videoHeight = Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_HEIGHT));
+                if (degrees == 90) {
+                    int temp = videoHeight;
+                    videoHeight = videoWidth;
+                    videoWidth = temp;
+                }
+                Log.e(TAG, "degrees: " + degrees + " videoWidth=" + videoWidth + "  videoHeight=" + videoHeight);
+                retriever.release();
+            }
+
 
             quadVertices = ByteBuffer.allocateDirect(QUAD_COORDS.length * FLOAT_SIZE)
                     .order(ByteOrder.nativeOrder())
@@ -321,73 +368,25 @@ public class CenterCropVideoView extends GLSurfaceView {
             quadVertices.put(QUAD_COORDS);
             quadVertices.position(0);
 
-            float videoRatio = 16.0F / 9;
-            //Log.d(TAG, "width:" + width + "  height:" + height);
-            float viewRatio = ((float) width) / height;
-            //Log.d(TAG, "videoRatio:" + videoRatio + "  viewRatio:" + viewRatio);
-            int  degrees = 0;
-            if (EmptyUtils.isNotEmpty(videoPath)){
-                MediaMetadataRetriever retriever =new  MediaMetadataRetriever();
-                Logger.e(videoPath);
-                retriever.setDataSource(videoPath);
-                degrees= Integer.parseInt(retriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION));
-                //Log.e(TAG, "degrees: "+degrees );
-                retriever.release();
-            }
 
-
-
-            if (viewRatio < videoRatio) {
-                float s = (1 - (9 / 16.F * viewRatio)) / 2.0F;
-                float[] texCoord = {
-                        0.0f + s, 1.0f,
-                        1.0f - s, 1.0f,
-                        1.0f - s, 0.0f,
-                        0.0f + s, 0.0f
-                };
-                //旋转
-                texCoord=rotate270(texCoord);
-                if (degrees==90){
-                    texCoord=rotate90(texCoord);
-                }
-                Log.d(TAG, Arrays.toString(texCoord));
-                quadTexCoord = ByteBuffer.allocateDirect(texCoord.length * FLOAT_SIZE)
-                        .order(ByteOrder.nativeOrder())
-                        .asFloatBuffer();
-                quadTexCoord.put(texCoord);
-                quadTexCoord.position(0);
-            } else if (viewRatio > videoRatio) {
-                float s = (1 - (16 / (9 * viewRatio))) / 2.0F;
-                float[] texCoord = {
-                        0.0f, 1.0f - s,
-                        1.0f, 1.0f - s,
-                        1.0f, 0.0f + s,
-                        0.0f, 0.0f + s
-                };
-
-                //旋转
-                texCoord=rotate270(texCoord);
-                if (degrees==90){
-                    texCoord=rotate90(texCoord);
-                }
-                Log.d(TAG, Arrays.toString(texCoord));
-                quadTexCoord = ByteBuffer.allocateDirect(texCoord.length * FLOAT_SIZE)
-                        .order(ByteOrder.nativeOrder())
-                        .asFloatBuffer();
-                quadTexCoord.put(texCoord);
-                quadTexCoord.position(0);
+            if (degrees == 90) {
+                quadTexCoords = rotate90(quadTexCoords);
+                //纹理裁剪
+                //quadTexCoords = centerCropTextCoords(quadTexCoords, width, height, videoWidth, videoHeight);
+            }else if (degrees==180){
+                quadTexCoords = rotate180(quadTexCoords);
+            } else if (degrees == 270) {
+                quadTexCoords = rotate270(quadTexCoords);
             } else {
-                //旋转
-                quadTexCoords= rotate270(quadTexCoords);
-                if (degrees==90){
-                    quadTexCoords=rotate90(quadTexCoords);
-                }
-                quadTexCoord = ByteBuffer.allocateDirect(quadTexCoords.length * FLOAT_SIZE)
-                        .order(ByteOrder.nativeOrder())
-                        .asFloatBuffer();
-                quadTexCoord.put(quadTexCoords);
-                quadTexCoord.position(0);
+                //纹理裁剪
+                quadTexCoords = centerCropTextCoords(quadTexCoords, width, height, videoWidth, videoHeight);
             }
+
+            quadTexCoord = ByteBuffer.allocateDirect(quadTexCoords.length * FLOAT_SIZE)
+                    .order(ByteOrder.nativeOrder())
+                    .asFloatBuffer();
+            quadTexCoord.put(quadTexCoords);
+            quadTexCoord.position(0);
 
 
             shortBuffer = ByteBuffer.allocateDirect(index.length * 2)
@@ -395,9 +394,36 @@ public class CenterCropVideoView extends GLSurfaceView {
                     .asShortBuffer();
             shortBuffer.put(index);
             shortBuffer.position(0);
+            resetVerticesAndTextCoords();
 
 
         }
+
+        public float[] centerCropTextCoords(float[] texCoords, float viewWidth, float viewHeight, float videoWidth, float videoHeight) {
+            float videoRatio = videoWidth / videoHeight;
+            float viewRatio = viewWidth / viewHeight;
+
+            if (viewRatio < videoRatio) {
+                float s = (1 - (videoHeight / videoWidth * viewRatio)) / 2.0F;
+                return new float[]{
+                        texCoords[0] - s, 0f,
+                        texCoords[2] + s, 0f,
+                        texCoords[4] + s, 1f,
+                        texCoords[6] - s, 1f};
+
+
+            } else if (viewRatio > videoRatio) {
+                float s = (1 - (videoWidth / (videoHeight * viewRatio))) / 2.0F;
+                return new float[]{
+                        1f, texCoords[1] + s,
+                        0f, texCoords[3] + s,
+                        0f, texCoords[5] - s,
+                        1f, texCoords[7] - s};
+            }
+
+            return texCoords;
+        }
+
 
         @Override
         public void onDrawFrame(GL10 gl) {
@@ -430,30 +456,37 @@ public class CenterCropVideoView extends GLSurfaceView {
         }
     }
 
-    private float[] rotate90(float[] quadTexCoords){
-        //旋转
-        quadTexCoords=new float[]{ quadTexCoords[2], quadTexCoords[3],
-                quadTexCoords[4], quadTexCoords[5],
-                quadTexCoords[6], quadTexCoords[7],
-                quadTexCoords[0], quadTexCoords[1]};
+    private float[] rotate90(float[] quadTexCoords) {
+        quadTexCoords = new float[]{
+                quadTexCoords[2], quadTexCoords[3], //bottom left
+                quadTexCoords[4], quadTexCoords[5],//top left
+                quadTexCoords[6], quadTexCoords[7], //Top right
+                quadTexCoords[0], quadTexCoords[1],  //bottom right
+        };
         return quadTexCoords;
+
     }
 
-    private float[] rotate180(float[] quadTexCoords){
-        //旋转
-        quadTexCoords=new float[]{ quadTexCoords[4], quadTexCoords[5],
-                quadTexCoords[6], quadTexCoords[7],
-                quadTexCoords[0], quadTexCoords[1],
-                quadTexCoords[2], quadTexCoords[3]};
+    private float[] rotate180(float[] quadTexCoords) {
+        quadTexCoords = new float[]{
+                quadTexCoords[4], quadTexCoords[5],//top left
+                quadTexCoords[6], quadTexCoords[7], //Top right
+                quadTexCoords[0], quadTexCoords[1],  //bottom right
+                quadTexCoords[2], quadTexCoords[3], //bottom left
+        };
         return quadTexCoords;
+
     }
 
-    private float[] rotate270(float[] quadTexCoords){
-        //旋转
-        quadTexCoords=new float[]{ quadTexCoords[6], quadTexCoords[7],
-                quadTexCoords[0], quadTexCoords[1],
-                quadTexCoords[2], quadTexCoords[3],
-                quadTexCoords[4], quadTexCoords[5]};
+
+    private float[] rotate270(float[] quadTexCoords) {
+        quadTexCoords = new float[]{
+                quadTexCoords[6], quadTexCoords[7], //Top right
+                quadTexCoords[0], quadTexCoords[1],  //bottom right
+                quadTexCoords[2], quadTexCoords[3], //bottom left
+                quadTexCoords[4], quadTexCoords[5],//top left
+
+        };
         return quadTexCoords;
     }
 
@@ -479,6 +512,7 @@ public class CenterCropVideoView extends GLSurfaceView {
 
         return shader;
     }
+
     /**
      * Checks if we've had an error inside of OpenGL ES, and if so what that error is.
      *
