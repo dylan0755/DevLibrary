@@ -7,6 +7,8 @@ import android.graphics.Paint;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.dylan.library.utils.DensityUtils;
+
 /**
  * Created by admin on 2017/6/17
  */
@@ -31,7 +33,7 @@ public class WebProgressView extends View {
     @Override
     protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
         super.onLayout(changed, left, top, right, bottom);
-        height=getMeasuredHeight();
+        height=getMeasuredHeight()>100? DensityUtils.dp2px(getContext(),2):getMeasuredHeight();
         paint.setStrokeWidth(height);
     }
 
