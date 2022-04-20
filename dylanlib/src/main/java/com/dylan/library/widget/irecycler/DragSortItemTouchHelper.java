@@ -1,4 +1,4 @@
-package com.dylan.library.callback;
+package com.dylan.library.widget.irecycler;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -8,7 +8,6 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 
-import com.dylan.library.adapter.BaseRecyclerAdapter;
 
 /**
  * Author: Dylan
@@ -16,36 +15,54 @@ import com.dylan.library.adapter.BaseRecyclerAdapter;
  * Desc:
  */
 
-/**
- * ItemTouchHelper  mItemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(this,mAdapter));
- * mItemTouchHelper.attachToRecyclerView(recyclerView);
- */
-public class LongPressDragItemTouchHelper extends ItemTouchHelper.Callback {
-    private BaseRecyclerAdapter mAdapter;
-    private final Vibrator mVibrator;
+public class DragSortItemTouchHelper extends ItemTouchHelper.Callback {
+    private RecyclerView.Adapter mAdapter;
+    private  Vibrator mVibrator;
     private Drawable backgroundDrawable;
     private int pressColor=Color.LTGRAY;
     private OnAfterDragCallBack mDragCallBack;
+    private int excludeAdapterPosition=-10;
+    private int dragOrientation=ItemTouchHelper.UP | ItemTouchHelper.DOWN|ItemTouchHelper.LEFT|ItemTouchHelper.RIGHT;
+    private ItemTouchHelper mItemTouchHelper;
 
-    public LongPressDragItemTouchHelper(Context context, BaseRecyclerAdapter adapter) {
-        mAdapter = adapter;
-        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);//震动
+    public DragSortItemTouchHelper() {
+
     }
-    public LongPressDragItemTouchHelper(Context context, int pressColor, BaseRecyclerAdapter adapter) {
-        this.pressColor=pressColor;
+
+    public void attachToRecyclerView(RecyclerView recyclerView, RecyclerView.Adapter adapter){
         mAdapter = adapter;
-        mVibrator = (Vibrator) context.getSystemService(Context.VIBRATOR_SERVICE);//震动
+        mVibrator = (Vibrator) recyclerView.getContext().getSystemService(Context.VIBRATOR_SERVICE);//震动
+        mItemTouchHelper=new ItemTouchHelper(this);
+        mItemTouchHelper.attachToRecyclerView(recyclerView);
+    }
+
+
+
+    public void setPressColor(int pressColor) {
+        this.pressColor = pressColor;
+    }
+
+    public void setExcludeAdapterPosition(int excludeAdapterPosition) {
+        this.excludeAdapterPosition = excludeAdapterPosition;
+    }
+
+    public void setDragOrientation(int dragOrientation) {
+        this.dragOrientation = dragOrientation;
     }
 
     @Override
     public int getMovementFlags(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder) {
-        int dragFlags = ItemTouchHelper.UP | ItemTouchHelper.DOWN;
-        return makeMovementFlags(dragFlags, 0);
+        int position=viewHolder.getAdapterPosition();
+        if(position==excludeAdapterPosition){
+            return 0;   //这里模拟，第一个位置不允许拖动
+        }
+        return makeMovementFlags(dragOrientation, 0);
     }
 
     @Override
     public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-        mAdapter.onItemMove(viewHolder.getAdapterPosition(), viewHolder1.getAdapterPosition());
+        if (viewHolder1.getAdapterPosition()==excludeAdapterPosition)return false;
+        mAdapter.notifyItemMoved(viewHolder.getAdapterPosition(), viewHolder1.getAdapterPosition());
         return false;
     }
 
@@ -93,6 +110,7 @@ public class LongPressDragItemTouchHelper extends ItemTouchHelper.Callback {
 
 
 
+
     public interface OnAfterDragCallBack{
         void afterDrag();
     }
@@ -100,5 +118,12 @@ public class LongPressDragItemTouchHelper extends ItemTouchHelper.Callback {
 
     public void setOnAfterDragCallBack(OnAfterDragCallBack callBack){
         mDragCallBack=callBack;
+    }
+
+
+
+    public static class Builder{
+
+
     }
 }

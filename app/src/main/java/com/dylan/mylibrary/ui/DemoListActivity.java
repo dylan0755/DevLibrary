@@ -61,7 +61,7 @@ public class DemoListActivity extends AppCompatActivity {
             "EditTouchDialogInput", "singleClickDemo", "DragMapView", "SmsCodeCounter",
             "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
             "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView", "SquareProgress方形进度条",
-            "Sonic变音", "M3U8视频下载", "网页视频嗅探下载", "PostBanner","ClipVideoView"};
+            "Sonic变音", "M3U8视频下载", "网页视频嗅探下载", "PostBanner","ClipVideoView","SortDragItemTouchHelper"};
     private Class[] classes = {ApkSignListActivity.class, RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -80,7 +80,8 @@ public class DemoListActivity extends AppCompatActivity {
             VerticalSeekBarActivity.class, MediumTextViewActivity.class, CircleRingProgressViewActivity.class,
             ToastUtilsActivity.class, ColorShadesActivity.class, ExpandableTextViewActivity.class,
             AutoSplitTextViewActivity.class, SquareProgressViewActivity.class, SonicTestActivity.class,
-            M3u8DownLoadActivity.class, WebVideoGrabActivity.class, PosterBannerActivity.class,ClipVideoViewActivity.class};
+            M3u8DownLoadActivity.class, WebVideoGrabActivity.class, PosterBannerActivity.class,ClipVideoViewActivity.class,
+            SortDragItemTouchHelperActivity.class};
 
 
     @Override

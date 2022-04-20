@@ -202,6 +202,7 @@
         <activity android:name=".ui.ClipVideoViewActivity"
             android:screenOrientation="landscape"
             android:theme="@style/FullScreen"/>
+        <activity android:name=".ui.SortDragItemTouchHelperActivity"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
