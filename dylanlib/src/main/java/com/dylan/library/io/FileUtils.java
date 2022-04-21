@@ -502,7 +502,7 @@ public class FileUtils {
     }
 
 
-    public static File getFileByUri(Uri uri, Context context) {
+    public static File getFileByUri(Context context,Uri uri) {
         String filePath=null;
         try {
             filePath= getPathByUri4kitkat(context, uri);
