@@ -109,7 +109,7 @@ public class SonicTestActivity extends AppCompatActivity {
                 if (selectedVideo == null) {
                     return;
                 }
-                final File file = FileUtils.getFileByUri(selectedVideo, this);
+                final File file = FileUtils.getFileByUri( this,selectedVideo);
                 if (file == null) {
                     ToastUtils.show("找不到视频文件");
                     return;

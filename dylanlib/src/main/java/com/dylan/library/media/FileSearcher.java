@@ -115,7 +115,7 @@ public class FileSearcher {
                             try {
                                 documentFiles=fileReader.getFileFromAndroidDataDirectory(path);
                                 for (DocumentFile documentFile : documentFiles) {
-                                    File originFile = FileUtils.getFileByUri(documentFile.getUri(), context);//微信
+                                    File originFile = FileUtils.getFileByUri(context,documentFile.getUri());//微信
                                     boolean matchSuffix=false;
                                     for (String suffix : suffixs) {
                                         if (originFile==null||!originFile.getAbsolutePath().endsWith(suffix)) {

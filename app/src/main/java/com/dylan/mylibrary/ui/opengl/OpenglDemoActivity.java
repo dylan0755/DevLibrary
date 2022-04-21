@@ -452,7 +452,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (100 == requestCode && data != null && data.getData() != null) {
-            File selectFile = FileUtils.getFileByUri(data.getData(), this);
+            File selectFile = FileUtils.getFileByUri( this,data.getData());
             if (selectFile == null) return;
             playHelper.playVideo(selectFile.getAbsolutePath());
         }

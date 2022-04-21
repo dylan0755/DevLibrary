@@ -170,7 +170,7 @@ public class PhotoSelector {
             if (selectUri != null) {
                 if (!crop && operateOriginal) {//操作原图 ,直接返回原图路径，只能是在不裁剪的前提下
                     if (pickerCallBack != null) {
-                        File file=FileUtils.getFileByUri(selectUri, pickerCallBack.getActivityContext());
+                        File file=FileUtils.getFileByUri(pickerCallBack.getActivityContext(),selectUri);
                         if (file!=null) pickerCallBack.onPickerResult(file,mTag==null?"":mTag);
 
                     }

@@ -52,7 +52,7 @@ public class ClipVideoViewActivity extends AppCompatActivity {
         if (requestCode == 100) {
             Uri uri = data.getData();
             if (uri == null) return ;
-            File file = FileUtils.getFileByUri(uri,this);
+            File file = FileUtils.getFileByUri(this,uri);
             if (file == null) return ;
             videoView.start(file.getAbsolutePath());
         }
