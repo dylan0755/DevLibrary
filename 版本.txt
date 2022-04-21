@@ -12,6 +12,11 @@ V5.9.0
 7.新增ShadowDrawable ,java 代码快速为View 设置阴影
 8.新增CenterCropVideoView;
 9.新增DragSortItemTouchHelper  可设置某个Item不允许拖动，一般场景是第0个不允许拖动,剔除LongPressDragItemHelper
+10.IntentUtils getChooseVideoIntent  getChooseImageIntent 默认采用ACTION_PICK
+
+
+
+
 
 
 V5.8.0 ---->2022.4.5

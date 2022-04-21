@@ -210,7 +210,13 @@ public class IntentUtils {
     public static Intent getChooseVideoIntent(){
         Intent intent = new Intent();
         intent.setType("video/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_PICK);
+        return intent;
+    }
+    public static Intent getChooseImageIntent(){
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_PICK);
         return intent;
     }
 
