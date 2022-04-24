@@ -160,10 +160,10 @@ public class FileSearcher {
                         Collections.sort(beanList, new Comparator<File>() {
                             @Override
                             public int compare(File o1, File o2) {
-                                if (o1.lastModified() > o2.lastModified()) {
-                                    return 1;
-                                } else {
-                                    return -1;
+                                try {
+                                    return Long.compare(o2.lastModified(), o1.lastModified());
+                                } catch (Exception var4) {
+                                    return 0;
                                 }
                             }
                         });
