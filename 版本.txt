@@ -14,7 +14,7 @@ V5.9.0
 9.新增DragSortItemTouchHelper  可设置某个Item不允许拖动，一般场景是第0个不允许拖动,剔除LongPressDragItemHelper
 10.IntentUtils getChooseVideoIntent  getChooseImageIntent 默认采用ACTION_PICK
 11.新增 PauseResumeLoopThread，控制线程的暂停和恢复
-
+12.新增 DanMuView 实现滚动，可根据业务需求继承DanMuView 自定义视图。
 
 
 

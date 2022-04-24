@@ -107,7 +107,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.dylan.mylibrary.ui.BulletinBoardActivity"
-            android:screenOrientation="landscape" />
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.dylan.mylibrary.ui.LocalPhotoSelectActivity"
             android:screenOrientation="portrait" />
