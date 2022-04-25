@@ -117,7 +117,7 @@ public class BulletinBoardActivity extends Activity {
                             @Override
                             public void run() {
                                   for (DanMuView danMuV:danMuViewList){
-                                      danMuV.resumeThread();
+                                      danMuV.restart();
                                   }
                             }
                         },1000);

@@ -17,6 +17,7 @@ import com.dylan.library.utils.thread.PauseResumeLoopThread;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Dylan on 2017/5/2.
@@ -28,8 +29,8 @@ public abstract class DanMuView<T> extends FrameLayout {
     private static final int MSG_LAST_ONE=102;
 
     //30毫秒刷新3dp在视觉上移动比较平滑
-    private static final int INTERVAL_TIME = 30;//线程刷新间隔时间
-    private static int MOVE_SPACE ; //每次刷新时向左平移多长距离
+    private static final int INTERVAL_TIME = 20;//线程刷新间隔时间
+    private int MOVE_SPACE ; //每次刷新时向左平移多长距离
     private int heightMeasureSpec;
     private int parentWidth;
     private boolean isLoop=true;
@@ -61,7 +62,6 @@ public abstract class DanMuView<T> extends FrameLayout {
         super(context, attrs);
         createDanMu();
 
-        MOVE_SPACE = new ScaleUtil(context).toScaleSize(6);//在不同分辨率下移动速度一致
         insertList = new ArrayList<>();
         mHandler = new Handler(Looper.getMainLooper()) {
             @Override
@@ -117,7 +117,7 @@ public abstract class DanMuView<T> extends FrameLayout {
                 if (mDanMuClickListener!=null)mDanMuClickListener.onClick(messageQuenue.get(currentMessageIndex));
                 if (EmptyUtils.isNotEmpty(danMuViewList)){
                     for ( DanMuView danMuView:danMuViewList){
-                         danMuView.pause();
+                        danMuView.pause();
                     }
                 }
 
@@ -191,6 +191,8 @@ public abstract class DanMuView<T> extends FrameLayout {
      * 计算滚动的时间
      */
     public void caculateScrollTime() {
+        int space=6+(new Random().nextInt(4));
+        MOVE_SPACE = new ScaleUtil(getContext()).toScaleSize(space);//在不同分辨率下移动速度一致
         needTime = scrollRange / MOVE_SPACE * INTERVAL_TIME;
     }
 
@@ -237,7 +239,7 @@ public abstract class DanMuView<T> extends FrameLayout {
     public abstract void setData(T t);
 
 
-    public void resumeThread(){
+    public void restart(){
         if (mScrollThread!=null){
             mScrollThread.resumeThread();
         }

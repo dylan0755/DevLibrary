@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.dylan.library.widget.shape.ShapeLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="300dp"
+    android:layout_width="260dp"
     android:layout_height="64dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"

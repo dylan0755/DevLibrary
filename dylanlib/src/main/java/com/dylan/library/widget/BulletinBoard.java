@@ -83,7 +83,9 @@ public class BulletinBoard extends FrameLayout {
                     } else {
                         if (callback != null) callback.onFinish();
                     }
-
+                }else{
+                    scrollBy(MOVE_SPACE, 0);
+                    currentTime += INTERVAL_TIME;
                 }
 
             }
@@ -223,8 +225,7 @@ public class BulletinBoard extends FrameLayout {
                             mHandler.sendEmptyMessage(1001);
                         }
                     } else {
-                        scrollBy(MOVE_SPACE, 0);
-                        currentTime += INTERVAL_TIME;
+                        mHandler.sendEmptyMessage(1000);
                     }
                     Thread.sleep(INTERVAL_TIME);
                 }
