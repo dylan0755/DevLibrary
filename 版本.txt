@@ -15,7 +15,7 @@ V5.9.0
 10.IntentUtils getChooseVideoIntent  getChooseImageIntent 默认采用ACTION_PICK
 11.新增 PauseResumeLoopThread，控制线程的暂停和恢复
 12.新增 DanMuView 实现滚动，可根据业务需求继承DanMuView 自定义视图。
-
+13.BulletinBoard 优化，修复在子线程不能更新UI bug
 
 
 
