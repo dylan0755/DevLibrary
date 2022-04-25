@@ -15,6 +15,7 @@ public abstract class PauseResumeLoopThread extends Thread{
     public void resumeThread(){
         //线程恢复
         synchronized (lock) {
+            if (!pause)return;
             pause = false;
             lock.notifyAll();
         }
