@@ -27,9 +27,6 @@ public class FragmentSwitcher {
     private HashMap<Integer, Fragment> mReferenceMap = new HashMap<Integer, Fragment>();
 
 
-    public FragmentSwitcher() {
-
-    }
 
     /**
      * @param containerId 用来盛放Fragment的布局
@@ -45,6 +42,8 @@ public class FragmentSwitcher {
         inits(classes);
     }
 
+
+    //在Activity 中使用， Fragment 中不需要
     public int  restoreFragments(Bundle savedInstanceState) {
         if (mFragmentManager == null) return 0;
         int[] key_arr=savedInstanceState.getIntArray(FRAGMENT_KEY_ARRAY);
@@ -59,6 +58,8 @@ public class FragmentSwitcher {
         return currentIndex;
     }
 
+
+    //在Activity 中使用， Fragment 中不需要
     public void saveFragmentInstanceSate(Bundle outState) {
         if (mFragmentManager!= null && mReferenceMap.size() > 0) {
             int index = 0;
