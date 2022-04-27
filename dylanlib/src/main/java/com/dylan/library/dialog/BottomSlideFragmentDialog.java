@@ -19,22 +19,19 @@ import android.view.WindowManager;
  * Date: 2021/05/29
  * Desc:
  */
-public abstract class BottomSlideDialogFragment extends DialogFragment {
+public abstract class BottomSlideFragmentDialog extends DialogFragment {
     protected View contentView;
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setStyle(DialogFragment.STYLE_NORMAL,com.dylan.library.R.style.DLBottomSheetDialogStyle);
-
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        setWindowLayout(getDialog().getWindow());
+        configWindowAttribute(getDialog().getWindow());
     }
 
     @Nullable
@@ -59,7 +56,9 @@ public abstract class BottomSlideDialogFragment extends DialogFragment {
     public abstract @LayoutRes
     int getLayoutId();
 
-    public abstract  void  setWindowLayout(Window window);
+    public   void  configWindowAttribute(Window window){
+
+    }
 
     public abstract void onFragmentCreate();
 
@@ -82,7 +81,7 @@ public abstract class BottomSlideDialogFragment extends DialogFragment {
     }
 
 
-    protected void hasInitContentView(View view){
+    protected void hasInitContentView(View contentView){
 
     }
 
