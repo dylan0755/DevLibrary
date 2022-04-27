@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+    
+    
+    <com.dylan.library.widget.TouchDispatchLayout
+        android:id="@+id/dispatchLayout"
+        android:layout_width="225dp"
+        android:layout_height="280dp"
+        app:solidColor="#000000"
+        app:shapeAlpha="0.3">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/icon_brower_bottom"
+            android:layout_marginBottom="-0.5dp">
+
+
+            <ImageView
+                android:id="@+id/ivClose"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/icon_close_danmubrowser" />
+
+        </RelativeLayout>
+
+    </com.dylan.library.widget.TouchDispatchLayout>
+
+</LinearLayout>

@@ -204,6 +204,8 @@
             android:theme="@style/FullScreen"/>
         <activity android:name=".ui.SortDragItemTouchHelperActivity"/>
 
+        <activity android:name=".ui.TouchDispatchLayoutActivity"/>
+
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
         所以name,authorities,resource 里面的都不一样-->
