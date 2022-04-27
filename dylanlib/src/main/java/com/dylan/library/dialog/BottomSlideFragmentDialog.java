@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.dylan.library.screen.ScreenUtils;
+
 /**
  * Author: Dylan
  * Date: 2021/05/29
@@ -57,7 +59,7 @@ public abstract class BottomSlideFragmentDialog extends DialogFragment {
     int getLayoutId();
 
     public   void  configWindowAttribute(Window window){
-
+        window.setLayout(ScreenUtils.getScreenWidth(getContext()),-2);
     }
 
     public abstract void onFragmentCreate();
