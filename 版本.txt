@@ -2,6 +2,7 @@
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
 V5.9.0
+
 1.新增FileSearcher,集成Android 11 Storage Access 权限获取，读取微信缓存
 2.新增 DocumentFileReader Android 11 读取其它应用的目录，如微信中DownLoad文件夹目录
 3.新增 MediumEditText
@@ -18,6 +19,11 @@ V5.9.0
 13.BulletinBoard 优化，修复在子线程不能更新UI bug
 14.FragmentSwitcher 删除空构造器方法
 15.BottomSlideDialogFragment 更名为 BottomSlideFragmentDialog，对内部方法命名优化，使用的时候把它当做Dialog 的存在。
+
+
+
+
+
 
 V5.8.0 ---->2022.4.5
 
