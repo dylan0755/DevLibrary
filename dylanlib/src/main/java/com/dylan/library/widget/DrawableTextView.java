@@ -11,6 +11,8 @@ import android.util.AttributeSet;
 import android.widget.TextView;
 
 import com.dylan.library.R;
+import com.dylan.library.utils.CompatUtils;
+import com.dylan.library.utils.DensityUtils;
 
 
 /**
@@ -167,5 +169,38 @@ public class DrawableTextView extends TextView {
                 left,top,right,bottom);
     }
 
+
+    public void changDrawableLeftIcon(int resId,int drawablePadding,int width,int height){
+        Drawable drawable = CompatUtils.getDrawable(resId);
+        if (drawable==null)return;
+        drawable.setBounds(0, 0, DensityUtils.dp2px(getContext(), width), DensityUtils.dp2px(getContext(), height));
+        setCompoundDrawablePadding(DensityUtils.dp2px(getContext(), drawablePadding));
+        setCompoundDrawables(drawable,null , null, null);
+    }
+
+
+    public void changDrawableTopIcon(int resId,int drawablePadding,int width,int height){
+        Drawable drawable = CompatUtils.getDrawable(resId);
+        if (drawable==null)return;
+        drawable.setBounds(0, 0, DensityUtils.dp2px(getContext(), width), DensityUtils.dp2px(getContext(), height));
+        setCompoundDrawablePadding(DensityUtils.dp2px(getContext(), drawablePadding));
+        setCompoundDrawables(null, drawable, null, null);
+    }
+
+    public void changDrawableRightIcon(int resId,int drawablePadding,int width,int height){
+        Drawable drawable = CompatUtils.getDrawable(resId);
+        if (drawable==null)return;
+        drawable.setBounds(0, 0, DensityUtils.dp2px(getContext(), width), DensityUtils.dp2px(getContext(), height));
+        setCompoundDrawablePadding(DensityUtils.dp2px(getContext(), drawablePadding));
+        setCompoundDrawables(null,null , drawable, null);
+    }
+
+    public void changDrawableBottomIcon(int resId,int drawablePadding,int width,int height){
+        Drawable drawable = CompatUtils.getDrawable(resId);
+        if (drawable==null)return;
+        drawable.setBounds(0, 0, DensityUtils.dp2px(getContext(), width), DensityUtils.dp2px(getContext(), height));
+        setCompoundDrawablePadding(DensityUtils.dp2px(getContext(), drawablePadding));
+        setCompoundDrawables(null,null ,null , drawable);
+    }
 
 }
