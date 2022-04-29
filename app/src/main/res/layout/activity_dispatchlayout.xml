@@ -5,13 +5,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     
-    
+
+
     <com.dylan.library.widget.TouchDispatchLayout
         android:id="@+id/dispatchLayout"
         android:layout_width="225dp"
         android:layout_height="280dp"
         app:solidColor="#000000"
-        app:shapeAlpha="0.3">
+        app:shapeAlpha="0.3"
+        app:radius="8dp"
+        >
 
 
         <RelativeLayout
@@ -32,5 +35,6 @@
         </RelativeLayout>
 
     </com.dylan.library.widget.TouchDispatchLayout>
+
 
 </LinearLayout>

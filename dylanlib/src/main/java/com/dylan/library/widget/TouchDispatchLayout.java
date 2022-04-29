@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
+import com.dylan.library.utils.Logger;
 import com.dylan.library.widget.shape.ShapeRelativeLayout;
 
 /**
@@ -30,6 +31,7 @@ public class TouchDispatchLayout extends ShapeRelativeLayout {
 
     public TouchDispatchLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
+        setClickable(true);
         dispatchHelper=new TouchDispatchHelper(context,this);
         dispatchHelper.setDispatchTouchInterceptListener(new TouchDispatchHelper.OnDispatchTouchInterceptListener() {
             private int downX;
