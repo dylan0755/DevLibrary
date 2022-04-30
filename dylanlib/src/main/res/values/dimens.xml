@@ -16,4 +16,12 @@
 
     <dimen name="llSpeedWidth">140dp</dimen>
     <dimen name="llSpeedHeight">80dp</dimen>
+
+    <dimen name="dottedline_stroke_width">1dp</dimen>
+
+    <dimen name="dottedline_stroke_height">2dp</dimen>
+
+    <dimen name="dottedline_dashGap_width">3dp</dimen>
+
+    <dimen name="dottedline_dashWidth">10dp</dimen>
 </resources>

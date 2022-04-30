@@ -20,8 +20,8 @@ V5.9.0
 14.FragmentSwitcher 删除空构造器方法
 15.BottomSlideDialogFragment 更名为 BottomSlideFragmentDialog，对内部方法命名优化，使用的时候把它当做Dialog 的存在。
 16.DrawableTextView 在代码中更改drawable changDrawableLeftIcon changDrawableTopIcon changDrawableRightIcon  changDrawableBottomIcon
-
-
+17.ViewUtils 新增logViewLocationInfo, 打印View的位置，偏移和缩放 方便调试
+18.DragScaleLayout 和 DragScaleHelper  支持任意布局拖动和缩放
 
 
 

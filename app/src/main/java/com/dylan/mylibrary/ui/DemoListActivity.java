@@ -16,6 +16,7 @@ import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.MultiDownloader;
 import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.utils.thread.ThreadPools;
+import com.dylan.library.widget.DragSelectRangeView;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
@@ -62,7 +63,7 @@ public class DemoListActivity extends AppCompatActivity {
             "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
             "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView", "SquareProgress方形进度条",
             "Sonic变音", "M3U8视频下载", "网页视频嗅探下载", "PostBanner","ClipVideoView","SortDragItemTouchHelper",
-            "TouchDispatchActivity"};
+            "DragSelectRangeView","TouchDispatchActivity"};
     private Class[] classes = {ApkSignListActivity.class, RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -82,7 +83,7 @@ public class DemoListActivity extends AppCompatActivity {
             ToastUtilsActivity.class, ColorShadesActivity.class, ExpandableTextViewActivity.class,
             AutoSplitTextViewActivity.class, SquareProgressViewActivity.class, SonicTestActivity.class,
             M3u8DownLoadActivity.class, WebVideoGrabActivity.class, PosterBannerActivity.class,ClipVideoViewActivity.class,
-            SortDragItemTouchHelperActivity.class,TouchDispatchLayoutActivity.class};
+            SortDragItemTouchHelperActivity.class, DragSelectRangeViewActivity.class,TouchDispatchLayoutActivity.class};
 
 
     @Override
