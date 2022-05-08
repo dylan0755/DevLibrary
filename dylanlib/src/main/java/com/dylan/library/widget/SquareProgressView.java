@@ -121,13 +121,13 @@ public class SquareProgressView extends View {
 
 
 
-        Logger.i("onDraw: point1:" + point1X + "," + point1Y);
-        Logger.i("onDraw: point2:" + point2X + "," + point2Y);
-        Logger.i("onDraw: point3:" + point3X + "," + point3Y);
-        Logger.i("onDraw: point4:" + point4X + "," + point4Y);
+//        Logger.i("onDraw: point1:" + point1X + "," + point1Y);
+//        Logger.i("onDraw: point2:" + point2X + "," + point2Y);
+//        Logger.i("onDraw: point3:" + point3X + "," + point3Y);
+//        Logger.i("onDraw: point4:" + point4X + "," + point4Y);
         proWidth = point3X - point1X;
         proHeight = point3Y - point1Y;
-        Logger.i("onDraw: point5:" + proWidth + "," + proHeight);
+ //       Logger.i("onDraw: point5:" + proWidth + "," + proHeight);
         Path maxpath = new Path();//整个进度条的路径
         maxpath.moveTo(point1X, point1Y);
         maxpath.lineTo(point2X, point2Y);
@@ -175,7 +175,7 @@ public class SquareProgressView extends View {
             dotCY = point1Y;
             curPath.lineTo(point1X, point1Y);
         }
-        Logger.i(TAG, "onDraw: dotC:" + dotCX + "," + dotCY);
+     //   Logger.i(TAG, "onDraw: dotC:" + dotCX + "," + dotCY);
         canvas.drawPath(curPath, curPaint);
         if (canDisplayDot) {
             canvas.drawCircle(dotCX, dotCY, dotDiameter * 0.6f, dotPaint);

@@ -78,6 +78,8 @@ public class DragSelectRangeView extends View implements View.OnTouchListener {
     private Rect mRightRect;
     private Bitmap mBottomBmp;
     private Rect mBottomRect;
+    private static  int MIN_HEIGHT=75;
+    private static  int MIN_WIDTH=100;
 //    private boolean isMove = false;
 
     private OnMyTouchListener myTouchListener;
@@ -308,16 +310,16 @@ public class DragSelectRangeView extends View implements View.OnTouchListener {
     private void bottom(View v, int dy) {
         Log.d(TAG, "...bottom ..." + dy);
         height += dy;
-        if (height < 100) {
-            height = 100;
+        if (height < MIN_HEIGHT) {
+            height = MIN_HEIGHT;
         }
     }
 
     private void right(View v, int dx) {
         Log.d(TAG, "...right ..." + dx);
         width += dx;
-        if (width < 100) {
-            width = 100;
+        if (width < MIN_WIDTH) {
+            width = MIN_WIDTH;
         }
     }
 
@@ -332,5 +334,27 @@ public class DragSelectRangeView extends View implements View.OnTouchListener {
         setLayoutParams(mlp);
     }
 
+
+    public float getFinalSelectedX(){
+        return  (getX()+25);
+    }
+    public float getFinalSelectedY(){
+        return  (getY()+25);
+    }
+    public int getFinalSelectedWidth(){
+        return getWidth()-50;
+    }
+    public int getFinalSelectedHeight(){
+        return getHeight()-50;
+    }
+
+
+    public static void setMinWidth(int minWidth) {
+        MIN_WIDTH = minWidth;
+    }
+
+    public static void setMinHeight(int minHeight) {
+        MIN_HEIGHT = minHeight;
+    }
 
 }
