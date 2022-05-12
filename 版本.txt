@@ -3,7 +3,7 @@
 
 V6.0.0
 1.DragSelectRangeView 公开设置最小宽高方法
-
+2.DragScaleLayout dispatchTouchEvent(MotionEvent ev,int action) 返回action
 
 
 

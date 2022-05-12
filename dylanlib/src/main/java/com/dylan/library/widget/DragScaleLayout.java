@@ -53,7 +53,7 @@ public class DragScaleLayout extends ShapeRelativeLayout {
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (mOnDispatchTouchEventListener !=null) mOnDispatchTouchEventListener.dispatchTouchEvent(ev);
+        if (mOnDispatchTouchEventListener !=null) mOnDispatchTouchEventListener.dispatchTouchEvent(ev,(ev.getAction() & MotionEvent.ACTION_MASK));
         if (allowDragAndScale||allowDrag||allowScale){
             dispatchHelper.dispatchTouchEvent(ev);
         }
@@ -63,7 +63,7 @@ public class DragScaleLayout extends ShapeRelativeLayout {
 
     private OnDispatchTouchEventListener mOnDispatchTouchEventListener;
     public interface OnDispatchTouchEventListener {
-        void dispatchTouchEvent(MotionEvent ev);
+        void dispatchTouchEvent(MotionEvent ev,int action);
     }
 
 
