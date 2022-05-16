@@ -701,11 +701,6 @@ public class FileUtils {
         BitmapHelper.saveBitmapSyncAndNotifyScan(context, bitmap, savePath);
     }
 
-    //同步保存
-    public static void saveBitmapSync(Bitmap bitmap, String savePath) throws IOException {
-        if (EmptyUtils.isEmpty(bitmap) || EmptyUtils.isEmpty(savePath)) return;
-        BitmapHelper.saveBitmapSync(bitmap, savePath);
-    }
 
 
     //异步保存

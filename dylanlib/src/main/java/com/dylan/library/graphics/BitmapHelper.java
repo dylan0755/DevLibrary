@@ -19,6 +19,7 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.os.Environment;
 import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
@@ -220,6 +221,13 @@ public class BitmapHelper {
     }
 
 
+
+    public static void saveBitmapSyncAndNotifyScan(Context context, Bitmap bitmap) throws IOException {
+        String savePath=Environment.getExternalStorageDirectory()+"/"+System.currentTimeMillis()+".png";
+        saveBitmapSyncAndNotifyScan(context,bitmap,savePath);
+    }
+
+
     //同步保存并通知系统扫描
     public static void saveBitmapSyncAndNotifyScan(Context context, Bitmap bitmap, String
             savePath) throws IOException {
@@ -228,7 +236,6 @@ public class BitmapHelper {
         if (!outPutFile.getParentFile().exists()) {
             outPutFile.getParentFile().mkdirs();
         }
-
         FileOutputStream fos = new FileOutputStream(savePath);
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
         fos.flush();
