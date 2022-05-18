@@ -95,7 +95,7 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
             FileUtils.createDirIfNotExists(path);//创建文件夹
             String filepath = path + fileName;
             try {
-                FileUtils.writeTextToSdcard(sb.toString(), filepath);
+                FileUtils.saveTextToSdcard(sb.toString(), filepath);
             } catch (Exception e) {
                 e.printStackTrace();
             }

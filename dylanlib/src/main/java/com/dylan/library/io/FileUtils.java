@@ -370,7 +370,7 @@ public class FileUtils {
     }
 
 
-    public static byte[] readFileByBytes(String filePath){
+    public static byte[] readFileToBytes(String filePath){
         try {
             return IOUtils.getBytes(new FileInputStream(filePath));
         } catch (FileNotFoundException e) {
@@ -382,12 +382,48 @@ public class FileUtils {
     }
 
 
+    public static void saveBytesToFile(byte[] bytes, String filePath){
+            BufferedOutputStream bos = null;
+            FileOutputStream fos = null;
+            File file = null;
+            try {
+
+                file = new File(filePath);
+                if (!file.getParentFile().exists()){
+                    //文件夹不存在 生成
+                    file.getParentFile().mkdirs();
+                }
+                fos = new FileOutputStream(file);
+                bos = new BufferedOutputStream(fos);
+                bos.write(bytes);
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (bos != null) {
+                    try {
+                        bos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fos != null) {
+                    try {
+                        fos.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+    }
+
+
     public static String getSDCardDir() {
         return SDCardUtils.getSDcardDir();
     }
 
 
-    public static void writeTextToSDRootPath(String text, String fileName) throws Exception {
+    public static void saveTextToSDRootPath(String text, String fileName) throws Exception {
         if (EmptyUtils.isEmpty(text)) throw new Exception("text is empty!!!");
         String sdPath = Environment.getExternalStorageDirectory().toString();
         String outPutPath = sdPath + "/" + fileName;
@@ -398,7 +434,7 @@ public class FileUtils {
     }
 
 
-    public static boolean writeTextToSdcard(String text, String outputFilePath) throws Exception {
+    public static boolean saveTextToSdcard(String text, String outputFilePath) throws Exception {
         if (EmptyUtils.isEmpty(text)) throw new Exception("text is empty!!!");
 
         File outPutFile = new File(outputFilePath);
