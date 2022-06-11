@@ -6,7 +6,7 @@ V6.0.0
 2.DragScaleLayout dispatchTouchEvent(MotionEvent ev,int action) 返回action
 3.FileUtils 新增saveBytesToFile 将字节数组保存成某种类型文件
 4.DrawableTextView 新增setColorFilter(int color) 着色
-
+5.MultiDownloader 下载失败，解决重定向问题
 
 V5.9.0 ---->2022.4.30
 

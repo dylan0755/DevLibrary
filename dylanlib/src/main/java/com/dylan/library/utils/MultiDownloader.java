@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
+import com.dylan.library.io.FileDownLoader;
+
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.File;
@@ -14,11 +16,19 @@ import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.KeyManager;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.TrustManager;
 
 /**
  * Author: Dylan
@@ -36,21 +46,21 @@ public class MultiDownloader {
     private static Object lock = new Object();
 
 
-// 下载状态监听，提供回调
+    // 下载状态监听，提供回调
     DownloadStateListener listener;
-// 下载目录
+    // 下载目录
     private String downloadPath;
-// 下载链接集合
+    // 下载链接集合
     private List<String> listURL;
-// 下载个数
+    // 下载个数
     private int size = 0;
-    private List<String> cachePathList=new ArrayList<>();
     private SharedPreferences sharedPreferences;
+    private ArrayList<DownLoadResultBean> pathList=new ArrayList<>();
 
-// 下载完成回调接口
+    // 下载完成回调接口
     public interface DownloadStateListener {
-         void onFinish(List<String> cachePathList);
-         void onFailed();
+        void onFinish(ArrayList<DownLoadResultBean> pathList);
+        void onFailed();
     }
 
     public MultiDownloader(Context context, String downloadPath, List<String> listURL, DownloadStateListener listener) {
@@ -83,7 +93,7 @@ public class MultiDownloader {
                 DEFAULT_TASK_EXECUTOR.execute(new Runnable() {
                     @Override
                     public void run() {
-                        downloadBitmap(url);
+                        downloadBitmap(url,false,null);
                     }
                 });
 
@@ -105,14 +115,14 @@ public class MultiDownloader {
      * @return
      */
 
-    private File downloadBitmap(String urlString) {
+    private File downloadBitmap(String urlString,boolean isReload,String originUrl) {
         String fileName = urlString;
-        final File cacheFile = new File(createFilePath(new File(downloadPath), fileName));
+        final File outPutFile = new File(createFilePath(new File(downloadPath), fileName));
         String cachePath=sharedPreferences.getString(urlString,"");
         if (EmptyUtils.isNotEmpty(cachePath)){
             File file=new File(cachePath);
             if (file.exists()){
-                cachePathList.add(cachePath);
+                pathList.add(new DownLoadResultBean(urlString,cachePath));
                 statDownloadNum();
                 return file;
             }
@@ -121,21 +131,49 @@ public class MultiDownloader {
         HttpURLConnection urlConnection = null;
         BufferedOutputStream out = null;
         try {
+            SSLContext sslcontext = SSLContext.getInstance("SSL");
+            TrustManager[] tm = new TrustManager[]{new FileDownLoader.MyX509TrustManager()};
+            sslcontext.init((KeyManager[])null, tm, new SecureRandom());
+            HostnameVerifier ignoreHostnameVerifier = new HostnameVerifier() {
+                public boolean verify(String s, SSLSession sslsession) {
+                    return true;
+                }
+            };
+            HttpsURLConnection.setDefaultHostnameVerifier(ignoreHostnameVerifier);
+            HttpsURLConnection.setDefaultSSLSocketFactory(sslcontext.getSocketFactory());
+            final  URL mURL = new URL(urlString);
+            urlConnection = (HttpURLConnection)mURL.openConnection();
+            urlConnection.setConnectTimeout(10000);
+            urlConnection.setReadTimeout(10000);
+            urlConnection.setRequestMethod("GET");
+            int responseCode = urlConnection.getResponseCode();
+            if (responseCode == 301 || responseCode == 302){
+                Logger.e("重定向");
+                String errorText = urlConnection.getHeaderField("Location");
+                urlConnection.disconnect();
+                downloadBitmap(errorText,true,urlString);
+                return null;
+            }
 
-            final URL url = new URL(urlString);
-            urlConnection = (HttpURLConnection) url.openConnection();
             final InputStream in = new BufferedInputStream(urlConnection.getInputStream(), IO_BUFFER_SIZE);
-            out = new BufferedOutputStream(new FileOutputStream(cacheFile), IO_BUFFER_SIZE);
+            out = new BufferedOutputStream(new FileOutputStream(outPutFile), IO_BUFFER_SIZE);
             int b;
             while ((b = in.read()) != -1) {
                 out.write(b);
             }
-            sharedPreferences.edit().putString(urlString,cacheFile.getAbsolutePath()).apply();
-            cachePathList.add(cacheFile.getAbsolutePath());
-            statDownloadNum();
-            return cacheFile;
+            sharedPreferences.edit().putString(urlString,outPutFile.getAbsolutePath()).apply();
+            DownLoadResultBean downLoadResultBean;
+            if (isReload){
+                downLoadResultBean= new DownLoadResultBean(originUrl,outPutFile.getAbsolutePath());
+            }else{
+                downLoadResultBean= new DownLoadResultBean(urlString,outPutFile.getAbsolutePath());
+            }
 
-        } catch (final IOException e) {
+            pathList.add(downLoadResultBean);
+            statDownloadNum();
+            return outPutFile;
+
+        } catch (final Exception e) {
             Log.e(TAG, "download " + urlString + " error");
             listener.onFailed();
         } finally {
@@ -175,9 +213,37 @@ public class MultiDownloader {
             if (size == listURL.size()) {
                 Log.d(TAG, "download finished total " + size);
                 DEFAULT_TASK_EXECUTOR.shutdownNow();
-                listener.onFinish(cachePathList); // 下载成功回调
+                listener.onFinish(pathList); // 下载成功回调
             }
         }
     }
 
+
+    public static class DownLoadResultBean {
+        public String downLoadUrl;
+        public String downLoadPath;
+
+        public DownLoadResultBean(String downLoadUrl, String downLoadPath) {
+            this.downLoadUrl = downLoadUrl;
+            this.downLoadPath = downLoadPath;
+        }
+
+        public String getDownLoadUrl() {
+            return downLoadUrl;
+        }
+
+        public void setDownLoadUrl(String downLoadUrl) {
+            this.downLoadUrl = downLoadUrl;
+        }
+
+        public String getDownLoadPath() {
+            return downLoadPath;
+        }
+
+        public void setDownLoadPath(String downLoadPath) {
+            this.downLoadPath = downLoadPath;
+        }
+
+
+    }
 }
