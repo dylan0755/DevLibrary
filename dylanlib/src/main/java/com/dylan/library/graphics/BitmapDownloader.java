@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -95,15 +96,15 @@ public class BitmapDownloader {
 
     public void downloadMultiImages(Context context,String saveDirPath,final List<String> imgUrls,final MultiDownloader.DownloadStateListener listener){
         new MultiDownloader(context,saveDirPath, imgUrls, new MultiDownloader.DownloadStateListener() {
+
             @Override
-            public void onFinish(final List<String> cachePathList) {
+            public void onFinish(final ArrayList<MultiDownloader.DownLoadResultBean> pathList) {
                 ThreadUtils.runOnMainThread(new Runnable() {
                     @Override
                     public void run() {
-                        if (listener!=null)listener.onFinish(cachePathList);
+                        if (listener!=null)listener.onFinish(pathList);
                     }
                 });
-
             }
 
             @Override
