@@ -40,27 +40,23 @@ public class VideoPlayHelper {
 
 
     public VideoPlayHelper(VideoDecoderListener listener, GLSurfaceView surfaceView) {
-        mVideoDecoderListener = listener;
-        startPlayerThread();
-        mVideoDecoder = new VideoDecoder();
-        mVideoDecoder.setOnReadPixelListener(mOnReadPixelListener);
-        surfaceView.queueEvent(new Runnable() {
-            @Override
-            public void run() {
-                mVideoDecoder.create(EGL14.eglGetCurrentContext(), true);
-            }
-        });
+        this(listener,surfaceView,false,false);
     }
 
-    public VideoPlayHelper(VideoDecoderListener listener, GLSurfaceView surfaceView, final boolean isFlip) {
+    public VideoPlayHelper(VideoDecoderListener listener, GLSurfaceView surfaceView, final boolean isLoop) {
+        this(listener,surfaceView,isLoop,false);
+    }
+
+    public VideoPlayHelper(VideoDecoderListener listener, GLSurfaceView surfaceView, final boolean isLoop,final boolean isFrontCam) {
         mVideoDecoderListener = listener;
         startPlayerThread();
         mVideoDecoder = new VideoDecoder();
+        mVideoDecoder.setLoop(isLoop);
         mVideoDecoder.setOnReadPixelListener(mOnReadPixelListener);
         surfaceView.queueEvent(new Runnable() {
             @Override
             public void run() {
-                mVideoDecoder.create(EGL14.eglGetCurrentContext(), isFlip);
+                mVideoDecoder.create(EGL14.eglGetCurrentContext(), isFrontCam);
             }
         });
     }

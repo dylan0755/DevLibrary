@@ -56,6 +56,11 @@ public class VideoDecoder implements SurfaceTexture.OnFrameAvailableListener {
     private Surface mSurface;
     private OnReadPixelListener mOnReadPixelListener;
     private boolean mIsFrontCam;
+    private boolean isLoop=true;
+
+    public void setLoop(boolean loop) {
+        isLoop = loop;
+    }
 
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
@@ -195,7 +200,7 @@ public class VideoDecoder implements SurfaceTexture.OnFrameAvailableListener {
             mMediaPlayer = new MediaPlayer();
             mMediaPlayer.setDataSource(mVideoPath);
             mMediaPlayer.setVolume(0F, 0F);
-            mMediaPlayer.setLooping(true);
+            mMediaPlayer.setLooping(isLoop);
             mSurface = new Surface(mSurfaceTexture);
             mMediaPlayer.setSurface(mSurface);
             mMediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
