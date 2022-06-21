@@ -34,9 +34,28 @@ import java.util.List;
  */
 @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class VideoUtils {
-
-
     private static final Object TAG = VideoUtils.class.getSimpleName() ;
+
+
+    public static long getDurationUS(String url) {
+        try {
+            MediaExtractor mediaExtractor = new MediaExtractor();
+            mediaExtractor.setDataSource(url);
+            int videoExt =selectTrack(mediaExtractor,false);
+            if (videoExt == -1) {
+                videoExt =selectTrack(mediaExtractor,true);
+                if (videoExt == -1) {
+                    return 0L;
+                }
+            }
+            MediaFormat mediaFormat = mediaExtractor.getTrackFormat(videoExt);
+            long res = mediaFormat.containsKey("durationUs") ? mediaFormat.getLong("durationUs") : 0L;
+            mediaExtractor.release();
+            return res;
+        } catch (Exception var6) {
+            return 0L;
+        }
+    }
 
 
     public static boolean hasAudioTrack(String videoIn) {
