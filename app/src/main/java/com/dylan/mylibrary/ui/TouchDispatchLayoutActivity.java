@@ -27,8 +27,7 @@ public class TouchDispatchLayoutActivity extends AppCompatActivity {
         dispatchLayout = findViewById(R.id.dispatchLayout);
         dispatchLayout.setOnDispatchTouchEventListener(new DragScaleLayout.OnDispatchTouchEventListener() {
             @Override
-            public void dispatchTouchEvent(MotionEvent ev) {
-               int action=ev.getAction() & MotionEvent.ACTION_MASK;//注意 ACTION_MASK 才能识别多手指，进行缩放
+            public void dispatchTouchEvent(MotionEvent ev, int action) {
                 if (action== MotionEvent.ACTION_DOWN) {
                     dispatchLayout.setClickable(true);
                     int height = dispatchLayout.getMeasuredHeight();
@@ -45,6 +44,7 @@ public class TouchDispatchLayoutActivity extends AppCompatActivity {
                     dispatchLayout.setAllowDragAndScale(false);
                 }
             }
+
 
 
         });
