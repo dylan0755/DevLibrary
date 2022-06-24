@@ -9,7 +9,7 @@ V6.0.0
 5.MultiDownloader 下载失败，解决重定向问题
 6.VideoPlayerHelper 设置是否循环播放
 7.VideoUtils 增加获取时长微秒  getDurationUS
-
+8.新增 ScrollHorizontalRecyclerView，解决ScrollView 中嵌套RecyclerView 横向滑动事件冲突问题。
 
 
 
