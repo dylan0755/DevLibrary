@@ -10,7 +10,7 @@ V6.0.0
 6.VideoPlayerHelper 设置是否循环播放
 7.VideoUtils 增加获取时长微秒  getDurationUS
 8.新增 ScrollHorizontalRecyclerView，解决ScrollView 中嵌套RecyclerView 横向滑动事件冲突问题。
-
+9.新增AudioRecorder 录音辅助类
 
 
 V5.9.0 ---->2022.4.30
