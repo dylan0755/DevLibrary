@@ -27,8 +27,11 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.IntStream;
 
 /**
  * Created by huangwei on 2018/3/7 0007.
@@ -953,5 +956,17 @@ public class AudioUtils {
         csd.put(0, (byte) (profile << 3 | freqIdx >> 1));
         csd.put(1, (byte) ((freqIdx & 0x01) << 7 | channel << 3));
         audioMediaFormat.setByteBuffer("csd-0", csd);
+    }
+
+
+    /**
+     *  生成静音
+     * @param filePath
+     * @param durationMs 毫秒
+     */
+    public static void makeSilenceWav(String filePath, Long durationMs) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+           SilenceAudioUtils.makeSilenceWav(filePath,durationMs);
+        }
     }
 }
