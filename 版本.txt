@@ -12,7 +12,7 @@ V6.0.0
 8.新增 ScrollHorizontalRecyclerView，解决ScrollView 中嵌套RecyclerView 横向滑动事件冲突问题。
 9.新增AudioRecorder 录音辅助类
 10.AudioUtils makeSilenceWav 生成静音音频文件
-11.FullWidthAutoRoundImageView 圆角处理
+
 
 
 
