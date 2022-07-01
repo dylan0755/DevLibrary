@@ -1,32 +1,37 @@
-//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
-
 package com.dylan.library.widget;
 
 import android.content.Context;
 import android.graphics.Matrix;
+import android.support.v7.widget.AppCompatImageView;
 import android.util.AttributeSet;
 
-public class RoundCropTopImageView extends RoundImageView {
-    public RoundCropTopImageView(Context context) {
-        this(context, (AttributeSet)null);
+/**
+ * Author: Dylan
+ * Date: 2022/07/01
+ * Desc:
+ */
+public class CropTopImageView extends AppCompatImageView {
+
+    public CropTopImageView(Context context, AttributeSet attrs) {
+        super(context, attrs);
+        setScaleType(ScaleType.MATRIX);
     }
 
-    public RoundCropTopImageView(Context context, AttributeSet attrs) {
-        this(context, attrs, 0);
-    }
-
-    public RoundCropTopImageView(Context context, AttributeSet attrs, int defStyle) {
+    public CropTopImageView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-        this.setScaleType(ScaleType.CENTER_CROP);
-        this.setScaleType(ScaleType.MATRIX);
+        setScaleType(ScaleType.MATRIX);
     }
 
-    protected boolean setFrame(int frameLeft, int frameTop, int frameRight, int frameBottom) {
+    public CropTopImageView(Context context) {
+        super(context);
+        setScaleType(ScaleType.MATRIX);
+    }
+
+    @Override
+    protected boolean setFrame(int l, int t, int r, int b)
+    {
         if (getDrawable() == null) {
-            return super.setFrame(frameLeft, frameTop, frameRight, frameBottom);
+            return super.setFrame(l, t, r, b);
         }
         Matrix matrix = getImageMatrix();
         float scaleWidth = getWidth()/(float)getDrawable().getIntrinsicWidth();
@@ -38,6 +43,6 @@ public class RoundCropTopImageView extends RoundImageView {
             matrix.postTranslate(-tanslateX, 0);
         }
         setImageMatrix(matrix);
-        return super.setFrame(frameLeft, frameTop, frameRight, frameBottom);
+        return super.setFrame(l, t, r, b);
     }
 }
