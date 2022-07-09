@@ -5,6 +5,9 @@ import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.dylan.library.io.FileDownLoader;
+import com.dylan.library.utils.CollectionsUtils;
+import com.dylan.library.utils.EmptyUtils;
+import com.dylan.library.utils.Logger;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -17,7 +20,12 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -29,6 +37,7 @@ import javax.net.ssl.KeyManager;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * Author: Dylan
@@ -88,12 +97,15 @@ public class MultiDownloader {
 
         }
 
-        for (final String url : listURL) {
+
+        for (int i = 0; i <listURL.size() ; i++) {
+            String url=listURL.get(i);
             try {
+                int finalI = i;
                 DEFAULT_TASK_EXECUTOR.execute(new Runnable() {
                     @Override
                     public void run() {
-                        downloadBitmap(url,false,null);
+                        downloadBitmap(finalI,url,false,null);
                     }
                 });
 
@@ -107,6 +119,7 @@ public class MultiDownloader {
             }
         }
 
+
     }
 
     /**
@@ -115,14 +128,16 @@ public class MultiDownloader {
      * @return
      */
 
-    private File downloadBitmap(String urlString,boolean isReload,String originUrl) {
+    private File downloadBitmap(int sortId,String urlString,boolean isReload,String originUrl) {
         String fileName = urlString;
         final File outPutFile = new File(createFilePath(new File(downloadPath), fileName));
         String cachePath=sharedPreferences.getString(urlString,"");
         if (EmptyUtils.isNotEmpty(cachePath)){
             File file=new File(cachePath);
             if (file.exists()){
-                pathList.add(new DownLoadResultBean(urlString,cachePath));
+                DownLoadResultBean downLoadResultBean=new DownLoadResultBean(urlString,cachePath);
+                downLoadResultBean.setSortId(sortId);
+                pathList.add(downLoadResultBean);
                 statDownloadNum();
                 return file;
             }
@@ -151,7 +166,7 @@ public class MultiDownloader {
                 Logger.e("重定向");
                 String errorText = urlConnection.getHeaderField("Location");
                 urlConnection.disconnect();
-                downloadBitmap(errorText,true,urlString);
+                downloadBitmap(sortId,errorText,true,urlString);
                 return null;
             }
 
@@ -168,7 +183,7 @@ public class MultiDownloader {
             }else{
                 downLoadResultBean= new DownLoadResultBean(urlString,outPutFile.getAbsolutePath());
             }
-
+            downLoadResultBean.setSortId(sortId);
             pathList.add(downLoadResultBean);
             statDownloadNum();
             return outPutFile;
@@ -213,6 +228,13 @@ public class MultiDownloader {
             if (size == listURL.size()) {
                 Log.d(TAG, "download finished total " + size);
                 DEFAULT_TASK_EXECUTOR.shutdownNow();
+
+                Collections.sort(pathList, new Comparator<DownLoadResultBean>() {
+                    @Override
+                    public int compare(DownLoadResultBean o1, DownLoadResultBean o2) {
+                        return Long.compare(o1.sortId,o2.sortId);
+                    }
+                });
                 listener.onFinish(pathList); // 下载成功回调
             }
         }
@@ -220,12 +242,17 @@ public class MultiDownloader {
 
 
     public static class DownLoadResultBean {
+        public int sortId;//排序
         public String downLoadUrl;
         public String downLoadPath;
 
         public DownLoadResultBean(String downLoadUrl, String downLoadPath) {
             this.downLoadUrl = downLoadUrl;
             this.downLoadPath = downLoadPath;
+        }
+
+        public void setSortId(int sortId) {
+            this.sortId = sortId;
         }
 
         public String getDownLoadUrl() {
@@ -246,4 +273,9 @@ public class MultiDownloader {
 
 
     }
+
+
+
+
+
 }
