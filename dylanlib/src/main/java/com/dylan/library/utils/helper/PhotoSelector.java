@@ -69,41 +69,48 @@ public class PhotoSelector {
         bottomSheetDialog.show(new PhotoSelectBottomSheetDialog.SelectListener() {
             @Override
             public void selectCamera() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestBuilder = new PermissionRequestBuilder(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
-                    requestBuilder.addPerm(Manifest.permission.CAMERA, true);
-                    requestBuilder.addPerm(Manifest.permission.READ_EXTERNAL_STORAGE, true);
-                    requestBuilder.addPerm(Manifest.permission.WRITE_EXTERNAL_STORAGE, true);
-                    boolean needRequest = requestBuilder.startRequest(REQUEST_PER_CAMERA_WRITE);
-                    if (needRequest) {
-                        return;
-                    }
-                }
-                selectByCamera();
+                selectFromCamera();
             }
 
             @Override
             public void selectPhotoAlbum() {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                    requestBuilder = new PermissionRequestBuilder(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
-                    requestBuilder.addPerm(Manifest.permission.READ_EXTERNAL_STORAGE, true);
-                    requestBuilder.addPerm(Manifest.permission.WRITE_EXTERNAL_STORAGE, true);
-                    boolean needRequest = requestBuilder.startRequest(REQUEST_PER_EXTERNAL);
-                    if (needRequest) {
-                        return;
-                    }
-                }
-                toPick();
+                selectFromPhotoAlbum();
             }
         });
         return bottomSheetDialog;
     }
 
 
+    public void selectFromCamera(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestBuilder = new PermissionRequestBuilder(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+            requestBuilder.addPerm(Manifest.permission.CAMERA, true);
+            requestBuilder.addPerm(Manifest.permission.READ_EXTERNAL_STORAGE, true);
+            requestBuilder.addPerm(Manifest.permission.WRITE_EXTERNAL_STORAGE, true);
+            boolean needRequest = requestBuilder.startRequest(REQUEST_PER_CAMERA_WRITE);
+            if (needRequest) {
+                return;
+            }
+        }
+        selectByCamera();
+    }
 
 
+    public void selectFromPhotoAlbum(){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            requestBuilder = new PermissionRequestBuilder(ContextUtils.getActivity(pickerCallBack.getActivityContext()));
+            requestBuilder.addPerm(Manifest.permission.READ_EXTERNAL_STORAGE, true);
+            requestBuilder.addPerm(Manifest.permission.WRITE_EXTERNAL_STORAGE, true);
+            boolean needRequest = requestBuilder.startRequest(REQUEST_PER_EXTERNAL);
+            if (needRequest) {
+                return;
+            }
+        }
+        toPick();
+    }
 
-    public void selectByCamera() {
+
+    private void selectByCamera() {
         //用意图打开系统照相机
         Intent intent = new Intent();
         intent.setAction("android.media.action.IMAGE_CAPTURE");

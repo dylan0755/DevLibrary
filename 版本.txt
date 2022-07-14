@@ -13,7 +13,7 @@ V6.0.0
 9.新增AudioRecorder 录音辅助类
 10.AudioUtils makeSilenceWav 生成静音音频文件
 11.新增 CropTopImageView、RoundCropTopImageView 显示图片上半部分
-
+12.PhotoSelector 公开 selectFromCamera selectFromPhotoAlbum
 
 
 
