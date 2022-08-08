@@ -326,7 +326,7 @@ public class ScreenUtils {
     public static class OrientHelper{
         private OrientationEventListener mOrientationListener;
 
-        private void registerOrientListener(Context context,OrientationListener listener) {
+        public void registerOrientListener(Context context,OrientationListener listener) {
             mOrientationListener = new OrientationEventListener(context, SensorManager.SENSOR_DELAY_NORMAL) {
                 @Override
                 public void onOrientationChanged(int orientation) {
