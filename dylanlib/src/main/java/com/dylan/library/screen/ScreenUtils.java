@@ -5,9 +5,11 @@ import android.content.Context;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.graphics.Rect;
+import android.hardware.SensorManager;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
 import android.view.DisplayCutout;
+import android.view.OrientationEventListener;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
@@ -320,5 +322,52 @@ public class ScreenUtils {
     }
 
 
+
+    public static class OrientHelper{
+        private OrientationEventListener mOrientationListener;
+
+        private void registerOrientListener(Context context,OrientationListener listener) {
+            mOrientationListener = new OrientationEventListener(context, SensorManager.SENSOR_DELAY_NORMAL) {
+                @Override
+                public void onOrientationChanged(int orientation) {
+                    if (orientation == OrientationEventListener.ORIENTATION_UNKNOWN) {
+                        return;  //手机平放时，检测不到有效的角度
+                    }
+                    int degree=0;
+                    //可以根据不同角度检测处理，这里只检测四个角度的改变
+                    if (orientation > 350 || orientation < 10) { //0度
+                        degree = 0;
+                    } else if (orientation > 80 && orientation < 100) { //90度
+                        degree = 90;
+                    } else if (orientation > 170 && orientation < 190) { //180度
+                        degree = 180;
+                    } else if (orientation > 260 && orientation < 280) { //270度
+                        degree = 270;
+                    } else {
+                        return;
+                    }
+                    if (listener!=null)listener.onOrientationChanged(orientation,degree);
+
+                }
+            };
+            if (mOrientationListener.canDetectOrientation()) {
+                mOrientationListener.enable();
+            } else {
+                mOrientationListener.disable();
+            }
+
+        }
+
+
+        public void unRegisterListener(){
+            if (mOrientationListener != null) mOrientationListener.disable();
+        }
+
+    }
+
+
+    public interface OrientationListener{
+        void onOrientationChanged(int orientation,int degree);
+    }
 
 }
