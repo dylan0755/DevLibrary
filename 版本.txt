@@ -16,7 +16,7 @@ V6.0.0
 12.PhotoSelector 公开 selectFromCamera selectFromPhotoAlbum
 13.SoundPoolHelper 播放特效
 14.ScreenUtils 新增手机传感器方向监听
-
+15.修复SignatureUtils 获取md5 失效bug
 
 
 
