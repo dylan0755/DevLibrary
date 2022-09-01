@@ -17,7 +17,7 @@ V6.0.0
 13.SoundPoolHelper 播放特效
 14.ScreenUtils 新增手机传感器方向监听
 15.修复SignatureUtils 获取md5 失效bug
-
+16.新增TextFileReader  Text 文件 按行读取
 
 
 V5.9.0 ---->2022.4.30
