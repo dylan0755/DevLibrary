@@ -93,7 +93,7 @@ public class SonicTestActivity extends AppCompatActivity {
                            ToastUtils.show("完成");
                        }
                    });
-               } catch (IOException e) {
+               } catch (Exception e) {
                    e.printStackTrace();
                }
            }

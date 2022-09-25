@@ -187,7 +187,7 @@ public class VideoSniffer {
                 //检测成功，是视频
                 VideoSnifferLogger.d("WorkerThread", "found video taskUrl=" + url);
                 return true;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 VideoSnifferLogger.d("WorkerThread", "fail IO错误 taskUrl=" + url);
                 return false;

@@ -242,7 +242,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         mRecordBarrier = new CountDownLatch(2);
         String videoFileName = "opengl" + System.currentTimeMillis() + ".mp4";
         mVideoOutFile = new File(Environment.getExternalStorageDirectory().toString(), videoFileName);
-        try {
+//        try {
             muxerWrapper = new MediaMuxerWrapper(mVideoOutFile.getAbsolutePath());
 
 
@@ -263,9 +263,9 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
             muxerWrapper.startRecording();
             startTime();
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
     }
 
@@ -323,7 +323,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
 
 
                     mIsTakingPic = false;
-                } catch (IOException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
 

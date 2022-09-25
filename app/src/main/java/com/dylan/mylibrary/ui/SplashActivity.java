@@ -28,7 +28,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 Intent intent=new Intent(SplashActivity.this,DemoListActivity.class);
                 startActivity(intent);
-                onBackPressed();
+                finish();
             }
         },2000);
 
