@@ -1,7 +1,8 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V6.0.0
+V6.0.0 ---->2022.9.25
+
 1.DragSelectRangeView 公开设置最小宽高方法
 2.DragScaleLayout dispatchTouchEvent(MotionEvent ev,int action) 返回action
 3.FileUtils 新增saveBytesToFile 将字节数组保存成某种类型文件
