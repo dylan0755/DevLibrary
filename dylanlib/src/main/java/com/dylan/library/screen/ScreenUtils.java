@@ -8,6 +8,7 @@ import android.graphics.Rect;
 import android.hardware.SensorManager;
 import android.os.Build;
 import android.support.v4.view.ViewCompat;
+import android.util.DisplayMetrics;
 import android.view.DisplayCutout;
 import android.view.OrientationEventListener;
 import android.view.View;
@@ -31,12 +32,18 @@ public class ScreenUtils {
 
     public static int getScreenWidth(Context context) {
         if (context == null) return 0;
-        return context.getResources().getDisplayMetrics().widthPixels;
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        WindowManager mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        mWindowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
+        return displayMetrics.widthPixels;
     }
 
     public static int getScreenHeight(Context context) {
         if (context == null) return 0;
-        return context.getResources().getDisplayMetrics().heightPixels;
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        WindowManager mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        mWindowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
+        return displayMetrics.heightPixels;
     }
 
     public static int getStatusBarHeight(Activity activity) {
