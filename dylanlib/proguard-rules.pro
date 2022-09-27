@@ -311,6 +311,10 @@
       public *;
       protected *;
 }
+-keep class com.dylan.library.platform.** {
+      public *;
+      protected *;
+}
 -keep class com.dylan.library.preferecen.** {
       public *;
       protected *;
