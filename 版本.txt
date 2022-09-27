@@ -5,6 +5,8 @@ V6.1.0
 1.ScreenUtils 修复 getScreenHeight  全面屏获取高度不准确问题
 2.新增ScreenShotHelper 应用外截屏
 3.BitmapHelper 新增 getImageFromAssetsFile
+4.增加百度Api封装
+
 
 V6.0.0 ---->2022.9.25
 
