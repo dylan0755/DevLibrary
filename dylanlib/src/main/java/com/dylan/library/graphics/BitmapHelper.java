@@ -1,6 +1,7 @@
 package com.dylan.library.graphics;
 
 import android.content.Context;
+import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -51,6 +52,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 
 /**
@@ -343,6 +345,23 @@ public class BitmapHelper {
         Bitmap bitmap = Bitmap.createBitmap(imageView.getDrawingCache());
         imageView.setDrawingCacheEnabled(false);
         return bitmap;
+    }
+
+    public static Bitmap getImageFromAssetsFile(Context context,String fileName)
+    {
+        Bitmap image = null;
+        AssetManager am = context.getResources().getAssets();
+        try
+        {
+            InputStream is = am.open(fileName);
+            image = BitmapFactory.decodeStream(is);
+            is.close();
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+        return image;
     }
 
 
