@@ -151,12 +151,12 @@ public class StringUtils {
         return false;
     }
 
-    public static boolean startWithOneStr(String[] array, String str) {
-        if (array != null && array.length != 0) {
-            if (str != null) {
+    public static boolean startWithKeyWord(String originText, String[] keyWords) {
+        if (keyWords != null && keyWords.length != 0) {
+            if (originText != null) {
                 int i = 0;
-                for (int len = array.length; i < len; ++i) {
-                    if (array[i].startsWith(str)) {
+                for (int len = keyWords.length; i < len; ++i) {
+                    if (originText.startsWith(keyWords[i])) {
                         return true;
                     }
                 }
