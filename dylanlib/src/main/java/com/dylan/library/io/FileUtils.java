@@ -346,12 +346,10 @@ public class FileUtils {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static void copyFile(File src, File dest) throws IOException {
         copyFile(new FileInputStream(src), dest);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public static void copyFile(InputStream is, File dest) throws IOException {
         if (is == null) {
             return;

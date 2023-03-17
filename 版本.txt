@@ -6,6 +6,10 @@ V6.1.0
 2.新增ScreenShotHelper 应用外截屏
 3.BitmapHelper 新增 getImageFromAssetsFile
 4.增加百度Api封装
+5.新增NIOUtils
+6.StringUtils 新增 startWithOneStr(String[] agr,String key)
+
+
 
 
 V6.0.0 ---->2022.9.25

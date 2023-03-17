@@ -151,6 +151,20 @@ public class StringUtils {
         return false;
     }
 
+    public static boolean startWithOneStr(String[] array, String str) {
+        if (array != null && array.length != 0) {
+            if (str != null) {
+                int i = 0;
+                for (int len = array.length; i < len; ++i) {
+                    if (array[i].startsWith(str)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
 
     private static boolean isChinese(char c) {
         Character.UnicodeBlock ub = Character.UnicodeBlock.of(c);
