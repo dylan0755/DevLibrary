@@ -8,6 +8,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.util.Log;
+import android.view.accessibility.AccessibilityNodeInfo;
 
 import com.dylan.library.exception.ELog;
 import com.dylan.library.io.FileUtils;
@@ -218,6 +219,20 @@ public class StringUtils {
             }
         }
         return false;
+    }
+    /**
+     * 判断是否包含数字
+     */
+    public static boolean containsDigit(String str) {
+        Pattern pattern = Pattern.compile(".*[0-9].*");
+        return pattern.matcher(str).matches();
+    }
+
+    public static String extractDigit(String str) {
+        String regEx = "[^0-9]";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.replaceAll("").trim();
     }
 
 
