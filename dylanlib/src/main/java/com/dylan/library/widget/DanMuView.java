@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.thread.PauseResumeLoopThread;
+import com.dylan.library.utils.thread.ControllableThread;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -257,10 +257,10 @@ public abstract class DanMuView<T> extends FrameLayout {
     }
 
 
-    public class ScrollThreadRe extends PauseResumeLoopThread {
+    public class ScrollThreadRe extends ControllableThread {
 
         @Override
-        public void doRun() {
+        public void loopRun() {
             if (currentTime >= needTime) {//该条消息已经滚动显示完毕，判断是不是最后一条
                 if (currentMessageIndex == messageQuenue.size() - 1) {
                     mHandler.sendEmptyMessage(MSG_LAST_ONE);

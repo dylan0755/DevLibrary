@@ -7,7 +7,7 @@ package com.dylan.library.utils.thread;
  * Desc: 控制线程的暂停和恢复运行
  */
 
-public abstract class PauseResumeLoopThread extends Thread{
+public abstract class ControllableThread extends Thread{
     private boolean mRunning=true;
     private final Object lock = new Object();
     private boolean pause = false;
@@ -53,10 +53,10 @@ public abstract class PauseResumeLoopThread extends Thread{
             if (pause){
                 pause();
             }
-            doRun();
+            loopRun();
         }
     }
 
 
-    public abstract void doRun();
+    public abstract void loopRun();
 }

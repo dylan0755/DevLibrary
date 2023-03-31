@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ClipDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
@@ -19,6 +20,9 @@ import android.widget.SeekBar;
  */
 public class DrawableUtils {
 
+    public static Drawable getTransparentDrawable(){
+        return new ColorDrawable(Color.TRANSPARENT);
+    }
 
     public static void resetShapeColor(View view, int backgroundColor) {
         if (view == null) return;
