@@ -2,6 +2,7 @@ package com.dylan.library.utils;
 
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.Rect;
 
 import com.dylan.library.map.MapUtils;
 
@@ -86,6 +87,19 @@ public class MathUtils {
         }
     }
 
+    public static boolean isInPolygon(Point point, Rect boundRect) {
+        if (boundRect == null) return false;
+        Point LeftTop = new Point(boundRect.left, boundRect.top);
+        Point rightTop = new Point(boundRect.right, boundRect.top);
+        Point LeftBottom = new Point(boundRect.left, boundRect.bottom);
+        Point rightBottom = new Point(boundRect.right, boundRect.bottom);
+        List<Point> points = new ArrayList<>();
+        points.add(LeftTop);
+        points.add(rightTop);
+        points.add(LeftBottom);
+        points.add(rightBottom);
+        return isInPolygon(point, points);
+    }
 
     public static boolean isInPolygon(Point point, List<Point> pts) {
 
@@ -152,7 +166,6 @@ public class MathUtils {
     }
 
 
-
     //绘制多边形
     public static float[] convertPointsToLinesFloatArray(List<Point> points) {
         if (points.size() < 3) return null;
@@ -206,37 +219,31 @@ public class MathUtils {
     }
 
 
-
-
-
-
-
-
     /**
-     *  直线方程   y=ax+b   由起点和终点两个点确定a与b，
-     *  代入直线上任意一点，前提是知道该点的x坐标或y坐标
+     * 直线方程   y=ax+b   由起点和终点两个点确定a与b，
+     * 代入直线上任意一点，前提是知道该点的x坐标或y坐标
      *
-     * @param startPointF  起点坐标
-     * @param endPointF    终点坐标
-     * @param innerPoint   线上任意一点坐标
+     * @param startPointF 起点坐标
+     * @param endPointF   终点坐标
+     * @param innerPoint  线上任意一点坐标
      * @return
      */
-    public static PointF getInnerPointX(PointF startPointF, PointF endPointF, PointF innerPoint){
-        float deltaX=endPointF.x-startPointF.x;
-        float deltaY=endPointF.y-startPointF.y;
-        innerPoint.x=(innerPoint.y-startPointF.y+(deltaY/deltaX)*startPointF.x)/(deltaY/deltaX);
+    public static PointF getInnerPointX(PointF startPointF, PointF endPointF, PointF innerPoint) {
+        float deltaX = endPointF.x - startPointF.x;
+        float deltaY = endPointF.y - startPointF.y;
+        innerPoint.x = (innerPoint.y - startPointF.y + (deltaY / deltaX) * startPointF.x) / (deltaY / deltaX);
         return innerPoint;
     }
 
-    public static PointF getInnerPointY(PointF startPointF, PointF endPointF, PointF innerPoint){
-        float deltaX=endPointF.x-startPointF.x;
-        float deltaY=endPointF.y-startPointF.y;
-        innerPoint.y=(deltaY/deltaX)*innerPoint.x+startPointF.y-(deltaY/deltaX)*startPointF.x;
+    public static PointF getInnerPointY(PointF startPointF, PointF endPointF, PointF innerPoint) {
+        float deltaX = endPointF.x - startPointF.x;
+        float deltaY = endPointF.y - startPointF.y;
+        innerPoint.y = (deltaY / deltaX) * innerPoint.x + startPointF.y - (deltaY / deltaX) * startPointF.x;
         return innerPoint;
     }
 
     public static String rvZeroAndDot(String s) {
-        if (s==null||s.isEmpty()) {
+        if (s == null || s.isEmpty()) {
             return "";
         }
         if (s.indexOf(".") > 0) {
@@ -246,7 +253,7 @@ public class MathUtils {
         return s;
     }
 
-    public static String rvZeroAndDot(double d){
+    public static String rvZeroAndDot(double d) {
         String s = Double.toString(d);
         if (s.indexOf(".") > 0) {
             s = s.replaceAll("0+?$", "");//去掉多余的0
@@ -256,133 +263,130 @@ public class MathUtils {
     }
 
     //加
-    public static double add(double v1,double v2){
-        BigDecimal b1=new BigDecimal(Double.toString(v1));
-        BigDecimal b2=new BigDecimal(Double.toString(v2));
+    public static double add(double v1, double v2) {
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.add(b2).doubleValue();
     }
 
-    public static double add(String v1,String v2){
-        if (v1==null||v1.isEmpty())v1="0";
-        if (v2==null||v2.isEmpty())v2="0";
-        BigDecimal b1=new BigDecimal(v1);
-        BigDecimal b2=new BigDecimal(v2);
+    public static double add(String v1, String v2) {
+        if (v1 == null || v1.isEmpty()) v1 = "0";
+        if (v2 == null || v2.isEmpty()) v2 = "0";
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(v2);
         return b1.add(b2).doubleValue();
     }
 
     //减
-    public static double subtract(double v1,double v2){
-        BigDecimal b1=new BigDecimal(Double.toString(v1));
-        BigDecimal b2=new BigDecimal(Double.toString(v2));
+    public static double subtract(double v1, double v2) {
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.subtract(b2).doubleValue();
     }
 
-    public static double subtract(String v1,String v2){
-        if (v1==null||v1.isEmpty())v1="0";
-        if (v2==null||v2.isEmpty())v2="0";
-        BigDecimal b1=new BigDecimal(v1);
-        BigDecimal b2=new BigDecimal(v2);
+    public static double subtract(String v1, String v2) {
+        if (v1 == null || v1.isEmpty()) v1 = "0";
+        if (v2 == null || v2.isEmpty()) v2 = "0";
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(v2);
         return b1.subtract(b2).doubleValue();
     }
 
     //乘
-    public static double multiply(double v1,double v2){
-        BigDecimal b1=new BigDecimal(Double.toString(v1));
-        BigDecimal b2=new BigDecimal(Double.toString(v2));
+    public static double multiply(double v1, double v2) {
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
         return b1.multiply(b2).doubleValue();
     }
 
-    public static double multiply(String v1,String v2){
-        if (v1==null||v1.isEmpty())v1="0";
-        if (v2==null||v2.isEmpty())v2="0";
-        BigDecimal b1=new BigDecimal(v1);
-        BigDecimal b2=new BigDecimal(v2);
+    public static double multiply(String v1, String v2) {
+        if (v1 == null || v1.isEmpty()) v1 = "0";
+        if (v2 == null || v2.isEmpty()) v2 = "0";
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(v2);
         return b1.multiply(b2).doubleValue();
     }
-
-
 
 
     /**
-     *
      * @param v1
      * @param v2
      * @param scale 保留几位小数
      * @return
      */
-    public static double divide(double v1,double v2,int scale){
-        if (scale<0){
-            scale=2;
+    public static double divide(double v1, double v2, int scale) {
+        if (scale < 0) {
+            scale = 2;
         }
-        BigDecimal b1=new BigDecimal(Double.toString(v1));
-        BigDecimal b2=new BigDecimal(Double.toString(v2));
-        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
+        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
 
-    public static double divide(String v1,String v2,int scale){
-        if (v1==null||v1.isEmpty())v1="0";
-        if (v2==null||v2.isEmpty())v2="0";
-        if (scale<0){
-            scale=2;
+    public static double divide(String v1, String v2, int scale) {
+        if (v1 == null || v1.isEmpty()) v1 = "0";
+        if (v2 == null || v2.isEmpty()) v2 = "0";
+        if (scale < 0) {
+            scale = 2;
         }
-        BigDecimal b1=new BigDecimal(v1);
-        BigDecimal b2=new BigDecimal(v2);
-        return b1.divide(b2,scale,BigDecimal.ROUND_HALF_UP).doubleValue();
+        BigDecimal b1 = new BigDecimal(v1);
+        BigDecimal b2 = new BigDecimal(v2);
+        return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
     }
-
 
 
     //得出距离  单位米
-    public static double getLatLngMeterDistance(double longitude1, double latitude1 , double longitude2, double latitude2) {
-        return MapUtils.getLatLngMeterDistance(longitude1,latitude1,longitude2,latitude2);
+    public static double getLatLngMeterDistance(double longitude1, double latitude1, double longitude2, double latitude2) {
+        return MapUtils.getLatLngMeterDistance(longitude1, latitude1, longitude2, latitude2);
     }
 
 
     public static float nextInclusiveExclusiveFloat(final float startInclusive, final float endExclusive) {
-        return MathUtils.nextInclusiveExclusiveFloat(startInclusive,endExclusive);
+        return MathUtils.nextInclusiveExclusiveFloat(startInclusive, endExclusive);
     }
 
-    public static float nextInclusiveInclusiveFloat(final float startInclusive, final float endInclusive,int keepPoint) {
-        return MathUtils.nextInclusiveInclusiveFloat(startInclusive,endInclusive,keepPoint);
+    public static float nextInclusiveInclusiveFloat(final float startInclusive, final float endInclusive, int keepPoint) {
+        return MathUtils.nextInclusiveInclusiveFloat(startInclusive, endInclusive, keepPoint);
     }
 
-    public static float getFloatFromInclusiveInclusiveRange(float min,float max,int keepPoint,float excludeValue){
-       return MathUtils.getFloatFromInclusiveInclusiveRange(min,max,keepPoint,excludeValue);
+    public static float getFloatFromInclusiveInclusiveRange(float min, float max, int keepPoint, float excludeValue) {
+        return MathUtils.getFloatFromInclusiveInclusiveRange(min, max, keepPoint, excludeValue);
     }
 
-    public static double getDoubleFromInclusiveInclusiveRange(double min,double max,int keepPoint,double excludeValue){
-        return MathUtils.getDoubleFromInclusiveInclusiveRange(min,max,keepPoint,excludeValue);
+    public static double getDoubleFromInclusiveInclusiveRange(double min, double max, int keepPoint, double excludeValue) {
+        return MathUtils.getDoubleFromInclusiveInclusiveRange(min, max, keepPoint, excludeValue);
     }
 
     /**
      * 求一个数在一个范围内的百分比
+     *
      * @param rangStartValue
      * @param rangeEndValue
      * @param positionValue
      * @return
      */
-    public static double getPercentInRange(Number rangStartValue,Number rangeEndValue,Number positionValue){
-        double totolRange=Math.max(rangStartValue.doubleValue(),rangeEndValue.doubleValue())-Math.min(rangStartValue.doubleValue(),rangeEndValue.doubleValue());
-        boolean flag=positionValue.doubleValue()>=rangStartValue.doubleValue()&&positionValue.doubleValue()<=rangeEndValue.doubleValue();
-        if (!flag)return 0;
-        BigDecimal bigDecimal1=new BigDecimal(String.valueOf(positionValue));
-        BigDecimal bigDecimal2=new BigDecimal(String.valueOf(rangStartValue));
-        BigDecimal result=bigDecimal1.subtract(bigDecimal2);
-        double percentRange=result.doubleValue();
-        DecimalFormat decimal=new DecimalFormat("#.00");
+    public static double getPercentInRange(Number rangStartValue, Number rangeEndValue, Number positionValue) {
+        double totolRange = Math.max(rangStartValue.doubleValue(), rangeEndValue.doubleValue()) - Math.min(rangStartValue.doubleValue(), rangeEndValue.doubleValue());
+        boolean flag = positionValue.doubleValue() >= rangStartValue.doubleValue() && positionValue.doubleValue() <= rangeEndValue.doubleValue();
+        if (!flag) return 0;
+        BigDecimal bigDecimal1 = new BigDecimal(String.valueOf(positionValue));
+        BigDecimal bigDecimal2 = new BigDecimal(String.valueOf(rangStartValue));
+        BigDecimal result = bigDecimal1.subtract(bigDecimal2);
+        double percentRange = result.doubleValue();
+        DecimalFormat decimal = new DecimalFormat("#.00");
         decimal.setRoundingMode(RoundingMode.FLOOR);
-        return Double.parseDouble(decimal.format(percentRange*1.0f/totolRange));
+        return Double.parseDouble(decimal.format(percentRange * 1.0f / totolRange));
     }
 
 
-    public static double getSpecValueInRangeByPercent(Number rangStartValue,Number rangeEndValue,double percent){
-        double totalRange=Math.max(rangStartValue.doubleValue(),rangeEndValue.doubleValue())-Math.min(rangStartValue.doubleValue(),rangeEndValue.doubleValue());
-        BigDecimal bigDecimal1=new BigDecimal(String.valueOf(totalRange));
-        BigDecimal bigDecimal2=new BigDecimal(String.valueOf(percent));
-        BigDecimal result=new BigDecimal(String.valueOf(rangStartValue)).add(bigDecimal1.multiply(bigDecimal2));
-        DecimalFormat decimal=new DecimalFormat("#.00");
+    public static double getSpecValueInRangeByPercent(Number rangStartValue, Number rangeEndValue, double percent) {
+        double totalRange = Math.max(rangStartValue.doubleValue(), rangeEndValue.doubleValue()) - Math.min(rangStartValue.doubleValue(), rangeEndValue.doubleValue());
+        BigDecimal bigDecimal1 = new BigDecimal(String.valueOf(totalRange));
+        BigDecimal bigDecimal2 = new BigDecimal(String.valueOf(percent));
+        BigDecimal result = new BigDecimal(String.valueOf(rangStartValue)).add(bigDecimal1.multiply(bigDecimal2));
+        DecimalFormat decimal = new DecimalFormat("#.00");
         decimal.setRoundingMode(RoundingMode.FLOOR);
-        return  Double.parseDouble(decimal.format(result.doubleValue()));
+        return Double.parseDouble(decimal.format(result.doubleValue()));
     }
 
 }

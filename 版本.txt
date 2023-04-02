@@ -12,6 +12,7 @@ V6.1.0
  containsDigit
  extractDigit
 7.DrawableUtils 新增 getTransparentDrawable
+8.MathUtils 新增isInPolygon(Point point, Rect boundRect)
 
 
 V6.0.0 ---->2022.9.25
