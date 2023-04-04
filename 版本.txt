@@ -13,6 +13,9 @@ V6.1.0
  extractDigit
 7.DrawableUtils 新增 getTransparentDrawable
 8.MathUtils 新增isInPolygon(Point point, Rect boundRect)
+9.ArrayUtils 新增 concat(String[] a, String[] b) 数组合并
+
+
 
 
 V6.0.0 ---->2022.9.25

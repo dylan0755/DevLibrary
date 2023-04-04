@@ -364,6 +364,15 @@ public class BitmapHelper {
         return image;
     }
 
+    public static Bitmap getLocalBitmap(String path) throws FileNotFoundException, IOException {
+        Bitmap bitmap = null;
+        FileInputStream fis = null;
+        fis = new FileInputStream(path);
+        bitmap = BitmapFactory.decodeStream(fis);
+        fis.close();
+        return bitmap;
+    }
+
 
     public static Bitmap centerCrop(Bitmap srcBitmap, int outWidth, int outHeight) {
         if (srcBitmap == null) return null;
