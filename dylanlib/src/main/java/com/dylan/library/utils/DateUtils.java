@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 
 /**
@@ -92,6 +93,13 @@ public class DateUtils {
         Date date = new Date();
         return String.format("%td", date);
 
+    }
+
+    public static int getHourFor24Format(){
+          SimpleDateFormat simpleDateFormat = new SimpleDateFormat("HH", Locale.getDefault());
+          Date date = new Date();
+          String time = simpleDateFormat.format(date);
+          return Integer.parseInt(time);
     }
 
     public static String getDayOfWeek() {

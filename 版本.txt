@@ -14,7 +14,7 @@ V6.1.0
 7.DrawableUtils 新增 getTransparentDrawable
 8.MathUtils 新增isInPolygon(Point point, Rect boundRect)
 9.ArrayUtils 新增 concat(String[] a, String[] b) 数组合并
-
+10.DateUtils 新增 getHourFor24Format
 
 
 
