@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Build;
@@ -14,6 +15,7 @@ import android.os.Environment;
 import android.provider.DocumentsContract;
 import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.util.Base64;
 
 import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.exception.ELog;
@@ -852,7 +854,27 @@ public class FileUtils {
     }
 
 
+    public static String fileToBase64(String filePath) {
+        try {
+            BufferedInputStream   bis = new BufferedInputStream(new FileInputStream(filePath));
+            ByteArrayOutputStream  baos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len = -1;
+            while ((len = bis.read(buffer))!=-1){
+                baos.write(buffer, 0, len);
+            }
+            bis.close();
+            baos.close();
+            return Base64.encodeToString(baos.toByteArray(), 2);
+        }catch (Exception e){
+            ELog.e(e);
+        }
+        return "";
+    }
 
+    public static Bitmap base64ToBitmap(String base64Data) {
+        return BitmapHelper.base64ToBitmap(base64Data);
+    }
 
 
 }
