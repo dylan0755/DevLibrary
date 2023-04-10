@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="com_font_color_4a4a4a">#4a4a4a</color>
+    <color name="com_font_color_D9D9D9">#D9D9D9</color>
+    <color name="com_font_color_E3E3E3">#E3E3E3</color>
+    <color name="com_font_color_FFFFF">#FFFFFF</color>
+    <dimen name="com_divider_line">1px</dimen>
+    <dimen name="com_font_size_14">14dp</dimen>
+    <dimen name="com_font_size_16">16dp</dimen>
+    <dimen name="com_padding_10">10dp</dimen>
+    <dimen name="com_padding_15">15dp</dimen>
+    <dimen name="com_padding_48">48dp</dimen>
+    <dimen name="com_padding_55">55dp</dimen>
+    <string name="app_cancel">取消</string>
+    <string name="app_confirm">确定</string>
+    <string name="app_prompt">提示</string>
+    <style name="com_divider_line">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">1px</item>
+        <item name="android:background">#F2F2F2</item>
+    </style>
+    <style name="com_vertical_line_1">
+        <item name="android:layout_width">@dimen/com_divider_line</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:background">@color/com_font_color_E3E3E3</item>
+    </style>
+    <style name="common_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+    <style mce_bogus="1" name="listDialogWindowAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/list_dialog_fade_in</item>
+        <item name="android:windowExitAnimation">@anim/list_dialog_fade_out</item>
+    </style>
+</resources>
