@@ -64,7 +64,7 @@ public class ActivityManager {
      * 获取当前Activity（堆栈中最后一个压入的）
      */
     public Activity currentActivity() {
-        if (activityStack.isEmpty()) return null;
+        if (activityStack==null||activityStack.isEmpty()) return null;
         else return activityStack.lastElement();//当没有元素时会闪退;
     }
 
