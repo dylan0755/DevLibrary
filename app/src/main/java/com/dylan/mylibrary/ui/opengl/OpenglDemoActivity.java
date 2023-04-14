@@ -243,10 +243,14 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
         String videoFileName = "opengl" + System.currentTimeMillis() + ".mp4";
         mVideoOutFile = new File(Environment.getExternalStorageDirectory().toString(), videoFileName);
 //        try {
+        try {
             muxerWrapper = new MediaMuxerWrapper(mVideoOutFile.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
-            // for video capturing
+        // for video capturing
 //            int videoWidth = mCameraRenderer.getCameraHeight();
 //            int videoHeight = mCameraRenderer.getCameraWidth();
 
@@ -259,8 +263,12 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
             } else {
                 new MediaShareAudioEncoder(muxerWrapper, mMediaEncoderListener);
             }
+        try {
             muxerWrapper.prepare();
-            muxerWrapper.startRecording();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        muxerWrapper.startRecording();
             startTime();
 
 //        } catch (IOException e) {

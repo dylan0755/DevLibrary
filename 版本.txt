@@ -16,7 +16,9 @@ V6.1.0
 9.ArrayUtils 新增 concat(String[] a, String[] b) 数组合并
 10.DateUtils 新增 getHourFor24Format
 11.FileUtils 新增 fileToBase64
-12.集成commonList dialog
+12.新增 commonList dialog
+13.新增 FloatActionMenu
+
 
 V6.0.0 ---->2022.9.25
 

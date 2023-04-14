@@ -203,5 +203,14 @@
     <declare-styleable name="MediumTextView">
         <attr name="textBold" format="float" />
     </declare-styleable>
-
+    <declare-styleable name="FloatActionMenu">
+        <attr name="viewOffset" format="dimension" />
+        <attr name="spreadDirection" format="enum">
+            <enum name="spread_up" value="0"/>
+            <enum name="spread_left" value="1"/>
+            <enum name="spread_right" value="2"/>
+            <enum name="spread_bottom" value="3"/>
+        </attr>
+        <attr name="duration" format="integer" />
+    </declare-styleable>
 </resources>
