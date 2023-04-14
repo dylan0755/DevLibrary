@@ -408,7 +408,10 @@ public class DateUtils {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd  HH:mm");
         return format.format(new Date(dateL));
     }
-
+    public static String getYMDHHmmss(long dateL) {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd  HH:mm:ss");
+        return format.format(new Date(dateL));
+    }
 
     public static class DateTime {
 

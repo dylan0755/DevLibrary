@@ -18,7 +18,7 @@ V6.1.0
 11.FileUtils 新增 fileToBase64
 12.新增 commonList dialog
 13.新增 FloatActionMenu
-
+14.DateUtils getYMDHHmmss(long dateL)
 
 V6.0.0 ---->2022.9.25
 
