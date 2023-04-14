@@ -1,7 +1,18 @@
 
 *** 已启动混淆， 在包名下新建目录记得到混淆文件开启防混淆！！（开启混淆只是为了对代码进行压缩）
 
-V6.1.0
+
+V6.2.0
+1.新增 CompletableFutureUtils 异步工具
+
+
+
+
+
+
+
+
+V6.1.0 ---->2023.4.14
 1.ScreenUtils 修复 getScreenHeight  全面屏获取高度不准确问题
 2.新增ScreenShotHelper 应用外截屏
 3.BitmapHelper 新增 getImageFromAssetsFile
