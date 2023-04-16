@@ -228,12 +228,27 @@ public class StringUtils {
         return pattern.matcher(str).matches();
     }
 
-    public static String extractDigit(String str) {
+
+
+    public static String extractIntegerDigit(String str) {
         String regEx = "[^0-9]";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);
         return m.replaceAll("").trim();
     }
+
+    public static String extractDigit(String str) {
+        String regEx = "[0-9]+([.]{1}[0-9]+){0,1}";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        String result="";
+        while (m.find()) {
+            result=m.group(0);
+        }
+        return result;
+    }
+
+
 
 
     public static CharSequence splitColor(String str, int limitStart, int limitEnd, String splitColor) {
