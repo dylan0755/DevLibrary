@@ -223,21 +223,13 @@ public class StringUtils {
     /**
      * 判断是否包含数字
      */
-    public static boolean containsDigit(String str) {
+    public static boolean containsNumber(String str) {
         Pattern pattern = Pattern.compile(".*[0-9].*");
         return pattern.matcher(str).matches();
     }
 
 
-
-    public static String extractIntegerDigit(String str) {
-        String regEx = "[^0-9]";
-        Pattern p = Pattern.compile(regEx);
-        Matcher m = p.matcher(str);
-        return m.replaceAll("").trim();
-    }
-
-    public static String extractDigit(String str) {
+    public static String extractNumber(String str) {
         String regEx = "[0-9]+([.]{1}[0-9]+){0,1}";
         Pattern p = Pattern.compile(regEx);
         Matcher m = p.matcher(str);
@@ -248,6 +240,12 @@ public class StringUtils {
         return result;
     }
 
+    public static boolean isIntegerNumber(String str) {
+        String regEx = "[0-9]+";
+        Pattern p = Pattern.compile(regEx);
+        Matcher m = p.matcher(str);
+        return m.matches();
+    }
 
 
 

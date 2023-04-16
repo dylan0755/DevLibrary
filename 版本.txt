@@ -4,7 +4,9 @@
 
 V6.2.0
 1.新增 CompletableFutureUtils 异步工具
-2.更新 extractDigit，支持小数
+2.StringUtils
+ 更新 extractNumber，支持小数
+ 新增 isIntegerNumber
 
 
 
