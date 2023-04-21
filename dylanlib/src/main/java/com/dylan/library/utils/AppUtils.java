@@ -15,6 +15,8 @@ import android.os.Build;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.content.FileProvider;
+import android.util.Log;
+
 import java.io.File;
 import java.util.Collections;
 import java.util.List;
@@ -114,6 +116,20 @@ public class AppUtils {
         CharSequence label = context.getPackageManager().getApplicationLabel(context.getApplicationInfo());
         if (label != null) return label.toString();
         else return "";
+    }
+
+    public static String getAppName(Context context,String packName){
+        try {
+            PackageManager pm=context.getPackageManager();
+           ApplicationInfo applicationInfo=pm.getApplicationInfo(packName,0);
+           if (applicationInfo!=null){
+               return applicationInfo.loadLabel(pm).toString();
+           }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+            Log.e("logtag",""+e.getMessage());
+        }
+        return null;
     }
 
 
