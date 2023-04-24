@@ -5,8 +5,6 @@ import com.dylan.library.m3u8.Exception.M3u8Exception;
 import com.dylan.library.m3u8.entry.VideoMeta;
 import com.dylan.library.m3u8.entry.VideoTs;
 import com.dylan.library.m3u8.utils.CommonUtil;
-import com.dylan.library.utils.HttpRequestUtils;
-import com.dylan.library.utils.Logger;
 
 import java.io.BufferedReader;
 import java.io.IOException;

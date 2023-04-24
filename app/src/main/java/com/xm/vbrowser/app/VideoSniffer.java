@@ -6,7 +6,7 @@ import com.dylan.library.bean.EventBundle;
 import com.dylan.library.m3u8.entry.M3U8;
 import com.dylan.library.m3u8.utils.M3U8Utils;
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.HttpRequestUtils;
+import com.dylan.library.utils.HttpUtils;
 import com.xm.vbrowser.app.activity.WebVideoGrabActivity;
 import com.xm.vbrowser.app.entity.DetectedVideoInfo;
 import com.xm.vbrowser.app.entity.VideoFormat;
@@ -17,7 +17,6 @@ import com.xm.vbrowser.app.util.VideoSnifferLogger;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -113,7 +112,7 @@ public class VideoSniffer {
             String sourcePageUrl = detectedVideoInfo.getSourcePageUrl();
             String sourcePageTitle = detectedVideoInfo.getSourcePageTitle();
             try {
-                HttpRequestUtils.HeadRequestResponse headRequestResponse = HttpRequestUtils.performHeadRequest(url);
+                HttpUtils.HeadRequestResponse headRequestResponse = HttpUtils.performHeadRequest(url);
                 url = headRequestResponse.getRealUrl();
                 detectedVideoInfo.setUrl(url);
                 Map<String, List<String>> headerMap = headRequestResponse.getHeaderMap();

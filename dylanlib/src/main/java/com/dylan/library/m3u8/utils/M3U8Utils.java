@@ -3,7 +3,7 @@ package com.dylan.library.m3u8.utils;
 import android.util.Log;
 
 import com.dylan.library.m3u8.entry.M3U8;
-import com.dylan.library.utils.HttpRequestUtils;
+import com.dylan.library.utils.HttpUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -15,7 +15,7 @@ import java.net.URL;
 
 public class M3U8Utils {
     public static double figureM3U8Duration(String url) throws IOException {
-        String m3U8Content = HttpRequestUtils.getResponseString(HttpRequestUtils.sendGetRequest(url));
+        String m3U8Content = HttpUtils.getResponseString(HttpUtils.getRequest(url));
         boolean isSubFileFound = false;
         double totalDuration = 0d;
         for(String lineString:m3U8Content.split("\n")){

@@ -7,9 +7,11 @@ import com.dylan.library.exception.ELog;
 import com.dylan.library.media.MimeTypeFile;
 
 import java.io.BufferedReader;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -337,7 +339,7 @@ public class HttpUtils {
         return null;
     }
 
-    private static String getResponseString(URLConnection urlConnection) throws IOException {
+    public static String getResponseString(URLConnection urlConnection) throws IOException {
 
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
@@ -377,7 +379,7 @@ public class HttpUtils {
 
 
 
-    private static HeadRequestResponse performHeadRequest(String url) throws IOException {
+    public static HeadRequestResponse performHeadRequest(String url) throws IOException {
         return performHeadRequest(url, commonHeaders);
     }
 
@@ -427,7 +429,7 @@ public class HttpUtils {
         }
     }
 
-    private static class HeadRequestResponse{
+    public static class HeadRequestResponse{
         private String realUrl;
         private Map<String, List<String>> headerMap;
 
@@ -462,6 +464,14 @@ public class HttpUtils {
         ResponseBody body=new ResponseBody();
         try {
             URL url = new URL(requestUrl);
+            if (url.getProtocol().toUpperCase().equals("HTTPS")) {
+                trustAllHosts();
+                HttpsURLConnection https = (HttpsURLConnection) url.openConnection();
+                https.setHostnameVerifier(DO_NOT_VERIFY);
+                conn = https;
+            } else {
+                conn = (HttpURLConnection) url.openConnection();
+            }
             conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("POST");
             conn.setReadTimeout(TIME_OUT);
@@ -569,4 +579,97 @@ public class HttpUtils {
         }
     }
 
+
+    
+    public static void save2File(URLConnection urlConnection,String saveFilePath) throws IOException {
+
+        DataInputStream dis = null;
+        FileOutputStream fos = null;
+
+        try {
+            dis = new DataInputStream(urlConnection.getInputStream());
+            //建立一个新的文件
+            fos = new FileOutputStream(new File(saveFilePath));
+            byte[] buffer = new byte[1024];
+            int length;
+            //开始填充数据
+            while ((length = dis.read(buffer)) > 0) {
+                fos.write(buffer, 0, length);
+            }
+        }finally {
+            if(dis != null){
+                dis.close();
+            }
+            if(fos != null){
+                fos.close();
+            }
+            ((HttpsURLConnection)urlConnection).disconnect();
+        }
+    }
+
+    public static URLConnection getRequest(String url) throws IOException {
+        return getRequest(url, null,commonHeaders);
+    }
+
+    public static URLConnection getRequest(String url,
+                                           Map<String, String> params) throws IOException {
+        return getRequest(url,params,commonHeaders);
+    }
+
+    public static URLConnection getRequest(String url, Map<String, String> params, Map<String, String> headers) throws IOException {
+        StringBuilder buf = new StringBuilder("");
+        URL urlObject = new URL(url);
+        buf.append(urlObject.getProtocol()).append("://").append(urlObject.getHost()).append(((urlObject.getPort()==-1) || (urlObject.getPort()!=urlObject.getDefaultPort()))?"":":"+urlObject.getPort()).append(urlObject.getPath());
+        String query = urlObject.getQuery();
+        if(params == null ){
+            params = new HashMap<String, String>();
+        }
+        boolean isQueryExist = false;
+        if(!(query == null || query.length() == 0) || params.size() > 0){
+            buf.append("?");
+            isQueryExist = true;
+        }
+        if(!(query == null || query.length() == 0)){
+            buf.append(query);
+            buf.append("&");
+        }
+        Set<Map.Entry<String, String>> entrys = params.entrySet();
+        for (Map.Entry<String, String> entry : entrys) {
+            buf.append(entry.getKey()).append("=")
+                    .append(URLEncoder.encode(entry.getValue(), defaultCharset)).append("&");
+        }
+        if(isQueryExist){
+            buf.deleteCharAt(buf.length() - 1);
+        }
+        System.out.println("before:"+url);
+        System.out.println("after:"+buf.toString());
+        urlObject = new URL(buf.toString());
+        HttpURLConnection conn = null;
+        try {
+            if (urlObject.getProtocol().toUpperCase().equals("HTTPS")) {
+                trustAllHosts();
+                HttpsURLConnection https = (HttpsURLConnection) urlObject.openConnection();
+                https.setHostnameVerifier(DO_NOT_VERIFY);
+                conn = https;
+            } else {
+                conn = (HttpURLConnection) urlObject.openConnection();
+            }
+            conn.setRequestMethod("GET");
+            conn.setConnectTimeout(connectTimeout);
+            conn.setReadTimeout(readTimeout);
+            if (headers != null) {
+                entrys = headers.entrySet();
+                for (Map.Entry<String, String> entry : entrys) {
+                    conn.setRequestProperty(entry.getKey(), entry.getValue());
+                }
+            }
+            conn.getResponseCode();
+            return conn;
+        }catch (IOException e){
+            if(conn != null) {
+                conn.disconnect();
+            }
+            throw e;
+        }
+    }
 }
