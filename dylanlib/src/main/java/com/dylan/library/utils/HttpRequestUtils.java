@@ -34,6 +34,7 @@ import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+@Deprecated
 public class HttpRequestUtils {
 
     private static final String TAG = "HttpRequestUtil";

@@ -4,8 +4,12 @@ import android.util.Log;
 
 
 import com.dylan.library.exception.ELog;
+import com.dylan.library.media.MimeTypeFile;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
@@ -34,9 +39,13 @@ import javax.net.ssl.X509TrustManager;
  * Desc:
  */
 public class HttpUtils {
-
+    public static final int TIME_OUT = 8 * 1000;                          //超时时间
+    public static final String CHARSET = "UTF-8";                         //编码格式
+    private static final String PREFIX = "--";                            //前缀
+    private static final String BOUNDARY = UUID.randomUUID().toString();  //边界标识 随机生成
+    private static final String CONTENT_TYPE = "multipart/form-data";     //内容类型
+    private static final String LINE_END = "\r\n";
     private static final String TAG = "HttpRequestUtil";
-
     private static final String defaultCharset = "UTF-8";//"GBK"
     private static final int readTimeout = 60000;//60s
     private static final int connectTimeout = 60000;//60s
@@ -444,6 +453,119 @@ public class HttpUtils {
 
         public void setHeaderMap(Map<String, List<String>> headerMap) {
             this.headerMap = headerMap;
+        }
+    }
+
+
+    public static ResponseBody postParamAndFiles(String requestUrl, final Map<String, String> strParams, final List<File> fileList) {
+        HttpURLConnection conn = null;
+        ResponseBody body=new ResponseBody();
+        try {
+            URL url = new URL(requestUrl);
+            conn = (HttpURLConnection) url.openConnection();
+            conn.setRequestMethod("POST");
+            conn.setReadTimeout(TIME_OUT);
+            conn.setConnectTimeout(TIME_OUT);
+            conn.setDoOutput(true);
+            conn.setDoInput(true);
+            conn.setUseCaches(false);//Post 请求不能使用缓存
+            //设置请求头参数
+            conn.setRequestProperty("Connection", "Keep-Alive");
+            conn.setRequestProperty("Charset", "UTF-8");
+            conn.setRequestProperty("Content-Type", CONTENT_TYPE+";boundary=" + BOUNDARY);
+            /**
+             * 请求体
+             */
+            //上传参数
+            DataOutputStream dos = new DataOutputStream(conn.getOutputStream());
+            //getStrParams()为一个
+            dos.write( getStrParams(strParams).toString().getBytes(CHARSET) );
+            dos.flush();
+            //文件上传
+            StringBuilder fileSb = new StringBuilder();
+            for (File file:fileList){
+                String contentType= MimeTypeFile.getMimeTypeForFile(file.getPath());
+                fileSb.append(PREFIX)
+                        .append(BOUNDARY)
+                        .append(LINE_END)
+                        .append("Content-Disposition: form-data; name=\"file\"; filename=\""
+                                + file.getName() + "\"" + LINE_END)
+                        .append("Content-Type: "+contentType + LINE_END) //此处的ContentType不同于 请求头 中Content-Type
+                        .append(LINE_END);// 参数头设置完以后需要两个换行，然后才是参数内容
+                dos.writeBytes(fileSb.toString());
+                dos.flush();
+                InputStream is = new FileInputStream(file);
+                byte[] buffer = new byte[1024];
+                int len = 0;
+                while ((len = is.read(buffer)) != -1){
+                    dos.write(buffer,0,len);
+                }
+                is.close();
+                dos.writeBytes(LINE_END);
+            }
+            //请求结束标志
+            dos.writeBytes(PREFIX + BOUNDARY + PREFIX + LINE_END);
+            dos.flush();
+            dos.close();
+            //读取服务器返回信息
+            InputStream in;
+            if (conn.getResponseCode() == 200) {
+                in= conn.getInputStream();
+            }else{
+                in= conn.getErrorStream();
+            }
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+            String line = null;
+            StringBuilder response = new StringBuilder();
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+            reader.close();
+            in.close();
+            body.status=conn.getResponseCode();
+            body.result=response.toString();
+        } catch (Exception e) {
+            ELog.e(e);
+            body.status=-100;
+            body.result=e.getMessage();
+        }finally {
+            if (conn!=null){
+                conn.disconnect();
+            }
+        }
+        return body;
+    }
+
+    /**
+     * 对post参数进行编码处理
+     * */
+    private static StringBuilder getStrParams(Map<String,String> strParams){
+        StringBuilder strSb = new StringBuilder();
+        for (Map.Entry<String, String> entry : strParams.entrySet() ){
+            strSb.append(PREFIX)
+                    .append(BOUNDARY)
+                    .append(LINE_END)
+                    .append("Content-Disposition: form-data; name=\"" + entry.getKey() + "\"" + LINE_END)
+                    .append("Content-Type: text/plain; charset=" + CHARSET + LINE_END)
+                    .append(LINE_END)// 参数头设置完以后需要两个换行，然后才是参数内容
+                    .append(entry.getValue())
+                    .append(LINE_END);
+        }
+        return strSb;
+    }
+
+
+
+    public static class ResponseBody{
+        public int status;
+        public String result;
+
+        @Override
+        public String toString() {
+            return "ResponseBody{" +
+                    "status=" + status +
+                    ", result='" + result + '\'' +
+                    '}';
         }
     }
 
