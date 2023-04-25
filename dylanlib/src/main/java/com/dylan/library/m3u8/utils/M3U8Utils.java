@@ -3,7 +3,7 @@ package com.dylan.library.m3u8.utils;
 import android.util.Log;
 
 import com.dylan.library.m3u8.entry.M3U8;
-import com.dylan.library.utils.HttpUtils;
+import com.dylan.library.http.HttpUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;

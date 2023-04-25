@@ -8,7 +8,7 @@ V6.2.0
  更新 extractNumber，支持小数
  新增 isIntegerNumber
 3.AppUtils getAppName(Context context,String packName) 根据包名查询第三方应用名称
-4.HttpUtils 新增 postParamAndFiles，同时上传参数和文件
+4. 新增 MultiPartPoster，同时上传参数和文件,支持json 和 表单
 
 
 
