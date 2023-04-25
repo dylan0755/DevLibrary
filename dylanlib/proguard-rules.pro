@@ -283,7 +283,10 @@
       public *;
       protected *;
 }
-
+-keep class com.dylan.library.http.** {
+      public *;
+      protected *;
+}
 -keep class com.dylan.library.io.** {
        public *;
        protected *;
