@@ -105,14 +105,10 @@ public class DeviceUtils {
         long totalSizeLong=blocksize*totalblocks;
         long avaliableSizeLong=avaliableblocks*blocksize;
         long usedSizeLong=totalSizeLong-avaliableSizeLong;
-
-        String totalSize= Formatter.formatFileSize(context, totalSizeLong);
-        String availableSize=Formatter.formatFileSize(context,avaliableSizeLong);
-        String usedSize=Formatter.formatFileSize(context,usedSizeLong);
         MemoryInfo memoryInfo=new MemoryInfo();
-        memoryInfo.setTotalSize(totalSize);
-        memoryInfo.setAvailableSize(availableSize);
-        memoryInfo.setUsedSize(usedSize);
+        memoryInfo.setTotalSizeL(totalSizeLong);
+        memoryInfo.setAvailableSizeL(avaliableSizeLong);
+        memoryInfo.setAvailableSizeL(usedSizeLong);
         return memoryInfo;
     }
 
@@ -127,13 +123,10 @@ public class DeviceUtils {
         long availableSizeLong=avaliableblocks*blocksize;
         long usedSizeLong=totalSizeLong-availableSizeLong;
 
-        String totalSize=Formatter.formatFileSize(context, totalSizeLong);
-        String availableSize=Formatter.formatFileSize(context,availableSizeLong);
-        String usedSize=Formatter.formatFileSize(context,usedSizeLong);
         MemoryInfo memoryInfo=new MemoryInfo();
-        memoryInfo.setTotalSize(totalSize);
-        memoryInfo.setAvailableSize(availableSize);
-        memoryInfo.setUsedSize(usedSize);
+        memoryInfo.setTotalSizeL(totalSizeLong);
+        memoryInfo.setAvailableSizeL(availableSizeLong);
+        memoryInfo.setUsedSizeL(usedSizeLong);
         return memoryInfo;
 
     }
@@ -143,14 +136,10 @@ public class DeviceUtils {
         long totalSizeLong=getTotalMemory(context);
         long availableSizeLong=getAvailMemory(context);
         long usedSizeLong=totalSizeLong-availableSizeLong;
-
-        String totalSize=Formatter.formatFileSize(context, totalSizeLong);
-        String availableSize=Formatter.formatFileSize(context,availableSizeLong);
-        String usedSize=Formatter.formatFileSize(context,usedSizeLong);
         MemoryInfo memoryInfo=new MemoryInfo();
-        memoryInfo.setTotalSize(totalSize);
-        memoryInfo.setAvailableSize(availableSize);
-        memoryInfo.setUsedSize(usedSize);
+        memoryInfo.setTotalSizeL(totalSizeLong);
+        memoryInfo.setAvailableSizeL(availableSizeLong);
+        memoryInfo.setUsedSizeL(usedSizeLong);
         return memoryInfo;
 
     }
