@@ -3,14 +3,15 @@ package com.dylan.library.widget.irecycler;
 import android.content.res.ColorStateList;
 import android.graphics.PorterDuff;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.TypedValue;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.dylan.library.adapter.BaseRecyclerAdapter;
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;

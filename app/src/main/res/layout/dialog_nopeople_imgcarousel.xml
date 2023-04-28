@@ -53,7 +53,7 @@
             android:visibility="visible"
             android:text="可拖动图片改变轮播顺序，或长按拖拽至底删除！"/>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvCategoryItem"
             android:layout_width="match_parent"
             android:layout_height="0dp"

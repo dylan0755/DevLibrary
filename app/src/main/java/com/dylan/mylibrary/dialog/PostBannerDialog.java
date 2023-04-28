@@ -1,9 +1,10 @@
 package com.dylan.mylibrary.dialog;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;

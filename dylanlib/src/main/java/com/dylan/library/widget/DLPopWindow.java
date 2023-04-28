@@ -5,8 +5,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
-import android.support.annotation.FloatRange;
-import android.support.annotation.IntRange;
+import androidx.annotation.FloatRange;
+
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
-import android.widget.TableRow;
 
 import com.dylan.library.utils.ContextUtils;
 

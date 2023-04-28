@@ -2,7 +2,7 @@ package com.dylan.library.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.util.DisplayMetrics;
 import android.view.ViewGroup;
 import android.widget.ImageView;

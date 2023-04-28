@@ -3,7 +3,7 @@ package com.dylan.library.widget.tab;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.IntDef;
+import androidx.annotation.IntDef;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.LayoutInflater;

@@ -2,12 +2,10 @@ package com.dylan.library.widget;
 
 import android.content.Context;
 import android.graphics.Paint;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
-
-import com.dylan.library.utils.Logger;
 
 /**
  * Author: Dylan

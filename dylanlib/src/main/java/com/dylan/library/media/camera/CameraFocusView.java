@@ -3,14 +3,13 @@ package com.dylan.library.media.camera;
 import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatImageView;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.AppCompatImageView;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
 
 import com.dylan.library.R;
 import com.dylan.library.utils.DensityUtils;
-import com.dylan.library.utils.Logger;
 
 /**
  * 不支持在ConstraintLayout 布局下，如果在该布局下要套一个常规的布局

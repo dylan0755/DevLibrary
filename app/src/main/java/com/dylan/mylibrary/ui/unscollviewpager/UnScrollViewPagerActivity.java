@@ -1,11 +1,12 @@
 package com.dylan.mylibrary.ui.unscollviewpager;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+
 import android.view.View;
 import android.widget.Button;
 
@@ -36,9 +37,9 @@ public class UnScrollViewPagerActivity extends AppCompatActivity{
     }
 
 
-    static class FragmentDataAdapter extends FragmentPagerAdapter{
+    static class FragmentDataAdapter extends FragmentPagerAdapter {
         private List<Fragment> fragmentList;
-        public FragmentDataAdapter(FragmentManager fm,List<Fragment> fragmentList) {
+        public FragmentDataAdapter(FragmentManager fm, List<Fragment> fragmentList) {
             super(fm);
             this.fragmentList=fragmentList;
         }

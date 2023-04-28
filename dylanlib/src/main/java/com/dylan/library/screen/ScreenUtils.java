@@ -7,7 +7,7 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.hardware.SensorManager;
 import android.os.Build;
-import android.support.v4.view.ViewCompat;
+import androidx.core.view.ViewCompat;
 import android.util.DisplayMetrics;
 import android.view.DisplayCutout;
 import android.view.OrientationEventListener;

@@ -5,8 +5,8 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.provider.DocumentsContract;
-import android.support.annotation.RequiresApi;
-import android.support.v4.provider.DocumentFile;
+import androidx.annotation.RequiresApi;
+import androidx.documentfile.provider.DocumentFile;
 
 import java.util.ArrayList;
 import java.util.List;

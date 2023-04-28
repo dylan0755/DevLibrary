@@ -34,7 +34,7 @@ import javax.net.ssl.X509TrustManager;
  * Desc:
  */
 public class MultiPartPoster {
-    public static final int TIME_OUT = 8 * 1000;                          //超时时间
+    public static  int TIME_OUT = 12000;                          //超时时间
     public static final String CHARSET = "UTF-8";                         //编码格式
     private static final String PREFIX = "--";                            //前缀
     private static final String BOUNDARY = UUID.randomUUID().toString();  //边界标识 随机生成

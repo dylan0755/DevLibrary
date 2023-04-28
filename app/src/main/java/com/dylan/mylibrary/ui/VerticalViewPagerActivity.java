@@ -1,14 +1,12 @@
 package com.dylan.mylibrary.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.dylan.mylibrary.R;
-import com.dylan.mylibrary.ui.verticalviewpager.VerticalPageAdapter;
-import com.dylan.mylibrary.ui.verticalviewpager.VerticalViewPager;
 
 /**
  * Author: Dylan

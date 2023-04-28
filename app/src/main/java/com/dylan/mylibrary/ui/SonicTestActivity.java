@@ -10,15 +10,14 @@ package com.dylan.mylibrary.ui;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
-import android.media.AudioFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -27,13 +26,11 @@ import android.widget.TextView;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.media.Sound;
 import com.dylan.library.media.VideoUtils;
-import com.dylan.library.utils.AndKit;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
 
 import java.io.File;
-import java.io.IOException;
 
 
 public class SonicTestActivity extends AppCompatActivity {

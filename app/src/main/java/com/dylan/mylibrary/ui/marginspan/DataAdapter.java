@@ -1,13 +1,14 @@
 package com.dylan.mylibrary.ui.marginspan;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dylan.library.utils.SpannableStringUtils;
 import com.dylan.mylibrary.R;

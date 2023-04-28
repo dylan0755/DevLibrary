@@ -2,8 +2,8 @@ package com.dylan.mylibrary.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ProgressBar;
 
 import com.dylan.library.widget.progressbar.ProgressBarDrawableDecorator;

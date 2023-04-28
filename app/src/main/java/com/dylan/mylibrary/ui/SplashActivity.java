@@ -1,16 +1,11 @@
 package com.dylan.mylibrary.ui;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Environment;
 import android.os.Handler;
-import android.os.PersistableBundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 
-import com.dylan.library.graphics.BitmapHelper;
-import com.dylan.library.utils.DensityUtils;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Author: Dylan

@@ -32,7 +32,7 @@ import java.util.List;
 /**
  * Created by huangwei on 2018/3/8 0008.
  */
-@android.support.annotation.RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+@androidx.annotation.RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
 public class VideoUtils {
     private static final Object TAG = VideoUtils.class.getSimpleName() ;
 

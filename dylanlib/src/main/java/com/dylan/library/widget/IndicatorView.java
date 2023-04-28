@@ -2,8 +2,8 @@ package com.dylan.library.widget;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.support.v7.widget.AppCompatImageView;
-import android.support.v7.widget.LinearLayoutCompat;
+import androidx.appcompat.widget.AppCompatImageView;
+import androidx.appcompat.widget.LinearLayoutCompat;
 import android.util.AttributeSet;
 import com.dylan.library.utils.DensityUtils;
 

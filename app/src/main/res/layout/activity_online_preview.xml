@@ -5,13 +5,13 @@
     android:orientation="vertical"
     >
 
-    <com.dylan.mylibrary.ui.onlinepic.PreViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/viewPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#000000"/>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvSelector"
         android:layout_width="wrap_content"
         android:layout_height="24dp"

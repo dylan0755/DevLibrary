@@ -2,26 +2,19 @@ package com.dylan.mylibrary.ui;
 
 import android.content.Intent;
 import android.graphics.Color;
-import android.media.MediaCodec;
 import android.os.Bundle;
-import android.support.v4.provider.DocumentFile;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.GridView;
 
-import com.dylan.library.graphics.BitmapDownloader;
 import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 
-import com.dylan.library.utils.DocumentFileReader;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.MultiDownloader;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.utils.thread.ThreadPools;
-import com.dylan.library.widget.DragSelectRangeView;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
 import com.dylan.mylibrary.IRecyclerViewActivity;
-import com.dylan.mylibrary.MyApplication;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.apksign.ApkSignListActivity;
 import com.dylan.mylibrary.ui.edittext.EditNumberActivity;
@@ -38,7 +31,6 @@ import com.dylan.mylibrary.ui.slidingrefresh.SlidingRefreshActivity;
 import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
-import com.dylan.photopicker.api.BitmapHelper;
 import com.xm.vbrowser.app.activity.WebVideoGrabActivity;
 
 import java.util.ArrayList;

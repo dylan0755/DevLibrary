@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.dylan.library.device.DeviceUtils;
 import com.dylan.library.device.MemoryInfo;
-import com.dylan.library.device.MemoryUtils;
 import com.dylan.library.device.SDCardUtils;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.screen.ScreenUtils;
@@ -136,8 +135,8 @@ public class CrashHandler implements Thread.UncaughtExceptionHandler {
         infos.put(CrashLog.SCREEN_WIDTH, String.valueOf(ScreenUtils.getScreenWidth(mContext)));
         infos.put(CrashLog.SCREEN_HEIGHT, String.valueOf(ScreenUtils.getScreenWidth(mContext)));
 
-        MemoryInfo memoryInfo_in = MemoryUtils.getInternalMemory(mContext);
-        MemoryInfo memoryInfo_ext = MemoryUtils.getExternalMemory(mContext);
+        MemoryInfo memoryInfo_in = DeviceUtils.getInternalMemory(mContext);
+        MemoryInfo memoryInfo_ext = DeviceUtils.getExternalMemory(mContext);
         infos.put(CrashLog.INTERNAL_TOTALSIZE, memoryInfo_in.getTotalSize());
         infos.put(CrashLog.INTERNAL_AVAILABLE, memoryInfo_in.getAvailableSize());
         infos.put(CrashLog.SDCARD_TOTALSIZE, memoryInfo_ext.getTotalSize());

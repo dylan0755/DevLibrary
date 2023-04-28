@@ -1,10 +1,9 @@
 package com.dylan.mylibrary.ui;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.mylibrary.R;

@@ -6,7 +6,7 @@ import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.Gravity;
 
-public class ShapeVerticalTextView extends android.support.v7.widget.AppCompatTextView {
+public class ShapeVerticalTextView extends androidx.appcompat.widget.AppCompatTextView {
     final boolean topDown;
     private ShapeViewHelper shapeViewHelper;
     public ShapeVerticalTextView(Context context, AttributeSet attrs) {

@@ -3,7 +3,7 @@ package com.dylan.library.media;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.RequiresApi;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;

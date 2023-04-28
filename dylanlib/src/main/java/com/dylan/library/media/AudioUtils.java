@@ -2,17 +2,15 @@ package com.dylan.library.media;
 
 import android.content.Context;
 import android.media.AudioFormat;
-import android.media.AudioTrack;
 import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
 import android.media.MediaExtractor;
 import android.media.MediaFormat;
 import android.media.MediaMuxer;
 import android.os.Build;
-import android.os.Environment;
 import android.os.ParcelFileDescriptor;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
+import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import android.util.Pair;
 
 
@@ -27,11 +25,8 @@ import java.io.InputStream;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.stream.IntStream;
 
 /**
  * Created by huangwei on 2018/3/7 0007.

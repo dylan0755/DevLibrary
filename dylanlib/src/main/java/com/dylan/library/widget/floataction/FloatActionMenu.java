@@ -4,8 +4,8 @@ import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
-import android.os.Build;
-import android.support.design.widget.FloatingActionButton;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.view.animation.BounceInterpolator;
 import android.widget.ImageView;
 
 import com.dylan.library.R;
-import com.dylan.library.utils.DensityUtils;
 
 import java.util.ArrayList;
 import java.util.List;

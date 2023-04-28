@@ -1,7 +1,7 @@
 package com.dylan.library.utils;
 
 import android.content.Context;
-import android.support.annotation.StyleRes;
+import androidx.annotation.StyleRes;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.RotateAnimation;

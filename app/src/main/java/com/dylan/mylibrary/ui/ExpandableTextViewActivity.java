@@ -2,13 +2,10 @@ package com.dylan.mylibrary.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
-import android.text.SpannableString;
-import android.text.Spanned;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.dylan.library.utils.CompatUtils;
 import com.dylan.library.utils.DensityUtils;
-import com.dylan.library.utils.HtmlUtils;
 import com.dylan.library.widget.ExpandableTextView;
 import com.dylan.mylibrary.R;
 

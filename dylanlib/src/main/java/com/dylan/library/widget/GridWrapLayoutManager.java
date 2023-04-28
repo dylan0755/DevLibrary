@@ -1,7 +1,7 @@
 package com.dylan.library.widget;
 
 import android.content.Context;
-import android.support.v7.widget.GridLayoutManager;
+import androidx.recyclerview.widget.GridLayoutManager;
 
 /**
  * Created by Dylan on 2017/1/12.

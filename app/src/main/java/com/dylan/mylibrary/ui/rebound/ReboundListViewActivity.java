@@ -1,12 +1,11 @@
 package com.dylan.mylibrary.ui.rebound;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 
 import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.rebound.ReboundListView;

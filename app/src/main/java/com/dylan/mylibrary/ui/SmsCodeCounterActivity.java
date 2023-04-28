@@ -3,13 +3,12 @@ package com.dylan.mylibrary.ui;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
 import com.dylan.library.callback.SingleClickListener;
-import com.dylan.library.utils.CompatUtils;
 import com.dylan.library.utils.SmsCodeCounter;
 import com.dylan.library.widget.shape.GradientDrawableBuilder;
 import com.dylan.mylibrary.R;

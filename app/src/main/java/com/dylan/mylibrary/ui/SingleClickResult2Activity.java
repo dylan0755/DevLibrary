@@ -1,7 +1,7 @@
 package com.dylan.mylibrary.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.dylan.library.activity.SingleClickAppCompatActivity;
 import com.dylan.mylibrary.R;

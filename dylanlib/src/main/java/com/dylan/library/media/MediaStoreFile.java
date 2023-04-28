@@ -1,6 +1,6 @@
 package com.dylan.library.media;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 import com.dylan.library.bean.MergeCell;
 

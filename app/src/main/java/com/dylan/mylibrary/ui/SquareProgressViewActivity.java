@@ -2,20 +2,16 @@ package com.dylan.mylibrary.ui;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.dylan.library.exception.ELog;
-import com.dylan.library.media.MediaTools;
-import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.TimerClock;
 import com.dylan.library.widget.SquareProgressView;
 import com.dylan.mylibrary.R;
 import com.gyf.barlibrary.ImmersionBar;
-
-import butterknife.BindView;
 
 /**
  * Author: Dylan

@@ -2,17 +2,16 @@ package com.dylan.library.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.LayoutRes;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
 import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.utils.ContextUtils;
-import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 
 import java.lang.reflect.Constructor;
@@ -100,7 +99,7 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
         return null;
     }
 
-    public abstract @LayoutRes
+    public abstract
     int getLayoutId();
 
     public abstract void onBindViewHolder(VH holder, T t, int position);

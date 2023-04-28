@@ -1,12 +1,11 @@
 package com.dylan.mylibrary.ui;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.dylan.library.utils.Logger;
 import com.dylan.library.widget.VerticalSeekBar;
 import com.dylan.mylibrary.R;
 

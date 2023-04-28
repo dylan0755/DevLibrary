@@ -5,9 +5,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.os.Build;
-import android.support.annotation.NonNull;
-
-import static android.Manifest.permission.ACCESS_NETWORK_STATE;
+import androidx.annotation.NonNull;
 
 
 /**

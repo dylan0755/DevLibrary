@@ -1,7 +1,7 @@
 package com.dylan.library.utils;
 
 import android.app.Dialog;
-import android.support.v7.app.AlertDialog;
+import androidx.appcompat.app.AlertDialog;
 import android.view.Gravity;
 import android.view.WindowManager;
 

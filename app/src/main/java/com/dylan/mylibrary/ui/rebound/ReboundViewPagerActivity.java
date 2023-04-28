@@ -2,11 +2,12 @@ package com.dylan.mylibrary.ui.rebound;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -35,7 +36,7 @@ public class ReboundViewPagerActivity extends AppCompatActivity {
 
 
 
-    class ViewPagerAdapter extends PagerAdapter{
+    class ViewPagerAdapter extends PagerAdapter {
 
         private List<View> viewList=new ArrayList<>();
 

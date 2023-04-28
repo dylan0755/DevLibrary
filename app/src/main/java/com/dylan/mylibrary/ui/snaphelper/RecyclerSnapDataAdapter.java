@@ -1,18 +1,14 @@
 package com.dylan.mylibrary.ui.snaphelper;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.TextView;
 
 import com.dylan.library.adapter.BaseRecyclerAdapter;
 import com.dylan.mylibrary.R;
-import com.dylan.mylibrary.adapter.PictureDataGridAdapter;
 
 import java.util.ArrayList;
 

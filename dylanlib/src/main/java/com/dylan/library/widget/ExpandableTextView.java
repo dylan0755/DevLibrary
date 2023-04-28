@@ -5,9 +5,9 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.ColorInt;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.AppCompatTextView;
+import androidx.annotation.ColorInt;
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatTextView;
 import android.text.Layout;
 import android.text.Spannable;
 import android.text.SpannableString;
@@ -18,19 +18,15 @@ import android.text.TextPaint;
 import android.text.TextUtils;
 import android.text.style.AlignmentSpan;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
 import android.text.style.ImageSpan;
 import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.Transformation;
-import android.widget.TextView;
 
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.HtmlUtils;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.widget.OverLinkMovementMethod;
 
 import java.lang.reflect.Field;
 

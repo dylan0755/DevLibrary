@@ -8,14 +8,10 @@ import android.content.UriPermission;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.DocumentsContract;
 import android.provider.Settings;
-import android.support.annotation.RequiresApi;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.view.View;
-
-import com.dylan.library.R;
+import androidx.annotation.RequiresApi;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.lang.reflect.Method;
 
@@ -28,6 +24,7 @@ public class PermissionUtils {
     public static final int REQUEST_PER_CAMERA_WRITE =101;
     public static final int REQUEST_PER_EXTERNAL_STORAGE =102;
     public static final int REQUEST_PER_DRAW_OVER_LAY=103;
+
 
 
     public static boolean hasNotCameraAndExternalWritePermission(Activity activity) {
@@ -90,6 +87,11 @@ public class PermissionUtils {
 
     public static boolean hasNotDrawOverlaysPermission(Context context){
         return !hasDrawOverlaysPermission(context);
+    }
+
+    public static boolean hasWriteSecureSettingsPermission(Context context){
+        int hasSecurePerm = ContextCompat.checkSelfPermission(context, Manifest.permission.WRITE_SECURE_SETTINGS);
+        return hasSecurePerm==0;
     }
 
 

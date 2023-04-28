@@ -3,7 +3,7 @@ package com.dylan.mylibrary.ui.apksign;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.widget.ListView;
 
 import com.dylan.mylibrary.R;

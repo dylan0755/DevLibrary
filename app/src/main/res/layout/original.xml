@@ -25,7 +25,7 @@
     </com.zhy.autolayout.AutoLinearLayout>
 
 
-    <android.support.v4.view.ViewPager
+    <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp_containner"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

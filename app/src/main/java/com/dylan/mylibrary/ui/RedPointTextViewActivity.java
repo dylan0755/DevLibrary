@@ -3,7 +3,7 @@ package com.dylan.mylibrary.ui;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import com.dylan.mylibrary.R;
 import com.dylan.library.widget.RedPointTextView;

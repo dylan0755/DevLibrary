@@ -3,10 +3,10 @@ package com.dylan.library.widget.banner;
 import android.content.Context;
 import android.graphics.Outline;
 import android.os.Build;
-import android.support.annotation.NonNull;
-import android.support.annotation.RequiresApi;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -291,7 +291,7 @@ public class Banner extends RelativeLayout implements ViewPager.OnPageChangeList
     }
 
     /**
-     * {@link android.support.v4.view.ViewPager.SimpleOnPageChangeListener}
+     * {@link ViewPager.SimpleOnPageChangeListener}
      */
     public Banner setOuterPageChangeListener(ViewPager.OnPageChangeListener outerPageChangeListener) {
         this.outerPageChangeListener = outerPageChangeListener;

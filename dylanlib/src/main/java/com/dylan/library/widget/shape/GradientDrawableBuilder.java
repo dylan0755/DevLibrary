@@ -2,7 +2,7 @@ package com.dylan.library.widget.shape;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 import android.util.TypedValue;
 
 /**
