@@ -1,8 +1,7 @@
 package com.dylan.library.http;
 
-import android.util.Log;
 
-import com.dylan.library.exception.ELog;
+import com.dylan.library.io.FileUtils;
 import com.dylan.library.media.MimeTypeFile;
 import com.dylan.library.utils.EmptyUtils;
 
@@ -55,8 +54,10 @@ public class MultiPartPoster {
     public static ResponseBody postJson(String requestUrl, final FormDataJSONParam paramJson, final List<FormDataFile> fileList) {
         HttpURLConnection conn = null;
         ResponseBody body = new ResponseBody();
+        long startTime=0;
         try {
             URL url = new URL(requestUrl);
+            startTime=System.currentTimeMillis();
             if (url.getProtocol().toUpperCase().equals("HTTPS")) {
                 trustAllHosts();
                 HttpsURLConnection https = (HttpsURLConnection) url.openConnection();
@@ -131,13 +132,17 @@ public class MultiPartPoster {
             body.status = conn.getResponseCode();
             body.result = response.toString();
         } catch (Exception e) {
-            ELog.e(e);
+            e.printStackTrace();
             body.status = -100;
             body.result = e.getMessage();
         } finally {
             if (conn != null) {
                 conn.disconnect();
             }
+        }
+        body.duration=(System.currentTimeMillis()-startTime)*1.0f/1000+"s";
+        if (body.status==200){
+            body.byteSize= FileUtils.getFormatFileSize(body.result.getBytes().length);
         }
         return body;
     }
@@ -150,7 +155,9 @@ public class MultiPartPoster {
     public static ResponseBody postForm(String requestUrl, final Map<String, String> strParams, final List<FormDataFile> fileList) {
         HttpURLConnection conn = null;
         ResponseBody body = new ResponseBody();
+        long startTime=0;
         try {
+            startTime=System.currentTimeMillis();
             URL url = new URL(requestUrl);
             if (url.getProtocol().toUpperCase().equals("HTTPS")) {
                 trustAllHosts();
@@ -226,13 +233,17 @@ public class MultiPartPoster {
             body.status = conn.getResponseCode();
             body.result = response.toString();
         } catch (Exception e) {
-            ELog.e(e);
+            e.printStackTrace();
             body.status = -100;
             body.result = e.getMessage();
         } finally {
             if (conn != null) {
                 conn.disconnect();
             }
+        }
+        body.duration=(System.currentTimeMillis()-startTime)*1.0f/1000+"s";
+        if (body.status==200){
+            body.byteSize=FileUtils.getFormatFileSize(body.result.getBytes().length);
         }
         return body;
     }
@@ -258,12 +269,16 @@ public class MultiPartPoster {
 
     public static class ResponseBody {
         public int status;
+        public String duration;
+        public String byteSize;
         public String result;
 
         @Override
         public String toString() {
             return "ResponseBody{" +
                     "status=" + status +
+                    ", duration='" + duration + '\'' +
+                    ", byteSize='" + byteSize + '\'' +
                     ", result='" + result + '\'' +
                     '}';
         }
@@ -280,11 +295,11 @@ public class MultiPartPoster {
             }
 
             public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                Log.i(TAG, "checkClientTrusted");
+                System.out.println( "checkClientTrusted");
             }
 
             public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
-                Log.i(TAG, "checkServerTrusted");
+                System.out.println( "checkServerTrusted");
             }
         }};
 
@@ -344,4 +359,5 @@ public class MultiPartPoster {
             this.jsonParam = jsonParam;
         }
     }
+
 }
