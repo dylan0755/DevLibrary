@@ -1,5 +1,7 @@
 package com.dylan.library.utils.thread;
 
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadFactory;
@@ -47,7 +49,22 @@ public class ThreadPools {
     }
 
 
-    public void fixedThreadPoolRun(Runnable runnable){
+    public void run(Runnable runnable){
+        fixedThreadPoolRun(runnable);
+    }
+
+    public void runDelay(Runnable runnable,long delay){
+        Timer timer=new Timer();
+        timer.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                timer.cancel();
+                fixedThreadPoolRun(runnable);
+            }
+        }, delay);
+    }
+
+    private void fixedThreadPoolRun(Runnable runnable){
         if (isShutDown()){
             mFixThreadPool=creatFixThreadPool();
         }

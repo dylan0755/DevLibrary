@@ -94,7 +94,7 @@ public class FileSearcher {
         final List<File> totalList = new ArrayList<>();
         final int[] count = new int[1];
         for (final String path : pathLists) {
-            ThreadPools.getInstance().fixedThreadPoolRun(new Runnable() {
+            ThreadPools.getInstance().run(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                 @Override
                 public void run() {

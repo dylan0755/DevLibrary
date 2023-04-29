@@ -10,7 +10,9 @@ V6.2.0
 3.AppUtils getAppName(Context context,String packName) 根据包名查询第三方应用名称
 4. 新增 MultiPartPoster，同时上传参数和文件,支持json 和 表单
 5.删除MemoryUtils，里面的方法转移到DeviceUtils中
-
+6.ThreadPools
+1.fixedThreadPoolRun 更名为run
+2.新增runDelay
 
 
 
