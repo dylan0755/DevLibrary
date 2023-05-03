@@ -247,6 +247,22 @@ public class StringUtils {
         return m.matches();
     }
 
+    /**
+     * 判断是否为数字
+     */
+    public static boolean isNumber(String str) {
+        return isNumber(str,false);
+    }
+    public static boolean isNumber(String str,boolean includeStarWithPlus) {
+        if (EmptyUtils.isEmpty(str))return false;
+        if (includeStarWithPlus){
+            return str.matches("[+-]?[0-9]+(\\.[0-9]+)?");
+        }else{
+            return str.matches("[-]?[0-9]+(\\.[0-9]+)?");
+        }
+
+    }
+
 
 
     public static CharSequence splitColor(String str, int limitStart, int limitEnd, String splitColor) {
@@ -297,16 +313,6 @@ public class StringUtils {
         return new String(c);
     }
 
-
-    /**
-     * 判断是否为数字
-     */
-    public static boolean isNumber(String str) {
-        String pattern = "^[\\+\\-]?[\\d]+(\\.[\\d]+)?$";
-        Pattern r = Pattern.compile(pattern);
-        Matcher m = r.matcher(str);
-        return m.matches();
-    }
 
 
     //支持全角空格去除
