@@ -1,5 +1,9 @@
 package com.dylan.library.http;
 
+import android.util.Log;
+
+
+import com.dylan.library.exception.ELog;
 
 import java.io.BufferedReader;
 import java.io.DataInputStream;
@@ -13,6 +17,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,15 +27,19 @@ import java.util.UUID;
 
 import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
-
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 
 /**
  * Author: Dylan
  * Date: 2021/12/13
  * Desc:
  */
-public class HttpUtils {
+
+@Deprecated
+public class Http {
     public static final int TIME_OUT = 8 * 1000;                          //超时时间
     public static final String CHARSET = "UTF-8";                         //编码格式
     private static final String PREFIX = "--";                            //前缀
@@ -55,18 +65,45 @@ public class HttpUtils {
         commonHeaders.put("User-Agent", "Mozilla/5.0 (iPhone; CPU iPhone OS 9_1 like Mac OS X) AppleWebKit/601.1.46 (KHTML, like Gecko) Version/9.0 Mobile/13B143 Safari/601.1");
     }
 
+    private static void trustAllHosts() {
+        final String TAG = "trustAllHosts";
+        // Create a trust manager that does not validate certificate chains
+        TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
 
-    public static ResponseBody get(String url) throws IOException {
+            public X509Certificate[] getAcceptedIssuers() {
+                return new X509Certificate[] {};
+            }
+
+            public void checkClientTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                Log.i(TAG, "checkClientTrusted");
+            }
+
+            public void checkServerTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+                Log.i(TAG, "checkServerTrusted");
+            }
+        } };
+
+        // Install the all-trusting trust manager
+        try {
+            SSLContext sc = SSLContext.getInstance("TLS");
+            sc.init(null, trustAllCerts, new java.security.SecureRandom());
+            HttpsURLConnection.setDefaultSSLSocketFactory(sc.getSocketFactory());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static String get(String url) throws IOException {
         return get( url,null, commonHeaders);
     }
 
-    public static ResponseBody get(String url, Map<String, String> params) throws IOException {
+    public static String get(String url, Map<String, String> params) throws IOException {
         return get( url,params, commonHeaders);
     }
 
-    public static ResponseBody get(String url, Map<String, String> params, Map<String, String> headers) throws IOException {
-        HttpURLConnection connection=obtainGetRequest(url,params,headers);
-        return getResponseString(connection);
+    public static String get(String url, Map<String, String> params, Map<String, String> headers) throws IOException {
+         HttpURLConnection connection=obtainGetRequest(url,params,headers);
+         return getResponseString(connection);
     }
 
 
@@ -100,7 +137,14 @@ public class HttpUtils {
         urlObject = new URL(buf.toString());
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection) urlObject.openConnection();
+            if (urlObject.getProtocol().toUpperCase().equals("HTTPS")) {
+                trustAllHosts();
+                HttpsURLConnection https = (HttpsURLConnection) urlObject.openConnection();
+                https.setHostnameVerifier(DO_NOT_VERIFY);
+                conn = https;
+            } else {
+                conn = (HttpURLConnection) urlObject.openConnection();
+            }
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(connectTimeout);
             conn.setReadTimeout(readTimeout);
@@ -125,29 +169,27 @@ public class HttpUtils {
     }
 
     private static HttpURLConnection obtainGetRequest(String url,
-                                                      Map<String, String> params) throws IOException {
+                                                 Map<String, String> params) throws IOException {
         return obtainGetRequest(url,params,commonHeaders);
     }
 
 
 
 
-    public static ResponseBody post(String url,Map<String, String> params) throws IOException {
+    public static String post(String url,Map<String, String> params) throws IOException {
         HttpURLConnection connection=ObtainPostRequest(url,params,commonHeaders);
         return getResponseString(connection);
     }
-    public static ResponseBody post(String url,Map<String, String> params,Map<String, String> headers) throws IOException {
+    public static String post(String url,Map<String, String> params,Map<String, String> headers) throws IOException {
         HttpURLConnection connection=ObtainPostRequest(url,params,headers);
         return getResponseString(connection);
     }
 
 
-    public static ResponseBody postJson(String reqUrl, String json){
+    public static String postJson(String reqUrl, String json){
         String result = "";
         HttpURLConnection httpURLConnection = null;
         BufferedReader reader = null;
-        ResponseBody body=new ResponseBody();
-        long start=System.currentTimeMillis();
         try {
             URL url = new URL(reqUrl);
             httpURLConnection = (HttpURLConnection) url.openConnection();
@@ -159,27 +201,22 @@ public class HttpUtils {
             httpURLConnection.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
             httpURLConnection.connect();
             OutputStream os = httpURLConnection.getOutputStream();
-            os.write(json.getBytes("UTF-8"));
+            os.write(json.getBytes("utf-8"));
             os.flush();
             os.close();
-            InputStream in;
             if (httpURLConnection.getResponseCode() == 200) {
-                in = httpURLConnection.getInputStream();
-            } else {
-                in = httpURLConnection.getErrorStream();
+                reader = new BufferedReader(
+                        new InputStreamReader(httpURLConnection.getInputStream())
+                );
+                String data = "";
+                StringBuilder builder = new StringBuilder();
+                while ((data = reader.readLine()) != null) {
+                    builder.append(data);
+                }
+                result = builder.toString();
             }
-            reader = new BufferedReader(new InputStreamReader(in));
-            String data = "";
-            StringBuilder builder = new StringBuilder();
-            while ((data = reader.readLine()) != null) {
-                builder.append(data);
-            }
-            body.status = httpURLConnection.getResponseCode();
-            body.result = builder.toString();
         } catch (Exception e) {
-            e.printStackTrace();
-            body.status = -100;
-            body.result = e.getMessage();
+            ELog.e(e);
         } finally {
             try {
                 if (reader != null) {
@@ -192,11 +229,7 @@ public class HttpUtils {
                 e.printStackTrace();
             }
         }
-        body.duration=(System.currentTimeMillis()-start)*1.0f/1000+"s";
-        if (body.status==200){
-            body.byteSize=ResponseBody.getFormatFileSize(body.result.getBytes().length);
-        }
-        return body;
+        return result;
     }
 
 
@@ -214,7 +247,14 @@ public class HttpUtils {
         URL urlObject = new URL(url);
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection) urlObject.openConnection();
+            if (urlObject.getProtocol().toUpperCase().equals("HTTPS")) {
+                trustAllHosts();
+                HttpsURLConnection https = (HttpsURLConnection) urlObject.openConnection();
+                https.setHostnameVerifier(DO_NOT_VERIFY);
+                conn = https;
+            } else {
+                conn = (HttpURLConnection) urlObject.openConnection();
+            }
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(connectTimeout);
             conn.setReadTimeout(readTimeout);
@@ -240,7 +280,7 @@ public class HttpUtils {
     }
 
     private static HttpURLConnection ObtainPostRequest(String url,
-                                                       Map<String, String> params) throws IOException {
+                                                  Map<String, String> params) throws IOException {
         try {
             return ObtainPostRequest(url, params, commonHeaders);
         }catch (Exception e){
@@ -257,7 +297,14 @@ public class HttpUtils {
         URL urlObject = new URL(url);
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection) urlObject.openConnection();
+            if (urlObject.getProtocol().toUpperCase().equals("HTTPS")) {
+                trustAllHosts();
+                HttpsURLConnection https = (HttpsURLConnection) urlObject.openConnection();
+                https.setHostnameVerifier(DO_NOT_VERIFY);
+                conn = https;
+            } else {
+                conn = (HttpURLConnection) urlObject.openConnection();
+            }
             conn.setRequestMethod("POST");
             conn.setConnectTimeout(connectTimeout);
             conn.setReadTimeout(readTimeout);
@@ -291,36 +338,28 @@ public class HttpUtils {
         return null;
     }
 
-    public static ResponseBody getResponseString(URLConnection urlConnection) throws IOException {
+    public static String getResponseString(URLConnection urlConnection) throws IOException {
 
         InputStream inputStream = null;
         InputStreamReader inputStreamReader = null;
         BufferedReader reader = null;
         StringBuffer resultBuffer = new StringBuffer();
         String tempLine;
-        ResponseBody body=new ResponseBody();
-        long start=System.currentTimeMillis();
+
         try {
-            HttpURLConnection connection= (HttpURLConnection) urlConnection;
-            if (connection.getResponseCode() == 200) {
-                inputStream = urlConnection.getInputStream();
-            } else {
-                inputStream = connection.getErrorStream();
+            if (((HttpURLConnection)urlConnection).getResponseCode() >= 300) {
+                throw new IOException("HTTP Request is not success, Response code is " + ((HttpURLConnection)urlConnection).getResponseCode());
             }
-
-
+            inputStream = urlConnection.getInputStream();
             inputStreamReader = new InputStreamReader(inputStream, defaultCharset);
             reader = new BufferedReader(inputStreamReader);
+
             while ((tempLine = reader.readLine()) != null) {
                 resultBuffer.append(tempLine+"\n");
             }
-            body.status = connection.getResponseCode();
-            body.result = resultBuffer.toString();
-        }catch (Exception e){
-            e.printStackTrace();
-            body.status = -100;
-            body.result = e.getMessage();
-        }  finally {
+            return resultBuffer.toString();
+        }finally {
+
             if (reader != null) {
                 reader.close();
             }
@@ -334,11 +373,6 @@ public class HttpUtils {
             }
             ((HttpURLConnection) urlConnection).disconnect();
         }
-        body.duration=(System.currentTimeMillis()-start)*1.0f/1000+"s";
-        if (body.status==200){
-            body.byteSize=ResponseBody.getFormatFileSize(body.result.getBytes().length);
-        }
-        return body;
     }
 
 
@@ -356,7 +390,14 @@ public class HttpUtils {
         URL urlObject = new URL(url);
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection) urlObject.openConnection();
+            if (urlObject.getProtocol().toUpperCase().equals("HTTPS")) {
+                trustAllHosts();
+                HttpsURLConnection https = (HttpsURLConnection) urlObject.openConnection();
+                https.setHostnameVerifier(DO_NOT_VERIFY);
+                conn = https;
+            } else {
+                conn = (HttpURLConnection) urlObject.openConnection();
+            }
             conn.setInstanceFollowRedirects(false);
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(connectTimeout);
@@ -419,7 +460,7 @@ public class HttpUtils {
 
 
 
-
+    
     public static void save2File(URLConnection urlConnection,String saveFilePath) throws IOException {
 
         DataInputStream dis = null;
@@ -485,7 +526,14 @@ public class HttpUtils {
         urlObject = new URL(buf.toString());
         HttpURLConnection conn = null;
         try {
-            conn = (HttpURLConnection) urlObject.openConnection();
+            if (urlObject.getProtocol().toUpperCase().equals("HTTPS")) {
+                trustAllHosts();
+                HttpsURLConnection https = (HttpsURLConnection) urlObject.openConnection();
+                https.setHostnameVerifier(DO_NOT_VERIFY);
+                conn = https;
+            } else {
+                conn = (HttpURLConnection) urlObject.openConnection();
+            }
             conn.setRequestMethod("GET");
             conn.setConnectTimeout(connectTimeout);
             conn.setReadTimeout(readTimeout);
@@ -504,18 +552,4 @@ public class HttpUtils {
             throw e;
         }
     }
-
-    private static String getRequestHeader(HttpURLConnection httpUrlCon){
-        String requestInfo="Request Headers:"+"\n"
-                +httpUrlCon.getRequestMethod() +"\n"+
-                " Connection: " + httpUrlCon.getRequestProperty("Connection") +"\n"+
-                " Accept: " + httpUrlCon.getRequestProperty("Connection") +"\n"+
-                " User-Agent: " + httpUrlCon.getRequestProperty("User-Agent") +"\n"+
-                " Accept-Encoding: " + httpUrlCon.getRequestProperty("Accept-Encoding") +"\n"+
-                " Accept-Language: " + httpUrlCon.getRequestProperty("Accept-Language") +"\n"+
-                " Cookie: " + httpUrlCon.getRequestProperty("Cookie") +"\n"+
-                " Connection: " + httpUrlCon.getRequestProperty("Connection") +"\n";
-        return requestInfo;
-    }
-
 }

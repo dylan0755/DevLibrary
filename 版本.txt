@@ -15,6 +15,7 @@ V6.2.0
 1.fixedThreadPoolRun 更名为run
 2.新增runDelay
 7.CacheManager 清除SharePreference 增加排除项
+8.HttpUtils 返回ResponseBody
 
 
 V6.1.0 ---->2023.4.14

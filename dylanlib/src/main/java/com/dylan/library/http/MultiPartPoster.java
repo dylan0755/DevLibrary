@@ -267,22 +267,6 @@ public class MultiPartPoster {
     }
 
 
-    public static class ResponseBody {
-        public int status;
-        public String duration;
-        public String byteSize;
-        public String result;
-
-        @Override
-        public String toString() {
-            return "ResponseBody{" +
-                    "status=" + status +
-                    ", duration='" + duration + '\'' +
-                    ", byteSize='" + byteSize + '\'' +
-                    ", result='" + result + '\'' +
-                    '}';
-        }
-    }
 
 
     private static void trustAllHosts() {
