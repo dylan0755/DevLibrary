@@ -1,10 +1,7 @@
 package com.dylan.library.http;
 
-import com.dylan.library.proguard.NotProguard;
-
 import java.math.BigDecimal;
 
-@NotProguard
 public class ResponseBody {
     public int status;
     public String duration;
@@ -25,7 +22,7 @@ public class ResponseBody {
     public static String getFormatFileSize(long size) {
         double kiloByte = (double)size * 1.0 / 1024.0;
         if (kiloByte < 1.0) {
-            return "0 B";
+            return ((int)(kiloByte*1024))+" B";
         } else {
             double megaByte = kiloByte / 1024.0;
             if (megaByte < 1.0) {

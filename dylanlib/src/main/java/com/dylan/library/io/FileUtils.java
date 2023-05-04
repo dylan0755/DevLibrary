@@ -822,7 +822,7 @@ public class FileUtils {
     public static String getFormatFileSize(long size) {
         double kiloByte = size * 1.0 / 1024;
         if (kiloByte < 1) {
-            return "0 B";
+            return ((int)(kiloByte*1024))+" B";
         }
 
         double megaByte = kiloByte / 1024;
