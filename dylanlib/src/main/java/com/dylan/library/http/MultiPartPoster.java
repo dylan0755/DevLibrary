@@ -120,7 +120,7 @@ public class MultiPartPoster {
      * status OK,otherwise an exception is thrown.
      * @throws IOException
      */
-    public ResponseBody finish() throws IOException {
+    public ResponseBody getResponseBody() throws IOException {
         writer.append(LINE_Feed).flush();
         writer.append("--" + boundary + "--").append(LINE_Feed);
         writer.close();
