@@ -17,7 +17,7 @@ V6.2.0
 7.CacheManager 清除SharePreference 增加排除项
 8.HttpUtils 返回ResponseBody
 9.解决FileUtils getFormatFileSize 小于1K 不显示字节问题
-
+10.新增ReflectUtils,反射获取Application 和 MainHandler
 
 
 

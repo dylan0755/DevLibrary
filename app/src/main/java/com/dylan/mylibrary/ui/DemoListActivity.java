@@ -1,5 +1,6 @@
 package com.dylan.mylibrary.ui;
 
+import android.app.Application;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import com.dylan.library.screen.ScreenUtils;
 import com.dylan.library.utils.DensityUtils;
 
 import com.dylan.library.utils.Logger;
+import com.dylan.library.utils.ReflectUtils;
 import com.dylan.library.utils.thread.ThreadPools;
 import com.dylan.library.widget.GridViewPager;
 import com.dylan.mylibrary.HorizontalScrollBackActivity;
@@ -87,11 +89,10 @@ public class DemoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_demolist);
         initEvent();
         ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE);
-        ThreadPools.getInstance().fixedThreadPoolRun(new Runnable() {
+        ThreadPools.getInstance().run(new Runnable() {
             @Override
             public void run() {
-
-
+                ReflectUtils.getApplication();
             }
         });
 
