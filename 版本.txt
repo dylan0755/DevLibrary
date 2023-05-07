@@ -18,7 +18,7 @@ V6.2.0
 8.HttpUtils 返回ResponseBody
 9.解决FileUtils getFormatFileSize 小于1K 不显示字节问题
 10.新增ReflectUtils,反射获取Application 和 MainHandler
-
+11.新增PerDayTaskRecorder， 以每天为单位进行存储
 
 
 
