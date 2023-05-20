@@ -1,5 +1,6 @@
 package com.dylan.library.utils;
 
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
@@ -53,6 +54,10 @@ public class DrawableUtils {
     public static void setColorFilter(Drawable drawable,int filterColor){
         PorterDuffColorFilter colorFilter= new PorterDuffColorFilter(filterColor, PorterDuff.Mode.MULTIPLY);
         drawable.setColorFilter(colorFilter);
+    }
+
+    public static ColorStateList getColorStateList(int color){
+        return new ColorStateList(new int[1][0],new int[]{color});
     }
 
 
