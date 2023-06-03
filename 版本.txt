@@ -19,7 +19,7 @@ V6.2.0
 9.解决FileUtils getFormatFileSize 小于1K 不显示字节问题
 10.新增ReflectUtils,反射获取Application 和 MainHandler
 11.新增PerDayTaskRecorder， 以每天为单位进行存储
-
+12.StringUtils 新增 findSerialSameString findSameCharCount 找连续相同字符和总共相同字符数量
 
 
 

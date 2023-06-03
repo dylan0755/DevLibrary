@@ -278,6 +278,49 @@ public class StringUtils {
         return span;
     }
 
+    public static String findSerialSameString(String s1, String s2) {
+        if (s1.length() > s2.length()) {
+            String temp = s1;
+            s1 = s2;
+            s2 = temp;
+        }
+        int n = s1.length();
+        int index = 0;
+        ok:
+        for (; n > 0; n--) {
+            for (int i = 0; i < s1.length() - n + 1; i++) {
+                String s = s1.substring(i, i + n);
+                if (s2.contains(s)) {
+                    index = i;
+                    break ok;
+                }
+            }
+        }
+        return s1.substring(index, index + n);
+    }
+
+    public static int findSameCharCount(String source, String target) {
+        char[] sources = source.toCharArray();
+        char[] targets = target.toCharArray();
+        int sourceLen = sources.length;
+        int targetLen = targets.length;
+        int samesum = 0;
+        int locatpre = 0;
+        String sameStr = "";
+        for (int i = 0; i < targetLen - 1; i++) {
+            for (int j = 0; j < sourceLen - 1; j++) {
+                if ((targets[i] == sources[j]) && (targets[i + 1] == sources[j + 1])) {
+                    samesum++;
+                    sameStr += targets[i];
+                    if (j > locatpre) {
+                        locatpre = j;
+                    }
+                    break;
+                }
+            }
+        }
+        return samesum;
+    }
     //全角转半角
     public static String toDBC(String input) {
         if (input == null) return "";
