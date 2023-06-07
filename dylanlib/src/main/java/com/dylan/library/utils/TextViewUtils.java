@@ -4,6 +4,7 @@ import android.graphics.Paint;
 import android.text.method.ScrollingMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
@@ -70,4 +71,13 @@ public class TextViewUtils {
         textView.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG | Paint.ANTI_ALIAS_FLAG);
     }
 
+    //获取ScrollView 中TextView当前显示的首行
+    public static int getVisibleFirstLineInScrollView(TextView textView, ScrollView scrollView){
+        return textView.getLayout().getLineForVertical(scrollView.getScrollY());
+    }
+
+    //获取ScrollView 中TextView当前显示的末行
+    public static int getVisibleEndLineInScrollView(TextView textView, ScrollView scrollView){
+        return textView.getLayout().getLineForVertical(scrollView.getScrollY() + scrollView.getMeasuredHeight());
+    }
 }

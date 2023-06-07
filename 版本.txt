@@ -1,102 +1,102 @@
 
-*** ÒÑÆô¶¯»ìÏı£¬ ÔÚ°üÃûÏÂĞÂ½¨Ä¿Â¼¼ÇµÃµ½»ìÏıÎÄ¼ş¿ªÆô·À»ìÏı£¡£¡£¨¿ªÆô»ìÏıÖ»ÊÇÎªÁË¶Ô´úÂë½øĞĞÑ¹Ëõ£©
+*** ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ú°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½Ä¿Â¼ï¿½ÇµÃµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Îªï¿½Ë¶Ô´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½
 
 
 V6.2.0
-1.ĞÂÔö CompletableFutureUtils Òì²½¹¤¾ß
+1.ï¿½ï¿½ï¿½ï¿½ CompletableFutureUtils ï¿½ì²½ï¿½ï¿½ï¿½ï¿½
 2.StringUtils
- ¸üĞÂ extractNumber£¬Ö§³ÖĞ¡Êı
- ĞÂÔö isIntegerNumber
- ĞŞ¸´ÕıÔò£¬½â¾ö´ø+ºÅµÄÊı×ÖÊ¶±ğÎªtrueµÄÎÊÌâ
-3.AppUtils getAppName(Context context,String packName) ¸ù¾İ°üÃû²éÑ¯µÚÈı·½Ó¦ÓÃÃû³Æ
-4. ĞÂÔö MultiPartPoster£¬Í¬Ê±ÉÏ´«²ÎÊıºÍÎÄ¼ş,Ö§³Öjson ºÍ ±íµ¥
-5.É¾³ıMemoryUtils£¬ÀïÃæµÄ·½·¨×ªÒÆµ½DeviceUtilsÖĞ
+ ï¿½ï¿½ï¿½ï¿½ extractNumberï¿½ï¿½Ö§ï¿½ï¿½Ğ¡ï¿½ï¿½
+ ï¿½ï¿½ï¿½ï¿½ isIntegerNumber
+ ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ò£¬½ï¿½ï¿½ï¿½ï¿½+ï¿½Åµï¿½ï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½Îªtrueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.AppUtils getAppName(Context context,String packName) ï¿½ï¿½ï¿½İ°ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+4. ï¿½ï¿½ï¿½ï¿½ MultiPartPosterï¿½ï¿½Í¬Ê±ï¿½Ï´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½,Ö§ï¿½ï¿½json ï¿½ï¿½ ï¿½ï¿½
+5.É¾ï¿½ï¿½MemoryUtilsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½×ªï¿½Æµï¿½DeviceUtilsï¿½ï¿½
 6.ThreadPools
-1.fixedThreadPoolRun ¸üÃûÎªrun
-2.ĞÂÔörunDelay
-7.CacheManager Çå³ıSharePreference Ôö¼ÓÅÅ³ıÏî
-8.HttpUtils ·µ»ØResponseBody
-9.½â¾öFileUtils getFormatFileSize Ğ¡ÓÚ1K ²»ÏÔÊ¾×Ö½ÚÎÊÌâ
-10.ĞÂÔöReflectUtils,·´Éä»ñÈ¡Application ºÍ MainHandler
-11.ĞÂÔöPerDayTaskRecorder£¬ ÒÔÃ¿ÌìÎªµ¥Î»½øĞĞ´æ´¢
+1.fixedThreadPoolRun ï¿½ï¿½ï¿½ï¿½Îªrun
+2.ï¿½ï¿½ï¿½ï¿½runDelay
+7.CacheManager ï¿½ï¿½ï¿½SharePreference ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½ï¿½ï¿½
+8.HttpUtils ï¿½ï¿½ï¿½ï¿½ResponseBody
+9.ï¿½ï¿½ï¿½FileUtils getFormatFileSize Ğ¡ï¿½ï¿½1K ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
+10.ï¿½ï¿½ï¿½ï¿½ReflectUtils,ï¿½ï¿½ï¿½ï¿½ï¿½È¡Application ï¿½ï¿½ MainHandler
+11.ï¿½ï¿½ï¿½ï¿½PerDayTaskRecorderï¿½ï¿½ ï¿½ï¿½Ã¿ï¿½ï¿½Îªï¿½ï¿½Î»ï¿½ï¿½ï¿½Ğ´æ´¢
 
 
 
 
 V6.1.0 ---->2023.4.14
-1.ScreenUtils ĞŞ¸´ getScreenHeight  È«ÃæÆÁ»ñÈ¡¸ß¶È²»×¼È·ÎÊÌâ
-2.ĞÂÔöScreenShotHelper Ó¦ÓÃÍâ½ØÆÁ
-3.BitmapHelper ĞÂÔö getImageFromAssetsFile
-4.Ôö¼Ó°Ù¶ÈApi·â×°
-5.ĞÂÔöNIOUtils
-6.StringUtils ĞÂÔö:
+1.ScreenUtils ï¿½Ş¸ï¿½ getScreenHeight  È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ß¶È²ï¿½×¼È·ï¿½ï¿½ï¿½ï¿½
+2.ï¿½ï¿½ï¿½ï¿½ScreenShotHelper Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.BitmapHelper ï¿½ï¿½ï¿½ï¿½ getImageFromAssetsFile
+4.ï¿½ï¿½ï¿½Ó°Ù¶ï¿½Apiï¿½ï¿½×°
+5.ï¿½ï¿½ï¿½ï¿½NIOUtils
+6.StringUtils ï¿½ï¿½ï¿½ï¿½:
  startWithKeyWord(String originText, String[] keyWords)
  containsDigit
  extractDigit
-7.DrawableUtils ĞÂÔö getTransparentDrawable
-8.MathUtils ĞÂÔöisInPolygon(Point point, Rect boundRect)
-9.ArrayUtils ĞÂÔö concat(String[] a, String[] b) Êı×éºÏ²¢
-10.DateUtils ĞÂÔö getHourFor24Format
-11.FileUtils ĞÂÔö fileToBase64
-12.ĞÂÔö commonList dialog
-13.ĞÂÔö FloatActionMenu
+7.DrawableUtils ï¿½ï¿½ï¿½ï¿½ getTransparentDrawable
+8.MathUtils ï¿½ï¿½ï¿½ï¿½isInPolygon(Point point, Rect boundRect)
+9.ArrayUtils ï¿½ï¿½ï¿½ï¿½ concat(String[] a, String[] b) ï¿½ï¿½ï¿½ï¿½Ï²ï¿½
+10.DateUtils ï¿½ï¿½ï¿½ï¿½ getHourFor24Format
+11.FileUtils ï¿½ï¿½ï¿½ï¿½ fileToBase64
+12.ï¿½ï¿½ï¿½ï¿½ commonList dialog
+13.ï¿½ï¿½ï¿½ï¿½ FloatActionMenu
 14.DateUtils getYMDHHmmss(long dateL)
 
 V6.0.0 ---->2022.9.25
 
-1.DragSelectRangeView ¹«¿ªÉèÖÃ×îĞ¡¿í¸ß·½·¨
-2.DragScaleLayout dispatchTouchEvent(MotionEvent ev,int action) ·µ»Øaction
-3.FileUtils ĞÂÔösaveBytesToFile ½«×Ö½ÚÊı×é±£´æ³ÉÄ³ÖÖÀàĞÍÎÄ¼ş
-4.DrawableTextView ĞÂÔösetColorFilter(int color) ×ÅÉ«
-5.MultiDownloader ÏÂÔØÊ§°Ü£¬½â¾öÖØ¶¨ÏòÎÊÌâ
-6.VideoPlayerHelper ÉèÖÃÊÇ·ñÑ­»·²¥·Å
-7.VideoUtils Ôö¼Ó»ñÈ¡Ê±³¤Î¢Ãë  getDurationUS
-8.ĞÂÔö ScrollHorizontalRecyclerView£¬½â¾öScrollView ÖĞÇ¶Ì×RecyclerView ºáÏò»¬¶¯ÊÂ¼ş³åÍ»ÎÊÌâ¡£
-9.ĞÂÔöAudioRecorder Â¼Òô¸¨ÖúÀà
-10.AudioUtils makeSilenceWav Éú³É¾²ÒôÒôÆµÎÄ¼ş
-11.ĞÂÔö CropTopImageView¡¢RoundCropTopImageView ÏÔÊ¾Í¼Æ¬ÉÏ°ë²¿·Ö
-12.PhotoSelector ¹«¿ª selectFromCamera selectFromPhotoAlbum
-13.SoundPoolHelper ²¥·ÅÌØĞ§
-14.ScreenUtils ĞÂÔöÊÖ»ú´«¸ĞÆ÷·½Ïò¼àÌı
-15.ĞŞ¸´SignatureUtils »ñÈ¡md5 Ê§Ğ§bug
-16.ĞÂÔöTextFileReader  Text ÎÄ¼ş °´ĞĞ¶ÁÈ¡
+1.DragSelectRangeView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ß·ï¿½ï¿½ï¿½
+2.DragScaleLayout dispatchTouchEvent(MotionEvent ev,int action) ï¿½ï¿½ï¿½ï¿½action
+3.FileUtils ï¿½ï¿½ï¿½ï¿½saveBytesToFile ï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½é±£ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
+4.DrawableTextView ï¿½ï¿½ï¿½ï¿½setColorFilter(int color) ï¿½ï¿½É«
+5.MultiDownloader ï¿½ï¿½ï¿½ï¿½Ê§ï¿½Ü£ï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+6.VideoPlayerHelper ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Ñ­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+7.VideoUtils ï¿½ï¿½ï¿½Ó»ï¿½È¡Ê±ï¿½ï¿½Î¢ï¿½ï¿½  getDurationUS
+8.ï¿½ï¿½ï¿½ï¿½ ScrollHorizontalRecyclerViewï¿½ï¿½ï¿½ï¿½ï¿½ScrollView ï¿½ï¿½Ç¶ï¿½ï¿½RecyclerView ï¿½ï¿½ï¿½ò»¬¶ï¿½ï¿½Â¼ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½â¡£
+9.ï¿½ï¿½ï¿½ï¿½AudioRecorder Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+10.AudioUtils makeSilenceWav ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ä¼ï¿½
+11.ï¿½ï¿½ï¿½ï¿½ CropTopImageViewï¿½ï¿½RoundCropTopImageView ï¿½ï¿½Ê¾Í¼Æ¬ï¿½Ï°ë²¿ï¿½ï¿½
+12.PhotoSelector ï¿½ï¿½ï¿½ï¿½ selectFromCamera selectFromPhotoAlbum
+13.SoundPoolHelper ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§
+14.ScreenUtils ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+15.ï¿½Ş¸ï¿½SignatureUtils ï¿½ï¿½È¡md5 Ê§Ğ§bug
+16.ï¿½ï¿½ï¿½ï¿½TextFileReader  Text ï¿½Ä¼ï¿½ ï¿½ï¿½ï¿½Ğ¶ï¿½È¡
 
 
 V5.9.0 ---->2022.4.30
 
-1.ĞÂÔöFileSearcher,¼¯³ÉAndroid 11 Storage Access È¨ÏŞ»ñÈ¡£¬¶ÁÈ¡Î¢ĞÅ»º´æ
-2.ĞÂÔö DocumentFileReader Android 11 ¶ÁÈ¡ÆäËüÓ¦ÓÃµÄÄ¿Â¼£¬ÈçÎ¢ĞÅÖĞDownLoadÎÄ¼ş¼ĞÄ¿Â¼
-3.ĞÂÔö MediumEditText
-4.ResizableLayout  ¸üÃûÎªObserveKeyBoardRootLayout ¼àÌıÈí¼üÅÌµ¯³öÓë¹Ø±Õ
-5.É¾³ıNoExtraUiDialog, ĞÂÔö EditTouchDialogInputHelper  ÔÚÒ³Ãæµã»÷ÊäÈë¿òµ¯³ö¶Ô»°¿ò£¬ÔÚ¶Ô»°¿òÖĞÊäÈë
-6.ĞÂÔöMultiDownloader£¬ÏÂÔØ¶à¸öÎÄ¼ş£¬Ö»ÓĞÈ«²¿ÏÂÔØ³É¹¦²Å»Øµ÷³É¹¦£¬Ê¹ÓÃ³¡¾°£º¶àÍ¼Æ¬ÏÂÔØ£¬
+1.ï¿½ï¿½ï¿½ï¿½FileSearcher,ï¿½ï¿½ï¿½ï¿½Android 11 Storage Access È¨ï¿½Ş»ï¿½È¡ï¿½ï¿½ï¿½ï¿½È¡Î¢ï¿½Å»ï¿½ï¿½ï¿½
+2.ï¿½ï¿½ï¿½ï¿½ DocumentFileReader Android 11 ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ãµï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½DownLoadï¿½Ä¼ï¿½ï¿½ï¿½Ä¿Â¼
+3.ï¿½ï¿½ï¿½ï¿½ MediumEditText
+4.ResizableLayout  ï¿½ï¿½ï¿½ï¿½ÎªObserveKeyBoardRootLayout ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½ï¿½Ø±ï¿½
+5.É¾ï¿½ï¿½NoExtraUiDialog, ï¿½ï¿½ï¿½ï¿½ EditTouchDialogInputHelper  ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½òµ¯³ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½Ú¶Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+6.ï¿½ï¿½ï¿½ï¿½MultiDownloaderï¿½ï¿½ï¿½ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ö»ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½Ø³É¹ï¿½ï¿½Å»Øµï¿½ï¿½É¹ï¿½ï¿½ï¿½Ê¹ï¿½Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½Ø£ï¿½
   Api:downloadMultiImages(Context context,String ,final List<String> imgUrls, MultiDownloader.DownloadStateListener listener)
-7.ĞÂÔöShadowDrawable ,java ´úÂë¿ìËÙÎªView ÉèÖÃÒõÓ°
-8.ĞÂÔöCenterCropVideoView;
-9.ĞÂÔöDragSortItemTouchHelper  ¿ÉÉèÖÃÄ³¸öItem²»ÔÊĞíÍÏ¶¯£¬Ò»°ã³¡¾°ÊÇµÚ0¸ö²»ÔÊĞíÍÏ¶¯,ÌŞ³ıLongPressDragItemHelper
-10.IntentUtils getChooseVideoIntent  getChooseImageIntent Ä¬ÈÏ²ÉÓÃACTION_PICK
-11.ĞÂÔö PauseResumeLoopThread£¬¿ØÖÆÏß³ÌµÄÔİÍ£ºÍ»Ö¸´
-12.ĞÂÔö DanMuView ÊµÏÖ¹ö¶¯£¬¿É¸ù¾İÒµÎñĞèÇó¼Ì³ĞDanMuView ×Ô¶¨ÒåÊÓÍ¼¡£
-13.BulletinBoard ÓÅ»¯£¬ĞŞ¸´ÔÚ×ÓÏß³Ì²»ÄÜ¸üĞÂUI bug
-14.FragmentSwitcher É¾³ı¿Õ¹¹ÔìÆ÷·½·¨
-15.BottomSlideDialogFragment ¸üÃûÎª BottomSlideFragmentDialog£¬¶ÔÄÚ²¿·½·¨ÃüÃûÓÅ»¯£¬Ê¹ÓÃµÄÊ±ºò°ÑËüµ±×öDialog µÄ´æÔÚ¡£
-16.DrawableTextView ÔÚ´úÂëÖĞ¸ü¸Ädrawable changDrawableLeftIcon changDrawableTopIcon changDrawableRightIcon  changDrawableBottomIcon
-17.ViewUtils ĞÂÔölogViewLocationInfo, ´òÓ¡ViewµÄÎ»ÖÃ£¬Æ«ÒÆºÍËõ·Å ·½±ãµ÷ÊÔ
-18.DragScaleLayout ºÍ DragScaleHelper  Ö§³ÖÈÎÒâ²¼¾ÖÍÏ¶¯ºÍËõ·Å
+7.ï¿½ï¿½ï¿½ï¿½ShadowDrawable ,java ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó°
+8.ï¿½ï¿½ï¿½ï¿½CenterCropVideoView;
+9.ï¿½ï¿½ï¿½ï¿½DragSortItemTouchHelper  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Itemï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½Ò»ï¿½ã³¡ï¿½ï¿½ï¿½Çµï¿½0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¶ï¿½,ï¿½Ş³ï¿½LongPressDragItemHelper
+10.IntentUtils getChooseVideoIntent  getChooseImageIntent Ä¬ï¿½Ï²ï¿½ï¿½ï¿½ACTION_PICK
+11.ï¿½ï¿½ï¿½ï¿½ PauseResumeLoopThreadï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ìµï¿½ï¿½ï¿½Í£ï¿½Í»Ö¸ï¿½
+12.ï¿½ï¿½ï¿½ï¿½ DanMuView Êµï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¸ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì³ï¿½DanMuView ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½
+13.BulletinBoard ï¿½Å»ï¿½ï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³Ì²ï¿½ï¿½Ü¸ï¿½ï¿½ï¿½UI bug
+14.FragmentSwitcher É¾ï¿½ï¿½ï¿½Õ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+15.BottomSlideDialogFragment ï¿½ï¿½ï¿½ï¿½Îª BottomSlideFragmentDialogï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Dialog ï¿½Ä´ï¿½ï¿½Ú¡ï¿½
+16.DrawableTextView ï¿½Ú´ï¿½ï¿½ï¿½ï¿½Ğ¸ï¿½ï¿½ï¿½drawable changDrawableLeftIcon changDrawableTopIcon changDrawableRightIcon  changDrawableBottomIcon
+17.ViewUtils ï¿½ï¿½ï¿½ï¿½logViewLocationInfo, ï¿½ï¿½Ó¡Viewï¿½ï¿½Î»ï¿½Ã£ï¿½Æ«ï¿½Æºï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+18.DragScaleLayout ï¿½ï¿½ DragScaleHelper  Ö§ï¿½ï¿½ï¿½ï¿½ï¿½â²¼ï¿½ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
 V5.8.0 ---->2022.4.5
 
-1.EditTextUtils insert(EditText editText,CharSequence text)ÔÚ¹â±êÎ»ÖÃ²åÈëÎÄ±¾
-2.ĞÂÔöM3U8DownLoader ÊÓÆµÏÂÔØ,»ñÈ¡m3u8 ĞÅÏ¢
-3.UrlUtils ºÍ FileUtils ĞÂÔö getSuffixFromUrl »ñÈ¡urlºó×º
-4.ĞŞ¸´IOUtils getBytes(InputStream inputStream) Îª¿ÕÎÊÌâ
-5.ĞÂÔöEditDoubleInputHelper Ğ¡Êı
-6.ĞÂÔöBanner ¿ìËÙÊµÏÖº£±¨×óÓÒ»¬¶¯Banner
-7.ĞÂÔöColorUtils changeAlpha(int color,float fraction)¸Ä±äÑÕÉ«Í¸Ã÷¶È
-8.ÓÅ»¯WebProgressView ¸ß¶È¼ÆËã
-9.ĞÂÔöLayoutInflateAdapter ,Îª¸÷ÖÖ²¼¾Ö¶¯Ì¬Ìí¼ÓÊı¾İ£¬·½±ã²Ù×÷
+1.EditTextUtils insert(EditText editText,CharSequence text)ï¿½Ú¹ï¿½ï¿½Î»ï¿½Ã²ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+2.ï¿½ï¿½ï¿½ï¿½M3U8DownLoader ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½,ï¿½ï¿½È¡m3u8 ï¿½ï¿½Ï¢
+3.UrlUtils ï¿½ï¿½ FileUtils ï¿½ï¿½ï¿½ï¿½ getSuffixFromUrl ï¿½ï¿½È¡urlï¿½ï¿½×º
+4.ï¿½Ş¸ï¿½IOUtils getBytes(InputStream inputStream) Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+5.ï¿½ï¿½ï¿½ï¿½EditDoubleInputHelper Ğ¡ï¿½ï¿½
+6.ï¿½ï¿½ï¿½ï¿½Banner ï¿½ï¿½ï¿½ï¿½Êµï¿½Öºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½Banner
+7.ï¿½ï¿½ï¿½ï¿½ColorUtils changeAlpha(int color,float fraction)ï¿½Ä±ï¿½ï¿½ï¿½É«Í¸ï¿½ï¿½ï¿½ï¿½
+8.ï¿½Å»ï¿½WebProgressView ï¿½ß¶È¼ï¿½ï¿½ï¿½
+9.ï¿½ï¿½ï¿½ï¿½LayoutInflateAdapter ,Îªï¿½ï¿½ï¿½Ö²ï¿½ï¿½Ö¶ï¿½Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½İ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 10.FileUtils isImageFileType  isAudioFileType isVideoFileType
 11.BitmapHelper loadBitmapFromByteArray
 
@@ -105,57 +105,57 @@ V5.8.0 ---->2022.4.5
 
 V5.7.0 ---->2022.3.7
 
-1.ĞÂÔöSupportFlowLayout,¿½±´android.support.design.internalÏÂµÄFlowLayout,¸ü¸Äprotect Îª public
+1.ï¿½ï¿½ï¿½ï¿½SupportFlowLayout,ï¿½ï¿½ï¿½ï¿½android.support.design.internalï¿½Âµï¿½FlowLayout,ï¿½ï¿½ï¿½ï¿½protect Îª public
 2.IntentUtils getChooseVideoIntent
-3.AudioUtils ĞÂÔö amplifyPCMData £¬ÔöÇ¿pcmÒôÁ¿
-4.ĞÂÔöHttpUtils £¬·â×° get he post ÇëÇó
-5.AppUtils ĞÂÔö checkIsAppInstalled
-6.MediaTools ĞÂÔö getDurationDayHourMinuteSecond
-7.SpannableStringUtils  getTintResizeSpannableString ĞÂÔö Á½¶Î×ÅÉ«
-8.AutoLinearLayoutManager RecyclerView ËæItem ¸ß¶È×ÔÊÊÓ¦
-9.DataTypeConversionUtils ¸üĞÂ£¬short[] ºÍ byte[] Ïà»¥×ª»»
-10.PcmToWavUtils ÓÅ»¯
-11.TextViewUtils ĞÂÔö setMovementMethodInScrollView£¬TextView ÔÚ ScrollView »¬¶¯³åÍ»ÎÊÌâ
+3.AudioUtils ï¿½ï¿½ï¿½ï¿½ amplifyPCMData ï¿½ï¿½ï¿½ï¿½Ç¿pcmï¿½ï¿½ï¿½ï¿½
+4.ï¿½ï¿½ï¿½ï¿½HttpUtils ï¿½ï¿½ï¿½ï¿½×° get he post ï¿½ï¿½ï¿½ï¿½
+5.AppUtils ï¿½ï¿½ï¿½ï¿½ checkIsAppInstalled
+6.MediaTools ï¿½ï¿½ï¿½ï¿½ getDurationDayHourMinuteSecond
+7.SpannableStringUtils  getTintResizeSpannableString ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
+8.AutoLinearLayoutManager RecyclerView ï¿½ï¿½Item ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
+9.DataTypeConversionUtils ï¿½ï¿½ï¿½Â£ï¿½short[] ï¿½ï¿½ byte[] ï¿½à»¥×ªï¿½ï¿½
+10.PcmToWavUtils ï¿½Å»ï¿½
+11.TextViewUtils ï¿½ï¿½ï¿½ï¿½ setMovementMethodInScrollViewï¿½ï¿½TextView ï¿½ï¿½ ScrollView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½
 12.BitmapHelper toHorizontalMirror toVerticalMirror
-13.DensityFontUtils ÔÚoncreate ºÍ onResume Ê¹ÓÃ£¬ÆÁÄ»ÊÊÅä+¹Ì¶¨×ÖÌå´óĞ¡²»ËæÏµÍ³¸Ä±ä¶ø¸Ä±ä
-14.HttpUtils ĞÂÔö postJson
-15.SpannableStringUtils StringUtils ĞÂÔö findSpecWordAndHighLight(String srcText, List<HighLight> highLights)
-16.ĞÂÔöTextDrawable ÎÄ×ÖÍ¼Æ¬ ÎÄ×Ödrawable
+13.DensityFontUtils ï¿½ï¿½oncreate ï¿½ï¿½ onResume Ê¹ï¿½Ã£ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½+ï¿½Ì¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ÏµÍ³ï¿½Ä±ï¿½ï¿½ï¿½Ä±ï¿½
+14.HttpUtils ï¿½ï¿½ï¿½ï¿½ postJson
+15.SpannableStringUtils StringUtils ï¿½ï¿½ï¿½ï¿½ findSpecWordAndHighLight(String srcText, List<HighLight> highLights)
+16.ï¿½ï¿½ï¿½ï¿½TextDrawable ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½drawable
 
 
 V5.6.0 ---->2021.11.27
-1.NormalTabSwitcher ¸üÃûÎªTabSwitcher£¬Ö§³ÖÏÂ»®Ïß¿í¶È¡¢¸ß¶È¡¢ÑÕÉ«×Ô¶¨Òå£¬±êÇ©×ÖÌå¼Ó´Ö´¦Àí
-2.RandomUtils ĞÂÔö genSpecLengthRandomNum£¬»ñÈ¡Ö¸¶¨Î»ÊıµÄËæ»úÊı
-3.FileDownLoader ÏÂÔØÍê³É»Øµ÷ ·½·¨ Ôö¼Ó isFromCache, ÊÇ·ñ¶ÁÈ¡±¾µØ»º´æ
-4.ExpandableTextView ÖØÔØ  setOriginalText(SpannableString styleSpan)£¬ÕÛµşÖ§³ÖÑùÊ½
-5.ĞÂÔöRoundFullAutoImageView
-6.ĞÂÔöEmojiFilter StringUtils ĞÂÔö±íÇé·û¹ıÂË
-7.AnimationUtils ĞÂÔö getRotateInSef360
-8.ĞÂÔö RoundCropTopImageView  ½ØÈ¡Í¼Æ¬ÉÏ²¿·Ö£¬£¨ImageView centerCrop ½ØÈ¡ÖĞ¼ä£¬²¢²»ÄÜ½ØÈ¡ÉÏ²¿£©
-9.IntentUtils ĞÂÔögetMarketIntent
-10.ĞÂÔö AppMarket£¬Ó¦ÓÃÉÌµêºÏ¼¯
-11.VideoUtils ĞÂÔö hasAudioTrack ÅĞ¶ÏÊÓÆµÓĞÃ»ÓĞÒô¹ì
-12.FileUtils ĞÂÔö readFileByBytes£¬½«ÎÄ¼ş×ªÎª×Ö½ÚÊı×é
-13.ĞÂÔöDataTypeConversionUtils Êı¾İÀàĞÍ×ª»»¹¤¾ß
+1.NormalTabSwitcher ï¿½ï¿½ï¿½ï¿½ÎªTabSwitcherï¿½ï¿½Ö§ï¿½ï¿½ï¿½Â»ï¿½ï¿½ß¿ï¿½È¡ï¿½ï¿½ß¶È¡ï¿½ï¿½ï¿½É«ï¿½Ô¶ï¿½ï¿½å£¬ï¿½ï¿½Ç©ï¿½ï¿½ï¿½ï¿½Ó´Ö´ï¿½ï¿½ï¿½
+2.RandomUtils ï¿½ï¿½ï¿½ï¿½ genSpecLengthRandomNumï¿½ï¿½ï¿½ï¿½È¡Ö¸ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.FileDownLoader ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É»Øµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ isFromCache, ï¿½Ç·ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ø»ï¿½ï¿½ï¿½
+4.ExpandableTextView ï¿½ï¿½ï¿½ï¿½  setOriginalText(SpannableString styleSpan)ï¿½ï¿½ï¿½Ûµï¿½Ö§ï¿½ï¿½ï¿½ï¿½Ê½
+5.ï¿½ï¿½ï¿½ï¿½RoundFullAutoImageView
+6.ï¿½ï¿½ï¿½ï¿½EmojiFilter StringUtils ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+7.AnimationUtils ï¿½ï¿½ï¿½ï¿½ getRotateInSef360
+8.ï¿½ï¿½ï¿½ï¿½ RoundCropTopImageView  ï¿½ï¿½È¡Í¼Æ¬ï¿½Ï²ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ImageView centerCrop ï¿½ï¿½È¡ï¿½Ğ¼ä£¬ï¿½ï¿½ï¿½ï¿½ï¿½Ü½ï¿½È¡ï¿½Ï²ï¿½ï¿½ï¿½
+9.IntentUtils ï¿½ï¿½ï¿½ï¿½getMarketIntent
+10.ï¿½ï¿½ï¿½ï¿½ AppMarketï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ìµï¿½Ï¼ï¿½
+11.VideoUtils ï¿½ï¿½ï¿½ï¿½ hasAudioTrack ï¿½Ğ¶ï¿½ï¿½ï¿½Æµï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+12.FileUtils ï¿½ï¿½ï¿½ï¿½ readFileByBytesï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½×ªÎªï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
+13.ï¿½ï¿½ï¿½ï¿½DataTypeConversionUtils ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 V5.5.0 ---->2021.9.5
-1.MathUtils ĞÂÔögetPercentInRange getSpecValueInRangeByPercent
-Ä³¸öÊıÔÚÒ»×é·¶Î§ÄÚµÄ°Ù·Ö±È£¬¸ù¾İ°Ù·Ö±ÈÔÚÒ»×é·¶Î§ÄÚÊıÖĞÕÒ³öÌØ¶¨µÄÄÇ¸öÊı
-Èç-39 ÔÚ[-50,50] ¶ÔÓ¦[-2,2] ÖĞµÄÄÇ¸öÊı,³¡¾°£º¸Ä±äÊÓÆµ±¥ºÍ¶È½ø¶ÈÌõUIÉÏµÄÖµÊÇ-50,50£¬
-¶øffmpeg ÊÇ-2£¬2¡£
+1.MathUtils ï¿½ï¿½ï¿½ï¿½getPercentInRange getSpecValueInRangeByPercent
+Ä³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½é·¶Î§ï¿½ÚµÄ°Ù·Ö±È£ï¿½ï¿½ï¿½ï¿½İ°Ù·Ö±ï¿½ï¿½ï¿½Ò»ï¿½é·¶Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ø¶ï¿½ï¿½ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½
+ï¿½ï¿½-39 ï¿½ï¿½[-50,50] ï¿½ï¿½Ó¦[-2,2] ï¿½Ğµï¿½ï¿½Ç¸ï¿½ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½Í¶È½ï¿½ï¿½ï¿½ï¿½ï¿½UIï¿½Ïµï¿½Öµï¿½ï¿½-50,50ï¿½ï¿½
+ï¿½ï¿½ffmpeg ï¿½ï¿½-2ï¿½ï¿½2ï¿½ï¿½
 2.DrawableUtils setColorFilter
-3.MediaTools ¸üĞÂ getVideoSpec£¬ĞŞ¸´¿í¸ßµÄ»ñÈ¡ºÍMediaMetadataRetriever µÄÊÍ·Å
-4.ĞÂÔöSonic¡¢AudioUtils ¡¢VideoUtils, Ö§³ÖĞŞ¸ÄÊÓÆµÉùÒô£¨ËÙ¶È¡¢Òôµ÷¡¢rate)
-5.ĞÂÔö getReNameFilePath£¬·µ»ØÒ»¸öºÍÔ­ÎÄ¼şÖØÃüÃûºóµÄÂ·¾¶
-6.ViewUtils setClickListener  ´«Èë¶à¸öView,ÉèÖÃÏàÍ¬µÄµã»÷ÊÂ¼ş
-7. ĞŞ¸´FileUtils getFileSuffixFromPath Ã»ÓĞºó×ºÃûÔò·µ»Ø¿Õ×Ö·û´®
-8.BaseRecyclerAdapter Ôö¼ÓsetInitSelectItemPos ³õÊ¼»¯Ñ¡ÖĞÏÂ±ê
-9.ĞÂÔö FullWidthAutoImageView,¿í¶ÈÆÌÂú,¸ß¶È×ÔÊÊÓ¦
-10.ĞÂÔöIndicatorView
-11.FileUtils ExternalStorageDir ĞÂÔö CameraRootDir, Ïà²áµÄ¸ùÄ¿Â¼£¬ÊÓÆµ±£´æµ½¸ÃÄ¿Â¼£¬È·±£ËùÓĞÊÖ»ú¶¼ÄÜ¹»Õı³£ÏÔÊ¾
-12.FileDownLoader ĞÂÔöÎÄ¼şÊÇ·ñ´æÔÚµÄÑ¡Ïî£¬´æÔÚ²»ÏÂÔØ
-13.ĞÂÔöMimeTypeFile ÎÄ¼ş£¬¸ù¾İÎÄ¼şºó×º´Ó¶øÓÃIntent ´ò¿ª
-14.getSystemAppGallery »ñÈ¡´ò¿ªÏµÍ³Ïà²áIntent
+3.MediaTools ï¿½ï¿½ï¿½ï¿½ getVideoSpecï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½ßµÄ»ï¿½È¡ï¿½ï¿½MediaMetadataRetriever ï¿½ï¿½ï¿½Í·ï¿½
+4.ï¿½ï¿½ï¿½ï¿½Sonicï¿½ï¿½AudioUtils ï¿½ï¿½VideoUtils, Ö§ï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ù¶È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½rate)
+5.ï¿½ï¿½ï¿½ï¿½ getReNameFilePathï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ô­ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½
+6.ViewUtils setClickListener  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½View,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬ï¿½Äµï¿½ï¿½ï¿½Â¼ï¿½
+7. ï¿½Ş¸ï¿½FileUtils getFileSuffixFromPath Ã»ï¿½Ğºï¿½×ºï¿½ï¿½ï¿½ò·µ»Ø¿ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+8.BaseRecyclerAdapter ï¿½ï¿½ï¿½ï¿½setInitSelectItemPos ï¿½ï¿½Ê¼ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½Â±ï¿½
+9.ï¿½ï¿½ï¿½ï¿½ FullWidthAutoImageView,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½,ï¿½ß¶ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦
+10.ï¿½ï¿½ï¿½ï¿½IndicatorView
+11.FileUtils ExternalStorageDir ï¿½ï¿½ï¿½ï¿½ CameraRootDir, ï¿½ï¿½ï¿½Ä¸ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½æµ½ï¿½ï¿½Ä¿Â¼ï¿½ï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ü¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾
+12.FileDownLoader ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½Ç·ï¿½ï¿½ï¿½Úµï¿½Ñ¡ï¿½î£¬ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½
+13.ï¿½ï¿½ï¿½ï¿½MimeTypeFile ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½×ºï¿½Ó¶ï¿½ï¿½ï¿½Intent ï¿½ï¿½
+14.getSystemAppGallery ï¿½ï¿½È¡ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½Intent
 
 
 
@@ -164,97 +164,97 @@ V5.5.0 ---->2021.9.5
 
 V5.4.0 ---->2021.7.26
 
-1.ĞÂÔöMD5Utils,FileUtils ĞÂÔögetFileMD5String   getFileSHA1String
+1.ï¿½ï¿½ï¿½ï¿½MD5Utils,FileUtils ï¿½ï¿½ï¿½ï¿½getFileMD5String   getFileSHA1String
 2.DrawableUtils setSeekBarColor(SeekBar seekBar, int color)
-3.DateUtils,MediaTools ĞÂÔö formatHmsS  Ê±·ÖÃëºÁÃë
-4.StringUtils formatFileSize ÒÆ¶¯Î»ÖÃµ½FileUtils,¸üÃûÎª getFormatFileSize
-5.ĞÂÔöShapeDrawableTextView
-6.ĞÂÔö DrawableCenterTextView£¬ShapeDrawableCenterTextView drawable ºÍ ÎÄ×Ö¾ÓÖĞ¶ÔÆë
-7.ĞÂÔö SquareProgressView ·½ĞÎ½ø¶ÈÌõ£¬ÒôÊÓÆµ´¦Àí½ø¶È
-8.ĞÂÔöRandomUtils, Ëæ»ú¹¤¾ßÀà£¬ java Ëæ»úÀà¶¼ÊÇ[0,100),²»°üÀ¨×îºó¸öÖµ£¬±¾¹¤¾ßÀà½â¾öĞ¡ÊıµãÇø¼ä£¬Ä©¶Ë¿ÉÒÔÈ¡µ½£¬Ä³·¶Î§ÄÚËæ»ú£¬²¢ÇÒÅÅ³ıÄ³ÖµÖ®Íâ
-9.ArrayUtils¡¢ĞÂÔöRandomUtils Ôö¼Ó
-  getRandomDistinctElementsFromArray ´ÓÊı×éÖĞËæ¼´³é³öÈô¸ÉÏî·ÇÖØ¸´µÄÔªËØ
-  getRandomDistinctElementsFromList ´ÓÁĞ±íÖĞËæ¼´³é³öÈô¸ÉÏî·ÇÖØ¸´µÄÔªËØ
-10.FileDownLoader ¿ÉÒÔ×Ô¶¨ÒåÏÂÔØÄ¿Â¼
-11.FileUtils Èë²Î¿ÕÅĞ
-12.ĞÂÔö MediaConverter ¶àÃ½Ìå×ª»»¹¤¾ß£¬pcm×ªwav, ¶à¸öwav ºÏ²¢
+3.DateUtils,MediaTools ï¿½ï¿½ï¿½ï¿½ formatHmsS  Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+4.StringUtils formatFileSize ï¿½Æ¶ï¿½Î»ï¿½Ãµï¿½FileUtils,ï¿½ï¿½ï¿½ï¿½Îª getFormatFileSize
+5.ï¿½ï¿½ï¿½ï¿½ShapeDrawableTextView
+6.ï¿½ï¿½ï¿½ï¿½ DrawableCenterTextViewï¿½ï¿½ShapeDrawableCenterTextView drawable ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¾ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½
+7.ï¿½ï¿½ï¿½ï¿½ SquareProgressView ï¿½ï¿½ï¿½Î½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+8.ï¿½ï¿½ï¿½ï¿½RandomUtils, ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ java ï¿½ï¿½ï¿½ï¿½à¶¼ï¿½ï¿½[0,100),ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ä£¬Ä©ï¿½Ë¿ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å³ï¿½Ä³ÖµÖ®ï¿½ï¿½
+9.ArrayUtilsï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RandomUtils ï¿½ï¿½ï¿½ï¿½
+  getRandomDistinctElementsFromArray ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¼´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+  getRandomDistinctElementsFromList ï¿½ï¿½ï¿½Ğ±ï¿½ï¿½ï¿½ï¿½æ¼´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½ï¿½Ôªï¿½ï¿½
+10.FileDownLoader ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿Â¼
+11.FileUtils ï¿½ï¿½Î¿ï¿½ï¿½ï¿½
+12.ï¿½ï¿½ï¿½ï¿½ MediaConverter ï¿½ï¿½Ã½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ß£ï¿½pcm×ªwav, ï¿½ï¿½ï¿½wav ï¿½Ï²ï¿½
 
 
 
 
 V5.3.0 ---->2021.6.25
 
-1.GradientDrawableBuilder Ôö¼Ó setAlpha
-2.BeanUtils cloneSerializableObject  ¿½±´¶ÔÏó£¬ÒªĞòÁĞ»¯
-3.StringUtils, SpannableStringUtils ĞÂÔö findSpecWordAndHighLight £¬´Ó×Ö·û´®ÖĞÕÒ³ö¹Ø¼ü×Ö²¢¸ßÁÁ£¬Èç¼ì²âÃô¸Ğ´Ê³¡¾°
-4.ĞÂÔöDialogUtils £¬keepStatusBarSameStyleWithActivity Dialog µ¯³öÊ±×´Ì¬À¸×ÖÌåÑÕÉ«²»»á¸Ä±ä
-5.ĞÂÔö HighLightStateDrawableGroup £¬´¦ÀíÒ³Ãæ°´Å¥µÄÖÃ»ÒÓë¸ßÁÁµÄÇĞ»»
-6.ĞÂÔö BottomSlideDialogFragment
-7.¸üĞÂ BundleBuilder  Ö§³ÖÁ´Ê½
-8.ĞÂÔöExpandableTextView
-9.ĞÂÔö AutoSplitTextView ½â¾ö Êı×Ö¡¢×ÖÄ¸¡¢ºº×Ö»ìÅÅ
-10.StringUtils ĞÂÔö isMD5(String msg) ÅĞ¶Ï×Ö·û´®ÊÇ·ñÎªMD5
+1.GradientDrawableBuilder ï¿½ï¿½ï¿½ï¿½ setAlpha
+2.BeanUtils cloneSerializableObject  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Ğ»ï¿½
+3.StringUtils, SpannableStringUtils ï¿½ï¿½ï¿½ï¿½ findSpecWordAndHighLight ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½Ø¼ï¿½ï¿½Ö²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ´Ê³ï¿½ï¿½ï¿½
+4.ï¿½ï¿½ï¿½ï¿½DialogUtils ï¿½ï¿½keepStatusBarSameStyleWithActivity Dialog ï¿½ï¿½ï¿½ï¿½Ê±×´Ì¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+5.ï¿½ï¿½ï¿½ï¿½ HighLightStateDrawableGroup ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ°´Å¥ï¿½ï¿½ï¿½Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½
+6.ï¿½ï¿½ï¿½ï¿½ BottomSlideDialogFragment
+7.ï¿½ï¿½ï¿½ï¿½ BundleBuilder  Ö§ï¿½ï¿½ï¿½ï¿½Ê½
+8.ï¿½ï¿½ï¿½ï¿½ExpandableTextView
+9.ï¿½ï¿½ï¿½ï¿½ AutoSplitTextView ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½
+10.StringUtils ï¿½ï¿½ï¿½ï¿½ isMD5(String msg) ï¿½Ğ¶ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ÎªMD5
 
 V5.2.0 ---->2021.4.13
-1.CompatUtils Ä¬ÈÏ³õÊ¼»¯ AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); °²×¿5.0 ÒÔÏÂÊ¹ÓÃVector
-2.ĞÂÔö ColorShades ,Á½¸öÑÕÉ«Ö®¼ä½øĞĞ½¥±ä£¬Ó¦ÓÃÓÚ»¬¶¯ViewPager,¶¥²¿TabLayout ÑÕÉ«½¥±ä
-3.MapUtils,¶ÔMap ÅÅĞò£¬Æ´½Ó Map ÖĞµÄvalue
-4.ĞÂÔö contains(String key)  ĞŞ¸´AppSpManager getInt ·µ»Ø float†–î},AppSpManager ĞÂÔö Bean ºÍ List µÄ´æÈ¡
-5.ĞÂÔö LetterNumberEditText ·â×°Ö»ÄÜÊäÈë×ÖÄ¸Êı×Ö
-6.SpannableStringUtils Òş²Ø getClickTintResizeSpanStr·½·¨£¬ÉèÖÃµã»÷ÓÃsetClickTintResizeSpanStr
-7.ĞÂÔö VerticalDashLineView ´¹Ö±ĞéÏß
-8.ĞÂÔöFastClickUtils
-9.DateUtils ĞÂÔö isSameDay(Date firstDate,Date secondDate) ÅĞ¶ÏÊÇ·ñÎªÍ¬Ò»Ìì
-10.ĞÂÔö TimerClock ¼ÆÊ±Æ÷
-11.ĞÂÔö LongPressDragItemTouchHelper £¬RecyclerView³¤°´ÍÏ×§
+1.CompatUtils Ä¬ï¿½Ï³ï¿½Ê¼ï¿½ï¿½ AppCompatDelegate.setCompatVectorFromResourcesEnabled(true); ï¿½ï¿½×¿5.0 ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Vector
+2.ï¿½ï¿½ï¿½ï¿½ ColorShades ,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«Ö®ï¿½ï¿½ï¿½ï¿½Ğ½ï¿½ï¿½ä£¬Ó¦ï¿½ï¿½ï¿½Ú»ï¿½ï¿½ï¿½ViewPager,ï¿½ï¿½ï¿½ï¿½TabLayout ï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½
+3.MapUtils,ï¿½ï¿½Map ï¿½ï¿½ï¿½ï¿½Æ´ï¿½ï¿½ Map ï¿½Ğµï¿½value
+4.ï¿½ï¿½ï¿½ï¿½ contains(String key)  ï¿½Ş¸ï¿½AppSpManager getInt ï¿½ï¿½ï¿½ï¿½ floatï¿½ï¿½ï¿½},AppSpManager ï¿½ï¿½ï¿½ï¿½ Bean ï¿½ï¿½ List ï¿½Ä´ï¿½È¡
+5.ï¿½ï¿½ï¿½ï¿½ LetterNumberEditText ï¿½ï¿½×°Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½
+6.SpannableStringUtils ï¿½ï¿½ï¿½ï¿½ getClickTintResizeSpanStrï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½ï¿½setClickTintResizeSpanStr
+7.ï¿½ï¿½ï¿½ï¿½ VerticalDashLineView ï¿½ï¿½Ö±ï¿½ï¿½ï¿½ï¿½
+8.ï¿½ï¿½ï¿½ï¿½FastClickUtils
+9.DateUtils ï¿½ï¿½ï¿½ï¿½ isSameDay(Date firstDate,Date secondDate) ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ÎªÍ¬Ò»ï¿½ï¿½
+10.ï¿½ï¿½ï¿½ï¿½ TimerClock ï¿½ï¿½Ê±ï¿½ï¿½
+11.ï¿½ï¿½ï¿½ï¿½ LongPressDragItemTouchHelper ï¿½ï¿½RecyclerViewï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×§
 
 
 
 
 V5.1.0 ---->2021.3.18
-1.¸üĞÂFileUtils  getFileByUri,½â¾öuri ·µ»ØÂ·¾¶ÎŞ·¨Õı³£¶ÁÈ¡ÎÄ¼ş
-2.BaseDialog ÖØĞ´ dismiss() ½â¾ödialogÏûÊ§£¬¼üÅÌ²»¸ú×ÅÏûÊ§µÄÎÊÌâ
-3.IRecyclerHelper ·â×° AdapterDataObserver£¬ Ã»ÓĞÊı¾İÔòÏÔÊ¾emptyView
-4.GradientDrawableBuilder ĞÂÔö setGradientColors ½¥±ä
-5.ĞÂÔö FragmentAddDelPagerAdapter ViewPager ¶¯Ì¬ÔöÉ¾Fragment
-6.BaseRecyclerAdapter ºÍ CommonBaseAdapter ĞÂÔö attachContext(Context context),
-ÔÚAdapter ³õÊ¼»¯ContextµÄÊ±ºò»Øµ÷£¬×ÓÀà¿ÉÒÔÔÚÕâ¸ö·½·¨ÖĞ ×öÒ»Ğ©ĞèÒªContext µÄ²Ù×÷
-7.BaseRecyclerAdapter ·â×°  Ñ¡ÖĞÊôĞÔ£¬Ñ¡ÖĞÅĞ¶Ï
-8.HtmlUtils ¶ÔfromHtml(String html) Èë²Î¿ÕÅĞ
-9.BaseRecyclerAdapter ĞÂÔöstartActivityForResult
-10.CompatUtils ĞÂÔö compatAlertDialogAfterShowMethod,½â¾öAlertDialog ÔÚ²¿·Ö»úĞÍ²»¾ÓÖĞÎÊÌâ
-11.ToastUtils ¸üĞÂ£¬Í³Ò»ÑùÊ½£¬½â¾ö²¿·ÖÊÖ»úÒò¹Ø±ÕÍ¨Öªµ¯²»³öÍÂË¾ÎÊÌâ
-12.IRecyclerView Ôö¼ÓdealPullRefreshInAppBarLayout(AppBarLayout layout),´¦ÀíIRecyclerView µÄÏÂÀ­Ë¢ĞÂºÍAppBarLayoutµÄÕ¹¿ªÕÛµş³åÍ»;
-13.ĞŞ¸´CompatLineTextView ÉèÖÃwrap_content µÄÎÊÌâ£¬½¨ÒéÊ¹ÓÃMatch_parent
-14.ToastUtils ĞÂÔöhasInit ÅĞ¶Ï£¬ ClipBoardUtils ÖĞToast ÓÅÏÈÊ¹ÓÃToastUtilsµÄ
+1.ï¿½ï¿½ï¿½ï¿½FileUtils  getFileByUri,ï¿½ï¿½ï¿½uri ï¿½ï¿½ï¿½ï¿½Â·ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä¼ï¿½
+2.BaseDialog ï¿½ï¿½Ğ´ dismiss() ï¿½ï¿½ï¿½dialogï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.IRecyclerHelper ï¿½ï¿½×° AdapterDataObserverï¿½ï¿½ Ã»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾emptyView
+4.GradientDrawableBuilder ï¿½ï¿½ï¿½ï¿½ setGradientColors ï¿½ï¿½ï¿½ï¿½
+5.ï¿½ï¿½ï¿½ï¿½ FragmentAddDelPagerAdapter ViewPager ï¿½ï¿½Ì¬ï¿½ï¿½É¾Fragment
+6.BaseRecyclerAdapter ï¿½ï¿½ CommonBaseAdapter ï¿½ï¿½ï¿½ï¿½ attachContext(Context context),
+ï¿½ï¿½Adapter ï¿½ï¿½Ê¼ï¿½ï¿½Contextï¿½ï¿½Ê±ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ò»Ğ©ï¿½ï¿½ÒªContext ï¿½Ä²ï¿½ï¿½ï¿½
+7.BaseRecyclerAdapter ï¿½ï¿½×°  Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½Ñ¡ï¿½ï¿½ï¿½Ğ¶ï¿½
+8.HtmlUtils ï¿½ï¿½fromHtml(String html) ï¿½ï¿½Î¿ï¿½ï¿½ï¿½
+9.BaseRecyclerAdapter ï¿½ï¿½ï¿½ï¿½startActivityForResult
+10.CompatUtils ï¿½ï¿½ï¿½ï¿½ compatAlertDialogAfterShowMethod,ï¿½ï¿½ï¿½AlertDialog ï¿½Ú²ï¿½ï¿½Ö»ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+11.ToastUtils ï¿½ï¿½ï¿½Â£ï¿½Í³Ò»ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½Ø±ï¿½Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¾ï¿½ï¿½ï¿½ï¿½
+12.IRecyclerView ï¿½ï¿½ï¿½ï¿½dealPullRefreshInAppBarLayout(AppBarLayout layout),ï¿½ï¿½ï¿½ï¿½IRecyclerView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Âºï¿½AppBarLayoutï¿½ï¿½Õ¹ï¿½ï¿½ï¿½Ûµï¿½ï¿½ï¿½Í»;
+13.ï¿½Ş¸ï¿½CompatLineTextView ï¿½ï¿½ï¿½ï¿½wrap_content ï¿½ï¿½ï¿½ï¿½ï¿½â£¬ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½Match_parent
+14.ToastUtils ï¿½ï¿½ï¿½ï¿½hasInit ï¿½Ğ¶Ï£ï¿½ ClipBoardUtils ï¿½ï¿½Toast ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ToastUtilsï¿½ï¿½
 
 
 
 
 
 V5.0.0 ---->2021.2.10
-1.ĞÂÔöopengl°ü,Ôö¼ÓopenglÏà¹Ø·â×°Àà,Ôö¼ÓË®Ó¡ÅäÖÃÀà
-2.ĞÂÔöCameraFocusView CameraHelper Ïà»úÀà
-3.IOUtils ĞÂÔögetBytes ·½·¨£¬Ö±½Ó½«InputStream ×ª³É×Ö½ÚÊı×é
-4.FileUtils Ôö¼Ó copyFile(File src, File dest) ÎÄ¼ş¿½±´·½·¨
-5.BitmapHelperÔö¼Ó getGrayBitmap·½·¨£¬½«Í¼Æ¬±ä»Ò
-6.ĞŞ¸´Logger µ÷ÓÃÈë¿Ú¶ÑÕ»ĞÅÏ¢¶ªÊ§ÎÊÌâ
-7.AnimationUtils Ôö¼Ó»ñÈ¡styleµÄ·½·¨£¬Ôö¼Ó300¶¯»­Ê±³¤µÄ¶¯»­
-8.ScreenUtils Ôö¼Ó hasNotchScreen£¬ÅĞ¶ÏÊÇ²»ÊÇÁõº£ÆÁ
-9.BitmapHelper ĞÂÔö getBitmapFromText£¬ÎÄ×Ö×ªÍ¼Æ¬
-10.ĞÂÔö·ÂIOSµÄSwitchView
-11.ĞÂÔöVerticalSeekBar
-12.ĞÂÔö È«ÆÁdialogµÄstyle DLDialogFullscreen
-13.ThreadUtils ĞÂÔörunOnMainThreadDelay
-14.ÓÅ»¯AppSpManager getString(String key)
-15.ĞÂÔöMediumTextView ºÍ ShapeMediumTextView ¿ÉÒÔ¸Ä±ä×ÖÌåµÄ´ÖÏ¸
-16.É¾³ıLoginRegUtils,ĞÂÔöRegexUtils ÕıÔò¹¤¾ßÀà
-17.ShapeView Ôö¼Ó×Ô¶¨Òå shapeAlpha ÊôĞÔ£¬ÉèÖÃ±³¾° drawable µÄÍ¸Ã÷¶È£¬²»ĞèÒªÔÚ´úÂëÖĞÉèÖÃ
-18.ShapeView ĞÂÔö startColor£¬endColor, angle Ö§³Ö½¥±ä
-19.·â×°ÓÅ»¯LoadingDialog ÆÁ±ÎÖ±½Ónew Ê¹ÓÃBuilder ´´½¨LoadingDialog
-20.¸üĞÂImagePollingPagerAdapter
-21.CircleIndicatorView ¸üÃûÎªCircleRingProgressView,ÓÅ»¯Ôö¼ÓÎÄ×ÖºÍ±³¾°Ö§³Ö
-22.ĞÂÔöTextDrawer ÎÄ×Ö»æÖÆÀà£¬¿ÉÒÔ»»ĞĞ
+1.ï¿½ï¿½ï¿½ï¿½openglï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½openglï¿½ï¿½Ø·ï¿½×°ï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½Ë®Ó¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+2.ï¿½ï¿½ï¿½ï¿½CameraFocusView CameraHelper ï¿½ï¿½ï¿½ï¿½ï¿½
+3.IOUtils ï¿½ï¿½ï¿½ï¿½getBytes ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó½ï¿½InputStream ×ªï¿½ï¿½ï¿½Ö½ï¿½ï¿½ï¿½ï¿½ï¿½
+4.FileUtils ï¿½ï¿½ï¿½ï¿½ copyFile(File src, File dest) ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+5.BitmapHelperï¿½ï¿½ï¿½ï¿½ getGrayBitmapï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½
+6.ï¿½Ş¸ï¿½Logger ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¶ï¿½Õ»ï¿½ï¿½Ï¢ï¿½ï¿½Ê§ï¿½ï¿½ï¿½ï¿½
+7.AnimationUtils ï¿½ï¿½ï¿½Ó»ï¿½È¡styleï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½300ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ä¶ï¿½ï¿½ï¿½
+8.ScreenUtils ï¿½ï¿½ï¿½ï¿½ hasNotchScreenï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½Ç²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+9.BitmapHelper ï¿½ï¿½ï¿½ï¿½ getBitmapFromTextï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªÍ¼Æ¬
+10.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IOSï¿½ï¿½SwitchView
+11.ï¿½ï¿½ï¿½ï¿½VerticalSeekBar
+12.ï¿½ï¿½ï¿½ï¿½ È«ï¿½ï¿½dialogï¿½ï¿½style DLDialogFullscreen
+13.ThreadUtils ï¿½ï¿½ï¿½ï¿½runOnMainThreadDelay
+14.ï¿½Å»ï¿½AppSpManager getString(String key)
+15.ï¿½ï¿½ï¿½ï¿½MediumTextView ï¿½ï¿½ ShapeMediumTextView ï¿½ï¿½ï¿½Ô¸Ä±ï¿½ï¿½ï¿½ï¿½ï¿½Ä´ï¿½Ï¸
+16.É¾ï¿½ï¿½LoginRegUtils,ï¿½ï¿½ï¿½ï¿½RegexUtils ï¿½ï¿½ï¿½ò¹¤¾ï¿½ï¿½ï¿½
+17.ShapeView ï¿½ï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ shapeAlpha ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ drawable ï¿½ï¿½Í¸ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Ú´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+18.ShapeView ï¿½ï¿½ï¿½ï¿½ startColorï¿½ï¿½endColor, angle Ö§ï¿½Ö½ï¿½ï¿½ï¿½
+19.ï¿½ï¿½×°ï¿½Å»ï¿½LoadingDialog ï¿½ï¿½ï¿½ï¿½Ö±ï¿½ï¿½new Ê¹ï¿½ï¿½Builder ï¿½ï¿½ï¿½ï¿½LoadingDialog
+20.ï¿½ï¿½ï¿½ï¿½ImagePollingPagerAdapter
+21.CircleIndicatorView ï¿½ï¿½ï¿½ï¿½ÎªCircleRingProgressView,ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÖºÍ±ï¿½ï¿½ï¿½Ö§ï¿½ï¿½
+22.ï¿½ï¿½ï¿½ï¿½TextDrawer ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½
 
 
 
@@ -262,16 +262,16 @@ V5.0.0 ---->2021.2.10
 
 V4.9.0 ---->2021.1.16
 
-1.ĞÂÔöGeoHash ºÍ MapUtils,ÓÉ¾­Î³¶È×ªgeocode, ÒµÎñÖĞĞèÒªÔÚµØÍ¼·¢ÉúÒÆ¶¯ºóÒªÖØĞÂ»ñÈ¡ĞÅÏ¢£¬¶øÕâ¸öÅĞ¶ÏÊÇ·ñÒÆ¶¯¾ÍÓÃGeoHash¡£
-2.ĞÂÔö ImagePollingPagerAdapter ,¸øViewPagerÉèÖÃAdapter¼´¿ÉÊµÏÖÂÖ²¥
-3.¸üĞÂPhotoView  ³õÊ¼ºÍÆÁÄ»µÈ´óµÄÇé¿öÏÂË«»÷¿ÉÒÔ·Å×î´ó
-4.ĞÂÔöLandScapePhotoView ºÍ LandScapeScaleUpPhotoView  ÊÊÅäºáÆÁ£¬ÊúÆÁÒÔ¿í¶ÈÎª»ù×¼£¬ºáÆÁÒÔ¸ß¶ÈÎª»ù×¼
-5.ĞÂÔöUrlEncoderUtils£¬ÅĞ¶Ï×Ö·û´®ÊÇ·ñ°üº¬UrlEncode±àÂë hasUrlEncoded(String str)
-6.StringUtils ĞÂÔödecodeJsonUrlEncodeValue£¬´¦ÀíJson ÖĞº¬ÓĞURLEncoder±àÂë¹ıµÄvalue
-7.ĞÂÔöOpenGLUtils ÊµÏÖ¾µÏñ£¬²Ã¼ô²Ù×÷
-8.ActivityManager ĞÂÔöÊÇ·ñÎªÔÚºóÌ¨ÉèÖÃ setOnBackGround  isOnBackground
-9.¸ü¸ÄLogger, ĞÂÔö Log.e()  Log.w() Log.i()  Log.d()
-10.É¾³ı CarouselView  glide.jar
+1.ï¿½ï¿½ï¿½ï¿½GeoHash ï¿½ï¿½ MapUtils,ï¿½É¾ï¿½Î³ï¿½ï¿½×ªgeocode, Òµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½Úµï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Â»ï¿½È¡ï¿½ï¿½Ï¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½GeoHashï¿½ï¿½
+2.ï¿½ï¿½ï¿½ï¿½ ImagePollingPagerAdapter ,ï¿½ï¿½ViewPagerï¿½ï¿½ï¿½ï¿½Adapterï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½Ö²ï¿½
+3.ï¿½ï¿½ï¿½ï¿½PhotoView  ï¿½ï¿½Ê¼ï¿½ï¿½ï¿½ï¿½Ä»ï¿½È´ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë«ï¿½ï¿½ï¿½ï¿½ï¿½Ô·ï¿½ï¿½ï¿½ï¿½
+4.ï¿½ï¿½ï¿½ï¿½LandScapePhotoView ï¿½ï¿½ LandScapeScaleUpPhotoView  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½Îªï¿½ï¿½×¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¸ß¶ï¿½Îªï¿½ï¿½×¼
+5.ï¿½ï¿½ï¿½ï¿½UrlEncoderUtilsï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½UrlEncodeï¿½ï¿½ï¿½ï¿½ hasUrlEncoded(String str)
+6.StringUtils ï¿½ï¿½ï¿½ï¿½decodeJsonUrlEncodeValueï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Json ï¿½Ğºï¿½ï¿½ï¿½URLEncoderï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½value
+7.ï¿½ï¿½ï¿½ï¿½OpenGLUtils Êµï¿½Ö¾ï¿½ï¿½ñ£¬²Ã¼ï¿½ï¿½ï¿½ï¿½ï¿½
+8.ActivityManager ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½Úºï¿½Ì¨ï¿½ï¿½ï¿½ï¿½ setOnBackGround  isOnBackground
+9.ï¿½ï¿½ï¿½ï¿½Logger, ï¿½ï¿½ï¿½ï¿½ Log.e()  Log.w() Log.i()  Log.d()
+10.É¾ï¿½ï¿½ CarouselView  glide.jar
 
 
 
@@ -280,52 +280,52 @@ V4.9.0 ---->2021.1.16
 
 V4.8.0 ---->2020.11.10
 
-1.ĞÂÔö GradientDrawableBuilder, java´úÂëÊ¹ÓÃ¿É´úÌæ  xml  shapeÑùÊ½ÎÄ¼ş
-2.ĞŞ¸´ DragMapView onFiling ÖĞ mBitmap ÎªnullµÄ¿ÕÖ¸ÕëÎÊÌâ
-3.ĞŞ¸´ NoExtractUiEditPopHelper NoExtractUiEditDialogHelper ÖĞÈí¼üÅÌÑÓÊ±µ¯³öµÄ×ÓÏß³ÌĞŞ¸ÄUI Bug
-4.ÓÅ»¯IRecyclerHelper afterGetData·½·¨£¬IRecyclerPage ·â×°
-5.IRecyclerHelper ĞÂÔö toStickFromPosition³ÉÔ±·½·¨£¬·½±ã activity ÖĞ recyclerHelper ÊµÀıµ÷ÓÃ£¬¶¨Î»µ½µÚ¼¸¸öitem,ĞÂÔöscrollToTop ¹ö¶¯µ½¶¥²¿Î»ÖÃ
-6.ArrayUtils ĞÂÔö findMax ÕÒ×î´óÖµ
-7.¸üĞÂBothItemRecyclerAdapter ,ÊµÏÖIRecyclerAdapterDataBinder£¬ÒÔ±ãÔÚrecyclerHelper ÖĞÊ¹ÓÃ
-8.»ñÈ¡½ø³ÌËÄÖÖ·½Ê½ Í³Ò»·â×°ÓÚProcessUtils ÖĞ£¬ÒÆ³ı AppUtils »ñÈ¡½ø³ÌµÄ¾ßÌåÊµÏÖ
-9.ThreadUtils ĞÂÔö runOnMainThread(Runnable action)£¬ÔÚÃ»ÓĞActivity ÉÏÏÂÎÄµÄÇé¿öÏÂÊ¹ÓÃÖ÷Ïß³Ì
-10.MathUtils ĞÂÔö getLatLngMeterDistance() Á½¸ö¾­Î³¶ÈµÄ¾àÀë
+1.ï¿½ï¿½ï¿½ï¿½ GradientDrawableBuilder, javaï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ã¿É´ï¿½ï¿½ï¿½  xml  shapeï¿½ï¿½Ê½ï¿½Ä¼ï¿½
+2.ï¿½Ş¸ï¿½ DragMapView onFiling ï¿½ï¿½ mBitmap Îªnullï¿½Ä¿ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.ï¿½Ş¸ï¿½ NoExtractUiEditPopHelper NoExtractUiEditDialogHelper ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½Ş¸ï¿½UI Bug
+4.ï¿½Å»ï¿½IRecyclerHelper afterGetDataï¿½ï¿½ï¿½ï¿½ï¿½ï¿½IRecyclerPage ï¿½ï¿½×°
+5.IRecyclerHelper ï¿½ï¿½ï¿½ï¿½ toStickFromPositionï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ activity ï¿½ï¿½ recyclerHelper Êµï¿½ï¿½ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½item,ï¿½ï¿½ï¿½ï¿½scrollToTop ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½
+6.ArrayUtils ï¿½ï¿½ï¿½ï¿½ findMax ï¿½ï¿½ï¿½ï¿½ï¿½Öµ
+7.ï¿½ï¿½ï¿½ï¿½BothItemRecyclerAdapter ,Êµï¿½ï¿½IRecyclerAdapterDataBinderï¿½ï¿½ï¿½Ô±ï¿½ï¿½ï¿½recyclerHelper ï¿½ï¿½Ê¹ï¿½ï¿½
+8.ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½Ê½ Í³Ò»ï¿½ï¿½×°ï¿½ï¿½ProcessUtils ï¿½Ğ£ï¿½ï¿½Æ³ï¿½ AppUtils ï¿½ï¿½È¡ï¿½ï¿½ï¿½ÌµÄ¾ï¿½ï¿½ï¿½Êµï¿½ï¿½
+9.ThreadUtils ï¿½ï¿½ï¿½ï¿½ runOnMainThread(Runnable action)ï¿½ï¿½ï¿½ï¿½Ã»ï¿½ï¿½Activity ï¿½ï¿½ï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½
+10.MathUtils ï¿½ï¿½ï¿½ï¿½ getLatLngMeterDistance() ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î³ï¿½ÈµÄ¾ï¿½ï¿½ï¿½
 
 
 
 
 V4.7.0 ---->2020.10.29
-1.ĞÂÔö NotificationHelper£¬ÊÊÅä°²×¿8.0
-2.ĞÂÔö SingleClickAppCompatActivity £¬ÏîÄ¿µÄBaseActivity ¼Ì³ĞËü¾Í¿ÉÒÔ·ÀÖ¹¿ìËÙµã»÷´ò¿ª¶à¸öActivityµÄÇé¿ö
+1.ï¿½ï¿½ï¿½ï¿½ NotificationHelperï¿½ï¿½ï¿½ï¿½ï¿½ä°²×¿8.0
+2.ï¿½ï¿½ï¿½ï¿½ SingleClickAppCompatActivity ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½BaseActivity ï¿½Ì³ï¿½ï¿½ï¿½ï¿½Í¿ï¿½ï¿½Ô·ï¿½Ö¹ï¿½ï¿½ï¿½Ùµï¿½ï¿½ï¿½ò¿ª¶ï¿½ï¿½Activityï¿½ï¿½ï¿½ï¿½ï¿½
 3.BitmapHelper
- 1.ĞÂÔösetCurrentDensity£¬Èç¹ûÏîÄ¿Òò×öÆÁÄ»ÊÊÅä¸ü¸ÄÁËdensity, ÄÇÃ´setImageBitmap Ö®ºó »ñÈ¡µÄdrawble ´óĞ¡ºÍ Ô­ÏÈBitmapµÄ´óĞ¡²»Ò»ÖÂ£¬
-   ĞèÒªÔÚsetImageBitmapÖ®Ç°ÉèÖÃBitmapµÄdensity
- 2.clickInTransparentArea(Bitmap bitmap, MotionEvent e) ÅĞ¶Ïµã»÷ÊÇ·ñÂäÔÚÍ¼Æ¬µÄÍ¸Ã÷ÇøÓò
-4.MatrixUtils ĞÂÔö getBitmapClickPointF »ñÈ¡ImageView µã»÷Ê±ÂäÔÚÔÚBitmapµÄ×ø±ê
+ 1.ï¿½ï¿½ï¿½ï¿½setCurrentDensityï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½density, ï¿½ï¿½Ã´setImageBitmap Ö®ï¿½ï¿½ ï¿½ï¿½È¡ï¿½ï¿½drawble ï¿½ï¿½Ğ¡ï¿½ï¿½ Ô­ï¿½ï¿½Bitmapï¿½Ä´ï¿½Ğ¡ï¿½ï¿½Ò»ï¿½Â£ï¿½
+   ï¿½ï¿½Òªï¿½ï¿½setImageBitmapÖ®Ç°ï¿½ï¿½ï¿½ï¿½Bitmapï¿½ï¿½density
+ 2.clickInTransparentArea(Bitmap bitmap, MotionEvent e) ï¿½Ğ¶Ïµï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+4.MatrixUtils ï¿½ï¿½ï¿½ï¿½ getBitmapClickPointF ï¿½ï¿½È¡ImageView ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Bitmapï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 5.MathUtils
-  1.ĞÂÔöisInPolygon(PointF point, List<PointF> pts)  isInPolygon(Point point, List<Point> pts) ÅĞ¶ÏµãÊÇ·ñÔÚ¶à±ßĞÎÄÚ
-  2.ĞÂÔö convertPointsToLinesFloatArray(List<Point> points)£¬½«µã×ª»¯Îªcanvas.draLines ĞèÒªµÄ float[] Êı×é£¬¼´¿É»æÖÆ³ö¶à±ßĞÎ
-6.FlingRunnable ĞÂÔö isScrolling() ÅĞ¶ÏÊÇ·ñÔÚ¹ö¶¯
-7.ĞÂÔö DragMapView £¬´óÍ¼ÍÏÀ­¹ö¶¯
-8.BaseRecyclerAdapter mClickListener ¸üÃûÎª mItemClickListener
-9.CustomDialog ¸üÃûÎª CustomFloatingDialog, ĞÂÔöCustomNotFloatingDialog
-10.ĞÂÔö ParamMapBuilder Á´Ê½µ÷ÓÃMap<String,Object> put,Ö§³Ö·µ»ØJSON
-11.SmsCodeCounter ¸üĞÂÓÅ»¯£¬Ôö¼Óµ¹¼ÆÊ±»Øµ÷
+  1.ï¿½ï¿½ï¿½ï¿½isInPolygon(PointF point, List<PointF> pts)  isInPolygon(Point point, List<Point> pts) ï¿½Ğ¶Ïµï¿½ï¿½Ç·ï¿½ï¿½Ú¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  2.ï¿½ï¿½ï¿½ï¿½ convertPointsToLinesFloatArray(List<Point> points)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Îªcanvas.draLines ï¿½ï¿½Òªï¿½ï¿½ float[] ï¿½ï¿½ï¿½é£¬ï¿½ï¿½ï¿½É»ï¿½ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+6.FlingRunnable ï¿½ï¿½ï¿½ï¿½ isScrolling() ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½Ú¹ï¿½ï¿½ï¿½
+7.ï¿½ï¿½ï¿½ï¿½ DragMapView ï¿½ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+8.BaseRecyclerAdapter mClickListener ï¿½ï¿½ï¿½ï¿½Îª mItemClickListener
+9.CustomDialog ï¿½ï¿½ï¿½ï¿½Îª CustomFloatingDialog, ï¿½ï¿½ï¿½ï¿½CustomNotFloatingDialog
+10.ï¿½ï¿½ï¿½ï¿½ ParamMapBuilder ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Map<String,Object> put,Ö§ï¿½Ö·ï¿½ï¿½ï¿½JSON
+11.SmsCodeCounter ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½Ê±ï¿½Øµï¿½
 
 
 
 V4.6.0  ---->2020.09.24
 
-1.BitmapHelper convertViewToBitmapÓÅ»¯£¬½â¾öView¹ı´óÎŞ·¨×ª»¯³ÉBitmap ÎÊÌâ
-2.StringUtils ĞÂÔö bundleToString
-3.ActivityManager ĞŞ¸´ currentActivity() Òì³£ÎÊÌâ£¬Ôö¼ÓgetActivityCount() ·µ»Øµ±Ç°ActivityµÄ¸öÊı
-4.IntentUtils ĞÂÔö getLaunchIntentFromBackToFront£¨Context context, String className£©,¸üĞÂAppUtils bringAppToFront(Context context, String className)
-5.ClipBoardUtils  ĞÂÔö copyNoToast
-6.ĞÂÔöDES ¼ÓÃÜ,AESUtils Ôö¼Ó·ÇÆ«ÒÆÁ¿ ¼Ó½âÃÜ
-7. ĞÂÔöNoExtractUiEditDialogHelper  ½â¾öºáÆÁÏÂÈí¼üÅÌµ²×¡ÊäÈë¿ò   Ê¹ÓÃ£º NoExtractUiEditTextDialog.buildEditTextDialog(edtDetailAddress,true);
-8. ĞÂÔöNoExtractUiEditPopHelper ½â¾öºáÆÁÏÂÈí¼üÅÌµ²×¡ÊäÈë¿ò   Ê¹ÓÃ£º NoExtractUiEditTextDialog.buildEditTextDialog(edtDetailAddress,true);
-9.ĞÂÔö KeyPreImeEditText £¬½â¾ö Èí¼üÅÌÏÔÊ¾Çé¿öÏÂ£¬ÔÚActivity dialog ÖĞÎŞ·¨¼àÌıµ½·µ»Ø¼üµÄ·µ»ØÊÂ¼şÎÊÌâ¡£
-10.EditTextUtils disableImeShowWhileClick  ½ûÖ¹EditText µã»÷µ¯³öÊäÈë·¨
+1.BitmapHelper convertViewToBitmapï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Viewï¿½ï¿½ï¿½ï¿½ï¿½Ş·ï¿½×ªï¿½ï¿½ï¿½ï¿½Bitmap ï¿½ï¿½ï¿½ï¿½
+2.StringUtils ï¿½ï¿½ï¿½ï¿½ bundleToString
+3.ActivityManager ï¿½Ş¸ï¿½ currentActivity() ï¿½ì³£ï¿½ï¿½ï¿½â£¬ï¿½ï¿½ï¿½ï¿½getActivityCount() ï¿½ï¿½ï¿½Øµï¿½Ç°Activityï¿½Ä¸ï¿½ï¿½ï¿½
+4.IntentUtils ï¿½ï¿½ï¿½ï¿½ getLaunchIntentFromBackToFrontï¿½ï¿½Context context, String classNameï¿½ï¿½,ï¿½ï¿½ï¿½ï¿½AppUtils bringAppToFront(Context context, String className)
+5.ClipBoardUtils  ï¿½ï¿½ï¿½ï¿½ copyNoToast
+6.ï¿½ï¿½ï¿½ï¿½DES ï¿½ï¿½ï¿½ï¿½,AESUtils ï¿½ï¿½ï¿½Ó·ï¿½Æ«ï¿½ï¿½ï¿½ï¿½ ï¿½Ó½ï¿½ï¿½ï¿½
+7. ï¿½ï¿½ï¿½ï¿½NoExtractUiEditDialogHelper  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½×¡ï¿½ï¿½ï¿½ï¿½ï¿½   Ê¹ï¿½Ã£ï¿½ NoExtractUiEditTextDialog.buildEditTextDialog(edtDetailAddress,true);
+8. ï¿½ï¿½ï¿½ï¿½NoExtractUiEditPopHelper ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½×¡ï¿½ï¿½ï¿½ï¿½ï¿½   Ê¹ï¿½Ã£ï¿½ NoExtractUiEditTextDialog.buildEditTextDialog(edtDetailAddress,true);
+9.ï¿½ï¿½ï¿½ï¿½ KeyPreImeEditText ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½Activity dialog ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¼ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½â¡£
+10.EditTextUtils disableImeShowWhileClick  ï¿½ï¿½Ö¹EditText ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ë·¨
 
 
 
@@ -333,18 +333,18 @@ V4.6.0  ---->2020.09.24
 
 V4.5.0  ---->2020.08.23
 
-1.ĞŞ¸´Toast ¿ìËÙµã»÷£¬Ö»ÏÔÊ¾µÚÒ»¸öºóÃæÒ»Ğ¡¶ÎÊ±¼ä²»ÏÔÊ¾µÄÎÊÌâ
+1.ï¿½Ş¸ï¿½Toast ï¿½ï¿½ï¿½Ùµï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½Ê¾ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»Ğ¡ï¿½ï¿½Ê±ï¿½ä²»ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 2.NavBarUtils
-  1.ÓÅ»¯hideNavBar ·½·¨£¬ĞÂÔö setNotFocusableFlag  clearNotFocusableFlag
-  2.ĞÂÔö hideNavBarFromWindowAndDecorView ¼üÅÌËõÏÂÈ¥µÄÊ±ºòµ¼º½À¸×Ô¶¯ÊÕËõ
-3.LoadingDialog ºÍ CustomDialog Ö§³Öshow µÄÊ±ºòÈ«ÆÁ£¬ĞéÄâ¼üÅÌ²»»áµ¯³öÀ´,Ö»ÒªÔÚshow Ö®Ç° µ÷ÓÃ hideNavBar¼´¿É
-4.bringRecordToFrontAndClearTop ĞŞ¸´bug
-5.DLPopupWindow ¸üÃûÎª DLPopWindow£¬Ö§³Ö±³¾°»Ò°µ¶Èµ÷½Ú setDimAmount(float dimAmount)
-6.EditTextUtils ĞÂÔö parseDoubleValue ºÍ parseIntValue
-7.AppUtils ĞÂÔöisInMainProcess getCurrentProcessName,bringAppToFront ½«App´ÓºóÌ¨À­µ½Ç°Ì¨Õ¹Ê¾
-8.DrawableUtils  setBackgroundMutateAlpha ±ÜÃâ¸ü¸ÄÒ»´¦²¼¾ÖÍ¸Ã÷¶ÈÒıÆğÆäËüµØ·½¸Ä±ä
-9.EditNumberHelper ĞÂÔö setMaxNum
-10.ĞÂÔö ProgressBarDrawableDecorator£¬´úÂëÖĞÉèÖÃ½ø¶ÈÌõ
+  1.ï¿½Å»ï¿½hideNavBar ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ setNotFocusableFlag  clearNotFocusableFlag
+  2.ï¿½ï¿½ï¿½ï¿½ hideNavBarFromWindowAndDecorView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½ï¿½Ê±ï¿½òµ¼ºï¿½ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½
+3.LoadingDialog ï¿½ï¿½ CustomDialog Ö§ï¿½ï¿½show ï¿½ï¿½Ê±ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì²ï¿½ï¿½áµ¯ï¿½ï¿½ï¿½ï¿½,Ö»Òªï¿½ï¿½show Ö®Ç° ï¿½ï¿½ï¿½ï¿½ hideNavBarï¿½ï¿½ï¿½ï¿½
+4.bringRecordToFrontAndClearTop ï¿½Ş¸ï¿½bug
+5.DLPopupWindow ï¿½ï¿½ï¿½ï¿½Îª DLPopWindowï¿½ï¿½Ö§ï¿½Ö±ï¿½ï¿½ï¿½ï¿½Ò°ï¿½ï¿½Èµï¿½ï¿½ï¿½ setDimAmount(float dimAmount)
+6.EditTextUtils ï¿½ï¿½ï¿½ï¿½ parseDoubleValue ï¿½ï¿½ parseIntValue
+7.AppUtils ï¿½ï¿½ï¿½ï¿½isInMainProcess getCurrentProcessName,bringAppToFront ï¿½ï¿½Appï¿½Óºï¿½Ì¨ï¿½ï¿½ï¿½ï¿½Ç°Ì¨Õ¹Ê¾
+8.DrawableUtils  setBackgroundMutateAlpha ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½Ä±ï¿½
+9.EditNumberHelper ï¿½ï¿½ï¿½ï¿½ setMaxNum
+10.ï¿½ï¿½ï¿½ï¿½ ProgressBarDrawableDecoratorï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -353,35 +353,35 @@ V4.5.0  ---->2020.08.23
 
 V4.4.0 ---->2020.07.29
 
-1.ĞÂÔö SimplePagerSelectedListener
-2.TextUtils ĞÂÔö setStrikeThruText ÖĞ»®Ïß
-3.ĞÂÔö VerticalViewPager
-4.addDoneAction  addSearchAction   addSendAction ÓÅ»¯,ºáÆÁÈ«ÆÁÊäÈë·¨²»Õ¼ÂúÆÁ
-5.ĞÂÔö ArcMenu
-6.CollectionsUtils ĞÂÔö SparseArray<List<T>> grouping(List<T> sourceList, int countPerPage)    ¶ÔList °´ ¶àÉÙÎªÒ»×é½øĞĞ·Ö×é
-7.ToastUtils show ·½·¨ÓÅ»¯
-8.ActivityManager ĞÂÔö bringRecordToFrontAndClearTop
-9.IRecyclerView ³õÊ¼»¯Ä¬ÈÏÌí¼ÓÉÏÏÂÀ­Ë¢ĞÂºÍÉÏÀ­¼ÓÔØ¸ü¶à£¬ÔÚjava ´úÂëÖĞ ÉèÖÃ setLoadMoreEnabled(true);  setRefreshEnabled(true);
-10.widget Ä¿Â¼ÏÂĞÂÔö ShapeEditText £¬ShapeFrameLayout£¬ShapeRelativeLayout,ShapeLinearLayout, ºÍShapeTextView Ê¹ÓÃ·½·¨Ò»ÖÂ
+1.ï¿½ï¿½ï¿½ï¿½ SimplePagerSelectedListener
+2.TextUtils ï¿½ï¿½ï¿½ï¿½ setStrikeThruText ï¿½Ğ»ï¿½ï¿½ï¿½
+3.ï¿½ï¿½ï¿½ï¿½ VerticalViewPager
+4.addDoneAction  addSearchAction   addSendAction ï¿½Å»ï¿½,ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½ï¿½ë·¨ï¿½ï¿½Õ¼ï¿½ï¿½ï¿½ï¿½
+5.ï¿½ï¿½ï¿½ï¿½ ArcMenu
+6.CollectionsUtils ï¿½ï¿½ï¿½ï¿½ SparseArray<List<T>> grouping(List<T> sourceList, int countPerPage)    ï¿½ï¿½List ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ÎªÒ»ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½
+7.ToastUtils show ï¿½ï¿½ï¿½ï¿½ï¿½Å»ï¿½
+8.ActivityManager ï¿½ï¿½ï¿½ï¿½ bringRecordToFrontAndClearTop
+9.IRecyclerView ï¿½ï¿½Ê¼ï¿½ï¿½Ä¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½Âºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¸ï¿½ï¿½à£¬ï¿½ï¿½java ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ setLoadMoreEnabled(true);  setRefreshEnabled(true);
+10.widget Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ShapeEditText ï¿½ï¿½ShapeFrameLayoutï¿½ï¿½ShapeRelativeLayout,ShapeLinearLayout, ï¿½ï¿½ShapeTextView Ê¹ï¿½Ã·ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
 
 
 
 V4.3.0 ---->2020.06.30
 
-1.¸üĞÂNetworkUtils Ê¹ÓÃ¼æÈİ·½Ê½»ñÈ¡ÍøÂç×´Ì¬
-2.ĞÂÔö setCustomActivityDensityInWidth
-3.BitmapHelper Ôö¼Ó scale ¶ÔBitmap ½øĞĞËõ·Å¡£
-4.BitmapHelper layOnCenter ¸ü¸Ä£¬¼æÈİĞ¡Ã×ÊÖ»ú£¬µ×²¿Bitmap  ²»ÄÜÊ¹ÓÃcanvas.drawBitmap(bitmapBottom, 0, 0, null);  ÒªÊ¹ÓÃ  canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
-5.ScreenShoot ¸üÃûÎªScreenShootUtils ĞÂÔö  captureDecorViewExcludeStatusBar ²»°üº¬×´Ì¬À¸           captureDecorViewExcludeStatusNavBar ²»°üº¬×´Ì¬À¸ºÍµ×²¿µ¼º½À¸
-6.BitmapHelper É¾³ıBlurImages ¸ßË¹Ä£ºıÄÚ²¿Àà     ĞÂÔö  blurBitmap ·½·¨
-7.SystemBarHelper  tintStatusBar  Ä¬ÈÏÍ¸Ã÷¶È¸ÄÎª0
-8.MediaTools getVideoSpec »ñÈ¡ÊÓÆµ¿í¸ßĞı×ª½Ç¶È Ôö¼ÓÍøÂçÊÓÆµ»¹ÊÇ±¾µØÊÓÆµÅĞ¶Ï
+1.ï¿½ï¿½ï¿½ï¿½NetworkUtils Ê¹ï¿½Ã¼ï¿½ï¿½İ·ï¿½Ê½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½×´Ì¬
+2.ï¿½ï¿½ï¿½ï¿½ setCustomActivityDensityInWidth
+3.BitmapHelper ï¿½ï¿½ï¿½ï¿½ scale ï¿½ï¿½Bitmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Å¡ï¿½
+4.BitmapHelper layOnCenter ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½×²ï¿½Bitmap  ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½canvas.drawBitmap(bitmapBottom, 0, 0, null);  ÒªÊ¹ï¿½ï¿½  canvas.drawBitmap(bitmapBottom,bottomRect,bottomRect,null);
+5.ScreenShoot ï¿½ï¿½ï¿½ï¿½ÎªScreenShootUtils ï¿½ï¿½ï¿½ï¿½  captureDecorViewExcludeStatusBar ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½           captureDecorViewExcludeStatusNavBar ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½Íµ×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+6.BitmapHelper É¾ï¿½ï¿½BlurImages ï¿½ï¿½Ë¹Ä£ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½     ï¿½ï¿½ï¿½ï¿½  blurBitmap ï¿½ï¿½ï¿½ï¿½
+7.SystemBarHelper  tintStatusBar  Ä¬ï¿½ï¿½Í¸ï¿½ï¿½ï¿½È¸ï¿½Îª0
+8.MediaTools getVideoSpec ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½Ç¶ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½Ç±ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½Ğ¶ï¿½
 9.AppUtils isActivityOnForeground
-10.setClickTintResizeSpanStr  setClickTintResizeSpanStr  Ö§³ÖÁ½´¦µØ·½¸ßÁÁ¿Éµã»÷
-11.ĞÂÔö BundleBuilder
-12.CommonFragmentPagerAdapter ĞÂÔö addFragment(Fragment fragment, Bundle bundle)
-13.ĞŞ¸´ ClipBoardUtils getPasteString ¿ÕÖ¸ÕëÒì³£
-14.HtmlUtils Ôö¼Ó replaceHtmlContent ÊÊÅähtml ¿í¸ß
+10.setClickTintResizeSpanStr  setClickTintResizeSpanStr  Ö§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Éµï¿½ï¿½
+11.ï¿½ï¿½ï¿½ï¿½ BundleBuilder
+12.CommonFragmentPagerAdapter ï¿½ï¿½ï¿½ï¿½ addFragment(Fragment fragment, Bundle bundle)
+13.ï¿½Ş¸ï¿½ ClipBoardUtils getPasteString ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ì³£
+14.HtmlUtils ï¿½ï¿½ï¿½ï¿½ replaceHtmlContent ï¿½ï¿½ï¿½ï¿½html ï¿½ï¿½ï¿½
 
 
 
@@ -391,22 +391,22 @@ V4.3.0 ---->2020.06.30
 V4.2.0   ---->2020.05.06
 
 
-1.ĞŞ¸´TabLayout ÉÁÍËbug   setSelect()Ê±Ö¸Ê¾Æ÷Î»ÖÃÃ»ÓĞ±ä»¯ÎÊÌâ
-2.FragmentSwitcher Ôö¼Ó select(int index,Bundle bundle)£¬Ö§³ÖFragment´´½¨µÄÊ±ºò setArgument
-3.AppUtils ĞÂÔöÅĞ¶ÏÎ¢ĞÅ£¬Ö§¸¶±¦AppÊÇ·ñ´æÔÚ
-4. IRecyclerView isRefreshing  IRecyclerHelper Õë¶Ô Throwalbe Çé¿öÏÂ ¹Ø±ÕÏÂÀ­Ë¢ĞÂ ×´Ì¬
-5.Ôö¼ÓContentObserver°ü£¬ÓÃÓÚ¼àÌıÏµÍ³¿ª¹Ø£¬ĞÂÔöGpsLocationObserver ¼àÌıgps¿ª¹Ø
-6.SmsCodeCounter setReGetCodeText  ÉèÖÃµ¹¼ÆÊ±½áÊøºóµÄÎÄ±¾
-7.SoftKeyboardUtils ĞÂÔö  AdjustPan £¬µ÷ÕûÒ³ÃæÊäÈë¿ò±»Èí¼üÅÌÕÚµ²ÎÊÌâ£¬  ·½°¸À´Ô´ AndroidBug5497Workaround¡£
-  Ê¹ÓÃ  SoftKeyboardUtils.assistActivity£¨Activity activity£© ·ÅÔÚsetContentViewÖ®ºó
-  ÒªÇó£º²¼¾ÖÖĞÒªÓĞScrollView£¬ListViewµÄ¹ö¶¯×é¼ş Activity ²»ÄÜÉèÖÃ¼üÅÌ setSoftInputMode
-8.PermissionRequestBodyBuilder ĞŞ¸Ä ·µ»Ø RequestReuslt£¬
-9.PhotoSelector ÄÚ²¿ÉêÇëÈ¨ÏŞÂß¼­ ÓÉPermissionUtils ¸Ä³É  PermissionRequestBodyBuilder ÊµÏÖ
-10.EditTextUtils ĞÂÔö keepDecimal(final EditText editText,final  int decimalCount)  Ôö¼ÓĞ¡Êıµã¿ØÖÆ
-11.ÓÅ»¯BaseRecyclerAdapter Ô­ÓĞprotected ĞŞÊÎµÄÊôĞÔ ¶¼¸Ä³É private  Ìá¹© getter
-12.ĞÂÔö AESUtils ¼ÓÃÜ½âÃÜ£¬   Base64Utils ¸üĞÂ
-13.¸üĞÂToastUtils  showCenter±ê×¢¹ıÊ±£¬  ĞÂÔöshowCenterShort   showCenterLong
-14.ClipBoardUtils ¸üĞÂ£¬ĞŞ¸Äcopy ·½·¨µÄToastÌáÊ¾£¬±ÜÃâĞ¡Ã×ÊÖ»útoast ´øÓ¦ÓÃÃû³Æ
+1.ï¿½Ş¸ï¿½TabLayout ï¿½ï¿½ï¿½ï¿½bug   setSelect()Ê±Ö¸Ê¾ï¿½ï¿½Î»ï¿½ï¿½Ã»ï¿½Ğ±ä»¯ï¿½ï¿½ï¿½ï¿½
+2.FragmentSwitcher ï¿½ï¿½ï¿½ï¿½ select(int index,Bundle bundle)ï¿½ï¿½Ö§ï¿½ï¿½Fragmentï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ setArgument
+3.AppUtils ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½Î¢ï¿½Å£ï¿½Ö§ï¿½ï¿½ï¿½ï¿½Appï¿½Ç·ï¿½ï¿½ï¿½ï¿½
+4. IRecyclerView isRefreshing  IRecyclerHelper ï¿½ï¿½ï¿½ Throwalbe ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ø±ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½ ×´Ì¬
+5.ï¿½ï¿½ï¿½ï¿½ContentObserverï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú¼ï¿½ï¿½ï¿½ÏµÍ³ï¿½ï¿½ï¿½Ø£ï¿½ï¿½ï¿½ï¿½ï¿½GpsLocationObserver ï¿½ï¿½ï¿½ï¿½gpsï¿½ï¿½ï¿½ï¿½
+6.SmsCodeCounter setReGetCodeText  ï¿½ï¿½ï¿½Ãµï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+7.SoftKeyboardUtils ï¿½ï¿½ï¿½ï¿½  AdjustPan ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½â£¬  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô´ AndroidBug5497Workaroundï¿½ï¿½
+  Ê¹ï¿½ï¿½  SoftKeyboardUtils.assistActivityï¿½ï¿½Activity activityï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½setContentViewÖ®ï¿½ï¿½
+  Òªï¿½ó£º²ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ScrollViewï¿½ï¿½ListViewï¿½Ä¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Activity ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¼ï¿½ï¿½ï¿½ setSoftInputMode
+8.PermissionRequestBodyBuilder ï¿½Ş¸ï¿½ ï¿½ï¿½ï¿½ï¿½ RequestReusltï¿½ï¿½
+9.PhotoSelector ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ß¼ï¿½ ï¿½ï¿½PermissionUtils ï¿½Ä³ï¿½  PermissionRequestBodyBuilder Êµï¿½ï¿½
+10.EditTextUtils ï¿½ï¿½ï¿½ï¿½ keepDecimal(final EditText editText,final  int decimalCount)  ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+11.ï¿½Å»ï¿½BaseRecyclerAdapter Ô­ï¿½ï¿½protected ï¿½ï¿½ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ä³ï¿½ private  ï¿½á¹© getter
+12.ï¿½ï¿½ï¿½ï¿½ AESUtils ï¿½ï¿½ï¿½Ü½ï¿½ï¿½Ü£ï¿½   Base64Utils ï¿½ï¿½ï¿½ï¿½
+13.ï¿½ï¿½ï¿½ï¿½ToastUtils  showCenterï¿½ï¿½×¢ï¿½ï¿½Ê±ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½showCenterShort   showCenterLong
+14.ClipBoardUtils ï¿½ï¿½ï¿½Â£ï¿½ï¿½Ş¸ï¿½copy ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Toastï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½Ö»ï¿½toast ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -417,22 +417,22 @@ V4.2.0   ---->2020.05.06
 
 V4.1.0  ---->2020.04.23
 
-1.PhotoViewShowDialog ¸üÃûÎª PhotoPreviewDialog ²¢ÇÒµ¥»÷¶Ô»°¿òÏûÊ§,¿ÉÉèÖÃ±³¾°ÑÕÉ«
-2.ĞÂÔöCompatCardView
-3.AmountUtils ĞÂÔö dealAmountValue
-4.FileUtils ĞÂÔö unZipAssetsFolder£¬½«AssetsÑ¹Ëõ°ü½âÑ¹µ½sdcard
-5.BaseRecyclerAdapter ºÍCommonBaseAdapter bind() ²»×ö´«²Î¿ÕÅĞ  CommonBaseAdapter Ôö¼ÓgetDataList ºÍ clear
-6.ĞÂÔöTabLayout
-7.ĞÂÔöShadowLayout
-8.checkBankCardCode ¸üĞÂ£¬Ôö¼Ó checkCardValid ×ß°¢Àï¹«¹²½Ó¿ÚÅĞ¶Ï
-9.ĞÂÔö BottomSlideDialog  CustomDialog
-10.ĞÂÔöAndKit Ò»Æğ³õÊ¼»¯ ToastUtils  CompatUtils AppSpManagerµÈÀà
-11.LoadMoreFooterView Ôö¼ÓsetGlobalCustomNoMoreText,È«¾Ö¸Ä±ä Ä¬ÈÏµÄÎŞ¸ü¶àÊı¾İÎÄ±¾
-12.ĞÂÔö IRecyclerAdapterDataBinder
-        IRecyclerHelper ²»ÔÙ½ÓÊÜBaseRecyclerAdapter,¸ÄÎª½ÓÊÜ IRecyclerAdapterDataBinder£¬
-        Ö»Òª×Ô¶¨ÒåµÄAdapter ÊµÏÖIRecyclerAdapterDataBinder£¬¾Í¿ÉÒÔÊ¹ÓÃ IRecyclerHelper¡£
-13.EntityReflection ¸üÃûÎª BeanUtils Ôö¼Ó copyProperties ¿½±´ÊôĞÔ
-14.BaseRecyclerAdapter ĞÂÔö  OnItemClickListener<T> setOnItemClickListener(OnItemClickListener<T> listener)
+1.PhotoViewShowDialog ï¿½ï¿½ï¿½ï¿½Îª PhotoPreviewDialog ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½Ê§,ï¿½ï¿½ï¿½ï¿½ï¿½Ã±ï¿½ï¿½ï¿½ï¿½ï¿½É«
+2.ï¿½ï¿½ï¿½ï¿½CompatCardView
+3.AmountUtils ï¿½ï¿½ï¿½ï¿½ dealAmountValue
+4.FileUtils ï¿½ï¿½ï¿½ï¿½ unZipAssetsFolderï¿½ï¿½ï¿½ï¿½AssetsÑ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½sdcard
+5.BaseRecyclerAdapter ï¿½ï¿½CommonBaseAdapter bind() ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½  CommonBaseAdapter ï¿½ï¿½ï¿½ï¿½getDataList ï¿½ï¿½ clear
+6.ï¿½ï¿½ï¿½ï¿½TabLayout
+7.ï¿½ï¿½ï¿½ï¿½ShadowLayout
+8.checkBankCardCode ï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ checkCardValid ï¿½ß°ï¿½ï¿½ï¹«ï¿½ï¿½ï¿½Ó¿ï¿½ï¿½Ğ¶ï¿½
+9.ï¿½ï¿½ï¿½ï¿½ BottomSlideDialog  CustomDialog
+10.ï¿½ï¿½ï¿½ï¿½AndKit Ò»ï¿½ï¿½ï¿½Ê¼ï¿½ï¿½ ToastUtils  CompatUtils AppSpManagerï¿½ï¿½ï¿½ï¿½
+11.LoadMoreFooterView ï¿½ï¿½ï¿½ï¿½setGlobalCustomNoMoreText,È«ï¿½Ö¸Ä±ï¿½ Ä¬ï¿½Ïµï¿½ï¿½Ş¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
+12.ï¿½ï¿½ï¿½ï¿½ IRecyclerAdapterDataBinder
+        IRecyclerHelper ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½BaseRecyclerAdapter,ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ IRecyclerAdapterDataBinderï¿½ï¿½
+        Ö»Òªï¿½Ô¶ï¿½ï¿½ï¿½ï¿½Adapter Êµï¿½ï¿½IRecyclerAdapterDataBinderï¿½ï¿½ï¿½Í¿ï¿½ï¿½ï¿½Ê¹ï¿½ï¿½ IRecyclerHelperï¿½ï¿½
+13.EntityReflection ï¿½ï¿½ï¿½ï¿½Îª BeanUtils ï¿½ï¿½ï¿½ï¿½ copyProperties ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+14.BaseRecyclerAdapter ï¿½ï¿½ï¿½ï¿½  OnItemClickListener<T> setOnItemClickListener(OnItemClickListener<T> listener)
 
 
 
@@ -440,47 +440,47 @@ V4.1.0  ---->2020.04.23
 V4.0.0  ---->2020.04.15
 
 
-1.ExpandableListItemLayout ÖØÃûÎª ListItemExpandableLayout  ÌŞ³ı ListItemWrapperLayout
-2.StringUtils ĞÂÔö dealNumericValue£¬ µ±ÓÃString ±íÊ¾ÊıÁ¿ºÍ½ğ¶î£¬ »á³öÏÖÎªnull,»òÕßĞ¡ÊıµãºóÃæÓĞ¶à¸ö0 µÄÎÊÌâ
-3.IRecyclerHepler  Ôö¼Ó completeRefresh  completeLoadMore ³ÉÔ±·½·¨
-4.DeviceUtils Ôö¼ÓgetDeviceId
-5.IntentUtils Ôö¼Ó getPhoneCallIntent  getDialIntent
-6.CacheManager ÓÅ»¯É¾³ıÄÚ²¿ÎÄ¼şÂß¼­£¬ĞÂÔö getTotalSizeExcludeSharePreference   cleanAllCacheExcludeSharePreference
-7.ThrowableUtils Ôö¼Ó ConnectException ÅĞ¶Ï£¬½ûÖ¹±¨´íÏÔÊ¾ip
-8.ĞÂÔö BothItemRecyclerAdapter  ¸üĞÂBothItemBaseAdapter
-9.ĞÂÔöIdCardUtils ¼ì²â 18 15 Î»ÒÔ¼°¸Û°ÄÌ¨ Éí·İÖ¤
-10.NavBarUtils Ôö¼Ó »ñÈ¡µ×²¿µ¼º½À¸¸ß¶È getNavBarHeight
-11.BankCardCodeUtils ¸üÃûÎªBankCardUtils, ĞÂÔö ÓÉÒøĞĞ¿¨ºÅ²éÑ¯ÒøĞĞÃû³ÆºÍ¿¨ÖÖ£¬ ÒøĞĞÁĞ±íJson£¨ÒÑ°´×ÖÄ¸ÅÅĞò£©
-12.IRecyclerHelper ºÍ RecyclerViewHelper  ĞÂÔö toStickFromPosition() ½«Ä³¸öitem ÖÃ¶¥
-13.StringUtils ĞÂÔö formatFileSize£¨long size£© ´¦ÀíÎÄ¼ş´óĞ¡£¬Formatter.formatFileSize  Õâ¸öÀà»á³öÏÖ µ¥Î»ÎªÖĞÎÄµÄÇé¿ö£¬Èç 637KB ±ä³É 637Ç§×Ö½Ú
+1.ExpandableListItemLayout ï¿½ï¿½ï¿½ï¿½Îª ListItemExpandableLayout  ï¿½Ş³ï¿½ ListItemWrapperLayout
+2.StringUtils ï¿½ï¿½ï¿½ï¿½ dealNumericValueï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½String ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Í½ï¿½î£¬ ï¿½ï¿½ï¿½ï¿½ï¿½Îªnull,ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½0 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.IRecyclerHepler  ï¿½ï¿½ï¿½ï¿½ completeRefresh  completeLoadMore ï¿½ï¿½Ô±ï¿½ï¿½ï¿½ï¿½
+4.DeviceUtils ï¿½ï¿½ï¿½ï¿½getDeviceId
+5.IntentUtils ï¿½ï¿½ï¿½ï¿½ getPhoneCallIntent  getDialIntent
+6.CacheManager ï¿½Å»ï¿½É¾ï¿½ï¿½ï¿½Ú²ï¿½ï¿½Ä¼ï¿½ï¿½ß¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ getTotalSizeExcludeSharePreference   cleanAllCacheExcludeSharePreference
+7.ThrowableUtils ï¿½ï¿½ï¿½ï¿½ ConnectException ï¿½Ğ¶Ï£ï¿½ï¿½ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ip
+8.ï¿½ï¿½ï¿½ï¿½ BothItemRecyclerAdapter  ï¿½ï¿½ï¿½ï¿½BothItemBaseAdapter
+9.ï¿½ï¿½ï¿½ï¿½IdCardUtils ï¿½ï¿½ï¿½ 18 15 Î»ï¿½Ô¼ï¿½ï¿½Û°ï¿½Ì¨ ï¿½ï¿½ï¿½Ö¤
+10.NavBarUtils ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¡ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¶ï¿½ getNavBarHeight
+11.BankCardCodeUtils ï¿½ï¿½ï¿½ï¿½ÎªBankCardUtils, ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¿ï¿½ï¿½Å²ï¿½Ñ¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆºÍ¿ï¿½ï¿½Ö£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±ï¿½Jsonï¿½ï¿½ï¿½Ñ°ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½
+12.IRecyclerHelper ï¿½ï¿½ RecyclerViewHelper  ï¿½ï¿½ï¿½ï¿½ toStickFromPosition() ï¿½ï¿½Ä³ï¿½ï¿½item ï¿½Ã¶ï¿½
+13.StringUtils ï¿½ï¿½ï¿½ï¿½ formatFileSizeï¿½ï¿½long sizeï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½Formatter.formatFileSize  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Î»Îªï¿½ï¿½ï¿½Äµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 637KB ï¿½ï¿½ï¿½ 637Ç§ï¿½Ö½ï¿½
 
 
 
 V3.9.0 ---->2020.04.04
 
-1.SearchTool  ÖØÃüÃûÎª SearchHelper £¬µ÷Õû²¿·Ö´úÂë
-2.ĞÂÔö DrawableTextView£¬ ¿ØÖÆ ×óÉÏÓÒÏÂ µÄ drawable ¿í¸ß
+1.SearchTool  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª SearchHelper ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½ï¿½ï¿½
+2.ï¿½ï¿½ï¿½ï¿½ DrawableTextViewï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ drawable ï¿½ï¿½ï¿½
 3.DateUtils
- 1.Ôö¼Ó »ñÈ¡µ±Ç°ÈÕÆÚ getCurrentDateTime
- 2.getWantDateString Ôö¼ÓÅ×³öÒì³£´¦Àí
-4.SystemSettings ĞÂÔö isGpsLocationServiceEnable ÅĞ¶ÏGPS·şÎñÊÇ·ñ¿ªÆô
-5.AppUtils ĞÂÔö gotoOpenLocationService ´ò¿ªÎ»ÖÃ·şÎñ
-6.PhotoView Ôö¼Ó lock ºÍ unlock ·½·¨£¬ Ëø×¡Ö®ºó ÎŞ·¨½øĞĞ´¥ÃşÒÆ¶¯ºÍËõ·Å  ĞŞ¸´ScaleUpPhotoView ÔÚÃ»ÓĞÍ¼Æ¬µÄÊ±ºòÍË³ö¶¯»­ÉÁÍËÎÊÌâ
-7.FileUtils Ôö¼Ó isPicture
-8.ĞÂÔö IRecyclerViewGridDecoration2 IRecyclerViewStaggeredGridDecoration2 ±ßÔµ ºÍ ÖĞ¼ä·Ö¸ôµÄ´óĞ¡·Ö¿ªÉèÖÃ
-9.ĞÂÔö NotProguard  ±» NotProguard ×¢½â±ê¼Ç¹ıµÄ Àà£¬ÊôĞÔ£¬·½·¨Ôò²»±»»ìÏı
-  (1) Õû¸öÀà²»»ìÏı
+ 1.ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¡ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ getCurrentDateTime
+ 2.getWantDateString ï¿½ï¿½ï¿½ï¿½ï¿½×³ï¿½ï¿½ì³£ï¿½ï¿½ï¿½ï¿½
+4.SystemSettings ï¿½ï¿½ï¿½ï¿½ isGpsLocationServiceEnable ï¿½Ğ¶ï¿½GPSï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½
+5.AppUtils ï¿½ï¿½ï¿½ï¿½ gotoOpenLocationService ï¿½ï¿½Î»ï¿½Ã·ï¿½ï¿½ï¿½
+6.PhotoView ï¿½ï¿½ï¿½ï¿½ lock ï¿½ï¿½ unlock ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½×¡Ö®ï¿½ï¿½ ï¿½Ş·ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½Æ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½Ş¸ï¿½ScaleUpPhotoView ï¿½ï¿½Ã»ï¿½ï¿½Í¼Æ¬ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+7.FileUtils ï¿½ï¿½ï¿½ï¿½ isPicture
+8.ï¿½ï¿½ï¿½ï¿½ IRecyclerViewGridDecoration2 IRecyclerViewStaggeredGridDecoration2 ï¿½ï¿½Ôµ ï¿½ï¿½ ï¿½Ğ¼ï¿½Ö¸ï¿½ï¿½Ä´ï¿½Ğ¡ï¿½Ö¿ï¿½ï¿½ï¿½ï¿½ï¿½
+9.ï¿½ï¿½ï¿½ï¿½ NotProguard  ï¿½ï¿½ NotProguard ×¢ï¿½ï¿½ï¿½Ç¹ï¿½ï¿½ï¿½ ï¿½à£¬ï¿½ï¿½ï¿½Ô£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ò²»±ï¿½ï¿½ï¿½ï¿½ï¿½
+  (1) ï¿½ï¿½ï¿½ï¿½ï¿½à²»ï¿½ï¿½ï¿½ï¿½
   @NotProguard
   public class User {}
-  (2) µ¥¸öÊôĞÔ²»»ìÏı
+  (2) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½ï¿½ï¿½ï¿½
   @NotProguard
   public int id;
-  (3) µ¥¸ö·½·¨²»»ìÏı
+  (3) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
   @NotProguard
   public boolean isValid() {
-  ¡­
+  ï¿½ï¿½
   }
-10.¶ÔÈô¸ÉÀà public  protected ÊôĞÔ¸Ä³É private,·½±ãÕë¶Ô private ½øĞĞ»ìÏı
+10.ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ public  protected ï¿½ï¿½ï¿½Ô¸Ä³ï¿½ private,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ private ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½
 
 
 
@@ -488,20 +488,20 @@ V3.9.0 ---->2020.04.04
 
 V3.8.0  ---->2020.03.30
 
-1.ĞÂÔö IRecyclerPage   ·ÖÒ³Àà£¬ ÖØÔØ afterGetData(boolean isError, Throwable throwable, IRecyclerPage page)
-2.ĞÂÔö PhotoViewShowDialog
-3.StringUtils ĞÂÔö replaceWithStarSymbol Ìæ»»ÎªĞÇºÅ
-4. ĞÂÔö AmountUtils ´¦Àí½ğ¶îĞ¡ÊıµãÓëÁãÄ©Î²
+1.ï¿½ï¿½ï¿½ï¿½ IRecyclerPage   ï¿½ï¿½Ò³ï¿½à£¬ ï¿½ï¿½ï¿½ï¿½ afterGetData(boolean isError, Throwable throwable, IRecyclerPage page)
+2.ï¿½ï¿½ï¿½ï¿½ PhotoViewShowDialog
+3.StringUtils ï¿½ï¿½ï¿½ï¿½ replaceWithStarSymbol ï¿½æ»»Îªï¿½Çºï¿½
+4. ï¿½ï¿½ï¿½ï¿½ AmountUtils ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä©Î²
 5.SoftKeyboardUtils
-  1.observeSoftKeyboard µÄÊ±ºò decorView.setTag °ó¶¨ onGlobalLayoutListener
-  2.Ôö¼Ó removeObserveSoftKeyboard  É¾³ı decorView °ó¶¨µÄ onGlobalLayoutListener
-6.ĞÂÔö SystemBarHelper
-7.ĞÂÔö EntityReflection  ÏàÍ¬µÄÁ½¸ö¶ÔÏó£¬¸³Öµ¸øÁíÒ»¸ö
-8.ĞÂÔö HorizontalLeftMarginDecoration Ë®Æ½·½ÏòÉÏRecyclerViewµÚÒ»¸öitem µÄ×ó±ß¾à
-9.ĞÂÔöSmsCodeCounter ¶ÌĞÅÑéÖ¤Âëµ¹¼ÆÊ±
-10.IRecyclerHelper Ö§³Ö ¿ÕÕ¼Î»Í¼
-11.  PermissionRequestBuilder startRequest ·µ»ØÊÇ·ñ¿ªÆôÉêÇë³É¹¦
-12.ĞÂÔö AppSpManager È«¾ÖSharePreference , ÔÚ Application ÖĞ³õÊ¼»¯ ¾Í¿ÉÒÔÖ±½ÓÊ¹ÓÃ AppSpManager.putString(String key,String value);
+  1.observeSoftKeyboard ï¿½ï¿½Ê±ï¿½ï¿½ decorView.setTag ï¿½ï¿½ onGlobalLayoutListener
+  2.ï¿½ï¿½ï¿½ï¿½ removeObserveSoftKeyboard  É¾ï¿½ï¿½ decorView ï¿½ó¶¨µï¿½ onGlobalLayoutListener
+6.ï¿½ï¿½ï¿½ï¿½ SystemBarHelper
+7.ï¿½ï¿½ï¿½ï¿½ EntityReflection  ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ó£¬¸ï¿½Öµï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½
+8.ï¿½ï¿½ï¿½ï¿½ HorizontalLeftMarginDecoration Ë®Æ½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½RecyclerViewï¿½ï¿½Ò»ï¿½ï¿½item ï¿½ï¿½ï¿½ï¿½ß¾ï¿½
+9.ï¿½ï¿½ï¿½ï¿½SmsCodeCounter ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤ï¿½ëµ¹ï¿½ï¿½Ê±
+10.IRecyclerHelper Ö§ï¿½ï¿½ ï¿½ï¿½Õ¼Î»Í¼
+11.  PermissionRequestBuilder startRequest ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¹ï¿½
+12.ï¿½ï¿½ï¿½ï¿½ AppSpManager È«ï¿½ï¿½SharePreference , ï¿½ï¿½ Application ï¿½Ğ³ï¿½Ê¼ï¿½ï¿½ ï¿½Í¿ï¿½ï¿½ï¿½Ö±ï¿½ï¿½Ê¹ï¿½ï¿½ AppSpManager.putString(String key,String value);
 
 
 
@@ -510,25 +510,25 @@ V3.8.0  ---->2020.03.30
 
 V3.7.0 ---->2020.03.27
 
-1.SoftKeyboardUtils ĞÂÔö adustScrollView(final ScrollView scrollView, final int originalBottomMargin) ½â¾ö¼üÅÌµ¯ÆğÕÚµ²ÊäÈë¿ò ÎÊÌâ
-2.ĞÂÔö ViewUtils isOnBottom  isOnTop  isOnRight isOnLeft
+1.SoftKeyboardUtils ï¿½ï¿½ï¿½ï¿½ adustScrollView(final ScrollView scrollView, final int originalBottomMargin) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+2.ï¿½ï¿½ï¿½ï¿½ ViewUtils isOnBottom  isOnTop  isOnRight isOnLeft
 3.DateUtils
   1.isToday(Date paramDate)
   2.isTomorrow(Date paramDate)
-  3.getAllDaysAfter(int days,boolean inCludeToday) //»ñÈ¡¶àÉÙÌìºóµÄ
-  4.isTodayAfterMilliSecond  ÅĞ¶Ï¶àÉÙºÁÃëÖ®ºóÊÇ·ñÎª½ñÌì
+  3.getAllDaysAfter(int days,boolean inCludeToday) //ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  4.isTodayAfterMilliSecond  ï¿½Ğ¶Ï¶ï¿½ï¿½Ùºï¿½ï¿½ï¿½Ö®ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½
 
-4.notifyItemRangeChanged(list) ¾Ö²¿¸üĞÂ£¬Ó¦ÓÃ³¡¾° ÆÙ²¼Á÷£¬ÄÚ²¿·â×°position Óë·¶Î§
-5.ĞÂÔö IRecyclerViewStaggeredGridDivider ÆÙ²¼Á÷·Ö¸îÌõ
-6.IRecyclerHelper ĞÂÔö invalidateSpanAssignments ´¦ÀíÆÙ²¼Á÷¶¥²¿¿Õ°×ÎÊÌâ
-7.ĞÂÔö DrawableUtils resetShapeColor ¸ü¸Ä shape µÄÑÕÉ«
-8.ĞÂÔö ShapeTextView
+4.notifyItemRangeChanged(list) ï¿½Ö²ï¿½ï¿½ï¿½ï¿½Â£ï¿½Ó¦ï¿½Ã³ï¿½ï¿½ï¿½ ï¿½Ù²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ú²ï¿½ï¿½ï¿½×°position ï¿½ë·¶Î§
+5.ï¿½ï¿½ï¿½ï¿½ IRecyclerViewStaggeredGridDivider ï¿½Ù²ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½
+6.IRecyclerHelper ï¿½ï¿½ï¿½ï¿½ invalidateSpanAssignments ï¿½ï¿½ï¿½ï¿½ï¿½Ù²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Õ°ï¿½ï¿½ï¿½ï¿½ï¿½
+7.ï¿½ï¿½ï¿½ï¿½ DrawableUtils resetShapeColor ï¿½ï¿½ï¿½ï¿½ shape ï¿½ï¿½ï¿½ï¿½É«
+8.ï¿½ï¿½ï¿½ï¿½ ShapeTextView
 9.AppUtils
-  1.ĞÂÔö getProcessName
-  2.ĞŞ¸Ä toInstallApk ¶¯Ì¬ÅĞ¶Ï 7.0 FileProvider
-10.ĞÂÔö PermissionRequestBuilder add Ìí¼Ó È¨ÏŞ ²¢ÇÒ±êÖ¾¸ÃÈ¨ÏŞÊÇ·ñÇ¿ÖÆĞèÒª£¬»Øµ÷ÖĞ
+  1.ï¿½ï¿½ï¿½ï¿½ getProcessName
+  2.ï¿½Ş¸ï¿½ toInstallApk ï¿½ï¿½Ì¬ï¿½Ğ¶ï¿½ 7.0 FileProvider
+10.ï¿½ï¿½ï¿½ï¿½ PermissionRequestBuilder add ï¿½ï¿½ï¿½ È¨ï¿½ï¿½ ï¿½ï¿½ï¿½Ò±ï¿½Ö¾ï¿½ï¿½È¨ï¿½ï¿½ï¿½Ç·ï¿½Ç¿ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½
    isRejectForcePermissions(String[] permissions, @NonNull int[] grantResults)
-   ·µ»Ø Ëù¾Ü¾øµÄ±ØĞëÈ¨ÏŞ  ²»Îª¿ÕÔòÍË³öÓ¦ÓÃ
+   ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ü¾ï¿½ï¿½Ä±ï¿½ï¿½ï¿½È¨ï¿½ï¿½  ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½Ë³ï¿½Ó¦ï¿½ï¿½
 
 
 
@@ -536,55 +536,55 @@ V3.7.0 ---->2020.03.27
 
 V3.6.0 ---->2020.03.24
 
-1.ĞŞ¸´PhotoView ²»ÄÜÕı³£Ô¤ÀÀ³¤½ØÍ¼bug
-2.Ô­LazyFragment ¸üÃûÎª LazyFragmentBase,ÖØĞÂĞÂ½¨LazyFragment
-3. Ô­°üÃûÏÂµÄtag Ä¿Â¼ ÒÆ¶¯µ½widgetÖĞ£¬ DLTabLayout ¸üÃûÎª HorizontalScrollTabLayout²¢ÓÅ»¯¹ö¶¯ÌåÑé
-4.DensityUtils ĞÂÔö setCustomDensity(Activity activity, final Application application) ÊÊÅäÆÁÄ»
-   ÔÚActivity onCreate ÖĞÊ¹ÓÃ£¬
-5.EdiTextUtils Ôö¼Ó Èí¼üÅÌÓÒÏÂ½Ç°´¼üÎÄ±¾¸ü¸ÄºÍµã»÷¼àÌı    addSearchAction  addSendAction addDoneAction
-6.FileUtils ĞÂÔö getStringFromInputStream inputStream ×ª×Ö·û´®
-7.HorizontalScrollTabLayout Tab Ôö¼Ó¼Ó´Ö£¬Ôö¼Ó setIndicatorLeftMargin
-8.ĞÂÔö Symbol Àà£¬·ûºÅÀà£¬ ÈçÈËÃñ±Ò·ûºÅ
-9.ĞŞ¸´²à»¬É¾³ıÀà µã»÷É¾³ıÎŞĞ§¹ûbug
-10. CollectionsUtils ĞÂÔö createEntityList(MyPublishDemand.class,8)£¬·µ»ØÖ¸¶¨µÄbean ¼¯ºÏ£¬·½±ã²âÊÔ
-11.ĞŞ¸´PhotoView ´Ó×î´óËõĞ¡ ÓĞ×Ô¶¯µ¯µ½×î´óbug
-12.ĞÂÔö IRecyclerViewGridDivider   rvMain.addItemDecoration(new IRecycleViewGridDivider(36,
+1.ï¿½Ş¸ï¿½PhotoView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô¤ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼bug
+2.Ô­LazyFragment ï¿½ï¿½ï¿½ï¿½Îª LazyFragmentBase,ï¿½ï¿½ï¿½ï¿½ï¿½Â½ï¿½LazyFragment
+3. Ô­ï¿½ï¿½ï¿½ï¿½ï¿½Âµï¿½tag Ä¿Â¼ ï¿½Æ¶ï¿½ï¿½ï¿½widgetï¿½Ğ£ï¿½ DLTabLayout ï¿½ï¿½ï¿½ï¿½Îª HorizontalScrollTabLayoutï¿½ï¿½ï¿½Å»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+4.DensityUtils ï¿½ï¿½ï¿½ï¿½ setCustomDensity(Activity activity, final Application application) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä»
+   ï¿½ï¿½Activity onCreate ï¿½ï¿½Ê¹ï¿½Ã£ï¿½
+5.EdiTextUtils ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â½Ç°ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ÄºÍµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½    addSearchAction  addSendAction addDoneAction
+6.FileUtils ï¿½ï¿½ï¿½ï¿½ getStringFromInputStream inputStream ×ªï¿½Ö·ï¿½ï¿½ï¿½
+7.HorizontalScrollTabLayout Tab ï¿½ï¿½ï¿½Ó¼Ó´Ö£ï¿½ï¿½ï¿½ï¿½ï¿½ setIndicatorLeftMargin
+8.ï¿½ï¿½ï¿½ï¿½ Symbol ï¿½à£¬ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò·ï¿½ï¿½ï¿½
+9.ï¿½Ş¸ï¿½ï¿½à»¬É¾ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½bug
+10. CollectionsUtils ï¿½ï¿½ï¿½ï¿½ createEntityList(MyPublishDemand.class,8)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½bean ï¿½ï¿½ï¿½Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+11.ï¿½Ş¸ï¿½PhotoView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ ï¿½ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bug
+12.ï¿½ï¿½ï¿½ï¿½ IRecyclerViewGridDivider   rvMain.addItemDecoration(new IRecycleViewGridDivider(36,
                                                true,true));
-13.IRecyclerHelper isCanLoadMore  ÖĞÔö¼ÓStaggeredGridLayoutManager ÅĞ¶Ï
-14.ĞÂÔö IndicatorSwitcher  Ô²µãÖ¸Ê¾Æ÷ ÇĞ»»Æ÷
-15.ĞÂÔö NormalTabSwitcher  ÆÕÍ¨µÄ¼¸¸ö°´Å¥Ö®¼äµÄÇĞ»»
+13.IRecyclerHelper isCanLoadMore  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½StaggeredGridLayoutManager ï¿½Ğ¶ï¿½
+14.ï¿½ï¿½ï¿½ï¿½ IndicatorSwitcher  Ô²ï¿½ï¿½Ö¸Ê¾ï¿½ï¿½ ï¿½Ğ»ï¿½ï¿½ï¿½
+15.ï¿½ï¿½ï¿½ï¿½ NormalTabSwitcher  ï¿½ï¿½Í¨ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Å¥Ö®ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½
 
 
 
 
 V3.5.0 ---->2020.03.01
 
-1.Ôö¼ÓMediaStoreLoader  £¬MediaStoreFile,  ²éÕÒÊä³öMediaStoreFile.
+1.ï¿½ï¿½ï¿½ï¿½MediaStoreLoader  ï¿½ï¿½MediaStoreFile,  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MediaStoreFile.
 2.FileUtils
- (1).ÒÆ³ı MediaStore Ïà¹ØÎÄ¼ş²Ù×÷£¬½»¸øMediaStoreLoader ¹ÜÀí¡£
- (2).getAllTSFilePath  getTSFileDirPath  Á½¸ö·½·¨£¬  delete·½·¨ÅĞ¶ÏÈç¹ûÊÇÉ¾³ım3u8£¬Ôò»áÉ¾³ıtsÎÄ¼ş
- (3).sortASC(List<File> fileList)ÉıĞòÅÅĞò  sortDESC(List<File> fileList) ½µĞòÅÅĞò
+ (1).ï¿½Æ³ï¿½ MediaStore ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½MediaStoreLoader ï¿½ï¿½ï¿½ï¿½
+ (2).getAllTSFilePath  getTSFileDirPath  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  deleteï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½m3u8ï¿½ï¿½ï¿½ï¿½ï¿½É¾ï¿½ï¿½tsï¿½Ä¼ï¿½
+ (3).sortASC(List<File> fileList)ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  sortDESC(List<File> fileList) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-3. ÍÏ×§»Øµ¯×é¼şÔö¼Ó ReboundViewPager
-4.MediaStoreLoader Ôö¼Ó getPictureDirectoryFromImageStore ·µ»Ø List<PictureDirectory> Í¼Æ¬ÎÄ¼ş¼Ğ¼¯ºÏ
-5.widget Ä¿Â¼ĞÂÔöPhotoView Ä£¿é,Ô­widget ÏÂµÄPhotoView Ç¨ÒÆµ½¸ÃÄ¿Â¼
-    (1)PhotoView ĞÂÔöÖ§³Ö¹ßĞÔ¹ö¶¯
-    (2).setMatrixBitmap ÖØÃüÃûÎª onMatrixWhileSettingBitmap  ±íÊ¾µ± setBitmap µÄÊ±ºò»á»Øµ÷
-    (3).ÒÆ³ı OnFirstImageMatrixListener Àà  ,Ô­ÏÈ OnFirstImageMatrixListener ÖĞµÄ preMatrix()
-        ÊÇ»Øµ÷ µ±ÉèÖÃsetBitmapÊ± ÉèÖÃMatrix ²Ù×÷µÄ£¬ ±ÜÃâÔÚ preMatrix Ğ´Âß¼­ ´Ó¶ø±£³ÖPhotoView µÄÍêÕûĞÔ£¬
-        ÒªÊµÏÖÂß¼­  ÔòÖØĞ´ (1) ÖĞµÄ onMatrixWhileSettingBitmap
+3. ï¿½ï¿½×§ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ReboundViewPager
+4.MediaStoreLoader ï¿½ï¿½ï¿½ï¿½ getPictureDirectoryFromImageStore ï¿½ï¿½ï¿½ï¿½ List<PictureDirectory> Í¼Æ¬ï¿½Ä¼ï¿½ï¿½Ğ¼ï¿½ï¿½ï¿½
+5.widget Ä¿Â¼ï¿½ï¿½ï¿½ï¿½PhotoView Ä£ï¿½ï¿½,Ô­widget ï¿½Âµï¿½PhotoView Ç¨ï¿½Æµï¿½ï¿½ï¿½Ä¿Â¼
+    (1)PhotoView ï¿½ï¿½ï¿½ï¿½Ö§ï¿½Ö¹ï¿½ï¿½Ô¹ï¿½ï¿½ï¿½
+    (2).setMatrixBitmap ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Îª onMatrixWhileSettingBitmap  ï¿½ï¿½Ê¾ï¿½ï¿½ setBitmap ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Øµï¿½
+    (3).ï¿½Æ³ï¿½ OnFirstImageMatrixListener ï¿½ï¿½  ,Ô­ï¿½ï¿½ OnFirstImageMatrixListener ï¿½Ğµï¿½ preMatrix()
+        ï¿½Ç»Øµï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½setBitmapÊ± ï¿½ï¿½ï¿½ï¿½Matrix ï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ preMatrix Ğ´ï¿½ß¼ï¿½ ï¿½Ó¶ï¿½ï¿½ï¿½ï¿½ï¿½PhotoView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½
+        ÒªÊµï¿½ï¿½ï¿½ß¼ï¿½  ï¿½ï¿½ï¿½ï¿½Ğ´ (1) ï¿½Ğµï¿½ onMatrixWhileSettingBitmap
 
-6.BitmapHelper ĞÂÔö readBitmapDegree ¶ÁÈ¡Í¼Æ¬½Ç¶È  rotateToDegrees Ğı×ªÍ¼Æ¬
-7.Ôö¼ÓExifHelper £¬  getExifInfo(String path) ·µ»Ø Exif ÏêÇé
-8.ĞÂÔöImageLoader
-9.MatrixUtils ¸üĞÂ
-10.ĞÂÔö GridListViewUtils getChildAt(AbsListView view, int position)
-    ListView»òGridView Ö±½ÓgetChildAt ·µ»ØµÄÊÇµ±Ç°¿É¼ûÊıÁ¿µÄµÚ¼¸¸ö£¬
-    ËùÒÔÕùÈ¡µÄ»ñÈ¡·½·¨ÊÇ position-view.getFirstVisiblePosition()
+6.BitmapHelper ï¿½ï¿½ï¿½ï¿½ readBitmapDegree ï¿½ï¿½È¡Í¼Æ¬ï¿½Ç¶ï¿½  rotateToDegrees ï¿½ï¿½×ªÍ¼Æ¬
+7.ï¿½ï¿½ï¿½ï¿½ExifHelper ï¿½ï¿½  getExifInfo(String path) ï¿½ï¿½ï¿½ï¿½ Exif ï¿½ï¿½ï¿½ï¿½
+8.ï¿½ï¿½ï¿½ï¿½ImageLoader
+9.MatrixUtils ï¿½ï¿½ï¿½ï¿½
+10.ï¿½ï¿½ï¿½ï¿½ GridListViewUtils getChildAt(AbsListView view, int position)
+    ListViewï¿½ï¿½GridView Ö±ï¿½ï¿½getChildAt ï¿½ï¿½ï¿½Øµï¿½ï¿½Çµï¿½Ç°ï¿½É¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµÚ¼ï¿½ï¿½ï¿½ï¿½ï¿½
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä»ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ position-view.getFirstVisiblePosition()
 
-11.ĞÂÔö PrimaryPagerAdapter £¬ Í¨¹ı PrimaryItem primaryItem= layoutInflaterAdapter.getPrimaryItem();
-    primaryItem.object, »òÕß layoutInflaterAdapter.getPrimaryItemObject()
-12.ĞÂÔöScaleUpPhotoView  ´Óµã»÷´¦À©´óµ½Ö¸¶¨Î»ÖÃ£¬³¡¾°£ºÍ¼Æ¬·Å´óä¯ÀÀ
+11.ï¿½ï¿½ï¿½ï¿½ PrimaryPagerAdapter ï¿½ï¿½ Í¨ï¿½ï¿½ PrimaryItem primaryItem= layoutInflaterAdapter.getPrimaryItem();
+    primaryItem.object, ï¿½ï¿½ï¿½ï¿½ layoutInflaterAdapter.getPrimaryItemObject()
+12.ï¿½ï¿½ï¿½ï¿½ScaleUpPhotoView  ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Î»ï¿½Ã£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½Å´ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -593,39 +593,39 @@ V3.5.0 ---->2020.03.01
 
 V3.4.0 ---->2020.02.25
 
-1.BitmapHelper ĞŞ¸´ getInSampleSizeBitmap  Ôì³ÉÄÚ´æÒç³öbug.
-2.Ôö¼ÓImageViewUtils,Ôö¼ÓÖ÷Ïß³ÌÄÚÉèÖÃÍ¼Æ¬£¬¶¯Ì¬»ñÈ¡¿í¸ß¡£
-3.SDCacheDir ±ê×¢¹ıÆÚ£¬Ê¹ÓÃExternalStorageDir ĞÂÀà£¬Ôö¼ÓgetPackageNameDir »ñÈ¡±¨ÃûÄ¿Â¼
-4.BitmapHelper ¸üĞÂ£º
- (1). Ôö¼Ó centerCrop  ÅäºÏ ImageView xml ÖĞµÄscaleType centerCrop
- (2). Ôö¼Ó centerCropRoundCorner   centerCrop Ä£Ê½ÏÂÔÙ½øĞĞÔ²½Ç
- (3). ÓÅ»¯ Ô­ÓĞ transformRoundCorner  transformRoundCornerWithBorder£¬outPutWidth ºÍ outPutHeight ±ØĞëÏÔÊ¾Ö¸¶¨
- (4). Ôö¼Ó logWidthHeight,´òÓ¡¿í¸ß
-5.Ôö¼ÓArrayUtils  getStringByArray(Object o),printArray(Object o)  ×ª×Ö·û´®£¬Êä³ö
+1.BitmapHelper ï¿½Ş¸ï¿½ getInSampleSizeBitmap  ï¿½ï¿½ï¿½ï¿½Ú´ï¿½ï¿½ï¿½ï¿½bug.
+2.ï¿½ï¿½ï¿½ï¿½ImageViewUtils,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Ì¬ï¿½ï¿½È¡ï¿½ï¿½ß¡ï¿½
+3.SDCacheDir ï¿½ï¿½×¢ï¿½ï¿½ï¿½Ú£ï¿½Ê¹ï¿½ï¿½ExternalStorageDir ï¿½ï¿½ï¿½à£¬ï¿½ï¿½ï¿½ï¿½getPackageNameDir ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ä¿Â¼
+4.BitmapHelper ï¿½ï¿½ï¿½Â£ï¿½
+ (1). ï¿½ï¿½ï¿½ï¿½ centerCrop  ï¿½ï¿½ï¿½ ImageView xml ï¿½Ğµï¿½scaleType centerCrop
+ (2). ï¿½ï¿½ï¿½ï¿½ centerCropRoundCorner   centerCrop Ä£Ê½ï¿½ï¿½ï¿½Ù½ï¿½ï¿½ï¿½Ô²ï¿½ï¿½
+ (3). ï¿½Å»ï¿½ Ô­ï¿½ï¿½ transformRoundCorner  transformRoundCornerWithBorderï¿½ï¿½outPutWidth ï¿½ï¿½ outPutHeight ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾Ö¸ï¿½ï¿½
+ (4). ï¿½ï¿½ï¿½ï¿½ logWidthHeight,ï¿½ï¿½Ó¡ï¿½ï¿½ï¿½
+5.ï¿½ï¿½ï¿½ï¿½ArrayUtils  getStringByArray(Object o),printArray(Object o)  ×ªï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 6.Logger
- (1).Ôö¼Ó Êı×éÅĞ¶Ï²¢Êä³öÊı×é
- (2).ÅĞ¶ÏÈç¹ûÊÇList,Êä³ö³¤¶ÈºÍ Êı×éĞÎÊ½Êä³ö
- (3).Ôö¼ÓBitmap ÅĞ¶Ï£¬Êä³ö¿í¸ß
+ (1).ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ (2).ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½List,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Èºï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½
+ (3).ï¿½ï¿½ï¿½ï¿½Bitmap ï¿½Ğ¶Ï£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 7.StringUtils
- (1).Ôö¼Ó trim·½·¨£¬Ö§³ÖÈ«½Ç¿Õ¸ñÈ¥³ı£¬Ô­Éú×Ö·û´®µÄtrim() Ö»ÄÜÈ¥³ıÊ×Î²°ë½Ç¿Õ¸ñ
- (2).×Ö·û´®ºÍUnicodeÂë»¥×ª
+ (1).ï¿½ï¿½ï¿½ï¿½ trimï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½È«ï¿½Ç¿Õ¸ï¿½È¥ï¿½ï¿½ï¿½ï¿½Ô­ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½trim() Ö»ï¿½ï¿½È¥ï¿½ï¿½ï¿½ï¿½Î²ï¿½ï¿½Ç¿Õ¸ï¿½
+ (2).ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½Unicodeï¿½ë»¥×ª
 
 8.FileUtils
- (1).getFileSuffixFromPath  »ñÈ¡ÎÄ¼şÃûºó×º
- (2).getFileNameWithoutSuffix  »ñÈ¡²»´øºó×ºµÄÎÄ¼şÃû
+ (1).getFileSuffixFromPath  ï¿½ï¿½È¡ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½×º
+ (2).getFileNameWithoutSuffix  ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ºï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
 
-9. SpannableStringUtils ¶à¸öº¯Êı¸üÃû£¬·½±ãµ÷ÓÃ
- (1).setAbsoluteSizeSpan ¸üÃûÎª getAbsoluteSizeSpannableString
- (2).convertBlodStyle ¸üÃûÎª getBlodStyleSpannableString
- (3).setTint ¸üÃûÎª getTintSpannableString
- (4). tintResize  ¸üÃûÎª getTintResizeSpannableString
- (5). tintResizeBold ¸üÃûÎª getTintResizeBoldSpannableString
- (6).setClickTintResizeSpanStr  ½ÓÊÕÑÕÉ«  ×Ö·û´®¸Ä³É  int
+9. SpannableStringUtils ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ (1).setAbsoluteSizeSpan ï¿½ï¿½ï¿½ï¿½Îª getAbsoluteSizeSpannableString
+ (2).convertBlodStyle ï¿½ï¿½ï¿½ï¿½Îª getBlodStyleSpannableString
+ (3).setTint ï¿½ï¿½ï¿½ï¿½Îª getTintSpannableString
+ (4). tintResize  ï¿½ï¿½ï¿½ï¿½Îª getTintResizeSpannableString
+ (5). tintResizeBold ï¿½ï¿½ï¿½ï¿½Îª getTintResizeBoldSpannableString
+ (6).setClickTintResizeSpanStr  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«  ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä³ï¿½  int
 
-10. MediaTools Ôö¼Ó getDurationMinuteFormat   getDurationHourFormat
-11.ĞÂÔö CompatLineTextView Àà£¬ ´¦Àí×Ö·û´®ÖĞÓĞĞ¡ÊıµãºÍÓ¢ÎÄ³öÏÖÒì³£»»ĞĞµÄÇé¿ö£¬Ö§³Ö maxLine ÏŞÖÆ
-12.AppUtils ĞÂÔö shareVideo
-13.ĞÂÔöGlide ¸¨ÖúÀà£¬RoundCornerTransform CornerType Ô²½Ç´¦Àí
+10. MediaTools ï¿½ï¿½ï¿½ï¿½ getDurationMinuteFormat   getDurationHourFormat
+11.ï¿½ï¿½ï¿½ï¿½ CompatLineTextView ï¿½à£¬ ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½ï¿½Ó¢ï¿½Ä³ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½ï¿½ maxLine ï¿½ï¿½ï¿½ï¿½
+12.AppUtils ï¿½ï¿½ï¿½ï¿½ shareVideo
+13.ï¿½ï¿½ï¿½ï¿½Glide ï¿½ï¿½ï¿½ï¿½ï¿½à£¬RoundCornerTransform CornerType Ô²ï¿½Ç´ï¿½ï¿½ï¿½
 
 
 
@@ -634,29 +634,29 @@ V3.4.0 ---->2020.02.25
 
 V3.3.0  ---->2020.02.20
 1.ScreenUtils
- (1).Ôö¼ÓºáÊúÆÁ·½ÏòÅĞ¶Ï·½·¨£¬ÇĞ»»ºáÊúÆÁ·½·¨
- (2).ĞÂÔö getStatusBarHeight2£¬ÀûÓÃ·´Éä»ñÈ¡ °²×¿µÄRÎÄ¼ş ÅäÖÃÀïÍ·µÄ  status_hegiht;
- (3).ĞÂÔöisTablet ·½·¨£¬ÅĞ¶ÏÊÇ·ñÎªÆ½°å
-2.Ìí¼ÓGridDividerItemDecoration
-3.MediaTime ¸üÃûÎªMediaTools,ĞÂÔö»ñÈ¡ÊÓÆµ½ØÍ¼£¬ÊÓÆµ¹æ¸ñº¯Êı
-4.FileUtils ¸üĞÂ
-(1).¼ÆËãÎÄ¼ş¼Ğ×Ü´óĞ¡(getTotalSizeOfFilesInDir)
-(2).´ÓÖ¸¶¨Ä¿Â¼£¬Ã½ÌåÎÄ¼ş¿âÖĞ¸ù¾İºó×ºÃû²éÕÒÎÄ¼ş(getSpecFilesFromDir¡¢getSpecFileFromMediaFileStore)
-(3).Ôö¼Ó deleteMediaStoreVideoFile ¡¢ deleteMediaStoreImageFile ¡¢deleteMediaStoreAudioFile ¡¢deleteMediaFileStoreFile  ´ÓÊı¾İ¿âÖĞÉ¾³ı¼ÇÂ¼
+ (1).ï¿½ï¿½ï¿½Óºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ (2).ï¿½ï¿½ï¿½ï¿½ getStatusBarHeight2ï¿½ï¿½ï¿½ï¿½ï¿½Ã·ï¿½ï¿½ï¿½ï¿½È¡ ï¿½ï¿½×¿ï¿½ï¿½Rï¿½Ä¼ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½  status_hegiht;
+ (3).ï¿½ï¿½ï¿½ï¿½isTablet ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ÎªÆ½ï¿½ï¿½
+2.ï¿½ï¿½ï¿½GridDividerItemDecoration
+3.MediaTime ï¿½ï¿½ï¿½ï¿½ÎªMediaTools,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½Æµï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½
+4.FileUtils ï¿½ï¿½ï¿½ï¿½
+(1).ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ü´ï¿½Ğ¡(getTotalSizeOfFilesInDir)
+(2).ï¿½ï¿½Ö¸ï¿½ï¿½Ä¿Â¼ï¿½ï¿½Ã½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Ğ¸ï¿½ï¿½İºï¿½×ºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½(getSpecFilesFromDirï¿½ï¿½getSpecFileFromMediaFileStore)
+(3).ï¿½ï¿½ï¿½ï¿½ deleteMediaStoreVideoFile ï¿½ï¿½ deleteMediaStoreImageFile ï¿½ï¿½deleteMediaStoreAudioFile ï¿½ï¿½deleteMediaFileStoreFile  ï¿½ï¿½ï¿½ï¿½ï¿½İ¿ï¿½ï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½Â¼
 
-5.Ôö¼ÓCollectionsUtils Àà£¬Ôö¼ÓmergeList£¬ºÏ²¢Á½¸ö¼¯ºÏÇÒÈ¥ÖØ´¦Àí,½á¹¹ÀàĞè¼Ì³Ğ MergeCell .
-6.ClipBoardUtils Ôö¼Ó getPasteString  »ñÈ¡×îĞÂ¸´ÖÆµÄÄÚÈİ
-7.Ôö¼Ó SystemSettings Àà£¬»ñÈ¡ÏµÍ³ÉèÖÃ£¬Èç ÁÁ¶È£¬×Ô¶¯Ğı×ªµÈµÈ
-8.Ôö¼ÓPlayerGestureºÍPlayerGestureView Á½Àà£¬Ê¹ÓÃPlayerGestureView ¿ÉÒÔ¿ØÖÆÁÁ¶È£¬ÉùÒô£¬½ø¶È
-9.anim ÎÄ¼ş¼ĞÏÂÔö¼Ó ×óÉÏÓÒÏÂËÄ¸ö·½Ïò µÄ»¬³öºÍ»¬Èë  8¸ö¶¯»­ÎÄ¼ş,style.xml ´´½¨4¸östyle,Ìá¹©µ÷ÓÃ
-  Ôö¼ÓAnimationUtils À´»ñÈ¡¡¢Æô¶¯Õâ8¸ö¶¯»­£¬getLeftSlideOutAnimation(Context context),startLeftSlideOutAnimation(Context context);
-10.Ôö¼Ó RoundImageView   app:roundRadius="10dp" ¿ØÖÆÔ²½Ç´óĞ¡
-11.Ôö¼Ó ReboundHelper ºËĞÄÀà£¬ÍÏ×§»Øµ¯Ğ§¹û!
-ĞÂÔö ReboundLayout,ReboudRecyclerView,ReboundScrollView,ReboundListView,ReboundGridView 5¸ö»Øµ¯×é¼ş¡£
-12.AppUtils Ôö¼Ó backHome£¬·µ»Ø×ÀÃæ¡£
-13.Ôö¼Ó ActivityManager
-14.PermissionUtils Ôö¼ÓÅĞ¶ÏÊÇ·ñÓĞÏÔÊ¾ÔÚÓ¦ÓÃÉÏ²ãÈ¨ÏŞ hasDrawOverlaysPermission   startDrawOverlaysActivityForResult
-15.Ôö¼Ó RotationObserver ¼àÌı ×Ô¶¯Ğı×ª¿ª¹Ø·¢Éú¸Ä±ä
+5.ï¿½ï¿½ï¿½ï¿½CollectionsUtils ï¿½à£¬ï¿½ï¿½ï¿½ï¿½mergeListï¿½ï¿½ï¿½Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¥ï¿½Ø´ï¿½ï¿½ï¿½,ï¿½á¹¹ï¿½ï¿½ï¿½ï¿½Ì³ï¿½ MergeCell .
+6.ClipBoardUtils ï¿½ï¿½ï¿½ï¿½ getPasteString  ï¿½ï¿½È¡ï¿½ï¿½ï¿½Â¸ï¿½ï¿½Æµï¿½ï¿½ï¿½ï¿½ï¿½
+7.ï¿½ï¿½ï¿½ï¿½ SystemSettings ï¿½à£¬ï¿½ï¿½È¡ÏµÍ³ï¿½ï¿½ï¿½Ã£ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½È£ï¿½ï¿½Ô¶ï¿½ï¿½ï¿½×ªï¿½Èµï¿½
+8.ï¿½ï¿½ï¿½ï¿½PlayerGestureï¿½ï¿½PlayerGestureView ï¿½ï¿½ï¿½à£¬Ê¹ï¿½ï¿½PlayerGestureView ï¿½ï¿½ï¿½Ô¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+9.anim ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä»ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½ï¿½  8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½,style.xml ï¿½ï¿½ï¿½ï¿½4ï¿½ï¿½style,ï¿½á¹©ï¿½ï¿½ï¿½ï¿½
+  ï¿½ï¿½ï¿½ï¿½AnimationUtils ï¿½ï¿½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½8ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½getLeftSlideOutAnimation(Context context),startLeftSlideOutAnimation(Context context);
+10.ï¿½ï¿½ï¿½ï¿½ RoundImageView   app:roundRadius="10dp" ï¿½ï¿½ï¿½ï¿½Ô²ï¿½Ç´ï¿½Ğ¡
+11.ï¿½ï¿½ï¿½ï¿½ ReboundHelper ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ï¿½ï¿½×§ï¿½Øµï¿½Ğ§ï¿½ï¿½!
+ï¿½ï¿½ï¿½ï¿½ ReboundLayout,ReboudRecyclerView,ReboundScrollView,ReboundListView,ReboundGridView 5ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+12.AppUtils ï¿½ï¿½ï¿½ï¿½ backHomeï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½æ¡£
+13.ï¿½ï¿½ï¿½ï¿½ ActivityManager
+14.PermissionUtils ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½Ï²ï¿½È¨ï¿½ï¿½ hasDrawOverlaysPermission   startDrawOverlaysActivityForResult
+15.ï¿½ï¿½ï¿½ï¿½ RotationObserver ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¶ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
 
 
 
@@ -665,16 +665,16 @@ V3.3.0  ---->2020.02.20
 V3.2.0 ---->2020.02.11
 
 
-1.Ôö¼Ó setClickTintResizeSpanStr getClickTintResizeSpanStr ×ÅÉ«²¢¿Éµã»÷Ğ§¹ûµÄ×Ö·û´®£¬
-  Ôö¼Ó ClickableSpanTextView ºÍ ClickableLinkMovementMethod Ó¦¶ÔListView ÖĞµÄTextView ÉèÖÃClickableSpanString Ê±£¬itemµã»÷Ã»ÓĞĞ§¹ûµÈ
-2.tintText ºÍ tintResize Á½¸öº¯ÊıÖØÔØ£¬ ²»´«Èë start,end, Ö»´«È«ÎÄ±¾£¬ºÍkeyword
-3.PullRefreshLayout Ôö¼Ó isRefreshing()º¯Êı ÅĞ¶ÏÊÇ·ñÕıÔÚË¢ĞÂ
-4.LoadingDialog ¸üĞÂĞı×ªÑùÊ½
-5.RedPointTextView  Ôö¼ÓĞŞ¸ÄºìµãÑÕÉ«
-6.ThrowableUtils ÖØÔØshow ·½·¨£¬½ÓÊÕObject ,»áÅĞ¶ÏÊÇString »¹ÊÇThrowable£¬
-ÓÃÓÚÍøÂçÇëÇó½Ó¿Ú´íÎóºÍÒµÎñfailureÇé¿ö
-7.BaseRecyclerAdapter Ôö¼Ó addAllAndNotifyDataChanged
-8.Ôö¼ÓIRecyclerView
+1.ï¿½ï¿½ï¿½ï¿½ setClickTintResizeSpanStr getClickTintResizeSpanStr ï¿½ï¿½É«ï¿½ï¿½ï¿½Éµï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
+  ï¿½ï¿½ï¿½ï¿½ ClickableSpanTextView ï¿½ï¿½ ClickableLinkMovementMethod Ó¦ï¿½ï¿½ListView ï¿½Ğµï¿½TextView ï¿½ï¿½ï¿½ï¿½ClickableSpanString Ê±ï¿½ï¿½itemï¿½ï¿½ï¿½Ã»ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½
+2.tintText ï¿½ï¿½ tintResize ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø£ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ start,end, Ö»ï¿½ï¿½È«ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½keyword
+3.PullRefreshLayout ï¿½ï¿½ï¿½ï¿½ isRefreshing()ï¿½ï¿½ï¿½ï¿½ ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½Ë¢ï¿½ï¿½
+4.LoadingDialog ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½Ê½
+5.RedPointTextView  ï¿½ï¿½ï¿½ï¿½ï¿½Ş¸Äºï¿½ï¿½ï¿½ï¿½É«
+6.ThrowableUtils ï¿½ï¿½ï¿½ï¿½show ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Object ,ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½String ï¿½ï¿½ï¿½ï¿½Throwableï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¿Ú´ï¿½ï¿½ï¿½ï¿½Òµï¿½ï¿½failureï¿½ï¿½ï¿½
+7.BaseRecyclerAdapter ï¿½ï¿½ï¿½ï¿½ addAllAndNotifyDataChanged
+8.ï¿½ï¿½ï¿½ï¿½IRecyclerView
 
 
 
@@ -682,46 +682,46 @@ V3.2.0 ---->2020.02.11
 
 V3.1.0 --->2019.09.24
 
-1.BitmapHelper Ôö¼Ó transformRoundCornerWithBorder Ô²½Ç°×±ß¿ò£¬
-    transformCircleWithBorder Ô²ĞÎ°×±ß¿ò   layOnCenter  Á½¸öBitmap²ãµş
-2.MathUtils ·â×°BigDecimal,  Ôö¼Ó ¼Ó¼õ³Ë³ı ¶ÔÓ¦·½·¨  ´¦Àídouble ÔËËãÎÊÌâ
-3.Ôö¼Ó6Î»Êı×ÖÃÜÂë¶Ô»°¿ò InputPassWordDialog
-4.EventBundle ²¹»Ø  putDouble getDouble
-5.SpannableStringUtils tintText Ôö¼ÓSpannableString ´«²Î£¬
-Ôö¼ÓgetUnderLineTintSpannableString º¯Êı ×ÅÉ«²¢ÏÂ»®Ïß´¦Àí
-6.Logger Êä³ö×Ö·û´®Èô³¤¶È³¬¹ı4k£¬·Ö¶Î´òÓ¡
-7.EmptyUtils isEmpty  Ôö¼ÓÅĞ¶ÏTextView ºÍ EditText
-8.Ôö¼Ó CountDownCircleView £¬ÓÃÓÚÆô¶¯Ò³µ¹¼ÆÊ±
-9.Ôö¼Ó WebProgressView£¬ÏÔÊ¾WebView ¼ÓÔØµÄ½ø¶È
-10.EditTextUtils Ôö¼ÓshowCursor ºÍ hideCursor ·½·¨
+1.BitmapHelper ï¿½ï¿½ï¿½ï¿½ transformRoundCornerWithBorder Ô²ï¿½Ç°×±ß¿ï¿½
+    transformCircleWithBorder Ô²ï¿½Î°×±ß¿ï¿½   layOnCenter  ï¿½ï¿½ï¿½ï¿½Bitmapï¿½ï¿½ï¿½
+2.MathUtils ï¿½ï¿½×°BigDecimal,  ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½ï¿½Ë³ï¿½ ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½double ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.ï¿½ï¿½ï¿½ï¿½6Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ InputPassWordDialog
+4.EventBundle ï¿½ï¿½ï¿½ï¿½  putDouble getDouble
+5.SpannableStringUtils tintText ï¿½ï¿½ï¿½ï¿½SpannableString ï¿½ï¿½ï¿½Î£ï¿½
+ï¿½ï¿½ï¿½ï¿½getUnderLineTintSpannableString ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½É«ï¿½ï¿½ï¿½Â»ï¿½ï¿½ß´ï¿½ï¿½ï¿½
+6.Logger ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È³ï¿½ï¿½ï¿½4kï¿½ï¿½ï¿½Ö¶Î´ï¿½Ó¡
+7.EmptyUtils isEmpty  ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½TextView ï¿½ï¿½ EditText
+8.ï¿½ï¿½ï¿½ï¿½ CountDownCircleView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½ï¿½ï¿½ï¿½Ê±
+9.ï¿½ï¿½ï¿½ï¿½ WebProgressViewï¿½ï¿½ï¿½ï¿½Ê¾WebView ï¿½ï¿½ï¿½ØµÄ½ï¿½ï¿½ï¿½
+10.EditTextUtils ï¿½ï¿½ï¿½ï¿½showCursor ï¿½ï¿½ hideCursor ï¿½ï¿½ï¿½ï¿½
 
 
 
 
 V3.0.0 --->2019.09.11
 
-1.CompatUtilsÔö¼Ó setTextAppearance(TextView textView,int resId);
-2.BitmapHelper Ôö¼Ó Bitmap ÓëBase64×Ö·û´®µÄÏà»¥×ª»»
-3.FileUtis notifyScanFile Í¨ÖªÃ½ÌåÎÄ¼şË¢ĞÂÔö¼Ó¼æÈİ½â¾ö·½Ê½
-4.Òş²Ø²¿·ÖÀàÖĞµÄScaleUtils,É¾³ıDLAlertDialog,DLTransparentDialog
-5.Ôö¼ÓThreadPools ºËĞÄÏß³ÌÊıÁ¿8
-6.Ôö¼ÓSingleClickListener  µ¥»÷¿ØÖÆ
-7.BitmapHelper  Ôö¼Ó getBitmapFromImageView ´ÓImageViewÖĞ»ñÈ¡Bitmap
+1.CompatUtilsï¿½ï¿½ï¿½ï¿½ setTextAppearance(TextView textView,int resId);
+2.BitmapHelper ï¿½ï¿½ï¿½ï¿½ Bitmap ï¿½ï¿½Base64ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½à»¥×ªï¿½ï¿½
+3.FileUtis notifyScanFile Í¨ÖªÃ½ï¿½ï¿½ï¿½Ä¼ï¿½Ë¢ï¿½ï¿½ï¿½ï¿½ï¿½Ó¼ï¿½ï¿½İ½ï¿½ï¿½ï¿½ï¿½Ê½
+4.ï¿½ï¿½ï¿½Ø²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ScaleUtils,É¾ï¿½ï¿½DLAlertDialog,DLTransparentDialog
+5.ï¿½ï¿½ï¿½ï¿½ThreadPools ï¿½ï¿½ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½ï¿½ï¿½8
+6.ï¿½ï¿½ï¿½ï¿½SingleClickListener  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+7.BitmapHelper  ï¿½ï¿½ï¿½ï¿½ getBitmapFromImageView ï¿½ï¿½ImageViewï¿½Ğ»ï¿½È¡Bitmap
 8.SpannableStringUtils
-   Ôö¼Ó tintText  convertBlodStyle  setAbsoluteSizeSpan  getUnderLineSpannableString
-   º¯Êı£¬¶ÔÓ¦ÎÄ±¾µÄ×ÅÉ«£¬¼Ó´Ö£¬´óĞ¡ ,ÏÂ»®Ïß
-9.Ôö¼Ó PhotoSelectBottomSheetDialog  µ×²¿»¬³öÍ¼Æ¬Ñ¡Ôñ¶Ô»°¿ò£¬Ïà²áÑ¡Ôñ£¬ÅÄÕÕ
-10.PhotoSelector ¼¯³É ´ÓÏà²áÑ¡ÔñºÍÅÄÕÕ ·½Ê½Ñ¡ÔñÍ¼Æ¬
-     Ê¹ÓÃ£ºphotoSelector.showDialog("ÕâÀïÊÇtag,Ò»¸öÒ³ÃæÓĞ¼¸¸öImageViewÒªÑ¡ÔñÍ¼Æ¬£¬Ôò¿¿TagÀ´±êÊ¶ÊÇÄÄ¸öImageView");
-     »Øµ÷£ºonPickerResult(File pickFile, String tag)
-     »Øµ÷:photoSelector.onActivityResult(requestCode, resultCode, data);
-     »Øµ÷:photoSelector.onRequestPermissionsResult(requestCode,permissions,grantResults);
-11.MathUtils Ôö¼Ó rvZeroAndDot  È¥µô¶àÓàÁã
-12.Ôö¼ÓPermissionUtils,ÅĞ¶ÏºÍÉêÇë Camera ,´æ´¢È¨ÏŞ
-13.AndroidManifestUtils ¿É¶¯Ì¬»ñÈ¡AndroidManifest.xml ÖĞ 7.0 ÅäÖÃµÄFileProviderĞÅÏ¢
-14.StringUtils Ôö¼Ó isNumber ÅĞ¶Ï×Ö·û´®ÊÇ·ñÎªÊı×Ö (Õı¸ºĞ¡Êıµã)
-15.Ôö¼ÓDashLineView  ĞéÏßView: app:dashLineColor="#333333" ĞéÏßÑÕÉ«    app:dashWith="12dp"£ºĞéÏß¿í¶È  app:dashGap="3dp" ¼äÏ¶¿í¶È
-16. EditTextUtils Ôö¼Ó setGravityCenter£¬½â¾öÅ¬±ÈÑÇÊÖ»ú EditTextÄÚÈİ²»ÄÜ¾ÓÖĞÎÊÌâ
+   ï¿½ï¿½ï¿½ï¿½ tintText  convertBlodStyle  setAbsoluteSizeSpan  getUnderLineSpannableString
+   ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä±ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½Ó´Ö£ï¿½ï¿½ï¿½Ğ¡ ,ï¿½Â»ï¿½ï¿½ï¿½
+9.ï¿½ï¿½ï¿½ï¿½ PhotoSelectBottomSheetDialog  ï¿½×²ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬Ñ¡ï¿½ï¿½Ô»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+10.PhotoSelector ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ê½Ñ¡ï¿½ï¿½Í¼Æ¬
+     Ê¹ï¿½Ã£ï¿½photoSelector.showDialog("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½tag,Ò»ï¿½ï¿½Ò³ï¿½ï¿½ï¿½Ğ¼ï¿½ï¿½ï¿½ImageViewÒªÑ¡ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½Tagï¿½ï¿½ï¿½ï¿½Ê¶ï¿½ï¿½ï¿½Ä¸ï¿½ImageView");
+     ï¿½Øµï¿½ï¿½ï¿½onPickerResult(File pickFile, String tag)
+     ï¿½Øµï¿½:photoSelector.onActivityResult(requestCode, resultCode, data);
+     ï¿½Øµï¿½:photoSelector.onRequestPermissionsResult(requestCode,permissions,grantResults);
+11.MathUtils ï¿½ï¿½ï¿½ï¿½ rvZeroAndDot  È¥ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+12.ï¿½ï¿½ï¿½ï¿½PermissionUtils,ï¿½Ğ¶Ïºï¿½ï¿½ï¿½ï¿½ï¿½ Camera ,ï¿½æ´¢È¨ï¿½ï¿½
+13.AndroidManifestUtils ï¿½É¶ï¿½Ì¬ï¿½ï¿½È¡AndroidManifest.xml ï¿½ï¿½ 7.0 ï¿½ï¿½ï¿½Ãµï¿½FileProviderï¿½ï¿½Ï¢
+14.StringUtils ï¿½ï¿½ï¿½ï¿½ isNumber ï¿½Ğ¶ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ç·ï¿½Îªï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ï¿½ï¿½)
+15.ï¿½ï¿½ï¿½ï¿½DashLineView  ï¿½ï¿½ï¿½ï¿½View: app:dashLineColor="#333333" ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«    app:dashWith="12dp"ï¿½ï¿½ï¿½ï¿½ï¿½ß¿ï¿½ï¿½  app:dashGap="3dp" ï¿½ï¿½Ï¶ï¿½ï¿½ï¿½
+16. EditTextUtils ï¿½ï¿½ï¿½ï¿½ setGravityCenterï¿½ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ EditTextï¿½ï¿½ï¿½İ²ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
 
 
@@ -730,54 +730,35 @@ V3.0.0 --->2019.09.11
 
 
 
-V2.3.0 ---> 2019.08.27 ¸üĞÂÖÁJCenter
-1.Ôö¼Ó BitmapDownloader £¬ÏÂÔØbitmap²¢»º´æµ½ÄÚ²¿´ÅÅÌ
-2.BitmapHelperÖĞÔö¼ÓÑ¹ËõÍ¼Æ¬³ß´ç·½·¨getInSampleSizeBitmap(String picPath, int reqsW, int reqsH)£¬
-Ôö¼ÓÍ¬²½£¬Òì²½·½Ê½±£´æBitmapµ½±¾µØ µÄ·½·¨
-3.ToastUtils ¶ÔContext ½øĞĞ¿ÕÅĞ£¬·ÀÖ¹Context Îª¿ÕÊ±µ÷ÓÃÏÔÊ¾¿ÕÖ¸ÕëÒì³£
-4.FileUtils Ôö¼ÓdelectDirFile£¬É¾³ıÕû¸öÎÄ¼ş¼Ğ
-5.CompatUtils Ôö¼Ó setTint(Drawable drawble,int color) ¼æÈİ×ÅÉ«
-6.Ôö¼ÓCommonFragmentPagerAdapter layoutInflaterAdapter.addFragment() ºÍ layoutInflaterAdapter.addTitle();
-7.EmptyUtils ĞÂÔöisNotBlank()ÅĞ¶Ï¿Õ¸ñ
-8.HtmlUtils ĞÂÔö fromHtml() ´¦ÀíHtml.fromHtml()¹ıÊ±ÎÊÌâ¡£
-9.Ôö¼ÓEventBus Êı¾İ´«µİÀà£ºEventBundle   ÄÚ²¿·â×°Action, Bundle´æ´¢ £¬¸½¼ÓÊôĞÔ£»
-Ê¹ÓÃ putAction(),putInt(),putString(),putBoolean(),putLong(),putSerializableµÈ·½·¨¡£
-10.Ôö¼ÓThrowableUtils   ThrowableUtils.show(Throwable throwable)
+V2.3.0 ---> 2019.08.27 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JCenter
+1.ï¿½ï¿½ï¿½ï¿½ BitmapDownloader ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½bitmapï¿½ï¿½ï¿½ï¿½ï¿½æµ½ï¿½Ú²ï¿½ï¿½ï¿½ï¿½ï¿½
+2.BitmapHelperï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½Í¼Æ¬ï¿½ß´ç·½ï¿½ï¿½getInSampleSizeBitmap(String picPath, int reqsW, int reqsH)ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½ï¿½ï¿½ì²½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½Bitmapï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ä·ï¿½ï¿½ï¿½
+3.ToastUtils ï¿½ï¿½Context ï¿½ï¿½ï¿½Ğ¿ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½Ö¹Context Îªï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ì³£
+4.FileUtils ï¿½ï¿½ï¿½ï¿½delectDirFileï¿½ï¿½É¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½
+5.CompatUtils ï¿½ï¿½ï¿½ï¿½ setTint(Drawable drawble,int color) ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«
+6.ï¿½ï¿½ï¿½ï¿½CommonFragmentPagerAdapter layoutInflaterAdapter.addFragment() ï¿½ï¿½ layoutInflaterAdapter.addTitle();
+7.EmptyUtils ï¿½ï¿½ï¿½ï¿½isNotBlank()ï¿½Ğ¶Ï¿Õ¸ï¿½
+8.HtmlUtils ï¿½ï¿½ï¿½ï¿½ fromHtml() ï¿½ï¿½ï¿½ï¿½Html.fromHtml()ï¿½ï¿½Ê±ï¿½ï¿½ï¿½â¡£
+9.ï¿½ï¿½ï¿½ï¿½EventBus ï¿½ï¿½ï¿½İ´ï¿½ï¿½ï¿½ï¿½à£ºEventBundle   ï¿½Ú²ï¿½ï¿½ï¿½×°Action, Bundleï¿½æ´¢ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ô£ï¿½
+Ê¹ï¿½ï¿½ putAction(),putInt(),putString(),putBoolean(),putLong(),putSerializableï¿½È·ï¿½ï¿½ï¿½ï¿½ï¿½
+10.ï¿½ï¿½ï¿½ï¿½ThrowableUtils   ThrowableUtils.show(Throwable throwable)
 
 
 
 
 
-V2.2.0  ---> 2019.08.12 ¸üĞÂÖÁJCenter
-1.Ôö¼ÓMathUtils ¹¤¾ßÀà£¬  ÒÑÖªÁ½¸ö×ø±êµãºÍµÚÈı¸ö×ø±êµÄ X»òY ÖĞµÄÒ»¸ö×ø±ê£¬ÇóX»òY;
-2.Ôö¼ÓMatixUtils ¹¤¾ßÀà£¬ ¿ÉÓÉMatrix ¶ÔÏó »ñÈ¡µ½µ±Ç°²Ù×÷Í¼Æ¬µÄËÄ¸ö¶¥µã×ø±ê
-3.MatixUtils¸üĞÂ£¬Ôö¼Ó zoomOutToMaxRangeºÍ centerInRange Á½¸ö·½·¨£¬ËõÖÁÖ¸¶¨·¶Î§²¢¾ÓÖĞ
-4.Ôö¼ÓPhotoView ºÍViewTouchUtils Àà
-5.È¥µôGson °üÒÀÀµ
-6.¸üĞÂToastUtil ,Ôö¼ÓÏÔÊ¾ÖĞ¼äÎ»ÖÃtoast£¬»¹ÓĞÈÎÒâÊ±³¤µÄtoast
-7.Ôö¼ÓCompatUtils£¬ºÍToastUtils Ò»ÑùÔÚApplication ÖĞinitContext()
-8.Ôö¼ÓSlidingLayout ºÍ PullRefreshLayout
-9.Ôö¼ÓSpannableStringUtils£¬SpannableStringUtils.firstLineMarginLeft(leftTagViewWidth,content)
-µÚÒ»ĞĞ»áÓĞ¸ö×ó±ß¾à(Èç¶ÎÂäÎÄÕÂÆğĞĞ¿ÕÁ½¸ö×Ö)
-
-
-
-
-
-
-
-
-V2.1.0  --->  2019.03.20 ¸üĞÂÖÁJCenter
-
-1.Gson Ìí¼Ó  xxxAdapter£¬ ¹ıÂË int ,double, long ½âÎö¿Õ×Ö·û´® "" µÄÎÊÌâ¡£
-2. ¸üĞÂRomUtils £¬ĞŞ¸´¶ÁÈ¡ build.prop È¨ÏŞ±»¾Ü¾øÎÊÌâ¡£
-3.FileUtils Ôö¼ÓÑ¹Ëõµ½Ö¸¶¨Ä¿Â¼·½·¨¡£
-4.FileUtils Ôö¼Ó getFilefromUri() ºÍ·¢ËÍ¹ã²¥Í¨Öª¸üĞÂÎÄ¼şÉ¨Ãè
-5.ToastUtils Ôö¼Ó showLongToast() ÉèÖÃËæÒâ
-6.¸üĞÂCommonAbsListView.Adapter ÖØÃüÃûÎªCommonBaseAdapter,¸üĞÂBaseRecycleViewAdapter
-oncreateViewHodler ±ä³É getLayoutId(),´´½¨ViewHolder ½»ÓÉ¸¸Àà´´½¨
-7.BitmpUtils Ôö¼Ó convertViewToBitmap£¬½«View ×ªBitmap
-8.ĞÂÔö VerticalTextSwitcherHelper  TextView ÓÉÏÂÍùÉÏÇĞ»»
+V2.2.0  ---> 2019.08.12 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JCenter
+1.ï¿½ï¿½ï¿½ï¿½MathUtils ï¿½ï¿½ï¿½ï¿½ï¿½à£¬  ï¿½ï¿½Öªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Íµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Xï¿½ï¿½Y ï¿½Ğµï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ê£¬ï¿½ï¿½Xï¿½ï¿½Y;
+2.ï¿½ï¿½ï¿½ï¿½MatixUtils ï¿½ï¿½ï¿½ï¿½ï¿½à£¬ ï¿½ï¿½ï¿½ï¿½Matrix ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ï¿½ï¿½ï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+3.MatixUtilsï¿½ï¿½ï¿½Â£ï¿½ï¿½ï¿½ï¿½ï¿½ zoomOutToMaxRangeï¿½ï¿½ centerInRange ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½ï¿½ï¿½Î§ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+4.ï¿½ï¿½ï¿½ï¿½PhotoView ï¿½ï¿½ViewTouchUtils ï¿½ï¿½
+5.È¥ï¿½ï¿½Gson ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+6.ï¿½ï¿½ï¿½ï¿½ToastUtil ,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¾ï¿½Ğ¼ï¿½Î»ï¿½ï¿½toastï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½ï¿½toast
+7.ï¿½ï¿½ï¿½ï¿½CompatUtilsï¿½ï¿½ï¿½ï¿½ToastUtils Ò»ï¿½ï¿½ï¿½ï¿½Application ï¿½ï¿½initContext()
+8.ï¿½ï¿½ï¿½ï¿½SlidingLayout ï¿½ï¿½ PullRefreshLayout
+9.ï¿½ï¿½ï¿½ï¿½SpannableStringUtilsï¿½ï¿½SpannableStringUtils.firstLineMarginLeft(leftTagViewWidth,content)
+ï¿½ï¿½Ò»ï¿½Ğ»ï¿½ï¿½Ğ¸ï¿½ï¿½ï¿½ß¾ï¿½(ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½)
 
 
 
@@ -786,20 +767,17 @@ oncreateViewHodler ±ä³É getLayoutId(),´´½¨ViewHolder ½»ÓÉ¸¸Àà´´½¨
 
 
 
+V2.1.0  --->  2019.03.20 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JCenter
 
-
-
-
-V2.0.1  2018.05.07¸üĞÂÖÁJCenter
-1.ĞÂÔöCheckBoxListAdapter  £¬Ö»Òª¼Ì³ĞËü²»ÓÃ¿¼ÂÇ¸´ÓÃĞÔµ¼ÖÂ checkbox×´Ì¬¶ªÊ§
-2.DeviceUtls Ôö¼Ó»ñÈ¡IMEI getIMEI
-3.ĞÂÔölazyFragment ÀÁ¼ÓÔØ
-4.AutoGridView Ôö¼ÓÅĞ¶ÏÊÇ·ñ²âÁ¿£¬CommonAbsListView.Adapter ÖĞÅĞ¶ÏAutoGridView Àà²¢ÅĞ¶ÏÊÇ·ñ²âÁ¿£¬·ÀÖ¹GridView ÖĞµÄgetView µ÷ÓÃ¶à´ÎÎÊÌâ
-5.TimeUtilsÔö¼Ó µ¹¼ÆÊ± getCountTimeStartWidthDay£¨£© ·µ»ØStrng[] °üº¬Ìì£¬Ê±£¬·Ö£¬Ãë 4¸öÖµ
-6.ĞŞ¸´DLTabLayoutºáÊúÆÁÇĞ»»  tab¿í¶ÈÃ»ÓĞ¸Ä±äÎÊÌâ
-7.ĞŞ¸´TabLayout ±êÇ©ÏÔÊ¾²»È«ÎÊÌâ
-8.ĞÂÔöRedPointTextView,ÔÚÎÄ±¾Ä©Î²×Ô¶¯×·¼ÓĞ¡ºìµã£¬¿É¿ØÖÆÒş²Ø¡£
-9.StringUtil Ôö¼ÓÈ«½ÇºÍ°ë½ÇµÄÏà»¥×ª»»
+1.Gson ï¿½ï¿½ï¿½  xxxAdapterï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ int ,double, long ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ "" ï¿½ï¿½ï¿½ï¿½ï¿½â¡£
+2. ï¿½ï¿½ï¿½ï¿½RomUtils ï¿½ï¿½ï¿½Ş¸ï¿½ï¿½ï¿½È¡ build.prop È¨ï¿½Ş±ï¿½ï¿½Ü¾ï¿½ï¿½ï¿½ï¿½â¡£
+3.FileUtils ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½Ö¸ï¿½ï¿½Ä¿Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+4.FileUtils ï¿½ï¿½ï¿½ï¿½ getFilefromUri() ï¿½Í·ï¿½ï¿½Í¹ã²¥Í¨Öªï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½É¨ï¿½ï¿½
+5.ToastUtils ï¿½ï¿½ï¿½ï¿½ showLongToast() ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+6.ï¿½ï¿½ï¿½ï¿½CommonAbsListView.Adapter ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªCommonBaseAdapter,ï¿½ï¿½ï¿½ï¿½BaseRecycleViewAdapter
+oncreateViewHodler ï¿½ï¿½ï¿½ getLayoutId(),ï¿½ï¿½ï¿½ï¿½ViewHolder ï¿½ï¿½ï¿½É¸ï¿½ï¿½à´´ï¿½ï¿½
+7.BitmpUtils ï¿½ï¿½ï¿½ï¿½ convertViewToBitmapï¿½ï¿½ï¿½ï¿½View ×ªBitmap
+8.ï¿½ï¿½ï¿½ï¿½ VerticalTextSwitcherHelper  TextView ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½
 
 
 
@@ -809,62 +787,84 @@ V2.0.1  2018.05.07¸üĞÂÖÁJCenter
 
 
 
-V2.0.0£º
-1.Ôö¼ÓThreadUtils
-    (1) ÅĞ¶ÏÊÇ·ñÔÚÖ÷Ïß³ÌµÄ·½·¨¡£
-2.Ôö¼ÓEditTextUtils  
-    (1).showSoftInputAuto×Ô¶¯µ¯³ö¼üÅÌ²¢½«ÊäÈë¿òÖĞµÄ¹â±êÒÆÖÁÎÄ±¾Ä©Î²¡£
-3.Ôö¼ÓDLPopupWidnow  
-    (1).½â¾ö°²×¿7.0 Õæ»úÏÂµÄshowAsDropDown(View anchor)µÄÎ»ÖÃÎÊÌâ¡£
-4.Ôö¼ÓBothItemAdapter
-    BaseAdapterË«²¼¾ÖµÄ·â×°Àà¡£
-5.StringUtilsÔö¼ÓsplitColor();  
-   ¶Ô×Ö·û´®ÖĞÑÕÉ«·ÖÀë£¬£¨SpanableString·â×°£©
-6.Ôö¼Ó  RunTaskUtils 
-    ÅĞ¶ÏÓ¦ÓÃ´¦ÓÚÇ°Ì¨»¹ÊÇºóÌ¨£¬ÔÚApplicationÖĞµÄoncreate·½·¨ÖĞµ÷ÓÃ registerActivityLifeCallBack(getApplication())
-    ÔÚÆäËüµØ·½¿ÉÒÔ µ÷ÓÃÏÂÁĞ·½·¨À´»ñÈ¡×´Ì¬£¬×¢ÒâÔÚMainActivityÖĞoncreateµ÷ÓÃ¿ÉÄÜÒòÊ±¼äÌ«¶Ì»ñÈ¡µ½µÄ×´Ì¬ÊÇÎ´×¢²á¡£
+
+
+
+V2.0.1  2018.05.07ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½JCenter
+1.ï¿½ï¿½ï¿½ï¿½CheckBoxListAdapter  ï¿½ï¿½Ö»Òªï¿½Ì³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ã¿ï¿½ï¿½Ç¸ï¿½ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½ checkbox×´Ì¬ï¿½ï¿½Ê§
+2.DeviceUtls ï¿½ï¿½ï¿½Ó»ï¿½È¡IMEI getIMEI
+3.ï¿½ï¿½ï¿½ï¿½lazyFragment ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+4.AutoGridView ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½CommonAbsListView.Adapter ï¿½ï¿½ï¿½Ğ¶ï¿½AutoGridView ï¿½à²¢ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¹GridView ï¿½Ğµï¿½getView ï¿½ï¿½ï¿½Ã¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+5.TimeUtilsï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ê± getCountTimeStartWidthDayï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Strng[] ï¿½ï¿½ï¿½ï¿½ï¿½ì£¬Ê±ï¿½ï¿½ï¿½Ö£ï¿½ï¿½ï¿½ 4ï¿½ï¿½Öµ
+6.ï¿½Ş¸ï¿½DLTabLayoutï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ»ï¿½  tabï¿½ï¿½ï¿½Ã»ï¿½Ğ¸Ä±ï¿½ï¿½ï¿½ï¿½ï¿½
+7.ï¿½Ş¸ï¿½TabLayout ï¿½ï¿½Ç©ï¿½ï¿½Ê¾ï¿½ï¿½È«ï¿½ï¿½ï¿½ï¿½
+8.ï¿½ï¿½ï¿½ï¿½RedPointTextView,ï¿½ï¿½ï¿½Ä±ï¿½Ä©Î²ï¿½Ô¶ï¿½×·ï¿½ï¿½Ğ¡ï¿½ï¿½ã£¬ï¿½É¿ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø¡ï¿½
+9.StringUtil ï¿½ï¿½ï¿½ï¿½È«ï¿½ÇºÍ°ï¿½Çµï¿½ï¿½à»¥×ªï¿½ï¿½
+
+
+
+
+
+
+
+
+
+V2.0.0ï¿½ï¿½
+1.ï¿½ï¿½ï¿½ï¿½ThreadUtils
+    (1) ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß³ÌµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½
+2.ï¿½ï¿½ï¿½ï¿½EditTextUtils  
+    (1).showSoftInputAutoï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ĞµÄ¹ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½Ä©Î²ï¿½ï¿½
+3.ï¿½ï¿½ï¿½ï¿½DLPopupWidnow  
+    (1).ï¿½ï¿½ï¿½ï¿½ï¿½×¿7.0 ï¿½ï¿½ï¿½ï¿½Âµï¿½showAsDropDown(View anchor)ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½â¡£
+4.ï¿½ï¿½ï¿½ï¿½BothItemAdapter
+    BaseAdapterË«ï¿½ï¿½ï¿½ÖµÄ·ï¿½×°ï¿½à¡£
+5.StringUtilsï¿½ï¿½ï¿½ï¿½splitColor();  
+   ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«ï¿½ï¿½ï¿½ë£¬ï¿½ï¿½SpanableStringï¿½ï¿½×°ï¿½ï¿½
+6.ï¿½ï¿½ï¿½ï¿½  RunTaskUtils 
+    ï¿½Ğ¶ï¿½Ó¦ï¿½Ã´ï¿½ï¿½ï¿½Ç°Ì¨ï¿½ï¿½ï¿½Çºï¿½Ì¨ï¿½ï¿½ï¿½ï¿½Applicationï¿½Ğµï¿½oncreateï¿½ï¿½ï¿½ï¿½ï¿½Ğµï¿½ï¿½ï¿½ registerActivityLifeCallBack(getApplication())
+    ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø·ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡×´Ì¬ï¿½ï¿½×¢ï¿½ï¿½ï¿½ï¿½MainActivityï¿½ï¿½oncreateï¿½ï¿½ï¿½Ã¿ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½Ì«ï¿½Ì»ï¿½È¡ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½Î´×¢ï¿½á¡£
     final int flag=RunTaskUtils.getRunningState();
     Log.e( "flag: ","getRunningState "+flag );
-    if (flag==RunTaskUtils.STATE_ON_FRONT) Log.e( "flag: ","ÔÚÇ°Ì¨" );
-    else if (flag==RunTaskUtils.STATE_ON_BACKROUND) Log.e( "flag: ","ÔÚºóÌ¨" );
+    if (flag==RunTaskUtils.STATE_ON_FRONT) Log.e( "flag: ","ï¿½ï¿½Ç°Ì¨" );
+    else if (flag==RunTaskUtils.STATE_ON_BACKROUND) Log.e( "flag: ","ï¿½Úºï¿½Ì¨" );
     
- 7.Ôö¼ÓBulletinBoard ¹«¸æÀ¸£¬ÓÎÏ·ÀïÃæÅÜÂíµÆĞ§¹û¡£
- 8.ĞŞ¸ÄTabGroup£¬¸½¼ÓbadgeView¡£
- 9.Ôö¼ÓRSAUtils,Rsa¼ÓÃÜ
- 10.ÓÅ»¯ToastUtils,±ÜÃâÔÚÊ¹ÓÃµÄÊ±ºòÔÙÊµÀı»¯¡£
- 11.AppUtilsÔö¼Óµ÷Íùµ½È¨ÏŞÉèÖÃÒ³Ãæ£¬Ö±½ÓÌø×ªµÄÓĞ÷È×å£¬Ğ¡Ã×£¬»ªÎª£¬ÆäËüµÄÖ»ÊÇÌøµ½Ó¦ÓÃĞÅÏ¢Ò³Ãæ£¬´ÓÓ¦ÓÃĞÅÏ¢Ò³ÃæÔÚÊÖ¶¯µã»÷½øÈëÈ¨ÏŞÉèÖÃÒ³Ãæ¡£
- 12. ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE); ÷È×å£¬Ğ¡Ã×£¬ÒÔ¼°6.0ÒÔÉÏµÄÏµÍ³ÉèÖÃ×´Ì¬À¸ÑÕÉ«Îª°×É«£¬²¢ÇÒ×ÖÌåÑÕÉ«ÎªºÚÉ«
- 13.Ôö¼ÓUrlUtils  ½ØÈ¡urlÖĞµÄ²ÎÊıÃûºÍ²ÎÊıÖµ
- 14.ĞŞ¸ÄDateUtilÖĞ  getDateByMonthsAfter  getDateByDaysAfter  ·µ»ØDate
- 15.Ôö¼ÓBankCardCodeUtils  ÅĞ¶ÏÒøĞĞ¿¨  ¿¨ºÅÊÇ·ñÕıÈ·
- 16.Ôö¼ÓLoggerÀà£¬logÊä³ö´øÓĞ°üÃû£¬·½·¨ºÍĞĞÊı
- 17.Ôö¼ÓDLWebChormeClinet  ¼¯³ÉÁËÊÓÆµÈ«ÆÁ²¥·Å/Ïà²á£¨ÅÄÕÕ£©Ñ¡ÔñÍ¼Æ¬¡£
- 18.Ôö¼ÓTextViewUitls   Ö§³Ö¹ö¶¯ºÍ  ÔÚScrollViewÖĞTextViewÖ§³Ö¹ö¶¯
- 19.Ôö¼ÓDLTranPrentDialog ºÍDLAlertDialog,×Ô¶¨ÒåDialog ¿ÉÒÔ¼Ì³ĞDLTranPrentDialog£¬²¼¾ÖµÄMatch_parent²»»áÊ§Ğ§¡£
- 20.Ôö¼ÓResourceManager ´úÂëÖĞ¿ÉÒÔ¶¯Ì¬»ñÈ¡ colorPrimary colorPrimaryDark colorAccent µÄÑÕÉ«
- 21.Ôö¼ÓIOUtils  InputStream ×ª×Ö·û´®¡£
- 22.Ôö¼ÓHorizontalScrollBackLayout  ÓÒ»¬Ïú»ÙActivity
- 23.·â×°SlideFromBottomDialog  ´Óµ×²¿»¬³ö£¬»¬µ½µ×²¿ÍË³ö¶¯»­
- 24.SoftKeyBoardUtils Ôö¼Ó showSoftInputAuto(EditText edittext)
- 25.Ôö¼ÓNavBarUtils  ÅĞ¶ÏÊÇ·ñÓĞ°üº¬µ×²¿ĞéÄâ°´¼ü£¨Èç»ªÎªÊÖ»ú¾ÍÓĞ£©£¬Òş²ØºÍÏÔÊ¾·½·¨¡£
- 26.Ôö¼ÓÂ¼Òô£¬·ÂÎ¢ĞÅÓïÒô·¢ËÍ¡£
- 27.Ôö¼ÓWebViewErroPage  µ±¶ÏÍø»òÎŞ·¨·ÃÎÊÊ±¿ÉÒÔµã»÷¿Õ°×´¦Ë¢ĞÂ¡£WebViewµÄ¸¸²¼¾ÖÒªÊÇFrameLayout
- 28.SignatureUtils  ¸ù¾İ°üÃû»ñÈ¡Ó¦ÓÃµÄMD5Ç©Ãû
- 29.Ôö¼ÓBase64Utils  °²×¿µÄBase64 Api ÒªÑ¡ÔñNO_WRAP,²»»»ĞĞ£¬²»ÒªÑ¡ÔñDEFAULT,·ñÔòÈç¹û½âÂëµÄ·½Ê½²»¶Ô£¬¾Í»á³öÏÖÂÒÂë
- 30.Ôö¼ÓFileUtils  ¸´ÖÆÎÄ¼ş£¬¸ü¸ÄÎÄ¼şºó×º
- 31.Ôö¼ÓFileDownLoader  ¶àÏß³ÌÏÂÔØ£¬Í¨ÖªÀ¸Notifcation ¸üĞÂÏÂÔØ½ø¶È¡££¨²»ÄÜÍ¬Ê±ÏÂÔØÍ¬ÃûÎÄ¼ş£¬ÒòÎª¸÷¸öÏß³ÌµÄ»º´æÎÄ¼şÊÇÒÔÏÂÔØÎÄ¼şÃû+threadIdÃüÃûµÄ£©
- 32.Ìí¼Ó clipboardUtils
- 33.Ôö¼ÓcircleImageView
- 34.TimeUtils Ôö¼ÓÅĞ¶Ï½ñÌì£¬Ã÷Ìì£¬ºóÌì
- 35.commonAbsListView ÖĞµÄadapter Ôö¼Ó SimpleDateFormatter
+ 7.ï¿½ï¿½ï¿½ï¿½BulletinBoard ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ§ï¿½ï¿½ï¿½ï¿½
+ 8.ï¿½Ş¸ï¿½TabGroupï¿½ï¿½ï¿½ï¿½ï¿½ï¿½badgeViewï¿½ï¿½
+ 9.ï¿½ï¿½ï¿½ï¿½RSAUtils,Rsaï¿½ï¿½ï¿½ï¿½
+ 10.ï¿½Å»ï¿½ToastUtils,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ê¹ï¿½Ãµï¿½Ê±ï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 11.AppUtilsï¿½ï¿½ï¿½Óµï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ£¬Ö±ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½å£¬Ğ¡ï¿½×£ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ï¢Ò³ï¿½æ£¬ï¿½ï¿½Ó¦ï¿½ï¿½ï¿½ï¿½Ï¢Ò³ï¿½ï¿½ï¿½ï¿½ï¿½Ö¶ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¨ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò³ï¿½æ¡£
+ 12. ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE); ï¿½ï¿½ï¿½å£¬Ğ¡ï¿½×£ï¿½ï¿½Ô¼ï¿½6.0ï¿½ï¿½ï¿½Ïµï¿½ÏµÍ³ï¿½ï¿½ï¿½ï¿½×´Ì¬ï¿½ï¿½ï¿½ï¿½É«Îªï¿½ï¿½É«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½É«Îªï¿½ï¿½É«
+ 13.ï¿½ï¿½ï¿½ï¿½UrlUtils  ï¿½ï¿½È¡urlï¿½ĞµÄ²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í²ï¿½ï¿½ï¿½Öµ
+ 14.ï¿½Ş¸ï¿½DateUtilï¿½ï¿½  getDateByMonthsAfter  getDateByDaysAfter  ï¿½ï¿½ï¿½ï¿½Date
+ 15.ï¿½ï¿½ï¿½ï¿½BankCardCodeUtils  ï¿½Ğ¶ï¿½ï¿½ï¿½ï¿½Ğ¿ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½Ç·ï¿½ï¿½ï¿½È·
+ 16.ï¿½ï¿½ï¿½ï¿½Loggerï¿½à£¬logï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 17.ï¿½ï¿½ï¿½ï¿½DLWebChormeClinet  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÆµÈ«ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½/ï¿½ï¿½á£¨ï¿½ï¿½ï¿½Õ£ï¿½Ñ¡ï¿½ï¿½Í¼Æ¬ï¿½ï¿½
+ 18.ï¿½ï¿½ï¿½ï¿½TextViewUitls   Ö§ï¿½Ö¹ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ScrollViewï¿½ï¿½TextViewÖ§ï¿½Ö¹ï¿½ï¿½ï¿½
+ 19.ï¿½ï¿½ï¿½ï¿½DLTranPrentDialog ï¿½ï¿½DLAlertDialog,ï¿½Ô¶ï¿½ï¿½ï¿½Dialog ï¿½ï¿½ï¿½Ô¼Ì³ï¿½DLTranPrentDialogï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½Match_parentï¿½ï¿½ï¿½ï¿½Ê§Ğ§ï¿½ï¿½
+ 20.ï¿½ï¿½ï¿½ï¿½ResourceManager ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¿ï¿½ï¿½Ô¶ï¿½Ì¬ï¿½ï¿½È¡ colorPrimary colorPrimaryDark colorAccent ï¿½ï¿½ï¿½ï¿½É«
+ 21.ï¿½ï¿½ï¿½ï¿½IOUtils  InputStream ×ªï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
+ 22.ï¿½ï¿½ï¿½ï¿½HorizontalScrollBackLayout  ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Activity
+ 23.ï¿½ï¿½×°SlideFromBottomDialog  ï¿½Óµ×²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½Ë³ï¿½ï¿½ï¿½ï¿½ï¿½
+ 24.SoftKeyBoardUtils ï¿½ï¿½ï¿½ï¿½ showSoftInputAuto(EditText edittext)
+ 25.ï¿½ï¿½ï¿½ï¿½NavBarUtils  ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½Ğ°ï¿½ï¿½ï¿½ï¿½×²ï¿½ï¿½ï¿½ï¿½â°´ï¿½ï¿½ï¿½ï¿½ï¿½ç»ªÎªï¿½Ö»ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Øºï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 26.ï¿½ï¿½ï¿½ï¿½Â¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¢ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¡ï¿½
+ 27.ï¿½ï¿½ï¿½ï¿½WebViewErroPage  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ş·ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ï¿½Ôµï¿½ï¿½ï¿½Õ°×´ï¿½Ë¢ï¿½Â¡ï¿½WebViewï¿½Ä¸ï¿½ï¿½ï¿½ï¿½ï¿½Òªï¿½ï¿½FrameLayout
+ 28.SignatureUtils  ï¿½ï¿½ï¿½İ°ï¿½ï¿½ï¿½ï¿½ï¿½È¡Ó¦ï¿½Ãµï¿½MD5Ç©ï¿½ï¿½
+ 29.ï¿½ï¿½ï¿½ï¿½Base64Utils  ï¿½ï¿½×¿ï¿½ï¿½Base64 Api ÒªÑ¡ï¿½ï¿½NO_WRAP,ï¿½ï¿½ï¿½ï¿½ï¿½Ğ£ï¿½ï¿½ï¿½ÒªÑ¡ï¿½ï¿½DEFAULT,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä·ï¿½Ê½ï¿½ï¿½ï¿½Ô£ï¿½ï¿½Í»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+ 30.ï¿½ï¿½ï¿½ï¿½FileUtils  ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½×º
+ 31.ï¿½ï¿½ï¿½ï¿½FileDownLoader  ï¿½ï¿½ï¿½ß³ï¿½ï¿½ï¿½ï¿½Ø£ï¿½Í¨Öªï¿½ï¿½Notifcation ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ø½ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¬Ê±ï¿½ï¿½ï¿½ï¿½Í¬ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½ï¿½ß³ÌµÄ»ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½ï¿½ï¿½+threadIdï¿½ï¿½ï¿½ï¿½ï¿½Ä£ï¿½
+ 32.ï¿½ï¿½ï¿½ clipboardUtils
+ 33.ï¿½ï¿½ï¿½ï¿½circleImageView
+ 34.TimeUtils ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶Ï½ï¿½ï¿½ì£¬ï¿½ï¿½ï¿½ì£¬ï¿½ï¿½ï¿½ï¿½
+ 35.commonAbsListView ï¿½Ğµï¿½adapter ï¿½ï¿½ï¿½ï¿½ SimpleDateFormatter
  
  
  
  
-V1.0.1£º
-1.2017/3/7 Ôö¼ÓRomUtils  Ö§³ÖÅĞ¶ÏĞ¡Ã×£¬÷È×å£¬»ªÎª¡£  
-2.StringUtils  Ôö¼ÓÅĞ¶ÏÊÇ·ñ°üº¬ÖĞÎÄµÄ·½·¨£¬Ö§³Ö¡££¬µÈÖĞÎÄ×Ö·û¡£
-Ôö¼ÓListViewµÄ²à»¬É¾³ı
+V1.0.1ï¿½ï¿½
+1.2017/3/7 ï¿½ï¿½ï¿½ï¿½RomUtils  Ö§ï¿½ï¿½ï¿½Ğ¶ï¿½Ğ¡ï¿½×£ï¿½ï¿½ï¿½ï¿½å£¬ï¿½ï¿½Îªï¿½ï¿½  
+2.StringUtils  ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½Ç·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÄµÄ·ï¿½ï¿½ï¿½ï¿½ï¿½Ö§ï¿½Ö¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½
+ï¿½ï¿½ï¿½ï¿½ListViewï¿½Ä²à»¬É¾ï¿½ï¿½
  
  
  
@@ -872,41 +872,41 @@ V1.0.1£º
  
  
  
-V1.0.0£º
+V1.0.0ï¿½ï¿½
 
-1.2016/12/10  Ôö¼ÓCustomTitleUtil
-2.2016/12/16  Ôö¼ÓDateUtil        ÈÕÆÚÑ¡ÔñÆ÷£¨4.xÏµÍ³ ÑùÊ½£©
-3.2016/12/20 Ôö¼ÓEidtNumberHelper ¶ÔÊäÈëÊı×ÖÊäÈë¿ò ¼Ó¼õ  ÊäÈë¼ÆËã¡£
-4.2016/12/22  Ôö¼ÓLoginRegUtil
+1.2016/12/10  ï¿½ï¿½ï¿½ï¿½CustomTitleUtil
+2.2016/12/16  ï¿½ï¿½ï¿½ï¿½DateUtil        ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½4.xÏµÍ³ ï¿½ï¿½Ê½ï¿½ï¿½
+3.2016/12/20 ï¿½ï¿½ï¿½ï¿½EidtNumberHelper ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ó¼ï¿½  ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ã¡£
+4.2016/12/22  ï¿½ï¿½ï¿½ï¿½LoginRegUtil
 
 5.2016/12/29
-  ½«StringCheckÖØÃüÃûÎªStringUtils,  
-  ĞÂÔöEmptyUtils.
+  ï¿½ï¿½StringCheckï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÎªStringUtils,  
+  ï¿½ï¿½ï¿½ï¿½EmptyUtils.
 
 6.2016/12/31 
-  ĞÂÔö BitmapUtils.
-  ĞÂÔö ×Ô¶¯°²×°/ÖÇÄÜ°²×°   (AccessibilityService)
+  ï¿½ï¿½ï¿½ï¿½ BitmapUtils.
+  ï¿½ï¿½ï¿½ï¿½ ï¿½Ô¶ï¿½ï¿½ï¿½×°/ï¿½ï¿½ï¿½Ü°ï¿½×°   (AccessibilityService)
 
 7.2017/01/01 
-  ĞÂÔö IOCloser
-  ĞÂÔö ScreenShoot
-  ĞÂÔö MemoryUtils ¶ÁÈ¡sdcard  ÄÚ´æ¿¨£¬RAM¡£
-  ĞÂÔö CrashHandler  ÏµÍ³±ÀÀ£Òì³££¬Ğ´½øÈÕÖ¾ÎÄ¼ş£¬¿ÉÉÏ´«ÖÁ×Ô¼ºµÄ·şÎñÆ÷¡£
-  ĞÂÔö TelephonyUtils ´ÓTelePhoneyManager»ñÈ¡µç»°ºÅÂëÔËĞĞÉÌ£¬ÓÉºÅÂëÀ´ÅĞ¶ÏÔËÓªÉÌ¡£(ÕıÔò)
+  ï¿½ï¿½ï¿½ï¿½ IOCloser
+  ï¿½ï¿½ï¿½ï¿½ ScreenShoot
+  ï¿½ï¿½ï¿½ï¿½ MemoryUtils ï¿½ï¿½È¡sdcard  ï¿½Ú´æ¿¨ï¿½ï¿½RAMï¿½ï¿½
+  ï¿½ï¿½ï¿½ï¿½ CrashHandler  ÏµÍ³ï¿½ï¿½ï¿½ï¿½ï¿½ì³£ï¿½ï¿½Ğ´ï¿½ï¿½ï¿½ï¿½Ö¾ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ï¿½ï¿½ï¿½Ô¼ï¿½ï¿½Ä·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+  ï¿½ï¿½ï¿½ï¿½ TelephonyUtils ï¿½ï¿½TelePhoneyManagerï¿½ï¿½È¡ï¿½ç»°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì£ï¿½ï¿½Éºï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¶ï¿½ï¿½ï¿½Óªï¿½Ì¡ï¿½(ï¿½ï¿½ï¿½ï¿½)
 
 
 8.2017/01/02
-  TimeUtilÖØÃûÎªTimeUtils  Ôö¼Ó»ñÈ¡ÍøÂçÊ±¼ä¡£
-  ĞÂÔöElog ¿ÉÒÔÒÔLog.e()µÄĞÎÊ½Êä³ö  ExceptionºÍThrowable£¬ÒòÎªe.printStackÑÕÉ«²»ÊÇºìÉ«¡£
+  TimeUtilï¿½ï¿½ï¿½ï¿½ÎªTimeUtils  ï¿½ï¿½ï¿½Ó»ï¿½È¡ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ä¡£
+  ï¿½ï¿½ï¿½ï¿½Elog ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Log.e()ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½  Exceptionï¿½ï¿½Throwableï¿½ï¿½ï¿½ï¿½Îªe.printStackï¿½ï¿½É«ï¿½ï¿½ï¿½Çºï¿½É«ï¿½ï¿½
 
 9.2017/01/14
-  ĞÂÔöGridViewPagerAdapter.
-  ĞÂÔöWrapLayoutManager.
+  ï¿½ï¿½ï¿½ï¿½GridViewPagerAdapter.
+  ï¿½ï¿½ï¿½ï¿½WrapLayoutManager.
 
 10.2017/01/15
-  ĞÂÔöDialogUtils.
+  ï¿½ï¿½ï¿½ï¿½DialogUtils.
 
-11.2017/01/16  ÎªhtmlÔö¼ÓÍ·²¿ÑùÊ½£¬ÊÊÅäwebView´óĞ¡¡£
+11.2017/01/16  Îªhtmlï¿½ï¿½ï¿½ï¿½Í·ï¿½ï¿½ï¿½ï¿½Ê½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½webViewï¿½ï¿½Ğ¡ï¿½ï¿½
 
 
  
