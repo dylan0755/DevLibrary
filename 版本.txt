@@ -19,6 +19,7 @@ V6.2.0
 9.���FileUtils getFormatFileSize С��1K ����ʾ�ֽ�����
 10.����ReflectUtils,�����ȡApplication �� MainHandler
 11.����PerDayTaskRecorder�� ��ÿ��Ϊ��λ���д洢
+12.StringUtils ���� findSerialSameString findSameCharCount ��������ͬ�ַ����ܹ���ͬ�ַ�����
 
 
 
