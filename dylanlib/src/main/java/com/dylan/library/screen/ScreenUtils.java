@@ -328,7 +328,28 @@ public class ScreenUtils {
         return  context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
     }
 
-
+    public static String getScreenParams(Context context) {
+        DisplayMetrics dm = context.getResources().getDisplayMetrics();
+        int heightPixels = dm.heightPixels;//高的像素
+        int widthPixels = dm.widthPixels;//宽的像素
+        int densityDpi = dm.densityDpi;//dpi
+        float xdpi = dm.xdpi;//xdpi
+        float ydpi = dm.ydpi;//ydpi
+        float density = dm.density;//density=dpi/160,密度比
+        float scaledDensity = dm.scaledDensity;//scaledDensity=dpi/160 字体缩放密度比
+        float heightDP = heightPixels / density;//高度的dp
+        float widthDP = widthPixels / density;//宽度的dp
+        String str = "heightPixels: " + heightPixels + "px";
+        str += "\nwidthPixels: " + widthPixels + "px";
+        str += "\ndensityDpi: " + densityDpi + "dpi";
+        str += "\nxdpi: " + xdpi + "dpi";
+        str += "\nydpi: " + ydpi + "dpi";
+        str += "\ndensity: " + density;
+        str += "\nscaledDensity: " + scaledDensity;
+        str += "\nheightDP: " + heightDP + "dp";
+        str += "\nwidthDP: " + widthDP + "dp";
+        return str;
+    }
 
     public static class OrientHelper{
         private OrientationEventListener mOrientationListener;
