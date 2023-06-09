@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:voiceView="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+    <com.dylan.library.widget.VoiceLineView
+        android:id="@+id/voicLine"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
+        android:layout_marginTop="18dp"
+        android:background="@android:color/holo_red_light"
+        voiceView:middleLine="@android:color/transparent"
+        voiceView:middleLineHeight="0dp"
+        voiceView:rectSpace="0dp"
+        voiceView:rectWidth="1dp"
+        voiceView:viewMode="rect"
+        voiceView:voiceLine="@android:color/white" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/voicLine"
+        android:background="@android:color/white" />
+
+
+</LinearLayout>

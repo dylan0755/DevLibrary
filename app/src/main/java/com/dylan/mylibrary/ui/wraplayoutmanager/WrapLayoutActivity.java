@@ -2,7 +2,8 @@ package com.dylan.mylibrary.ui.wraplayoutmanager;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.testdata.TestDatas;

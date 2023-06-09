@@ -207,6 +207,10 @@
         <activity android:name=".ui.TouchDispatchLayoutActivity"/>
         <activity android:name=".ui.DragSelectRangeViewActivity"/>
         <activity android:name=".ui.FloatActionButtonDemoActivity"/>
+        <activity android:name=".ui.VoiceLineDemoActivity"/>
+        <activity android:name=".ui.FlattenProgressBarActivity"/>
+
+
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
         所以name,authorities,resource 里面的都不一样-->
         <provider

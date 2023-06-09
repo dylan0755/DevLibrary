@@ -2,10 +2,11 @@ package com.dylan.mylibrary.ui.screenshoot;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.screen.ScreenShootUtils;

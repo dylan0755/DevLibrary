@@ -2,10 +2,11 @@ package com.dylan.mylibrary.dialog;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.ImageView;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dylan.library.adapter.BaseRecyclerAdapter;
 import com.dylan.library.callback.SingleClickListener;

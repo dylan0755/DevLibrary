@@ -1,9 +1,10 @@
 package com.xm.vbrowser.app.util;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.dialog.BottomSlideDialog;

@@ -2,9 +2,9 @@ package com.dylan.mylibrary.ui.lazyload;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.dylan.library.fragment.LazyFragment;
 import com.dylan.mylibrary.R;
