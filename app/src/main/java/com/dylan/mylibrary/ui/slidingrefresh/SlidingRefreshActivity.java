@@ -1,11 +1,10 @@
 package com.dylan.mylibrary.ui.slidingrefresh;
 
 import android.os.Bundle;
-import androidx.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Toast;
@@ -14,6 +13,7 @@ import com.dylan.library.widget.pullrefresh.PullRefreshLayout;
 import com.dylan.library.widget.sliding.OffsetChangedListener;
 import com.dylan.library.widget.sliding.SlidingLayout;
 import com.dylan.mylibrary.R;
+import com.google.android.material.tabs.TabLayout;
 
 
 /**
