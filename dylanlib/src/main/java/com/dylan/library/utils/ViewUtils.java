@@ -55,4 +55,8 @@ public class ViewUtils {
                         + " getScrollY()" + view.getScrollY()
         );
     }
+
+    public static void rotate(View view,int angle){
+        view.animate().rotation(angle).start();
+    }
 }
