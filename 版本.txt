@@ -18,7 +18,7 @@ V6.2.0
 12.StringUtils 新增 findSerialSameString findSameCharCount 找连续相同字符和总共相同字符数量
 13.getVisibleFirstLineInScrollView  getVisibleEndLineInScrollView 获取ScrollView 中TextView 的首尾行
 14.新增FlatterProgressBar 仿IOS 控制中心进度条
-15.VoiceLine 声波控件
+15.新增VoiceLine 声波控件
 
 
 
