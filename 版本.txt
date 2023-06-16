@@ -1,4 +1,15 @@
-V6.2.0
+
+V6.3.0
+1.新增ChatAdapter 快速实现聊天页面
+2.新增 SmoothScrollLayoutManager 让RecyclerView 滑动更顺畅
+
+
+
+
+
+
+
+V6.2.0 ---->2023.6.11
 1.新增 CompletableFutureUtils 异步工具
 2.StringUtils
  更新 extractNumber，支持小数
