@@ -129,6 +129,13 @@ public class SwitchView extends View {
             return;
         }
         refreshState(wishState);
+        if (changedListener!=null){
+            if (isOpened){
+                changedListener.toggleToOn(this);
+            }else{
+                changedListener.toggleToOff(this);
+            }
+        }
     }
 
     public void toggleSwitch(boolean isOpened) {
