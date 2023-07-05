@@ -12,6 +12,7 @@ import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Matrix;
 import android.graphics.Paint;
+import android.graphics.Picture;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
@@ -809,6 +810,27 @@ public class BitmapHelper {
         paint.setColorFilter(f);
         c.drawBitmap(bitmap, 0, 0, paint);
         return bmpGrayScale;
+    }
+
+    public static Bitmap convertHardWareBitmap(Bitmap src){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            if (src.getConfig() != Bitmap.Config.HARDWARE) {
+                return src;
+            }
+        }
+
+        final int w = src.getWidth();
+        final int h = src.getHeight();
+        // For hardware bitmaps, use the Picture API to directly create a software bitmap
+        Picture picture = new Picture();
+        Canvas canvas = picture.beginRecording(w, h);
+        canvas.drawBitmap(src, 0, 0, null);
+        picture.endRecording();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            return Bitmap.createBitmap(picture, w, h,
+                    Bitmap.Config.ARGB_8888);
+        }
+        return null;
     }
 
 
