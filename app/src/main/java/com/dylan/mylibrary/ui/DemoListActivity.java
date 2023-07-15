@@ -58,7 +58,7 @@ public class DemoListActivity extends AppCompatActivity {
             "Camera+OpenGl", "IOSSwitchView", "VerticalSeekBar", "MediumTextView", "CircleRingProgressView",
             "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView", "SquareProgress方形进度条",
             "Sonic变音", "M3U8视频下载", "网页视频嗅探下载", "PostBanner", "ClipVideoView", "SortDragItemTouchHelper",
-            "DragSelectRangeView", "TouchDispatchActivity", "FloatActionButton","声音波纹View","仿IOS拖动条","ChatGTP打字机效果"};
+            "DragSelectRangeView", "TouchDispatchActivity", "FloatActionButton","声音波纹View","仿IOS拖动条","ChatGTP打字机效果","倒计时选择器"};
     private Class[] classes = {ApkSignListActivity.class, RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -79,7 +79,8 @@ public class DemoListActivity extends AppCompatActivity {
             AutoSplitTextViewActivity.class, SquareProgressViewActivity.class, SonicTestActivity.class,
             M3u8DownLoadActivity.class, WebVideoGrabActivity.class, PosterBannerActivity.class, ClipVideoViewActivity.class,
             SortDragItemTouchHelperActivity.class, DragSelectRangeViewActivity.class, TouchDispatchLayoutActivity.class,
-            FloatActionButtonDemoActivity.class,VoiceLineDemoActivity.class,FlattenProgressBarActivity.class,ChatLayoutActivity.class};
+            FloatActionButtonDemoActivity.class,VoiceLineDemoActivity.class,FlattenProgressBarActivity.class,ChatLayoutActivity.class,
+            CountDownPickerActivity.class};
 
 
     @Override

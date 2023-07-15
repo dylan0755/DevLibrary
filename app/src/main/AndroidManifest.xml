@@ -246,6 +246,8 @@
         <activity android:name=".ui.ChatLayoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
+        <activity android:name=".ui.CountDownPickerActivity"/>
+
     </application>
 
 </manifest>
