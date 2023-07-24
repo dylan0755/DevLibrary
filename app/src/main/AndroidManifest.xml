@@ -248,6 +248,8 @@
 
         <activity android:name=".ui.CountDownPickerActivity"/>
 
+        <activity android:name=".ui.CutViewActivity"/>
+
     </application>
 
 </manifest>
