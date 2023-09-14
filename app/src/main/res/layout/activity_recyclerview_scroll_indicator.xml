@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!--AI直播托管权益-->
+    <com.dylan.library.widget.shape.ShapeLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="272dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        app:radius="24dp"
+        app:solidColor="#F3F4FF"
+        app:strokeColor="#DBE0FA"
+        app:strokeWidth="2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center_vertical">
+
+            <com.dylan.library.widget.shape.ShapeTextView
+                android:layout_width="8dp"
+                android:layout_height="22dp"
+                android:layout_marginLeft="24dp"
+                app:radius="4dp"
+                app:solidColor="#FF4464" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:text="托管直播权益"
+                android:textColor="#ff333333"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvAutoLive"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:layout_weight="1"
+            android:paddingLeft="22dp" />
+
+        <ProgressBar
+            android:id="@+id/indicatorAutoLive"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="30dp"
+            android:layout_height="6dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="14dp"
+            android:layout_marginBottom="12dp"
+            android:progressDrawable="@drawable/rv_autolive_progress_indicator" />
+
+
+    </com.dylan.library.widget.shape.ShapeLinearLayout>
+    <!--AI直播托管权益-->
+
+</LinearLayout>

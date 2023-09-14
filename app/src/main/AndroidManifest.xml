@@ -250,6 +250,8 @@
 
         <activity android:name=".ui.CutViewActivity"/>
 
+        <activity android:name=".ui.RecyclerViewScrollIndicatorActivity"/>
+
     </application>
 
 </manifest>
