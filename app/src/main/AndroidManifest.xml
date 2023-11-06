@@ -252,6 +252,8 @@
 
         <activity android:name=".ui.RecyclerViewScrollIndicatorActivity"/>
 
+        <activity android:name=".ui.RecyclerPagerDemoActivity"/>
+
     </application>
 
 </manifest>
