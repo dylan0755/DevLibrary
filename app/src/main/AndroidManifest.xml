@@ -246,6 +246,14 @@
         <activity android:name=".ui.ChatLayoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
+        <activity android:name=".ui.CountDownPickerActivity"/>
+
+        <activity android:name=".ui.CutViewActivity"/>
+
+        <activity android:name=".ui.RecyclerViewScrollIndicatorActivity"/>
+
+        <activity android:name=".ui.RecyclerPagerDemoActivity"/>
+
     </application>
 
 </manifest>

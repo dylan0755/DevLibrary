@@ -180,5 +180,6 @@
 
     <style name="DLHorizontalProgressBar" parent="@android:style/Widget.ProgressBar.Horizontal">
 
+
     </style>
 </resources>

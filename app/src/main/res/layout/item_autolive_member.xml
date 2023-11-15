@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="140dp"
+    android:layout_height="180dp"
+    android:layout_marginRight="15dp">
+
+
+
+    <com.dylan.library.widget.shape.ShadowLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        app:shadowColor="#4dbbbccd"
+        app:shadowWith="4dp"
+        app:shadowRadius="8dp"
+        app:cornerRadius="8dp"
+        >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:singleLine="true"
+                android:textColor="#ff333333"
+                android:textStyle="bold"
+                android:textSize="20sp"
+                android:layout_marginTop="34dp"
+                />
+
+            <TextView
+                android:id="@+id/tvDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:textColor="#ff6372c7"
+                android:textSize="17sp"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="16dp"
+                android:gravity="center"
+                />
+        </FrameLayout>
+    </com.dylan.library.widget.shape.ShadowLayout>
+
+    <ImageView
+        android:id="@+id/ivItemType"
+        android:layout_width="61dp"
+        android:layout_height="61dp"
+        android:layout_gravity="center_horizontal"/>
+
+</FrameLayout>

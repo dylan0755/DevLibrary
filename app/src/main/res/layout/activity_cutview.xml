@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
+    android:background="#100000"
+    >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:clipChildren="false">
+        <FrameLayout
+            android:id="@+id/flParent"
+            android:layout_width="180dp"
+            android:layout_height="180dp"
+            android:background="#0000"
+            android:layout_marginTop="20dp"
+            android:clipChildren="false"
+            >
+
+            <SurfaceView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#a0a0a0"/>
+
+            <com.dylan.library.widget.CutView
+                android:id="@+id/cutView1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+
+
+        </FrameLayout>
+    </FrameLayout>
+
+
+    <FrameLayout
+        android:layout_width="180dp"
+        android:layout_height="180dp"
+        android:background="#0000"
+        android:layout_marginTop="20dp"
+        android:clipChildren="false"
+        >
+
+        <SurfaceView
+            android:id="@+id/surfaceView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#a0a0a0"/>
+
+        <com.dylan.library.widget.CutView
+            android:id="@+id/cutView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+
+    </FrameLayout>
+
+</LinearLayout>
