@@ -137,9 +137,9 @@ public class MultiPartPoster {
                 builder.append(line);
             }
             reader.close();
-            httpConn.disconnect();
             responseBody.result=builder.toString();
         }
+        httpConn.disconnect();
         responseBody.duration=(System.currentTimeMillis()- startTime)*1.0f/1000+"s";
         if (responseBody.status==200){
             responseBody.byteSize=ResponseBody.getFormatFileSize(responseBody.result.getBytes().length);
