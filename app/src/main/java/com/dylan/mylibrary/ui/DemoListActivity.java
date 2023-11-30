@@ -30,6 +30,7 @@ import com.dylan.mylibrary.ui.rebound.ReboundActivity;
 import com.dylan.mylibrary.ui.screenshoot.ScreenShootActivity;
 import com.dylan.mylibrary.ui.slidingrefresh.SlidingRefreshActivity;
 import com.dylan.mylibrary.ui.snaphelper.RecyclerSnapHelperActivity;
+import com.dylan.mylibrary.ui.tts.TTsDemoActivity;
 import com.dylan.mylibrary.ui.unscollviewpager.UnScrollViewPagerActivity;
 import com.dylan.mylibrary.ui.wraplayoutmanager.WrapLayoutActivity;
 import com.xm.vbrowser.app.activity.WebVideoGrabActivity;
@@ -58,7 +59,7 @@ public class DemoListActivity extends AppCompatActivity {
             "ToastActivity", "ColorShades", "ExpandableTextView", "AutoSplitTextView", "SquareProgress方形进度条",
             "Sonic变音", "M3U8视频下载", "网页视频嗅探下载", "PostBanner", "ClipVideoView", "SortDragItemTouchHelper",
             "DragSelectRangeView", "TouchDispatchActivity", "FloatActionButton","声音波纹View","仿IOS拖动条",
-            "ChatGTP打字机效果","倒计时选择器","裁剪框","RecyclerView进度指示器","RecyclerView 横向分页"};
+            "ChatGTP打字机效果","倒计时选择器","裁剪框","RecyclerView进度指示器","RecyclerView 横向分页","TTS"};
     private Class[] classes = {ApkSignListActivity.class, RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -80,7 +81,8 @@ public class DemoListActivity extends AppCompatActivity {
             M3u8DownLoadActivity.class, WebVideoGrabActivity.class, PosterBannerActivity.class, ClipVideoViewActivity.class,
             SortDragItemTouchHelperActivity.class, DragSelectRangeViewActivity.class, TouchDispatchLayoutActivity.class,
             FloatActionButtonDemoActivity.class,VoiceLineDemoActivity.class,FlattenProgressBarActivity.class,ChatLayoutActivity.class,
-            CountDownPickerActivity.class,CutViewActivity.class, RecyclerViewScrollIndicatorActivity.class,RecyclerPagerDemoActivity.class};
+            CountDownPickerActivity.class,CutViewActivity.class, RecyclerViewScrollIndicatorActivity.class,RecyclerPagerDemoActivity.class,
+    TTsDemoActivity.class};
 
 
     @Override

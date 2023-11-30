@@ -254,6 +254,9 @@
 
         <activity android:name=".ui.RecyclerPagerDemoActivity"/>
 
+        <activity android:name=".ui.tts.TTsDemoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
     </application>
 
 </manifest>

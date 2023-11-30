@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:ignore="MissingDefaultResource,Orientation">
+
+    <EditText
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        android:textSize="20dp"
+        android:text="无论面对多大的挑战，你都有足够的力量去克服。每一步的努力，都是通向成功的道路上的一部分。不要忘记，你的梦想和目标值得追求，而你所做的每一个努力都是迈向成功的关键一步。坚持、努力、相信自己，你一定能够创造出美好的明天。你是独一无二的，你的能力是无限的。相信自己，你可以超越自己的期望，创造出令人惊叹的成就。在每一个困难面前，都蕴藏着机会和成长。保持积极的态度，勇往直前，你将发现自己能够达到意想不到的高度。愿你在人生的旅途中，勇敢前行，敢于梦想，勇于追求，你的未来会因此变得更加辉煌。"/>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:text="点击测试TTS语音"/>
+</LinearLayout>
+
