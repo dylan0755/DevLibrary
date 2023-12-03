@@ -59,7 +59,7 @@ public class DataTypeConversionUtils {
     public static double[] toDoubleArray(byte[] byteArray) {
         int times = Double.SIZE / Byte.SIZE;
         double[] doubles = new double[byteArray.length / times];
-        for (int i = 0; i < byteArray.length; i++) {
+        for (int i = 0; i < doubles.length; i++) {
             doubles[i] = ByteBuffer.wrap(byteArray, i * times, times).getDouble();
         }
         return doubles;
@@ -77,12 +77,20 @@ public class DataTypeConversionUtils {
     public static int[] toIntArray(byte[] byteArray) {
         int times = Integer.SIZE / Byte.SIZE;
         int[] ints = new int[byteArray.length / times];
-        for (int i = 0; i < byteArray.length; i++) {
+        for (int i = 0; i < ints.length; i++) {
             ints[i] = ByteBuffer.wrap(byteArray, i * times, times).getInt();
         }
         return ints;
     }
 
+    public static float[] doubleArrayToFloatArray(double[] doubleArray){
+        float[] floatArray = new float[doubleArray.length];
 
+        for (int i = 0; i < doubleArray.length; i++) {
+            floatArray[i] = (float) doubleArray[i];
+        }
+
+        return floatArray;
+    }
 }
 

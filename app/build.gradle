@@ -9,7 +9,7 @@ android {
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
-
+        multiDexEnabled true
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
 
@@ -33,8 +33,8 @@ android {
 
 }
 
-repositories{
-    flatDir{
+repositories {
+    flatDir {
         dirs 'libs'
     }
 
@@ -49,6 +49,7 @@ dependencies {
     })
     testImplementation 'junit:junit:4.12'
     implementation 'com.zhy:autolayout:1.4.3'
+    implementation "androidx.multidex:multidex:2.0.1"
     implementation 'androidx.appcompat:appcompat:1.0.0'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.squareup.okhttp3:okhttp:3.1.2'
@@ -62,7 +63,7 @@ dependencies {
     //compile 'com.dylan:devlib:4.8.0'
     //  implementation 'com.github.dylan0755:DevLibrary:6.0.0'
     implementation project(':dylanlib')
-        compile(name: 'photopicker-release', ext: 'aar')
+    compile(name: 'photopicker-release', ext: 'aar')
     implementation(name: 'FlycoTabLayout_Lib', ext: 'aar')
     implementation 'com.jakewharton:butterknife:10.0.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:10.0.0'
@@ -71,6 +72,6 @@ dependencies {
     implementation files('libs/tbs_sdk_thirdapp_v4.3.0.1072_43646_20190429_175122.jar')
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'org.greenrobot:eventbus:3.1.1'
-
+    implementation 'com.github.wendykierp:JTransforms:3.1'
 
 }

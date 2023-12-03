@@ -274,4 +274,19 @@
             <attr format="color" name="wheelPick_dividerColor"/>
             <attr format="float" name="wheelPick_lineSpacingMultiplier"/>
         </declare-styleable>
+
+
+    <declare-styleable name="AudioVisualizeView">
+        <attr format="reference|color" name="visualize_color"/>
+        <attr format="integer" name="visualize_count"/>
+        <attr format="integer" name="visualize_stroke_size"/>
+        <attr format="float" name="visualize_ratio"/>
+        <attr format="dimension" name="visualize_item_margin"/>
+        <attr format="enum" name="visualize_orientation">
+            <enum name="horizontal_line_top" value="1"/>
+            <enum name="horizontal_line_all" value="2"/>
+        </attr>
+        <attr format="integer" name="visualize_threshold"/>
+        <attr format="float" name="visualize_height_rate"/>
+    </declare-styleable>
 </resources>

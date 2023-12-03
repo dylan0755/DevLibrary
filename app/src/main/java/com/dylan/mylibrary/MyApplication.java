@@ -7,6 +7,8 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 
+import androidx.multidex.MultiDexApplication;
+
 import com.dylan.library.manager.ActivityManager;
 import com.dylan.library.utils.AndKit;
 import com.dylan.library.utils.Logger;
@@ -27,7 +29,7 @@ import retrofit2.Call;
 /**
  * Created by Dylan on 2016/9/1.
  */
-public class MyApplication extends Application {
+public class MyApplication extends MultiDexApplication {
     private static MyApplication mContext;
     private RestApi mRestApi;
     public static String qiniuDomain;
