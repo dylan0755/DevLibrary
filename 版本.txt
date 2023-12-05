@@ -1,10 +1,17 @@
 
 V6.3.0
-1.新增ChatAdapter 快速实现聊天页面
+
+1.新增ChatAdapter  chat gpt 打字机效果
 2.新增 SmoothScrollLayoutManager 让RecyclerView 滑动更顺畅
-
-
-
+3.新增RecyclerView横向进度指示器
+4.新增RecyclerView 网格横向分页
+5.修复SwitchView setOpened 不回调statusChanged bug
+6.新增扁平化时分秒倒计时控件
+7.新增任意中文数字转阿拉伯数字
+8.DataTypeConversionUtils
+增加 byte[] 与 int[] double[]  float[] 互转
+9.修复MultiPartPoster httpConnect release 释放连接
+10.新增音频 频谱动画控件，分扬声器播放、麦克风两种场景
 
 
 
@@ -16,14 +23,14 @@ V6.2.0 ---->2023.6.11
  新增 isIntegerNumber
  修复正则，解决带+号的数字识别为true的问题
 3.AppUtils getAppName(Context context,String packName) 根据包名查询第三方应用名称
-4. 新增 MultiPartPoster，同时上传参数和文件,支持json 和 表单
+4. 新增 MultiPartPoster (原生HttpUrlConnect)，同时上传参数和文件,支持json 和 表单
 5.删除MemoryUtils，里面的方法转移到DeviceUtils中
 6.ThreadPools
 1.fixedThreadPoolRun 更名为run
 2.新增runDelay
 7.CacheManager 清除SharePreference 增加排除项
 8.HttpUtils 返回ResponseBody
-9.解决FileUtils getFormatFileSize 小于1K 不显示字节问题
+9.修复FileUtils getFormatFileSize 小于1K 不显示字节问题
 10.新增ReflectUtils,反射获取Application 和 MainHandler
 11.新增PerDayTaskRecorder， 以每天为单位进行存储
 12.StringUtils 新增 findSerialSameString findSameCharCount 找连续相同字符和总共相同字符数量
