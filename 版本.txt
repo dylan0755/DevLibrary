@@ -12,7 +12,7 @@ V6.3.0
 增加 byte[] 与 int[] double[]  float[] 互转
 9.修复MultiPartPoster httpConnect release 释放连接
 10.新增音频 频谱动画控件，分扬声器播放、麦克风两种场景
-
+11.新增XFloat 快速实现简易悬浮窗
 
 
 
