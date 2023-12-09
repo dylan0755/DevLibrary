@@ -13,7 +13,7 @@ V6.3.0
 9.修复MultiPartPoster httpConnect release 释放连接
 10.新增音频 频谱动画控件，分扬声器播放、麦克风两种场景
 11.新增XFloat 快速实现简易悬浮窗
-
+12.HtmlUtils injectCssWhileOnPageFinish 注入CSS 样式
 
 
 V6.2.0 ---->2023.6.11
