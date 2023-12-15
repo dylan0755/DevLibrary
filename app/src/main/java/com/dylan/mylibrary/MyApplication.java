@@ -1,12 +1,17 @@
 package com.dylan.mylibrary;
 
 import android.app.Activity;
+import android.app.ActivityController;
 import android.app.Application;
+import android.app.IProcessObserver;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.RemoteException;
 import android.util.Log;
 
+import androidx.annotation.RequiresApi;
 import androidx.multidex.MultiDexApplication;
 
 import com.dylan.library.manager.ActivityManager;
@@ -23,6 +28,9 @@ import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 import retrofit2.Call;
 
@@ -66,6 +74,28 @@ public class MyApplication extends MultiDexApplication {
                 ActivityManager.getInstance().removeActivity(activity);
             }
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            monitor();
+        }
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    private void monitor(){
+        try {
+        Class activityManager = Class.forName("android.app.ActivityManager");
+        Method getDefaultMethod = activityManager.getMethod("getService");
+        Object iActivityManager = getDefaultMethod.invoke(null);
+        Method registerMethod = iActivityManager.getClass().getMethod("registerProcessObserver", IProcessObserver.class);
+        registerMethod.invoke(iActivityManager, new ProcessImpl());
+        } catch (ClassNotFoundException | NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -123,4 +153,27 @@ public class MyApplication extends MultiDexApplication {
     public static Application getApplication() {
         return mContext;
     }
+
+    static class ProcessImpl extends IProcessObserver.Stub {
+        @Override
+        public void basicTypes(int anInt, long aLong, boolean aBoolean, float aFloat, double aDouble, String aString) throws RemoteException {
+
+        }
+
+        @Override
+        public void onForegroundActivitiesChanged(int pid, int uid, boolean foregroundActivities) throws RemoteException {
+
+           Log.e("logtag", "onForegroundActivitiesChanged: " + pid);
+        }
+
+        @Override
+        public void onForegroundServicesChanged(int pid, int uid, int serviceTypes) throws RemoteException {
+
+        }
+
+        @Override
+        public void onProcessDied(int pid, int uid) throws RemoteException {
+
+        }
+    };
 }
