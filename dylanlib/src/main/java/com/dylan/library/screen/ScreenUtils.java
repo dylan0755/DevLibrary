@@ -53,6 +53,12 @@ public class ScreenUtils {
         if (statusBarHeight==0){
             statusBarHeight=getStatusBarHeight2(activity);
         }
+        if (statusBarHeight==0){
+            int resourceId=activity.getResources().getIdentifier("status_bar_height","dimen","android");
+            if (resourceId>0){
+                statusBarHeight=activity.getResources().getDimensionPixelSize(resourceId);
+            }
+        }
         return statusBarHeight;
     }
 

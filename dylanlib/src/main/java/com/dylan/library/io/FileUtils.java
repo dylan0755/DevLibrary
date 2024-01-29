@@ -21,6 +21,7 @@ import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.manager.ExternalStorageDir;
 import com.dylan.library.media.MimeTypeFile;
 import com.dylan.library.net.UrlUtils;
+import com.dylan.library.utils.AmountUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.MD5Utils;
