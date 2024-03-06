@@ -260,7 +260,8 @@
         <activity android:name=".ui.AudioVisualizeViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
-        <activity android:name=".ui.RelationShipGraphViewDemoActivity"/>
+        <activity android:name=".ui.RelationShipGraphViewDemoActivity"
+            android:windowSoftInputMode="adjustNothing"/>
     </application>
 
 </manifest>

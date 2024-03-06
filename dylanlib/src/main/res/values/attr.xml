@@ -289,4 +289,9 @@
         <attr format="integer" name="visualize_threshold"/>
         <attr format="float" name="visualize_height_rate"/>
     </declare-styleable>
+
+    <declare-styleable name="UnderLineEditText">
+        <attr name="lineColor" format="color"/>
+        <attr name="lineStrokeWith" format="dimension"/>
+    </declare-styleable>
 </resources>
