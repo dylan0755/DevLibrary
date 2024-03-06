@@ -21,6 +21,7 @@ import com.dylan.library.opengl.GlUtils;
 import com.dylan.library.opengl.OffscreenSurface;
 import com.dylan.library.opengl.TextureOESDrawer;
 
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.util.Arrays;

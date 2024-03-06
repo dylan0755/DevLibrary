@@ -5,6 +5,7 @@ import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.provider.MediaStore;
 
+import java.io.IOException;
 import java.util.HashMap;
 
 /**

@@ -259,6 +259,8 @@
 
         <activity android:name=".ui.AudioVisualizeViewActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+        <activity android:name=".ui.RelationShipGraphViewDemoActivity"/>
     </application>
 
 </manifest>
