@@ -7,8 +7,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.dylan.library.dialog.InputPassWordDialog;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -35,7 +35,7 @@ public class InputPasswordActivity extends AppCompatActivity {
                 .setOnInputReturnListener(new InputPassWordDialog.setOnPassWordInputListener() {
                     @Override
                     public void onInputFinish(String str) {
-                        ToastUtils.show(str);
+                        Toaster.show(str);
                     }
                 }).create();
         dialog.show();

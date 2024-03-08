@@ -33,9 +33,9 @@ import com.dylan.library.utils.EditTextUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.PermissionRequestBuilder;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.webview.WebProgressView;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 import com.xm.vbrowser.app.VideoSniffer;
 import com.xm.vbrowser.app.entity.DetectedVideoInfo;
 import com.xm.vbrowser.app.entity.VideoInfo;
@@ -330,7 +330,7 @@ public class WebVideoGrabActivity extends BaseActivity {
         if (requestCode==100){
             PermissionRequestBuilder.RequestReuslt requestReuslt=requestBuilder.onRequestPermissionsResult(permissions,grantResults);
             if (requestReuslt.hasRejectForceNeed) {
-                ToastUtils.show("存储权限未允许");
+                Toaster.show("存储权限未允许");
             }
         }
     }

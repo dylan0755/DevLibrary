@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.dylan.library.graphics.BitmapHelper;
 import com.dylan.library.screen.ScreenShootUtils;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.test.TestAdapter;
+import com.hjq.toast.Toaster;
 
 /**
  * Created by Dylan on 2017/1/1.
@@ -44,7 +44,7 @@ public class ScreenShootActivity extends Activity {
         ScreenShootUtils.captureDecorView(this, picPath, new BitmapHelper.OutPutListenener() {
             @Override
             public void onSuccess() {
-                ToastUtils.show("保存成功！  "+picPath);
+                Toaster.show("保存成功！  "+picPath);
             }
 
             @Override

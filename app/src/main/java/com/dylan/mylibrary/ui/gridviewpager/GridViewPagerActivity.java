@@ -8,8 +8,8 @@ import android.widget.GridView;
 
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.ui.testdata.TestDatas;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.GridViewPager;
+import com.hjq.toast.Toaster;
 
 import java.util.List;
 
@@ -46,7 +46,7 @@ public class GridViewPagerActivity extends Activity {
 
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            ToastUtils.show("position "+position);
+            Toaster.show("position "+position);
         }
     }
 }

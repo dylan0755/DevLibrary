@@ -187,7 +187,7 @@
         <activity android:name=".ui.VerticalSeekBarActivity"/>
         <activity android:name=".ui.MediumTextViewActivity"/>
         <activity android:name=".ui.CircleRingProgressViewActivity"/>
-        <activity android:name=".ui.ToastUtilsActivity"/>
+        <activity android:name=".ui.ToasterActivity"/>
         <activity android:name=".ui.ColorShadesActivity"/>
         <activity android:name=".ui.ExpandableTextViewActivity"/>
         <activity android:name=".ui.AutoSplitTextViewActivity"/>

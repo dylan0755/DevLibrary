@@ -5,8 +5,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -21,7 +21,7 @@ public class ReboundScrollViewActivity extends AppCompatActivity {
         findViewById(R.id.viewLast).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ToastUtils.show("被点击了");
+                Toaster.show("被点击了");
             }
         });
     }

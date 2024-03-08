@@ -3,7 +3,6 @@ package com.dylan.mylibrary.ui.filedownloader;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,10 +12,9 @@ import android.widget.TextView;
 import com.dylan.library.io.FileDownLoader;
 import com.dylan.library.io.FileUtils;
 import com.dylan.library.utils.DensityUtils;
-import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Created by Dylan on 2017/12/9.
@@ -70,7 +68,7 @@ public class FileDownLoaderActivity extends Activity{
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                ToastUtils.show(error);
+                                Toaster.show(error);
                             }
                         });
 

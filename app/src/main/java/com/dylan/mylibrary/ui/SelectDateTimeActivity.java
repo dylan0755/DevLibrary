@@ -22,7 +22,6 @@ import com.dylan.library.utils.DateUtils;
 import com.dylan.library.utils.DensityFontUtils;
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.wheel.NumericWheelAdapter;
 import com.dylan.library.widget.wheel.OnItemSelectedListener;
 import com.dylan.library.widget.wheel.WheelView;
@@ -30,6 +29,7 @@ import com.dylan.mylibrary.MyApplication;
 import com.dylan.mylibrary.R;
 import com.dylan.mylibrary.adapter.HorizontalDateAdapter;
 import com.dylan.mylibrary.dialog.DatePickerDialog;
+import com.hjq.toast.Toaster;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -269,7 +269,7 @@ public class SelectDateTimeActivity extends AppCompatActivity implements View.On
         long selectTimeStamp=DateUtils.parseYMDHMS(selectDate+":00");
         Log.e("complete: ","selectDate="+selectDate+" currentTimeStamp="+selectTimeStamp );
         if (selectTimeStamp-System.currentTimeMillis()<1000*60*60*3){
-            ToastUtils.show("只能选择当前3小时之后的时间");
+            Toaster.show("只能选择当前3小时之后的时间");
             return;
         }
         Intent intent=new Intent();

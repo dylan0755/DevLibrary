@@ -8,9 +8,9 @@ import android.view.View;
 
 import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.DragScaleLayout;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -52,7 +52,7 @@ public class TouchDispatchLayoutActivity extends AppCompatActivity {
         dispatchLayout.findViewById(R.id.ivClose).setOnClickListener(new SingleClickListener() {
             @Override
             public void onSingleClick(View v) {
-                ToastUtils.show("click close");
+                Toaster.show("click close");
             }
         });
 

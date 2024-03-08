@@ -9,9 +9,9 @@ import android.widget.EditText;
 
 import com.dylan.library.dialog.EditTouchDialogInputHelper;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.ObserveKeyBoardRootLayout;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Administrator
@@ -30,14 +30,14 @@ public class EditTouchDialogInputDemoActivity extends AppCompatActivity {
         observeKeyBoardRootLayout.setOnKeyBoardObserverListener(new ObserveKeyBoardRootLayout.OnKeyBoardObserverListener() {
             @Override
             public void onShow() {
-                ToastUtils.show("显示");
+                Toaster.show("显示");
                 Logger.e("显示");
             }
 
             @Override
             public void onHide() {
                 Logger.e("隐藏");
-                ToastUtils.show("隐藏");
+                Toaster.show("隐藏");
             }
 
 

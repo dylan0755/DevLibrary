@@ -5,9 +5,9 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.ArcMenu;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -26,7 +26,7 @@ public class ArcMenuActivity extends AppCompatActivity {
         arcMenu.setOnMenuItemClickListener(new ArcMenu.OnMenuItemClickListener() {
             @Override
             public void onClick(View view, int pos) {
-                ToastUtils.show(""+pos);
+                Toaster.show(""+pos);
             }
         });
     }

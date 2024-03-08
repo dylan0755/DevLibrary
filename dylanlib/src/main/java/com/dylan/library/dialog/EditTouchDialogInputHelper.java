@@ -17,9 +17,9 @@ import android.widget.TextView;
 import com.dylan.library.R;
 import com.dylan.library.utils.EditTextUtils;
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.KeyPreImeEditText;
 import com.dylan.library.widget.ObserveKeyBoardRootLayout;
+import com.hjq.toast.Toaster;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -150,7 +150,7 @@ public class EditTouchDialogInputHelper extends Dialog {
             @Override
             public void onClick(View v) {
                 if (!canConfirmWhileEmpty) {
-                    if (EmptyUtils.isNotEmpty(emptyTip)) ToastUtils.show(emptyTip);
+                    if (EmptyUtils.isNotEmpty(emptyTip)) Toaster.show(emptyTip);
                     return;
                 }
 

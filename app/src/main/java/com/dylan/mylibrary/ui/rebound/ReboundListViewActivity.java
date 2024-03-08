@@ -7,9 +7,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.rebound.ReboundListView;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,7 @@ public class ReboundListViewActivity extends AppCompatActivity {
         reboundListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                ToastUtils.show(listdata.get(position));
+                Toaster.show(listdata.get(position));
             }
         });
     }

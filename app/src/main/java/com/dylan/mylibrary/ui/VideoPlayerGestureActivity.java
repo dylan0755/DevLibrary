@@ -8,9 +8,9 @@ import android.widget.FrameLayout;
 import com.dylan.library.media.MediaTools;
 import com.dylan.library.media.PlayerGesture;
 import com.dylan.library.screen.ScreenUtils;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.PlayerGestureView;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -43,7 +43,7 @@ public class VideoPlayerGestureActivity extends AppCompatActivity {
 
             @Override
             public void seekTo(long position) {
-                ToastUtils.show("从 "+ MediaTools.getDurationMinuteFormat(position)+"播放");
+                Toaster.show("从 "+ MediaTools.getDurationMinuteFormat(position)+"播放");
             }
         });
     }

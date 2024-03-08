@@ -5,6 +5,8 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.widget.Toast;
 
+import com.hjq.toast.Toaster;
+
 /**
  * Created by Dylan on 2017/12/9.
  */
@@ -18,8 +20,8 @@ public class ClipBoardUtils {
         ClipboardManager myClipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData myClip = ClipData.newPlainText("text", text);
         myClipboard.setPrimaryClip(myClip);
-        if (ToastUtils.hasInit()){
-            ToastUtils.show("复制成功");
+        if (Toaster.isInit()){
+            Toaster.show("复制成功");
         }else{
             Toast toast=Toast.makeText(context, null, Toast.LENGTH_SHORT);
             toast.setText("复制成功");
@@ -34,8 +36,8 @@ public class ClipBoardUtils {
         ClipboardManager myClipboard = (ClipboardManager)context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData myClip = ClipData.newPlainText("text", text);
         myClipboard.setPrimaryClip(myClip);
-        if (ToastUtils.hasInit()){
-            ToastUtils.show(tip);
+        if (Toaster.isInit()){
+            Toaster.show(tip);
         }else{
             Toast toast=Toast.makeText(context, null, Toast.LENGTH_SHORT);
             toast.setText(tip);

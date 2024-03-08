@@ -20,7 +20,7 @@ import com.dylan.library.utils.AndroidManifestUtils;
 import com.dylan.library.utils.AppUtils;
 import com.dylan.library.utils.ContextUtils;
 import com.dylan.library.utils.PermissionRequestBuilder;
-import com.dylan.library.utils.ToastUtils;
+import com.hjq.toast.Toaster;
 
 import java.io.File;
 
@@ -226,7 +226,7 @@ public class PhotoSelector {
                           })
                           .show();
               }else{
-                  ToastUtils.show("相机权限未允许");
+                  Toaster.show("相机权限未允许");
               }
           } else {
               selectByCamera();
@@ -234,7 +234,7 @@ public class PhotoSelector {
       }else if (requestCode==REQUEST_PER_EXTERNAL){
           PermissionRequestBuilder.RequestReuslt result = requestBuilder.onRequestPermissionsResult(permissions, grantResults);
           if (result.hasRejectForceNeed) {
-              ToastUtils.show("存储权限未允许");
+              Toaster.show("存储权限未允许");
           } else {
               toPick();
           }

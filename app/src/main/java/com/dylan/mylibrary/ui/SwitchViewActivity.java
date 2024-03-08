@@ -4,9 +4,9 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.SwitchView;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -23,13 +23,13 @@ public class SwitchViewActivity extends AppCompatActivity {
         switchView.setOnStateChangedListener(new SwitchView.OnStateChangedListener() {
             @Override
             public void toggleToOn(SwitchView view) {
-                ToastUtils.show("打开");
+                Toaster.show("打开");
 
             }
 
             @Override
             public void toggleToOff(SwitchView view) {
-                ToastUtils.show("关闭");
+                Toaster.show("关闭");
 
             }
         });

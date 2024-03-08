@@ -6,6 +6,8 @@ import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.net.Uri;
 
+import com.hjq.toast.Toaster;
+
 import java.util.List;
 
 /**
@@ -75,7 +77,7 @@ public class AppMarket {
         try {
             context.startActivity(getMarketIntent(context));
         } catch (Exception e) {
-            ToastUtils.show("您的手机没有安装Android应用市场");
+            Toaster.show("您的手机没有安装Android应用市场");
             e.printStackTrace();
         }
     }

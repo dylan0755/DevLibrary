@@ -7,9 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
 import com.dylan.library.callback.SingleClickListener;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.CountDownCircleView;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -33,7 +33,7 @@ public class CountDownCircleViewActivity extends AppCompatActivity {
             public void countDownFinished() {
                 countDownCircleView.setVisibility(View.GONE);
                 if (!isFinishing()) {
-                    ToastUtils.show("跳转XXXActivity");
+                    Toaster.show("跳转XXXActivity");
                 }
 
             }
@@ -45,7 +45,7 @@ public class CountDownCircleViewActivity extends AppCompatActivity {
                 countDownCircleView.setVisibility(View.GONE);
 //                Intent intent=new Intent(CountDownCircleViewActivity.this,DemoListActivity.class);
 //                startActivity(intent);
-                ToastUtils.show("跳转XXXActivity");
+                Toaster.show("跳转XXXActivity");
             }
         });
 

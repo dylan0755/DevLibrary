@@ -20,11 +20,11 @@ import com.dylan.library.exception.ThrowableUtils;
 import com.dylan.library.utils.ArrayUtils;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.RecyclerViewHelper;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.CircleRingProgressView;
 import com.dylan.library.widget.irecycler.footer.LoadMoreFooterView;
 import com.dylan.library.widget.irecycler.header.RefreshHeaderView;
 import com.dylan.library.widget.irecycler.paging.IRecyclerPage;
+import com.hjq.toast.Toaster;
 
 import java.util.List;
 
@@ -177,7 +177,7 @@ public class IRecyclerHelper {
 
                 if (!isSucceed) {
                     if (EmptyUtils.isNotEmpty(failureMsg)) {
-                        ToastUtils.show(failureMsg);
+                        Toaster.show(failureMsg);
                     }
                 }
             }

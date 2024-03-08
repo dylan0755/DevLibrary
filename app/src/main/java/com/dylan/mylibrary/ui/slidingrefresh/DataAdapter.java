@@ -8,8 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 /**
  * Author: Dylan
@@ -33,7 +33,7 @@ public class DataAdapter extends RecyclerView.Adapter<DataAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(viewHolder.tvText.getActivityContext(), "position "+i, Toast.LENGTH_SHORT).show();
-                ToastUtils.show("position "+i);
+                Toaster.show("position "+i);
             }
         });
 

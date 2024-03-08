@@ -8,11 +8,11 @@ import android.widget.LinearLayout;
 
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.DanMuView;
 import com.dylan.mylibrary.R;
 import com.dylan.library.widget.BulletinBoard;
 import com.dylan.mylibrary.widget.HotSearchDanMu;
+import com.hjq.toast.Toaster;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -112,7 +112,7 @@ public class BulletinBoardActivity extends Activity {
                 danMuView.setOnDanMuClickListener(new DanMuView.OnDanMuClickListener<String>() {
                     @Override
                     public void onClick(String str) {
-                        ToastUtils.show(str);
+                        Toaster.show(str);
                         danMuView.postDelayed(new Runnable() {
                             @Override
                             public void run() {
@@ -148,7 +148,7 @@ public class BulletinBoardActivity extends Activity {
                 danMuViewList.get(0).appendMessages(danmuMsgs1);
                 danMuViewList.get(1).appendMessages(danmuMsgs2);
                 danMuViewList.get(2).appendMessages(danmuMsgs3);
-                ToastUtils.show("已加入弹幕队列");
+                Toaster.show("已加入弹幕队列");
             } catch (Exception e) {
                 e.printStackTrace();
             }

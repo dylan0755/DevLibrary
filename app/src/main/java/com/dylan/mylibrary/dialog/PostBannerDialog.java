@@ -12,12 +12,13 @@ import com.bumptech.glide.request.RequestOptions;
 import com.dylan.library.callback.SingleClickListener;
 import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.Logger;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.library.widget.banner.Banner;
 import com.dylan.library.widget.banner.HolderCreator;
 import com.dylan.library.widget.banner.ScaleInTransformer;
 import com.dylan.library.widget.shape.ShapeTextView;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class PostBannerDialog extends BaseDialog {
         findViewById(R.id.tvSavePoster).setOnClickListener(new SingleClickListener() {
             @Override
             public void onSingleClick(View view) {
-                ToastUtils.show("敬请期待");
+                Toaster.show("敬请期待");
             }
         });
         posterShareBanner.setIndicator(null)

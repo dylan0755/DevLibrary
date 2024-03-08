@@ -78,7 +78,7 @@ public class DemoListActivity extends AppCompatActivity {
             EditTouchDialogInputDemoActivity.class, SingleClickTestActivity.class, DragMapViewDemoActivity.class,
             SmsCodeCounterActivity.class, OpenglDemoActivity.class, SwitchViewActivity.class,
             VerticalSeekBarActivity.class, MediumTextViewActivity.class, CircleRingProgressViewActivity.class,
-            ToastUtilsActivity.class, ColorShadesActivity.class, ExpandableTextViewActivity.class,
+            ToasterActivity.class, ColorShadesActivity.class, ExpandableTextViewActivity.class,
             AutoSplitTextViewActivity.class, SquareProgressViewActivity.class, SonicTestActivity.class,
             M3u8DownLoadActivity.class, WebVideoGrabActivity.class, PosterBannerActivity.class, ClipVideoViewActivity.class,
             SortDragItemTouchHelperActivity.class, DragSelectRangeViewActivity.class, TouchDispatchLayoutActivity.class,

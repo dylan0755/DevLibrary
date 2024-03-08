@@ -37,8 +37,8 @@ import com.dylan.library.utils.DensityUtils;
 import com.dylan.library.utils.IntentUtils;
 import com.dylan.library.utils.Logger;
 import com.dylan.library.utils.PermissionRequestBuilder;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 import java.io.File;
 import java.io.IOException;
@@ -323,7 +323,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ToastUtils.show("保存图片成功");
+                            Toaster.show("保存图片成功");
                             Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(new File(filePath)));
                             sendBroadcast(intent);
                         }
@@ -390,7 +390,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            ToastUtils.show("时间太短了");
+                            Toaster.show("时间太短了");
                         }
                     });
                     return;
@@ -400,7 +400,7 @@ public class OpenglDemoActivity extends AppCompatActivity implements CameraGLSur
                     @Override
                     public void run() {
                         sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.fromFile(mVideoOutFile)));
-                        ToastUtils.show("保存视频成功");
+                        Toaster.show("保存视频成功");
                     }
                 });
 

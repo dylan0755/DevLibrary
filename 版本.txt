@@ -1,4 +1,15 @@
 
+V7.0
+1.ToastUtils 更名Toaster，适配高版本安卓
+
+
+
+
+
+
+
+
+
 V6.3.0 ---->2024.3.8
 
 1.新增ChatAdapter  chat gpt 打字机效果
@@ -248,10 +259,10 @@ V5.1.0 ---->2021.3.18
 8.HtmlUtils 对fromHtml(String html) 入参空判
 9.BaseRecyclerAdapter 新增startActivityForResult
 10.CompatUtils 新增 compatAlertDialogAfterShowMethod,解决AlertDialog 在部分机型不居中问题
-11.ToastUtils 更新，统一样式，解决部分手机因关闭通知弹不出吐司问题
+11.Toaster 更新，统一样式，解决部分手机因关闭通知弹不出吐司问题
 12.IRecyclerView 增加dealPullRefreshInAppBarLayout(AppBarLayout layout),处理IRecyclerView 的下拉刷新和AppBarLayout的展开折叠冲突;
 13.修复CompatLineTextView 设置wrap_content 的问题，建议使用Match_parent
-14.ToastUtils 新增hasInit 判断， ClipBoardUtils 中Toast 优先使用ToastUtils的
+14.Toaster 新增hasInit 判断， ClipBoardUtils 中Toast 优先使用Toaster的
 
 
 
@@ -384,7 +395,7 @@ V4.4.0 ---->2020.07.29
 4.addDoneAction  addSearchAction   addSendAction 优化,横屏全屏输入法不占满屏
 5.新增 ArcMenu
 6.CollectionsUtils 新增 SparseArray<List<T>> grouping(List<T> sourceList, int countPerPage)    对List 按 多少为一组进行分组
-7.ToastUtils show 方法优化
+7.Toaster show 方法优化
 8.ActivityManager 新增 bringRecordToFrontAndClearTop
 9.IRecyclerView 初始化默认添加上下拉刷新和上拉加载更多，在java 代码中 设置 setLoadMoreEnabled(true);  setRefreshEnabled(true);
 10.widget 目录下新增 ShapeEditText ，ShapeFrameLayout，ShapeRelativeLayout,ShapeLinearLayout, 和ShapeTextView 使用方法一致
@@ -430,7 +441,7 @@ V4.2.0   ---->2020.05.06
 10.EditTextUtils 新增 keepDecimal(final EditText editText,final  int decimalCount)  增加小数点控制
 11.优化BaseRecyclerAdapter 原有protected 修饰的属性 都改成 private  提供 getter
 12.新增 AESUtils 加密解密，   Base64Utils 更新
-13.更新ToastUtils  showCenter标注过时，  新增showCenterShort   showCenterLong
+13.更新Toaster  showCenter标注过时，  新增showCenterShort   showCenterLong
 14.ClipBoardUtils 更新，修改copy 方法的Toast提示，避免小米手机toast 带应用名称
 
 
@@ -451,7 +462,7 @@ V4.1.0  ---->2020.04.23
 7.新增ShadowLayout
 8.checkBankCardCode 更新，增加 checkCardValid 走阿里公共接口判断
 9.新增 BottomSlideDialog  CustomDialog
-10.新增AndKit 一起初始化 ToastUtils  CompatUtils AppSpManager等类
+10.新增AndKit 一起初始化 Toaster  CompatUtils AppSpManager等类
 11.LoadMoreFooterView 增加setGlobalCustomNoMoreText,全局改变 默认的无更多数据文本
 12.新增 IRecyclerAdapterDataBinder
         IRecyclerHelper 不再接受BaseRecyclerAdapter,改为接受 IRecyclerAdapterDataBinder，
@@ -759,7 +770,7 @@ V2.3.0 ---> 2019.08.27 更新至JCenter
 1.增加 BitmapDownloader ，下载bitmap并缓存到内部磁盘
 2.BitmapHelper中增加压缩图片尺寸方法getInSampleSizeBitmap(String picPath, int reqsW, int reqsH)，
 增加同步，异步方式保存Bitmap到本地 的方法
-3.ToastUtils 对Context 进行空判，防止Context 为空时调用显示空指针异常
+3.Toaster 对Context 进行空判，防止Context 为空时调用显示空指针异常
 4.FileUtils 增加delectDirFile，删除整个文件夹
 5.CompatUtils 增加 setTint(Drawable drawble,int color) 兼容着色
 6.增加CommonFragmentPagerAdapter layoutInflaterAdapter.addFragment() 和 layoutInflaterAdapter.addTitle();
@@ -780,7 +791,7 @@ V2.2.0  ---> 2019.08.12 更新至JCenter
 4.增加PhotoView 和ViewTouchUtils 类
 5.去掉Gson 包依赖
 6.更新ToastUtil ,增加显示中间位置toast，还有任意时长的toast
-7.增加CompatUtils，和ToastUtils 一样在Application 中initContext()
+7.增加CompatUtils，和Toaster 一样在Application 中initContext()
 8.增加SlidingLayout 和 PullRefreshLayout
 9.增加SpannableStringUtils，SpannableStringUtils.firstLineMarginLeft(leftTagViewWidth,content)
 第一行会有个左边距(如段落文章起行空两个字)
@@ -798,7 +809,7 @@ V2.1.0  --->  2019.03.20 更新至JCenter
 2. 更新RomUtils ，修复读取 build.prop 权限被拒绝问题。
 3.FileUtils 增加压缩到指定目录方法。
 4.FileUtils 增加 getFilefromUri() 和发送广播通知更新文件扫描
-5.ToastUtils 增加 showLongToast() 设置随意
+5.Toaster 增加 showLongToast() 设置随意
 6.更新CommonAbsListView.Adapter 重命名为CommonBaseAdapter,更新BaseRecycleViewAdapter
 oncreateViewHodler 变成 getLayoutId(),创建ViewHolder 交由父类创建
 7.BitmpUtils 增加 convertViewToBitmap，将View 转Bitmap
@@ -856,7 +867,7 @@ V2.0.0：
  7.增加BulletinBoard 公告栏，游戏里面跑马灯效果。
  8.修改TabGroup，附加badgeView。
  9.增加RSAUtils,Rsa加密
- 10.优化ToastUtils,避免在使用的时候再实例化。
+ 10.优化Toaster,避免在使用的时候再实例化。
  11.AppUtils增加调往到权限设置页面，直接跳转的有魅族，小米，华为，其它的只是跳到应用信息页面，从应用信息页面在手动点击进入权限设置页面。
  12. ScreenUtils.setStatusBarLightMode(getWindow(), Color.WHITE); 魅族，小米，以及6.0以上的系统设置状态栏颜色为白色，并且字体颜色为黑色
  13.增加UrlUtils  截取url中的参数名和参数值

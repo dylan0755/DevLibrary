@@ -27,8 +27,8 @@ import com.dylan.library.io.FileUtils;
 import com.dylan.library.media.Sound;
 import com.dylan.library.media.VideoUtils;
 import com.dylan.library.utils.EmptyUtils;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 import java.io.File;
 
@@ -58,7 +58,7 @@ public class SonicTestActivity extends AppCompatActivity {
 
     public void play(View view) {
         if (EmptyUtils.isEmpty(tvSelectFile)) {
-            ToastUtils.show("请选择视频文件");
+            Toaster.show("请选择视频文件");
             return;
         }
         FileUtils.createDirIfNotExists(Environment.getExternalStorageDirectory().getPath() + "/1");
@@ -87,7 +87,7 @@ public class SonicTestActivity extends AppCompatActivity {
                    runOnUiThread(new Runnable() {
                        @Override
                        public void run() {
-                           ToastUtils.show("完成");
+                           Toaster.show("完成");
                        }
                    });
                } catch (Exception e) {
@@ -108,7 +108,7 @@ public class SonicTestActivity extends AppCompatActivity {
                 }
                 final File file = FileUtils.getFileByUri( this,selectedVideo);
                 if (file == null) {
-                    ToastUtils.show("找不到视频文件");
+                    Toaster.show("找不到视频文件");
                     return;
                 }
                 tvSelectFile.setText(file.getAbsolutePath());

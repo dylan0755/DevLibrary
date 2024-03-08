@@ -20,8 +20,8 @@ import com.dylan.library.m3u8.core.DownLoadListener;
 import com.dylan.library.m3u8.core.M3u8DownLoader;
 import com.dylan.library.utils.EmptyUtils;
 import com.dylan.library.utils.PermissionRequestBuilder;
-import com.dylan.library.utils.ToastUtils;
 import com.dylan.mylibrary.R;
+import com.hjq.toast.Toaster;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
@@ -66,7 +66,7 @@ public class M3u8DownLoadActivity extends AppCompatActivity {
     private void testM3u8DownLoad(){
         final String videoUrl= edtLink.getText().toString();
         if (EmptyUtils.isEmpty(videoUrl)){
-            ToastUtils.show("请输入链接");
+            Toaster.show("请输入链接");
             return;
         }
         final String outPutDir=  Environment.getExternalStorageDirectory().toString()+"/1test";
@@ -116,7 +116,7 @@ public class M3u8DownLoadActivity extends AppCompatActivity {
                     public void run() {
                         tvInfo.setText(stringBuilder);
                         scrollView.fullScroll(View.FOCUS_DOWN);
-                        ToastUtils.show("下载成功");
+                        Toaster.show("下载成功");
                         FileUtils.notifyScanFile(scrollView.getContext(),savePath);
                         tvDownLoad.setEnabled(true);
                     }
@@ -150,7 +150,7 @@ public class M3u8DownLoadActivity extends AppCompatActivity {
         if (requestCode==100){
             PermissionRequestBuilder.RequestReuslt requestReuslt=requestBuilder.onRequestPermissionsResult(permissions,grantResults);
             if (requestReuslt.hasRejectForceNeed) {
-                ToastUtils.show("存储权限未允许");
+                Toaster.show("存储权限未允许");
             }
         }
     }

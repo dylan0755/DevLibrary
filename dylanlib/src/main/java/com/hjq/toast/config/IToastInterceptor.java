@@ -1,10 +1,10 @@
-package com.dylan.library.toast;
+package com.hjq.toast.config;
 
-import android.widget.Toast;
+import com.hjq.toast.ToastParams;
 
 /**
  *    author : Android 轮子哥
- *    github : https://github.com/getActivity/ToastUtils
+ *    github : https://github.com/getActivity/Toaster
  *    time   : 2019/05/19
  *    desc   : Toast 拦截器接口
  */
@@ -13,5 +13,5 @@ public interface IToastInterceptor {
     /**
      * 根据显示的文本决定是否拦截该 Toast
      */
-    boolean intercept(Toast toast, CharSequence text);
+    boolean intercept(ToastParams params);
 }
