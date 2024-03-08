@@ -262,6 +262,10 @@
 
         <activity android:name=".ui.RelationShipGraphViewDemoActivity"
             android:windowSoftInputMode="adjustNothing"/>
+
+        <activity android:name=".ui.SelectDateTimeActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
     </application>
 
 </manifest>

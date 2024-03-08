@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff">
+
+    <include
+        android:id="@+id/titleBar"
+        layout="@layout/view_header_bar"/>
+
+    <com.flyco.tablayout.widget.MediumTextView
+        android:id="@+id/tvSelectedDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="周五 3月22"
+        android:textColor="#ff333333"
+        android:textSize="15sp"
+        app:textBold="0.8"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        />
+
+    <com.flyco.tablayout.widget.MediumTextView
+        android:id="@+id/tvSelectTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="16:45"
+        android:textColor="#ff333333"
+        android:textSize="15sp"
+        app:textBold="0.8"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_marginTop="38dp"
+        android:layout_marginLeft="26dp"
+        android:layout_marginRight="26dp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvDate"
+            android:layout_width="match_parent"
+            android:layout_height="98dp"
+            android:overScrollMode="never"
+            />
+
+        <com.dylan.library.widget.shape.ShapeTextView
+            android:layout_width="68dp"
+            android:layout_height="98dp"
+            android:layout_gravity="center_horizontal"
+            app:strokeWidth="1dp"
+            app:strokeColor="#0095FF"
+            app:radius="6dp"/>
+
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="67dp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            >
+
+
+            <com.dylan.library.widget.wheel.WheelView
+                android:id="@+id/wvhour"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=":"
+                android:textSize="22sp"
+                android:textColor="#000000" />
+
+            <com.dylan.library.widget.wheel.WheelView
+                android:id="@+id/wvminute"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content" />
+
+
+
+
+        </LinearLayout>
+
+
+        <com.dylan.library.widget.shape.ShapeTextView
+            android:layout_width="match_parent"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            app:strokeWidth="1dp"
+            app:strokeColor="#0095FF"
+            android:layout_marginLeft="42dp"
+            android:layout_marginRight="42dp"
+            app:radius="6dp"/>
+    </FrameLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="66dp"
+        android:layout_gravity="center_horizontal">
+
+        <LinearLayout
+            android:id="@+id/llMorning"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="早晨"
+                android:textColor="#ff0095ff"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="9:00"
+                android:textColor="#ff0095ff"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llAfternoon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="94dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="下午"
+                android:textColor="#ff0095ff"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="13:00"
+                android:textColor="#ff0095ff"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/llDusk"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="94dp"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="傍晚"
+                android:textColor="#ff0095ff"
+                android:textSize="18sp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="19:00"
+                android:textColor="#ff0095ff"
+                android:textSize="18sp"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+     <View
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"/>
+
+    <com.dylan.library.widget.shape.ShapeTextView
+        android:id="@+id/btnComplete"
+        android:layout_width="350dp"
+        android:layout_height="56dp"
+        android:layout_gravity="center_horizontal"
+        app:solidColor="#333333"
+        app:radius="20dp"
+        android:textSize="16sp"
+        android:text="完成"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginBottom="67dp"/>
+
+</LinearLayout>

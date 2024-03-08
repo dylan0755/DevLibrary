@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    >
+
+    <com.flyco.tablayout.widget.MediumTextView
+        android:id="@+id/tvDateItem"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:gravity="center"
+        app:textBold="0.8"
+        android:layout_marginBottom="3dp"
+        />
+
+    <com.dylan.library.widget.shape.ShapeTextView
+        android:id="@+id/tvHasSchedules"
+        android:layout_width="5dp"
+        android:layout_height="5dp"
+        app:solidColor="#171A27"
+        app:radius="2.5dp"
+        android:visibility="invisible"
+        android:layout_marginBottom="15dp"/>
+
+</LinearLayout>

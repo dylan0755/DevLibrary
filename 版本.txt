@@ -1,5 +1,5 @@
 
-V6.3.0
+V6.3.0 ---->2024.3.8
 
 1.新增ChatAdapter  chat gpt 打字机效果
 2.新增 SmoothScrollLayoutManager 让RecyclerView 滑动更顺畅
@@ -17,6 +17,7 @@ V6.3.0
 13.新增IProcessObserver(非系统应用)  IActivityController（系统应用），监听应用进程
 14.新增人物关系图谱控件
 15.新增UnderLineEditText 下划线EditText
+16.新增CalendarUtils 日历控件
 
 
 
