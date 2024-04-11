@@ -33,21 +33,13 @@ public class AndroidManifestUtils {
             for (ProviderInfo provider : providers) {
                 if (provider.name.contains(packageName)) {
                     Class<?> classApp = Class.forName(provider.name);
-                    Class<?> classV4 = Class.forName("android.support.v4.content.FileProvider");
-                    Class<?> classX = Class.forName("androidx.core.content.FileProvider");
-                    if (classX.isAssignableFrom(classApp)) {
-                        defalutAuthority = provider.authority;
-                        return defalutAuthority;
-                    }else if (classV4.isAssignableFrom(classApp)){
+                    Class<?> classV4 = Class.forName("androidx.core.content.FileProvider");
+                    if (classV4.isAssignableFrom(classApp)) {
                         defalutAuthority = provider.authority;
                         return defalutAuthority;
                     }
                 }
                 if ("androidx.core.content.FileProvider".equals(provider.name)) {
-                    if (provider.authority.contains(packageName)) {
-                        defalutAuthority = provider.authority;
-                    }
-                }else if ("android.support.v4.content.FileProvider".equals(provider.name)){
                     if (provider.authority.contains(packageName)) {
                         defalutAuthority = provider.authority;
                     }
