@@ -154,12 +154,18 @@ public class StringUtils {
     }
 
     public static boolean startWithKeyWord(String originText, String[] keyWords) {
+        return startWithKeyWord(originText,keyWords,null);
+    }
+
+    public static boolean startWithKeyWord(String originText, String[] keyWords,String excludeKeyword) {
         if (keyWords != null && keyWords.length != 0) {
             if (originText != null) {
                 int i = 0;
                 for (int len = keyWords.length; i < len; ++i) {
                     if (originText.startsWith(keyWords[i])) {
-                        return true;
+                        if (!keyWords[i].equals(excludeKeyword)){
+                            return true;
+                        }
                     }
                 }
             }
