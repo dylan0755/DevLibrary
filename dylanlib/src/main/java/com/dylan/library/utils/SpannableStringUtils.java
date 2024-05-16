@@ -68,6 +68,13 @@ public class SpannableStringUtils {
         return spannableString;
     }
 
+    public static SpannableString getGradientTintSpannableString(String text, int startColor, int endColor, GradientSpan.Orient orient){
+        SpannableString spannableString = new SpannableString(text);
+        GradientSpan gradientSpan = new GradientSpan(startColor, endColor,orient);
+        spannableString.setSpan(gradientSpan, 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString;
+    }
+
 
     public static SpannableString getBlodStyleSpannableString(String fullText, int start, int end) {
         SpannableString spannableString = new SpannableString(fullText);
