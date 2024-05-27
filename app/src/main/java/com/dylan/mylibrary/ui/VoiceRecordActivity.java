@@ -1,11 +1,16 @@
 package com.dylan.mylibrary.ui;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
+
+import android.os.Environment;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -70,6 +75,14 @@ public class VoiceRecordActivity extends Activity {
 
             }
         });
+
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.R){
+            if (!Environment.isExternalStorageManager()){
+                Intent intent=  new Intent(Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION);
+                startActivityForResult(intent,100);
+            }
+        }
+
     }
 
      class MyRecordFinishListener implements VoiceRecorder.RecordFinishListener {

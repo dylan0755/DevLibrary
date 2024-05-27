@@ -81,7 +81,7 @@ public class VoiceRecorder {
 			return;
 		}
 		if (recordHelper == null) {
-			String dir = Environment.getExternalStorageDirectory() + "/Android/data/" + context.getPackageName() + "/audioFile/";
+			String dir = Environment.getExternalStorageDirectory() + "/mylibrary/audioFile/";
 			recordHelper = MediaRecordHelper.getInstance(dir);
 		}
 		recordHelper.clearHistoryBeforeStart(clearHistory);

@@ -60,9 +60,12 @@ public class MediaRecordHelper {
             // 设置音频源
             mediaRecorder.setAudioSource(MediaRecorder.AudioSource.MIC);
             // 设置音频格式
-            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.AMR_NB);
+            mediaRecorder.setOutputFormat(MediaRecorder.OutputFormat.MPEG_4);
             // 设置音频编码
-            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
+            mediaRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
+            mediaRecorder.setAudioSamplingRate(48000);
+            mediaRecorder.setAudioChannels(2);
+            mediaRecorder.setAudioEncodingBitRate(131072);
             mediaRecorder.prepare();
             mediaRecorder.start();
             // 准备结束
