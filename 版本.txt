@@ -3,7 +3,7 @@ V7.0
 1.ToastUtils 更名Toaster，适配高版本安卓
 2.SpannableString getGradientTintSpannableString 文字颜色渐变
 3.修复录音声音模糊问题
-
+4.优化FileDownLoad
 
 
 

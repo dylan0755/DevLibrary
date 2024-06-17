@@ -3,6 +3,7 @@ package com.dylan.mylibrary.ui.filedownloader;
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -64,11 +65,12 @@ public class FileDownLoaderActivity extends Activity{
                     }
 
                     @Override
-                    public void onError(int erroType,final String error) {
+                    public void onError(final String error) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
                                 Toaster.show(error);
+                                button_download.setEnabled(true);
                             }
                         });
 
@@ -76,6 +78,7 @@ public class FileDownLoaderActivity extends Activity{
 
                     @Override
                     public void onProgress(long totalSize, long hasDownLoadSize, final int progressPercent) {
+                        Log.e("onProgress: ","hasDownLoadSize="+hasDownLoadSize );
                         pb.setProgress(progressPercent);
                         runOnUiThread(new Runnable() {
                             @Override

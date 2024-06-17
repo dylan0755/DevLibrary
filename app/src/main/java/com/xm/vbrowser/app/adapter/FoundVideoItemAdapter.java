@@ -255,7 +255,7 @@ public class FoundVideoItemAdapter extends BaseRecyclerAdapter<VideoInfo, FoundV
                 }
 
                 @Override
-                public void onError(int i, String s) {
+                public void onError(String s) {
                     taskCount--;
                     llDownLoad.post(new Runnable() {
                         @Override
