@@ -2,6 +2,8 @@ package com.dylan.library.utils;
 
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffColorFilter;
 import android.graphics.drawable.ClipDrawable;
@@ -11,6 +13,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.graphics.drawable.LayerDrawable;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 
@@ -58,6 +61,13 @@ public class DrawableUtils {
 
     public static ColorStateList getColorStateList(int color){
         return new ColorStateList(new int[1][0],new int[]{color});
+    }
+
+    public static void gray(ImageView imageView){
+        ColorMatrix matrix = new ColorMatrix();
+        matrix.setSaturation(0);
+        ColorMatrixColorFilter colorFilter = new ColorMatrixColorFilter(matrix);
+        imageView.setColorFilter(colorFilter);
     }
 
 

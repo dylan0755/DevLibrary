@@ -4,7 +4,7 @@ V7.0
 2.SpannableString getGradientTintSpannableString 文字颜色渐变
 3.修复录音声音模糊问题
 4.优化FileDownLoad
-
+5.DrawableUtils 新增 gray 灰化
 
 
 
