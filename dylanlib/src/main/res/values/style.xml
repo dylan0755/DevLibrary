@@ -115,7 +115,7 @@
     </style>
 
 
-    <style name="DLBottomSheetDialogStyle" parent="@android:style/Theme.Dialog">
+    <style name="DLBottomSheetDialogStyle" parent="Theme.AppCompat.Light.Dialog">
         <!-- 背景透明 -->
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:windowContentOverlay">@null</item>

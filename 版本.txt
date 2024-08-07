@@ -5,8 +5,8 @@ V7.0
 3.修复录音声音模糊问题
 4.优化FileDownLoad
 5.DrawableUtils 新增 gray 灰化
-
-
+6.DLBottomSheetDialogStyle 修复弹窗字体透明bug
+7.ScreenUtils 新增 getScreenSize
 
 
 

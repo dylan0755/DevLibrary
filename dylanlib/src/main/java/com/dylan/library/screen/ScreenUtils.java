@@ -7,8 +7,12 @@ import android.content.res.Configuration;
 import android.graphics.Rect;
 import android.hardware.SensorManager;
 import android.os.Build;
+
+import androidx.annotation.RequiresApi;
 import androidx.core.view.ViewCompat;
+
 import android.util.DisplayMetrics;
+import android.util.Size;
 import android.view.DisplayCutout;
 import android.view.OrientationEventListener;
 import android.view.View;
@@ -46,17 +50,27 @@ public class ScreenUtils {
         return displayMetrics.heightPixels;
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+    public static Size getScreenSize(Context context) {
+        if (context == null) return new Size(0, 0);
+        DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
+        WindowManager mWindowManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        mWindowManager.getDefaultDisplay().getRealMetrics(displayMetrics);
+        return new Size(displayMetrics.widthPixels, displayMetrics.heightPixels);
+    }
+
     public static int getStatusBarHeight(Activity activity) {
         Rect frame = new Rect();
         activity.getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
         int statusBarHeight = frame.top;
-        if (statusBarHeight==0){
-            statusBarHeight=getStatusBarHeight2(activity);
+        if (statusBarHeight == 0) {
+            statusBarHeight = getStatusBarHeight2(activity);
         }
-        if (statusBarHeight==0){
-            int resourceId=activity.getResources().getIdentifier("status_bar_height","dimen","android");
-            if (resourceId>0){
-                statusBarHeight=activity.getResources().getDimensionPixelSize(resourceId);
+        if (statusBarHeight == 0) {
+            int resourceId = activity.getResources().getIdentifier("status_bar_height", "dimen", "android");
+            if (resourceId > 0) {
+                statusBarHeight = activity.getResources().getDimensionPixelSize(resourceId);
             }
         }
         return statusBarHeight;
@@ -104,8 +118,7 @@ public class ScreenUtils {
      */
     public void setFullScreenMode(Activity activity) {
         activity.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        activity.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
     }
 
     /**
@@ -133,7 +146,7 @@ public class ScreenUtils {
     }
 
 
-    public static void showInFullScreen(Window window){
+    public static void showInFullScreen(Window window) {
         WindowManager.LayoutParams attrs = window.getAttributes();
         attrs.flags &= ~WindowManager.LayoutParams.FLAG_FULLSCREEN;
         window.setAttributes(attrs);
@@ -141,7 +154,6 @@ public class ScreenUtils {
         window.addFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
 
     }
-
 
 
     /**
@@ -201,25 +213,22 @@ public class ScreenUtils {
     /**
      * 判断是否是平板
      * 这个方法是从 Google I/O App for Android 的源码里找来的，非常准确。
+     *
      * @param context
      * @return
      */
     public static boolean isTablet(Context context) {
-        return (context.getResources().getConfiguration().screenLayout
-                & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
+        return (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
-
-
-
 
 
     /**
      * 判断是否是刘海屏
+     *
      * @return
      */
-    public static boolean hasNotchScreen(Activity activity){
-        if (getInt("ro.miui.notch",activity) == 1 || hasNotchAtHuawei(activity) || hasNotchAtOPPO(activity)
-                || hasNotchAtVivo(activity) || isAndroidP(activity) != null){ //TODO 各种品牌
+    public static boolean hasNotchScreen(Activity activity) {
+        if (getInt("ro.miui.notch", activity) == 1 || hasNotchAtHuawei(activity) || hasNotchAtOPPO(activity) || hasNotchAtVivo(activity) || isAndroidP(activity) != null) { //TODO 各种品牌
             return true;
         }
 
@@ -228,34 +237,33 @@ public class ScreenUtils {
 
     /**
      * Android P 刘海屏判断
+     *
      * @param activity
      * @return
      */
-    private static DisplayCutout isAndroidP(Activity activity){
+    private static DisplayCutout isAndroidP(Activity activity) {
         View decorView = activity.getWindow().getDecorView();
-        if (decorView != null && android.os.Build.VERSION.SDK_INT >= 28){
+        if (decorView != null && android.os.Build.VERSION.SDK_INT >= 28) {
             WindowInsets windowInsets = decorView.getRootWindowInsets();
-            if (windowInsets != null)
-                return windowInsets.getDisplayCutout();
+            if (windowInsets != null) return windowInsets.getDisplayCutout();
         }
         return null;
     }
 
     /**
      * 小米刘海屏判断.
+     *
      * @return 0 if it is not notch ; return 1 means notch
      * @throws IllegalArgumentException if the key exceeds 32 characters
      */
-    private static int getInt(String key,Activity activity) {
+    private static int getInt(String key, Activity activity) {
         int result = 0;
-        if (RomUtils.isMiui()){
+        if (RomUtils.isMiui()) {
             try {
                 ClassLoader classLoader = activity.getClassLoader();
-                @SuppressWarnings("rawtypes")
-                Class SystemProperties = classLoader.loadClass("android.os.SystemProperties");
+                @SuppressWarnings("rawtypes") Class SystemProperties = classLoader.loadClass("android.os.SystemProperties");
                 //参数类型
-                @SuppressWarnings("rawtypes")
-                Class[] paramTypes = new Class[2];
+                @SuppressWarnings("rawtypes") Class[] paramTypes = new Class[2];
                 paramTypes[0] = String.class;
                 paramTypes[1] = int.class;
                 Method getInt = SystemProperties.getMethod("getInt", paramTypes);
@@ -282,6 +290,7 @@ public class ScreenUtils {
 
     /**
      * 华为刘海屏判断
+     *
      * @return
      */
     private static boolean hasNotchAtHuawei(Context context) {
@@ -296,7 +305,7 @@ public class ScreenUtils {
         } catch (NoSuchMethodException e) {
             Logger.e("hasNotchAtHuawei NoSuchMethodException");
         } catch (Exception e) {
-            Logger.e( "hasNotchAtHuawei Exception");
+            Logger.e("hasNotchAtHuawei Exception");
         } finally {
             return ret;
         }
@@ -307,6 +316,7 @@ public class ScreenUtils {
 
     /**
      * VIVO刘海屏判断
+     *
      * @return
      */
     private static boolean hasNotchAtVivo(Context context) {
@@ -317,21 +327,23 @@ public class ScreenUtils {
             Method method = FtFeature.getMethod("isFeatureSupport", int.class);
             ret = (boolean) method.invoke(FtFeature, VIVO_NOTCH);
         } catch (ClassNotFoundException e) {
-            Logger.e( "hasNotchAtVivo ClassNotFoundException");
+            Logger.e("hasNotchAtVivo ClassNotFoundException");
         } catch (NoSuchMethodException e) {
-            Logger.e(  "hasNotchAtVivo NoSuchMethodException");
+            Logger.e("hasNotchAtVivo NoSuchMethodException");
         } catch (Exception e) {
-            Logger.e(  "hasNotchAtVivo Exception");
+            Logger.e("hasNotchAtVivo Exception");
         } finally {
             return ret;
         }
     }
+
     /**
      * OPPO刘海屏判断
+     *
      * @return
      */
     private static boolean hasNotchAtOPPO(Context context) {
-        return  context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
+        return context.getPackageManager().hasSystemFeature("com.oppo.feature.screen.heteromorphism");
     }
 
     public static String getScreenParams(Context context) {
@@ -357,17 +369,17 @@ public class ScreenUtils {
         return str;
     }
 
-    public static class OrientHelper{
+    public static class OrientHelper {
         private OrientationEventListener mOrientationListener;
 
-        public void registerOrientListener(Context context,OrientationListener listener) {
+        public void registerOrientListener(Context context, OrientationListener listener) {
             mOrientationListener = new OrientationEventListener(context, SensorManager.SENSOR_DELAY_NORMAL) {
                 @Override
                 public void onOrientationChanged(int orientation) {
                     if (orientation == OrientationEventListener.ORIENTATION_UNKNOWN) {
                         return;  //手机平放时，检测不到有效的角度
                     }
-                    int degree=0;
+                    int degree = 0;
                     //可以根据不同角度检测处理，这里只检测四个角度的改变
                     if (orientation > 350 || orientation < 10) { //0度
                         degree = 0;
@@ -380,7 +392,7 @@ public class ScreenUtils {
                     } else {
                         return;
                     }
-                    if (listener!=null)listener.onOrientationChanged(orientation,degree);
+                    if (listener != null) listener.onOrientationChanged(orientation, degree);
 
                 }
             };
@@ -393,15 +405,15 @@ public class ScreenUtils {
         }
 
 
-        public void unRegisterListener(){
+        public void unRegisterListener() {
             if (mOrientationListener != null) mOrientationListener.disable();
         }
 
     }
 
 
-    public interface OrientationListener{
-        void onOrientationChanged(int orientation,int degree);
+    public interface OrientationListener {
+        void onOrientationChanged(int orientation, int degree);
     }
 
 }
