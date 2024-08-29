@@ -3,7 +3,13 @@ package com.dylan.library.utils;
 import android.os.Build;
 import android.text.Html;
 import android.text.Spanned;
+import android.webkit.ValueCallback;
 import android.webkit.WebView;
+
+import androidx.annotation.RequiresApi;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 /**
  * Created by Dylan on 2017/1/16.
@@ -69,6 +75,40 @@ public class HtmlUtils {
         jsUrl.append("}");
 
         webView.loadUrl(jsUrl.toString());
+    }
+
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    public static void loadImgSrc(WebView view) {
+        view.evaluateJavascript(loadImgSrcJs(),
+                new ValueCallback<String>() {
+                    @Override
+                    public void onReceiveValue(String value) {
+                        try {
+                            JSONArray jsonArray = new JSONArray(value);
+                            for (int i = 0; i < jsonArray.length(); i++) {
+                                String url = jsonArray.getString(i);
+                                if (url.startsWith("data:image/")) {
+
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+    }
+
+    private static String loadImgSrcJs(){
+        return  "(function() { " +
+                "   var imgs = document.getElementsByTagName('img'); " +
+                "   var l = imgs.length; " +
+                "   var imgUrls = []; " +
+                "   for (var i = 0; i < l; i++) { " +
+                "       imgUrls.push(imgs[i].src); " +
+                "   } " +
+                "   return imgUrls; " +
+                "})();";
     }
 
 }
