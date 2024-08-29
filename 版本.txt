@@ -7,7 +7,7 @@ V7.0
 5.DrawableUtils 新增 gray 灰化
 6.DLBottomSheetDialogStyle 修复弹窗字体透明bug
 7.ScreenUtils 新增 getScreenSize
-
+8.新增GifDecoder Gif解码器
 
 
 V6.3.0 ---->2024.3.8

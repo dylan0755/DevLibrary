@@ -2,6 +2,7 @@ package com.dylan.library.utils;
 
 import android.app.Application;
 import android.os.Handler;
+import android.os.Looper;
 
 import java.lang.reflect.Field;
 
@@ -37,7 +38,7 @@ public class ReflectUtils {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+        return new Handler(Looper.getMainLooper());
     }
 
 }
