@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.widget.GridView;
 
 import com.dylan.library.screen.ScreenUtils;
+import com.dylan.library.utils.AppUtils;
 import com.dylan.library.utils.DensityUtils;
 
 import com.dylan.library.utils.Logger;

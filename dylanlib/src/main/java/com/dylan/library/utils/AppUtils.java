@@ -404,4 +404,22 @@ public class AppUtils {
     }
 
 
+    public static boolean isAppRunning(Context context,String packageName){
+        PackageManager localPackageManager = context.getPackageManager();
+        List<PackageInfo> localList = localPackageManager.getInstalledPackages(0);
+        for (int i = 0; i < localList.size(); i++) {
+            PackageInfo localPackageInfo1 = (PackageInfo) localList.get(i);
+            String str1 = localPackageInfo1.packageName.split(":")[0];
+            if (((ApplicationInfo.FLAG_SYSTEM & localPackageInfo1.applicationInfo.flags) == 0)
+                    && ((ApplicationInfo.FLAG_UPDATED_SYSTEM_APP & localPackageInfo1.applicationInfo.flags) == 0)
+                    && ((ApplicationInfo.FLAG_STOPPED & localPackageInfo1.applicationInfo.flags) == 0)) {
+                   if (str1!=null&&str1.equals(packageName)){
+                       return true;
+                   }
+            }
+        }
+        return false;
+    }
+
+
 }
