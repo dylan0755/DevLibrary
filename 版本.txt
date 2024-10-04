@@ -10,8 +10,8 @@ V7.0
 8.新增GifDecoder Gif解码器
 9.html 新增 loadImgSrc  查找<img src
 10.增加ZxingUtils
-11.isAppRunning
-
+11.AppUtils增加isAppRunning
+12.修复倒计时控件滑动跳动bug
 
 
 

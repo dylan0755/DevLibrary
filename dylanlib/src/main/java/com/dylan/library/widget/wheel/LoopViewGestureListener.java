@@ -12,7 +12,15 @@ import android.view.MotionEvent;
     }
 
     public final boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        this.loopView.scrollBy(velocityY);
+        //回调velocityY有设备差异性
+        float startY = e1.getY();
+        float endY = e2.getY();
+        long startTime = e1.getEventTime();
+        long endTime = e2.getEventTime();
+        float distanceX = endY - startY;
+        long timeDiff = endTime - startTime;
+        float velocity = distanceX / timeDiff;
+        this.loopView.scrollBy(velocity*1000L);
         return true;
     }
 }
