@@ -28,21 +28,21 @@ public class DrawableTextView extends TextView {
     public final static int POSITION_RIGHT = 2;
     public final static int POSITION_BOTTOM = 3;
 
-    int leftDrawableWidth = 10;
-    int leftDrawableHeight = 10;
-    int topDrawableWidth = 10;
-    int topDrawableHeight = 10;
-    int rightDrawableWidth = 10;
-    int rightDrawableHeight = 10;
-    int bottomDrawableWidth = 10;
-    int bottomDrawableHeight = 10;
+    protected int leftDrawableWidth = 10;
+    protected int leftDrawableHeight = 10;
+    protected int topDrawableWidth = 10;
+    protected int topDrawableHeight = 10;
+    protected int rightDrawableWidth = 10;
+    protected int rightDrawableHeight = 10;
+    protected int bottomDrawableWidth = 10;
+    protected int bottomDrawableHeight = 10;
     Paint mPaint;
     Paint mPaint2;
     Rect mBound;
-    Drawable left;
-    Drawable top;
-    Drawable right;
-    Drawable bottom;
+    protected Drawable leftDrawable;
+    protected Drawable topDrawable;
+    protected Drawable rightDrawable;
+    protected Drawable bottomDrawable;
 
     public DrawableTextView(Context context) {
         this(context, null, 0);
@@ -98,7 +98,7 @@ public class DrawableTextView extends TextView {
          * 这里获取完自定义的宽高属性后再次调用这个方法，插入drawable的大小
          * */
         setCompoundDrawablesWithIntrinsicBounds(
-                left, top, right, bottom);
+                leftDrawable, topDrawable, rightDrawable, bottomDrawable);
 
 
     }
@@ -124,10 +124,10 @@ public class DrawableTextView extends TextView {
                                                         Drawable top,
                                                         Drawable right,
                                                         Drawable bottom) {
-        this.left = left;
-        this.top = top;
-        this.right = right;
-        this.bottom = bottom;
+        this.leftDrawable = left;
+        this.topDrawable = top;
+        this.rightDrawable = right;
+        this.bottomDrawable = bottom;
 
 
         if (left != null) {
@@ -168,7 +168,7 @@ public class DrawableTextView extends TextView {
         }
 
         setCompoundDrawablesWithIntrinsicBounds(
-                left, top, right, bottom);
+                leftDrawable, topDrawable, rightDrawable, bottomDrawable);
     }
 
 

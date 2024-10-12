@@ -12,7 +12,7 @@ V7.0
 10.增加ZxingUtils
 11.AppUtils增加isAppRunning
 12.修复倒计时控件滑动跳动bug
-
+13.新增ShapeDrawableTextView
 
 
 
