@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.Paint;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -207,20 +208,43 @@ public class DrawableTextView extends TextView {
 
 
     public void setColorFilter(int color) {
-        Drawable drawable = null;
         if (getCompoundDrawables()[0] != null) {
-            drawable = getCompoundDrawables()[0];
+            Drawable left = getCompoundDrawables()[0];
+            left = left.mutate();
+            if (color == 0) {
+                left.clearColorFilter();
+            } else {
+                left.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            }
+            setCompoundDrawables(left, null, null, null);
         } else if (getCompoundDrawables()[1] != null) {
-            drawable = getCompoundDrawables()[1];
+            Drawable top = getCompoundDrawables()[1];
+            top = top.mutate();
+            if (color == 0) {
+                top.clearColorFilter();
+            } else {
+                top.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            }
+            setCompoundDrawables(null, top, null, null);
         } else if (getCompoundDrawables()[2] != null) {
-            drawable = getCompoundDrawables()[2];
+            Drawable right = getCompoundDrawables()[2];
+            right = right.mutate();
+            if (color == 0) {
+                right.clearColorFilter();
+            } else {
+                right.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            }
+            setCompoundDrawables(null, null, right, null);
         } else if (getCompoundDrawables()[3] != null) {
-            drawable = getCompoundDrawables()[3];
+            Drawable bottom = getCompoundDrawables()[3];
+            bottom = bottom.mutate();
+            if (color == 0) {
+                bottom.clearColorFilter();
+            } else {
+                bottom.setColorFilter(color, PorterDuff.Mode.SRC_IN);
+            }
+            setCompoundDrawables(null, null, bottom, null);
         }
-        drawable.mutate();
-        Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
-        DrawableCompat.setTintList(wrappedDrawable, ColorStateList.valueOf(color));
-        setCompoundDrawables(null, drawable, null, null);
     }
 
 }

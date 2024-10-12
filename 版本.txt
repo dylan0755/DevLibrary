@@ -13,7 +13,7 @@ V7.0
 11.AppUtils增加isAppRunning
 12.修复倒计时控件滑动跳动bug
 13.新增ShapeDrawableTextView
-
+14.Drawable修复setColorFilter
 
 
 V6.3.0 ---->2024.3.8
