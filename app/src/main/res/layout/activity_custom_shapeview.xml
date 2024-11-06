@@ -93,6 +93,26 @@
             android:drawablePadding="4dp"
             />
 
+        <com.dylan.library.widget.shape.ShapeDrawableCenterTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="24dp"
+            android:text="文字与Drawable居中"
+            app:radius="8dp"
+            app:solidColor="#DFB880"
+            app:strokeColor="#9A6B4E"
+            app:strokeWidth="1dp"
+            android:drawableRight="@mipmap/ic_buy_add"
+            app:drawableRightWidth="24dp"
+            app:drawableRightHeight="24dp"
+            android:paddingBottom="8dp"
+            android:paddingTop="8dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:drawablePadding="4dp"
+            />
+
         <com.dylan.library.widget.shape.ShapeLinearLayout
             android:layout_width="250dp"
             android:layout_height="140dp"

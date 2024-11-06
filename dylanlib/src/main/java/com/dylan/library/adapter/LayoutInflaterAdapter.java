@@ -18,69 +18,66 @@ import java.util.List;
  * Desc:
  */
 
-public abstract  class LayoutInflaterAdapter<T> {
+public abstract class LayoutInflaterAdapter<T> {
     @NotProguard
     protected Context mContext;
     private List<T> dataList;
-    private int selectPos =0;
-    HashMap<T, ViewHolder> holderHashMap=new HashMap<>();
+    private int selectPos = 0;
+    HashMap<T, ViewHolder> holderHashMap = new HashMap<>();
     private ViewGroup mParentView;
 
-    public void setInitSelectPosition(int position){
-        this.selectPos =position;
+    public void setInitSelectPosition(int position) {
+        this.selectPos = position;
     }
-    public void setSelect(int position){
-        this.selectPos =position;
+
+    public void setSelect(int position) {
+        this.selectPos = position;
         notifyDataSetChanged();
     }
 
-    public boolean isItemSelected(int position){
-        return selectPos ==position;
+    public boolean isItemSelected(int position) {
+        return selectPos == position;
     }
 
 
-    public void notifyDataSetChanged(){
-        if (getCount()>0&& EmptyUtils.isNotEmpty(dataList)){
-            for (int i=0;i<dataList.size();i++){
-                ViewHolder holder=holderHashMap.get(dataList.get(i));
-                if (holder==null){
-                    holder=createViewHolder(mParentView,i);
+    public void notifyDataSetChanged() {
+        if (getCount() > 0 && EmptyUtils.isNotEmpty(dataList)) {
+            for (int i = 0; i < dataList.size(); i++) {
+                ViewHolder holder = holderHashMap.get(dataList.get(i));
+                if (holder == null) {
+                    holder = createViewHolder(mParentView, i);
                     View child = holder.itemView;
-                    mParentView.addView(child,i);
+                    mParentView.addView(child, i);
                 }
-                onBindViewHolder(holder,dataList.get(i),i);
+                onBindViewHolder(holder, dataList.get(i), i);
             }
 
-            if (dataList.size()!=holderHashMap.size()){
-                List<T> waitDelete=new ArrayList<>();
-                for (T t:holderHashMap.keySet()){
-                   if (!dataList.contains(t)){
-                       waitDelete.add(t);
-                   }
+            if (dataList.size() != holderHashMap.size()) {
+                List<T> waitDelete = new ArrayList<>();
+                for (T t : holderHashMap.keySet()) {
+                    if (!dataList.contains(t)) {
+                        waitDelete.add(t);
+                    }
                 }
-                for (T t:waitDelete){
-                    ViewHolder holder= holderHashMap.remove(t);
+                for (T t : waitDelete) {
+                    ViewHolder holder = holderHashMap.remove(t);
                     mParentView.removeView(holder.itemView);
                 }
             }
-        }else{
-            if (mParentView!=null)mParentView.removeAllViews();
+        } else {
+            if (mParentView != null) mParentView.removeAllViews();
             holderHashMap.clear();
         }
     }
 
-    public LayoutInflaterAdapter(List<T> dataList){
-        this.dataList=dataList;
+    public LayoutInflaterAdapter(List<T> dataList) {
+        this.dataList = dataList;
     }
 
-    public ViewHolder createViewHolder(ViewGroup parentView, int position){
-        if (mParentView==null){
-            mParentView=parentView;
-            mContext=mParentView.getContext();
-        }
-        View view= LayoutInflater.from(mContext).inflate(getLayoutId(),parentView,false);
-        ViewHolder holder=new ViewHolder(view);
-        holderHashMap.put(dataList.get(position),holder);
+    public ViewHolder createViewHolder(ViewGroup parentView, int position) {
+        View view = LayoutInflater.from(mContext).inflate(getLayoutId(), parentView, false);
+        ViewHolder holder = new ViewHolder(view);
+        holderHashMap.put(dataList.get(position), holder);
         return holder;
     }
 
@@ -93,9 +90,9 @@ public abstract  class LayoutInflaterAdapter<T> {
         return dataList;
     }
 
-    public void clear(){
-      if (EmptyUtils.isNotEmpty(dataList))dataList.clear();
-      notifyDataSetChanged();
+    public void clear() {
+        if (EmptyUtils.isNotEmpty(dataList)) dataList.clear();
+        notifyDataSetChanged();
     }
 
     public abstract int getLayoutId();
@@ -108,24 +105,22 @@ public abstract  class LayoutInflaterAdapter<T> {
     }
 
 
-
-     public void  bindViewGroup(ViewGroup viewGroup){
-        if (viewGroup==null)return;
+    public void bindViewGroup(ViewGroup viewGroup) {
+        if (viewGroup == null) return;
         viewGroup.removeAllViews();
+        mParentView = viewGroup;
+        mContext = mParentView.getContext();
         int n = getCount();
         for (int i = 0; i < n; i++) {
-            LayoutInflaterAdapter.ViewHolder viewHolder=createViewHolder(viewGroup,i);
-            onBindViewHolder( viewHolder, getDataList().get(i), i);
+            LayoutInflaterAdapter.ViewHolder viewHolder = createViewHolder(viewGroup, i);
+            onBindViewHolder(viewHolder, getDataList().get(i), i);
             View child = viewHolder.itemView;
             viewGroup.addView(child);
         }
     }
 
 
-
-
-
-    public  static class ViewHolder {
+    public static class ViewHolder {
         public final View itemView;
 
         /**
@@ -138,12 +133,11 @@ public abstract  class LayoutInflaterAdapter<T> {
             this.itemView = itemView;
         }
 
-        public <T extends View> T findViewById(int id){
+        public <T extends View> T findViewById(int id) {
             return itemView.findViewById(id);
         }
 
     }
-
 
 
 }

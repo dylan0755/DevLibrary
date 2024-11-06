@@ -14,6 +14,10 @@ V7.0
 12.修复倒计时控件滑动跳动bug
 13.新增ShapeDrawableTextView
 14.Drawable修复setColorFilter
+15.修复LayoutInflaterAdapter空指针bug
+
+
+
 
 
 V6.3.0 ---->2024.3.8

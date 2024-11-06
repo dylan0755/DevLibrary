@@ -2,8 +2,10 @@ package com.dylan.library.widget;
 
 import android.annotation.TargetApi;
 import android.content.Context;
+
 import androidx.core.view.MarginLayoutParamsCompat;
 import androidx.core.view.ViewCompat;
+
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +24,7 @@ public class FlowLayout extends ViewGroup {
 
 
     public FlowLayout(Context context) {
-        this(context, (AttributeSet)null);
+        this(context, (AttributeSet) null);
     }
 
     public FlowLayout(Context context, AttributeSet attrs) {
@@ -39,7 +41,6 @@ public class FlowLayout extends ViewGroup {
         super(context, attrs, defStyleAttr, defStyleRes);
         this.singleLine = false;
     }
-
 
 
     public int getLineSpacing() {
@@ -71,7 +72,7 @@ public class FlowLayout extends ViewGroup {
         int widthMode = MeasureSpec.getMode(widthMeasureSpec);
         int height = MeasureSpec.getSize(heightMeasureSpec);
         int heightMode = MeasureSpec.getMode(heightMeasureSpec);
-        int maxWidth = widthMode != -2147483648 && widthMode != 1073741824 ? 2147483647 : width;
+        int maxWidth = widthMode != MeasureSpec.AT_MOST && widthMode != MeasureSpec.EXACTLY ? Integer.MAX_VALUE : width;
         int childLeft = this.getPaddingLeft();
         int childTop = this.getPaddingTop();
         int childBottom = childTop;
@@ -79,7 +80,7 @@ public class FlowLayout extends ViewGroup {
         int maxRight = maxWidth - this.getPaddingRight();
 
         int finalWidth;
-        for(finalWidth = 0; finalWidth < this.getChildCount(); ++finalWidth) {
+        for (finalWidth = 0; finalWidth < this.getChildCount(); ++finalWidth) {
             View child = this.getChildAt(finalWidth);
             if (child.getVisibility() != GONE) {
                 this.measureChild(child, widthMeasureSpec, heightMeasureSpec);
@@ -87,7 +88,7 @@ public class FlowLayout extends ViewGroup {
                 int leftMargin = 0;
                 int rightMargin = 0;
                 if (lp instanceof MarginLayoutParams) {
-                    MarginLayoutParams marginLp = (MarginLayoutParams)lp;
+                    MarginLayoutParams marginLp = (MarginLayoutParams) lp;
                     leftMargin += marginLp.leftMargin;
                     rightMargin += marginLp.rightMargin;
                 }
@@ -114,10 +115,10 @@ public class FlowLayout extends ViewGroup {
     }
 
     private static int getMeasuredDimension(int size, int mode, int childrenEdge) {
-        switch(mode) {
-            case -2147483648:
+        switch (mode) {
+            case MeasureSpec.AT_MOST:
                 return Math.min(childrenEdge, size);
-            case 1073741824:
+            case MeasureSpec.EXACTLY:
                 return size;
             default:
                 return childrenEdge;
@@ -134,14 +135,14 @@ public class FlowLayout extends ViewGroup {
             int childBottom = childTop;
             int maxChildEnd = right - left - paddingEnd;
 
-            for(int i = 0; i < this.getChildCount(); ++i) {
+            for (int i = 0; i < this.getChildCount(); ++i) {
                 View child = this.getChildAt(i);
                 if (child.getVisibility() != GONE) {
                     LayoutParams lp = child.getLayoutParams();
                     int startMargin = 0;
                     int endMargin = 0;
                     if (lp instanceof MarginLayoutParams) {
-                        MarginLayoutParams marginLp = (MarginLayoutParams)lp;
+                        MarginLayoutParams marginLp = (MarginLayoutParams) lp;
                         startMargin = MarginLayoutParamsCompat.getMarginStart(marginLp);
                         endMargin = MarginLayoutParamsCompat.getMarginEnd(marginLp);
                     }
@@ -168,15 +169,9 @@ public class FlowLayout extends ViewGroup {
     }
 
 
-    public void  setAdapter(LayoutInflaterAdapter layoutInflaterAdapter) {
+    public <T> void setAdapter(LayoutInflaterAdapter<T> layoutInflaterAdapter) {
         layoutInflaterAdapter.bindViewGroup(this);
     }
-
-
-
-
-
-
 
 
 }
