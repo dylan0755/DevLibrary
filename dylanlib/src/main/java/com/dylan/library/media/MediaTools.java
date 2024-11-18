@@ -5,7 +5,6 @@ import android.media.MediaMetadataRetriever;
 import android.media.ThumbnailUtils;
 import android.provider.MediaStore;
 
-import java.io.IOException;
 import java.util.HashMap;
 
 /**
@@ -17,11 +16,11 @@ public class MediaTools {
 
     //xx分：xx秒
     public static String getDurationMinuteFormat(long time){
-        return getMediaDurtionTime(time,MINUTE_TIME);
+        return getMediaDurationTime(time,MINUTE_TIME);
     }
     //xx时：xx分：xx秒
     public static String getDurationHourFormat(long time){
-        return getMediaDurtionTime(time, HOUR_TIME);
+        return getMediaDurationTime(time, HOUR_TIME);
     }
     //xx天xx时：xx分：xx秒
     public static String getDurationDayHourMinuteSecond(long time){
@@ -75,7 +74,7 @@ public class MediaTools {
      * @param timeformat 最高位是时还是分钟
      * @return
      */
-    private static String getMediaDurtionTime(long time, int timeformat) {//
+    private static String getMediaDurationTime(long time, int timeformat) {//
         long secondTime = time / 1000;
         int hour = (int) (secondTime / 3600);
         int minute = (int) (secondTime % 3600);
@@ -113,7 +112,7 @@ public class MediaTools {
     }
 
 
-    private static String getMediaDurtionTime(long time) {//
+    private static String getMediaDurationTime(long time) {//
         long secondTime = time / 1000;
         int hour = (int) (secondTime / 3600);
         int minute = (int) (secondTime % 3600);
