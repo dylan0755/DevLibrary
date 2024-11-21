@@ -267,6 +267,8 @@
         <activity android:name=".ui.SelectDateTimeActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
+        <activity android:name=".ui.TextDotLoadingActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
     </application>
 
 </manifest>

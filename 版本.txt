@@ -15,7 +15,7 @@ V7.0
 13.新增ShapeDrawableTextView
 14.Drawable修复setColorFilter
 15.修复LayoutInflaterAdapter空指针bug
-
+16.新增DotLoadingTextView 加载中... 点动画
 
 
 

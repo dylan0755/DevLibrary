@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <FrameLayout
+
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp">
+
+        <com.dylan.library.widget.shape.ShapeLinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:radius="12dp"
+            app:strokeColor="#ffffff"
+            app:strokeWidth="1dp"
+            app:solidColor="#525252"
+            app:shapeAlpha="0.5"
+            android:orientation="vertical"
+            >
+
+            <com.dylan.library.widget.DrawableTextView
+                android:id="@+id/tvReWrite"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:text="重新仿写"
+                android:textColor="#ffffff"
+                android:textSize="14sp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:paddingTop="5dp"
+                android:paddingBottom="5dp"
+                android:background="@drawable/button_gradient_style_2_radius_12"/>
+
+            <com.dylan.library.widget.DotLoadingTextView
+                android:id="@+id/tvContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:textColor="#ffffff"
+                tools:text="仿写中...."
+                android:layout_gravity="center_horizontal"
+                />
+
+
+        </com.dylan.library.widget.shape.ShapeLinearLayout>
+    </FrameLayout>
+
+
+</LinearLayout>

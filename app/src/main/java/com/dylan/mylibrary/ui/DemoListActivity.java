@@ -62,7 +62,7 @@ public class DemoListActivity extends AppCompatActivity {
             "Sonic变音", "M3U8视频下载", "网页视频嗅探下载", "PostBanner", "ClipVideoView", "SortDragItemTouchHelper",
             "DragSelectRangeView", "TouchDispatchActivity", "FloatActionButton", "声音波纹View", "仿IOS拖动条",
             "ChatGTP打字机效果", "倒计时选择器", "裁剪框", "RecyclerView进度指示器", "RecyclerView 横向分页", "TTS",
-            "音频频谱动画","人物关系图谱","日历控件"};
+            "音频频谱动画", "人物关系图谱", "日历控件", "TextDotLoading"};
     private Class[] classes = {ApkSignListActivity.class, RecyclerSnapHelperActivity.class, ScaleUpPhotoViewActivity.class, IRecyclerViewActivity.class,
             EditNumberActivity.class, CircleAnimationActivity.class, ScreenShootActivity.class,
             GridViewPagerActivity.class, WrapLayoutActivity.class, LoadingDialogActivity.class,
@@ -85,7 +85,8 @@ public class DemoListActivity extends AppCompatActivity {
             SortDragItemTouchHelperActivity.class, DragSelectRangeViewActivity.class, TouchDispatchLayoutActivity.class,
             FloatActionButtonDemoActivity.class, VoiceLineDemoActivity.class, FlattenProgressBarActivity.class, ChatLayoutActivity.class,
             CountDownPickerActivity.class, CutViewActivity.class, RecyclerViewScrollIndicatorActivity.class, RecyclerPagerDemoActivity.class,
-            TTsDemoActivity.class, AudioVisualizeViewActivity.class,RelationShipGraphViewDemoActivity.class,SelectDateTimeActivity.class};
+            TTsDemoActivity.class, AudioVisualizeViewActivity.class, RelationShipGraphViewDemoActivity.class, SelectDateTimeActivity.class,
+            TextDotLoadingActivity.class};
 
 
     @Override
