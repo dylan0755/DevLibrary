@@ -528,4 +528,33 @@ public class DateUtils {
         return MediaTools.formatHmsS(ms,false);
     }
 
+
+    public static String transIsoLocalDateTimeTo(String isoLocalDateTime,String pattern){
+        //String dateTimeString = "2024-10-24T11:23:44";
+        SimpleDateFormat formatterFrom = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date date = null;
+        try {
+            date = formatterFrom.parse(isoLocalDateTime);
+            // String pattern="yyyy/MM/dd HH:mm:ss";
+            SimpleDateFormat formatterTo = new SimpleDateFormat(pattern);
+            return formatterTo.format(date);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "";
+    }
+
+    public static Date getDateFromIsoLocalDateTime(String isoLocalDateTime){
+        //String dateTimeString = "2024-10-24T11:23:44";
+        SimpleDateFormat formatterFrom = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        Date date = null;
+        try {
+            date = formatterFrom.parse(isoLocalDateTime);
+            return date;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }
