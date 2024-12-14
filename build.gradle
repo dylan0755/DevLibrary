@@ -4,8 +4,11 @@ buildscript {
     repositories {
         flatDir { dirs 'proguard' }
         google()
-        jcenter()
+        //替换为
         maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+        maven { url 'https://maven.aliyun.com/repository/google'}
+        maven { url 'https://maven.aliyun.com/repository/jcenter'}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public'}
         maven { url 'https://jitpack.io' }
     }
     dependencies {
@@ -20,8 +23,10 @@ buildscript {
 allprojects {
     repositories {
         google()
-        jcenter()
         maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+        maven { url 'https://maven.aliyun.com/repository/google'}
+        maven { url 'https://maven.aliyun.com/repository/jcenter'}
+        maven { url 'http://maven.aliyun.com/nexus/content/groups/public'}
         maven { url 'https://jitpack.io' }
         maven { url "https://dl.bintray.com/albertlii/android-maven/" }
 

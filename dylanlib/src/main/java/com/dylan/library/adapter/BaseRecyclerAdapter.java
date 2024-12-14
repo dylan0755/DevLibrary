@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dylan.library.callback.IRecyclerAdapterDataBinder;
+import com.dylan.library.exception.ThrowableUtils;
 import com.dylan.library.proguard.NotProguard;
 import com.dylan.library.utils.ContextUtils;
 import com.dylan.library.utils.Logger;
@@ -108,7 +109,11 @@ public abstract class BaseRecyclerAdapter<T, VH extends BaseRecyclerAdapter.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         T t = mDataList.get(position);
         if (t != null) {
-            onBindViewHolder(((VH) holder), t, position);
+            try {
+                onBindViewHolder(((VH) holder), t, position);
+            }catch (Exception e){
+                ThrowableUtils.show(e);
+            }
         }
 
     }
