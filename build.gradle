@@ -5,7 +5,7 @@ buildscript {
         flatDir { dirs 'proguard' }
         google()
         //替换为
-        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+        /*maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }*/
         maven { url 'https://maven.aliyun.com/repository/google'}
         maven { url 'https://maven.aliyun.com/repository/jcenter'}
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public'}
@@ -23,7 +23,7 @@ buildscript {
 allprojects {
     repositories {
         google()
-        maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }
+       /* maven { url "http://maven.aliyun.com/nexus/content/repositories/releases" }*/
         maven { url 'https://maven.aliyun.com/repository/google'}
         maven { url 'https://maven.aliyun.com/repository/jcenter'}
         maven { url 'http://maven.aliyun.com/nexus/content/groups/public'}
