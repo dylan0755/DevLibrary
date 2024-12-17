@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F8F8F9"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="63dp"
+        android:background="#ffffff"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:id="@+id/ivBack"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:padding="4dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
+            android:src="@mipmap/icon_back" />
+
+        <com.flyco.tablayout.widget.MediumTextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="4dp"
+            android:text="添加银行卡"
+            android:textColor="#ff333333"
+            android:textSize="18sp"
+            app:textBold="0.5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="32dp"
+            android:text="请绑定持卡人本人的银行卡"
+            android:textColor="#ff666666"
+            android:textSize="12sp" />
+    </RelativeLayout>
+
+    <com.flyco.tablayout.widget.MediumTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="20dp"
+        android:text="卡号"
+        android:textColor="#ff333333"
+        android:textSize="16sp"
+        app:textBold="0.6" />
+
+    <com.dylan.library.widget.shape.ShapeLinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="20dp"
+        app:radius="10dp"
+        app:solidColor="#FFFFFF">
+
+        <EditText
+            android:id="@+id/edtCardNo"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="#0000"
+            android:inputType="number"
+            android:hint="输入卡号"
+            android:paddingLeft="20dp"
+            android:textColor="#333333"
+            android:textSize="14sp" />
+
+        <ImageView
+            android:id="@+id/ivCamera"
+            android:layout_width="21dp"
+            android:layout_height="19dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="20dp"
+            android:src="@mipmap/icon_camera" />
+
+    </com.dylan.library.widget.shape.ShapeLinearLayout>
+</LinearLayout>

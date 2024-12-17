@@ -210,6 +210,8 @@
         <activity android:name=".ui.FloatActionButtonDemoActivity"/>
         <activity android:name=".ui.VoiceLineDemoActivity"/>
         <activity android:name=".ui.FlattenProgressBarActivity"/>
+        <activity android:name=".ui.ScanBankCardDemoActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
 
 
         <!--7.0应用共享 这里最好不要按官方方式配置，因为有可能和第三方库冲突，
