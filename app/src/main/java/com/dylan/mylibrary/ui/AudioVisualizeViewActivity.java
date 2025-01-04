@@ -145,6 +145,7 @@ public class AudioVisualizeViewActivity extends BaseActivity {
             return;
         }
         audioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, sampleRateInHz, channelConfig, audioFormat, bufferSize);//创建AudioRecorder对象
+
         parent = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/AudiioRecordTest");
 
         if (!parent.exists())

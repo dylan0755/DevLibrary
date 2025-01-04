@@ -36,4 +36,8 @@
     <color name="private_doctor">#1ed0e0</color>
     <color name="post_guidance">#f922e7</color>
     <color name="red_packet">#fa5171</color>
+
+
+    <color name="blue">#26b1e5</color>
+    <color name="divider">#B0BBC5</color>
 </resources>

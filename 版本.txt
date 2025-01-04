@@ -17,6 +17,7 @@ V7.0
 15.修复LayoutInflaterAdapter空指针bug
 16.新增DotLoadingTextView 加载中... 点动画
 17.DateUtils 新增 IsoLocalDateTime 解析和转化 "yyyy-MM-dd'T'HH:mm:ss"
+18.BottomSlideDialog 修复设置导航栏状态栏无效问题
 
 
 
