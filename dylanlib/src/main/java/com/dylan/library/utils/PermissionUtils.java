@@ -8,6 +8,7 @@ import android.content.UriPermission;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.provider.Settings;
 
 import androidx.annotation.RequiresApi;
@@ -48,13 +49,21 @@ public class PermissionUtils {
     }
 
     public static boolean hasExternalStoragePermission(Activity activity) {
-        int hasReadPermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
-        int hasWritePermison = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        //权限还没有授予，需要在这里写申请权限的代码
-        if (hasReadPermission != PackageManager.PERMISSION_GRANTED || hasWritePermison != PackageManager.PERMISSION_GRANTED) {
-            return false;
+        return hasExternalStoragePermission(activity, false);
+    }
+
+    public static boolean hasExternalStoragePermission(Activity activity, boolean isManagerPerm) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && isManagerPerm) {
+            return Environment.isExternalStorageManager();
         } else {
-            return true;
+            int hasReadPermission = ContextCompat.checkSelfPermission(activity, Manifest.permission.READ_EXTERNAL_STORAGE);
+            int hasWritePermison = ContextCompat.checkSelfPermission(activity, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            //权限还没有授予，需要在这里写申请权限的代码
+            if (hasReadPermission != PackageManager.PERMISSION_GRANTED || hasWritePermison != PackageManager.PERMISSION_GRANTED) {
+                return false;
+            } else {
+                return true;
+            }
         }
     }
 
@@ -132,9 +141,22 @@ public class PermissionUtils {
     }
 
     public static void requestExternalStorage(Activity activity) {
-        ActivityCompat.requestPermissions(activity,
-                new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
-                        Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PER_EXTERNAL_STORAGE);
+        if (activity == null) return;
+        requestExternalStorage(activity, false);
+    }
+
+    public static void requestExternalStorage(Activity activity, boolean isManagerPerm) {
+        if (activity == null) return;
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && isManagerPerm) {
+            Intent intent = new Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION);
+            intent.setData(Uri.parse("package:" + activity.getPackageName()));
+            activity.startActivityForResult(intent, REQUEST_PER_EXTERNAL_STORAGE);
+        } else {
+            ActivityCompat.requestPermissions(activity,
+                    new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,
+                            Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUEST_PER_EXTERNAL_STORAGE);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
